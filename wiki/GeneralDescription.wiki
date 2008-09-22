@@ -3,14 +3,16 @@
 
 = Introduction =
 
-We're all familiar with the power of AMF and how easy it makes the communication with the backend server. It is a binary protocol (thus very compact and fast), basically [http://en.wikipedia.org/wiki/ActionScript ActionScript] bytecode that is natively interpreted into an AS3 object. The only "issue" would be the backend server that will have to know AMF (sure, there have been, for quite some time now, a variety of products that provide a seamless way for AMF serialization: [http://opensource.adobe.com/wiki/display/blazeds/BlazeDS BlazeDS], [http://www.fluorinefx.com/ FluorineFX] just to name a few). 
+We're all familiar with the power of AMF and how easy it makes the communication with the backend server. It is a binary protocol (thus very compact and fast), basically [http://en.wikipedia.org/wiki/ActionScript ActionScript] bytecode that is natively interpreted into an AS3 object. The only "issue" would be the backend server that will have to know AMF (sure, there have been, for quite some time now, a variety of products that provide a seamless way for AMF serialization: [http://opensource.adobe.com/wiki/display/blazeds/BlazeDS BlazeDS], [http://www.fluorinefx.com/ FluorineFX], just to name a few). 
 
-What happens if one finds oneself in the company of an "XML spitting server" (like the situation I find myself in some of my work projects) for compatibility sake? In that case one might be forced to implement a way to send and receive objects through XML. Fortunately, thanks to E4X the task is not quite as horrific as it might appear. Still, a multitude of issues appear with XML communication:
+What happens if one finds oneself in the company of an "XML spitting server" (like the situation I find myself in some of my work projects) for compatibility sake, with no way of making any common sens changes to it (like adding a communication layer smart enough to make the switch between XML and AMF serialization on demand)? In that case one might be forced to implement a way to send and receive objects through XML. Fortunately, thanks to E4X the task is not quite as horrific as it might appear. Still, a multitude of issues appear with XML communication:
   * How do we handle object duplication?
   * How do we handle versioning?
   * What if we want only some fields of an object to be sent to the server? etc.
 
-*FlexXB* appeared in my mind as an attempt to shed some light into all of these problems and, hopefully, more: a way to automate the serialization/deserialization process while keeping the model objects used in the communication free of ugly {{{toXML() : XML}}} and {{{fromXML(xmlData : XML) : Object}}}. The most simple way of marking the model objects for serialization seemed to be the use of annotations (to some extent similar to [http://java.sun.com/developer/technicalArticles/WebServices/jaxb/ JAXB] approach, that is, if I'm not terribly mistaking)
+*FlexXB* appeared in my mind as an attempt to shed some light into all of these problems and, hopefully, more: a way to automate the serialization/deserialization process while keeping the model objects used in the communication free of ugly {{{toXML() : XML}}} and {{{fromXML(xmlData : XML) : Object}}}. The most simple way of marking the model objects for serialization seemed to be the use of annotations (to some extent similar to [http://java.sun.com/developer/technicalArticles/WebServices/jaxb/ JAXB] approach, that is, if I'm not terribly mistaking). 
+
+I plan to include in this project what I've learned and continue to learn about talking XML with a backend server and hope that all this fuss will someday help someone who might find himself in the same position as I did.
 
 = Details =
 
