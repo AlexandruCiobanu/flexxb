@@ -1,0 +1,16 @@
+#summary XML-AS3 automated (de)serialization for Flex and Air applications
+#labels Featured
+
+= Introduction =
+
+We're all familiar with the power of AMF and how easy it makes the communication with the backend server. It is a binary protocol (thus very compact and fast), basically ActionScript bytecode that is natively interpreted into an AS3 object. The only "issue" would be the backend server that will have to know AMF (sure, there have been, for quite some time now, a variety of products that provide a seamless way for AMF serialization: BlazeDS, FluorineFX just to name a few). 
+What happens if one finds oneself in the company of an "XML spitting server" (like the situation I find myself in some of my work projects) for compatibility sake? In that case one might be forced to implement a way to send and receive objects through XML. Fortunately, thanks to E4X the task is not quite as horrific as it might appear. Still, a multitude of issues appear with XML communication:
+  * How do we handle object duplication?
+  * How do we handle versioning?
+  * What if we want only some fields of an object to be sent to the server? etc.
+
+FlexXB appeared in my mind as an attempt to shed some light into all of these problems and, hopefully, more: a way to automate the serialization/deserialization process while keeping the model objects used in the communication free of ugly {{{toXML() : XML}}} and {{{fromXML(xmlData : XML) : Object}}}. The most simple way of marking the model objects for serialization seemed to be the use of annotations (similar to JAXB approach, that is, if I'm not terribly mistaking)
+
+= Details =
+
+More details to come... And also some alpha versions of the product :D
