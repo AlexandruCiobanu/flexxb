@@ -7,4 +7,4 @@ Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estim
 = ROADMAP =
 
 || *Product version* || *Delivery Date* || *Feature list* || *Observations* ||
-||   1.0 - _alpha_   ||   01-Oct-2008   ||      _N/A_     ||      _Intended delivery date_   ||
+||   1.0 - _alpha_   ||   01-Oct-2008   ||      [http://code.google.com/p/flexxb/wiki/Features FXB-001], [http://code.google.com/p/flexxb/wiki/Features FXB-002], [http://code.google.com/p/flexxb/wiki/Features FXB-003]     ||      _Intended delivery date_   ||
