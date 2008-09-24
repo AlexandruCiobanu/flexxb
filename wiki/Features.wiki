@@ -23,4 +23,4 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-004||Integrate model object cache to insure object uniqueness||1.0 _beta_||
 ||FXB-005||Serialize partial object ||1.0 _beta_||
 ||FXB-006||Class type identification by response's namespace on deserialization||1.0||
-||FXB-007||Flex Model Object Designer||1.0||
+||FXB-007||Flex Model Object Designer||2.0||
