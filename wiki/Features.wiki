@@ -8,19 +8,21 @@ This page will contain a list of features and requirements I have planned for my
 
 = Features =
 
- * *Support for object namespacing*:
- * *Xml alias*:
- * *Ignore a field on serialization, deserialization or both*:
- * *Serialize partial object (only serialize the object's identification field(s))*:
- * *Integrate model object cache to insure object uniqueness*:
- * *Class type identification by response's namespace on deserialization*:
- * *Flex Model Object Designer (FxMOD)*:
+ * FXB-001 *Support for object namespacing*:
+ * FXB-002 *Xml alias*:
+ * FXB-003 *Ignore a field on serialization, deserialization or both*:
+ * FXB-004 *Serialize partial object (only serialize the object's identification field(s))*:
+ * FXB-005 *Integrate model object cache to insure object uniqueness*:
+ * FXB-006 *Class type identification by response's namespace on deserialization*:
+ * FXB-007 *Flex Model Object Designer (FxMOD)*:
+ * FXB-008 *Custom to and from string conversion for simple types*:
 
-||*Feature ID*|| *Description*||*Delivery version*||
+|| *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
 ||FXB-002||Xml alias||1.0 _alpha_||
 ||FXB-003||Ignore a field on serialization, deserialization or both||1.0 _alpha_||
-||FXB-004||Integrate model object cache to insure object uniqueness||1.0 _beta_||
-||FXB-005||Serialize partial object ||1.0 _beta_||
+||FXB-005||Integrate model object cache to insure object uniqueness||1.0 _beta_||
+||FXB-004||Serialize partial object ||1.0 _beta_||
+||FXB_008||Custom to and from string conversion for simple types||1.0 _beta_||
 ||FXB-006||Class type identification by response's namespace on deserialization||1.0||
 ||FXB-007||Flex Model Object Designer||2.0||
