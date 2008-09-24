@@ -1,0 +1,10 @@
+#summary *FlexXB* delivery road map
+#labels Featured
+
+Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estimation but I'll update it frequently to reflect more accurately my plan._
+
+
+= ROADMAP =
+
+|| *Product version* || *Delivery Date* || *Feature list* || *Observations* ||
+||   1.0 - _alpha_   ||   01-Oct-2008   ||      _N/A_     ||      _Intended delivery date_   ||
