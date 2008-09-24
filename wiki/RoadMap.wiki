@@ -1,4 +1,4 @@
-#summary *FlexXB* delivery road map
+#summary FlexXB delivery road map
 #labels Featured
 
 Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estimation but I'll update it frequently to reflect more accurately my plan._
