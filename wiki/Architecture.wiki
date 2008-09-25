@@ -9,5 +9,5 @@
  Syntax:{{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]}}}
 === XmlElement ===
  Syntax:{{{[XmlElement(alias="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
-=== [ XmlArray] ===
+=== XmlArray ===
  Syntax:{{{[XmlArray(alias="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
