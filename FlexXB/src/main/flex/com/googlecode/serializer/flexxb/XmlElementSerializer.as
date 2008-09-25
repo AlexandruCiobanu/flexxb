@@ -47,7 +47,9 @@
 			}else{
 				child.appendChild(object);
 			}
-			child.setName(element.xmlName);
+			if(!element.useOwnerAlias()){
+				child.setName(element.xmlName);
+			}
 			parentXml.appendChild(child);
 			return child;
 		}
@@ -60,7 +62,11 @@
 			if(element.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
 				return null;
 			}
-			var xmlElement : XMLList = xmlData.child(element.xmlName);
+			var xmlName : QName = element.xmlName;
+			if(element.useOwnerAlias()){
+				xmlName = XMLSerializer.instance.getXmlName(element.fieldType);
+			}
+			var xmlElement : XMLList = xmlData.child(xmlName);
 			if(xmlElement.length() == 0) 
 				return null;
 			if(isComplexType(annotation.fieldType)){

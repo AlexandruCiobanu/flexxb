@@ -21,7 +21,7 @@ package com.googlecode.serializer.flexxb
 	
 	/**
 	 * 
-	 * <p>Usage: <code>[XmlClass(name="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
+	 * <p>Usage: <code>[XmlClass(alias="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
 	 * @author aCiobanu
 	 * 
 	 */	

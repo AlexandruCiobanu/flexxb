@@ -18,7 +18,7 @@
  package com.googlecode.serializer.flexxb
 {
 	/**
-	 * <p>Usage: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></p>
+	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]</code></p>
 	 * @author aCiobanu
 	 * 
 	 */	

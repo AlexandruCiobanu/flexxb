@@ -50,7 +50,7 @@
 		/**
 		 * 
 		 */		
-		protected var _alias : String = "*";
+		protected var _alias : String = "";
 		/**
 		 * 
 		 */		
@@ -89,7 +89,7 @@
 		 */		
 		public function get xmlName() : QName{
 			if(!_xmlName){
-				_xmlName = new QName(nameSpace, _alias == "*" ? _fieldName : _alias);
+				_xmlName = new QName(nameSpace, _alias == "" ? _fieldName : _alias);
 			}
 			return _xmlName;
 		}
@@ -107,8 +107,10 @@
 		 * 
 		 */		
 		protected final function setAlias(value : String) : void{
-			if(value && value.length > 0 && value !="*"){
-				_alias = value;
+			if(value == null) return;
+			_alias = value;
+			if(_alias.length == 0){
+				_alias = _fieldName;
 			}
 		}
 		/**
@@ -118,6 +120,10 @@
 		 */				
 		public function get annotationName() : String{
 			return "";
+		}
+		
+		public function useOwnerAlias() : Boolean{
+			return _alias == "*";
 		}
 		/**
 		 * Analyze field/class descriptor to extract base informations like field's name and type
