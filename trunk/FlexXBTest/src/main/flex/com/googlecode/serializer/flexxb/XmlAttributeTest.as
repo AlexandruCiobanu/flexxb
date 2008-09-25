@@ -32,7 +32,7 @@
 			validate(att1, "aField", String, "stuff", "");
 			
 			var att2 : XmlAttribute = new XmlAttribute(getFieldDescriptor("date", descriptor));
-			validate(att2, "date", Date, "*", XmlMember.IGNORE_ON_SERIALIZE);
+			validate(att2, "date", Date, "date", XmlMember.IGNORE_ON_SERIALIZE);
 		}
 				
 		protected override function customValidate(annotation:Annotation, ...args):void{

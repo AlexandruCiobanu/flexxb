@@ -17,9 +17,7 @@
  */ 
  package com.googlecode.serializer.flexxb
 {
-	import flash.utils.describeType;
-	
-	import flexunit.framework.TestCase;
+	import com.googlecode.testData.Mock2;
 
 	public class XmlElementTest extends AnnotationTest
 	{
@@ -33,9 +31,19 @@
 			validate(att1, "version", Number, "objVersion", "", false);
 			
 			var att2 : XmlElement = new XmlElement(getFieldDescriptor("reference", descriptor));
-			validate(att2, "reference", Object, "*", "", true);
+			validate(att2, "reference", Object, "reference", "", true);
+			
+			var att3 : XmlElement = new XmlElement(getFieldDescriptor("link", descriptor));
+			validate(att3, "link", Mock2, "*", "", false);
 		}
-				
+		/**
+		 * Custom validation. Handles the fourth and fifth parameters:
+		 *   - IgnoreOn
+		 *   - SerializePartialElement 
+		 * @param annotation
+		 * @param args
+		 * 
+		 */		
 		protected override function customValidate(annotation:Annotation, ...args):void{
 			assertEquals("IgnoreOn is incorrect", args[3], XmlElement(annotation).ignoreOn);
 			assertEquals("SerializePartialElement is incorrect", args[4], XmlElement(annotation).serializePartialElement);
