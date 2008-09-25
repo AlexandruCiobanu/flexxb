@@ -1,2 +1,13 @@
 #summary FlexXB architecture
 #labels Phase-Implementation,Phase-Design
+
+= Annotations =
+
+== [XmlClass] ==
+ Syntax: {{{[XmlClass(name="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]}}}
+== [XmlAttribute] ==
+ Syntax:{{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]}}}
+== [XmlElement] ==
+ Syntax:{{{[XmlElement(alias="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
+== [XmlArray] ==
+ Syntax:{{{[XmlArray(alias="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
