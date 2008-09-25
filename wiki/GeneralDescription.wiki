@@ -33,6 +33,10 @@ When an object is passed to it for serialization, it inspects the object's defin
 
 There are four built-in annotations for describing object serialization, one being class-scoped, the other field-scoped:
  * *XmlClass*: Defines class's namespace (by uri and prefix) and xml alias;
+ Syntax: {{{[XmlClass(name="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]}}}
  * *XmlAttribute*: Marks the field to be rendered as an attribute of the xml representation of the parent object;
+ Syntax:{{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]}}}
  * *XmlElement*: Marks the field to be rendered as a child element of the xml representation of the parent object;
- * *XmlArray*: Is a particular type of element since it marks a field to be rendered as an Array of elements.
+ Syntax:{{{[XmlElement(alias="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
+ * *XmlArray*: Is a particular type of element since it marks a field to be rendered as an Array of elements of a certain type.
+ Syntax:{{{[XmlArray(alias="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
