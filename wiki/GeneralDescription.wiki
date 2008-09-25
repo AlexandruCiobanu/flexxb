@@ -25,7 +25,6 @@ In order for *FlexXB* to be able to automate the (de)serialization process, the 
  * Which object fields translate into xml attributes, which into xml elements and which should be ignored?
  * Should we use namespaces to build the request xml and parse the response one? If so, what are the namespaces?
  * The object's fields need to have different names in the xml representation?
-
 All this information is linked to the object by adding metadata tags (annotations - in Java - or attributes - in .NET) to the class definition of the object in question.
 
 When an object is passed to it for serialization, it inspects the object's definition and extracts a list of annotations describing the way an object of that type needs to be (de)serialized. It keeps the generated list in a cache in order to reuse it if need arises and then builds the corresponding XML using the information provided by the annotations.
