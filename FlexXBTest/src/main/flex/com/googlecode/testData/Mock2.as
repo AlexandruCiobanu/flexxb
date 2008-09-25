@@ -17,7 +17,7 @@
  */ 
  package com.googlecode.testData
 {
-	[XmlClass(alias="meee", prefix="meee", uri="http://www.axway.com/xmlns/passport/v1/meee")]
+	[XmlClass(alias="MyMock", prefix="meee", uri="http://www.axway.com/xmlns/passport/v1/meee")]
 	public class Mock2
 	{
 		[XmlAttribute]
