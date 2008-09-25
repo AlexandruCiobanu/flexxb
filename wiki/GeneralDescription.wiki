@@ -29,7 +29,7 @@ In order for *FlexXB* to be able to automate the (de)serialization process, the 
 
 All this information is linked to the object by adding metadata tags (annotations - in Java - or attributes - in .NET) to the class definition of the object in question.
 
-When an object is passed to it for serialization, it inspects the object's definition and extracts a list of annotations describing the way an object of that type needs to be (de)serialized. It keeps the generated list in a cache in order to reuse it if need arises and then builds the corresponding XML using the information provided by the annotations.
+When an object is passed to it for serialization, it inspects the object's definition and extracts a list of annotations describing the way an object of that type needs to be (de)serialized. It keeps the generated list in a cache in order to reuse it if need arises and then builds the corresponding XML using the information provided by the annotations. Any object field that does not have an annotation defined is ignored in the (de)serialization process of that object.
 
 There are four built-in annotations for describing object serialization, one being class-scoped, the other field-scoped:
  * *XmlClass*: Defines class's namespace (by uri and prefix) and xml alias;
