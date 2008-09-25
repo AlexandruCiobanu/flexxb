@@ -34,5 +34,5 @@ When an object is passed to it for serialization, it inspects the object's defin
 There are four built-in annotations for describing object serialization, one being class-scoped, the other field-scoped:
  * *[Architecture XmlClass]*: Defines class's namespace (by uri and prefix) and xml alias;
  * *[Architecture XmlAttribute]*: Marks the field to be rendered as an attribute of the xml representation of the parent object;
-  * *[Architecture XmlElement]*: Marks the field to be rendered as a child element of the xml representation of the parent object;
+ * *[Architecture XmlElement]*: Marks the field to be rendered as a child element of the xml representation of the parent object;
  * *[Architecture XmlArray]*: Is a particular type of element since it marks a field to be rendered as an Array of elements of a certain type.
