@@ -87,6 +87,9 @@
 			if(object == null){
 				return null;
 			}
+			if(object is IXmlSerializable){
+				return IXmlSerializable(object).toXml();
+			}
 			var annotations : Array = getAnnotations(object);
 			var xmlData : XML = <xml />;
 			for each(var annotation : Annotation in annotations){
@@ -108,13 +111,17 @@
 		public final function deserialize(xmlData : XML, objectClass : Class) : Object{
 			if(xmlData && objectClass){
 				var result : Object = new objectClass();
-				var annotations : Array = getAnnotations(result);
-				for each(var annotation : Annotation in annotations){
-					if(annotation is XmlClass){
-						continue;
-					}					
-					var serializer : ISerializer = getSerializer(annotation.annotationName);
-					result[annotation.fieldName] = serializer.deserialize(xmlData, annotation);
+				if(result is IXmlSerializable){
+					IXmlSerializable(result).fromXml(xmlData);
+				}else{
+					var annotations : Array = getAnnotations(result);
+					for each(var annotation : Annotation in annotations){
+						if(annotation is XmlClass){
+							continue;
+						}					
+						var serializer : ISerializer = getSerializer(annotation.annotationName);
+						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation);
+					}
 				}
 				return result;
 			}
