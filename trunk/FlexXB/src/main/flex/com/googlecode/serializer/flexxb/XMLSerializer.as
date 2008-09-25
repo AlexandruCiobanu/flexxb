@@ -110,6 +110,7 @@
 		 */		
 		public final function deserialize(xmlData : XML, objectClass : Class) : Object{
 			if(xmlData && objectClass){
+				//var ns : Array = xmlData.namespaceDeclarations();
 				var result : Object = new objectClass();
 				if(result is IXmlSerializable){
 					IXmlSerializable(result).fromXml(xmlData);
@@ -124,6 +125,16 @@
 					}
 				}
 				return result;
+			}
+			return null;
+		}
+		
+		public final function getXmlName(clasz : Class) : QName{
+			if(clasz != null){
+				var annotationList : Array = getAnnotations(clasz);
+				if(annotationList){
+					return (annotationList[0] as XmlClass).xmlName;
+				}
 			}
 			return null;
 		}
@@ -150,7 +161,7 @@
 				return annotationMap[annotationName].serializer as ISerializer;
 			}
 			return null;
-		}		
+		}	
 		/**
 		 * 
 		 * @param object

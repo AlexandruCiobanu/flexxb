@@ -18,7 +18,7 @@
  package com.googlecode.serializer.flexxb
 {
 	/**
-	 * <p>Usage: <code>[Array(alias="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></p>
+	 * <p>Usage: <code>[XmlArray(alias="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></p>
 	 * @author aCiobanu
 	 * 
 	 */	
