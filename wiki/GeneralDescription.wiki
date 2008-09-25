@@ -17,7 +17,7 @@ I plan to include in this project what I've learned and continue to learn about 
 
 = What is FlexXB? =
 
-*FlexXB* is an ActionScript library designed to automate the AS3 objects' serialization to XML to be sent to a backend server and the xml deserialization into AS3 objects of a response received from that server. 
+*FlexXB* is an [http://en.wikipedia.org/wiki/ActionScript ActionScript] library designed to automate the AS3 objects' serialization to XML to be sent to a backend server and the xml deserialization into AS3 objects of a response received from that server. 
   
 = How does it work? =
 
