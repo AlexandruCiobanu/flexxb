@@ -7,9 +7,9 @@ We're all familiar with the power of AMF and how easy it makes the communication
 
 What happens if one finds oneself in the company of an "XML spitting server" (like the situation I find myself in some of my work projects) for compatibility sake, with no way of making any common sens changes to it (like adding a communication layer smart enough to make the switch between XML and AMF serialization on demand -  talk xml with legacy clients and AMF with the cool kids :D)? In that case one might be forced to implement a way to send and receive objects through XML. Fortunately, thanks to E4X the task is not quite as horrific as it might appear. Still, a multitude of issues appear with XML communication:
 
-  * How do we handle object duplication?
-  * How do we handle versioning?
-  * What if we want only some fields of an object to be sent to the server? etc.
+ * How do we handle object duplication?
+ * How do we handle versioning?
+ * What if we want only some fields of an object to be sent to the server? etc.
 
 *FlexXB* appeared in my mind as an attempt to shed some light into all of these problems and, hopefully, more: a way to automate the serialization/deserialization process while keeping the model objects used in the communication free of ugly {{{toXML() : XML}}} and {{{fromXML(xmlData : XML) : Object}}}. The most simple way of marking the model objects for serialization seemed to be the use of annotations (to some extent similar to [http://java.sun.com/developer/technicalArticles/WebServices/jaxb/ JAXB] approach, that is, if I'm not terribly mistaking). 
 
@@ -21,9 +21,11 @@ I plan to include in this project what I've learned and continue to learn about 
   
 = How does it work? =
 
-In order fo FlexXB to be able to automate the (de)serialization process, the model objects involved must be "decorated" with [http://livedocs.adobe.com/flex/3/html/help.html?content=metadata_3.html AS3 metadata tags] that will instruct it on how they should be processed:
-* Which object fields translate into xml attributes, which into xml elements and which should be ignored?
-* Should we use namespaces to build the request xml and parse the response one? If so, what are the namespaces?
-* The object's fields need to have different names in the xml representation?
+In order for *FlexXB* to be able to automate the (de)serialization process, the model objects involved must be "decorated" with [http://livedocs.adobe.com/flex/3/html/help.html?content=metadata_3.html AS3 metadata tags] that will instruct it on how they should be processed:
+ * Which object fields translate into xml attributes, which into xml elements and which should be ignored?
+ * Should we use namespaces to build the request xml and parse the response one? If so, what are the namespaces?
+ * The object's fields need to have different names in the xml representation?
 
-All this information is linked to the object by adding metadata tags (annotations - in Java - or attributes - in .NET) to theclass definition of the object in question.
+All this information is linked to the object by adding metadata tags (annotations - in Java - or attributes - in .NET) to the class definition of the object in question.
+
+When an object is passed to it for serialization, it inspects the object's definition and extracts a list of annotations describing the way an object of that type needs to be (de)serialized. It keeps the generated list in a cache in order to reuse it if need arises and then builds the corresponding XML using the information provided by the annotations.
