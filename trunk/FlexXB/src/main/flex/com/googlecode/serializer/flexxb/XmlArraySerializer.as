@@ -39,7 +39,7 @@
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
 		 */
-		public override function serialize(object:Object, annotation : Annotation, parentXml : XML):XML
+		public override function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer) : XML
 		{
 			var array : XmlArray = annotation as XmlArray;
 			if(array.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
@@ -48,7 +48,7 @@
 			var result : XML = <xml />;
 			result.setName(annotation.xmlName);
 			for each(var member : Object in object){
-				result.appendChild(XMLSerializer.instance.serialize(member));
+				result.appendChild(serializer.serialize(member));
 			}
 			parentXml.appendChild(result);
 			return result;
@@ -56,7 +56,7 @@
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
 		 */
-		public override function deserialize(xmlData:XML, annotation : Annotation):Object
+		public override function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer):Object
 		{
 			var array : XmlArray = annotation as XmlArray;
 			if(array.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
@@ -67,7 +67,7 @@
 			if(xmlArray.length() > 0) {
 				var memberType : Class = getDefinitionByName(array.type) as Class;
 				for each(var xmlChild : XML in xmlArray.children()){
-					var member : Object = XMLSerializer.instance.deserialize(xmlChild, memberType);
+					var member : Object = serializer.deserialize(xmlChild, memberType);
 					if(member){
 						addMemberToResult(member, result);
 					}

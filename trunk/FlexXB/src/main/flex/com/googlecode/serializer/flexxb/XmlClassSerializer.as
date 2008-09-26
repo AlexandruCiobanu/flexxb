@@ -35,17 +35,18 @@
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
 		 */
-		public function serialize(object:Object, annotation : Annotation, parentXml : XML):XML
+		public function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer) : XML
 		{
 			var xmlClass : XmlClass = annotation as XmlClass;
-			parentXml.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
-			parentXml.addNamespace(xmlClass.nameSpace);
-			return null;
+			var xml : XML = <xml />
+			xml.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
+			xml.addNamespace(xmlClass.nameSpace);
+			return xml;
 		}
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
 		 */
-		public function deserialize(xmlData:XML, annotation : Annotation):Object
+		public function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer):Object
 		{
 			var xmlClass : XmlClass = annotation as XmlClass;
 			return null;

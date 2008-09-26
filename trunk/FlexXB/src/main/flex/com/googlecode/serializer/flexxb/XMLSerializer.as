@@ -90,13 +90,13 @@
 			if(object is IXmlSerializable){
 				return IXmlSerializable(object).toXml();
 			}
-			var annotations : Array = getAnnotations(object);
-			var xmlData : XML = <xml />;
-			for each(var annotation : Annotation in annotations){
+			var classDescriptor : XmlClass = getAnnotations(object);
+			var xmlData : XML = getSerializer(classDescriptor.annotationName).serialize(object, classDescriptor, null, this);
+			for each(var annotation : Annotation in classDescriptor.members){
 				var serializer : ISerializer = getSerializer(annotation.annotationName);
-				var target : Object = annotation is XmlClass ? object : object[annotation.fieldName];
+				var target : Object = object[annotation.fieldName];
 				if(target){
-					serializer.serialize(target, annotation, xmlData);
+					serializer.serialize(target, annotation, xmlData, this);
 				}
 			}
 			return xmlData;
@@ -115,13 +115,10 @@
 				if(result is IXmlSerializable){
 					IXmlSerializable(result).fromXml(xmlData);
 				}else{
-					var annotations : Array = getAnnotations(result);
-					for each(var annotation : Annotation in annotations){
-						if(annotation is XmlClass){
-							continue;
-						}					
+					var classDescriptor : XmlClass = getAnnotations(result);
+					for each(var annotation : Annotation in classDescriptor.members){				
 						var serializer : ISerializer = getSerializer(annotation.annotationName);
-						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation);
+						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 					}
 				}
 				return result;
@@ -129,11 +126,11 @@
 			return null;
 		}
 		
-		public final function getXmlName(clasz : Class) : QName{
-			if(clasz != null){
-				var annotationList : Array = getAnnotations(clasz);
-				if(annotationList){
-					return (annotationList[0] as XmlClass).xmlName;
+		public final function getXmlName(object : Object) : QName{
+			if(object != null){
+				var classDescriptor : XmlClass = getAnnotations(object);
+				if(classDescriptor){
+					return classDescriptor.xmlName;
 				}
 			}
 			return null;
@@ -168,42 +165,30 @@
 		 * @return Array of Annotation objects
 		 * 
 		 */		
-		private function getAnnotations(object : Object) : Array{
-			var result : Array;
+		private function getAnnotations(object : Object) : XmlClass{
+			var result : XmlClass;
 			var className : String = getQualifiedClassName(object);
 			//attempt to get the annotations from the descriptor cache
-			if(descriptorCache && descriptorCache[className]){
-				result = descriptorCache[className];
+			if(descriptorCache && descriptorCache[className] is XmlClass){
+				result = descriptorCache[className] as XmlClass;
 			}else{
-				result = [];
 				var descriptor : XML = describeType(object);
-				//get class annotation
-				result.push(new XmlClass(descriptor));
+				//get class annotation				
+				var classDescriptor : XmlClass = new XmlClass(descriptor);
 				//get namespace
-				var ns : Namespace = (result[0] as Annotation).nameSpace;
 				var field : XML;
-				var annotation : Annotation;
 				for each(field in descriptor..variable){
-					annotation = getAnnotation(field);
-					if(annotation){
-						//add the same namespace to all of the current class' fields 
-						annotation.nameSpace = ns;
-						result.push(annotation);
-					}
+					classDescriptor.addMember(getAnnotation(field));
 				}
 				for each(field in descriptor..accessor.(@access == "readwrite")){
-					annotation = getAnnotation(field);
-					if(annotation){
-						//add the same namespace to all of the current class' fields 
-						annotation.nameSpace = ns;
-						result.push(annotation);
-					}
+					classDescriptor.addMember(getAnnotation(field));
 				}
+				result = classDescriptor;
 				//save the annotation list in cache				
 				if(!descriptorCache){
 					descriptorCache = new Object();
 				}
-				descriptorCache[className] = result;
+				descriptorCache[className] = classDescriptor;
 			}
 			return result;
 		}

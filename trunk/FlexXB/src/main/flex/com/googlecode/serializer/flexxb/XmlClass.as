@@ -19,6 +19,8 @@ package com.googlecode.serializer.flexxb
 {
 	import flash.utils.getDefinitionByName;
 	
+	import mx.collections.ArrayCollection;
+	
 	/**
 	 * 
 	 * <p>Usage: <code>[XmlClass(alias="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
@@ -40,12 +42,35 @@ package com.googlecode.serializer.flexxb
 		 */ 
 		public static const ARGUMENT_NAMESPACE_URI : String = "uri";
 		/**
+		 * 
+		 */		
+		public var members : ArrayCollection = new ArrayCollection(); 
+		/**
 		 *Constructor 
 		 * 
 		 */		
 		public function XmlClass(descriptor : XML){
 			super(descriptor);
 		}
+		/**
+		 * 
+		 * @param annotation
+		 * 
+		 */		
+		public function addMember(annotation : Annotation) : void{
+			if(annotation && !isFieldRegistered(annotation)){
+				annotation.nameSpace = nameSpace;
+				members.addItem(annotation);
+			}
+		}
+		/**
+		 * 
+		 * @see Annotation#annotationName
+		 * 
+		 */		
+		public override function get annotationName():String{
+			return ANNOTATION_NAME;
+		} 
 		/**
 		 * 
 		 * @see Annotation#parse()
@@ -65,7 +90,12 @@ package com.googlecode.serializer.flexxb
 			nameSpace = getNamespace(metadata);
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
 		}
-		
+		/**
+		 * 
+		 * @param metadata
+		 * @return 
+		 * 
+		 */		
 		private function getNamespace(metadata : XML) : Namespace{
 			var prefix : String = metadata.arg.(@key == ARGUMENT_NAMESPACE_PREFIX).@value;
 			var uri : String = metadata.arg.(@key == ARGUMENT_NAMESPACE_URI).@value;
@@ -79,11 +109,17 @@ package com.googlecode.serializer.flexxb
 		}
 		/**
 		 * 
-		 * @see Annotation#annotationName
+		 * @param annotation
+		 * @return 
 		 * 
 		 */		
-		public override function get annotationName():String{
-			return ANNOTATION_NAME;
-		} 
+		private function isFieldRegistered(annotation : Annotation) : Boolean{
+			for each(var member : Annotation in members){
+				if(member.fieldName == annotation.fieldName){
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }
