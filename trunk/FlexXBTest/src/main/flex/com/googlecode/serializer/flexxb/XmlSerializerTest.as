@@ -18,7 +18,7 @@
  package com.googlecode.serializer.flexxb
 {
 	import com.googlecode.testData.Mock;
-	import com.googlecode.testData.Mock2;
+	import com.googlecode.testData.Mock3;
 	
 	import flexunit.framework.TestCase;
 
@@ -31,7 +31,7 @@
 		
 		protected function getObject() : Mock{
 			var target : Mock = new Mock();
-			target.link = new Mock2();
+			target.link = new Mock3();
 			target.aField = "test1";
 			target.date = new Date();
 			target.version = 6;
