@@ -32,13 +32,13 @@
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
 		 */		
-		public function serialize(object:Object, annotation : Annotation, parentXml : XML):XML
+		public function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer):XML
 		{
 			var attribute : XmlAttribute = annotation as XmlAttribute;
 			if(attribute.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
 				return null;
 			}
-			var value : String = XMLSerializer.instance.objectToString(object);
+			var value : String = serializer.objectToString(object);
 			if(value && value.length > 0){
 				parentXml.@[attribute.xmlName] = value;
 			} 
@@ -47,13 +47,13 @@
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
 		 */	
-		public function deserialize(xmlData:XML, annotation : Annotation):Object
+		public function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer):Object
 		{
 			var attribute : XmlAttribute = annotation as XmlAttribute;
 			if(attribute.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
 				return null;
 			}
-			var result : Object = XMLSerializer.instance.stringToObject(xmlData.@[annotation.xmlName], annotation.fieldType);
+			var result : Object = serializer.stringToObject(xmlData.@[annotation.xmlName], annotation.fieldType);
 			return result;
 		}
 	}

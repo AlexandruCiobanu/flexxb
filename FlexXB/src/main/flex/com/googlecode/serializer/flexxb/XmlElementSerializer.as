@@ -32,7 +32,7 @@
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
 		 */
-		public function serialize(object:Object, annotation : Annotation, parentXml : XML) : XML
+		public function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer) : XML
 		{
 			var element : XmlElement = annotation as XmlElement;
 			if(element.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
@@ -43,11 +43,13 @@
 			}*/
 			var child : XML = <xml />;
 			if(isComplexType(object)){
-				child = XMLSerializer.instance.serialize(object);
+				child = serializer.serialize(object);
 			}else{
 				child.appendChild(object);
 			}
-			if(!element.useOwnerAlias()){
+			if(element.useOwnerAlias()){
+				child.setName(serializer.getXmlName(object));
+			}else{
 				child.setName(element.xmlName);
 			}
 			parentXml.appendChild(child);
@@ -56,7 +58,7 @@
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
 		 */
-		public function deserialize(xmlData:XML, annotation : Annotation) : Object
+		public function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer) : Object
 		{
 			var element : XmlElement = annotation as XmlElement;
 			if(element.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
@@ -64,15 +66,15 @@
 			}
 			var xmlName : QName = element.xmlName;
 			if(element.useOwnerAlias()){
-				xmlName = XMLSerializer.instance.getXmlName(element.fieldType);
+				xmlName = serializer.getXmlName(element.fieldType);
 			}
 			var xmlElement : XMLList = xmlData.child(xmlName);
 			if(xmlElement.length() == 0) 
 				return null;
 			if(isComplexType(annotation.fieldType)){
-				return XMLSerializer.instance.deserialize(xmlElement[0], element.fieldType);
+				return serializer.deserialize(xmlElement[0], element.fieldType);
 			}
-			return XMLSerializer.instance.stringToObject(xmlElement[0].text()[0], element.fieldType);
+			return serializer.stringToObject(xmlElement[0].text()[0], element.fieldType);
 		}
 		
 		private function isComplexType(value : Object) : Boolean

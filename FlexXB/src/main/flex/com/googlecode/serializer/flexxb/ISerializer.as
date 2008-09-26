@@ -29,17 +29,19 @@ package com.googlecode.serializer.flexxb
 		 * @param object Object to be serialized
 		 * @param annotation Annotation containing the conversion parameters 
 		 * @param parentXml Parent xml that will enclose the objects xml representation
+		 * @serializer
 		 * @return Generated xml
 		 * 
 		 */			
-		function serialize(object : Object, annotation : Annotation, parentXml : XML) : XML;
+		function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer) : XML;
 		/**
 		 * Deserialize an xml into the appropiate AS3 object
 		 * @param xmlData Xml to be deserialized
-		 * @param annotation Annotation containing the conversion parameters 
+		 * @param annotation Annotation containing the conversion parameters
+		 * @serializer 
 		 * @return Generated object
 		 * 
 		 */		
-		function deserialize(xmlData : XML, annotation : Annotation) : Object;		
+		function deserialize(xmlData : XML, annotation : Annotation, serializer : XMLSerializer) : Object;		
 	}
 }
