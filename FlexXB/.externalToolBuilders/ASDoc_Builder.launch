@@ -7,6 +7,7 @@
 <mapEntry key="DOC_TITLE" value="&quot;XMLSerializer API Documentation&quot;"/>
 <mapEntry key="PROJECT_DOC" value="&quot;${project_loc}\doc&quot;"/>
 </mapAttribute>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="${workspace_loc:/FlexXB/bin/out/out.txt}"/>
 <booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/FlexXB/tools/buildASDoc.cmd}"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_RUN_BUILD_KINDS" value="full,incremental,"/>
