@@ -21,7 +21,7 @@
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 	/**
-	 * Cache for objects handled by the serializer. Keeps a separate cache for each handled object type.
+	 * Object cache used to ensure object uniqueness across the application.
 	 * @author Alexutz
 	 * 
 	 */	
