@@ -18,7 +18,7 @@
  package com.googlecode.serializer
 {
 	/**
-	 * 
+	 * Provides a method to uniquely identify objects of a certain type. 
 	 * @author Alexutz
 	 * 
 	 */	
