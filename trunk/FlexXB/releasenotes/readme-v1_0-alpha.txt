@@ -12,7 +12,7 @@ FlexXB-1_0-alpha-bin.zip - contains the flexxb library along with the test
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
 			/doc/ 				- ASDOC
-			/releasenotes.txt	- version release notes
+			/README.txt	- version release notes
 
 FlexXB-1_0-alpha-src.zip - contains source files
 			/FlexXB/	- FlexXB project sources
