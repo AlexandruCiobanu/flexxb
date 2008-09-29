@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="com.googlecode.serializer.flexxb.ISerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlClassSerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlArraySerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlElement"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlElementSerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlClass"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlAttributeSerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.Annotation"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlAttribute"/>
+<classEntry path="com.googlecode.serializer.IIdentifiable"/>
+<classEntry path="com.googlecode.serializer.ModelObjectCache"/>
+<classEntry path="com.googlecode.serializer.flexxb.IXmlSerializable"/>
+<classEntry path="com.googlecode.serializer.flexxb.XMLSerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlMember"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlArray"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>
