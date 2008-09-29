@@ -17,14 +17,16 @@ This page will contain a list of features and requirements I have planned for my
  * FXB-007 *Flex Model Object Designer (FxMOD)*:
  * FXB-008 *Custom to and from string conversion for simple types*:
  * FXB-009 *Use paths in xml aliases*:
+ * FXB-010 *Allow custom object (de)serialization*:
 
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
 ||FXB-002||Xml alias||1.0 _alpha_||
 ||FXB-003||Ignore a field on serialization, deserialization or both||1.0 _alpha_||
+||FXB-010||Allow custom object (de)serialization||1.0 _alpha_||
 ||FXB-005||Integrate model object cache to insure object uniqueness||1.0 _beta_||
 ||FXB-004||Serialize partial object ||1.0 _beta_||
-||FXB_008||Custom to and from string conversion for simple types||1.0 _beta_||
+||FXB-008||Custom to and from string conversion for simple types||1.0 _beta_||
 ||FXB-006||Class type identification by response's namespace on deserialization||1.0||
 ||FXB-009||Use paths in xml aliases||1.0||
 ||FXB-007||Flex Model Object Designer||2.0||
