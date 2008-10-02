@@ -8,18 +8,30 @@ This page will contain a list of features and requirements I have planned for my
 
 = Features =
 
- * FXB-001 *Support for object namespacing*: Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace.
- * FXB-002 *Xml alias*: Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias).
- * FXB-003 *Ignore a field on serialization, deserialization or both*: An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization.
- * FXB-004 *Serialize partial object (only serialize the object's identification field(s))*: An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id). 
- * FXB-005 *Integrate model object cache to insure object uniqueness*: All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application.
- * FXB-006 *Class type identification by response's namespace on deserialization*: Object types that should be used in deserialization should be determined from the namespaces present in the xml response.
- * FXB-007 *Flex Model Object Designer (FxMOD)*: FXMOD is a utility designed to assist object composition and code generation. It allows the user to visualy assemble the classes it requires for its model and will automatically generate the neccessary annotations are added to the to the generated class and its fields in order to allow for automated (de)serialization. The user will have the option of implementing a custom serialization process if needed.  
- * FXB-008 *Custom to and from string conversion for simple types*: Some simple types (such as Date) may require custom conversion methods to and from String values.
- * FXB-009 *Use paths in xml aliases*: Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of teh server object's hierarchy).
- * FXB-010 *Allow custom object (de)serialization*: There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent.
- * FXB-011 *XSD validation against incoming XML*: Xml responses should be validated by using XSD schemas.
- * FXB-012 *Add getFromCache option for deserializing complex fields*: Fields marked with getFromCache option will be extracted from cache or, the object is absent from cache, will be deserialized.
+ * FXB-001 *Support for object namespacing*: 
+ Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace.
+ * FXB-002 *Xml alias*: 
+ Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias).
+ * FXB-003 *Ignore a field on serialization, deserialization or both*: 
+ An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization.
+ * FXB-004 *Serialize partial object (only serialize the object's identification field(s))*: 
+ An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id). 
+ * FXB-005 *Integrate model object cache to insure object uniqueness*: 
+ All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application.
+ * FXB-006 *Class type identification by response's namespace on deserialization*: 
+ Object types that should be used in deserialization should be determined from the namespaces present in the xml response.
+ * FXB-007 *Flex Model Object Designer (FxMOD)*: 
+ FXMOD is a utility designed to assist object composition and code generation. It allows the user to visualy assemble the classes it requires for its model and will automatically generate the neccessary annotations are added to the to the generated class and its fields in order to allow for automated (de)serialization. The user will have the option of implementing a custom serialization process if needed.  
+ * FXB-008 *Custom to and from string conversion for simple types*: 
+ Some simple types (such as Date) may require custom conversion methods to and from String values.
+ * FXB-009 *Use paths in xml aliases*: 
+ Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of teh server object's hierarchy).
+ * FXB-010 *Allow custom object (de)serialization*: 
+ There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent.
+ * FXB-011 *XSD validation against incoming XML*: Xml 
+ responses should be validated by using XSD schemas.
+ * FXB-012 *Add getFromCache option for deserializing complex fields*: 
+ Fields marked with getFromCache option will be extracted from cache or, the object is absent from cache, will be deserialized.
 
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
