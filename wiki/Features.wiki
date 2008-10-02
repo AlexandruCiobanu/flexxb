@@ -31,7 +31,7 @@ This page will contain a list of features and requirements I have planned for my
  * FXB-011 *XSD validation against incoming XML*: Xml 
  responses should be validated by using XSD schemas.
  * FXB-012 *Add getFromCache option for deserializing complex fields*: 
- Fields marked with getFromCache option will be extracted from cache or, the object is absent from cache, will be deserialized.
+ Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized.
 
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
