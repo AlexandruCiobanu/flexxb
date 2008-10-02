@@ -74,7 +74,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#deserialize()">deserialize</a>(xmlData:XML, objectClass:Class):Object</div>
+<a class="signatureLink" href="#deserialize()">deserialize</a>(xmlData:XML, objectClass:Class, getFromCache:Boolean = false):Object</div>
 <div class="summaryTableDescription">
    Convert an xml to an AS3 object counterpart
    </div>
@@ -84,7 +84,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#getXmlName()">getXmlName</a>(object:Object):QName</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   
+   </div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
 </tr>
 <tr class="">
@@ -166,7 +168,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public final function deserialize(xmlData:XML, objectClass:Class):Object</code><p>
+<code>public final function deserialize(xmlData:XML, objectClass:Class, getFromCache:Boolean = false):Object</code><p>
    Convert an xml to an AS3 object counterpart
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -180,6 +182,12 @@ showHideInherited();
 <tr>
 <td width="20px"></td><td><code><span class="label">objectClass</span>:Class</code> &mdash; object class
    </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">getFromCache</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
 </tr>
 </table>
 <p></p>
@@ -199,7 +207,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public final function getXmlName(object:Object):QName</code><span class="label">Parameters</span>
+<code>public final function getXmlName(object:Object):QName</code><p>
+   
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">object</span>:Object</code></td>
