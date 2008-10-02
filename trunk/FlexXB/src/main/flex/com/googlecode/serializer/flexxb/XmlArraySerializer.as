@@ -67,7 +67,7 @@
 			if(xmlArray.length() > 0) {
 				var memberType : Class = getDefinitionByName(array.type) as Class;
 				for each(var xmlChild : XML in xmlArray.children()){
-					var member : Object = serializer.deserialize(xmlChild, memberType);
+					var member : Object = serializer.deserialize(xmlChild, memberType, array.getFromCache);
 					if(member){
 						addMemberToResult(member, result);
 					}

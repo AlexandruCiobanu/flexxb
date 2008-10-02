@@ -36,5 +36,12 @@ package com.googlecode.serializer.flexxb
 		 * @param xmlData xml data source
 		 */ 
 		function fromXml(xmlData : XML) : Object;
+		/**
+		 * 
+		 * @param xmldata
+		 * @return 
+		 * 
+		 */		
+		function getIdValue(xmldata : XML) : String;
 	}
 }

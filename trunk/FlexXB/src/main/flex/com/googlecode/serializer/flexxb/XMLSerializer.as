@@ -17,7 +17,10 @@
  */ 
  package com.googlecode.serializer.flexxb
 {
+	import com.googlecode.serializer.ModelObjectCache;
+	
 	import flash.utils.describeType;
+	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	/**
 	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration. 
@@ -91,9 +94,9 @@
 				return IXmlSerializable(object).toXml();
 			}
 			var classDescriptor : XmlClass = getAnnotations(object);
-			var xmlData : XML = getSerializer(classDescriptor.annotationName).serialize(object, classDescriptor, null, this);
+			var xmlData : XML = getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
 			for each(var annotation : Annotation in classDescriptor.members){
-				var serializer : ISerializer = getSerializer(annotation.annotationName);
+				var serializer : ISerializer = getSerializer(annotation);
 				var target : Object = object[annotation.fieldName];
 				if(target){
 					serializer.serialize(target, annotation, xmlData, this);
@@ -108,16 +111,26 @@
 		 * @return object of type objectClass 
 		 * 
 		 */		
-		public final function deserialize(xmlData : XML, objectClass : Class) : Object{
+		public final function deserialize(xmlData : XML, objectClass : Class, getFromCache : Boolean = false) : Object{
 			if(xmlData && objectClass){
-				//var ns : Array = xmlData.namespaceDeclarations();
 				var result : Object = new objectClass();
-				if(result is IXmlSerializable){
+				var id : String = getId(result, xmlData);
+				//get object from cache
+				if(id && ModelObjectCache.instance.isCached(id, objectClass)){
+					if(getFromCache){
+						return ModelObjectCache.instance.getObject(id, objectClass);
+					}
+					result = ModelObjectCache.instance.getObject(id, objectClass);
+				}else{
+					ModelObjectCache.instance.putObject(id, result);
+				}
+				//update obect fields
+				if(result is IXmlSerializable){	
 					IXmlSerializable(result).fromXml(xmlData);
 				}else{
 					var classDescriptor : XmlClass = getAnnotations(result);
 					for each(var annotation : Annotation in classDescriptor.members){				
-						var serializer : ISerializer = getSerializer(annotation.annotationName);
+						var serializer : ISerializer = getSerializer(annotation);
 						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 					}
 				}
@@ -125,7 +138,12 @@
 			}
 			return null;
 		}
-		
+		/**
+		 * 
+		 * @param object
+		 * @return 
+		 * 
+		 */		
 		public final function getXmlName(object : Object) : QName{
 			if(object != null){
 				var classDescriptor : XmlClass = getAnnotations(object);
@@ -134,6 +152,62 @@
 				}
 			}
 			return null;
+		}
+		/**
+		 * 
+		 * @param value
+		 * @param clasz
+		 * @return 
+		 * 
+		 */		
+		public final function stringToObject(value : String, clasz : Class) : Object{
+			if(clasz==Boolean){
+				return (value && value.toLowerCase() == "true");
+			}
+			if(clasz == Date){
+				if(value == ""){
+					return null;
+				}
+				var date : Date = new Date();
+				date.setTime(Date.parse(value));
+				return date;
+			}
+			return clasz(value);
+		}
+		/**
+		 * 
+		 * @param object
+		 * @return 
+		 * 
+		 */		
+		public final function objectToString(object : Object) : String{
+			if(object is String){
+				return object as String;
+			}
+			try{
+				return object.toString();
+			}catch(e:Error){}
+			return "";
+		}
+		/**
+		 * 
+		 * @param result
+		 * @param xmlData
+		 * @return 
+		 * 
+		 */		
+		private function getId(result : Object, xmlData : XML) : String{
+			var id : String;
+			if(result is IXmlSerializable){
+				id = IXmlSerializable(result).getIdValue(xmlData);
+			}else{
+				var classDescriptor : XmlClass = getAnnotations(result);
+				var idSerializer : ISerializer = getSerializer(classDescriptor.idField);
+				if(idSerializer){
+					id = idSerializer.deserialize(xmlData, classDescriptor.idField, this) as String;
+				}
+			}
+			return id;
 		}
 		/**
 		 * 
@@ -153,9 +227,9 @@
 		 * @return 
 		 * 
 		 */		
-		private function getSerializer(annotationName : String) : ISerializer{
-			if(annotationMap[annotationName]){
-				return annotationMap[annotationName].serializer as ISerializer;
+		private function getSerializer(annotation : Annotation) : ISerializer{
+			if(annotation && annotationMap[annotation.annotationName]){
+				return annotationMap[annotation.annotationName].serializer as ISerializer;
 			}
 			return null;
 		}	
@@ -207,42 +281,6 @@
 				}
 			}
 			return null;
-		}
-		/**
-		 * 
-		 * @param value
-		 * @param clasz
-		 * @return 
-		 * 
-		 */		
-		public final function stringToObject(value : String, clasz : Class) : Object{
-			if(clasz==Boolean){
-				return (value && value.toLowerCase() == "true");
-			}
-			if(clasz == Date){
-				if(value == ""){
-					return null;
-				}
-				var date : Date = new Date();
-				date.setTime(Date.parse(value));
-				return date;
-			}
-			return clasz(value);
-		}
-		/**
-		 * 
-		 * @param object
-		 * @return 
-		 * 
-		 */		
-		public final function objectToString(object : Object) : String{
-			if(object is String){
-				return object as String;
-			}
-			try{
-				return object.toString();
-			}catch(e:Error){}
-			return "";
 		}
 	}
 }

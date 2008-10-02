@@ -76,6 +76,9 @@
 		 * 
 		 */
 		public function putObject(id : String, object : Object) : Boolean {
+			if(!id){
+				return false;
+			}
 			var qualifiedName : String = getQualifiedClassName(object);
 			var clasz : Class = ApplicationDomain.currentDomain.getDefinition(qualifiedName) as Class;
 			var old : Object = getObject(id, clasz);
@@ -84,7 +87,7 @@
 			}
 			cache[clasz][id] = object;
 			return old;
-		}		
+		}
 		/**
 		 * Clears the cache for all the objects with given class.
 		 * If no class is specified, then all cache is cleared.

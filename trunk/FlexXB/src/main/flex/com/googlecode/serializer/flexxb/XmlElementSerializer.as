@@ -72,7 +72,7 @@
 			if(xmlElement.length() == 0) 
 				return null;
 			if(isComplexType(annotation.fieldType)){
-				return serializer.deserialize(xmlElement[0], element.fieldType);
+				return serializer.deserialize(xmlElement[0], element.fieldType, element.getFromCache);
 			}
 			return serializer.stringToObject(xmlElement[0].text()[0], element.fieldType);
 		}

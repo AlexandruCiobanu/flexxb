@@ -18,7 +18,7 @@
  package com.googlecode.serializer.flexxb
 {
 	/**
-	 * Usage: <code>[XmlElement(alias="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code>
+	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code>
 	 * @author aCiobanu
 	 * 
 	 */
@@ -36,6 +36,10 @@
 		 * 
 		 */
 		protected var _serializePartialElement : Boolean;
+		/**
+		 * 
+		 */		
+		protected var _getFromCache : Boolean;
 		
 		public function XmlElement(descriptor : XML){
 			super(descriptor);
@@ -50,12 +54,21 @@
 		}
 		/**
 		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get getFromCache() : Boolean{
+			return _getFromCache;
+		}
+		/**
+		 * 
 		 * @see Annotation#parseMetadata()
 		 * 
 		 */	
 		protected override function parseMetadata(metadata : XML):void{
 			super.parseMetadata(metadata);
 			_serializePartialElement = metadata.arg.(@key == ARGUMENT_SERIALIZE_PARTIAL_ELEMENT).@value == "true";
+			_getFromCache =  metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value == "true";
 		}
 		/**
 		 * 

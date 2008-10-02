@@ -23,7 +23,7 @@ package com.googlecode.serializer.flexxb
 	
 	/**
 	 * 
-	 * <p>Usage: <code>[XmlClass(alias="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
+	 * <p>Usage: <code>[XmlClass(alias="MyClass", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
 	 * @author aCiobanu
 	 * 
 	 */	
@@ -44,7 +44,19 @@ package com.googlecode.serializer.flexxb
 		/**
 		 * 
 		 */		
+		public static const ARGUMENT_ID : String = "idField";
+		/**
+		 * 
+		 */		
 		public var members : ArrayCollection = new ArrayCollection(); 
+		/**
+		 * 
+		 */		
+		protected var _idField : Annotation;
+		/**
+		 * 
+		 */		
+		private var id : String;
 		/**
 		 *Constructor 
 		 * 
@@ -61,7 +73,18 @@ package com.googlecode.serializer.flexxb
 			if(annotation && !isFieldRegistered(annotation)){
 				annotation.nameSpace = nameSpace;
 				members.addItem(annotation);
+				if(annotation.fieldName == id){
+					_idField = annotation;
+				}
 			}
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get idField() : Annotation{
+			return _idField;
 		}
 		/**
 		 * 
@@ -89,6 +112,13 @@ package com.googlecode.serializer.flexxb
 		protected override function parseMetadata(metadata : XML) : void{
 			nameSpace = getNamespace(metadata);
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
+			setIdField(metadata.arg.(@key == ARGUMENT_ID).@value);		
+		}
+		
+		protected function setIdField(field : String) : void{
+			if(field && field.length > 0) {
+				id = field;
+			}
 		}
 		/**
 		 * 
