@@ -28,8 +28,8 @@ This page will contain a list of features and requirements I have planned for my
  Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of teh server object's hierarchy).
  * FXB-010 *Allow custom object (de)serialization*: 
  There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent.
- * FXB-011 *XSD validation against incoming XML*: Xml 
- responses should be validated by using XSD schemas.
+ * FXB-011 *XSD validation against incoming XML*: 
+ Xml responses should be validated by using XSD schemas.
  * FXB-012 *Add getFromCache option for deserializing complex fields*: 
  Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized.
  * FXB-013 *Add method references to annotation's attribute values*:
