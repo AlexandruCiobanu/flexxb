@@ -32,7 +32,8 @@ This page will contain a list of features and requirements I have planned for my
  responses should be validated by using XSD schemas.
  * FXB-012 *Add getFromCache option for deserializing complex fields*: 
  Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized.
-
+ * FXB-013 *Add method references to annotation's attribute values*:
+ * FXB-014 *Add events to signal processing start and finish*:
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
 ||FXB-002||Xml alias||1.0 _alpha_||
