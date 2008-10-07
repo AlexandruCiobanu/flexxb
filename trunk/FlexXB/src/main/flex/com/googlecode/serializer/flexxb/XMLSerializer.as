@@ -18,10 +18,6 @@
  package com.googlecode.serializer.flexxb
 {
 	import com.googlecode.serializer.ModelObjectCache;
-	
-	import flash.utils.describeType;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
 	/**
 	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration. 
 	 * By default it registeres the built-in annotations at startup. 
@@ -36,7 +32,11 @@
 	 * <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code></p>
 	 * @author aCiobanu
 	 * 
-	 */		
+	 */
+	[Event(name="preserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	[Event(name="postserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	[Event(name="predeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	[Event(name="postdeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
 	public final class XMLSerializer
 	{	
 		/**
@@ -46,11 +46,11 @@
 		/**
 		 * 
 		 */		
-		private var descriptorCache : Object;
+		private var descriptorCache : DescriptorCache = new DescriptorCache();
 		/**
 		 * 
 		 */		
-		private var annotationMap : Object;
+		private var converterMap : Object;
 		/**
 		 * Constructor
 		 * 
@@ -60,25 +60,35 @@
 			if(instance){
 				throw new Error("Please do not instanciate this class. Use XMLSerializer.instance instead");
 			}
-			annotationMap = new Object();
-			registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
-			registerAnnotation(XmlElement.ANNOTATION_NAME,   XmlElement,   XmlElementSerializer);
-			registerAnnotation(XmlArray.ANNOTATION_NAME, 	 XmlArray, 	   XmlArraySerializer);
-			registerAnnotation(XmlClass.ANNOTATION_NAME, 	 XmlClass, 	   XmlClassSerializer);
+			descriptorCache.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
+			descriptorCache.registerAnnotation(XmlElement.ANNOTATION_NAME,   XmlElement,   XmlElementSerializer);
+			descriptorCache.registerAnnotation(XmlArray.ANNOTATION_NAME, 	 XmlArray, 	   XmlArraySerializer);
+			descriptorCache.registerAnnotation(XmlClass.ANNOTATION_NAME, 	 XmlClass, 	   XmlClassSerializer);
 		}
 		/**
-		 * Register a new annotation and its serializer. If it founds a registration with the 
-		 * same name and <code>overrideExisting </code> is set to <code>false</code>, it will disregard the current attempt and keep the old value.
-		 * @param name the name of the annotation to be registered
-		 * @param annotationClazz annotation class type
-		 * @param serializerInstance instance of the serializer that will handle this annotation
-		 * @param overrideExisting
+		 * 
+		 * @param converter
+		 * @return 
 		 * 
 		 */		
-		public final function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void{
-			if(overrideExisting || !annotationMap[name]){
-				annotationMap[name] = {annotation: annotationClazz, serializer: new serializer() as ISerializer};
+		public function registerSimpleTypeConverter(converter : IConverter) : Boolean{
+			if(converter == null || converter.type == null || (converterMap && converterMap[converter.type])){
+				return false;
 			}
+			if(converterMap == null){
+				converterMap = new Object();
+			}
+			converterMap[converter.type] = converter;
+			return true;
+		}
+		/**
+		 * 
+		 * @param type
+		 * @return 
+		 * 
+		 */		
+		public function hasConverter(type : Class) : Boolean{
+			return converterMap && type && converterMap[type] is IConverter;
 		}
 		/**
 		 * Convert an object to a xml representation.
@@ -86,23 +96,38 @@
 		 * @return xml representation of the given object
 		 * 
 		 */		
-		public final function serialize(object : Object) : XML{
+		public final function serialize(object : Object, partial : Boolean = false) : XML{
 			if(object == null){
 				return null;
 			}
 			if(object is IXmlSerializable){
 				return IXmlSerializable(object).toXml();
 			}
-			var classDescriptor : XmlClass = getAnnotations(object);
-			var xmlData : XML = getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
-			for each(var annotation : Annotation in classDescriptor.members){
-				var serializer : ISerializer = getSerializer(annotation);
-				var target : Object = object[annotation.fieldName];
-				if(target){
-					serializer.serialize(target, annotation, xmlData, this);
+			var classDescriptor : XmlClass = descriptorCache.getDescriptor(object);
+			var xmlData : XML = descriptorCache.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
+			var serializer : ISerializer;
+			if(partial && classDescriptor.idField){
+				doSerialize(object, classDescriptor.idField, xmlData);  
+			}else{
+				for each(var annotation : Annotation in classDescriptor.members){
+					doSerialize(object, annotation, xmlData);
 				}
 			}
 			return xmlData;
+		}
+		/**
+		 * 
+		 * @param object
+		 * @param annotation
+		 * @param xmlData
+		 * 
+		 */		
+		private function doSerialize(object : Object, annotation : Annotation, xmlData : XML) : void{
+			var serializer : ISerializer = descriptorCache.getSerializer(annotation);
+			var target : Object = object[annotation.fieldName];
+			if(target){
+				serializer.serialize(target, annotation, xmlData, this);
+			}
 		}
 		/**
 		 * Convert an xml to an AS3 object counterpart
@@ -128,9 +153,9 @@
 				if(result is IXmlSerializable){	
 					IXmlSerializable(result).fromXml(xmlData);
 				}else{
-					var classDescriptor : XmlClass = getAnnotations(result);
+					var classDescriptor : XmlClass = descriptorCache.getDescriptor(result);
 					for each(var annotation : Annotation in classDescriptor.members){				
-						var serializer : ISerializer = getSerializer(annotation);
+						var serializer : ISerializer = descriptorCache.getSerializer(annotation);
 						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 					}
 				}
@@ -146,7 +171,7 @@
 		 */		
 		public final function getXmlName(object : Object) : QName{
 			if(object != null){
-				var classDescriptor : XmlClass = getAnnotations(object);
+				var classDescriptor : XmlClass = descriptorCache.getDescriptor(object);
 				if(classDescriptor){
 					return classDescriptor.xmlName;
 				}
@@ -161,6 +186,9 @@
 		 * 
 		 */		
 		public final function stringToObject(value : String, clasz : Class) : Object{
+			if(hasConverter(clasz)){
+				return getConverter(clasz).fromString(value);
+			}
 			if(clasz==Boolean){
 				return (value && value.toLowerCase() == "true");
 			}
@@ -201,8 +229,8 @@
 			if(result is IXmlSerializable){
 				id = IXmlSerializable(result).getIdValue(xmlData);
 			}else{
-				var classDescriptor : XmlClass = getAnnotations(result);
-				var idSerializer : ISerializer = getSerializer(classDescriptor.idField);
+				var classDescriptor : XmlClass = descriptorCache.getDescriptor(result);
+				var idSerializer : ISerializer = descriptorCache.getSerializer(classDescriptor.idField);
 				if(idSerializer){
 					id = idSerializer.deserialize(xmlData, classDescriptor.idField, this) as String;
 				}
@@ -211,76 +239,12 @@
 		}
 		/**
 		 * 
-		 * @param annotationName
+		 * @param clasz
 		 * @return 
 		 * 
 		 */		
-		private function getClass(annotationName : String) : Class{
-			if(annotationMap[annotationName]){
-				return annotationMap[annotationName].annotation as Class;
-			}
-			return null;
-		}
-		/**
-		 * 
-		 * @param annotationName
-		 * @return 
-		 * 
-		 */		
-		private function getSerializer(annotation : Annotation) : ISerializer{
-			if(annotation && annotationMap[annotation.annotationName]){
-				return annotationMap[annotation.annotationName].serializer as ISerializer;
-			}
-			return null;
-		}	
-		/**
-		 * 
-		 * @param object
-		 * @return Array of Annotation objects
-		 * 
-		 */		
-		private function getAnnotations(object : Object) : XmlClass{
-			var result : XmlClass;
-			var className : String = getQualifiedClassName(object);
-			//attempt to get the annotations from the descriptor cache
-			if(descriptorCache && descriptorCache[className] is XmlClass){
-				result = descriptorCache[className] as XmlClass;
-			}else{
-				var descriptor : XML = describeType(object);
-				//get class annotation				
-				var classDescriptor : XmlClass = new XmlClass(descriptor);
-				//get namespace
-				var field : XML;
-				for each(field in descriptor..variable){
-					classDescriptor.addMember(getAnnotation(field));
-				}
-				for each(field in descriptor..accessor.(@access == "readwrite")){
-					classDescriptor.addMember(getAnnotation(field));
-				}
-				result = classDescriptor;
-				//save the annotation list in cache				
-				if(!descriptorCache){
-					descriptorCache = new Object();
-				}
-				descriptorCache[className] = classDescriptor;
-			}
-			return result;
-		}
-		/**
-		 * 
-		 * @param field
-		 * @return 
-		 * 
-		 */		
-		private function getAnnotation(field : XML) : Annotation{
-			var annotations : XMLList = field.metadata;
-			for each(var member : XML in annotations){
-				var annotationClass : Class = getClass(member.@name);
-				if(annotationClass){
-					return new annotationClass(field) as Annotation;
-				}
-			}
-			return null;
+		private function getConverter(clasz : Class) : IConverter{
+			return converterMap[clasz] as IConverter;
 		}
 	}
 }
