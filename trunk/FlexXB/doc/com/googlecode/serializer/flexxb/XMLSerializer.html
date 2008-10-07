@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="XMLSerializer,com.googlecode.serializer.flexxb.XMLSerializer,instance,deserialize,getXmlName,objectToString,registerAnnotation,serialize,stringToObject" name="keywords">
+<meta content="XMLSerializer,com.googlecode.serializer.flexxb.XMLSerializer,instance,deserialize,getXmlName,hasConverter,objectToString,registerSimpleTypeConverter,serialize,stringToObject" name="keywords">
 <title>com.googlecode.serializer.flexxb.XMLSerializer</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 <td align="left" class="titleTableTitle">XMLSerializer API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?com/googlecode/serializer/flexxb/XMLSerializer.html&amp;com/googlecode/serializer/flexxb/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;XMLSerializer</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;XMLSerializer</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class XMLSerializer"); titleBar_setSubNav(true,false,false,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class XMLSerializer"); titleBar_setSubNav(true,false,false,false,true,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -39,18 +39,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  Entry point for AS3-XML (de)serialization. Allows new annotation registration. 
-  By default it registeres the built-in annotations at startup. 
-  <p>Built-in anotation usage:
-   <ul>
-   <li>XmlClass: <code>[XmlClass(name="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]</code></li>
-   <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
-   <li>XmlElement: <code>[XmlElement(name="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
-   <li>XmlArray: <code>[Array(name="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
-   </ul></p>
-  <p>Make sure you add the following switches to your compiler settings:
-  <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code></p>
-  <p></p>
+<p></p>
 <br>
 <hr>
 </div>
@@ -92,6 +81,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#hasConverter()">hasConverter</a>(type:Class):Boolean</div>
+<div class="summaryTableDescription">
+   
+   </div>
+</td><td class="summaryTableOwnerCol">XMLSerializer</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#objectToString()">objectToString</a>(object:Object):String</div>
 <div class="summaryTableDescription">
    
@@ -101,15 +99,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#registerAnnotation()">registerAnnotation</a>(name:String, annotationClazz:Class, serializer:Class, overrideExisting:Boolean = false):void</div>
+<a class="signatureLink" href="#registerSimpleTypeConverter()">registerSimpleTypeConverter</a>(converter:<a href="IConverter.html">IConverter</a>):Boolean</div>
 <div class="summaryTableDescription">
-   Register a new annotation and its serializer.</div>
+   
+   </div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#serialize()">serialize</a>(object:Object):XML</div>
+<a class="signatureLink" href="#serialize()">serialize</a>(object:Object, partial:Boolean = false):XML</div>
 <div class="summaryTableDescription">
    Convert an object to a xml representation.</div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
@@ -122,6 +121,44 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    
    </div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:postdeserialize">postdeserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">XMLSerializer</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:postserialize">postserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">XMLSerializer</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:predeserialize">predeserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">XMLSerializer</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:preserialize">preserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+  Entry point for AS3-XML (de)serialization.</td><td class="summaryTableOwnerCol">XMLSerializer</td>
 </tr>
 </table>
 </div>
@@ -223,6 +260,29 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="hasConverter()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasConverter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hasConverter(type:Class):Boolean</code><p>
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:Class</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
 <a name="objectToString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -246,41 +306,26 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="registerAnnotation()"></a>
+<a name="registerSimpleTypeConverter()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">registerAnnotation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">registerSimpleTypeConverter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public final function registerAnnotation(name:String, annotationClazz:Class, serializer:Class, overrideExisting:Boolean = false):void</code><p>
-   Register a new annotation and its serializer. If it founds a registration with the 
-   same name and <code>overrideExisting </code> is set to <code>false</code>, it will disregard the current attempt and keep the old value.
+<code>public function registerSimpleTypeConverter(converter:<a href="IConverter.html">IConverter</a>):Boolean</code><p>
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">name</span>:String</code> &mdash; the name of the annotation to be registered
-   </td>
+<td width="20px"></td><td><code><span class="label">converter</span>:<a href="IConverter.html">IConverter</a></code></td>
 </tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">annotationClazz</span>:Class</code> &mdash; annotation class type
-   </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">serializer</span>:Class</code> &mdash; instance of the serializer that will handle this annotation
-   </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">overrideExisting</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+<td width="20"></td><td><code>Boolean</code></td>
 </tr>
 </table>
 </div>
@@ -291,13 +336,19 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public final function serialize(object:Object):XML</code><p>
+<code>public final function serialize(object:Object, partial:Boolean = false):XML</code><p>
    Convert an object to a xml representation.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; object to be converted.
    </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">partial</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
 </tr>
 </table>
 <p></p>
@@ -339,6 +390,62 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:postdeserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">postdeserialize</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../flexxb/XmlEvent.html"><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p>
+</div>
+<a name="event:postserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">postserialize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../flexxb/XmlEvent.html"><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p>
+</div>
+<a name="event:predeserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">predeserialize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../flexxb/XmlEvent.html"><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p>
+</div>
+<a name="event:preserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">preserialize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../flexxb/XmlEvent.html"><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p><p>
+  Entry point for AS3-XML (de)serialization. Allows new annotation registration. 
+  By default it registeres the built-in annotations at startup. 
+  </p><p>Built-in anotation usage:
+   <ul>
+   <li>XmlClass: <code>[XmlClass(name="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]</code></li>
+   <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
+   <li>XmlElement: <code>[XmlElement(name="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
+   <li>XmlArray: <code>[Array(name="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
+   </ul></p>
+  <p>Make sure you add the following switches to your compiler settings:
+  <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code></p>
+  </div>
 <a name="constantDetail"></a>
 <div class="detailSectionHeader">Constant detail</div>
 <a name="instance"></a>
