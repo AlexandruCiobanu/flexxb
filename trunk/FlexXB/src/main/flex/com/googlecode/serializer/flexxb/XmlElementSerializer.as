@@ -25,10 +25,7 @@
 	 */	
 	public class XmlElementSerializer implements ISerializer
 	{
-		public function XmlElementSerializer()
-		{
-			//TODO: implement function
-		}
+		public function XmlElementSerializer(){}
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
 		 */
@@ -38,9 +35,6 @@
 			if(element.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
 				return null;
 			}
-			/*if(element.serializePartialElement){
-				return null;
-			}*/
 			var child : XML = <xml />;
 			if(isComplexType(object)){
 				child = serializer.serialize(object);
