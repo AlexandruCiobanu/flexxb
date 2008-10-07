@@ -121,6 +121,14 @@
 		public function get annotationName() : String{
 			return "";
 		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function hasNamespaceDeclaration() : Boolean{
+			return nameSpace && nameSpace.uri && nameSpace.uri.length > 0;
+		}
 		
 		public function useOwnerAlias() : Boolean{
 			return _alias == "*";
