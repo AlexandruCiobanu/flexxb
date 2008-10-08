@@ -8,6 +8,6 @@
 === XmlAttribute ===
  Syntax:{{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]}}}
 === XmlElement ===
- Syntax:{{{[XmlElement(alias="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
+ Syntax:{{{[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
 === XmlArray ===
- Syntax:{{{[XmlArray(alias="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
+ Syntax:{{{[XmlArray(alias="element", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
