@@ -43,7 +43,7 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-005||Integrate model object cache to insure object uniqueness||1.0 _beta_||
 ||FXB-004||Serialize partial object ||1.0 _beta_||
 ||FXB-008||Custom to and from string conversion for simple types||1.0 _beta_||
-||FXB-012||Add getFromCache option for deserializing complex fields||1.0_beta_||
+||FXB-012||Add getFromCache option for deserializing complex fields||1.0 _beta_||
 ||FXB-014||Add events to signal processing start and finish||1.0 _beta_||
 ||FXB-006||Class type identification by response's namespace on deserialization||1.0||
 ||FXB-009||Use paths in xml aliases||1.0||
