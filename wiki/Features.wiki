@@ -34,6 +34,7 @@ This page will contain a list of features and requirements I have planned for my
  Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized.
  * FXB-013 *Add method references to annotation's attribute values*:
  * FXB-014 *Add events to signal processing start and finish*:
+ The serializer should allow custom treatments at different stages in the xml processing. These stages are: _Pre-Serialize_, _Post-Serialize_, _Pre-Deserialize_ and _Post_Deserialize_.
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
 ||FXB-002||Xml alias||1.0 _alpha_||
@@ -43,7 +44,9 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-004||Serialize partial object ||1.0 _beta_||
 ||FXB-008||Custom to and from string conversion for simple types||1.0 _beta_||
 ||FXB-012||Add getFromCache option for deserializing complex fields||1.0_beta_||
+||FXB-014||Add events to signal processing start and finish||1.0 _beta_||
 ||FXB-006||Class type identification by response's namespace on deserialization||1.0||
 ||FXB-009||Use paths in xml aliases||1.0||
+||FXB-013||Add method references to annotation's attribute values||1.0||
 ||FXB-007||Flex Model Object Designer||2.0||
 ||FXB-011||XSD validation against incoming XML||3.0||
