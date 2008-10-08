@@ -8,6 +8,6 @@ Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estim
 
 || *Product version* || *Delivery Date* || *Feature list* || *Observations* ||
 ||   1.0 - _alpha_   ||   01-Oct-2008   ||      [Features FXB-001], [Features FXB-002], [Features FXB-003], [Features FXB-010]     ||      Delivered  ||
-||   1.0 - _beta_   ||   10-Nov-2008   ||      [Features FXB-004], [Features FXB-005], [Features FXB-008]     ||      _Intended delivery date_   ||
-||   1.0   ||   10-Dec-2008   ||      [Features FXB-006]     ||      _Intended delivery date_   ||
+||   1.0 - _beta_   ||   10-Nov-2008   ||      [Features FXB-004], [Features FXB-005], [Features FXB-008], [Features FXB-012], [Features FXB-014]     ||      _Intended delivery date_   ||
+||   1.0   ||   10-Dec-2008   ||      [Features FXB-006], [Features FXB-009], [Features FXB-013]     ||      _Intended delivery date_   ||
 ||   2.0 - _alpha_  ||   15-Feb-2009   ||      [Features FXB-007]     ||      _Intended delivery date_   ||
