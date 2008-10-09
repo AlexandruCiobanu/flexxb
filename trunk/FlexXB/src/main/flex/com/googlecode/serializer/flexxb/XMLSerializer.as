@@ -146,7 +146,7 @@
 						return ModelObjectCache.instance.getObject(id, objectClass);
 					}
 					result = ModelObjectCache.instance.getObject(id, objectClass);
-				}else{
+				}else if(id){
 					ModelObjectCache.instance.putObject(id, result);
 				}
 				//update obect fields
