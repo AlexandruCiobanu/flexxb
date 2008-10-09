@@ -19,6 +19,7 @@
 {
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
+	import com.googlecode.testData.Mock3;
 	
 	import flexunit.framework.TestCase;
 
@@ -48,11 +49,23 @@
 			assertFalse("Wrong excluded field", copy.someExcludedField)
 		}
 		
-		public function testSerializeDeserialize() : void{
+		public function testSerializeWithNS() : void{
 			var target : Mock = getObject();
 			var xml : XML = XMLSerializer.instance.serialize(target);
 			var copy : Mock = XMLSerializer.instance.deserialize(xml, Mock) as Mock;
 			compare(target, copy);
+		}
+		
+		public function testSerializeWithoutNS() : void{
+			var target : Mock3 = new Mock3();
+			target.attribute = true;
+			target.id = 5;
+			target.version = 33;
+			var xml : XML = XMLSerializer.instance.serialize(target);
+			var copy : Mock3 = XMLSerializer.instance.deserialize(xml, Mock3) as Mock3;
+			assertEquals("Attribute is wrong", target.attribute, copy.attribute);
+			assertEquals("id is wrong", target.id, copy.id);
+			assertEquals("version is wrong", target.version, copy.version);
 		}		
 	}
 }
