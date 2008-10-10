@@ -18,6 +18,8 @@
  package com.googlecode.serializer.flexxb
 {
 	import com.googlecode.serializer.ModelObjectCache;
+	
+	import flash.events.EventDispatcher;
 	/**
 	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration. 
 	 * By default it registeres the built-in annotations at startup. 
@@ -37,7 +39,7 @@
 	[Event(name="postserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
 	[Event(name="predeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
 	[Event(name="postdeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
-	public final class XMLSerializer
+	public final class XMLSerializer extends EventDispatcher
 	{	
 		/**
 		 * Singleton
@@ -100,19 +102,29 @@
 			if(object == null){
 				return null;
 			}
+			var xmlData : XML;
+			
+			//dispatch preSerializeEvent
+			dispatchEvent(XmlEvent.createPreSerializeEvent(object, xmlData));
+			
 			if(object is IXmlSerializable){
-				return IXmlSerializable(object).toXml();
-			}
-			var classDescriptor : XmlClass = descriptorCache.getDescriptor(object);
-			var xmlData : XML = descriptorCache.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
-			var serializer : ISerializer;
-			if(partial && classDescriptor.idField){
-				doSerialize(object, classDescriptor.idField, xmlData);  
+				xmlData = IXmlSerializable(object).toXml();
 			}else{
-				for each(var annotation : Annotation in classDescriptor.members){
-					doSerialize(object, annotation, xmlData);
+				var classDescriptor : XmlClass = descriptorCache.getDescriptor(object);
+				xmlData = descriptorCache.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
+				var serializer : ISerializer;
+				if(partial && classDescriptor.idField){
+					doSerialize(object, classDescriptor.idField, xmlData);  
+				}else{
+					for each(var annotation : Annotation in classDescriptor.members){
+						doSerialize(object, annotation, xmlData);
+					}
 				}
 			}
+			
+			//dispatch postSerializeEvent
+			dispatchEvent(XmlEvent.createPostSerializeEvent(object, xmlData));
+			
 			return xmlData;
 		}
 		/**
@@ -140,6 +152,10 @@
 			if(xmlData && objectClass){
 				var result : Object = new objectClass();
 				var id : String = getId(result, xmlData);
+				
+				//dispatch preSerializeEvent
+				dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
+				
 				//get object from cache
 				if(id && ModelObjectCache.instance.isCached(id, objectClass)){
 					if(getFromCache){
@@ -159,6 +175,10 @@
 						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 					}
 				}
+				
+				//dispatch preSerializeEvent
+				dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
+				
 				return result;
 			}
 			return null;
@@ -232,7 +252,7 @@
 				var classDescriptor : XmlClass = descriptorCache.getDescriptor(result);
 				var idSerializer : ISerializer = descriptorCache.getSerializer(classDescriptor.idField);
 				if(idSerializer){
-					id = idSerializer.deserialize(xmlData, classDescriptor.idField, this) as String;
+					id = String(idSerializer.deserialize(xmlData, classDescriptor.idField, this));
 				}
 			}
 			return id;
