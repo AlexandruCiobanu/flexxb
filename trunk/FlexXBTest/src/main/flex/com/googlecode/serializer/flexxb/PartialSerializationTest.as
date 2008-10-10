@@ -25,7 +25,10 @@ package com.googlecode.serializer.flexxb
 			target.link.id = 325;
 			target.link.version = 2;
 			var xml : XML = XMLSerializer.instance.serialize(target);
-			Alert.show(xml);
+			assertTrue(xml.MOck2Replacement.length()>0);
+			assertEquals(xml.MOck2Replacement.@id, "325");
+			assertEquals(xml.MOck2Replacement.@attribute.toString(), "");
+			assertEquals(xml.MOck2Replacement.objectVersion.toString(), "");			
 		} 		
 	}
 }
