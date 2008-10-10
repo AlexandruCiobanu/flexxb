@@ -37,7 +37,7 @@
 			}
 			var child : XML = <xml />;
 			if(isComplexType(object)){
-				child = serializer.serialize(object);
+				child = serializer.serialize(object, element.serializePartialElement);
 			}else{
 				child.appendChild(object);
 			}
