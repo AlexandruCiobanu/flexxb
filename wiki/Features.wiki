@@ -33,6 +33,7 @@ This page will contain a list of features and requirements I have planned for my
  * FXB-012 *Add getFromCache option for deserializing complex fields*: 
  Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized.
  * FXB-013 *Add method references to annotation's attribute values*:
+ When specifying the annotations, the user should be able to provide, as a value for each of the annotation's attributes, a reference to a method within the object that will get called each time the serialization process accesses that annotation. 
  * FXB-014 *Add events to signal processing start and finish*:
  The serializer should allow custom treatments at different stages in the xml processing. These stages are: _Pre-Serialize_, _Post-Serialize_, _Pre-Deserialize_ and _Post-Deserialize_.
 || *Feature ID* || *Description* || *Delivery version* ||
