@@ -32,7 +32,7 @@
 		
 		protected function getObject() : Mock{
 			var target : Mock = new Mock();
-			target.link = new Mock2();
+			target.link = new Mock3();
 			target.aField = "test1";
 			target.date = new Date();
 			target.version = 6;

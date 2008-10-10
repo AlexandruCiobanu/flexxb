@@ -17,7 +17,7 @@
  */ 
  package com.googlecode.serializer.flexxb
 {
-	import com.googlecode.testData.Mock2;
+	import com.googlecode.testData.Mock3;
 
 	public class XmlElementTest extends AnnotationTest
 	{
@@ -34,7 +34,7 @@
 			validate(att2, "reference", Object, "reference", "", true);
 			
 			var att3 : XmlElement = new XmlElement(getFieldDescriptor("link", descriptor));
-			validate(att3, "link", Mock2, "*", "", false);
+			validate(att3, "link", Mock3, "*", "", true);
 		}
 		/**
 		 * Custom validation. Handles the fourth and fifth parameters:

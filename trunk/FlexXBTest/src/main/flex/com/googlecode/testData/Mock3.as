@@ -1,6 +1,6 @@
 package com.googlecode.testData
 {
-	[XmlClass(alias="MOck2Replacement")]
+	[XmlClass(alias="MOck2Replacement", idField="id")]
 	public class Mock3 extends Mock2
 	{
 		[XmlAttribute]

@@ -27,8 +27,8 @@
 		public var date : Date;
 		[XmlElement(alias="objVersion")]
 		public var version : Number;
-		[XmlElement(alias="*")]
-		public var link : Mock2;
+		[XmlElement(alias="*", serializePartialElement="true")]
+		public var link : Mock3;
 		[XmlElement(serializePartialElement="true")]
 		public var reference : Object;
 		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]

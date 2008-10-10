@@ -18,6 +18,7 @@
  package com.googlecode
 {
 	import com.googlecode.serializer.flexxb.ModelObjectCacheTest;
+	import com.googlecode.serializer.flexxb.PartialSerializationTest;
 	import com.googlecode.serializer.flexxb.XmlTests;
 	
 	import flexunit.framework.TestSuite;
@@ -44,7 +45,8 @@
 			var ts:TestSuite = new TestSuite();	
 			ts.name = "All Tests";
 			ts.addTest(XmlTests.suite());
-			ts.addTestSuite(ModelObjectCacheTest);			
+			ts.addTestSuite(ModelObjectCacheTest);
+			ts.addTestSuite(PartialSerializationTest);			
  			return ts;
 		}
 	}
