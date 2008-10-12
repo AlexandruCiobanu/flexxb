@@ -1,0 +1,63 @@
+<?xml version="1.0"?> 
+<project name="FlexXB" basedir="../">  
+	<!-- Define variables/paths used in this build script --> 
+	<property file="./build/build.properties" />   
+	<!-- -->
+	<target name="properties"> 
+		<fail unless="asdoc.exe">The "asdoc.exe" property must be set in ${build.dir}/build.properties.</fail> 
+		<fail unless="compc.exe">The "compc.exe" property must be set in ${build.dir}/build.properties.</fail>
+		<fail unless="mxmlc.exe">The "mxmlc.exe" property must be set in ${build.dir}/build.properties.</fail> 
+	</target>
+	<!-- -->
+	<target name="asdoc" depends="properties">
+		<exec executable="${asdoc.exe}">
+			<arg line="-source-path ${flexxb.src.dir}"/>
+			<arg line="-doc-sources ${flexxb.src.dir}"/>
+			<arg line="-output ${doc.dir}"/>
+			<arg line="-main-title ${doc.title}"/>
+			<arg line="-window-title ${doc.title}"/>
+		</exec>
+	</target>
+	<!-- -->
+	<target name="build.flexxb" depends="properties">
+		<exec executable="${compc.exe}" dir="${basedir}">
+			<arg line="-o ${flexxb.swc.output}"/>
+			<arg line="-sp ${flexxb.src.dir}"/>
+			<arg line="-is ${flexxb.src.dir}"/>
+			<arg line="-el ${flex3sdk.lib.dir}"/>
+		</exec>
+	</target>
+	<!-- -->
+	<target name="build.flexxb.test" depends="properties">
+		 <exec executable="${mxmlc.exe}" failonerror="true">
+    	 	<arg value="-source-path+=${flexxb.tests.src.dir}"/>
+    	 	<arg value="-file-specs=${flexxb.tests.src.dir}/PassportUI.mxml"/>
+    	 	<arg value="-output=${bin.dir}/PassportUI.swf"/>		
+    	 	    	 	
+    	 	<arg value="-actionscript-file-encoding=UTF-8"/>
+    	 	<arg value="-debug=false"/>
+    	 	<arg value="-incremental=false"/>
+    	 	<arg value="-keep-generated-actionscript=false"/>
+    	 	    		
+    	 	<arg line="-keep-as3-metadata XmlElement -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlArray -keep-as3-metadata XmlClass"/>
+    	 </exec>
+	</target>
+	<!-- -->
+	<target name="build.fxmod" depends="properties">
+		<exec executable="${mxmlc.exe}">
+			<arg value="-load-config=${flex3sdk.dir}/frameworks/air-config.xml"/>
+			<arg line="-include-libraries ${flex3sdk.air.lib}"/>
+			<arg value="-actionscript-file-encoding=UTF-8"/>
+			<arg value="-debug=false"/>
+			<arg value="-keep-generated-actionscript=false"/>
+			<arg value="-source-path+=${fxmod.src.dir}"/>
+			<arg value="-file-specs=${fxmod.src.dir}/FxMOD.mxml"/>
+			<arg value="-output=${fxmod.output}"/>
+		</exec>
+	</target>
+	
+	<target name="release" depends="build.flexxb, build.flexxb.test, build.fxmod, asdoc">
+		<copy file="${flexxb.dir}/README.txt" tofile="${flexxb.dir}/releasenotes/readme-v${release.version}.txt" overwrite="true"/>
+		
+	</target>
+</project>
