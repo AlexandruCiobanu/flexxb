@@ -9,7 +9,7 @@
 		<fail unless="mxmlc.exe">The "mxmlc.exe" property must be set in ${build.dir}/build.properties.</fail> 
 	</target>
 	<!-- -->
-	<target name="asdoc" depends="properties">
+	<target name="asdoc" depends="build.flexxb">
 		<exec executable="${asdoc.exe}">
 			<arg line="-source-path ${flexxb.src.dir}"/>
 			<arg line="-doc-sources ${flexxb.src.dir}"/>
@@ -19,20 +19,19 @@
 		</exec>
 	</target>
 	<!-- -->
-	<target name="build.flexxb" depends="properties">
+	<target name="build.flexxb" depends="properties, clean">
 		<exec executable="${compc.exe}" dir="${basedir}">
-			<arg line="-o ${flexxb.swc.output}"/>
-			<arg line="-sp ${flexxb.src.dir}"/>
-			<arg line="-is ${flexxb.src.dir}"/>
-			<arg line="-el ${flex3sdk.lib.dir}"/>
+			<arg line="-o '${flexxb.swc.output}'"/>
+			<arg line="-sp '${flexxb.src.dir}'"/>
+			<arg line="-is '${flexxb.src.dir}'"/>
 		</exec>
 	</target>
 	<!-- -->
-	<target name="build.flexxb.test" depends="properties">
+	<target name="build.flexxb.test" depends="build.flexxb">
 		 <exec executable="${mxmlc.exe}" failonerror="true">
-    	 	<arg value="-source-path+=${flexxb.tests.src.dir}"/>
-    	 	<arg value="-file-specs=${flexxb.tests.src.dir}/PassportUI.mxml"/>
-    	 	<arg value="-output=${bin.dir}/PassportUI.swf"/>		
+    	 	<arg value="-source-path=${flexxb.tests.src.dir}"/>
+    	 	<arg value="-file-specs=${flexxb.tests.src.dir}/SerializerTestView.mxml"/>
+    	 	<arg value="-output=${bin.dir}/FlexXBTest.swf"/>		
     	 	    	 	
     	 	<arg value="-actionscript-file-encoding=UTF-8"/>
     	 	<arg value="-debug=false"/>
@@ -40,7 +39,12 @@
     	 	<arg value="-keep-generated-actionscript=false"/>
     	 	    		
     	 	<arg line="-keep-as3-metadata XmlElement -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlArray -keep-as3-metadata XmlClass"/>
+			<arg line="-include-libraries ${flexunit.libs}"/>
+		 	<arg line="-include-libraries ${flexxb.swc.output}"/>
     	 </exec>
+		<make.wrapper application="${flexxb.test.name}" output.dir="${bin.dir}" wrapper.dir="${flexxb.test.dir}/html-template"
+			output.html="${bin.dir}/${flexxb.test.name}.html" swf="${flexxb.test.name}"
+			title="FlexXB Test"/>
 	</target>
 	<!-- -->
 	<target name="build.fxmod" depends="properties">
@@ -58,6 +62,82 @@
 	
 	<target name="release" depends="build.flexxb, build.flexxb.test, build.fxmod, asdoc">
 		<copy file="${flexxb.dir}/README.txt" tofile="${flexxb.dir}/releasenotes/readme-v${release.version}.txt" overwrite="true"/>
-		
 	</target>
+	
+	<target name="clean">
+		<delete failonerror="false">
+			<fileset dir="${bin.dir}" includes="**/*.*"/>
+		</delete>
+	</target>
+	
+	<macrodef name="make.wrapper">
+	    <attribute name="width" default="100%" />
+	    <attribute name="height" default="100%" />
+	    <attribute name="title" default="" />
+	    <attribute name="version.major" default="9" />
+	    <attribute name="version.minor" default="0" />
+	    <attribute name="version.revision" default="0" />
+	    <attribute name="application" default="" />
+	    <attribute name="swf" default="" />
+	    <attribute name="bgcolor" default="#869ca7" />
+	    <attribute name="wrapper.dir" />
+	    <attribute name="output.dir" />
+	    <attribute name="output.html" />
+	    <sequential>
+	    	<copy todir="@{output.dir}">
+	    		<fileset dir="@{wrapper.dir}">
+		    		<exclude name="**/index.template.html" />
+	    		</fileset>
+	    	</copy>
+	    	<copy 
+	    		file="@{wrapper.dir}/index.template.html"
+	    		tofile="@{output.html}" />
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{width\}"
+	    		replace="@{width}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{height\}"
+	    		replace="@{height}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{title\}"
+	    		replace="@{title}"
+	    		encoding="utf-8"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{version_major\}"
+	    		replace="@{version.major}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{version_minor\}"
+	    		replace="@{version.minor}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{version_revision\}"
+	    		replace="@{version.revision}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{application\}"
+	    		replace="@{application}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{bgcolor\}"
+	    		replace="@{bgcolor}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{swf\}"
+	    		replace="@{swf}"/>
+	    </sequential>
+	</macrodef>
 </project>
