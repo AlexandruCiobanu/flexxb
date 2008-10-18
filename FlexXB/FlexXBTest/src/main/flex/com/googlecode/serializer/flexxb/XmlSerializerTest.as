@@ -18,7 +18,6 @@
  package com.googlecode.serializer.flexxb
 {
 	import com.googlecode.testData.Mock;
-	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
 	
 	import flexunit.framework.TestCase;
@@ -37,6 +36,7 @@
 			target.date = new Date();
 			target.version = 6;
 			target.result = [];
+			target.xmlData = <test id="1"><element>retw</element></test>
 			return target;
 		}
 		
@@ -53,6 +53,11 @@
 			var target : Mock = getObject();
 			var xml : XML = XMLSerializer.instance.serialize(target);
 			var copy : Mock = XMLSerializer.instance.deserialize(xml, Mock) as Mock;
+			compare(target, copy);
+			var nss  :Array = xml.inScopeNamespaces();
+			var str  :String = xml.toXMLString().split(nss[0].prefix+":").join("").split("xmlns:"+nss[0].prefix+"=\""+nss[0].uri+"\"").join("");
+			xml = XML(str);
+			copy = XMLSerializer.instance.deserialize(xml, Mock) as Mock;
 			compare(target, copy);
 		}
 		

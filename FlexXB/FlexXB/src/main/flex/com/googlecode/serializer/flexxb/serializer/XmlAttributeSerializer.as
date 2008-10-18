@@ -15,8 +15,13 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.serializer
 {
+	import com.googlecode.serializer.flexxb.XMLSerializer;
+	import com.googlecode.serializer.flexxb.annotation.Annotation;
+	import com.googlecode.serializer.flexxb.annotation.XmlAttribute;
+	import com.googlecode.serializer.flexxb.annotation.XmlMember;
+		
 	/**
 	 * 
 	 * @author Alexutz
@@ -38,7 +43,7 @@
 			if(attribute.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
 				return null;
 			}
-			var value : String = serializer.objectToString(object);
+			var value : String = serializer.objectToString(object, annotation.fieldType);
 			if(value && value.length > 0){
 				parentXml.@[attribute.xmlName] = value;
 			} 
@@ -53,7 +58,7 @@
 			if(attribute.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
 				return null;
 			}
-			var result : Object = serializer.stringToObject(xmlData.@[annotation.xmlName], annotation.fieldType);
+			var result : Object = serializer.stringToObject(xmlData.attribute(attribute.xmlName), annotation.fieldType);
 			return result;
 		}
 	}

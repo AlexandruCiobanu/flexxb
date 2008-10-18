@@ -15,25 +15,30 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.annotation
 {
-	import com.googlecode.testData.Mock;
-	
-	
-	public class XmlClassTest extends AnnotationTest
+	import com.googlecode.serializer.flexxb.annotation.Annotation;
+	import com.googlecode.serializer.flexxb.annotation.XmlAttribute;
+	import com.googlecode.serializer.flexxb.annotation.XmlMember;
+
+	public class XmlAttributeTest extends AnnotationTest
 	{
-		public function XmlClassTest(methodName:String=null){
+		public function XmlAttributeTest(methodName:String=null)
+		{
+			//TODO: implement function
 			super(methodName);
 		}
 		
 		protected override function runTest(descriptor:XML):void{
-			var a : XmlClass = new XmlClass(descriptor);
-			validate(a, "Mock", Mock, "MyClass", "test", "http://www.axway.com/xmlns/passport/v1");
+			var att1 : XmlAttribute = new XmlAttribute(getFieldDescriptor("aField", descriptor));
+			validate(att1, "aField", String, "stuff", "");
+			
+			var att2 : XmlAttribute = new XmlAttribute(getFieldDescriptor("date", descriptor));
+			validate(att2, "date", Date, "date", XmlMember.IGNORE_ON_SERIALIZE);
 		}
 				
 		protected override function customValidate(annotation:Annotation, ...args):void{
-			assertEquals("Namespace prefix is incorrect", args[3], annotation.nameSpace.prefix);
-			assertEquals("Namespace uri is incorrect", args[4], annotation.nameSpace.uri);
-		}
+			assertEquals("IgnoreOn is incorrect", args[3], XmlAttribute(annotation).ignoreOn);
+		}	
 	}
 }

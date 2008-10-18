@@ -33,6 +33,8 @@
 		public var reference : Object;
 		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]
 		public var result : Array;
+		[XmlElement]
+		public var xmlData : XML; 
 		
 		public var someExcludedField  : Boolean;
 		

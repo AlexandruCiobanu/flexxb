@@ -15,8 +15,9 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.annotation
 {
+	import com.googlecode.serializer.flexxb.annotation.Annotation;
 	import com.googlecode.testData.Mock;
 	
 	import flash.utils.describeType;

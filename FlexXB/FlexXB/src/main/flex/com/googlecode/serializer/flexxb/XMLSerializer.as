@@ -18,6 +18,17 @@
  package com.googlecode.serializer.flexxb
 {
 	import com.googlecode.serializer.ModelObjectCache;
+	import com.googlecode.serializer.flexxb.annotation.Annotation;
+	import com.googlecode.serializer.flexxb.annotation.XmlArray;
+	import com.googlecode.serializer.flexxb.annotation.XmlAttribute;
+	import com.googlecode.serializer.flexxb.annotation.XmlClass;
+	import com.googlecode.serializer.flexxb.annotation.XmlElement;
+	import com.googlecode.serializer.flexxb.converter.IConverter;
+	import com.googlecode.serializer.flexxb.serializer.ISerializer;
+	import com.googlecode.serializer.flexxb.serializer.XmlArraySerializer;
+	import com.googlecode.serializer.flexxb.serializer.XmlAttributeSerializer;
+	import com.googlecode.serializer.flexxb.serializer.XmlClassSerializer;
+	import com.googlecode.serializer.flexxb.serializer.XmlElementSerializer;
 	
 	import flash.events.EventDispatcher;
 	/**
@@ -73,10 +84,13 @@
 		 * @return 
 		 * 
 		 */		
-		public function registerSimpleTypeConverter(converter : IConverter) : Boolean{
-			if(converter == null || converter.type == null || (converterMap && converterMap[converter.type])){
+		public function registerSimpleTypeConverter(converter : IConverter, overrideExisting : Boolean = false) : Boolean{
+			if(converter == null || converter.type == null){
 				return false;
 			}
+			if(!overrideExisting && converterMap && converterMap[converter.type]){
+				return false;
+			}			
 			if(converterMap == null){
 				converterMap = new Object();
 			}
@@ -228,7 +242,10 @@
 		 * @return 
 		 * 
 		 */		
-		public final function objectToString(object : Object) : String{
+		public final function objectToString(object : Object, clasz : Class) : String{
+			if(hasConverter(clasz)){
+				return getConverter(clasz).toString(object);
+			}
 			if(object is String){
 				return object as String;
 			}

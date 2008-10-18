@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flexLibProperties version="1">
 <includeClasses>
-<classEntry path="com.googlecode.serializer.flexxb.ISerializer"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlClassSerializer"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlArraySerializer"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlElement"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlElementSerializer"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlClass"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlAttributeSerializer"/>
-<classEntry path="com.googlecode.serializer.flexxb.Annotation"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlAttribute"/>
+<classEntry path="com.googlecode.serializer.flexxb.annotation.XmlMember"/>
+<classEntry path="com.googlecode.serializer.flexxb.serializer.XmlClassSerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.converter.XMLConverter"/>
+<classEntry path="com.googlecode.serializer.flexxb.serializer.XmlAttributeSerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.DescriptorCache"/>
+<classEntry path="com.googlecode.serializer.flexxb.serializer.XmlElementSerializer"/>
 <classEntry path="com.googlecode.serializer.IIdentifiable"/>
+<classEntry path="com.googlecode.serializer.flexxb.annotation.XmlArray"/>
 <classEntry path="com.googlecode.serializer.ModelObjectCache"/>
-<classEntry path="com.googlecode.serializer.flexxb.IXmlSerializable"/>
+<classEntry path="com.googlecode.serializer.flexxb.annotation.XmlClass"/>
+<classEntry path="com.googlecode.serializer.flexxb.serializer.XmlArraySerializer"/>
 <classEntry path="com.googlecode.serializer.flexxb.XMLSerializer"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlMember"/>
-<classEntry path="com.googlecode.serializer.flexxb.XmlArray"/>
+<classEntry path="com.googlecode.serializer.flexxb.annotation.XmlElement"/>
+<classEntry path="com.googlecode.serializer.flexxb.XmlEvent"/>
+<classEntry path="com.googlecode.serializer.flexxb.serializer.ISerializer"/>
+<classEntry path="com.googlecode.serializer.flexxb.annotation.Annotation"/>
+<classEntry path="com.googlecode.serializer.flexxb.annotation.XmlAttribute"/>
 </includeClasses>
 <includeResources/>
 <namespaceManifests/>

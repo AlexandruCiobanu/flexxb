@@ -1,4 +1,4 @@
-package com.googlecode.serializer.flexxb
+package com.googlecode.serializer.flexxb.converter
 {
 	/**
 	 * 
