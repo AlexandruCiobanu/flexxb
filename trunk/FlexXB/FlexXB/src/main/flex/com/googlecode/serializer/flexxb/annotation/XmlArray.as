@@ -15,33 +15,32 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.annotation
 {
 	/**
-	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code>
+	 * <p>Usage: <code>[XmlArray(alias="element", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></p>
 	 * @author aCiobanu
 	 * 
-	 */
-	public class XmlElement extends XmlMember
+	 */	
+	public final class XmlArray extends XmlElement
 	{
 		/**
 		 * 
 		 */		
-		public static const ANNOTATION_NAME : String = "XmlElement";
+		public static const ANNOTATION_NAME : String = "XmlArray";
 		/**
 		 * 
 		 */		
-		public static const ARGUMENT_SERIALIZE_PARTIAL_ELEMENT : String = "serializePartialElement";
+		public static const ARGUMENT_TYPE : String = "type";
 		/**
 		 * 
-		 */
-		protected var _serializePartialElement : Boolean;
+		 */ 
+		protected var _type : String = "*";
 		/**
+		 * Constructor
 		 * 
 		 */		
-		protected var _getFromCache : Boolean;
-		
-		public function XmlElement(descriptor : XML){
+		public function XmlArray(descriptor : XML){
 			super(descriptor);
 		}
 		/**
@@ -49,26 +48,20 @@
 		 * @return 
 		 * 
 		 */		
-		public function get serializePartialElement() : Boolean{
-			return _serializePartialElement;
-		}
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public function get getFromCache() : Boolean{
-			return _getFromCache;
+		public function get type() : String{
+			return _type;
 		}
 		/**
 		 * 
 		 * @see Annotation#parseMetadata()
 		 * 
 		 */	
-		protected override function parseMetadata(metadata : XML):void{
+		protected override function parseMetadata(metadata : XML) : void{
 			super.parseMetadata(metadata);
-			_serializePartialElement = metadata.arg.(@key == ARGUMENT_SERIALIZE_PARTIAL_ELEMENT).@value == "true";
-			_getFromCache =  metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value == "true";
+			_type =  metadata.arg.(@key == ARGUMENT_TYPE).@value;
+			if(_type == ""){
+				_type = "*";
+			}
 		}
 		/**
 		 * 
@@ -77,6 +70,6 @@
 		 */
 		public override function get annotationName():String{
 			return ANNOTATION_NAME;
-		}
+		}		
 	}
 }

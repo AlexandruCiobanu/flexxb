@@ -15,28 +15,27 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.annotation
 {
-	import flash.utils.describeType;
-
-	public class XmlAttributeTest extends AnnotationTest
+	import com.googlecode.serializer.flexxb.annotation.Annotation;
+	import com.googlecode.serializer.flexxb.annotation.XmlClass;
+	import com.googlecode.testData.Mock;
+	
+	
+	public class XmlClassTest extends AnnotationTest
 	{
-		public function XmlAttributeTest(methodName:String=null)
-		{
-			//TODO: implement function
+		public function XmlClassTest(methodName:String=null){
 			super(methodName);
 		}
 		
 		protected override function runTest(descriptor:XML):void{
-			var att1 : XmlAttribute = new XmlAttribute(getFieldDescriptor("aField", descriptor));
-			validate(att1, "aField", String, "stuff", "");
-			
-			var att2 : XmlAttribute = new XmlAttribute(getFieldDescriptor("date", descriptor));
-			validate(att2, "date", Date, "date", XmlMember.IGNORE_ON_SERIALIZE);
+			var a : XmlClass = new XmlClass(descriptor);
+			validate(a, "Mock", Mock, "MyClass", "test", "http://www.axway.com/xmlns/passport/v1");
 		}
 				
 		protected override function customValidate(annotation:Annotation, ...args):void{
-			assertEquals("IgnoreOn is incorrect", args[3], XmlAttribute(annotation).ignoreOn);
-		}	
+			assertEquals("Namespace prefix is incorrect", args[3], annotation.nameSpace.prefix);
+			assertEquals("Namespace uri is incorrect", args[4], annotation.nameSpace.uri);
+		}
 	}
 }

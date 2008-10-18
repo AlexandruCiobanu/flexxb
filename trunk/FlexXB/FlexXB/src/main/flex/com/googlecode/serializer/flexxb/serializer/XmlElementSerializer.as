@@ -15,8 +15,13 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.serializer
 {
+	import com.googlecode.serializer.flexxb.XMLSerializer;
+	import com.googlecode.serializer.flexxb.annotation.Annotation;
+	import com.googlecode.serializer.flexxb.annotation.XmlElement;
+	import com.googlecode.serializer.flexxb.annotation.XmlMember;
+	
 	import flash.utils.getQualifiedClassName;
 	/**
 	 * 
@@ -39,7 +44,7 @@
 			if(isComplexType(object)){
 				child = serializer.serialize(object, element.serializePartialElement);
 			}else{
-				child.appendChild(object);
+				child.appendChild(serializer.objectToString(object, annotation.fieldType));
 			}
 			if(element.useOwnerAlias()){
 				child.setName(serializer.getXmlName(object));
@@ -68,7 +73,7 @@
 			if(isComplexType(annotation.fieldType)){
 				return serializer.deserialize(xmlElement[0], element.fieldType, element.getFromCache);
 			}
-			return serializer.stringToObject(xmlElement[0].text()[0], element.fieldType);
+			return serializer.stringToObject(XML(xmlElement[0]).children()[0].toString(), element.fieldType);
 		}
 		
 		private function isComplexType(value : Object) : Boolean
@@ -82,6 +87,7 @@
 		        case "String":
 		        case "Boolean":
 		        case "Date":
+		        case "XML":
 		        {
 		            return false;
 		        }

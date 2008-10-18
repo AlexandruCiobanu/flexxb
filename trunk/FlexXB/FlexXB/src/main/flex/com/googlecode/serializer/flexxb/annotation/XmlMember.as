@@ -15,32 +15,37 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.annotation
 {
 	/**
-	 * <p>Usage: <code>[XmlArray(alias="element", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></p>
+	 * 
 	 * @author aCiobanu
 	 * 
 	 */	
-	public final class XmlArray extends XmlElement
+	public class XmlMember extends Annotation
 	{
 		/**
 		 * 
 		 */		
-		public static const ANNOTATION_NAME : String = "XmlArray";
+		public static const IGNORE_ON_SERIALIZE : String = "serialize";
 		/**
 		 * 
 		 */		
-		public static const ARGUMENT_TYPE : String = "type";
+		public static const IGNORE_ON_DESERIALIZE : String = "deserialize";
+		/**
+		 * 
+		 */		
+		public static const ARGUMENT_IGNORE_ON : String = "ignoreOn";
 		/**
 		 * 
 		 */ 
-		protected var _type : String = "*";
+		protected var _ignoreOn: String = "";
 		/**
 		 * Constructor
 		 * 
-		 */		
-		public function XmlArray(descriptor : XML){
+		 * 
+		 */ 
+		public function XmlMember(descriptor : XML){
 			super(descriptor);
 		}
 		/**
@@ -48,8 +53,18 @@
 		 * @return 
 		 * 
 		 */		
-		public function get type() : String{
-			return _type;
+		public function get ignoreOn() : String{
+			return _ignoreOn;
+		}
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
+		public function set ignoreOn(value : String) : void{
+			if(value == "" || value == IGNORE_ON_SERIALIZE || value == IGNORE_ON_DESERIALIZE){
+				_ignoreOn = value;
+			}
 		}
 		/**
 		 * 
@@ -57,19 +72,8 @@
 		 * 
 		 */	
 		protected override function parseMetadata(metadata : XML) : void{
-			super.parseMetadata(metadata);
-			_type =  metadata.arg.(@key == ARGUMENT_TYPE).@value;
-			if(_type == ""){
-				_type = "*";
-			}
-		}
-		/**
-		 * 
-		 * @see Annotation#annotationName
-		 * 
-		 */
-		public override function get annotationName():String{
-			return ANNOTATION_NAME;
+			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
+			ignoreOn = metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value;
 		}		
 	}
 }

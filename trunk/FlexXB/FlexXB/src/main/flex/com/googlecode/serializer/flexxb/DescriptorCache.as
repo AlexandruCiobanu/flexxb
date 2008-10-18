@@ -17,6 +17,10 @@
  */
 package com.googlecode.serializer.flexxb
 {
+	import com.googlecode.serializer.flexxb.annotation.Annotation;
+	import com.googlecode.serializer.flexxb.annotation.XmlClass;
+	import com.googlecode.serializer.flexxb.serializer.ISerializer;
+	
 	import flash.utils.describeType;
 	import flash.utils.getQualifiedClassName;
 	

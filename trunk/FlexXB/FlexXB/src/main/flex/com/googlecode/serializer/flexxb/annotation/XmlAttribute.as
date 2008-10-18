@@ -15,27 +15,31 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.serializer.flexxb
+ package com.googlecode.serializer.flexxb.annotation
 {
-	import flexunit.framework.TestCase;
-
-	public class XmlArrayTest extends AnnotationTest
+	/**
+	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]</code></p>
+	 * @author aCiobanu
+	 * 
+	 */	
+	public final class XmlAttribute extends XmlMember
 	{
-		public function XmlArrayTest(methodName:String=null)
-		{
-			super(methodName);
+		public static const ANNOTATION_NAME : String = "XmlAttribute";
+		/**
+		 * 
+		 * @param descriptor
+		 * 
+		 */		
+		public function XmlAttribute(descriptor : XML){
+			super(descriptor);
 		}
-		
-		protected override function runTest(descriptor:XML):void{
-			var att1 : XmlArray = new XmlArray(getFieldDescriptor("result", descriptor));
-			validate(att1, "result", Array, "data", "", false, "com.googlecode.testData.Mock");
-		}
-				
-		protected override function customValidate(annotation:Annotation, ...args):void{
-			assertEquals("IgnoreOn is incorrect", args[3], XmlArray(annotation).ignoreOn);
-			assertEquals("SerializePartialElement is incorrect", args[4], XmlArray(annotation).serializePartialElement);
-			assertEquals("Type is incorrect", args[5], XmlArray(annotation).type);
-		}
-		
+		/**
+		 * 
+		 * @see Annotation#annotationName
+		 * 
+		 */
+		public override function get annotationName() : String{
+			return ANNOTATION_NAME;
+		}	
 	}
 }

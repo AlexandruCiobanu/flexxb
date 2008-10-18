@@ -17,6 +17,11 @@
  */ 
  package com.googlecode.serializer.flexxb
 {
+	import com.googlecode.serializer.flexxb.annotation.XmlArrayTest;
+	import com.googlecode.serializer.flexxb.annotation.XmlAttributeTest;
+	import com.googlecode.serializer.flexxb.annotation.XmlClassTest;
+	import com.googlecode.serializer.flexxb.annotation.XmlElementTest;
+	
 	import flexunit.framework.TestSuite;
 
 	public class XmlTests extends TestSuite
@@ -34,13 +39,9 @@
 			var ts:TestSuite = new TestSuite();
 			ts.name = "Xml Tests";
 			ts.addTestSuite(XmlClassTest);
-			//ts.addTestSuite(XmlClassSerializerTest);
 			ts.addTestSuite(XmlAttributeTest);
-			//ts.addTestSuite(XmlAttributeSerializerTest);
 			ts.addTestSuite(XmlElementTest);
-			//ts.addTestSuite(XmlElementSerializerTest);
 			ts.addTestSuite(XmlArrayTest);
-			//ts.addTestSuite(XmlArraySerializerTest);
 			ts.addTestSuite(XmlSerializerTest);
 			return ts;
 		}		
