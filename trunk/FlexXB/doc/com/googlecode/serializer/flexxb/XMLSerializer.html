@@ -93,7 +93,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#objectToString()">objectToString</a>(object:Object):String</div>
+<a class="signatureLink" href="#objectToString()">objectToString</a>(object:Object, clasz:Class):String</div>
 <div class="summaryTableDescription">
    
    </div>
@@ -102,7 +102,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#registerSimpleTypeConverter()">registerSimpleTypeConverter</a>(converter:<a href="IConverter.html">IConverter</a>):Boolean</div>
+<a class="signatureLink" href="#registerSimpleTypeConverter()">registerSimpleTypeConverter</a>(converter:<a href="converter/IConverter.html">IConverter</a>, overrideExisting:Boolean = false):Boolean</div>
 <div class="summaryTableDescription">
    
    </div>
@@ -293,12 +293,18 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public final function objectToString(object:Object):String</code><p>
+<code>public final function objectToString(object:Object, clasz:Class):String</code><p>
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">object</span>:Object</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">clasz</span>:Class</code></td>
 </tr>
 </table>
 <p></p>
@@ -316,12 +322,18 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function registerSimpleTypeConverter(converter:<a href="IConverter.html">IConverter</a>):Boolean</code><p>
+<code>public function registerSimpleTypeConverter(converter:<a href="converter/IConverter.html">IConverter</a>, overrideExisting:Boolean = false):Boolean</code><p>
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">converter</span>:<a href="IConverter.html">IConverter</a></code></td>
+<td width="20px"></td><td><code><span class="label">converter</span>:<a href="converter/IConverter.html">IConverter</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">overrideExisting</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
 </tr>
 </table>
 <p></p>
