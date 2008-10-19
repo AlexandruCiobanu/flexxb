@@ -3,12 +3,11 @@
 <includeClasses>
 <classEntry path="com.googlecode.serializer.flexxb.annotation.XmlMember"/>
 <classEntry path="com.googlecode.serializer.flexxb.serializer.XmlClassSerializer"/>
-<classEntry path="com.googlecode.serializer.flexxb.converter.XMLConverter"/>
 <classEntry path="com.googlecode.serializer.flexxb.serializer.XmlAttributeSerializer"/>
 <classEntry path="com.googlecode.serializer.flexxb.DescriptorCache"/>
 <classEntry path="com.googlecode.serializer.flexxb.serializer.XmlElementSerializer"/>
-<classEntry path="com.googlecode.serializer.IIdentifiable"/>
 <classEntry path="com.googlecode.serializer.flexxb.annotation.XmlArray"/>
+<classEntry path="com.googlecode.serializer.IIdentifiable"/>
 <classEntry path="com.googlecode.serializer.ModelObjectCache"/>
 <classEntry path="com.googlecode.serializer.flexxb.annotation.XmlClass"/>
 <classEntry path="com.googlecode.serializer.flexxb.serializer.XmlArraySerializer"/>
