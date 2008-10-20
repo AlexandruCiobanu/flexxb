@@ -16,6 +16,11 @@
 -   You should have received a copy of the GNU General Public License
 -   along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 -->
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+<mx:WindowedApplication addedToStage="{stage.nativeWindow.menu = MenuParser.getMenu()}" xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:display="flash.display.*">
+	<mx:Script>
+		<![CDATA[
+			import com.googlecode.fxmod.MenuParser;
+		]]>
+	</mx:Script>
 	
 </mx:WindowedApplication>
