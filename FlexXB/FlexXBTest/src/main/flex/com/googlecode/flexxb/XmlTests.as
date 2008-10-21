@@ -15,39 +15,35 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode
+ package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.ModelObjectCacheTest;
-	import com.googlecode.flexxb.PartialSerializationTest;
-	import com.googlecode.flexxb.XmlTests;
+	import com.googlecode.flexxb.annotation.XmlArrayTest;
+	import com.googlecode.flexxb.annotation.XmlAttributeTest;
+	import com.googlecode.flexxb.annotation.XmlClassTest;
+	import com.googlecode.flexxb.annotation.XmlElementTest;
 	
 	import flexunit.framework.TestSuite;
-	
-	/**
-	 * 
-	 * @author Alexutz
-	 * 
-	 */	
-	public class AllTests
+
+	public class XmlTests extends TestSuite
 	{
-		/**
-		 * 
-		 * 
-		 */		
-		public function AllTests(){}
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public static function allTests() : TestSuite
+		public function XmlTests(param:Object=null)
 		{
-			var ts:TestSuite = new TestSuite();	
-			ts.name = "All Tests";
-			ts.addTest(XmlTests.suite());
-			ts.addTestSuite(ModelObjectCacheTest);
-			ts.addTestSuite(PartialSerializationTest);			
- 			return ts;
+			super(param);
 		}
+		/**
+		 * 
+		 * @return a test suite
+		 */
+		public static function suite() : TestSuite
+		{
+			var ts:TestSuite = new TestSuite();
+			ts.name = "Xml Tests";
+			ts.addTestSuite(XmlClassTest);
+			ts.addTestSuite(XmlAttributeTest);
+			ts.addTestSuite(XmlElementTest);
+			ts.addTestSuite(XmlArrayTest);
+			ts.addTestSuite(XmlSerializerTest);
+			return ts;
+		}		
 	}
 }

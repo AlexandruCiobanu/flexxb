@@ -15,39 +15,33 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode
+package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.ModelObjectCacheTest;
-	import com.googlecode.flexxb.PartialSerializationTest;
-	import com.googlecode.flexxb.XmlTests;
-	
-	import flexunit.framework.TestSuite;
+	import com.googlecode.flexxb.IIdentifiable;
 	
 	/**
+	 * Interface for an object that requires custom serialization/deserialization into/from Xml
+	 * @author aciobanu
 	 * 
-	 * @author Alexutz
 	 * 
 	 */	
-	public class AllTests
+	public interface IXmlSerializable extends IIdentifiable
 	{
 		/**
-		 * 
-		 * 
-		 */		
-		public function AllTests(){}
+		 * Serialize current object into Xml
+		 */ 
+		function toXml() : XML;
+		/**
+		 * Deserialize this object from one of it's possible XML representation.
+		 * @param xmlData xml data source
+		 */ 
+		function fromXml(xmlData : XML) : Object;
 		/**
 		 * 
+		 * @param xmldata
 		 * @return 
 		 * 
 		 */		
-		public static function allTests() : TestSuite
-		{
-			var ts:TestSuite = new TestSuite();	
-			ts.name = "All Tests";
-			ts.addTest(XmlTests.suite());
-			ts.addTestSuite(ModelObjectCacheTest);
-			ts.addTestSuite(PartialSerializationTest);			
- 			return ts;
-		}
+		function getIdValue(xmldata : XML) : String;
 	}
 }
