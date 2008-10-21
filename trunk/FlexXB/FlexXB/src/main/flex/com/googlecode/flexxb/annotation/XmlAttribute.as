@@ -15,39 +15,31 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode
+ package com.googlecode.flexxb.annotation
 {
-	import com.googlecode.flexxb.ModelObjectCacheTest;
-	import com.googlecode.flexxb.PartialSerializationTest;
-	import com.googlecode.flexxb.XmlTests;
-	
-	import flexunit.framework.TestSuite;
-	
 	/**
-	 * 
-	 * @author Alexutz
+	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]</code></p>
+	 * @author aCiobanu
 	 * 
 	 */	
-	public class AllTests
+	public final class XmlAttribute extends XmlMember
 	{
+		public static const ANNOTATION_NAME : String = "XmlAttribute";
 		/**
 		 * 
+		 * @param descriptor
 		 * 
 		 */		
-		public function AllTests(){}
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public static function allTests() : TestSuite
-		{
-			var ts:TestSuite = new TestSuite();	
-			ts.name = "All Tests";
-			ts.addTest(XmlTests.suite());
-			ts.addTestSuite(ModelObjectCacheTest);
-			ts.addTestSuite(PartialSerializationTest);			
- 			return ts;
+		public function XmlAttribute(descriptor : XML){
+			super(descriptor);
 		}
+		/**
+		 * 
+		 * @see Annotation#annotationName
+		 * 
+		 */
+		public override function get annotationName() : String{
+			return ANNOTATION_NAME;
+		}	
 	}
 }

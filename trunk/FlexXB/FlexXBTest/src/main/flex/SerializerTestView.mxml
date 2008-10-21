@@ -19,11 +19,11 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:defusion="org.defusion.flexunit.*" layout="absolute" creationComplete="init()">
 	<mx:Script>
 		<![CDATA[
+			import flash.utils.describeType;
 			import mx.controls.Alert;
 			import com.googlecode.AllTests;
 			import mx.core.Container;
-			import com.googlecode.serializer.flexxb.XmlTests;
-			import com.googlecode.serializer.flexxb.XMLSerializer;
+			import com.googlecode.flexxb.XmlTests;
 			import org.defusion.flexunit.FlexUnitRunner;
 			
 			private function init() : void{

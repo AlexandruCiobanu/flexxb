@@ -15,39 +15,27 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode
+ package com.googlecode.flexxb.annotation
 {
-	import com.googlecode.flexxb.ModelObjectCacheTest;
-	import com.googlecode.flexxb.PartialSerializationTest;
-	import com.googlecode.flexxb.XmlTests;
+	import com.googlecode.flexxb.annotation.Annotation;
+	import com.googlecode.flexxb.annotation.XmlClass;
+	import com.googlecode.testData.Mock;
 	
-	import flexunit.framework.TestSuite;
 	
-	/**
-	 * 
-	 * @author Alexutz
-	 * 
-	 */	
-	public class AllTests
+	public class XmlClassTest extends AnnotationTest
 	{
-		/**
-		 * 
-		 * 
-		 */		
-		public function AllTests(){}
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public static function allTests() : TestSuite
-		{
-			var ts:TestSuite = new TestSuite();	
-			ts.name = "All Tests";
-			ts.addTest(XmlTests.suite());
-			ts.addTestSuite(ModelObjectCacheTest);
-			ts.addTestSuite(PartialSerializationTest);			
- 			return ts;
+		public function XmlClassTest(methodName:String=null){
+			super(methodName);
+		}
+		
+		protected override function runTest(descriptor:XML):void{
+			var a : XmlClass = new XmlClass(descriptor);
+			validate(a, "Mock", Mock, "MyClass", "test", "http://www.axway.com/xmlns/passport/v1");
+		}
+				
+		protected override function customValidate(annotation:Annotation, ...args):void{
+			assertEquals("Namespace prefix is incorrect", args[3], annotation.nameSpace.prefix);
+			assertEquals("Namespace uri is incorrect", args[4], annotation.nameSpace.uri);
 		}
 	}
 }
