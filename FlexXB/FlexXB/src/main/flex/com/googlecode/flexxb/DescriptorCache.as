@@ -21,7 +21,9 @@ package com.googlecode.flexxb
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.serializer.ISerializer;
 	
+	import flash.utils.Dictionary;
 	import flash.utils.describeType;
+	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
 	/**
@@ -31,23 +33,28 @@ package com.googlecode.flexxb
 	 */	
 	internal final class DescriptorCache
 	{		
-		private var descriptorCache : Object;
+		private var descriptorCache : Dictionary = new Dictionary();
 		
-		private var annotationMap : Object = new Object();
+		private var annotationMap : Dictionary = new Dictionary();
 		/**
 		 * 
 		 * @param object
 		 * @return 
 		 * 
-		 */		
+		 */		 	
 		public function getDescriptor(object : Object) : XmlClass{
 			var className : String = getQualifiedClassName(object);
-			if(hasDescriptor(className)){
-				return descriptorCache[className] as XmlClass;
-			}
-			var descriptor : XmlClass = xmlDescribeType(object);
-			putDescriptor(className, descriptor)
-			return descriptor; 
+			return getDefinition(object, className).descriptor as XmlClass; 
+		}
+		
+		public function isCustomSerializable(object : Object) : Boolean{
+			var className : String = getQualifiedClassName(object);
+			return getDefinition(object, className).reference != null;
+		}
+		
+		public function getCustomSerializableReference(clasz : Class) : IXmlSerializable{
+			var className : String = getQualifiedClassName(clasz);
+			return getDefinition(clasz, className).reference as IXmlSerializable;
 		}
 		/**
 		 * Register a new annotation and its serializer. If it founds a registration with the 
@@ -70,8 +77,8 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public function getObjectType(namespaceUri : String) : Class{
-			for each(var dsc : XmlClass in descriptorCache){
-				if(dsc.nameSpace.uri == namespaceUri){
+			for each(var dsc : Object in descriptorCache){
+				if(dsc.descriptor.nameSpace.uri == namespaceUri){
 					return dsc.fieldType;
 				}
 			}
@@ -83,7 +90,7 @@ package com.googlecode.flexxb
 		 * @return 
 		 * 
 		 */		
-		public function getClass(annotationName : String) : Class{
+		public function getAnnotationClass(annotationName : String) : Class{
 			if(annotationMap[annotationName]){
 				return annotationMap[annotationName].annotation as Class;
 			}
@@ -102,8 +109,11 @@ package com.googlecode.flexxb
 			return null;
 		}
 		
-		private function xmlDescribeType(object : Object) : XmlClass{
-			var descriptor : XML = describeType(object);
+		private function xmlDescribeType(object : Object, xmlDescriptor : XML) : XmlClass{
+			var descriptor : XML = xmlDescriptor;
+			if(object is Class){
+				descriptor = descriptor.factory[0];
+			}
 			//get class annotation				
 			var classDescriptor : XmlClass = new XmlClass(descriptor);
 			//get namespace
@@ -120,7 +130,7 @@ package com.googlecode.flexxb
 		private function getAnnotation(field : XML) : Annotation{
 			var annotations : XMLList = field.metadata;
 			for each(var member : XML in annotations){
-				var annotationClass : Class = getClass(member.@name);
+				var annotationClass : Class = getAnnotationClass(member.@name);
 				if(annotationClass){
 					return new annotationClass(field) as Annotation;
 				}
@@ -128,20 +138,27 @@ package com.googlecode.flexxb
 			return null;
 		}
 		
-		private function hasDescriptor(className : String) : Boolean{
-			return  descriptorCache && descriptorCache[className] is XmlClass;
-		}
-				
-		private function putDescriptor(className : String, descriptor : XmlClass) : Boolean{
-			if(!descriptorCache){
-				descriptorCache = new Object();
-			}else{
-				if(descriptorCache[className] is XmlClass){
-					return false
-				}
+		private function getDefinition(object : Object, className : String) : Object{
+			if(descriptorCache && descriptorCache[className] != null){
+				return descriptorCache[className];
 			}
-			descriptorCache[className] = descriptor;
-			return true;
+			return put(object, className);
+		}
+		
+		private function put(object : Object, className : String) : Object{
+			var descriptor : XML = describeType(object);
+			var customSerializable : Boolean = String(descriptor.factory.implementsInterface.@type).indexOf("IXmlSerializable") >= 0;
+			var xmlClass : XmlClass;
+			var referenceObject : Object;
+			if(customSerializable){
+				var cls : Class = Class(object is Class ? object : getDefinitionByName(className));
+				referenceObject = new cls();
+			}else{
+				xmlClass = xmlDescribeType(object, descriptor);
+			}
+			var result : Object = {descriptor : xmlClass, customSerializable : customSerializable, reference : referenceObject};
+			descriptorCache[className] = result;
+			return result;
 		}
 	}
 }

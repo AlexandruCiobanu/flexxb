@@ -122,12 +122,10 @@
 			}
 			var xmlData : XML;
 			
-			registerObjectType(object);
-			
 			//dispatch preSerializeEvent
 			dispatchEvent(XmlEvent.createPreSerializeEvent(object, xmlData));
 			
-			if(object is IXmlSerializable){
+			if(descriptorCache.isCustomSerializable(object)){
 				xmlData = IXmlSerializable(object).toXml();
 			}else{
 				var classDescriptor : XmlClass = descriptorCache.getDescriptor(object);
@@ -272,8 +270,8 @@
 		 */		
 		private function getId(objectClass : Class, xmlData : XML) : String{
 			var id : String;
-			if(isCustomSerializable(objectClass)){
-				id = getCustomSerializableReference(objectClass).getIdValue(xmlData);
+			if(descriptorCache.isCustomSerializable(objectClass)){
+				id = descriptorCache.getCustomSerializableReference(objectClass).getIdValue(xmlData);
 			}else{
 				var classDescriptor : XmlClass = descriptorCache.getDescriptor(objectClass);
 				var idSerializer : ISerializer = descriptorCache.getSerializer(classDescriptor.idField);
@@ -291,38 +289,6 @@
 		 */		
 		private function getConverter(clasz : Class) : IConverter{
 			return converterMap[clasz] as IConverter;
-		}
-		
-		private var customMap : Object = new Object();
-		
-		private function registerObjectType(object : Object) : void{
-			var clasz : Class = getDefinitionByName(getQualifiedClassName(object)) as Class;
-			if(!hasClass(clasz)){
-				put(clasz);
-			}
-		}
-		
-		private function put(clasz : Class) : Object{
-			var descriptor : XML = describeType(clasz);
-			var customSerializable : Boolean = String(descriptor.factory.implementsInterface.@type).indexOf("IXmlSerializable") >= 0;
-			var result : Object = {customSerializable : customSerializable, reference : customSerializable ? new clasz() : null};
-			customMap[clasz] = result;
-			return result;
-		}
-		
-		private function hasClass(clasz : Class) : Boolean{
-			return customMap[clasz] != null;
-		}
-		
-		private function isCustomSerializable(clasz : Class) : Boolean{
-			if(!hasClass(clasz)){
-				return put(clasz).reference != null;
-			}
-			return customMap[clasz].reference != null;
-		}
-		
-		private function getCustomSerializableReference(clasz : Class)  :IXmlSerializable{
-			return customMap[clasz].reference;
 		}
 	}
 }
