@@ -18,7 +18,7 @@ package com.googlecode.fxmod
 		private static const MENUITEM_NAME : String = "MenuItem";
 		private static const MENUITEM_LABEL : String = "label";
 		private static const MENUITEM_KEY : String = "shortcutKey";
-		private static const MENUITEM_SEPARATOR : String = "separatorBefore";
+		private static const MENUITEM_SEPARATOR : String = "separator";
 		private static const MENUITEM_MNEMONIC : String = "mnemonicIndex";
 		
 		private static var menu : NativeMenu;
@@ -45,14 +45,16 @@ package com.googlecode.fxmod
 			var separator : Boolean = xml.@[MENUITEM_SEPARATOR] == "true";
 			var mnemonicIndex : int = Number(xml.@[MENUITEM_MNEMONIC]);
 			
-			var item : NativeMenuItem = new NativeMenuItem(label);
-			item.mnemonicIndex = mnemonicIndex;
-			var items : XMLList = xml.child(MENUITEM_NAME);
-			for each(var menuItemXml : XML in items){
-				if(!item.submenu){
-					item.submenu = new NativeMenu();
+			var item : NativeMenuItem = new NativeMenuItem(label, separator);
+			if(!separator){
+				item.mnemonicIndex = mnemonicIndex;
+				var items : XMLList = xml.child(MENUITEM_NAME);
+				for each(var menuItemXml : XML in items){
+					if(!item.submenu){
+						item.submenu = new NativeMenu();
+					}
+					item.submenu.addItem(buildMenuItem(menuItemXml));
 				}
-				item.submenu.addItem(buildMenuItem(menuItemXml));
 			}
 			return item;
 		}
