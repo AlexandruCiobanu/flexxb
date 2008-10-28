@@ -17,13 +17,13 @@
  */ 
  package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.ModelObjectCache;
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlAttribute;
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.converter.IConverter;
+	import com.googlecode.flexxb.persistence.PersistableObject;
 	import com.googlecode.flexxb.serializer.ISerializer;
 	import com.googlecode.flexxb.serializer.XmlArraySerializer;
 	import com.googlecode.flexxb.serializer.XmlAttributeSerializer;
@@ -31,10 +31,6 @@
 	import com.googlecode.flexxb.serializer.XmlElementSerializer;
 	
 	import flash.events.EventDispatcher;
-	import flash.utils.describeType;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-	import com.googlecode.flexxb.IIdentifiable;
 	/**
 	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration. 
 	 * By default it registeres the built-in annotations at startup. 
@@ -186,6 +182,9 @@
 						ModelObjectCache.instance.putObject(id, result);
 					}
 				}
+				if(result is PersistableObject){
+					PersistableObject(result).stopListening();
+				}
 				//update obect fields
 				if(result is IXmlSerializable){	
 					IXmlSerializable(result).fromXml(xmlData);
@@ -195,6 +194,10 @@
 						var serializer : ISerializer = descriptorCache.getSerializer(annotation);
 						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 					}
+				}
+				if(result is PersistableObject){
+					PersistableObject(result).commit();
+					PersistableObject(result).startListening();
 				}
 				
 				//dispatch preSerializeEvent
