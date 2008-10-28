@@ -15,11 +15,21 @@
 <classEntry path="com.googlecode.flexxb.annotation.XmlMember"/>
 <classEntry path="com.googlecode.flexxb.converter.IConverter"/>
 <classEntry path="com.googlecode.flexxb.converter.XmlConverter"/>
+<classEntry path="com.googlecode.flexxb.persistence.ChangeTracker"/>
+<classEntry path="com.googlecode.flexxb.persistence.ChangeTrackerKind"/>
+<classEntry path="com.googlecode.flexxb.persistence.IPersistable"/>
+<classEntry path="com.googlecode.flexxb.persistence.PersistableObject"/>
+<classEntry path="com.googlecode.flexxb.persistence.ReferenceList"/>
 <classEntry path="com.googlecode.flexxb.serializer.ISerializer"/>
 <classEntry path="com.googlecode.flexxb.serializer.XmlArraySerializer"/>
 <classEntry path="com.googlecode.flexxb.serializer.XmlAttributeSerializer"/>
 <classEntry path="com.googlecode.flexxb.serializer.XmlClassSerializer"/>
 <classEntry path="com.googlecode.flexxb.serializer.XmlElementSerializer"/>
+<classEntry path="com.googlecode.flexxb.service.AbstractService"/>
+<classEntry path="com.googlecode.flexxb.service.Communicator"/>
+<classEntry path="com.googlecode.flexxb.service.ICommunicator"/>
+<classEntry path="com.googlecode.flexxb.service.IServiceSettings"/>
+<classEntry path="com.googlecode.flexxb.service.ITranslator"/>
 </includeClasses>
 <includeResources/>
 <namespaceManifests/>
