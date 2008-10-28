@@ -14,42 +14,21 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
- package com.googlecode
+ */
+ package com.googlecode.flexxb.persistence
 {
-	import com.googlecode.flexxb.ModelObjectCacheTest;
-	import com.googlecode.flexxb.PartialSerializationTest;
-	import com.googlecode.flexxb.XmlTests;
-	import com.googlecode.flexxb.persistence.PersistenceTests;
-	
-	import flexunit.framework.TestSuite;
-	
-	/**
-	 * 
-	 * @author Alexutz
-	 * 
-	 */	
-	public class AllTests
+	import flexunit.framework.TestCase;
+
+	public class ReferenceListTest extends TestCase
 	{
-		/**
-		 * 
-		 * 
-		 */		
-		public function AllTests(){}
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public static function allTests() : TestSuite
+		public function ReferenceListTest(methodName:String=null)
 		{
-			var ts:TestSuite = new TestSuite();	
-			ts.name = "All Tests";
-			ts.addTest(XmlTests.suite());
-			ts.addTestSuite(ModelObjectCacheTest);
-			ts.addTestSuite(PartialSerializationTest);
-			ts.addTest(PersistenceTests.suite());			
- 			return ts;
+			//TODO: implement function
+			super(methodName);
 		}
+		
+		public function testList() : void{
+			
+		}		
 	}
 }
