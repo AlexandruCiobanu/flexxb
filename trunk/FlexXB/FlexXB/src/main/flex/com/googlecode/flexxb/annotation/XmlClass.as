@@ -23,7 +23,7 @@ package com.googlecode.flexxb.annotation
 	
 	/**
 	 * 
-	 * <p>Usage: <code>[XmlClass(alias="MyClass", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
+	 * <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
 	 * @author aCiobanu
 	 * 
 	 */	
@@ -44,6 +44,10 @@ package com.googlecode.flexxb.annotation
 		/**
 		 * 
 		 */		
+		public static const ARGUMENT_USE_CHILD_NAMESPACE : String = "useNamespaceFrom";
+		/**
+		 * 
+		 */		
 		public static const ARGUMENT_ID : String = "idField";
 		/**
 		 * 
@@ -57,6 +61,10 @@ package com.googlecode.flexxb.annotation
 		 * 
 		 */		
 		private var id : String;
+		/**
+		 * 
+		 */		
+		private var _useChildNamespace : String;
 		/**
 		 *Constructor 
 		 * 
@@ -80,11 +88,39 @@ package com.googlecode.flexxb.annotation
 		}
 		/**
 		 * 
+		 * @param memberFieldName
+		 * @return 
+		 * 
+		 */		
+		public function getMember(memberFieldName : String) : Annotation{
+			if(fieldName && fieldName.length > 0){
+				for each(var member : Annotation in members){
+					if(member.fieldName == memberFieldName){
+						return member;
+					}
+				}
+			}
+			return null;
+		}
+		/**
+		 * 
 		 * @return 
 		 * 
 		 */		
 		public function get idField() : Annotation{
 			return _idField;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get childNameSpaceFieldName() : String{
+			return _useChildNamespace;
+		}
+		
+		public function useOwnNamespace() : Boolean{
+			return _useChildNamespace == null || _useChildNamespace.length == 0;
 		}
 		/**
 		 * 
@@ -101,8 +137,13 @@ package com.googlecode.flexxb.annotation
 		 */		
 		protected override function parse(field:XML):void{
 			super.parse(field);
-			_fieldName = _fieldName.substring(_fieldName.lastIndexOf(":") + 1);
-			_fieldType = getDefinitionByName(field.@name) as Class;
+			if(field.name() == "type"){
+				_fieldName = _fieldName.substring(_fieldName.lastIndexOf(":") + 1);
+				_fieldType = getDefinitionByName(field.@name) as Class;
+			}else if(field.name() == "factory"){
+				var type : String = field.@type;
+				_fieldName = type.substring(type.lastIndexOf(":") + 1);
+			}
 		}
 		/**
 		 * 
@@ -112,7 +153,8 @@ package com.googlecode.flexxb.annotation
 		protected override function parseMetadata(metadata : XML) : void{
 			nameSpace = getNamespace(metadata);
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
-			setIdField(metadata.arg.(@key == ARGUMENT_ID).@value);		
+			setIdField(metadata.arg.(@key == ARGUMENT_ID).@value);
+			_useChildNamespace = metadata.arg.(@key == ARGUMENT_USE_CHILD_NAMESPACE).@value;
 		}
 		
 		protected function setIdField(field : String) : void{

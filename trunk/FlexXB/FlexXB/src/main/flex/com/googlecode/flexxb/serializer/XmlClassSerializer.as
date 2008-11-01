@@ -44,7 +44,17 @@
 			var xmlClass : XmlClass = annotation as XmlClass;
 			var xml : XML = <xml />
 			xml.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
-			xml.addNamespace(xmlClass.nameSpace);
+			if(xmlClass.useOwnNamespace()){
+				xml.addNamespace(xmlClass.nameSpace);
+			}else{
+				var member : Annotation = xmlClass.getMember(xmlClass.childNameSpaceFieldName);
+				if(member){
+					var ns : Namespace = serializer.getNamespace(object[member.fieldName]);
+					if(ns){
+						xml.addNamespace(ns);
+					}
+				}
+			}
 			return xml;
 		}
 		/**
