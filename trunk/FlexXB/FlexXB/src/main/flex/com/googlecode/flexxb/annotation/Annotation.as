@@ -35,6 +35,7 @@
 		 * 
 		 */		
 		public static const ARGUMENT_ALIAS : String = "alias"; 
+		public static const ALIAS_ANY : String = "*";
 		/**
 		 * 
 		 */		
@@ -131,7 +132,7 @@
 		}
 		
 		public function useOwnerAlias() : Boolean{
-			return _alias == "*";
+			return _alias == ALIAS_ANY;
 		}
 		/**
 		 * Analyze field/class descriptor to extract base informations like field's name and type
