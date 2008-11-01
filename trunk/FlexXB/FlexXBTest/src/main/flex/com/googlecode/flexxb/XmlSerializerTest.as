@@ -37,6 +37,7 @@
 			target.date = new Date();
 			target.version = 6;
 			target.result = [];
+			target.result.push(new Mock());
 			target.xmlData = <test id="1"><element>retw</element></test>
 			return target;
 		}

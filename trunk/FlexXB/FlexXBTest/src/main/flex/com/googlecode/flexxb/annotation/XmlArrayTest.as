@@ -17,8 +17,7 @@
  */ 
  package com.googlecode.flexxb.annotation
 {
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlArray;
+	import com.googlecode.testData.Mock;
 
 	public class XmlArrayTest extends AnnotationTest
 	{
@@ -29,7 +28,7 @@
 		
 		protected override function runTest(descriptor:XML):void{
 			var att1 : XmlArray = new XmlArray(getFieldDescriptor("result", descriptor));
-			validate(att1, "result", Array, "data", "", false, "com.googlecode.testData.Mock");
+			validate(att1, "result", Array, "data", "", false, Mock);
 		}
 				
 		protected override function customValidate(annotation:Annotation, ...args):void{

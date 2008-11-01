@@ -22,11 +22,11 @@
 	public class Mock
 	{
 		[XmlAttribute(alias="stuff")]
-		public var aField : String;
+		public var aField : String = "a";
 		[XmlAttribute(ignoreOn="serialize")]
 		public var date : Date;
 		[XmlElement(alias="objVersion")]
-		public var version : Number;
+		public var version : Number = 4;
 		[XmlElement(alias="*", serializePartialElement="true")]
 		public var link : Mock3;
 		[XmlElement(serializePartialElement="true")]
