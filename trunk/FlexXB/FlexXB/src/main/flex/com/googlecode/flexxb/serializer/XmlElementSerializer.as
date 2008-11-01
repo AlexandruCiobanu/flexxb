@@ -47,7 +47,10 @@
 				child.appendChild(serializer.objectToString(object, annotation.fieldType));
 			}
 			if(element.useOwnerAlias()){
-				child.setName(serializer.getXmlName(object));
+				var name : QName = serializer.getXmlName(object);
+				if(name){
+					child.setName(name);
+				}
 			}else{
 				child.setName(element.xmlName);
 			}
