@@ -107,6 +107,21 @@
 			return converterMap && type && converterMap[type] is IConverter;
 		}
 		/**
+		 * 
+		 * @param object
+		 * @return 
+		 * 
+		 */		
+		public function getNamespace(object : Object) : Namespace{
+			if(object){
+				var desc : XmlClass = descriptorCache.getDescriptor(object);
+				if(desc){
+					return desc.nameSpace;
+				}
+			}
+			return null;
+		}
+		/**
 		 * Convert an object to a xml representation.
 		 * @param object object to be converted.
 		 * @return xml representation of the given object
@@ -233,6 +248,7 @@
 			if(hasConverter(clasz)){
 				return getConverter(clasz).fromString(value);
 			}
+			if(!value) return null;
 			if(clasz==Boolean){
 				return (value && value.toLowerCase() == "true");
 			}
