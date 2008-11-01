@@ -22,8 +22,6 @@
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	
-	import flash.utils.getDefinitionByName;
-	
 	import mx.collections.ListCollectionView;
 	
 	/**
@@ -50,12 +48,19 @@
 			if(array.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
 				return null;
 			}
-			var result : XML = <xml />;
-			result.setName(annotation.xmlName);
+			var result : XML;
+			if(array.useOwnerAlias()){
+				result = parentXml;
+			}else{
+				result = <xml />;
+				result.setName(array.xmlName);
+				parentXml.appendChild(result);
+			}
+			
 			for each(var member : Object in object){
 				result.appendChild(serializer.serialize(member));
 			}
-			parentXml.appendChild(result);
+			
 			return result;
 		}
 		/**
@@ -67,12 +72,24 @@
 			if(array.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
 				return null;
 			}
+			
 			var result : Object = new annotation.fieldType();
-			var xmlArray : XMLList = xmlData.child(array.xmlName);
-			if(xmlArray.length() > 0) {
-				var memberType : Class = getDefinitionByName(array.type) as Class;
-				for each(var xmlChild : XML in xmlArray.children()){
-					var member : Object = serializer.deserialize(xmlChild, memberType, array.getFromCache);
+			
+			var xmlName : QName;
+			
+			if(array.useOwnerAlias()){
+				if(array.memberName){
+					xmlName = array.memberName;
+				}else if(array.type){
+					xmlName = serializer.getXmlName(array.type);
+				}
+			}else{
+				xmlName = array.xmlName;
+			}
+			var xmlArray : XMLList = xmlData.child(xmlName);
+			if(xmlArray && xmlArray.length() > 0) {
+				for each(var xmlChild : XML in xmlArray){
+					var member : Object = serializer.deserialize(xmlChild, array.type, array.getFromCache);
 					if(member){
 						addMemberToResult(member, result);
 					}

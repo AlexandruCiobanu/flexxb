@@ -17,6 +17,8 @@
  */ 
  package com.googlecode.flexxb.annotation
 {
+	import flash.utils.getDefinitionByName;
+	
 	/**
 	 * <p>Usage: <code>[XmlArray(alias="element", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></p>
 	 * @author aCiobanu
@@ -34,8 +36,16 @@
 		public static const ARGUMENT_TYPE : String = "type";
 		/**
 		 * 
+		 */		
+		public static const ARGUMENT_MEMBER_NAME : String = "memberName";
+		/**
+		 * 
 		 */ 
-		protected var _type : String = "*";
+		protected var _type : Class;
+		/**
+		 * 
+		 */		
+		protected var _memberName : QName;
 		/**
 		 * Constructor
 		 * 
@@ -48,8 +58,12 @@
 		 * @return 
 		 * 
 		 */		
-		public function get type() : String{
+		public function get type() : Class{
 			return _type;
+		}
+		
+		public function get memberName() : QName{
+			return _memberName;
 		}
 		/**
 		 * 
@@ -58,9 +72,17 @@
 		 */	
 		protected override function parseMetadata(metadata : XML) : void{
 			super.parseMetadata(metadata);
-			_type =  metadata.arg.(@key == ARGUMENT_TYPE).@value;
-			if(_type == ""){
-				_type = "*";
+			var classType : String =  metadata.arg.(@key == ARGUMENT_TYPE).@value;
+			if(classType){
+				try{
+					_type = getDefinitionByName(classType) as Class;
+				}catch(e : Error){
+					trace(e);
+				}
+			}
+			var arrayMemberName : String = metadata.arg.(@key == ARGUMENT_MEMBER_NAME).@value;
+			if(arrayMemberName){
+				_memberName = new QName(nameSpace, arrayMemberName);
 			}
 		}
 		/**
