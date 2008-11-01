@@ -17,11 +17,16 @@
  */
  package com.googlecode.flexxb.persistence
 {
+	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	import flash.utils.Dictionary;
 	
 	import mx.events.PropertyChangeEvent;	
-
+	/**
+	 * 
+	 * @author Alexutz
+	 * 
+	 */	
 	[Bindable]
 	public class PersistableObject implements IPersistable, IEventDispatcher
 	{		
@@ -39,11 +44,17 @@
 		{
 			return _modified;
 		}
-		
+		/**
+		 * 
+		 * 
+		 */		
 		public function stopListening() : void{
 			listen = false;
 		}
-		
+		/**
+		 * 
+		 * 
+		 */		
 		public function startListening() : void{
 			listen = true;
 		}
@@ -81,23 +92,52 @@
 				setModified(false);
 			}
 		}
-		
+		/**
+		 * 
+		 * @param type
+		 * @param listener
+		 * @param useCapture
+		 * @param priority
+		 * @param useWeakReference
+		 * 
+		 */		
 		public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void{}
-		
+		/**
+		 * 
+		 * @param type
+		 * @param listener
+		 * @param useCapture
+		 * 
+		 */		
 		public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void{}
-		
-		public function dispatchEvent(event:Event):Boolean
+		/**
+		 * 
+		 * @param event
+		 * @return 
+		 * 
+		 */		
+		public function dispatchEvent(event : Event):Boolean
 		{
 			if(event is PropertyChangeEvent && event.type == PropertyChangeEvent.PROPERTY_CHANGE){
 				valueChanged(PropertyChangeEvent(event));
 			}
 			return true;
 		}
-		
+		/**
+		 * 
+		 * @param type
+		 * @return 
+		 * 
+		 */		
 		public function hasEventListener(type:String):Boolean{
 			return type==PropertyChangeEvent.PROPERTY_CHANGE;
 		}
-		
+		/**
+		 * 
+		 * @param type
+		 * @return 
+		 * 
+		 */		
 		public function willTrigger(type:String):Boolean{
 			return hasEventListener(type);
 		}	
