@@ -147,7 +147,14 @@ package com.googlecode.flexxb
 		
 		private function put(object : Object, className : String) : Object{
 			var descriptor : XML = describeType(object);
-			var customSerializable : Boolean = String(descriptor.factory.implementsInterface.@type).indexOf("IXmlSerializable") >= 0;
+			var interfaces : XMLList = descriptor.name() == "type" ? descriptor.implementsInterface : descriptor.factory.implementsInterface
+			var customSerializable : Boolean;
+			for each(var interf : XML in interfaces){
+				if(interf.@type.indexOf("IXmlSerializable") >= 0){
+					customSerializable = true;
+					break;
+				}
+			}
 			var xmlClass : XmlClass;
 			var referenceObject : Object;
 			if(customSerializable){
