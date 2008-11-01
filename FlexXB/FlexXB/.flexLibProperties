@@ -14,6 +14,7 @@
 <classEntry path="com.googlecode.flexxb.annotation.XmlElement"/>
 <classEntry path="com.googlecode.flexxb.annotation.XmlMember"/>
 <classEntry path="com.googlecode.flexxb.converter.IConverter"/>
+<classEntry path="com.googlecode.flexxb.converter.W3CDateConverter"/>
 <classEntry path="com.googlecode.flexxb.converter.XmlConverter"/>
 <classEntry path="com.googlecode.flexxb.persistence.ChangeTracker"/>
 <classEntry path="com.googlecode.flexxb.persistence.ChangeTrackerKind"/>
