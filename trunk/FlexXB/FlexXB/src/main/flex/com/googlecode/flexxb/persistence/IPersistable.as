@@ -18,7 +18,13 @@
  package com.googlecode.flexxb.persistence
 {
 	/**
-	 * 
+	 * Interface defining an object that can be persisted. 
+	 * It exposes three methods:
+	 * <ul>
+	 * 	<li>modified - check if object has been changed since its last save</li>
+	 * 	<li>commit - make changes done from the last save persistent</li>
+	 * 	<li>rollback - revert to the initial state of the object</li>
+	 * </ul>
 	 * @author aCiobanu
 	 * 
 	 */	

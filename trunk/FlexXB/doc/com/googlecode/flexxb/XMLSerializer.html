@@ -485,10 +485,10 @@ showHideInherited();
   By default it registeres the built-in annotations at startup. 
   </p><p>Built-in anotation usage:
    <ul>
-   <li>XmlClass: <code>[XmlClass(name="MyClass", prefix="my", uri="http://www.your.site.com/schema/")]</code></li>
+   <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")]</code></li>
    <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
-   <li>XmlElement: <code>[XmlElement(name="element", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
-   <li>XmlArray: <code>[Array(name="element", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
+   <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
+   <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
    </ul></p>
   <p>Make sure you add the following switches to your compiler settings:
   <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code></p>
