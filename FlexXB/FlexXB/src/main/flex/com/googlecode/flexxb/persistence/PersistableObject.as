@@ -23,7 +23,17 @@
 	
 	import mx.events.PropertyChangeEvent;	
 	/**
-	 * 
+	 * This is the main implementation of IPersistable. It should be base for all model 
+	 * objects that need initial state memory capabilities such as IPersistable allows.
+	 * It uses the methods <code>commit()</code> and <code>rollback()</code> to save the
+	 * current state or to revert to the previously saved state.
+	 * <p>Basically, this object listens for changes to all its public properties and 
+	 * variables and saves the initial value set for that field. Upon commit, the list of 
+	 * initial values is discarded, the new values thus becoming initial values. On rollback,
+	 * the initial values are reinstated the object returning to the state before eny change 
+	 * had been made.
+	 * <p><b>Note</b>: Subclasses should be decorated with the <code>[Bindable]</code> annotation so all 
+	 * changes to the public fields would be registered.
 	 * @author Alexutz
 	 * 
 	 */	
@@ -37,7 +47,7 @@
 		private var listen : Boolean = true;
 		/**
 		 * 
-		 * @return 
+		 * @see IPersistable.modified() 
 		 * 
 		 */		
 		public function get modified():Boolean
@@ -45,14 +55,16 @@
 			return _modified;
 		}
 		/**
-		 * 
+		 * Stop listening for changes occuring to the object.
+		 * It is usually called before deserialization occurs.
 		 * 
 		 */		
 		public function stopListening() : void{
 			listen = false;
 		}
 		/**
-		 * 
+		 * Start listening for changes occuring to the object.
+		 * Usually called after deserialization completes.
 		 * 
 		 */		
 		public function startListening() : void{
@@ -69,7 +81,7 @@
 			listen = true;
 		}
 		/**
-		 * 
+		 * @see IPersistable.commit() 
 		 * 
 		 */		
 		public function commit():void
@@ -79,7 +91,7 @@
 			}
 		}
 		/**
-		 * 
+		 * @see IPersistable.rollback()
 		 * 
 		 */		
 		public function rollback():void
@@ -93,7 +105,7 @@
 			}
 		}
 		/**
-		 * 
+		 * Add a listener for an event type
 		 * @param type
 		 * @param listener
 		 * @param useCapture
@@ -103,7 +115,7 @@
 		 */		
 		public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void{}
 		/**
-		 * 
+		 * Remove a registered listener for an event type
 		 * @param type
 		 * @param listener
 		 * @param useCapture
@@ -111,9 +123,9 @@
 		 */		
 		public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void{}
 		/**
-		 * 
+		 * Dispacth the specified event
 		 * @param event
-		 * @return 
+		 * @return dispatch succeeded
 		 * 
 		 */		
 		public function dispatchEvent(event : Event):Boolean
@@ -124,8 +136,8 @@
 			return true;
 		}
 		/**
-		 * 
-		 * @param type
+		 * Check if there is an event listener specified for the specific event
+		 * @param type event type
 		 * @return 
 		 * 
 		 */		

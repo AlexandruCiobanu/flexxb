@@ -73,7 +73,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#addEventListener()">addEventListener</a>(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</div>
 <div class="summaryTableDescription">
-   
+   Add a listener for an event type
    </div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
@@ -82,8 +82,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#commit()">commit</a>():void</div>
 <div class="summaryTableDescription">
-   
-   
    </div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
@@ -92,7 +90,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#dispatchEvent()">dispatchEvent</a>(event:Event):Boolean</div>
 <div class="summaryTableDescription">
-   
+   Dispacth the specified event
    </div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
@@ -101,7 +99,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#hasEventListener()">hasEventListener</a>(type:String):Boolean</div>
 <div class="summaryTableDescription">
-   
+   Check if there is an event listener specified for the specific event
    </div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
@@ -110,7 +108,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#removeEventListener()">removeEventListener</a>(type:String, listener:Function, useCapture:Boolean = false):void</div>
 <div class="summaryTableDescription">
-   
+   Remove a registered listener for an event type
    </div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
@@ -119,8 +117,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#rollback()">rollback</a>():void</div>
 <div class="summaryTableDescription">
-   
-   
    </div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
@@ -129,9 +125,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#startListening()">startListening</a>():void</div>
 <div class="summaryTableDescription">
-   
-   
-   </div>
+   Start listening for changes occuring to the object.</div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
 <tr class="">
@@ -139,9 +133,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#stopListening()">stopListening</a>():void</div>
 <div class="summaryTableDescription">
-   
-   
-   </div>
+   Stop listening for changes occuring to the object.</div>
 </td><td class="summaryTableOwnerCol">PersistableObject</td>
 </tr>
 <tr class="">
@@ -176,6 +168,10 @@ showHideInherited();
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get modified():Boolean</code>
 <br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">IPersistable.modified()</div>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
@@ -187,7 +183,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</code><p>
-   
+   Add a listener for an event type
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -227,9 +223,11 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function commit():void</code><p>
-   
-   
-   </p></div>
+   </p><p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">IPersistable.commit()</div>
+</div>
 <a name="dispatchEvent()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -238,7 +236,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function dispatchEvent(event:Event):Boolean</code><p>
-   
+   Dispacth the specified event
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -249,7 +247,9 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Boolean</code></td>
+<td width="20"></td><td><code>Boolean</code> &mdash; dispatch succeeded
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -261,11 +261,12 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function hasEventListener(type:String):Boolean</code><p>
-   
+   Check if there is an event listener specified for the specific event
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; event type
+   </td>
 </tr>
 </table>
 <p></p>
@@ -284,7 +285,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void</code><p>
-   
+   Remove a registered listener for an event type
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -312,9 +313,11 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function rollback():void</code><p>
-   
-   
-   </p></div>
+   </p><p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">IPersistable.rollback()</div>
+</div>
 <a name="startListening()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -323,7 +326,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function startListening():void</code><p>
-   
+   Start listening for changes occuring to the object.
+   Usually called after deserialization completes.
    
    </p></div>
 <a name="stopListening()"></a>
@@ -334,7 +338,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function stopListening():void</code><p>
-   
+   Stop listening for changes occuring to the object.
+   It is usually called before deserialization occurs.
    
    </p></div>
 <a name="willTrigger()"></a>
