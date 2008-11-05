@@ -18,7 +18,8 @@
  package com.googlecode.flexxb.converter
 {
 	/**
-	 * 
+	 * Interface defining how strings can be converted to 
+	 * specific objects and viceversa.
 	 * @author aCiobanu
 	 * 
 	 */	
@@ -26,21 +27,21 @@
 	{
 		/**
 		 * 
-		 * @return 
+		 * @return Object type
 		 * 
 		 */		
 		function get type() : Class;
 		/**
-		 * 
-		 * @param object
-		 * @return 
+		 * Get the string representation of the specified object
+		 * @param object Target object
+		 * @return String representation of the specified object
 		 * 
 		 */		
 		function toString(object : Object) : String;
 		/**
-		 * 
-		 * @param value
-		 * @return 
+		 * Get the object whose representation is the specified value
+		 * @param value String parameter from which the object is created
+		 * @return Object whose representation is the specified value 
 		 * 
 		 */		
 		function fromString(value : String) : Object;

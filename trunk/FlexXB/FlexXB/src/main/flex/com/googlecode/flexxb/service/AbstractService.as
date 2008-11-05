@@ -25,15 +25,26 @@
 	public class AbstractService
 	{
 		private var _communicationHandler : ICommunicator = new Communicator();
-		
+		/**
+		 * Constructor
+		 * 
+		 */		
 		public function AbstractService()
 		{
 		}
-		
+		/**
+		 * Get communicator used for talking with the server
+		 * @return 
+		 * 
+		 */		
 		protected function get communicator() : ICommunicator{
 			return _communicationHandler;
 		}
-		
+		/**
+		 * Set the communicator used for talking with the server
+		 * @param value
+		 * 
+		 */		
 		protected function set communicator(value  :ICommunicator) : void{
 			_communicationHandler = value;
 		}

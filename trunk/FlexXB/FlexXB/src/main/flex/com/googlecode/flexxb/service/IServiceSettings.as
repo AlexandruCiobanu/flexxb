@@ -26,12 +26,29 @@ package com.googlecode.flexxb.service
 	 */	
 	public interface IServiceSettings
 	{
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		function get url() : String;
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		function get method() : String;
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		function get timeout() : int;
-				
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */				
 		function get logMessages() : Boolean;
 	}
 }
