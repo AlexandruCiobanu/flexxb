@@ -33,8 +33,8 @@ package com.googlecode.flexxb.service
 		/**
 		 * 
 		 * @param translator
-		 * @param resultHandler
-		 * @param faultHandler
+		 * @param resultHandler Metod callback that will be called if the request receives a success response
+		 * @param faultHandler Metod callback that will be called if the request fails
 		 * 
 		 */			
 		function sendRequest(translator : ITranslator, resultHandler : Function, faultHandler : Function = null) : void;

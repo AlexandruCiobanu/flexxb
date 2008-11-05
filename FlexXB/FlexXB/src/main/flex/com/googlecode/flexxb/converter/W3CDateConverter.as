@@ -18,13 +18,21 @@
  package com.googlecode.flexxb.converter
 {
 	import com.googlecode.flexxb.XMLSerializer;
-	
+	/**
+	 * Date converter conforming to the W3C standard 
+	 * @author Alexutz
+	 * 
+	 */	
 	public class W3CDateConverter implements IConverter
 	{
 		public static function registerInSerializer() : void{
 			XMLSerializer.instance.registerSimpleTypeConverter(new W3CDateConverter(), true);
 		}
-
+		/**
+		 * 
+		 * @see IConverter#type() 
+		 * 
+		 */		
 		public function get type():Class
 		{
 			return Date;
