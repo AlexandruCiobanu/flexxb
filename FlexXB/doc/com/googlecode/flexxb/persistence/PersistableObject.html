@@ -42,7 +42,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-<p></p>
+  Main implementation of IPersistable. It should be base for all model objects that need initial state memory capabilities such as IPersistable allows.
+  It uses the methods <code>commit()</code> and <code>rollback()</code> to save the
+  current state or to revert to the previously saved state.
+  <p>Basically, this object listens for changes to all its public properties and 
+  variables and saves the initial value set for that field. Upon commit, the list of 
+  initial values is discarded, the new values thus becoming initial values. On rollback,
+  the initial values are reinstated the object returning to the state before eny change 
+  had been made.</p>
+  <p><b>Note</b>: Subclasses should be decorated with the <code>[Bindable]</code> annotation so all 
+  changes to the public fields would be registered.</p>
+  <p></p>
 <br>
 <hr>
 </div>
@@ -171,7 +181,9 @@ showHideInherited();
 <p>
 <span class="label">See also</span>
 </p>
-<div class="seeAlso">IPersistable.modified()</div>
+<div class="seeAlso">
+<a href="IPersistable.html#modified()" target="">IPersistable.modified()</a>
+</div>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
@@ -226,7 +238,9 @@ showHideInherited();
    </p><p>
 <span class="label">See also</span>
 </p>
-<div class="seeAlso">IPersistable.commit()</div>
+<div class="seeAlso">
+<a href="IPersistable.html#commit()" target="">IPersistable.commit()</a>
+</div>
 </div>
 <a name="dispatchEvent()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -316,7 +330,9 @@ showHideInherited();
    </p><p>
 <span class="label">See also</span>
 </p>
-<div class="seeAlso">IPersistable.rollback()</div>
+<div class="seeAlso">
+<a href="IPersistable.html#rollback()" target="">IPersistable.rollback()</a>
+</div>
 </div>
 <a name="startListening()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

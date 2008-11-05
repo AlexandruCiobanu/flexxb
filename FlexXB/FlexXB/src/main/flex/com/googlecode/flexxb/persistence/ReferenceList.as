@@ -22,7 +22,9 @@ package com.googlecode.flexxb.persistence
 	import mx.collections.ArrayCollection;
 	import mx.events.CollectionEvent;
 	/**
-	 * 
+	 * Adds to ArrayCollection the functionalities specified by IPersistable.
+	 * Should be used in model objects the require having lists of referenced objects.
+	 * @see PersistableObject
 	 * @author aciobanu
 	 * 
 	 */	
@@ -32,7 +34,7 @@ package com.googlecode.flexxb.persistence
 		private var listen : Boolean = true;
 		private var changeList : Dictionary;
 		/**
-		 * 
+		 * Constructor
 		 * @param source
 		 * 
 		 */		
@@ -58,16 +60,15 @@ package com.googlecode.flexxb.persistence
 			return false;
 		}
 		/**
+		 * @see IPersistable#modified()
 		 * 
-		 * @return 
-		 * 
-		 */		
+		 */			
 		public function get modified():Boolean
 		{
 			return _modified;
 		}
 		/**
-		 * 
+		 * @see IPersistable#commit()
 		 * 
 		 */		
 		public function commit():void
@@ -77,9 +78,9 @@ package com.googlecode.flexxb.persistence
 			}
 		}
 		/**
+		 * @see IPersistable#rollback()
 		 * 
-		 * 
-		 */		
+		 */			
 		public function rollback():void
 		{
 			if(modified){
@@ -102,7 +103,11 @@ package com.googlecode.flexxb.persistence
 			}
 			listen = true;
 		}
-		
+		/**
+		 * Occurs whenever the collection changes by adding/ removing an object etc. 
+		 * @param event
+		 * 
+		 */		
 		protected function onCollectionChange(event : CollectionEvent) : void{
 			if(listen && !modified && ChangeTrackerKind.isActionTracked(event.kind)){
 				var initial : Array = [];
