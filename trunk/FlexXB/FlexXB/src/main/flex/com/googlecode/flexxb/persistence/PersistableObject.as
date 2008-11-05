@@ -21,23 +21,23 @@
 	import flash.events.IEventDispatcher;
 	import flash.utils.Dictionary;
 	
-	import mx.events.PropertyChangeEvent;	
+	import mx.events.PropertyChangeEvent;
+		
+	[Bindable]
 	/**
-	 * This is the main implementation of IPersistable. It should be base for all model 
-	 * objects that need initial state memory capabilities such as IPersistable allows.
+	 * Main implementation of IPersistable. It should be base for all model objects that need initial state memory capabilities such as IPersistable allows.
 	 * It uses the methods <code>commit()</code> and <code>rollback()</code> to save the
 	 * current state or to revert to the previously saved state.
 	 * <p>Basically, this object listens for changes to all its public properties and 
 	 * variables and saves the initial value set for that field. Upon commit, the list of 
 	 * initial values is discarded, the new values thus becoming initial values. On rollback,
 	 * the initial values are reinstated the object returning to the state before eny change 
-	 * had been made.
+	 * had been made.</p>
 	 * <p><b>Note</b>: Subclasses should be decorated with the <code>[Bindable]</code> annotation so all 
-	 * changes to the public fields would be registered.
+	 * changes to the public fields would be registered.</p>
 	 * @author Alexutz
 	 * 
 	 */	
-	[Bindable]
 	public class PersistableObject implements IPersistable, IEventDispatcher
 	{		
 		private var _modified  : Boolean;
@@ -47,7 +47,7 @@
 		private var listen : Boolean = true;
 		/**
 		 * 
-		 * @see IPersistable.modified() 
+		 * @see IPersistable#modified() 
 		 * 
 		 */		
 		public function get modified():Boolean
@@ -81,7 +81,7 @@
 			listen = true;
 		}
 		/**
-		 * @see IPersistable.commit() 
+		 * @see IPersistable#commit() 
 		 * 
 		 */		
 		public function commit():void
@@ -91,7 +91,7 @@
 			}
 		}
 		/**
-		 * @see IPersistable.rollback()
+		 * @see IPersistable#rollback()
 		 * 
 		 */		
 		public function rollback():void
