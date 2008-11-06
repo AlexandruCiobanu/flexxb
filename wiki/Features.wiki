@@ -21,11 +21,11 @@ This page will contain a list of features and requirements I have planned for my
  * FXB-006 *Class type identification by response's namespace on deserialization*: 
  Object types that should be used in deserialization should be determined from the namespaces present in the xml response.
  * FXB-007 *Flex Model Object Designer (FxMOD)*: 
- FXMOD is a utility designed to assist object composition and code generation. It allows the user to visualy assemble the classes it requires for its model and will automatically generate the neccessary annotations are added to the to the generated class and its fields in order to allow for automated (de)serialization. The user will have the option of implementing a custom serialization process if needed.  
+ FXMOD is a utility designed to assist object composition and code generation. It allows the user to visualy assemble the classes it requires for its model and will automatically generate the AS code. The user will be able to deem its objects as being serializable (AMF or XML) and have the option of setting a custom serialization process if needed. If he opts for xml serialization he'll be able to specify the way he wants each field (de)serialized by setting the right annotations.
  * FXB-008 *Custom to and from string conversion for simple types*: 
  Some simple types (such as Date) may require custom conversion methods to and from String values.
  * FXB-009 *Use paths in xml aliases*: 
- Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of teh server object's hierarchy).
+ Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of the server object's hierarchy).
  * FXB-010 *Allow custom object (de)serialization*: 
  There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent.
  * FXB-011 *XSD validation against incoming XML*: 
