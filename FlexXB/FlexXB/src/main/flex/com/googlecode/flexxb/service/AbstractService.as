@@ -18,7 +18,7 @@
  package com.googlecode.flexxb.service
 {
 	/**
-	 * 
+	 * Base Service for communicating with the server. All data service classes should extend this class
 	 * @author aciobanu
 	 * 
 	 */	
@@ -31,6 +31,14 @@
 		 */		
 		public function AbstractService()
 		{
+		}
+		/**
+		 * Configure the service settings 
+		 * @param settings
+		 * 
+		 */		
+		protected function configure(settings : IServiceSettings) : void{
+			_communicationHandler.applySettings(settings);
 		}
 		/**
 		 * Get communicator used for talking with the server

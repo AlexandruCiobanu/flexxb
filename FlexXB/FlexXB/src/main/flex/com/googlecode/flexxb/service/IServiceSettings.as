@@ -20,7 +20,7 @@ package com.googlecode.flexxb.service
 	import mx.rpc.http.HTTPService;
 	
 	/**
-	 * 
+	 * Communication settings
 	 * @author aciobanu
 	 * 
 	 */	
@@ -28,7 +28,7 @@ package com.googlecode.flexxb.service
 	{
 		/**
 		 * 
-		 * @return 
+		 * @return url
 		 * 
 		 */		
 		function get url() : String;
@@ -40,7 +40,7 @@ package com.googlecode.flexxb.service
 		function get method() : String;
 		/**
 		 * 
-		 * @return 
+		 * @return timeout
 		 * 
 		 */		
 		function get timeout() : int;
