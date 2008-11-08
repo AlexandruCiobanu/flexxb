@@ -32,7 +32,8 @@
 	
 	import flash.events.EventDispatcher;
 	/**
-	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration. 
+	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration.
+	 * The main access point consist of two methods: <code>serialize()</code> and <code>deserialize</code>, each corresponding to the specific stage in the conversion process.  
 	 * By default it registeres the built-in annotations at startup. 
 	 * <p>Built-in anotation usage:
 	 *  <ul>
