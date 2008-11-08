@@ -78,6 +78,8 @@ com.googlecode.serializer.flexxb.XMLSerializer.deserialize(xml, class)
 To register a custom annotation, subclass of com.googlecode.serializer.flexxb.Annotation:
 com.googlecode.serializer.flexxb.XMLSerializer.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)
 
+To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the xml representation and viceversa:
+com.googlecode.serializer.flexxb.XMLSerializer.registerSimpleTypeConverter(converterInstance, overrideExisting)
 
 Annotation syntax:
 
