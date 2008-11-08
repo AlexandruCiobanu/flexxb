@@ -42,7 +42,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 </tr>
 </table>
 <p></p>
-  
+  Communication interface
   <p></p>
 <br>
 <hr>
@@ -59,7 +59,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#applySettings()">applySettings</a>(settings:<a href="IServiceSettings.html">IServiceSettings</a>):void</div>
 <div class="summaryTableDescription">
-   
+   Apply communication settings
    </div>
 </td><td class="summaryTableOwnerCol">ICommunicator</td>
 </tr>
@@ -68,7 +68,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#destroy()">destroy</a>():void</div>
 <div class="summaryTableDescription">
-   
+   Release all resources
    
    </div>
 </td><td class="summaryTableOwnerCol">ICommunicator</td>
@@ -99,7 +99,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function applySettings(settings:<a href="IServiceSettings.html">IServiceSettings</a>):void</code><p>
-   
+   Apply communication settings
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -115,7 +115,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function destroy():void</code><p>
-   
+   Release all resources
    
    </p></div>
 <a name="sendRequest()"></a>
@@ -136,13 +136,16 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">resultHandler</span>:Function</code></td>
+<td width="20px"></td><td><code><span class="label">resultHandler</span>:Function</code> &mdash; Metod callback that will be called if the request receives a success response
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">faultHandler</span>:Function</code> (default = <code>null</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">faultHandler</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; Metod callback that will be called if the request fails
+   
+   </td>
 </tr>
 </table>
 </div>

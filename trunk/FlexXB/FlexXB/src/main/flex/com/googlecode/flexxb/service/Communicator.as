@@ -24,7 +24,7 @@ package com.googlecode.flexxb.service
 	import mx.rpc.http.HTTPService;
 	
 	/**
-	 * 
+	 * Communicates with the server by sending xml requests and receiving xml responses 
 	 * @author aciobanu
 	 * 
 	 */	
@@ -33,20 +33,32 @@ package com.googlecode.flexxb.service
 		private var _settings : IServiceSettings;
 		
 		private var service : HTTPService;
-		
+		/**
+		 * Constructor 
+		 * @param settings
+		 * 
+		 */		
 		public function Communicator(settings : IServiceSettings = null)
 		{
 			service = new HTTPService();
 			applySettings(settings);
 		}
-		
+		/**
+		 * 
+		 * @see ICommunicator#applySettings()
+		 * 
+		 */		
 		public function applySettings(settings : IServiceSettings) : void{
 			if(settings){
 				_settings = settings;
 				configureService(service, _settings);
 			}
 		}
-		
+		/**
+		 * 
+		 * @see ICommunicator#sendRequest()
+		 * 
+		 */		
 		public function sendRequest(translator : ITranslator, resultHandler : Function, faultHandler : Function = null): void{
 			if(translator == null || !(resultHandler is Function)){
 				throw new Error("Error sending request: request body and result handler can't be null");
@@ -69,11 +81,17 @@ package com.googlecode.flexxb.service
 			var token : AsyncToken = service.send();			
 			token.addResponder(new Responder(onResult, onError));
 		}
-		
+		/**
+		 * Cancel the last request made 
+		 * 
+		 */		
 		public function cancelRequest() : void{
 			service.cancel();
 		}
-		
+		/**
+		 * @see ICommunicator#destroy()
+		 * 
+		 */		
 		public function destroy() : void{
 			service.disconnect();
 			service = null;

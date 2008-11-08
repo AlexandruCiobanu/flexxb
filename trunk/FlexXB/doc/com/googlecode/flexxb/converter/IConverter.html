@@ -42,7 +42,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 </tr>
 </table>
 <p></p>
-  
+  Interface defining how strings can be converted to 
+  specific objects and viceversa.
   <p></p>
 <br>
 <hr>
@@ -74,7 +75,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#fromString()">fromString</a>(value:String):Object</div>
 <div class="summaryTableDescription">
-   
+   Get the object whose representation is the specified value
    </div>
 </td><td class="summaryTableOwnerCol">IConverter</td>
 </tr>
@@ -83,7 +84,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>(object:Object):String</div>
 <div class="summaryTableDescription">
-   
+   Get the string representation of the specified object
    </div>
 </td><td class="summaryTableOwnerCol">IConverter</td>
 </tr>
@@ -120,18 +121,21 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function fromString(value:String):Object</code><p>
-   
+   Get the object whose representation is the specified value
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">value</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">value</span>:String</code> &mdash; String parameter from which the object is created
+   </td>
 </tr>
 </table>
 <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Object</code></td>
+<td width="20"></td><td><code>Object</code> &mdash; Object whose representation is the specified value 
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -143,18 +147,21 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function toString(object:Object):String</code><p>
-   
+   Get the string representation of the specified object
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">object</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; Target object
+   </td>
 </tr>
 </table>
 <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; String representation of the specified object
+   
+   </td>
 </tr>
 </table>
 </div>

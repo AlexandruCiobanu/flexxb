@@ -18,14 +18,14 @@
 package com.googlecode.flexxb.service
 {
 	/**
-	 * 
+	 * Communication interface
 	 * @author aciobanu
 	 * 
 	 */	
 	public interface ICommunicator
 	{
 		/**
-		 * 
+		 * Apply communication settings
 		 * @param settings
 		 * 
 		 */		
@@ -39,7 +39,7 @@ package com.googlecode.flexxb.service
 		 */			
 		function sendRequest(translator : ITranslator, resultHandler : Function, faultHandler : Function = null) : void;
 		/**
-		 * 
+		 * Release all resources
 		 * 
 		 */		
 		function destroy() : void;
