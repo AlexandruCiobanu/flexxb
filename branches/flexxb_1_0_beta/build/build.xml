@@ -1,0 +1,208 @@
+<?xml version="1.0"?> 
+<project name="FlexXB" basedir="../">  
+	<!-- Define variables/paths used in this build script --> 
+	<property file="./build/build.properties" />   
+	<property file="../svn.properties"/>
+	
+	<taskdef resource="com/adobe/ac/ant/tasks/tasks.properties"/>
+	<taskdef resource="flexTasks.tasks"/>
+	<taskdef format="xml" resource="org/tigris/subversion/svnant/svnantlib.xml"/>
+	<!-- -->
+	<target name="init" description="Initializes the build">  
+		<tstamp/>  
+		<echo message="============================================="/>  
+		<echo message="${project.name}-${project.version} [${TODAY}]"/>  
+		<echo message="Copyright (c) ${project.year} ${project.owner}"/>  
+		<echo message="OS : ${os.name}" />  
+		<echo message="Author: ${author}" />  
+		<echo message="=============================================="/> 
+	</target>
+	<!-- -->
+	<target name="properties" depends="init">
+		<fail unless="asdoc.exe">The "asdoc.exe" property must be set in ${build.dir}/build.properties.</fail> 
+		<fail unless="compc.exe">The "compc.exe" property must be set in ${build.dir}/build.properties.</fail>
+		<fail unless="mxmlc.exe">The "mxmlc.exe" property must be set in ${build.dir}/build.properties.</fail>
+		<fail unless="amxmlc.bat">The "amxmlc.bat" property must be set in ${build.dir}/build.properties.</fail>
+	</target>
+	<!-- -->
+	<target name="build.flexxb" depends="properties, clean">
+		<exec executable="${compc.exe}" dir="${basedir}">
+			<arg line="-o '${flexxb.swc.output}'"/>
+			<arg line="-sp '${flexxb.src.dir}'"/>
+			<arg line="-is '${flexxb.src.dir}'"/>
+		</exec>
+	</target>
+	<!-- -->
+	<target name="build.flexxb.test" depends="build.flexxb">
+		 <exec executable="${mxmlc.exe}" failonerror="true">
+    	 	<arg value="-source-path=${flexxb.tests.src.dir}"/>
+    	 	<arg value="-file-specs=${flexxb.tests.src.dir}/SerializerTestView.mxml"/>
+    	 	<arg value="-output=${bin.dir}/test/FlexXBTest.swf"/>		
+    	 	    	 	
+    	 	<arg value="-actionscript-file-encoding=UTF-8"/>
+    	 	<arg value="-debug=false"/>
+    	 	<arg value="-incremental=false"/>
+    	 	<arg value="-keep-generated-actionscript=false"/>
+    	 	    		
+    	 	<arg line="-keep-as3-metadata XmlElement -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlArray -keep-as3-metadata XmlClass"/>
+			<arg line="-include-libraries ${flexunit.libs}"/>
+		 	<arg line="-include-libraries ${flexxb.swc.output}"/>
+    	 </exec>
+		<make.wrapper application="${flexxb.test.name}" output.dir="${bin.dir}/test" wrapper.dir="${flexxb.test.dir}/html-template"
+			output.html="${bin.dir}/test/${flexxb.test.name}.html" swf="${flexxb.test.name}"
+			title="FlexXB Test"/>
+	</target>
+	<!-- -->
+	<target name="build.fxmod" depends="properties">
+		<exec executable="${amxmlc.bat}">
+			<arg value="-actionscript-file-encoding=UTF-8"/>
+			<arg value="-debug=false"/>
+			<arg value="-keep-generated-actionscript=false"/>
+			<arg value="-source-path+=${fxmod.src.dir}"/>
+			<arg value="-file-specs=${fxmod.src.dir}/FxMOD.mxml"/>
+			<arg value="-output=${fxmod.output}"/>
+		</exec>
+	</target>
+	<!-- -->
+	<target name="development" depends="build.flexxb, build.flexxb.test, build.fxmod">
+	</target>
+	<!-- -->
+	<target name="release" depends="development">
+		<copy file="${basedir}/README.txt" tofile="${basedir}/releasenotes/readme-v${release.version}.txt" overwrite="true"/>
+		<zip destfile="${bin.dir}/${release.name.bin}">
+			<fileset dir="${basedir}">
+				<exclude name="**/build/**"/>
+				<exclude name="**/FlexXB/**"/>
+				<exclude name="**/FlexXBTest/**"/>
+				<exclude name="**/FxMOD/**"/>
+				<exclude name="**/libs/**"/>
+				<exclude name="**/.*"/>
+				<exclude name="**/.*/**"/>
+			</fileset>
+		</zip>
+		<zip destfile="${bin.dir}/${release.name.src}">
+			<fileset dir="${basedir}">
+				<exclude name="**/*.zip"/>
+				<exclude name="**/bin/*.*"/>
+				<exclude name="**/bin/*/**"/>
+				<exclude name="**/FlexXB/bin/*.*"/>
+				<exclude name="**/FlexXBTest/bin-debug/*.*"/>
+				<exclude name="**/FlexXBTest/bin-debug/*/**"/>
+				<exclude name="**/FxMOD/bin-debug/*.*"/>
+				<exclude name="**/FxMOD/bin-debug/*/**"/>
+			</fileset>
+		</zip>
+		<svn username="${svn.username}" password="${svn.password}">
+			<copy message="release ${release.version} branch" revision="HEAD" srcUrl="${svn.HEAD.dir}" destUrl="${svn.branch.dir}/flexxb_v_1_0_beta"/>
+		</svn>
+	</target>
+	
+	<target name="clean">
+		<delete failonerror="true">
+			<fileset dir="${bin.dir}">
+			</fileset>
+		</delete>
+	</target>
+	
+	<!-- -->
+	<target name="documentation" depends="development">
+		<exec executable="${asdoc.exe}">
+			<arg line="-source-path ${flexxb.src.dir}"/>
+			<arg line="-doc-sources ${flexxb.src.dir}"/>
+			<arg line="-output ${doc.dir}"/>
+			<arg line="-main-title ${doc.title}"/>
+			<arg line="-window-title ${doc.title}"/>
+		</exec>
+	</target>
+	
+	<target name="junit.ui">
+	        <flexunit
+	                swf="${flexxb.test.output}/FlexXBTest.swf"
+	                toDir="${bin.dir}/flexunit/reports/FlexXBTest"
+	                haltonfailure="false"
+	                verbose="true"
+	                failureproperty="flexunit.failed"/>
+
+	        <junitreport todir="${bin.dir}/flexunit/reports/FlexXBTest">
+	            <fileset dir="${bin.dir}/flexunit/reports/FlexXBTest">
+	                <include name="TEST-*.xml"/>
+	            </fileset>
+	            <report format="frames" todir="${bin.dir}/flexunit/reports/flex"/>
+	        </junitreport>
+
+	        <fail
+	                message="One or more flexunit tests failed. See test reports for details."
+	                if="flexunit.failed"/>
+	    </target>
+	
+	<macrodef name="make.wrapper">
+	    <attribute name="width" default="100%" />
+	    <attribute name="height" default="100%" />
+	    <attribute name="title" default="" />
+	    <attribute name="version.major" default="9" />
+	    <attribute name="version.minor" default="0" />
+	    <attribute name="version.revision" default="0" />
+	    <attribute name="application" default="" />
+	    <attribute name="swf" default="" />
+	    <attribute name="bgcolor" default="#869ca7" />
+	    <attribute name="wrapper.dir" />
+	    <attribute name="output.dir" />
+	    <attribute name="output.html" />
+	    <sequential>
+	    	<copy todir="@{output.dir}">
+	    		<fileset dir="@{wrapper.dir}">
+		    		<exclude name="**/index.template.html" />
+	    		</fileset>
+	    	</copy>
+	    	<copy 
+	    		file="@{wrapper.dir}/index.template.html"
+	    		tofile="@{output.html}" />
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{width\}"
+	    		replace="@{width}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{height\}"
+	    		replace="@{height}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{title\}"
+	    		replace="@{title}"
+	    		encoding="utf-8"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{version_major\}"
+	    		replace="@{version.major}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{version_minor\}"
+	    		replace="@{version.minor}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{version_revision\}"
+	    		replace="@{version.revision}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{application\}"
+	    		replace="@{application}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{bgcolor\}"
+	    		replace="@{bgcolor}"/>
+	    	<replaceregexp 
+	    		file="@{output.html}"
+	    		flags="gs"
+	    		match="\$\{swf\}"
+	    		replace="@{swf}"/>
+	    </sequential>
+	</macrodef>
+</project>

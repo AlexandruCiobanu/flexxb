@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="vertical" creationComplete="{init();}" >
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import com.googlecode.flexxb.XMLSerializer;
+			import model.Person;
+			import model.Department;
+			[Bindable]
+			private var department : Department;
+			[Bindable]
+			private var departmentXml : XML;
+			
+			private function init() : void{
+				department = new Department();
+				department.departmentHead = new Person(); 
+			}
+			
+			private function serialize(event : Event) : void{
+				departmentXml = XMLSerializer.instance.serialize(department);
+			}
+			
+			private function deserialize(event : Event) : void{
+				department = XMLSerializer.instance.deserialize(departmentXml, Department) as Department;
+			}
+			
+			private function updateXML(event : Event) : void{
+				try{
+					departmentXml = XML(event.target.text);
+				}catch(e : Error){
+					Alert.show(e.message, "Invalid XML");
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Label text="Sample 1 - Serialize and deserialize ActionScript objects to XML and viceversa" fontWeight="bold" fontSize="16" />
+	<mx:HBox verticalAlign="middle" width="100%" height="300" paddingBottom="30"
+	paddingLeft="30" paddingRight="30" paddingTop="30">
+		<mx:Form width="50%" height="100%">
+			<mx:FormHeading label="Fill in the form to configure the department" />
+			<mx:FormItem label="Dept ID">
+				<mx:TextInput text="{department.id}" restrict="0123456789"
+					change="{department.id = event.target.text}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Dept Name">
+				<mx:TextInput text="{department.name}"
+					change="{department.name = event.target.text}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Dept Leader First Name">
+				<mx:TextInput text="{department.departmentHead.firstName}"
+					change="{department.departmentHead.firstName = event.target.text}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Dept Leader Last Name">
+				<mx:TextInput  text="{department.departmentHead.lastName}"
+					change="{department.departmentHead.lastName = event.target.text}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Dept Leader Age">
+				<mx:TextInput restrict="0123456789"  text="{department.departmentHead.age}"
+					change="{department.departmentHead.age = Number(event.target.text)}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Dept Leader Position">
+				<mx:TextInput  text="{department.departmentHead.position}"
+					change="{department.departmentHead.position = event.target.text}"/>
+			</mx:FormItem>
+		</mx:Form>
+		<mx:VBox width="100%" horizontalAlign="center">
+			<mx:Button label="Serialize >>" click="{serialize(event)}"/>
+			<mx:Button label="&lt;&lt; Deserialize" click="(deserialize(event))"/>
+		</mx:VBox>
+		<mx:VBox width="400" height="100%">
+			<mx:Label text="XML View"/>
+			<mx:TextArea width="400" height="100%" text="{departmentXml.toXMLString()}" change="{updateXML(event)}" />
+		</mx:VBox>
+	</mx:HBox>
+</mx:Application>
