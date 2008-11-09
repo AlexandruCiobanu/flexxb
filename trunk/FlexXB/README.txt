@@ -12,6 +12,7 @@ FlexXB-1_0-beta-bin.zip - contains the flexxb library along with the test
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
 			/doc/ 				- ASDOC
+			/samples/			- samples showing FlexXB's features 
 			/README.txt	- version release notes
 
 FlexXB-1_0-beta-src.zip - contains source files
@@ -80,6 +81,9 @@ com.googlecode.serializer.flexxb.XMLSerializer.registerAnnotation(name, annotati
 
 To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the xml representation and viceversa:
 com.googlecode.serializer.flexxb.XMLSerializer.registerSimpleTypeConverter(converterInstance, overrideExisting)
+
+Note: Make sure you add the following switches to your compiler settings:
+	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray
 
 Annotation syntax:
 
