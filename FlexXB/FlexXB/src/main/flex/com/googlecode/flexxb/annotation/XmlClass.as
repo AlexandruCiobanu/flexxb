@@ -144,6 +144,9 @@ package com.googlecode.flexxb.annotation
 				var type : String = field.@type;
 				_fieldName = type.substring(type.lastIndexOf(":") + 1);
 			}
+			if(!alias || alias.length == 0){
+				setAlias(_fieldName);
+			}
 		}
 		/**
 		 * 
