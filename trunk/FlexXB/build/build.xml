@@ -109,7 +109,7 @@
 		<exec executable="${asdoc.exe}">
 			<arg line="-source-path ${flexxb.src.dir}"/>
 			<arg line="-doc-sources ${flexxb.src.dir}"/>
-			<arg line="-output ${doc.dir}"/>
+			<arg line="-output ${doc.dir}/asdoc"/>
 			<arg line="-main-title ${doc.title}"/>
 			<arg line="-window-title ${doc.title}"/>
 		</exec>
