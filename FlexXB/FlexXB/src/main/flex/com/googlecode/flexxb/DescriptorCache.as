@@ -119,20 +119,20 @@ package com.googlecode.flexxb
 			//get namespace
 			var field : XML;
 			for each(field in descriptor..variable){
-				classDescriptor.addMember(getAnnotation(field));
+				classDescriptor.addMember(getAnnotation(field, classDescriptor));
 			}
 			for each(field in descriptor..accessor.(@access == "readwrite")){
-				classDescriptor.addMember(getAnnotation(field));
+				classDescriptor.addMember(getAnnotation(field, classDescriptor));
 			}
 			return classDescriptor;
 		}
 		
-		private function getAnnotation(field : XML) : Annotation{
+		private function getAnnotation(field : XML, classDescriptor : XmlClass) : Annotation{
 			var annotations : XMLList = field.metadata;
 			for each(var member : XML in annotations){
 				var annotationClass : Class = getAnnotationClass(member.@name);
 				if(annotationClass){
-					return new annotationClass(field) as Annotation;
+					return new annotationClass(field, classDescriptor) as Annotation;
 				}
 			}
 			return null;
