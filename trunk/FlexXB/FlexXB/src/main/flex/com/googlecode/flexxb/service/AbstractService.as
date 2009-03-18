@@ -37,7 +37,7 @@
 		 * @param settings
 		 * 
 		 */		
-		protected function configure(settings : IServiceSettings) : void{
+		protected function configure(settings : ServiceSettings) : void{
 			_communicationHandler.applySettings(settings);
 		}
 		/**
@@ -53,7 +53,7 @@
 		 * @param value
 		 * 
 		 */		
-		protected function set communicator(value  :ICommunicator) : void{
+		protected function set communicator(value : ICommunicator) : void{
 			_communicationHandler = value;
 		}
 	}
