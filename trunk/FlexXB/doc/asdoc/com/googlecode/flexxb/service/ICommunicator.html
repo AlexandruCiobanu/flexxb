@@ -57,7 +57,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#applySettings()">applySettings</a>(settings:<a href="ServiceSettings.html">ServiceSettings</a>):void</div>
+<a class="signatureLink" href="#applySettings()">applySettings</a>(settings:<a href="ServiceSettings.html">ServiceSettings</a>, detectSettingsChange:Boolean = false):void</div>
 <div class="summaryTableDescription">
    Apply communication settings
    </div>
@@ -98,12 +98,18 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function applySettings(settings:<a href="ServiceSettings.html">ServiceSettings</a>):void</code><p>
+<code>public function applySettings(settings:<a href="ServiceSettings.html">ServiceSettings</a>, detectSettingsChange:Boolean = false):void</code><p>
    Apply communication settings
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">settings</span>:<a href="ServiceSettings.html">ServiceSettings</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">detectSettingsChange</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
 </tr>
 </table>
 </div>
