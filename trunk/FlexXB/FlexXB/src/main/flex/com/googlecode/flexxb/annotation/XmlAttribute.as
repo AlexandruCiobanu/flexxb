@@ -30,8 +30,8 @@
 		 * @param descriptor
 		 * 
 		 */		
-		public function XmlAttribute(descriptor : XML){
-			super(descriptor);
+		public function XmlAttribute(descriptor : XML, classDescriptor : XmlClass = null){
+			super(descriptor, classDescriptor);
 		}
 		/**
 		 * 

@@ -41,8 +41,8 @@
 		 */		
 		protected var _getFromCache : Boolean;
 		
-		public function XmlElement(descriptor : XML){
-			super(descriptor);
+		public function XmlElement(descriptor : XML, xmlClass : XmlClass = null){
+			super(descriptor, xmlClass);
 		}
 		/**
 		 * 
