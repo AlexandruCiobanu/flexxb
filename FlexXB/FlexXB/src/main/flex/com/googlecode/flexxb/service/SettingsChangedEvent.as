@@ -15,40 +15,29 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.service
+ package com.googlecode.flexxb.service
 {
-	import mx.rpc.http.HTTPService;
-	
+	import flash.events.Event;
 	/**
-	 * Communication settings
-	 * @author aciobanu
+	 * 
+	 * @author Alexutz
 	 * 
 	 */	
-	public interface IServiceSettings
+	public class SettingsChangedEvent extends Event
 	{
 		/**
 		 * 
-		 * @return url
-		 * 
 		 */		
-		function get url() : String;
+		public static const SETTINGSCHANGE : String = "settingsChange";
 		/**
 		 * 
-		 * @return 
+		 * @param bubbles
+		 * @param cancelable
 		 * 
 		 */		
-		function get method() : String;
-		/**
-		 * 
-		 * @return timeout
-		 * 
-		 */		
-		function get timeout() : int;
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */				
-		function get logMessages() : Boolean;
+		public function SettingsChangedEvent(bubbles:Boolean=false, cancelable:Boolean=false)
+		{
+			super(SETTINGSCHANGE, bubbles, cancelable);
+		}		
 	}
 }

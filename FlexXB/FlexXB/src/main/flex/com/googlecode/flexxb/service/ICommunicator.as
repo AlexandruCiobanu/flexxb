@@ -27,9 +27,10 @@ package com.googlecode.flexxb.service
 		/**
 		 * Apply communication settings
 		 * @param settings
+		 * @param detectSettingsChange
 		 * 
 		 */		
-		function applySettings(settings : IServiceSettings) : void;
+		function applySettings(settings : ServiceSettings, detectSettingsChange : Boolean = false) : void;
 		/**
 		 * 
 		 * @param translator

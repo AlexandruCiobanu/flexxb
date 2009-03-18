@@ -17,6 +17,8 @@
  */
 package com.googlecode.flexxb.service
 {
+	import flash.utils.Timer;
+	
 	import mx.rpc.AsyncToken;
 	import mx.rpc.Responder;
 	import mx.rpc.events.FaultEvent;
@@ -30,27 +32,38 @@ package com.googlecode.flexxb.service
 	 */	
 	public class Communicator implements ICommunicator
 	{
-		private var _settings : IServiceSettings;
-		
+		/**
+		 * 
+		 */		
+		private var _settings : ServiceSettings;
+		/**
+		 * 
+		 */		
 		private var service : HTTPService;
 		/**
 		 * Constructor 
 		 * @param settings
 		 * 
 		 */		
-		public function Communicator(settings : IServiceSettings = null)
+		public function Communicator(settings : ServiceSettings = null, detectSettingsChange : Boolean = false)
 		{
 			service = new HTTPService();
-			applySettings(settings);
+			applySettings(settings, detectSettingsChange);
 		}
 		/**
 		 * 
 		 * @see ICommunicator#applySettings()
 		 * 
 		 */		
-		public function applySettings(settings : IServiceSettings) : void{
+		public function applySettings(settings : ServiceSettings, detectSettingsChange : Boolean = false) : void{
+			if(_settings){
+				_settings.removeEventListener(SettingsChangedEvent.SETTINGSCHANGE, settingsChangeHandler);
+			}
+			_settings = settings;
 			if(settings){
-				_settings = settings;
+				if(detectSettingsChange){
+					_settings.addEventListener(SettingsChangedEvent.SETTINGSCHANGE, settingsChangeHandler);
+				}
 				configureService(service, _settings);
 			}
 		}
@@ -65,7 +78,6 @@ package com.googlecode.flexxb.service
 			}
 			var xmlRequest : XML = translator.createRequest();
 			service.request = xmlRequest;
-			
 			var onResult : Function = function(event : ResultEvent) : void{
 				var xmlResponse : XML = event.result as XML;
 				var response : Object = translator.parseResponse(xmlResponse);
@@ -93,13 +105,29 @@ package com.googlecode.flexxb.service
 		 * 
 		 */		
 		public function destroy() : void{
-			service.disconnect();
-			service = null;
+			if(service){
+				service.disconnect();
+				service = null;
+			}
 			_settings = null;
 		}
-		
-		private function configureService(srv : HTTPService, settings : IServiceSettings) : void{
+		/**
+		 * 
+		 * @param event
+		 * 
+		 */		
+		private function settingsChangeHandler(event : SettingsChangedEvent) : void{
+			configureService(service, _settings);
+		}
+		/**
+		 * 
+		 * @param srv
+		 * @param settings
+		 * 
+		 */		
+		private function configureService(srv : HTTPService, settings : ServiceSettings) : void{
 			srv.url = settings.url;
+			srv.destination = settings.destination;
 			srv.contentType = HTTPService.CONTENT_TYPE_XML;
 			srv.requestTimeout = settings.timeout;
 			srv.method = settings.method;
