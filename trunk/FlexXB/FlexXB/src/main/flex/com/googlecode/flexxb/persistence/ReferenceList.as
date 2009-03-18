@@ -86,10 +86,8 @@ package com.googlecode.flexxb.persistence
 			if(modified){
 				listen = false;
 				var tracker : ChangeTracker = changeList[ChangeTrackerKind.UPDATE];
-				removeAll();
-				for each(var item : Object in tracker.persistedValue){
-					addItem(item);
-				}
+				source = tracker.persistedValue as Array;
+				refresh();
 				setModified(false);
 			}
 		}
