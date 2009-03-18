@@ -18,84 +18,49 @@
  package com.googlecode.flexxb.serializer
 {
 	import com.googlecode.flexxb.XMLSerializer;
-	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
-	
-	import flash.utils.getQualifiedClassName;
 	/**
 	 * 
 	 * @author Alexutz
 	 * 
 	 */	
-	public class XmlElementSerializer implements ISerializer
+	public class XmlElementSerializer extends XmlMemberSerializer
 	{
 		public function XmlElementSerializer(){}
 		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
-		 */
-		public function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer) : XML
-		{
-			var element : XmlElement = annotation as XmlElement;
-			if(element.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
-				return null;
-			}
+		 * @see XmlMemberSerializer#serializeObject()
+		 */		
+		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{
 			var child : XML = <xml />;
 			if(isComplexType(object)){
-				child = serializer.serialize(object, element.serializePartialElement);
+				child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
 			}else{
 				child.appendChild(serializer.objectToString(object, annotation.fieldType));
 			}
-			if(element.useOwnerAlias()){
+			
+			if(annotation.useOwnerAlias()){
 				var name : QName = serializer.getXmlName(object);
 				if(name){
 					child.setName(name);
 				}
-			}else{
-				child.setName(element.xmlName);
+			}else if(annotation.xmlName){
+				child.setName(annotation.xmlName);
 			}
 			parentXml.appendChild(child);
-			return child;
 		}
 		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
-		 */
-		public function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer) : Object
-		{
-			var element : XmlElement = annotation as XmlElement;
-			if(element.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
+		 * @see XmlMemberSerializer#deserializeObject()
+		 */		
+		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : XMLSerializer) : Object{
+			var list : XMLList = xmlData.child(xmlName);
+			if(list.length() == 0){
 				return null;
 			}
-			var xmlName : QName = element.xmlName;
-			if(element.useOwnerAlias()){
-				xmlName = serializer.getXmlName(element.fieldType);
+			if(isComplexType(element.fieldType)){
+				return serializer.deserialize(list[0], element.fieldType, XmlElement(element).getFromCache);
 			}
-			var xmlElement : XMLList = xmlData.child(xmlName);
-			if(xmlElement.length() == 0) 
-				return null;
-			if(isComplexType(annotation.fieldType)){
-				return serializer.deserialize(xmlElement[0], element.fieldType, element.getFromCache);
-			}
-			return serializer.stringToObject(XML(xmlElement[0]).children()[0].toString(), element.fieldType);
-		}
-		
-		private function isComplexType(value : Object) : Boolean
-		{
-		    var type:String =  getQualifiedClassName(value);
-		    switch (type)
-		    {
-		        case "Number":
-		        case "int":
-		        case "uint":
-		        case "String":
-		        case "Boolean":
-		        case "Date":
-		        case "XML":
-		        {
-		            return false;
-		        }
-		    }		
-		    return true;
-		}
+			return serializer.stringToObject(list[0].toString(), element.fieldType);
+		}		
 	}
 }

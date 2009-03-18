@@ -18,8 +18,6 @@
  package com.googlecode.flexxb.serializer
 {
 	import com.googlecode.flexxb.XMLSerializer;
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlAttribute;
 	import com.googlecode.flexxb.annotation.XmlMember;
 		
 	/**
@@ -27,7 +25,7 @@
 	 * @author Alexutz
 	 * 
 	 */	
-	public final class XmlAttributeSerializer implements ISerializer
+	public final class XmlAttributeSerializer extends XmlMemberSerializer
 	{
 		/**
 		 * Constructor 
@@ -35,30 +33,18 @@
 		 */		
 		public function XmlAttributeSerializer(){}
 		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
+		 * @see XmlMemberSerializer#serializeObject()
 		 */		
-		public function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer):XML
-		{
-			var attribute : XmlAttribute = annotation as XmlAttribute;
-			if(attribute.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
-				return null;
-			}
-			var value : String = serializer.objectToString(object, annotation.fieldType);
-			if(value && value.length > 0){
-				parentXml.@[attribute.xmlName] = value;
-			} 
-			return parentXml;
+		protected override function serializeObject(object : Object, attribute : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{
+			var value : String = serializer.objectToString(object, attribute.fieldType);
+			parentXml.@[attribute.xmlName] = value;			
 		}
 		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
-		 */	
-		public function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer):Object
-		{
-			var attribute : XmlAttribute = annotation as XmlAttribute;
-			if(attribute.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
-				return null;
-			}
-			var result : Object = serializer.stringToObject(xmlData.attribute(attribute.xmlName), annotation.fieldType);
+		 * @see XmlMemberSerializer#deserializeObject()
+		 */		
+		protected override function deserializeObject(xmlData : XML, xmlName : QName, attribute : XmlMember, serializer : XMLSerializer) : Object{
+			var value : String = xmlData.attribute(xmlName);
+			var result : Object = serializer.stringToObject(value, attribute.fieldType);
 			return result;
 		}
 	}
