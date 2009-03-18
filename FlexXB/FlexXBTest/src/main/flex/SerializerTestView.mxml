@@ -19,15 +19,35 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:defusion="org.defusion.flexunit.*" layout="absolute" creationComplete="init()">
 	<mx:Script>
 		<![CDATA[
+			import com.googlecode.testData.Mock;
+			import com.googlecode.testData.XmlPathObject;
+			import com.googlecode.flexxb.XMLSerializer;
 			import flash.utils.describeType;
 			import mx.controls.Alert;
 			import com.googlecode.AllTests;
 			import mx.core.Container;
 			import com.googlecode.flexxb.XmlTests;
+			import flexunit.junit.JUnitTestRunner; 
 			import org.defusion.flexunit.FlexUnitRunner;
 			
 			private function init() : void{
+				var test : XML = <team id='23'>teamName<test></test>teamVersion</team>;
+				var children : XMLList = test.children();
+				var name : Object = (children[2] as XML).name();
+				name = test.name();
+				var obj : XmlPathObject = new XmlPathObject();
+				obj.identity = 6;
+				obj.reference = "SomeReference";
+				//obj.textField = "MyTextField";
+				obj.list = [new Mock(), "doi","trei"];
+				var xml : XML = XMLSerializer.instance.serialize(obj);
+				var obj2 : XmlPathObject = XMLSerializer.instance.deserialize(xml, XmlPathObject) as XmlPathObject;
 				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite()];
+				/*if(Application.application.parameters["runTestOnDemand"] != "true"){
+					var runner : JUnitTestRunner = new JUnitTestRunner();
+					runner.run(AllTests.allTests());
+					Alert.show("running");
+				}*/
 			}
 		]]>
 	</mx:Script>

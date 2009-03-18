@@ -17,8 +17,6 @@
  */ 
  package com.googlecode.flexxb.annotation
 {
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.testData.Mock;
 	
 	
