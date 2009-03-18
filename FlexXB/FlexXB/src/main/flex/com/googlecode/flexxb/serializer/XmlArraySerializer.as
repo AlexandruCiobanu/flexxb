@@ -37,31 +37,31 @@
 		 */		
 		public function XmlArraySerializer()
 		{
-			//TODO: implement function
+			super();
 		}
 		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
+		 * @see XmlMemberSerializer#serializeObject()
 		 */
-		public override function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer) : XML
-		{
-			var array : XmlArray = annotation as XmlArray;
-			if(array.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
-				return null;
-			}
-			var result : XML;
-			if(array.useOwnerAlias()){
-				result = parentXml;
-			}else{
-				result = <xml />;
-				result.setName(array.xmlName);
-				parentXml.appendChild(result);
-			}
+		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{
+			var result : XML = <xml />;
 			
 			for each(var member : Object in object){
-				result.appendChild(serializer.serialize(member));
+				if(isComplexType(member)){
+					result.appendChild(serializer.serialize(member, XmlArray(annotation).serializePartialElement));
+				}else{
+					result.appendChild(serializer.objectToString(member, XmlArray(annotation).type));
+				}
 			}
 			
-			return result;
+			var name : QName = result.name() as QName;
+			if(name && name.localName != "xml"){
+				parentXml.appendChild(result);
+			}else{
+				for each(var subChild : XML in result.children()){
+					parentXml.appendChild(subChild);
+				}
+			}
+			
 		}
 		/**
 		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
@@ -76,6 +76,7 @@
 			var result : Object = new annotation.fieldType();
 			
 			var xmlName : QName;
+			var xmlArray : XMLList;
 			
 			if(array.useOwnerAlias()){
 				if(array.memberName){
@@ -83,10 +84,14 @@
 				}else if(array.type){
 					xmlName = serializer.getXmlName(array.type);
 				}
+				xmlArray = xmlData.child(xmlName);
 			}else{
 				xmlName = array.xmlName;
+				xmlArray = xmlData.child(xmlName);
+				if(xmlArray.length() > 0){
+					xmlArray = xmlArray.children();
+				}
 			}
-			var xmlArray : XMLList = xmlData.child(xmlName);
 			if(xmlArray && xmlArray.length() > 0) {
 				for each(var xmlChild : XML in xmlArray){
 					var member : Object = serializer.deserialize(xmlChild, array.type, array.getFromCache);

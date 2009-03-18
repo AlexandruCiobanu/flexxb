@@ -206,9 +206,11 @@
 					IXmlSerializable(result).fromXml(xmlData);
 				}else{
 					var classDescriptor : XmlClass = descriptorCache.getDescriptor(result);
-					for each(var annotation : Annotation in classDescriptor.members){				
-						var serializer : ISerializer = descriptorCache.getSerializer(annotation);
-						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
+					for each(var annotation : Annotation in classDescriptor.members){	
+						if(annotation != classDescriptor.valueField){			
+							var serializer : ISerializer = descriptorCache.getSerializer(annotation);
+							result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
+						}
 					}
 				}
 				if(result is PersistableObject){
