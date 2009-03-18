@@ -65,6 +65,7 @@
 	</target>
 	<!-- -->
 	<target name="development" depends="build.flexxb, build.flexxb.test, build.fxmod">
+		<antcall target="documentation" />
 	</target>
 	<!-- -->
 	<target name="release" depends="development">
@@ -105,7 +106,7 @@
 	</target>
 	
 	<!-- -->
-	<target name="documentation" depends="development">
+	<target name="documentation">
 		<exec executable="${asdoc.exe}">
 			<arg line="-source-path ${flexxb.src.dir}"/>
 			<arg line="-doc-sources ${flexxb.src.dir}"/>
