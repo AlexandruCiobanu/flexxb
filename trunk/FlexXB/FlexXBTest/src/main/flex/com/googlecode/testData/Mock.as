@@ -18,7 +18,7 @@
  package com.googlecode.testData
 {
 	[Bindable]
-	[XmlClass(alias="MyClass", prefix="test", uri="http://www.axway.com/xmlns/passport/v1")]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.axway.com/xmlns/passport/v1", defaultValueField="stuff")]
 	public class Mock
 	{
 		[XmlAttribute(alias="stuff")]
@@ -41,6 +41,5 @@
 		public function Mock(){
 			//TODO: implement function
 		}
-
 	}
 }

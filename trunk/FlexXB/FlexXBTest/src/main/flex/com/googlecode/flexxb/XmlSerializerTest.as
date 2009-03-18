@@ -17,7 +17,6 @@
  */ 
  package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.XMLSerializer;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock3;
 	
@@ -37,7 +36,10 @@
 			target.date = new Date();
 			target.version = 6;
 			target.result = [];
-			target.result.push(new Mock());
+			var mk : Mock = new Mock();
+			mk.date = new Date();
+			mk.aField = "mocktestfield";
+			target.result.push(mk);
 			target.xmlData = <test id="1"><element>retw</element></test>
 			return target;
 		}
