@@ -23,7 +23,7 @@ package com.googlecode.flexxb.annotation
 	
 	/**
 	 * 
-	 * <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")]</code></p>
+	 * <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></p>
 	 * @author aCiobanu
 	 * 
 	 */	
@@ -52,7 +52,15 @@ package com.googlecode.flexxb.annotation
 		/**
 		 * 
 		 */		
-		public var members : ArrayCollection = new ArrayCollection(); 
+		public static const ARGUMENT_VALUE : String = "defaultValueField";
+		/**
+		 * 
+		 */		
+		public var members : ArrayCollection = new ArrayCollection();
+		/**
+		 * 
+		 */		
+		private var id : String; 
 		/**
 		 * 
 		 */		
@@ -60,7 +68,11 @@ package com.googlecode.flexxb.annotation
 		/**
 		 * 
 		 */		
-		private var id : String;
+		private var defaultValue : String;
+		/**
+		 * 
+		 */		
+		protected var _defaultValueField : Annotation;
 		/**
 		 * 
 		 */		
@@ -83,6 +95,9 @@ package com.googlecode.flexxb.annotation
 				members.addItem(annotation);
 				if(annotation.fieldName == id){
 					_idField = annotation;
+				}
+				if(annotation.alias == defaultValue){
+					_defaultValueField = annotation;
 				}
 			}
 		}
@@ -109,6 +124,22 @@ package com.googlecode.flexxb.annotation
 		 */		
 		public function get idField() : Annotation{
 			return _idField;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get valueField() : Annotation{
+			return _defaultValueField;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function hasDefaultValueField() : Boolean{
+			return _defaultValueField != null;
 		}
 		/**
 		 * 
@@ -160,9 +191,15 @@ package com.googlecode.flexxb.annotation
 			_useChildNamespace = metadata.arg.(@key == ARGUMENT_USE_CHILD_NAMESPACE).@value;
 		}
 		
-		protected function setIdField(field : String) : void{
+		private function setIdField(field : String) : void{
 			if(field && field.length > 0) {
 				id = field;
+			}
+		}
+		
+		private function setValueField(field : String) : void{
+			if(field && field.length > 0) {
+				defaultValue = field;
 			}
 		}
 		/**

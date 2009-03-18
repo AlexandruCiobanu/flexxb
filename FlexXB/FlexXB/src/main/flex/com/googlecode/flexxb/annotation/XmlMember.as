@@ -38,15 +38,52 @@
 		public static const ARGUMENT_IGNORE_ON : String = "ignoreOn";
 		/**
 		 * 
+		 */		
+		public static const ALIAS_PATH_SEPARATOR : String = "/";
+		/**
+		 * 
 		 */ 
 		protected var _ignoreOn: String = "";
+		/**
+		 * 
+		 */		
+		protected var _class : XmlClass;
+		/**
+		 * 
+		 */		
+		private var pathElements : Array;
 		/**
 		 * Constructor
 		 * 
 		 * 
 		 */ 
-		public function XmlMember(descriptor : XML){
+		public function XmlMember(descriptor : XML, _class : XmlClass){
 			super(descriptor);
+			this._class = _class;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function isDefaultValue() : Boolean{
+			return _class && _class.valueField == this;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function isPath() : Boolean{
+			return pathElements && pathElements.length > 0;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get qualifiedPathElements() : Array{
+			return pathElements;
 		}
 		/**
 		 * 
@@ -55,6 +92,14 @@
 		 */		
 		public function get ignoreOn() : String{
 			return _ignoreOn;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get ownerClass() : XmlClass{
+			return _class;
 		}
 		/**
 		 * 
@@ -75,5 +120,29 @@
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
 			ignoreOn = metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value;
 		}		
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
+		protected override function setAlias(value:String):void{
+			if(value && value.indexOf(ALIAS_PATH_SEPARATOR) > 0){
+				var elems : Array = alias.split(ALIAS_PATH_SEPARATOR);
+				pathElements = [];
+				var localName : String;
+				for (var i : int = 0; i < elems.length ; i++){
+					localName = elems[i] as String;
+					if(localName && localName.length > 0){
+						if(i == elems.length - 1){
+							super.setAlias(localName);
+							break;
+						}
+						pathElements.push(new QName(nameSpace, localName));
+					}
+				}
+			}else{
+				super.setAlias(value);
+			}
+		} 
 	}
 }

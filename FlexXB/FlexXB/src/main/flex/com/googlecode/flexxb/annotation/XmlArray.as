@@ -50,8 +50,8 @@
 		 * Constructor
 		 * 
 		 */		
-		public function XmlArray(descriptor : XML){
-			super(descriptor);
+		public function XmlArray(descriptor : XML, xmlClass : XmlClass = null){
+			super(descriptor, xmlClass);
 		}
 		/**
 		 * 

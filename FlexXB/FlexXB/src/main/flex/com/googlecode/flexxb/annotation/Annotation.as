@@ -35,6 +35,9 @@
 		 * 
 		 */		
 		public static const ARGUMENT_ALIAS : String = "alias"; 
+		/**
+		 * 
+		 */		
 		public static const ALIAS_ANY : String = "*";
 		/**
 		 * 
@@ -107,7 +110,7 @@
 		 * @param value name to be set
 		 * 
 		 */		
-		protected final function setAlias(value : String) : void{
+		protected function setAlias(value : String) : void{
 			if(value == null) return;
 			_alias = value;
 			if(_alias.length == 0){
@@ -130,7 +133,11 @@
 		public function hasNamespaceDeclaration() : Boolean{
 			return nameSpace && nameSpace.uri && nameSpace.uri.length > 0;
 		}
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function useOwnerAlias() : Boolean{
 			return _alias == ALIAS_ANY;
 		}
