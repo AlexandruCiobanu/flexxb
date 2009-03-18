@@ -12,7 +12,7 @@
 		<tstamp/>  
 		<echo message="============================================="/>  
 		<echo message="${project.name}-${project.version} [${TODAY}]"/>  
-		<echo message="Copyright (c) ${project.year} ${project.owner}"/>  
+		<echo message="Copyright (c) 2008 - 2009 ${project.owner}"/>  
 		<echo message="OS : ${os.name}" />  
 		<echo message="Author: ${author}" />  
 		<echo message="=============================================="/> 
