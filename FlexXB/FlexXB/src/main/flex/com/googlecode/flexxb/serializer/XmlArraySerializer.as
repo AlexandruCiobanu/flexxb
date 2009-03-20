@@ -18,14 +18,13 @@
  package com.googlecode.flexxb.serializer
 {
 	import com.googlecode.flexxb.XMLSerializer;
-	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	
 	import mx.collections.ListCollectionView;
 	
 	/**
-	 * 
+	 * Insures serialization/deserialization for object field decorated with the XmlArray annotation
 	 * @author Alexutz
 	 * 
 	 */	
@@ -60,22 +59,16 @@
 				for each(var subChild : XML in result.children()){
 					parentXml.appendChild(subChild);
 				}
-			}
-			
-		}
+			}	
+		}		
 		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
-		 */
-		public override function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer):Object
-		{
-			var array : XmlArray = annotation as XmlArray;
-			if(array.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
-				return null;
-			}
+		 * @see XmlMemberSerializer#deserializeObject()
+		 */		
+		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : XMLSerializer) : Object{
+			var result : Object = new element.fieldType();
 			
-			var result : Object = new annotation.fieldType();
+			var array : XmlArray = element as XmlArray;
 			
-			var xmlName : QName;
 			var xmlArray : XMLList;
 			
 			if(array.useOwnerAlias()){
@@ -101,7 +94,7 @@
 				}
 			}
 			return result;
-		}		
+		}
 		
 		private function addMemberToResult(member : Object, result : Object) : void{
 			if(result is Array){

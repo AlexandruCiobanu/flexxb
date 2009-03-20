@@ -37,7 +37,7 @@
 	 * By default it registeres the built-in annotations at startup. 
 	 * <p>Built-in anotation usage:
 	 *  <ul>
-	 *  <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")]</code></li>
+	 *  <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></li>
 	 *  <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
 	 *  <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
 	 *  <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
@@ -108,8 +108,8 @@
 			return converterMap && type && converterMap[type] is IConverter;
 		}
 		/**
-		 * 
-		 * @param object
+		 * Get the namespace defined for an object type
+		 * @param object target instance
 		 * @return 
 		 * 
 		 */		
@@ -182,10 +182,7 @@
 			if(xmlData && objectClass){
 				var result : Object;
 				var id : String = getId(objectClass, xmlData);
-				
-				//dispatch preSerializeEvent
-				dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
-				
+								
 				//get object from cache
 				if(id && ModelObjectCache.instance.isCached(id, objectClass)){
 					if(getFromCache){
@@ -198,6 +195,10 @@
 						ModelObjectCache.instance.putObject(id, result);
 					}
 				}
+				
+				//dispatch preDeserializeEvent
+				dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
+				
 				if(result is PersistableObject){
 					PersistableObject(result).stopListening();
 				}
@@ -207,10 +208,8 @@
 				}else{
 					var classDescriptor : XmlClass = descriptorCache.getDescriptor(result);
 					for each(var annotation : Annotation in classDescriptor.members){	
-						if(annotation != classDescriptor.valueField){			
-							var serializer : ISerializer = descriptorCache.getSerializer(annotation);
-							result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
-						}
+						var serializer : ISerializer = descriptorCache.getSerializer(annotation);
+						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 					}
 				}
 				if(result is PersistableObject){
@@ -218,7 +217,7 @@
 					PersistableObject(result).startListening();
 				}
 				
-				//dispatch preSerializeEvent
+				//dispatch postDeserializeEvent
 				dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
 				
 				return result;
@@ -226,7 +225,7 @@
 			return null;
 		}
 		/**
-		 * 
+		 * Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
 		 * @param object
 		 * @return 
 		 * 
@@ -241,10 +240,10 @@
 			return null;
 		}
 		/**
-		 * 
-		 * @param value
-		 * @param clasz
-		 * @return 
+		 * Convert string value to object
+		 * @param value value to be converted to object
+		 * @param clasz type of the object to which the value is converted
+		 * @return instance of type passed as argument
 		 * 
 		 */		
 		public final function stringToObject(value : String, clasz : Class) : Object{
@@ -266,9 +265,9 @@
 			return clasz(value);
 		}
 		/**
-		 * 
-		 * @param object
-		 * @return 
+		 * Convert object value to string
+		 * @param object instance to be converted to string
+		 * @return string value
 		 * 
 		 */		
 		public final function objectToString(object : Object, clasz : Class) : String{

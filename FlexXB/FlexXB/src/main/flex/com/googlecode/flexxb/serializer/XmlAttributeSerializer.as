@@ -21,7 +21,7 @@
 	import com.googlecode.flexxb.annotation.XmlMember;
 		
 	/**
-	 * 
+	 * Insures serialization/deserialization for object field decorated with the XmlAttribute annotation 
 	 * @author Alexutz
 	 * 
 	 */	
