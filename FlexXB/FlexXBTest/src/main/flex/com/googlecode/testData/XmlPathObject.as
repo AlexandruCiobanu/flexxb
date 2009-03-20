@@ -1,6 +1,6 @@
 package com.googlecode.testData
 {	
-	[XmlClass(alias="myPathTester")]
+	[XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
 	public class XmlPathObject
 	{
 		[XmlElement(alias="subObject/id")]
@@ -11,6 +11,8 @@ package com.googlecode.testData
 		public var list : Array;
 		[XmlAttribute(alias="anotherSub/attTest")]
 		public var test : Date = new Date();
+		[XmlElement()]
+		public var defaultTest : String = "This is Default!!!"
 		
 		public function XmlPathObject()
 		{

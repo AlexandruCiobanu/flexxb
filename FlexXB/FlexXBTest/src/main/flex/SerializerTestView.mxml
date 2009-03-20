@@ -31,7 +31,7 @@
 			import org.defusion.flexunit.FlexUnitRunner;
 			
 			private function init() : void{
-				var test : XML = <team id='23'>teamName<test></test>teamVersion</team>;
+				/*var test : XML = <team id='23'>teamName<test></test>teamVersion</team>;
 				var children : XMLList = test.children();
 				var name : Object = (children[2] as XML).name();
 				name = test.name();
@@ -41,7 +41,7 @@
 				//obj.textField = "MyTextField";
 				obj.list = [new Mock(), "doi","trei"];
 				var xml : XML = XMLSerializer.instance.serialize(obj);
-				var obj2 : XmlPathObject = XMLSerializer.instance.deserialize(xml, XmlPathObject) as XmlPathObject;
+				var obj2 : XmlPathObject = XMLSerializer.instance.deserialize(xml, XmlPathObject) as XmlPathObject;*/
 				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite()];
 				/*if(Application.application.parameters["runTestOnDemand"] != "true"){
 					var runner : JUnitTestRunner = new JUnitTestRunner();

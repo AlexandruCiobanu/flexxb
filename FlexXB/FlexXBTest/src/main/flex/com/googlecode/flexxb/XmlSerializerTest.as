@@ -21,6 +21,7 @@
 	import com.googlecode.testData.Mock3;
 	
 	import flexunit.framework.TestCase;
+	import com.googlecode.testData.XmlPathObject;
 
 	public class XmlSerializerTest extends TestCase
 	{
@@ -76,5 +77,17 @@
 			assertEquals("id is wrong", target.id, copy.id);
 			assertEquals("version is wrong", target.version, copy.version);
 		}		
+		
+		public function testVirtualPath() : void{
+			var target : XmlPathObject = new XmlPathObject();
+			target.defaultTest = "My custom default";
+			target.identity = 345;
+			target.reference = "SOmeRef";
+			var xml : XML = XMLSerializer.instance.serialize(target);
+			var copy : XmlPathObject = XMLSerializer.instance.deserialize(xml, XmlPathObject) as XmlPathObject;
+			assertEquals("Identity is wrong", target.identity, copy.identity);
+			assertEquals("Reference is wrong", target.reference, copy.reference);			
+			assertEquals("DefaultTest is wrong", target.defaultTest, copy.defaultTest);
+		}
 	}
 }
