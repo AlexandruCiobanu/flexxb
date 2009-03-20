@@ -189,6 +189,7 @@ package com.googlecode.flexxb.annotation
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
 			setIdField(metadata.arg.(@key == ARGUMENT_ID).@value);
 			_useChildNamespace = metadata.arg.(@key == ARGUMENT_USE_CHILD_NAMESPACE).@value;
+			setValueField(metadata.arg.(@key == ARGUMENT_VALUE).@value);
 		}
 		
 		private function setIdField(field : String) : void{

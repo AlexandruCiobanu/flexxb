@@ -21,12 +21,16 @@
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	/**
-	 * 
+	 * Insures serialization/deserialization for object field decorated with the XmlElement annotation
 	 * @author Alexutz
 	 * 
 	 */	
 	public class XmlElementSerializer extends XmlMemberSerializer
 	{
+		/**
+		 * Constructor 
+		 * 
+		 */		
 		public function XmlElementSerializer(){}
 		/**
 		 * @see XmlMemberSerializer#serializeObject()

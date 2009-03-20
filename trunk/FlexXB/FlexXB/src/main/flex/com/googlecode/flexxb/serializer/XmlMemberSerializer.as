@@ -23,6 +23,7 @@ package com.googlecode.flexxb.serializer
 	import com.googlecode.flexxb.error.ProcessingError;
 	
 	import flash.utils.getQualifiedClassName;
+	import flash.xml.XMLNodeType;
 	/**
 	 * 
 	 * @author Alexutz
@@ -47,7 +48,7 @@ package com.googlecode.flexxb.serializer
 				return null;
 			}
 			if(element.isDefaultValue()){
-				parentXml.appendChild(serializer.objectToString(object[element.fieldName], element.fieldType));
+				parentXml.appendChild(serializer.objectToString(object, element.fieldType));
 				return null;
 			}
 			var location : XML = parentXml;
@@ -56,7 +57,7 @@ package com.googlecode.flexxb.serializer
 				location = setPathElement(element, parentXml);
 			}
 			
-			serializeObject(object, element, parentXml, serializer);
+			serializeObject(object, element, location, serializer);
 			
 			return location;
 		}
@@ -79,7 +80,11 @@ package com.googlecode.flexxb.serializer
 				return null;
 			}
 			if(element.isDefaultValue()){
-				
+				for each(var child : XML in xmlData.children()){
+					if(child.nodeKind() == XMLNodeType.TEXT_NODE){
+						return serializer.stringToObject(child.toXMLString(), element.fieldType);
+					}
+				}
 			}
 			
 			var xmlElement : XML;
@@ -122,6 +127,7 @@ package com.googlecode.flexxb.serializer
 			var list : XMLList;
 			var pathElement : QName;
 			for(var i : int = 0; i < element.qualifiedPathElements.length ; i++){
+				pathElement = element.qualifiedPathElements[i];
 				if(!xmlElement){
 					list = xmlData.child(pathElement);
 				}else{
