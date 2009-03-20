@@ -24,7 +24,7 @@
 	import mx.collections.ListCollectionView;
 	
 	/**
-	 * Insures serialization/deserialization for object field decorated with the XmlArray annotation
+	 * Insures serialization/deserialization for object field decorated with the XmlArray annotation.
 	 * @author Alexutz
 	 * 
 	 */	
@@ -43,22 +43,25 @@
 		 */
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{
 			var result : XML = <xml />;
-			
+			var xmlArray : XmlArray = annotation as XmlArray;
+			var child : XML;
 			for each(var member : Object in object){
 				if(isComplexType(member)){
-					result.appendChild(serializer.serialize(member, XmlArray(annotation).serializePartialElement));
+					child = serializer.serialize(member, xmlArray.serializePartialElement);
 				}else{
-					result.appendChild(serializer.objectToString(member, XmlArray(annotation).type));
+					child = XML(serializer.objectToString(member, xmlArray.type));
 				}
+				result.appendChild(child);
 			}
 			
 			var name : QName = result.name() as QName;
-			if(name && name.localName != "xml"){
-				parentXml.appendChild(result);
-			}else{
+			if(xmlArray.useOwnerAlias()){
 				for each(var subChild : XML in result.children()){
 					parentXml.appendChild(subChild);
 				}
+			}else{
+				result.setName(xmlArray.xmlName);
+				parentXml.appendChild(result);
 			}	
 		}		
 		/**
