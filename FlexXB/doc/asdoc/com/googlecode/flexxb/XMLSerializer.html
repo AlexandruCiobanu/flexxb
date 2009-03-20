@@ -77,7 +77,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getNamespace()">getNamespace</a>(object:Object):Namespace</div>
 <div class="summaryTableDescription">
-   
+   Get the namespace defined for an object type
    </div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
 </tr>
@@ -86,7 +86,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getXmlName()">getXmlName</a>(object:Object):QName</div>
 <div class="summaryTableDescription">
-   
+   Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
    </div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
 </tr>
@@ -104,7 +104,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#objectToString()">objectToString</a>(object:Object, clasz:Class):String</div>
 <div class="summaryTableDescription">
-   
+   Convert object value to string
    </div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
 </tr>
@@ -130,7 +130,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#stringToObject()">stringToObject</a>(value:String, clasz:Class):Object</div>
 <div class="summaryTableDescription">
-   
+   Convert string value to object
    </div>
 </td><td class="summaryTableOwnerCol">XMLSerializer</td>
 </tr>
@@ -257,11 +257,12 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function getNamespace(object:Object):Namespace</code><p>
-   
+   Get the namespace defined for an object type
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">object</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; target instance
+   </td>
 </tr>
 </table>
 <p></p>
@@ -280,7 +281,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public final function getXmlName(object:Object):QName</code><p>
-   
+   Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -326,11 +327,12 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public final function objectToString(object:Object, clasz:Class):String</code><p>
-   
+   Convert object value to string
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">object</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; instance to be converted to string
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
@@ -343,7 +345,9 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; string value
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -416,24 +420,28 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public final function stringToObject(value:String, clasz:Class):Object</code><p>
-   
+   Convert string value to object
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">value</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">value</span>:String</code> &mdash; value to be converted to object
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">clasz</span>:Class</code></td>
+<td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> &mdash; type of the object to which the value is converted
+   </td>
 </tr>
 </table>
 <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Object</code></td>
+<td width="20"></td><td><code>Object</code> &mdash; instance of type passed as argument
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -486,7 +494,7 @@ showHideInherited();
   By default it registeres the built-in annotations at startup. 
   </p><p>Built-in anotation usage:
    <ul>
-   <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")]</code></li>
+   <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></li>
    <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
    <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
    <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
