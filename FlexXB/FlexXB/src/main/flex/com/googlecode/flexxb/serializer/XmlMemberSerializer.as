@@ -23,7 +23,6 @@ package com.googlecode.flexxb.serializer
 	import com.googlecode.flexxb.error.ProcessingError;
 	
 	import flash.utils.getQualifiedClassName;
-	import flash.xml.XMLNodeType;
 	/**
 	 * 
 	 * @author Alexutz
@@ -81,7 +80,7 @@ package com.googlecode.flexxb.serializer
 			}
 			if(element.isDefaultValue()){
 				for each(var child : XML in xmlData.children()){
-					if(child.nodeKind() == XMLNodeType.TEXT_NODE){
+					if(child.nodeKind() == "text"){
 						return serializer.stringToObject(child.toXMLString(), element.fieldType);
 					}
 				}
