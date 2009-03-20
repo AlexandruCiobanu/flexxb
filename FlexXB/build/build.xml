@@ -1,6 +1,9 @@
 <?xml version="1.0"?> 
 <project name="FlexXB" basedir="../">  
 	<!-- Define variables/paths used in this build script --> 
+	<tstamp>
+		<format property="timestamp" pattern="ddMMyyyy"/>
+	</tstamp>
 	<property file="./build/build.properties" />   
 	<property file="../svn.properties"/>
 	
@@ -16,6 +19,7 @@
 		<echo message="OS : ${os.name}" />  
 		<echo message="Author: ${author}" />  
 		<echo message="=============================================="/> 
+		<echo message="${release.name.bin}"/>
 	</target>
 	<!-- -->
 	<target name="properties" depends="init">
