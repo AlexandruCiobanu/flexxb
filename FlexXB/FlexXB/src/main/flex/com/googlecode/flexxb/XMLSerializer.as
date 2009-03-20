@@ -178,50 +178,64 @@
 		 * @return object of type objectClass 
 		 * 
 		 */		
-		public final function deserialize(xmlData : XML, objectClass : Class, getFromCache : Boolean = false) : Object{
-			if(xmlData && objectClass){
-				var result : Object;
-				var id : String = getId(objectClass, xmlData);
-								
-				//get object from cache
-				if(id && ModelObjectCache.instance.isCached(id, objectClass)){
-					if(getFromCache){
-						return ModelObjectCache.instance.getObject(id, objectClass);
+		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : Object{
+			if(xmlData){
+				if(!objectClass){
+					objectClass = getIncomingType(xmlData);
+				}
+				if(objectClass){
+					var result : Object;
+					var id : String = getId(objectClass, xmlData);
+									
+					//get object from cache
+					if(id && ModelObjectCache.instance.isCached(id, objectClass)){
+						if(getFromCache){
+							return ModelObjectCache.instance.getObject(id, objectClass);
+						}
+						result = ModelObjectCache.instance.getObject(id, objectClass);
+					}else{
+						result = new objectClass();
+						if(id){
+							ModelObjectCache.instance.putObject(id, result);
+						}
 					}
-					result = ModelObjectCache.instance.getObject(id, objectClass);
-				}else{
-					result = new objectClass();
-					if(id){
-						ModelObjectCache.instance.putObject(id, result);
+					
+					//dispatch preDeserializeEvent
+					dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
+					
+					if(result is PersistableObject){
+						PersistableObject(result).stopListening();
 					}
-				}
-				
-				//dispatch preDeserializeEvent
-				dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
-				
-				if(result is PersistableObject){
-					PersistableObject(result).stopListening();
-				}
-				//update obect fields
-				if(result is IXmlSerializable){	
-					IXmlSerializable(result).fromXml(xmlData);
-				}else{
-					var classDescriptor : XmlClass = descriptorCache.getDescriptor(result);
-					for each(var annotation : Annotation in classDescriptor.members){	
-						var serializer : ISerializer = descriptorCache.getSerializer(annotation);
-						result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
+					//update obect fields
+					if(result is IXmlSerializable){	
+						IXmlSerializable(result).fromXml(xmlData);
+					}else{
+						var classDescriptor : XmlClass = descriptorCache.getDescriptor(result);
+						for each(var annotation : Annotation in classDescriptor.members){	
+							var serializer : ISerializer = descriptorCache.getSerializer(annotation);
+							result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
+						}
 					}
+					if(result is PersistableObject){
+						PersistableObject(result).commit();
+						PersistableObject(result).startListening();
+					}
+					
+					//dispatch postDeserializeEvent
+					dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
+					
+					return result;
 				}
-				if(result is PersistableObject){
-					PersistableObject(result).commit();
-					PersistableObject(result).startListening();
-				}
-				
-				//dispatch postDeserializeEvent
-				dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
-				
-				return result;
 			}
+			return null;
+		}
+		/**
+		 * 
+		 * @param incomingXML
+		 * @return 
+		 * 
+		 */		
+		public final function getIncomingType(incomingXML : XML) : Class{
 			return null;
 		}
 		/**
