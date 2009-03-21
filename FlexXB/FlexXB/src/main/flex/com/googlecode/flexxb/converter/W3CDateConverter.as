@@ -17,7 +17,7 @@
  */
  package com.googlecode.flexxb.converter
 {
-	import com.googlecode.flexxb.XMLSerializer;
+	import com.googlecode.flexxb.FlexXBEngine;
 	/**
 	 * Date converter conforming to the W3C standard 
 	 * @author Alexutz
@@ -26,7 +26,7 @@
 	public class W3CDateConverter implements IConverter
 	{
 		public static function registerInSerializer() : void{
-			XMLSerializer.instance.registerSimpleTypeConverter(new W3CDateConverter(), true);
+			FlexXBEngine.instance.registerSimpleTypeConverter(new W3CDateConverter(), true);
 		}
 		/**
 		 * 

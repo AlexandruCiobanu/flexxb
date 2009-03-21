@@ -1,6 +1,5 @@
 package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.XMLSerializer;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock3;
 	
@@ -23,11 +22,12 @@ package com.googlecode.flexxb
 			target.link = new Mock3();
 			target.link.id = 325;
 			target.link.version = 2;
-			var xml : XML = XMLSerializer.instance.serialize(target);
-			assertTrue(xml.MOck2Replacement.length()>0);
-			assertEquals(xml.MOck2Replacement.@id, "325");
-			assertEquals(xml.MOck2Replacement.@attribute.toString(), "");
-			assertEquals(xml.MOck2Replacement.objectVersion.toString(), "");			
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var mk3 : XML = xml.children()[1];
+			assertTrue(mk3.length()>0);
+			assertEquals(mk3.@id, "325");
+			assertEquals(mk3.@attribute.toString(), "");
+			assertEquals(mk3.objectVersion.toString(), "");			
 		} 		
 	}
 }

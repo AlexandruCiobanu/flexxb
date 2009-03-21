@@ -17,13 +17,13 @@
  */
  package com.googlecode.flexxb.converter
 {
-	import com.googlecode.flexxb.XMLSerializer;
+	import com.googlecode.flexxb.FlexXBEngine;
 	
 	
 	internal class XmlConverter implements IConverter
 	{
 		{
-			XMLSerializer.instance.registerSimpleTypeConverter(new XmlConverter());
+			FlexXBEngine.instance.registerSimpleTypeConverter(new XmlConverter());
 		}
 		
 		public function get type():Class

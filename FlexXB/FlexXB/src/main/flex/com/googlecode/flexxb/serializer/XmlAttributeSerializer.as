@@ -17,7 +17,7 @@
  */ 
  package com.googlecode.flexxb.serializer
 {
-	import com.googlecode.flexxb.XMLSerializer;
+	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlMember;
 		
 	/**
@@ -35,16 +35,16 @@
 		/**
 		 * @see XmlMemberSerializer#serializeObject()
 		 */		
-		protected override function serializeObject(object : Object, attribute : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{
-			var value : String = serializer.objectToString(object, attribute.fieldType);
+		protected override function serializeObject(object : Object, attribute : XmlMember, parentXml : XML, serializer : SerializerCore) : void{
+			var value : String = serializer.converterStore.objectToString(object, attribute.fieldType);
 			parentXml.@[attribute.xmlName] = value;			
 		}
 		/**
 		 * @see XmlMemberSerializer#deserializeObject()
 		 */		
-		protected override function deserializeObject(xmlData : XML, xmlName : QName, attribute : XmlMember, serializer : XMLSerializer) : Object{
+		protected override function deserializeObject(xmlData : XML, xmlName : QName, attribute : XmlMember, serializer : SerializerCore) : Object{
 			var value : String = xmlData.attribute(xmlName);
-			var result : Object = serializer.stringToObject(value, attribute.fieldType);
+			var result : Object = serializer.converterStore.stringToObject(value, attribute.fieldType);
 			return result;
 		}
 	}

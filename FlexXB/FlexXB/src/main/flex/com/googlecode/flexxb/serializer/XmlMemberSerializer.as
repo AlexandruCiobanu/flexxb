@@ -17,7 +17,7 @@
  */ 
 package com.googlecode.flexxb.serializer
 {
-	import com.googlecode.flexxb.XMLSerializer;
+	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.error.ProcessingError;
@@ -31,23 +31,16 @@ package com.googlecode.flexxb.serializer
 	internal class XmlMemberSerializer implements ISerializer
 	{
 		/**
-		 * 
-		 * 
-		 */		
-		public function XmlMemberSerializer()
-		{
-		}
-		/**
 		 * @see ISerializer#serialize
 		 */ 
-		public function serialize(object:Object, annotation:Annotation, parentXml:XML, serializer:XMLSerializer):XML
+		public function serialize(object:Object, annotation:Annotation, parentXml:XML, serializer:SerializerCore):XML
 		{
 			var element : XmlMember = annotation as XmlMember;
 			if(element.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
 				return null;
 			}
 			if(element.isDefaultValue()){
-				parentXml.appendChild(serializer.objectToString(object, element.fieldType));
+				parentXml.appendChild(serializer.converterStore.objectToString(object, element.fieldType));
 				return null;
 			}
 			var location : XML = parentXml;
@@ -68,11 +61,11 @@ package com.googlecode.flexxb.serializer
 		 * @return 
 		 * 
 		 */		
-		protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{} 
+		protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void{} 
 		/**
 		 * @see ISerializer#deserialize()
 		 */		
-		public function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer) : Object
+		public function deserialize(xmlData:XML, annotation : Annotation, serializer : SerializerCore) : Object
 		{
 			var element : XmlMember = annotation as XmlMember;
 			if(element.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
@@ -81,7 +74,7 @@ package com.googlecode.flexxb.serializer
 			if(element.isDefaultValue()){
 				for each(var child : XML in xmlData.children()){
 					if(child.nodeKind() == "text"){
-						return serializer.stringToObject(child.toXMLString(), element.fieldType);
+						return serializer.converterStore.stringToObject(child.toXMLString(), element.fieldType);
 					}
 				}
 			}
@@ -96,7 +89,7 @@ package com.googlecode.flexxb.serializer
 			
 			var xmlName : QName;
 			if(element.useOwnerAlias()){
-				xmlName = serializer.getXmlName(element.fieldType);
+				xmlName = serializer.descriptorStore.getXmlName(element.fieldType);
 			}else{
 				xmlName = element.xmlName;
 			}
@@ -111,7 +104,7 @@ package com.googlecode.flexxb.serializer
 		 * @return 
 		 * 
 		 */		
-		protected function deserializeObject(xmlData : XML, xmlName : QName, annotation : XmlMember, serializer : XMLSerializer) : Object{
+		protected function deserializeObject(xmlData : XML, xmlName : QName, annotation : XmlMember, serializer : SerializerCore) : Object{
 			return null;
 		}
 		/**

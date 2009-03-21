@@ -36,7 +36,7 @@
 			validate(att2, "reference", Object, "reference", "", true);
 			
 			var att3 : XmlElement = new XmlElement(getFieldDescriptor("link", descriptor));
-			validate(att3, "link", Mock3, "*", "", true);
+			validate(att3, "link", Mock3, "mock3", "", true);
 		}
 		/**
 		 * Custom validation. Handles the fourth and fifth parameters:

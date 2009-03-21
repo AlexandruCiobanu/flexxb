@@ -17,7 +17,7 @@
  */ 
  package com.googlecode.flexxb.serializer
 {
-	import com.googlecode.flexxb.XMLSerializer;
+	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlClass;
 		
@@ -29,27 +29,20 @@
 	public final class XmlClassSerializer implements ISerializer
 	{
 		/**
-		 *Constructor 
-		 * 
-		 */		
-		public function XmlClassSerializer()
-		{
-			//TODO: implement function
-		}
-		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#serialize()
+		 * @see ISerializer#serialize()
 		 */
-		public function serialize(object:Object, annotation : Annotation, parentXml : XML, serializer : XMLSerializer) : XML
+		public function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML
 		{
 			var xmlClass : XmlClass = annotation as XmlClass;
 			var xml : XML = <xml />
+			xml.setNamespace(xmlClass.nameSpace);
 			xml.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
 			if(xmlClass.useOwnNamespace()){
 				xml.addNamespace(xmlClass.nameSpace);
 			}else{
 				var member : Annotation = xmlClass.getMember(xmlClass.childNameSpaceFieldName);
 				if(member){
-					var ns : Namespace = serializer.getNamespace(object[member.fieldName]);
+					var ns : Namespace = serializer.descriptorStore.getNamespace(object[member.fieldName]);
 					if(ns){
 						xml.addNamespace(ns);
 					}
@@ -58,9 +51,9 @@
 			return xml;
 		}
 		/**
-		 * @see com.aciobanu.serializer.xml.ISerializer#deserialize()
+		 * @see ISerializer#deserialize()
 		 */
-		public function deserialize(xmlData:XML, annotation : Annotation, serializer : XMLSerializer):Object
+		public function deserialize(xmlData : XML, annotation : Annotation, serializer : SerializerCore) : Object
 		{
 			var xmlClass : XmlClass = annotation as XmlClass;
 			return null;
