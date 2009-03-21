@@ -17,7 +17,7 @@
  */ 
  package com.googlecode.flexxb.serializer
 {
-	import com.googlecode.flexxb.XMLSerializer;
+	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	/**
@@ -35,16 +35,16 @@
 		/**
 		 * @see XmlMemberSerializer#serializeObject()
 		 */		
-		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{
+		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void{
 			var child : XML = <xml />;
 			if(isComplexType(object)){
 				child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
 			}else{
-				child.appendChild(serializer.objectToString(object, annotation.fieldType));
+				child.appendChild(serializer.converterStore.objectToString(object, annotation.fieldType));
 			}
 			
 			if(annotation.useOwnerAlias()){
-				var name : QName = serializer.getXmlName(object);
+				var name : QName = serializer.descriptorStore.getXmlName(object);
 				if(name){
 					child.setName(name);
 				}
@@ -56,7 +56,7 @@
 		/**
 		 * @see XmlMemberSerializer#deserializeObject()
 		 */		
-		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : XMLSerializer) : Object{
+		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object{
 			var list : XMLList = xmlData.child(xmlName);
 			if(list.length() == 0){
 				return null;
@@ -64,7 +64,7 @@
 			if(isComplexType(element.fieldType)){
 				return serializer.deserialize(list[0], element.fieldType, XmlElement(element).getFromCache);
 			}
-			return serializer.stringToObject(list[0].toString(), element.fieldType);
+			return serializer.converterStore.stringToObject(list[0].toString(), element.fieldType);
 		}		
 	}
 }

@@ -31,11 +31,13 @@ package com.googlecode.flexxb
 	 * @author aCiobanu
 	 * 
 	 */	
-	internal final class DescriptorCache
+	internal final class DescriptorStore implements IDescriptorStore
 	{		
 		private var descriptorCache : Dictionary = new Dictionary();
 		
 		private var annotationMap : Dictionary = new Dictionary();
+		
+		private var classNamespaceMap : Dictionary;
 		/**
 		 * 
 		 * @param object
@@ -46,15 +48,62 @@ package com.googlecode.flexxb
 			var className : String = getQualifiedClassName(object);
 			return getDefinition(object, className).descriptor as XmlClass; 
 		}
-		
+		/**
+		 * 
+		 * @param object
+		 * @return 
+		 * 
+		 */		
 		public function isCustomSerializable(object : Object) : Boolean{
 			var className : String = getQualifiedClassName(object);
 			return getDefinition(object, className).reference != null;
 		}
-		
+		/**
+		 * 
+		 * @param clasz
+		 * @return 
+		 * 
+		 */		
 		public function getCustomSerializableReference(clasz : Class) : IXmlSerializable{
 			var className : String = getQualifiedClassName(clasz);
 			return getDefinition(clasz, className).reference as IXmlSerializable;
+		}
+		/**
+		 * @see IDescriptorStore#getXmlName()
+		 * 
+		 */		
+		public final function getXmlName(object : Object) : QName{
+			if(object != null){
+				var classDescriptor : XmlClass = getDescriptor(object);
+				if(classDescriptor){
+					return classDescriptor.xmlName;
+				}
+			}
+			return null;
+		}
+		/**
+		 * 
+		 * @see IDescriptorStore#getClassByNamespace() 
+		 * 
+		 */		
+		public function getClassByNamespace(ns : String) : Class{
+			if(classNamespaceMap){
+				return classNamespaceMap[ns] as Class;
+			}
+			return null;
+		}
+		/**
+		 * @see IDescriptorStore#getNamespace()
+		 * 
+		 */		
+		public function getNamespace(object : Object) : Namespace{
+			if(object){
+				var desc : XmlClass = getDescriptor(object);
+				if(desc){
+					return desc.nameSpace;
+				}
+			}
+			return null;
 		}
 		/**
 		 * Register a new annotation and its serializer. If it founds a registration with the 
@@ -69,20 +118,6 @@ package com.googlecode.flexxb
 			if(overrideExisting || !annotationMap[name]){
 				annotationMap[name] = {annotation: annotationClazz, serializer: new serializer() as ISerializer};
 			}
-		}
-		/**
-		 * 
-		 * @param namespaceUri
-		 * @return 
-		 * 
-		 */		
-		public function getObjectType(namespaceUri : String) : Class{
-			for each(var dsc : Object in descriptorCache){
-				if(dsc.descriptor.nameSpace.uri == namespaceUri){
-					return dsc.fieldType;
-				}
-			}
-			return null;
 		}
 		/**
 		 * 

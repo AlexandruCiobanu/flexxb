@@ -27,7 +27,7 @@
 		public var date : Date;
 		[XmlElement(alias="objVersion")]
 		public var version : Number = 4;
-		[XmlElement(alias="*", serializePartialElement="true")]
+		[XmlElement(alias="mock3", serializePartialElement="true")]
 		public var link : Mock3;
 		[XmlElement(serializePartialElement="true")]
 		public var reference : Object;

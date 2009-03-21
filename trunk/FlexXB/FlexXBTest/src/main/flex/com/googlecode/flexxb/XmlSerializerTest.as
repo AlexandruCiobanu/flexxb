@@ -56,13 +56,13 @@
 		
 		public function testSerializeWithNS() : void{
 			var target : Mock = getObject();
-			var xml : XML = XMLSerializer.instance.serialize(target);
-			var copy : Mock = XMLSerializer.instance.deserialize(xml, Mock) as Mock;
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var copy : Mock = FlexXBEngine.instance.deserialize(xml, Mock) as Mock;
 			compare(target, copy);
 			var nss  :Array = xml.inScopeNamespaces();
 			var str  :String = xml.toXMLString().split(nss[0].prefix+":").join("").split("xmlns:"+nss[0].prefix+"=\""+nss[0].uri+"\"").join("");
 			xml = XML(str);
-			copy = XMLSerializer.instance.deserialize(xml, Mock) as Mock;
+			copy = FlexXBEngine.instance.deserialize(xml, Mock) as Mock;
 			compare(target, copy);
 		}
 		
@@ -71,8 +71,8 @@
 			target.attribute = true;
 			target.id = 5;
 			target.version = 33;
-			var xml : XML = XMLSerializer.instance.serialize(target);
-			var copy : Mock3 = XMLSerializer.instance.deserialize(xml, Mock3) as Mock3;
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var copy : Mock3 = FlexXBEngine.instance.deserialize(xml, Mock3) as Mock3;
 			assertEquals("Attribute is wrong", target.attribute, copy.attribute);
 			assertEquals("id is wrong", target.id, copy.id);
 			assertEquals("version is wrong", target.version, copy.version);
@@ -83,8 +83,8 @@
 			target.defaultTest = "My custom default";
 			target.identity = 345;
 			target.reference = "SOmeRef";
-			var xml : XML = XMLSerializer.instance.serialize(target);
-			var copy : XmlPathObject = XMLSerializer.instance.deserialize(xml, XmlPathObject) as XmlPathObject;
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var copy : XmlPathObject = FlexXBEngine.instance.deserialize(xml, XmlPathObject) as XmlPathObject;
 			assertEquals("Identity is wrong", target.identity, copy.identity);
 			assertEquals("Reference is wrong", target.reference, copy.reference);			
 			assertEquals("DefaultTest is wrong", target.defaultTest, copy.defaultTest);

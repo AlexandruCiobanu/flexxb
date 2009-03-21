@@ -17,7 +17,7 @@
  */ 
  package com.googlecode.flexxb.serializer
 {
-	import com.googlecode.flexxb.XMLSerializer;
+	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	
@@ -41,7 +41,7 @@
 		/**
 		 * @see XmlMemberSerializer#serializeObject()
 		 */
-		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : XMLSerializer) : void{
+		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void{
 			var result : XML = <xml />;
 			var xmlArray : XmlArray = annotation as XmlArray;
 			var child : XML;
@@ -49,7 +49,7 @@
 				if(isComplexType(member)){
 					child = serializer.serialize(member, xmlArray.serializePartialElement);
 				}else{
-					child = XML(serializer.objectToString(member, xmlArray.type));
+					child = XML(serializer.converterStore.objectToString(member, xmlArray.type));
 				}
 				result.appendChild(child);
 			}
@@ -67,7 +67,7 @@
 		/**
 		 * @see XmlMemberSerializer#deserializeObject()
 		 */		
-		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : XMLSerializer) : Object{
+		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object{
 			var result : Object = new element.fieldType();
 			
 			var array : XmlArray = element as XmlArray;
@@ -78,7 +78,7 @@
 				if(array.memberName){
 					xmlName = array.memberName;
 				}else if(array.type){
-					xmlName = serializer.getXmlName(array.type);
+					xmlName = serializer.descriptorStore.getXmlName(array.type);
 				}
 				xmlArray = xmlData.child(xmlName);
 			}else{
