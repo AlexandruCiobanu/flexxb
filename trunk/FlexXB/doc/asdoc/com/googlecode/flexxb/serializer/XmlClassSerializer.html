@@ -57,17 +57,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#XmlClassSerializer()">XmlClassSerializer</a>()</div>
-<div class="summaryTableDescription">
-   onstructor 
-   
-   </div>
-</td><td class="summaryTableOwnerCol">XmlClassSerializer</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#deserialize()">deserialize</a>(xmlData:XML, annotation:<a href="../annotation/Annotation.html">Annotation</a>, serializer:<a href="../XMLSerializer.html">XMLSerializer</a>):Object</div>
+<a class="signatureLink" href="#deserialize()">deserialize</a>(xmlData:XML, annotation:<a href="../annotation/Annotation.html">Annotation</a>, serializer:<a href="../SerializerCore.html">SerializerCore</a>):Object</div>
 <div class="summaryTableDescription">
    </div>
 </td><td class="summaryTableOwnerCol">XmlClassSerializer</td>
@@ -75,7 +65,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#serialize()">serialize</a>(object:Object, annotation:<a href="../annotation/Annotation.html">Annotation</a>, parentXml:XML, serializer:<a href="../XMLSerializer.html">XMLSerializer</a>):XML</div>
+<a class="signatureLink" href="#serialize()">serialize</a>(object:Object, annotation:<a href="../annotation/Annotation.html">Annotation</a>, parentXml:XML, serializer:<a href="../SerializerCore.html">SerializerCore</a>):XML</div>
 <div class="summaryTableDescription">
    </div>
 </td><td class="summaryTableOwnerCol">XmlClassSerializer</td>
@@ -87,19 +77,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 showHideInherited();
 --></script>
 <div class="MainContent">
-<a name="constructorDetail"></a>
-<div class="detailSectionHeader">Constructor detail</div>
-<a name="XmlClassSerializer()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">XmlClassSerializer</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function XmlClassSerializer()</code><p>
-   onstructor 
-   
-   </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
 <a name="deserialize()"></a>
@@ -109,7 +86,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function deserialize(xmlData:XML, annotation:<a href="../annotation/Annotation.html">Annotation</a>, serializer:<a href="../XMLSerializer.html">XMLSerializer</a>):Object</code><p>
+<code>public function deserialize(xmlData:XML, annotation:<a href="../annotation/Annotation.html">Annotation</a>, serializer:<a href="../SerializerCore.html">SerializerCore</a>):Object</code><p>
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -125,7 +102,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">serializer</span>:<a href="../XMLSerializer.html">XMLSerializer</a></code></td>
+<td width="20px"></td><td><code><span class="label">serializer</span>:<a href="../SerializerCore.html">SerializerCore</a></code></td>
 </tr>
 </table>
 <p></p>
@@ -138,7 +115,9 @@ showHideInherited();
 <p>
 <span class="label">See also</span>
 </p>
-<div class="seeAlso">com.aciobanu.serializer.xml.ISerializer.deserialize()</div>
+<div class="seeAlso">
+<a href="ISerializer.html#deserialize()" target="">ISerializer.deserialize()</a>
+</div>
 </div>
 <a name="serialize()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -147,7 +126,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function serialize(object:Object, annotation:<a href="../annotation/Annotation.html">Annotation</a>, parentXml:XML, serializer:<a href="../XMLSerializer.html">XMLSerializer</a>):XML</code><p>
+<code>public function serialize(object:Object, annotation:<a href="../annotation/Annotation.html">Annotation</a>, parentXml:XML, serializer:<a href="../SerializerCore.html">SerializerCore</a>):XML</code><p>
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -169,7 +148,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">serializer</span>:<a href="../XMLSerializer.html">XMLSerializer</a></code></td>
+<td width="20px"></td><td><code><span class="label">serializer</span>:<a href="../SerializerCore.html">SerializerCore</a></code></td>
 </tr>
 </table>
 <p></p>
@@ -182,7 +161,9 @@ showHideInherited();
 <p>
 <span class="label">See also</span>
 </p>
-<div class="seeAlso">com.aciobanu.serializer.xml.ISerializer.serialize()</div>
+<div class="seeAlso">
+<a href="ISerializer.html#serialize()" target="">ISerializer.serialize()</a>
+</div>
 </div>
 <br>
 <br>

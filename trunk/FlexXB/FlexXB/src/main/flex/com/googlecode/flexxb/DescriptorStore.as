@@ -39,9 +39,9 @@ package com.googlecode.flexxb
 		
 		private var classNamespaceMap : Dictionary;
 		/**
-		 * 
+		 * Get the class descriptor associated with the object type
 		 * @param object
-		 * @return 
+		 * @return XmlClass descriptor
 		 * 
 		 */		 	
 		public function getDescriptor(object : Object) : XmlClass{
@@ -49,9 +49,9 @@ package com.googlecode.flexxb
 			return getDefinition(object, className).descriptor as XmlClass; 
 		}
 		/**
-		 * 
+		 * Determine whether the object is custom serializable or not
 		 * @param object
-		 * @return 
+		 * @return true if the object is custom serialisable, false otherwise
 		 * 
 		 */		
 		public function isCustomSerializable(object : Object) : Boolean{
@@ -59,9 +59,9 @@ package com.googlecode.flexxb
 			return getDefinition(object, className).reference != null;
 		}
 		/**
-		 * 
+		 * Get the reference instance defined for a custom serializable type
 		 * @param clasz
-		 * @return 
+		 * @return object type instance 
 		 * 
 		 */		
 		public function getCustomSerializableReference(clasz : Class) : IXmlSerializable{
@@ -120,26 +120,21 @@ package com.googlecode.flexxb
 			}
 		}
 		/**
-		 * 
-		 * @param annotationName
-		 * @return 
-		 * 
-		 */		
-		public function getAnnotationClass(annotationName : String) : Class{
-			if(annotationMap[annotationName]){
-				return annotationMap[annotationName].annotation as Class;
-			}
-			return null;
-		}
-		/**
-		 * 
-		 * @param annotationName
-		 * @return 
+		 * Get serializer associated with the annotation
+		 * @param annotation target annotation
+		 * @return the serializer object or null if the annotation name is not registered
 		 * 
 		 */		
 		public function getSerializer(annotation : Annotation) : ISerializer{
 			if(annotation && annotationMap[annotation.annotationName]){
 				return annotationMap[annotation.annotationName].serializer as ISerializer;
+			}
+			return null;
+		}
+				
+		private function getAnnotationClass(annotationName : String) : Class{
+			if(annotationMap[annotationName]){
+				return annotationMap[annotationName].annotation as Class;
 			}
 			return null;
 		}
@@ -158,6 +153,13 @@ package com.googlecode.flexxb
 			}
 			for each(field in descriptor..accessor.(@access == "readwrite")){
 				classDescriptor.addMember(getAnnotation(field, classDescriptor));
+			}
+			//if the class descriptor defines a namespace, register it in the namespace map
+			if(classDescriptor.nameSpace){
+				if(!classNamespaceMap){
+					classNamespaceMap = new Dictionary();
+				}
+				classNamespaceMap[classDescriptor.nameSpace.uri] = classDescriptor.fieldType;
 			}
 			return classDescriptor;
 		}

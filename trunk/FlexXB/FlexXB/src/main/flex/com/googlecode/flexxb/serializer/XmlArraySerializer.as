@@ -48,13 +48,18 @@
 			for each(var member : Object in object){
 				if(isComplexType(member)){
 					child = serializer.serialize(member, xmlArray.serializePartialElement);
+					if(xmlArray.memberName){
+						child.setName(xmlArray.memberName);
+					}
 				}else{
 					child = XML(serializer.converterStore.objectToString(member, xmlArray.type));
+					if(xmlArray.memberName){
+						child = <{xmlArray.memberName}>{child}</{xmlArray.memberName}>
+					}
 				}
 				result.appendChild(child);
 			}
 			
-			var name : QName = result.name() as QName;
 			if(xmlArray.useOwnerAlias()){
 				for each(var subChild : XML in result.children()){
 					parentXml.appendChild(subChild);
