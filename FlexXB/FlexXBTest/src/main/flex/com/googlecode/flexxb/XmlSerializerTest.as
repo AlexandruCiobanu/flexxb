@@ -18,10 +18,11 @@
  package com.googlecode.flexxb
 {
 	import com.googlecode.testData.Mock;
+	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
+	import com.googlecode.testData.XmlPathObject;
 	
 	import flexunit.framework.TestCase;
-	import com.googlecode.testData.XmlPathObject;
 
 	public class XmlSerializerTest extends TestCase
 	{
@@ -76,8 +77,8 @@
 			assertEquals("Attribute is wrong", target.attribute, copy.attribute);
 			assertEquals("id is wrong", target.id, copy.id);
 			assertEquals("version is wrong", target.version, copy.version);
-		}		
-		
+		}
+				
 		public function testVirtualPath() : void{
 			var target : XmlPathObject = new XmlPathObject();
 			target.defaultTest = "My custom default";
@@ -88,6 +89,14 @@
 			assertEquals("Identity is wrong", target.identity, copy.identity);
 			assertEquals("Reference is wrong", target.reference, copy.reference);			
 			assertEquals("DefaultTest is wrong", target.defaultTest, copy.defaultTest);
+		}
+		
+		public function testClassTypeByNamespace() : void{
+			var target : Mock2 = new Mock2();
+			target.id = 512;
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var copy : Object = FlexXBEngine.instance.deserialize(xml);
+			assertTrue("copy is null or not mock2", copy is Mock2);
 		}
 	}
 }

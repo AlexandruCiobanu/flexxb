@@ -1,13 +1,13 @@
 /****************************************************************************/
-/**					FlexXB version 1.0 beta (10-11-2008)				   **/
+/**					FlexXB version 1.0 beta (24-03-2009)				   **/
 /**							by Alex Ciobanu								   **/
 /****************************************************************************/
 
-Copyright 2008 Alex Ciobanu (http://code.google.com/p/flexxb)
+Copyright 2008 - 2009 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-FlexXB-1_0-beta-bin.zip - contains the flexxb library along with the test 
+FlexXB-1_0-24032009-bin.zip - contains the flexxb library along with the test 
 							application
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
@@ -15,7 +15,7 @@ FlexXB-1_0-beta-bin.zip - contains the flexxb library along with the test
 			/samples/			- samples showing FlexXB's features 
 			/README.txt	- version release notes
 
-FlexXB-1_0-beta-src.zip - contains source files
+FlexXB-1_0-24032009-src.zip - contains source files
 			/FlexXB/	- FlexXB project sources
 			/FlexXBTest - FlexXB test application sources
 
@@ -65,22 +65,22 @@ FEATURES
 	* FXB-008 Custom to and from string conversion for simple types
 	* FXB-012 Add getFromCache option for deserializing complex fields
 	* FXB-014 Add events to signal processing start and finish 
-	* FXB-015 Xml Service (preview)
+	* FXB-015 Xml Service
+	* FXB-009 Use paths in xml aliases
 	
-
 USAGE
 
 To serialize an object to xml:
-com.googlecode.serializer.flexxb.XMLSerializer.serialize(object)
+com.googlecode.serializer.flexxb.FlexXBEngine.serialize(object)
 
 To deserialize a received xml to an object, given the object's class:
-com.googlecode.serializer.flexxb.XMLSerializer.deserialize(xml, class)
+com.googlecode.serializer.flexxb.FlexXBEngine.deserialize(xml, class)
 
 To register a custom annotation, subclass of com.googlecode.serializer.flexxb.Annotation:
-com.googlecode.serializer.flexxb.XMLSerializer.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)
+com.googlecode.serializer.flexxb.FlexXBEngine.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)
 
 To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the xml representation and viceversa:
-com.googlecode.serializer.flexxb.XMLSerializer.registerSimpleTypeConverter(converterInstance, overrideExisting)
+com.googlecode.serializer.flexxb.FlexXBEngine.registerSimpleTypeConverter(converterInstance, overrideExisting)
 
 Note: Make sure you add the following switches to your compiler settings:
 	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray
@@ -88,7 +88,7 @@ Note: Make sure you add the following switches to your compiler settings:
 Annotation syntax:
 
 XmlClass
-[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/")] 
+[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")] 
 
 XmlAttribute
 [XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")] 
@@ -100,7 +100,8 @@ XmlArray
 [XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]
 
 Note: Using as alias "*" on a field will force the serializer to serialize that 
-field using an alias computed at runtime by the runtime type of the field's value.
+field using an alias computed at runtime by the runtime type of the field's value, except for XmlArray.
+For XmlArray using the "*" alias will cause the members of teh aray value to be rendered as children of the owner object xml rather than children of an xml element specifying the array.
 
 KNOWN LIMITATIONS
 
@@ -110,6 +111,11 @@ set to "*" then the deserialization process will return null for that field.
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+
+1.0 - 24-03-2009
+	- Enhancement (Issue 4) - Add support for having text elements in a serialized object 
+	- Feature: FXB-009 Use paths in xml aliases
+	- Changed the name of the entry point class to FlexXBEngine
 
 1.0 beta - 10-11-2008
 	- Feature: FXB-005 Integrate model object cache to insure object uniqueness 

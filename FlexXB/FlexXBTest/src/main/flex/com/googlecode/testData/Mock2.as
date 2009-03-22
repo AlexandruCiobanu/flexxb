@@ -21,7 +21,7 @@
 	public class Mock2
 	{
 		[XmlAttribute]
-		public var id:Number = 3;
+		public var id : Number = 3;
 		
 		public function Mock2()
 		{

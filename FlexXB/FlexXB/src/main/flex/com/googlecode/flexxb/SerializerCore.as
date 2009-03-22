@@ -190,14 +190,16 @@
 			return null;
 		}
 		/**
-		 * 
+		 * Get the type class corresponding to the namespace defined in the incoming xml
 		 * @param incomingXML
-		 * @return 
+		 * @return class
 		 * 
 		 */		
 		public final function getIncomingType(incomingXML : XML) : Class{
-			
-			var _namespace : String;
+			if(!incomingXML || incomingXML.namespaceDeclarations().length == 0){
+				return null;
+			}
+			var _namespace : String = (incomingXML.namespaceDeclarations()[0] as Namespace).uri;
 			return _descriptorStore.getClassByNamespace(_namespace);
 		}
 		/**
