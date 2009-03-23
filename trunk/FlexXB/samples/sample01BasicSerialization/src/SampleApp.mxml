@@ -3,8 +3,8 @@
 	layout="vertical" creationComplete="{init();}" >
 	<mx:Script>
 		<![CDATA[
+			import com.googlecode.flexxb.FlexXBEngine;
 			import mx.controls.Alert;
-			import com.googlecode.flexxb.XMLSerializer;
 			import model.Person;
 			import model.Department;
 			[Bindable]
@@ -18,11 +18,11 @@
 			}
 			
 			private function serialize(event : Event) : void{
-				departmentXml = XMLSerializer.instance.serialize(department);
+				departmentXml = FlexXBEngine.instance.serialize(department);
 			}
 			
 			private function deserialize(event : Event) : void{
-				department = XMLSerializer.instance.deserialize(departmentXml, Department) as Department;
+				department = FlexXBEngine.instance.deserialize(departmentXml, Department) as Department;
 			}
 			
 			private function updateXML(event : Event) : void{
