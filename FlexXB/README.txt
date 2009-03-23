@@ -101,7 +101,7 @@ XmlArray
 
 Note: Using as alias "*" on a field will force the serializer to serialize that 
 field using an alias computed at runtime by the runtime type of the field's value, except for XmlArray.
-For XmlArray using the "*" alias will cause the members of teh aray value to be rendered as children of the owner object xml rather than children of an xml element specifying the array.
+For XmlArray using the "*" alias will cause the members of the array value to be rendered as children of the owner object xml rather than children of an xml element specifying the array.
 
 KNOWN LIMITATIONS
 
@@ -115,6 +115,7 @@ RELEASE NOTES
 1.0 - 24-03-2009
 	- Enhancement (Issue 4) - Add support for having text elements in a serialized object 
 	- Feature: FXB-009 Use paths in xml aliases
+	- Enhancement - Get object type to deserialize into by the xml namespace
 	- Changed the name of the entry point class to FlexXBEngine
 
 1.0 beta - 10-11-2008
