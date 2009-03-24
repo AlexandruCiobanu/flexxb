@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="com.googlecode.flexxb.SerializerCore"/>
+<classEntry path="com.googlecode.flexxb.service.ITranslator"/>
+<classEntry path="com.googlecode.flexxb.IXmlSerializable"/>
+<classEntry path="com.googlecode.flexxb.annotation.XmlElement"/>
+<classEntry path="com.googlecode.flexxb.service.Communicator"/>
+<classEntry path="com.googlecode.flexxb.annotation.XmlClass"/>
+<classEntry path="com.googlecode.flexxb.IIdentifiable"/>
+<classEntry path="com.googlecode.flexxb.persistence.PersistableObject"/>
+<classEntry path="com.googlecode.flexxb.serializer.ISerializer"/>
+<classEntry path="com.googlecode.flexxb.serializer.XmlClassSerializer"/>
+<classEntry path="com.googlecode.flexxb.persistence.IPersistable"/>
+<classEntry path="com.googlecode.flexxb.FlexXBEngine"/>
+<classEntry path="com.googlecode.flexxb.service.ICommunicator"/>
+<classEntry path="com.googlecode.flexxb.serializer.XmlMemberSerializer"/>
+<classEntry path="com.googlecode.flexxb.ConverterStore"/>
+<classEntry path="com.googlecode.flexxb.persistence.ChangeTracker"/>
+<classEntry path="com.googlecode.flexxb.service.AbstractService"/>
+<classEntry path="com.googlecode.flexxb.serializer.XmlArraySerializer"/>
+<classEntry path="com.googlecode.flexxb.XmlEvent"/>
+<classEntry path="com.googlecode.flexxb.annotation.Annotation"/>
+<classEntry path="com.googlecode.flexxb.annotation.XmlArray"/>
+<classEntry path="com.googlecode.flexxb.ModelObjectCache"/>
+<classEntry path="com.googlecode.flexxb.persistence.ChangeTrackerKind"/>
+<classEntry path="com.googlecode.flexxb.serializer.XmlElementSerializer"/>
+<classEntry path="com.googlecode.flexxb.persistence.ReferenceList"/>
+<classEntry path="com.googlecode.flexxb.service.ServiceSettings"/>
+<classEntry path="com.googlecode.flexxb.DescriptorStore"/>
+<classEntry path="com.googlecode.flexxb.converter.XmlConverter"/>
+<classEntry path="com.googlecode.flexxb.annotation.XmlMember"/>
+<classEntry path="com.googlecode.flexxb.converter.W3CDateConverter"/>
+<classEntry path="com.googlecode.flexxb.converter.IConverter"/>
+<classEntry path="com.googlecode.flexxb.error.ProcessingError"/>
+<classEntry path="com.googlecode.flexxb.serializer.XmlAttributeSerializer"/>
+<classEntry path="com.googlecode.flexxb.service.SettingsChangedEvent"/>
+<classEntry path="com.googlecode.flexxb.annotation.XmlAttribute"/>
+<classEntry path="com.googlecode.flexxb.serializer.PropertyInspector"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>
