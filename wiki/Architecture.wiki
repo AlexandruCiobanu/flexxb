@@ -4,12 +4,13 @@
 = Annotations =
 
 === XmlClass ===
- Syntax: {{{[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="fieldName", prefix="my",  uri="http://www.your.site.com/schema/")]}}}
+ Syntax: {{{[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="fieldName", prefix="my",  uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]}}}
   * {{{alias}}}: The name of the element/attribute that represents this object in the xml request/response;
   * {{{useNamespaceFrom}}}: Allows the class to use as class namespace a namespace defined by the type of one of the composing fields.
   * {{{idField}}} The name of the object's field that will be used to identify that object;
   * {{{prefix}}}: Namespace prefix that will be used to serialize objects of this class;
   * {{{uri}}}: Namespace uri for object representations received from and transmitted to server;
+  * {{{defaultValueField}}}: name of the field whose value will be renderer as a free text element in the xml representation;
 === XmlAttribute ===
  Syntax:{{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]}}}
   * {{{alias}}}: The name of the attribute that represents this object in the xml request/response;
