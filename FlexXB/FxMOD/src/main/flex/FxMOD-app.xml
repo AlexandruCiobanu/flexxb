@@ -44,10 +44,10 @@
 	<version>v1</version>
 
 	<!-- Description, displayed in the AIR application installer. Optional. -->
-	<!-- <description></description> -->
+	<description>Flex Model Object Designer</description>
 
 	<!-- Copyright information. Optional -->
-	<!-- <copyright>Â© 2008 Alex Ciobanu</copyright> -->
+	<copyright>Â© 2008 - 2009 Alex Ciobanu</copyright>
 
 	<!-- Settings for the application's initial window. Required. -->
 	<initialWindow>
@@ -56,7 +56,7 @@
 		<content>[This value will be overwritten by Flex Builder in the output app.xml]</content>
 		
 		<!-- The title of the main window. Optional. -->
-		<!-- <title></title> -->
+		<title>FxMOD - Diagram Design</title>
 
 		<!-- The type of system chrome to use (either "standard" or "none"). Optional. Default standard. -->
 		<!-- <systemChrome></systemChrome> -->
@@ -120,16 +120,16 @@
 	<!-- <allowBrowserInvocation></allowBrowserInvocation> -->
 
 	<!-- Listing of file types for which the application can register. Optional. -->
-	<!-- <fileTypes> -->
+	<fileTypes>
 
 		<!-- Defines one file type. Optional. -->
-		<!-- <fileType> -->
+		<fileType>
 
 			<!-- The name that the system displays for the registered file type. Required. -->
-			<!-- <name></name> -->
+			<name>FxMOD Design File</name>
 
 			<!-- The extension to register. Required. -->
-			<!-- <extension></extension> -->
+			<extension>fmd</extension>
 			
 			<!-- The description of the file type. Optional. -->
 			<!-- <description></description> -->
@@ -145,7 +145,7 @@
 				<image128x128></image128x128>
 			</icon> -->
 			
-		<!-- </fileType> -->
-	<!-- </fileTypes> -->
+		</fileType>
+	</fileTypes>
 
 </application>
