@@ -9,7 +9,11 @@
 	
 	<taskdef resource="com/adobe/ac/ant/tasks/tasks.properties"/>
 	<taskdef resource="flexTasks.tasks"/>
-	<taskdef format="xml" resource="org/tigris/subversion/svnant/svnantlib.xml"/>
+	<taskdef format="xml" resource="org/tigris/subversion/svnant/svnantlib.xml">
+		<classpath>
+			<pathelement location="${basedir}/libs/ant/"/>
+		</classpath>
+	</taskdef>
 	<!-- -->
 	<target name="init" description="Initializes the build">  
 		<tstamp/>  
