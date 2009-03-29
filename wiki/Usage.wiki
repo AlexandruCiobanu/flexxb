@@ -31,3 +31,5 @@ There are four annotations defined:
 *Note*: Using as alias "{{{*}}}" on a field will force the serializer to serialize that 
 field using an alias computed at runtime by the runtime type of the field's value, except for XmlArray.
 For XmlArray using the "{{{*}}}" alias will cause the members of the array value to be rendered as children of the owner object xml rather than children of an xml element specifying the array.
+
+TODO Annotating samples
