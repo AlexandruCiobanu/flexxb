@@ -154,6 +154,8 @@ package com.googlecode.flexxb
 			for each(field in descriptor..accessor.(@access == "readwrite")){
 				classDescriptor.addMember(getAnnotation(field, classDescriptor));
 			}
+			//signal the class descriptor that no more members are to be added
+			classDescriptor.memberAddFinished();
 			//if the class descriptor defines a namespace, register it in the namespace map
 			if(classDescriptor.nameSpace){
 				if(!classNamespaceMap){

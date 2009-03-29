@@ -21,6 +21,7 @@
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	
+	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 	
 	/**
@@ -94,21 +95,28 @@
 				}
 			}
 			if(xmlArray && xmlArray.length() > 0) {
+				var list : Array = [];
 				for each(var xmlChild : XML in xmlArray){
 					var member : Object = serializer.deserialize(xmlChild, array.type, array.getFromCache);
 					if(member){
-						addMemberToResult(member, result);
+						list.push(member);
 					}
 				}
+				addMembersToResult(list, result);
 			}
 			return result;
 		}
 		
-		private function addMemberToResult(member : Object, result : Object) : void{
+		private function addMembersToResult(members : Array, result : Object) : void{
 			if(result is Array){
-				(result as Array).push(member);
+				(result as Array).push.apply(null, members);
+			}else if(result is ArrayCollection){
+				ArrayCollection(result).source = members;
+				ArrayCollection(result).refresh();
 			}else if(result is ListCollectionView){
-				ListCollectionView(result).addItem(member);
+				for each(var member : Object in members){
+					ListCollectionView(result).addItem(member);
+				}
 			}
 		}
 	}

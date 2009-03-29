@@ -17,6 +17,8 @@
  */ 
  package com.googlecode.flexxb.annotation
 {
+	import com.googlecode.flexxb.error.DescriptorParsingError;
+	
 	/**
 	 * Defines a member of an XmlClass, that is, a field of the class definition. 
 	 * The XmlMember is base for XmlAttribute and XmlElement since field values can 
@@ -81,19 +83,27 @@
 		 */		
 		public static const ARGUMENT_IGNORE_ON : String = "ignoreOn";
 		/**
+		 * 
+		 */		
+		public static const ARGUMENT_ORDER : String = "order";
+		/**
 		 * Path separator used for defining virtual paths in the alias
 		 */		
 		public static const ALIAS_PATH_SEPARATOR : String = "/";
 		/**
-		 * 
+		 * @private
 		 */ 
 		protected var _ignoreOn: String = "";
 		/**
-		 * 
+		 * @private
+		 */		
+		protected var _order : Number;
+		/**
+		 * @private
 		 */		
 		protected var _class : XmlClass;
 		/**
-		 * 
+		 * @private
 		 */		
 		private var pathElements : Array;
 		/**
@@ -135,6 +145,14 @@
 		 * @return 
 		 * 
 		 */		
+		public function get order() : Number{
+			return _order;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get ignoreOn() : String{
 			return _ignoreOn;
 		}
@@ -164,7 +182,20 @@
 		protected override function parseMetadata(metadata : XML) : void{
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
 			ignoreOn = metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value;
+			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value)
 		}		
+		
+		protected function setOrder(value : String) : void{
+			if(value){
+				var nr : Number;
+				try{
+					nr = Number(value);
+				}catch(error : Error){
+					throw new DescriptorParsingError(ownerClass.fieldType, fieldName, "The order attribute of the annotation is invalid as number");
+				}
+				_order = nr;
+			}
+		}
 		/**
 		 * 
 		 * @see Annotation#setAlias()

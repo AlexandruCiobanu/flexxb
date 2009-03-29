@@ -127,7 +127,7 @@
 		private function doSerialize(object : Object, annotation : Annotation, xmlData : XML) : void{
 			var serializer : ISerializer = _descriptorStore.getSerializer(annotation);
 			var target : Object = object[annotation.fieldName];
-			if(target){
+			if(target != null){
 				serializer.serialize(target, annotation, xmlData, this);
 			}
 		}		
@@ -166,7 +166,7 @@
 					if(result is PersistableObject){
 						PersistableObject(result).stopListening();
 					}
-					//update obect fields
+					//update object fields
 					if(result is IXmlSerializable){	
 						IXmlSerializable(result).fromXml(xmlData);
 					}else{

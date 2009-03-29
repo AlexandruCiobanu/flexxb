@@ -19,17 +19,18 @@
 {
 	import com.googlecode.flexxb.persistence.PersistableObject;
 	[Bindable]
+	[XmlClass(name="OrderTest", ordered="true")]
 	public class Persist extends PersistableObject
 	{
-		public var isOK : Boolean;
-		
+		[XmlElement(order="1")]
+		public var isOK : Boolean = false;
+		[XmlElement(order="3")]
 		public var test1 : int;
-		
+		[XmlElement(order="2")]
 		public var test2 : String;		
 		
 		public function Persist(){
 			super();
-		}
-		
+		}		
 	}
 }
