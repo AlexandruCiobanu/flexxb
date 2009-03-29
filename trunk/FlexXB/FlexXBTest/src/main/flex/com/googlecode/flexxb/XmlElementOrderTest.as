@@ -15,36 +15,31 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode.flexxb
+package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.annotation.XmlArrayTest;
-	import com.googlecode.flexxb.annotation.XmlAttributeTest;
-	import com.googlecode.flexxb.annotation.XmlClassTest;
-	import com.googlecode.flexxb.annotation.XmlElementTest;
+	import com.googlecode.testData.Persist;
 	
-	import flexunit.framework.TestSuite;
-
-	public class XmlTests extends TestSuite
+	import flexunit.framework.TestCase;
+	/**
+	 * 
+	 * @author Alexutz
+	 * 
+	 */	
+	public class XmlElementOrderTest extends TestCase
 	{
-		public function XmlTests(param:Object=null)
+		public function XmlElementOrderTest(methodName:String=null)
 		{
-			super(param);
+			super(methodName);
 		}
-		/**
-		 * 
-		 * @return a test suite
-		 */
-		public static function suite() : TestSuite
-		{
-			var ts:TestSuite = new TestSuite();
-			ts.name = "Xml Tests";
-			ts.addTestSuite(XmlClassTest);
-			ts.addTestSuite(XmlAttributeTest);
-			ts.addTestSuite(XmlElementTest);
-			ts.addTestSuite(XmlArrayTest);
-			ts.addTestSuite(XmlSerializerTest);
-			ts.addTestSuite(XmlElementOrderTest);
-			return ts;
+		
+		public function testNumericOrder() : void{
+			var test : Persist = new Persist();
+			test.test1 = 3;
+			test.test2 = "valoare";
+			var xml : XML = FlexXBEngine.instance.serialize(test);
+			assertEquals("ChildOrder not ok for first child", "isOK", (xml.children()[0] as XML).name().toString());
+			assertEquals("ChildOrder not ok for second child", "test2", (xml.children()[1] as XML).name().toString());
+			assertEquals("ChildOrder not ok for third child", "test1", (xml.children()[2] as XML).name().toString());
 		}		
 	}
 }

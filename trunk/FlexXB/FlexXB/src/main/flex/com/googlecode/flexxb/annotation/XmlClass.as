@@ -20,6 +20,8 @@ package com.googlecode.flexxb.annotation
 	import flash.utils.getDefinitionByName;
 	
 	import mx.collections.ArrayCollection;
+	import mx.collections.Sort;
+	import mx.collections.SortField;
 	
 	/**
 	 * 
@@ -56,27 +58,35 @@ package com.googlecode.flexxb.annotation
 		/**
 		 * 
 		 */		
-		public var members : ArrayCollection = new ArrayCollection();
+		public static const ARGUMENT_ORDERED : String = "ordered";
 		/**
 		 * 
+		 */		
+		public var members : ArrayCollection = new ArrayCollection();
+		/**
+		 * @private
 		 */		
 		private var id : String; 
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var _idField : Annotation;
 		/**
-		 * 
+		 * @private
 		 */		
 		private var defaultValue : String;
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var _defaultValueField : Annotation;
 		/**
-		 * 
+		 * @private
 		 */		
 		private var _useChildNamespace : String;
+		/**
+		 * 
+		 */		
+		private var _ordered : Boolean;
 		/**
 		 *Constructor 
 		 * 
@@ -99,6 +109,21 @@ package com.googlecode.flexxb.annotation
 				if(annotation.alias == defaultValue){
 					_defaultValueField = annotation;
 				}
+			}
+		}
+		/**
+		 * 
+		 * 
+		 */		
+		public function memberAddFinished() : void{
+			if(ordered){
+				var sort : Sort = new Sort();
+				var fields : Array = [];
+				fields.push(new SortField("order", false, false, true));
+				fields.push(new SortField("alias", false, false, true));
+				sort.fields = fields;
+				members.sort = sort;
+				members.refresh();
 			}
 		}
 		/**
@@ -132,6 +157,10 @@ package com.googlecode.flexxb.annotation
 		 */		
 		public function get valueField() : Annotation{
 			return _defaultValueField;
+		}
+		
+		public function get ordered() : Boolean{
+			return _ordered;
 		}
 		/**
 		 * 
@@ -168,14 +197,16 @@ package com.googlecode.flexxb.annotation
 		 */		
 		protected override function parse(field:XML):void{
 			super.parse(field);
+			var type : String;
 			if(field.name() == "type"){
 				_fieldName = _fieldName.substring(_fieldName.lastIndexOf(":") + 1);
-				_fieldType = getDefinitionByName(field.@name) as Class;
+				type = field.@name;
+				_fieldType = getDefinitionByName(type) as Class;
 			}else if(field.name() == "factory"){
-				var type : String = field.@type;
+				type = field.@type;
 				_fieldName = type.substring(type.lastIndexOf(":") + 1);
 			}
-			if(!alias || alias.length == 0){
+			if(!alias || alias.length == 0 || alias == type){
 				setAlias(_fieldName);
 			}
 		}
@@ -190,6 +221,7 @@ package com.googlecode.flexxb.annotation
 			setIdField(metadata.arg.(@key == ARGUMENT_ID).@value);
 			_useChildNamespace = metadata.arg.(@key == ARGUMENT_USE_CHILD_NAMESPACE).@value;
 			setValueField(metadata.arg.(@key == ARGUMENT_VALUE).@value);
+			setOrdered(metadata.arg.(@key == ARGUMENT_ORDERED).@value);
 		}
 		
 		private function setIdField(field : String) : void{
@@ -201,6 +233,12 @@ package com.googlecode.flexxb.annotation
 		private function setValueField(field : String) : void{
 			if(field && field.length > 0) {
 				defaultValue = field;
+			}
+		}
+		
+		private function setOrdered(value : String) : void{
+			if(value && value.length > 0) {
+				_ordered = value == "true";
 			}
 		}
 		/**
