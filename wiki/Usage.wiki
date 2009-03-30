@@ -198,6 +198,7 @@ _Notice the {{{defaultValueField}}} attribute. It specifies that the target fiel
 
 === 4. Ordering the xml sequence ===
 
+_FlexXB supports ordering the fields of an object in the rendered xml either by order index or by field alias both defined in the annotation decorating the field. For ordering to be activated, the ordered attribute must be set to true._
 
 {{{
 	[XmlClass(name="OrderTest", ordered="true")]
@@ -215,6 +216,8 @@ _Notice the {{{defaultValueField}}} attribute. It specifies that the target fiel
 		}		
 	}
 }}}
+
+_The resulting xml looks like:_
 
 {{{
 <Persist>
