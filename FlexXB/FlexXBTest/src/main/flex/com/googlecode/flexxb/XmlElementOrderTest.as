@@ -17,6 +17,7 @@
  */ 
 package com.googlecode.flexxb
 {
+	import com.googlecode.testData.NameOrdered;
 	import com.googlecode.testData.Persist;
 	
 	import flexunit.framework.TestCase;
@@ -40,6 +41,18 @@ package com.googlecode.flexxb
 			assertEquals("ChildOrder not ok for first child", "isOK", (xml.children()[0] as XML).name().toString());
 			assertEquals("ChildOrder not ok for second child", "test2", (xml.children()[1] as XML).name().toString());
 			assertEquals("ChildOrder not ok for third child", "test1", (xml.children()[2] as XML).name().toString());
+		}		
+		
+		public function testNameOrder() : void{
+			var test : NameOrdered = new NameOrdered();
+			test.test1 = 3;
+			test.test2 = "valoare";
+			test.reference = "ref";
+			var xml : XML = FlexXBEngine.instance.serialize(test);
+			assertEquals("ChildOrder not ok for first child", "reference", (xml.children()[0] as XML).name().toString());
+			assertEquals("ChildOrder not ok for second child", "test2", (xml.children()[1] as XML).name().toString());
+			assertEquals("ChildOrder not ok for third child", "TestOk", (xml.children()[2] as XML).name().toString());
+			assertEquals("ChildOrder not ok for third child", "variable", (xml.children()[3] as XML).name().toString());
 		}		
 	}
 }

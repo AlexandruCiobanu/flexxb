@@ -120,7 +120,7 @@ package com.googlecode.flexxb.annotation
 				var sort : Sort = new Sort();
 				var fields : Array = [];
 				fields.push(new SortField("order", false, false, true));
-				fields.push(new SortField("alias", false, false, true));
+				fields.push(new SortField("alias", true, false, false));
 				sort.fields = fields;
 				members.sort = sort;
 				members.refresh();
