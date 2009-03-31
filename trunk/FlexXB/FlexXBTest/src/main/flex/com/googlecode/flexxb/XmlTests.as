@@ -44,6 +44,7 @@
 			ts.addTestSuite(XmlArrayTest);
 			ts.addTestSuite(XmlSerializerTest);
 			ts.addTestSuite(XmlElementOrderTest);
+			ts.addTestSuite(XmlSpecialCharEscapeTest);
 			return ts;
 		}		
 	}
