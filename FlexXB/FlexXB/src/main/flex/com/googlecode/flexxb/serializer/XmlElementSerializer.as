@@ -20,6 +20,7 @@
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.util.FlexXBUtil;
 	/**
 	 * Insures serialization/deserialization for object field decorated with the XmlElement annotation
 	 * @author Alexutz
@@ -40,7 +41,16 @@
 			if(isComplexType(object)){
 				child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
 			}else{
-				child.appendChild(serializer.converterStore.objectToString(object, annotation.fieldType));
+				var stringValue : String = serializer.converterStore.objectToString(object, annotation.fieldType);
+				try{
+					child.appendChild(stringValue);
+				}catch(error : Error){
+					if(error.errorID == 1088){
+						child.appendChild(FlexXBUtil.getCDATAValue(stringValue));
+					}else{
+						throw error;
+					}
+				}				
 			}
 			
 			if(annotation.useOwnerAlias()){
