@@ -1,5 +1,5 @@
 /****************************************************************************/
-/**					FlexXB version 1.0 (24-03-2009)				   **/
+/**					FlexXB version 1.0.1 (03-04-2009)				   **/
 /**							by Alex Ciobanu								   **/
 /****************************************************************************/
 
@@ -7,7 +7,7 @@ Copyright 2008 - 2009 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-FlexXB-1_0-24032009-bin.zip - contains the flexxb library along with the test 
+FlexXB-1_0_1-03042009-bin.zip - contains the flexxb library along with the test 
 							application
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
@@ -15,7 +15,7 @@ FlexXB-1_0-24032009-bin.zip - contains the flexxb library along with the test
 			/samples/			- samples showing FlexXB's features 
 			/README.txt	- version release notes
 
-FlexXB-1_0-24032009-src.zip - contains source files
+FlexXB-1_0_1-03042009-src.zip - contains source files
 			/FlexXB/	- FlexXB project sources
 			/FlexXBTest - FlexXB test application sources
 
@@ -111,6 +111,11 @@ set to "*" then the deserialization process will return null for that field.
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+
+1.0.1 - 03-04-2009
+	- Fix: Issue 7 - Order annotation on XmlMember and Ordered on XmlClass (http://code.google.com/p/flexxb/issues/detail?id=7)
+	- Fix: Issue 8 - Escape characters (http://code.google.com/p/flexxb/issues/detail?id=8)
+	- Other small fixes.
 
 1.0 - 24-03-2009
 	- Enhancement (Issue 4) - Add support for having text elements in a serialized object 
