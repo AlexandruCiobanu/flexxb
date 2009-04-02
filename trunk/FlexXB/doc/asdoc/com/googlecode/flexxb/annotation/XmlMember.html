@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="XmlMember,com.googlecode.flexxb.annotation.XmlMember,ALIAS_PATH_SEPARATOR,ARGUMENT_IGNORE_ON,IGNORE_ON_DESERIALIZE,IGNORE_ON_SERIALIZE,_class,_ignoreOn,ignoreOn,ownerClass,qualifiedPathElements,isDefaultValue,isPath,parseMetadata,setAlias" name="keywords">
+<meta content="XmlMember,com.googlecode.flexxb.annotation.XmlMember,ALIAS_PATH_SEPARATOR,ARGUMENT_IGNORE_ON,ARGUMENT_ORDER,IGNORE_ON_DESERIALIZE,IGNORE_ON_SERIALIZE,ignoreOn,order,ownerClass,qualifiedPathElements,isDefaultValue,isPath,parseMetadata,setAlias,setOrder" name="keywords">
 <title>com.googlecode.flexxb.annotation.XmlMember</title>
 </head>
 <body>
@@ -146,6 +146,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#order">order</a> : Number<div class="summaryTableDescription">[read-only]
+   
+   </div>
+</td><td class="summaryTableOwnerCol">XmlMember</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ownerClass">ownerClass</a> : <a href="../annotation/XmlClass.html">XmlClass</a>
 <div class="summaryTableDescription">[read-only]
    Get the owner XmlClass entity
@@ -177,7 +183,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
 </div>
 </div>
-<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
@@ -186,13 +192,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    
    </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_class">_class</a> : <a href="../annotation/XmlClass.html">XmlClass</a>
-<div class="summaryTableDescription">
-   
-   </div>
-</td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
 <tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#_fieldName">_fieldName</a> : String<div class="summaryTableDescription">
@@ -205,12 +204,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    
    </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_ignoreOn">_ignoreOn</a> : String = ""<div class="summaryTableDescription">
-   
-   </div>
-</td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
 </table>
 </div>
@@ -318,6 +311,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    </div>
 </td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setOrder()">setOrder</a>(value:String):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XmlMember</td>
+</tr>
 </table>
 </div>
 <a name="constantSummary"></a>
@@ -360,6 +360,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ARGUMENT_ORDER">ARGUMENT_ORDER</a> : String = "order"<div class="summaryTableDescription">[static]
+   
+   </div>
+</td><td class="summaryTableOwnerCol">XmlMember</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#IGNORE_ON_DESERIALIZE">IGNORE_ON_DESERIALIZE</a> : String = "deserialize"<div class="summaryTableDescription">[static]
    Do not deserialize this member
    </div>
@@ -380,30 +386,10 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="_class"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">_class</td><td class="detailHeaderType">property</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>protected var _class:<a href="../annotation/XmlClass.html">XmlClass</a></code><p>
-   
-   </p></div>
-<a name="_ignoreOn"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">_ignoreOn</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>protected var _ignoreOn:String = ""</code><p>
-   
-   </p></div>
 <a name="ignoreOn"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">ignoreOn</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">ignoreOn</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -414,6 +400,20 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get ignoreOn():String</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set ignoreOn(value:String):void</code>
+<br>
+</div>
+<a name="order"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">order</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>order:Number</code>&nbsp;&nbsp;[read-only]<p>
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get order():Number</code>
 <br>
 </div>
 <a name="ownerClass"></a>
@@ -555,6 +555,20 @@ showHideInherited();
 <a href="Annotation.html#setAlias()" target="">Annotation.setAlias()</a>
 </div>
 </div>
+<a name="setOrder()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setOrder</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function setOrder(value:String):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:String</code></td>
+</tr>
+</table>
+</div>
 <a name="constantDetail"></a>
 <div class="detailSectionHeader">Constant detail</div>
 <a name="ALIAS_PATH_SEPARATOR"></a>
@@ -575,6 +589,16 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const ARGUMENT_IGNORE_ON:String = "ignoreOn"</code><p>
+   
+   </p></div>
+<a name="ARGUMENT_ORDER"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ARGUMENT_ORDER</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const ARGUMENT_ORDER:String = "order"</code><p>
    
    </p></div>
 <a name="IGNORE_ON_DESERIALIZE"></a>
