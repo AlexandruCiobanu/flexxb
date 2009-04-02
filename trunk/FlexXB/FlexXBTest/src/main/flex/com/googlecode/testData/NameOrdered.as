@@ -29,6 +29,8 @@
 		[XmlElement()]
 		public var test2 : String;	
 		[XmlElement()]
-		public var reference : String;		
+		public var reference : String;
+		[XmlArray(alias="list", memberName="testerElem")]
+		public var list : Array;		
 	}
 }
