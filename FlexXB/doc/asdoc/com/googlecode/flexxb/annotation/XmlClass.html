@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="XmlClass,com.googlecode.flexxb.annotation.XmlClass,ANNOTATION_NAME,ARGUMENT_ID,ARGUMENT_NAMESPACE_PREFIX,ARGUMENT_NAMESPACE_URI,ARGUMENT_USE_CHILD_NAMESPACE,ARGUMENT_VALUE,_defaultValueField,_idField,members,annotationName,childNameSpaceFieldName,idField,valueField,addMember,getMember,hasDefaultValueField,parse,parseMetadata,useOwnNamespace" name="keywords">
+<meta content="XmlClass,com.googlecode.flexxb.annotation.XmlClass,ANNOTATION_NAME,ARGUMENT_ID,ARGUMENT_NAMESPACE_PREFIX,ARGUMENT_NAMESPACE_URI,ARGUMENT_ORDERED,ARGUMENT_USE_CHILD_NAMESPACE,ARGUMENT_VALUE,members,annotationName,childNameSpaceFieldName,idField,ordered,valueField,addMember,getMember,hasDefaultValueField,memberAddFinished,parse,parseMetadata,useOwnNamespace" name="keywords">
 <title>com.googlecode.flexxb.annotation.XmlClass</title>
 </head>
 <body>
@@ -113,6 +113,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ordered">ordered</a> : Boolean<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">XmlClass</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#valueField">valueField</a> : <a href="../annotation/Annotation.html">Annotation</a>
 <div class="summaryTableDescription">[read-only]
    
@@ -138,7 +142,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
 </div>
 </div>
-<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
@@ -147,13 +151,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    
    </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_defaultValueField">_defaultValueField</a> : <a href="../annotation/Annotation.html">Annotation</a>
-<div class="summaryTableDescription">
-   
-   </div>
-</td><td class="summaryTableOwnerCol">XmlClass</td>
 </tr>
 <tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#_fieldName">_fieldName</a> : String<div class="summaryTableDescription">
@@ -166,13 +163,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    
    </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_idField">_idField</a> : <a href="../annotation/Annotation.html">Annotation</a>
-<div class="summaryTableDescription">
-   
-   </div>
-</td><td class="summaryTableOwnerCol">XmlClass</td>
 </tr>
 </table>
 </div>
@@ -237,6 +227,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    
    </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#memberAddFinished()">memberAddFinished</a>():void</div>
+<div class="summaryTableDescription">
+   
+   
+   </div>
+</td><td class="summaryTableOwnerCol">XmlClass</td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -352,6 +352,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">XmlClass</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ARGUMENT_ORDERED">ARGUMENT_ORDERED</a> : String = "ordered"<div class="summaryTableDescription">[static]
+   
+   </div>
+</td><td class="summaryTableOwnerCol">XmlClass</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ARGUMENT_USE_CHILD_NAMESPACE">ARGUMENT_USE_CHILD_NAMESPACE</a> : String = "useNamespaceFrom"<div class="summaryTableDescription">[static]
    
    </div>
@@ -406,26 +412,6 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get childNameSpaceFieldName():String</code>
 <br>
 </div>
-<a name="_defaultValueField"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">_defaultValueField</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>protected var _defaultValueField:<a href="../annotation/Annotation.html">Annotation</a></code><p>
-   
-   </p></div>
-<a name="_idField"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">_idField</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>protected var _idField:<a href="../annotation/Annotation.html">Annotation</a></code><p>
-   
-   </p></div>
 <a name="idField"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -450,6 +436,18 @@ showHideInherited();
 <code>public var members:ArrayCollection</code><p>
    
    </p></div>
+<a name="ordered"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ordered</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>ordered:Boolean</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get ordered():Boolean</code>
+<br>
+</div>
 <a name="valueField"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -541,6 +539,17 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="memberAddFinished()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">memberAddFinished</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function memberAddFinished():void</code><p>
+   
+   
+   </p></div>
 <a name="parse()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -642,6 +651,16 @@ showHideInherited();
 <div class="detailBody">
 <code>public static const ARGUMENT_NAMESPACE_URI:String = "uri"</code><p>
    Namespace uri
+   </p></div>
+<a name="ARGUMENT_ORDERED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ARGUMENT_ORDERED</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const ARGUMENT_ORDERED:String = "ordered"</code><p>
+   
    </p></div>
 <a name="ARGUMENT_USE_CHILD_NAMESPACE"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
