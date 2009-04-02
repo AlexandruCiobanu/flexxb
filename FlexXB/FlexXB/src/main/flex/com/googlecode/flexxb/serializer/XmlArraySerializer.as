@@ -20,6 +20,7 @@
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.util.FlexXBUtil;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
@@ -53,9 +54,20 @@
 						child.setName(xmlArray.memberName);
 					}
 				}else{
-					child = XML(serializer.converterStore.objectToString(member, xmlArray.type));
+					var stringValue : String = serializer.converterStore.objectToString(member, xmlArray.type);
+					var xmlValue : XML;
+					try{
+						xmlValue = XML(stringValue);
+					}catch(error : Error){
+						xmlValue = XML(FlexXBUtil.getCDATAValue(stringValue));
+					}
+					
 					if(xmlArray.memberName){
-						child = <{xmlArray.memberName}>{child}</{xmlArray.memberName}>
+						child = <xml />;
+						child.setName(xmlArray.memberName);
+						child.appendChild(xmlValue);						
+					}else{
+						child = xmlValue;
 					}
 				}
 				result.appendChild(child);
