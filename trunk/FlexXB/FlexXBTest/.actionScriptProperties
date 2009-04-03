@@ -11,6 +11,7 @@
 </compiler>
 <applications>
 <application path="SerializerTestView.mxml"/>
+<application path="AntTestRunner.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>
