@@ -11,6 +11,7 @@ FlexXB-1_0_1-03042009-bin.zip - contains the flexxb library along with the test
 							application
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
+			/bin/flexunit       - flexunit automated test reports
 			/doc/ 				- ASDOC
 			/samples/			- samples showing FlexXB's features 
 			/README.txt	- version release notes
