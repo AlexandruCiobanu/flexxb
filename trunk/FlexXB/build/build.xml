@@ -90,7 +90,7 @@
 		<antcall target="documentation" />
 	</target>
 	<!-- -->
-	<target name="release" depends="development">
+	<target name="release" depends="development, junit.ui">
 		<copy file="${basedir}/README.txt" tofile="${basedir}/releasenotes/readme-v${release.version}.txt" overwrite="true"/>
 		<zip destfile="${bin.dir}/${release.name.bin}">
 			<fileset dir="${basedir}">
