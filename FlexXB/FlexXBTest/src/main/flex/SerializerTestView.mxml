@@ -28,17 +28,10 @@
 			import mx.controls.Alert;
 			import com.googlecode.AllTests;
 			import mx.core.Container;
-			import com.googlecode.flexxb.XmlTests;
-			import flexunit.junit.JUnitTestRunner; 
-			import org.defusion.flexunit.FlexUnitRunner;
+			import com.googlecode.flexxb.XmlTests; 
 			
 			private function init() : void{
 				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite()];
-				/*if(Application.application.parameters["runTestOnDemand"] != "true"){
-					var runner : JUnitTestRunner = new JUnitTestRunner();
-					runner.run(AllTests.allTests());
-					Alert.show("running");
-				}*/
 			}
 		]]>
 	</mx:Script>

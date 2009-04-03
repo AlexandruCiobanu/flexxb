@@ -23,11 +23,11 @@ package com.googlecode.flexxb
 			target.link.id = 325;
 			target.link.version = 2;
 			var xml : XML = FlexXBEngine.instance.serialize(target);
-			var mk3 : XML = xml.children()[1];
+			var mk3 : XML = xml.child(new QName(new Namespace("http://www.axway.com/xmlns/passport/v1"),"mock3"))[0];
 			assertTrue(mk3.length()>0);
-			assertEquals(mk3.@id, "325");
-			assertEquals(mk3.@attribute.toString(), "");
-			assertEquals(mk3.objectVersion.toString(), "");			
+			assertEquals("Link id is wrong", "325", mk3.@id);
+			assertEquals("Link attribute is wrong", "", mk3.@attribute.toString());
+			assertEquals("Link version is wrong", "", mk3.objectVersion.toString());			
 		} 		
 	}
 }

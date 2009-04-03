@@ -59,6 +59,20 @@
 		<make.wrapper application="${flexxb.test.name}" output.dir="${bin.dir}/test" wrapper.dir="${flexxb.test.dir}/html-template"
 			output.html="${bin.dir}/test/${flexxb.test.name}.html" swf="${flexxb.test.name}"
 			title="FlexXB Test"/>
+		<exec executable="${mxmlc.exe}" failonerror="true">
+    	 	<arg value="-source-path=${flexxb.tests.src.dir}"/>
+    	 	<arg value="-file-specs=${flexxb.tests.src.dir}/AntTestRunner.mxml"/>
+    	 	<arg value="-output=${flexxb.test.ant.output}"/>		
+    	 	    	 	
+    	 	<arg value="-actionscript-file-encoding=UTF-8"/>
+    	 	<arg value="-debug=false"/>
+    	 	<arg value="-incremental=false"/>
+    	 	<arg value="-keep-generated-actionscript=false"/>
+    	 	    		
+    	 	<arg line="-keep-as3-metadata XmlElement -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlArray -keep-as3-metadata XmlClass"/>
+			<arg line="-include-libraries ${flexunit.libs}"/>
+		 	<arg line="-include-libraries ${flexxb.swc.output}"/>
+    	 </exec>
 	</target>
 	<!-- -->
 	<target name="build.fxmod" depends="properties">
@@ -126,9 +140,9 @@
 		</exec>
 	</target>
 	
-	<target name="junit.ui">
+	<target name="junit.ui" depends="build.flexxb.test">
 	        <flexunit
-	                swf="${flexxb.test.output}/FlexXBTest.swf"
+	                swf="${flexxb.test.ant.output}"
 	                toDir="${bin.dir}/flexunit/reports/FlexXBTest"
 	                haltonfailure="false"
 	                verbose="true"
