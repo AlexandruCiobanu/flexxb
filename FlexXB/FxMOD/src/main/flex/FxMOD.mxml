@@ -16,45 +16,18 @@
 -   You should have received a copy of the GNU General Public License
 -   along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 -->
-<mx:WindowedApplication addedToStage="{stage.nativeWindow.menu = MenuParser.getMenu()}" xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:display="flash.display.*">
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" minHeight="600" minWidth="800"
+		xmlns:fxmod="com.googlecode.fxmod.*"
+		layout="absolute"
+		addedToStage="{stage.nativeWindow.menu = MenuParser.getMenu(controller)}"
+		creationComplete="controller.initialize(this)">
 	<mx:Script>
 		<![CDATA[
-			import mx.controls.Alert;
-			import air.update.events.UpdateEvent;
-			import air.update.ApplicationUpdaterUI;
 			import com.googlecode.fxmod.MenuParser;
 			
-					// Instantiate the updater
-			private var appUpdater:ApplicationUpdaterUI = new ApplicationUpdaterUI();
-		
-			private function checkForUpdate():void {
-				// The code below is a hack to work around a bug in the framework so that CMD-Q still works on MacOS
-				// This is a temporary fix until the framework is updated
-				// See http://www.adobe.com/cfusion/webforums/forum/messageview.cfm?forumid=72&catid=670&threadid=1373568
-				NativeApplication.nativeApplication.addEventListener( Event.EXITING, 
-					function(e:Event):void {
-						var opened:Array = NativeApplication.nativeApplication.openedWindows;
-						for (var i:int = 0; i < opened.length; i ++) {
-							opened[i].close();
-						}
-				});	
-		
-				// Configuration stuff - see update framework docs for more details
-				appUpdater.updateURL = "http://64.23.34.61/updatesample/update.xml"; // Server-side XML file describing update
-				appUpdater.isCheckForUpdateVisible = false; // We won't ask permission to check for an update
-				appUpdater.addEventListener(UpdateEvent.INITIALIZED, onUpdate); // Once initialized, run onUpdate
-				appUpdater.addEventListener(ErrorEvent.ERROR, onError); // If something goes wrong, run onError
-				appUpdater.initialize(); // Initialize the update framework
-			}
-		
-			private function onError(event:ErrorEvent):void {
-				Alert.show(event.toString());
-			}
-			
-			private function onUpdate(event:UpdateEvent):void {
-				appUpdater.checkNow(); // Go check for an update now
-			}
 		]]>
 	</mx:Script>
-	
+	<fxmod:ApplicationModelLocator id="model" />
+	<fxmod:ApplicationController id="controller"/>
+	<mx:Canvas width="100%" height="100%"/>
 </mx:WindowedApplication>

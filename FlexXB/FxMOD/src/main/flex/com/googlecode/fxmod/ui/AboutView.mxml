@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" 
 	title="About..." height="194" showCloseButton="true">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.CloseEvent;
+			
+			private function close(event : Event) : void{
+				dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
+			}
+		]]>
+	</mx:Script>
 	<mx:Label text="FxMOD" color="#FB0802" fontWeight="bold" fontSize="16"/>
 	<mx:Label text="FLEX Model Object Designer" width="292" textAlign="center"/>
 	<mx:Spacer height="100%"/>
 	<mx:HBox width="100%" horizontalAlign="right">
-		<mx:Button label="OK"/>
+		<mx:Button label="OK" click="{close(event)}"/>
 	</mx:HBox>
 </mx:TitleWindow>
