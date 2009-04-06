@@ -32,14 +32,14 @@ package com.googlecode.fxmod
 	 * @author aCiobanu
 	 * 
 	 */	
-	public class MenuParser
+	public class DynamicMenuGenerator
 	{
 		[Embed("/assets/xml/menu.xml", mimeType="application/octet-stream")]
 		private static const MenuResource : Class;
 
-		private static var menu : NativeMenu;
+		private var menu : NativeMenu;
 		
-		public static function getMenu(host : Object) : NativeMenu{
+		public function getMenu(host : Object) : NativeMenu{
 			if(!menu){
 				var xmlMenu : XML = getMenuFile();
 				menu = buildMenu(xmlMenu, host);
@@ -47,7 +47,7 @@ package com.googlecode.fxmod
 			return menu;
 		}
 		
-		private static function buildMenu(xmlMenu : XML, host : Object) : NativeMenu{
+		private function buildMenu(xmlMenu : XML, host : Object) : NativeMenu{
 			var menu : NativeMenu = new NativeMenu();
 			
 			var settingsMenu : Menu = FlexXBEngine.instance.deserialize(xmlMenu, Menu) as Menu;
@@ -58,7 +58,7 @@ package com.googlecode.fxmod
 			return menu;
 		}
 		
-		private static function buildMenuItem(menuItem : MenuItem, host : Object) : NativeMenuItem{					
+		private function buildMenuItem(menuItem : MenuItem, host : Object) : NativeMenuItem{					
 			var item : NativeMenuItem = new NativeMenuItem(menuItem.label, menuItem.separator);
 			if(!menuItem.separator){
 				item.mnemonicIndex = menuItem.mnemonicIndex;
@@ -72,7 +72,7 @@ package com.googlecode.fxmod
 			return item;
 		}
 		
-		private static function buildSubMenu(item : NativeMenuItem, menuItem : MenuItem, host : Object) : void{
+		private function buildSubMenu(item : NativeMenuItem, menuItem : MenuItem, host : Object) : void{
 			if(menuItem.hasDataProvider()){
 				var dataProvider : Object;
 				if(host){
@@ -99,13 +99,13 @@ package com.googlecode.fxmod
 			}
 		}
 		
-		private static function setSelectHandler(item : NativeMenuItem, data : MenuItem, host : Object) : void{
+		private function setSelectHandler(item : NativeMenuItem, data : MenuItem, host : Object) : void{
 			if(data.selectHandler && host && host[data.selectHandler] is Function){
 				item.addEventListener(Event.SELECT, host[data.selectHandler] as Function);
 			}
 		}
 		
-		private static function getMenuFile() : XML
+		private function getMenuFile() : XML
 		{
 			var ba:ByteArrayAsset = ByteArrayAsset(new MenuResource());
    			return XML( ba.readUTFBytes( ba.length ));
