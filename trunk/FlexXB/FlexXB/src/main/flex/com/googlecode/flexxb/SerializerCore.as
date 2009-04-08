@@ -22,6 +22,7 @@
 	import com.googlecode.flexxb.annotation.XmlAttribute;
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.annotation.XmlElement;
+	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.persistence.PersistableObject;
 	import com.googlecode.flexxb.serializer.ISerializer;
 	import com.googlecode.flexxb.serializer.XmlArraySerializer;
@@ -171,7 +172,10 @@
 						IXmlSerializable(result).fromXml(xmlData);
 					}else{
 						var classDescriptor : XmlClass = _descriptorStore.getDescriptor(result);
-						for each(var annotation : Annotation in classDescriptor.members){	
+						for each(var annotation : XmlMember in classDescriptor.members){	
+							if(annotation.readOnly){
+								continue;
+							}
 							var serializer : ISerializer = _descriptorStore.getSerializer(annotation);
 							result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 						}
