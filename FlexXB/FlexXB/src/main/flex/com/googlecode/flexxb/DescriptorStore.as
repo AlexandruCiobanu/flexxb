@@ -151,7 +151,7 @@ package com.googlecode.flexxb
 			for each(field in descriptor..variable){
 				classDescriptor.addMember(getAnnotation(field, classDescriptor));
 			}
-			for each(field in descriptor..accessor.(@access == "readwrite" || @access == "readonly")){
+			for each(field in descriptor..accessor){
 				classDescriptor.addMember(getAnnotation(field, classDescriptor));
 			}
 			//signal the class descriptor that no more members are to be added

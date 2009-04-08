@@ -109,7 +109,7 @@
 		/**
 		 *@private 
 		 */		
-		private var _readOnly : Boolean;
+		private var _accessorType : int;
 		/**
 		 * Constructor 
 		 * @param descriptor xml descriptor of the class' field
@@ -128,9 +128,21 @@
 		public function isDefaultValue() : Boolean{
 			return _class && _class.valueField == this;
 		}
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get readOnly() : Boolean{
-			return _readOnly;
+			return AccessorType.isReadOnly(_accessorType);
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get writeOnly() : Boolean{
+			return AccessorType.isWriteOnly(_accessorType);
 		}
 		/**
 		 * Chenck if the alias defines virtual paths
@@ -178,8 +190,12 @@
 		 * 
 		 */		
 		public function set ignoreOn(value : String) : void{
-			if(_readOnly){
+			if(readOnly){
 				_ignoreOn = IGNORE_ON_DESERIALIZE;
+				return;
+			}
+			if(writeOnly){
+				_ignoreOn = IGNORE_ON_SERIALIZE;
 				return;
 			}
 			if(value == "" || value == IGNORE_ON_SERIALIZE || value == IGNORE_ON_DESERIALIZE){
@@ -188,8 +204,8 @@
 		}
 		
 		protected override function parse(field : XML):void{
+			_accessorType = AccessorType.getAccessorType(field);
 			super.parse(field);
-			_readOnly = field.@access == "readonly";
 		}
 		/**
 		 * 

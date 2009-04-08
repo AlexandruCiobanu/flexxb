@@ -39,6 +39,10 @@
 		public function get readOnly() : String{
 			return "YES";
 		}
+		[XmlElement()]
+		public function set writeOnly(value : String) : void{
+			trace("Mock - writeOnly");
+		}
 		
 		public var someExcludedField  : Boolean;
 		
