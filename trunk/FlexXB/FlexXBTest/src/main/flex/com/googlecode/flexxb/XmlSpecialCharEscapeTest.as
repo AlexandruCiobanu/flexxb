@@ -35,10 +35,15 @@ package com.googlecode.flexxb
 		public function testEscapeCharsOnElements() : void{
 			var target : NameOrdered = new NameOrdered();
 			target.test2 = "EscapeChar <b>OK</b>";
-			target.list = ["Alt escape test <juice />", "nik"];
+			target.reference = "<test </meeee>";
+			target.list = ["Alt escape test <juice />", "nik", "test4<", "<test5>"];
 			var xml : XML = FlexXBEngine.instance.serialize(target);
 			assertEquals("Escape Char element is wrong", "EscapeChar <b>OK</b>", (xml.test2[0] as XML).children()[0]);
+			assertEquals("Reference has wrong escape chars", "<test </meeee>", (xml.reference[0] as XML).children()[0]);
 			assertEquals("Array member has wrong escape chars", "Alt escape test <juice />", xml.list[0].testerElem[0].children()[0]);
+			assertEquals("Array member has wrong escape chars", "nik", xml.list[0].testerElem[1].children()[0]);
+			assertEquals("Array member has wrong escape chars", "test4<", xml.list[0].testerElem[2].children()[0]);
+			assertEquals("Array member has wrong escape chars", "<test5>", xml.list[0].testerElem[3].children()[0]);
 		}		
 	}
 }

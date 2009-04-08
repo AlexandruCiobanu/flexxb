@@ -34,7 +34,11 @@
 		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]
 		public var result : Array;
 		[XmlElement]
-		public var xmlData : XML; 
+		public var xmlData : XML;
+		[XmlElement]
+		public function get readOnly() : String{
+			return "YES";
+		}
 		
 		public var someExcludedField  : Boolean;
 		
