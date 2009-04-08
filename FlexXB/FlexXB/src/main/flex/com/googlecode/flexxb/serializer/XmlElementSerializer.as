@@ -20,7 +20,9 @@
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.flexxb.util.FlexXBUtil;
+	
+	import flash.xml.XMLNode;
+	import flash.xml.XMLNodeType;
 	/**
 	 * Insures serialization/deserialization for object field decorated with the XmlElement annotation
 	 * @author Alexutz
@@ -45,11 +47,7 @@
 				try{
 					child.appendChild(stringValue);
 				}catch(error : Error){
-					if(error.errorID == 1088){
-						child.appendChild(FlexXBUtil.getCDATAValue(stringValue));
-					}else{
-						throw error;
-					}
+					child.appendChild(XML(new XMLNode(XMLNodeType.TEXT_NODE, stringValue)).toXMLString());
 				}				
 			}
 			

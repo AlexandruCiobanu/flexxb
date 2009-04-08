@@ -20,7 +20,9 @@
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.flexxb.util.FlexXBUtil;
+	
+	import flash.xml.XMLNode;
+	import flash.xml.XMLNodeType;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
@@ -59,7 +61,8 @@
 					try{
 						xmlValue = XML(stringValue);
 					}catch(error : Error){
-						xmlValue = XML(FlexXBUtil.getCDATAValue(stringValue));
+						stringValue = XML(new XMLNode(XMLNodeType.TEXT_NODE, stringValue)).toXMLString();
+						xmlValue = XML(stringValue);
 					}
 					
 					if(xmlArray.memberName){
