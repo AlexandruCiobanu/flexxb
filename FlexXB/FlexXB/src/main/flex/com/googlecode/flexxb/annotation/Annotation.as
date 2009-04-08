@@ -142,6 +142,7 @@
 			return _alias == ALIAS_ANY;
 		}
 		/**
+		 * @private
 		 * Analyze field/class descriptor to extract base informations like field's name and type
 		 * @param field field descriptor
 		 * 
@@ -161,6 +162,7 @@
 			return;
 		}
 		/**
+		 * @private
 		 * Process the metadata attached to the field to extract annotation specific data
 		 * @param field field descriptor
 		 * 

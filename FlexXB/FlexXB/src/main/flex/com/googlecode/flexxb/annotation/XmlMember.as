@@ -107,6 +107,10 @@
 		 */		
 		private var pathElements : Array;
 		/**
+		 *@private 
+		 */		
+		private var _readOnly : Boolean;
+		/**
 		 * Constructor 
 		 * @param descriptor xml descriptor of the class' field
 		 * @param _class owner XmlClass entity
@@ -123,6 +127,10 @@
 		 */		
 		public function isDefaultValue() : Boolean{
 			return _class && _class.valueField == this;
+		}
+		
+		public function get readOnly() : Boolean{
+			return _readOnly;
 		}
 		/**
 		 * Chenck if the alias defines virtual paths
@@ -170,9 +178,18 @@
 		 * 
 		 */		
 		public function set ignoreOn(value : String) : void{
+			if(_readOnly){
+				_ignoreOn = IGNORE_ON_DESERIALIZE;
+				return;
+			}
 			if(value == "" || value == IGNORE_ON_SERIALIZE || value == IGNORE_ON_DESERIALIZE){
 				_ignoreOn = value;
 			}
+		}
+		
+		protected override function parse(field : XML):void{
+			super.parse(field);
+			_readOnly = field.@access == "readonly";
 		}
 		/**
 		 * 
