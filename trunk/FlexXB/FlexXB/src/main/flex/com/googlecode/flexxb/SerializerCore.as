@@ -107,7 +107,10 @@
 				if(partial && classDescriptor.idField){
 					doSerialize(object, classDescriptor.idField, xmlData);  
 				}else{
-					for each(var annotation : Annotation in classDescriptor.members){
+					for each(var annotation : XmlMember in classDescriptor.members){
+						if(annotation.writeOnly){
+							continue;
+						}
 						doSerialize(object, annotation, xmlData);
 					}
 				}
