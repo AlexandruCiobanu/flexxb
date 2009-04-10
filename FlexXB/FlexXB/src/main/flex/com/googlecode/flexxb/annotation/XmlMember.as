@@ -18,6 +18,7 @@
  package com.googlecode.flexxb.annotation
 {
 	import com.googlecode.flexxb.error.DescriptorParsingError;
+	import com.googlecode.flexxb.api.AccessorType;
 	
 	/**
 	 * Defines a member of an XmlClass, that is, a field of the class definition. 
@@ -109,7 +110,7 @@
 		/**
 		 *@private 
 		 */		
-		private var _accessorType : int;
+		private var _accessorType : AccessorType;
 		/**
 		 * Constructor 
 		 * @param descriptor xml descriptor of the class' field
@@ -134,7 +135,7 @@
 		 * 
 		 */		
 		public function get readOnly() : Boolean{
-			return AccessorType.isReadOnly(_accessorType);
+			return _accessorType.isReadOnly();
 		}
 		/**
 		 * 
@@ -142,7 +143,7 @@
 		 * 
 		 */		
 		public function get writeOnly() : Boolean{
-			return AccessorType.isWriteOnly(_accessorType);
+			return _accessorType.isWriteOnly();
 		}
 		/**
 		 * Chenck if the alias defines virtual paths
@@ -204,7 +205,7 @@
 		}
 		
 		protected override function parse(field : XML):void{
-			_accessorType = AccessorType.getAccessorType(field);
+			_accessorType = AccessorType.fromString(field.@access);
 			super.parse(field);
 		}
 		/**
