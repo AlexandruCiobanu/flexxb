@@ -15,43 +15,34 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
- package com.googlecode
+package com.googlecode.flexxb.api
 {
-	import com.googlecode.flexxb.ModelObjectCacheTest;
-	import com.googlecode.flexxb.PartialSerializationTest;
-	import com.googlecode.flexxb.XmlTests;
-	import com.googlecode.flexxb.api.ApiTests;
-	import com.googlecode.flexxb.persistence.PersistenceTests;
-	
 	import flexunit.framework.TestSuite;
-	
 	/**
 	 * 
 	 * @author Alexutz
 	 * 
 	 */	
-	public class AllTests
+	public class ApiTests extends TestSuite
 	{
 		/**
-		 * 
+		 * Constructor 
+		 * @param param
 		 * 
 		 */		
-		public function AllTests(){}
+		public function ApiTests(param:Object=null)
+		{
+			super(param);
+		}
 		/**
 		 * 
-		 * @return 
-		 * 
-		 */		
-		public static function allTests() : TestSuite
+		 * @return a test suite
+		 */
+		public static function suite() : TestSuite
 		{
-			var ts:TestSuite = new TestSuite();	
-			ts.name = "All Tests";
-			ts.addTest(XmlTests.suite());
-			ts.addTestSuite(ModelObjectCacheTest);
-			ts.addTestSuite(PartialSerializationTest);
-			ts.addTest(PersistenceTests.suite());
-			ts.addTest(ApiTests.suite());			
- 			return ts;
+			var ts:TestSuite = new TestSuite();
+			ts.name = "Api Tests";
+			return ts;
 		}
 	}
 }
