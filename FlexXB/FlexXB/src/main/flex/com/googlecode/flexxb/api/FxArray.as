@@ -1,12 +1,59 @@
+/**
+ *   FlexXB - an annotation based xml serializer for Flex and Air applications 
+ *   Copyright (C) 2008 Alex Ciobanu
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ * 
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.googlecode.flexxb.api
 {
-	public class FxArray extends FxMember
+	import flash.utils.Dictionary;
+	
+	/**
+	 * 
+	 * @author Alexutz
+	 * 
+	 */	
+	public class FxArray extends FxElement
 	{
-		public function FxArray()
+		/**
+		 * 
+		 */		
+		public var memberName : String;
+		/**
+		 * 
+		 */		
+		public var memberType : Class;
+		/**
+		 * 
+		 * @param field
+		 * @param alias
+		 * 
+		 */		
+		public function FxArray(field : FxField, alias : String = null)
 		{
-			//TODO: implement function
-			super();
+			super(field, alias);
+		}		
+		
+		protected override function getXmlAnnotationName() : String{
+			return "XmlArray";
 		}
 		
+		protected override function getContent() : Dictionary{
+			var items : Dictionary = super.getContent();
+			items["memberName"] = memberName;
+			items["type"] = memberType;
+			return items;
+		}		
 	}
 }
