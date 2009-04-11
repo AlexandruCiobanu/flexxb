@@ -21,6 +21,7 @@
 	layout="absolute" creationComplete="init()">
 	<mx:Script>
 		<![CDATA[
+			import com.googlecode.flexxb.api.ApiTests;
 			import com.googlecode.testData.Mock;
 			import com.googlecode.testData.XmlPathObject;
 			import com.googlecode.flexxb.SerializerCore;
@@ -31,7 +32,7 @@
 			import com.googlecode.flexxb.XmlTests; 
 			
 			private function init() : void{
-				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite()];
+				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite(), ApiTests.suite()];
 			}
 		]]>
 	</mx:Script>
