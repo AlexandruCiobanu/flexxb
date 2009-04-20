@@ -91,8 +91,7 @@ package com.googlecode.flexxb.api
 		 * 
 		 */		
 		public function addAttribute(fieldName : String, fieldType : Class, access : AccessorType = null, alias : String = null) : FxAttribute{
-			var field : FxField = new FxField(fieldName, fieldType, access);
-			var attribute : FxAttribute = new FxAttribute(field, alias);
+			var attribute : FxAttribute = FxAttribute.create(fieldName, fieldType, access, alias);
 			addMember(attribute);			
 			return attribute;
 		}
@@ -106,8 +105,7 @@ package com.googlecode.flexxb.api
 		 * 
 		 */		
 		public function addElement(fieldName : String, fieldType : Class, access : AccessorType = null, alias : String = null) : FxElement{
-			var field : FxField = new FxField(fieldName, fieldType, access);
-			var element : FxElement = new FxElement(field, alias);
+			var element : FxElement = FxElement.create(fieldName, fieldType, access, alias);
 			addMember(element);			
 			return element;
 		}
@@ -121,8 +119,7 @@ package com.googlecode.flexxb.api
 		 * 
 		 */		
 		public function addArray(fieldName : String, fieldType : Class, access : AccessorType = null, alias : String = null) : FxArray{
-			var field : FxField = new FxField(fieldName, fieldType, access);
-			var array : FxArray = new FxArray(field, alias);
+			var array : FxArray = FxArray.create(fieldName, fieldType, access, alias);
 			addMember(array);			
 			return array;
 		}

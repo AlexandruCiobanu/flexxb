@@ -26,6 +26,20 @@ package com.googlecode.flexxb.api
 	{
 		/**
 		 * 
+		 * @param name
+		 * @param type
+		 * @param accessType
+		 * @param alias
+		 * @return 
+		 * 
+		 */		
+		public static function create(name : String, type : Class, accessType : AccessorType = null, alias : String = null) : FxAttribute{
+			var field : FxField = new FxField(name, type, accessType);
+			var attribute : FxAttribute = new FxAttribute(field, alias);
+			return attribute;
+		}
+		/**
+		 * 
 		 * @param field
 		 * @param alias
 		 * 
