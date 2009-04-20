@@ -64,6 +64,18 @@ package com.googlecode.flexxb.api
 		}
 		/**
 		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get fieldType() : Class{
+			return field.type;
+		}
+		
+		public function get fieldAccessType() : AccessorType{
+			return field.accessType;
+		}
+		/**
+		 * 
 		 * @see com.googlecode.flexxb.IXmlSerializable#toXml()
 		 * 
 		 */
@@ -110,7 +122,8 @@ package com.googlecode.flexxb.api
 			var items : Dictionary = new Dictionary();
 			items["alias"] = alias;
 			items["ignoreOn"] = ignoreOn;
-			items["order"] = order;
+			if(!isNaN(order))
+				items["order"] = order;
 			return items;
 		}
 		

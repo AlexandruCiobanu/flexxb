@@ -28,6 +28,20 @@ package com.googlecode.flexxb.api
 	{
 		/**
 		 * 
+		 * @param name
+		 * @param type
+		 * @param accessType
+		 * @param alias
+		 * @return 
+		 * 
+		 */		
+		public static function create(name : String, type : Class, accessType : AccessorType = null, alias : String = null) : FxArray{
+			var field : FxField = new FxField(name, type, accessType);
+			var array : FxArray = new FxArray(field, alias);
+			return array;
+		}
+		/**
+		 * 
 		 */		
 		public var memberName : String;
 		/**

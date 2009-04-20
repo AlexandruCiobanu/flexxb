@@ -33,15 +33,15 @@ package com.googlecode.flexxb.api
 		/**
 		 * 
 		 */		
-		public var _name : String;
+		private var _name : String;
 		/**
 		 * 
 		 */		
-		public var _type : Class;
+		private var _type : Class;
 		/**
 		 * 
 		 */		
-		private var _accessType : AccessorType = AccessorType.READ_WRITE;
+		private var _accessType : AccessorType;
 		/**
 		 * 
 		 * @param name
@@ -55,6 +55,8 @@ package com.googlecode.flexxb.api
 			this.type = type;
 			if(accessType){
 				this.accessType = accessType;
+			}else{
+				this.accessType = AccessorType.READ_WRITE;
 			}
 		}
 		/**
