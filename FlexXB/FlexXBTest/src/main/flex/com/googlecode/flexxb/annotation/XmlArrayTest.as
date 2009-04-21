@@ -28,7 +28,7 @@
 		
 		protected override function runTest(descriptor:XML):void{
 			var att1 : XmlArray = new XmlArray(getFieldDescriptor("result", descriptor));
-			validate(att1, "result", Array, "data", "", false, Mock);
+			validate(att1, "result", Array, "data", null, false, Mock);
 		}
 				
 		protected override function customValidate(annotation:Annotation, ...args):void{

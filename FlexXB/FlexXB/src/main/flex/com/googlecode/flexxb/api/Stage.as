@@ -45,7 +45,7 @@ package com.googlecode.flexxb.api
 			if(value == SERIALIZE.name){
 				return SERIALIZE;
 			}
-			throw new Error("Unknown Stage element:" + value);
+			return null;
 		}
 		
 		private static var initialized : Boolean = false;

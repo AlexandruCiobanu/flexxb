@@ -17,8 +17,9 @@
  */ 
  package com.googlecode.flexxb.annotation
 {
-	import com.googlecode.flexxb.error.DescriptorParsingError;
 	import com.googlecode.flexxb.api.AccessorType;
+	import com.googlecode.flexxb.api.Stage;
+	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	/**
 	 * Defines a member of an XmlClass, that is, a field of the class definition. 
@@ -72,14 +73,6 @@
 	public class XmlMember extends Annotation
 	{
 		/**
-		 * Do not serialize this member 
-		 */		
-		public static const IGNORE_ON_SERIALIZE : String = "serialize";
-		/**
-		 * Do not deserialize this member
-		 */		
-		public static const IGNORE_ON_DESERIALIZE : String = "deserialize";
-		/**
 		 * 
 		 */		
 		public static const ARGUMENT_IGNORE_ON : String = "ignoreOn";
@@ -94,7 +87,7 @@
 		/**
 		 * @private
 		 */ 
-		protected var _ignoreOn: String = "";
+		protected var _ignoreOn : Stage;
 		/**
 		 * @private
 		 */		
@@ -174,7 +167,7 @@
 		 * @return 
 		 * 
 		 */		
-		public function get ignoreOn() : String{
+		public function get ignoreOn() : Stage{
 			return _ignoreOn;
 		}
 		/**
@@ -190,16 +183,16 @@
 		 * @param value
 		 * 
 		 */		
-		public function set ignoreOn(value : String) : void{
+		public function set ignoreOn(value : Stage) : void{
 			if(readOnly){
-				_ignoreOn = IGNORE_ON_DESERIALIZE;
+				_ignoreOn = Stage.DESERIALIZE;
 				return;
 			}
 			if(writeOnly){
-				_ignoreOn = IGNORE_ON_SERIALIZE;
+				_ignoreOn = Stage.SERIALIZE;
 				return;
 			}
-			if(value == "" || value == IGNORE_ON_SERIALIZE || value == IGNORE_ON_DESERIALIZE){
+			if(value){
 				_ignoreOn = value;
 			}
 		}
@@ -215,7 +208,7 @@
 		 */	
 		protected override function parseMetadata(metadata : XML) : void{
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
-			ignoreOn = metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value;
+			ignoreOn = Stage.fromString(metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value);
 			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value)
 		}		
 		
