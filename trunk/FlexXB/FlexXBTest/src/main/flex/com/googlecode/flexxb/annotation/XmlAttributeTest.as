@@ -17,9 +17,7 @@
  */ 
  package com.googlecode.flexxb.annotation
 {
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlAttribute;
-	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.api.Stage;
 
 	public class XmlAttributeTest extends AnnotationTest
 	{
@@ -31,10 +29,10 @@
 		
 		protected override function runTest(descriptor:XML):void{
 			var att1 : XmlAttribute = new XmlAttribute(getFieldDescriptor("aField", descriptor));
-			validate(att1, "aField", String, "stuff", "");
+			validate(att1, "aField", String, "stuff", null);
 			
 			var att2 : XmlAttribute = new XmlAttribute(getFieldDescriptor("date", descriptor));
-			validate(att2, "date", Date, "date", XmlMember.IGNORE_ON_SERIALIZE);
+			validate(att2, "date", Date, "date", Stage.SERIALIZE);
 		}
 				
 		protected override function customValidate(annotation:Annotation, ...args):void{

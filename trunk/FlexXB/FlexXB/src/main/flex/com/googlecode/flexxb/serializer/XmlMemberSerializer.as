@@ -20,6 +20,7 @@ package com.googlecode.flexxb.serializer
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.api.Stage;
 	import com.googlecode.flexxb.error.ProcessingError;
 	
 	import flash.utils.getQualifiedClassName;
@@ -36,7 +37,7 @@ package com.googlecode.flexxb.serializer
 		public function serialize(object:Object, annotation:Annotation, parentXml:XML, serializer:SerializerCore):XML
 		{
 			var element : XmlMember = annotation as XmlMember;
-			if(element.ignoreOn == XmlMember.IGNORE_ON_SERIALIZE){
+			if(element.ignoreOn == Stage.SERIALIZE){
 				return null;
 			}
 			if(element.isDefaultValue()){
@@ -68,7 +69,7 @@ package com.googlecode.flexxb.serializer
 		public function deserialize(xmlData:XML, annotation : Annotation, serializer : SerializerCore) : Object
 		{
 			var element : XmlMember = annotation as XmlMember;
-			if(element.ignoreOn == XmlMember.IGNORE_ON_DESERIALIZE){
+			if(element.ignoreOn == Stage.DESERIALIZE){
 				return null;
 			}
 			if(element.isDefaultValue()){

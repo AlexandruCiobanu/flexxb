@@ -30,13 +30,13 @@
 		
 		protected override function runTest(descriptor:XML):void{
 			var att1 : XmlElement = new XmlElement(getFieldDescriptor("version", descriptor));
-			validate(att1, "version", Number, "objVersion", "", false);
+			validate(att1, "version", Number, "objVersion", null, false);
 			
 			var att2 : XmlElement = new XmlElement(getFieldDescriptor("reference", descriptor));
-			validate(att2, "reference", Object, "reference", "", true);
+			validate(att2, "reference", Object, "reference", null, true);
 			
 			var att3 : XmlElement = new XmlElement(getFieldDescriptor("link", descriptor));
-			validate(att3, "link", Mock3, "mock3", "", true);
+			validate(att3, "link", Mock3, "mock3", null, true);
 		}
 		/**
 		 * Custom validation. Handles the fourth and fifth parameters:
