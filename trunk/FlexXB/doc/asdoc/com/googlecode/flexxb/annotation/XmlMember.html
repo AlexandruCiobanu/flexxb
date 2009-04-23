@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="XmlMember,com.googlecode.flexxb.annotation.XmlMember,ALIAS_PATH_SEPARATOR,ARGUMENT_IGNORE_ON,ARGUMENT_ORDER,IGNORE_ON_DESERIALIZE,IGNORE_ON_SERIALIZE,ignoreOn,order,ownerClass,qualifiedPathElements,isDefaultValue,isPath,parseMetadata,setAlias,setOrder" name="keywords">
+<meta content="XmlMember,com.googlecode.flexxb.annotation.XmlMember,ALIAS_PATH_SEPARATOR,ARGUMENT_IGNORE_ON,ARGUMENT_ORDER,ignoreOn,order,ownerClass,qualifiedPathElements,readOnly,writeOnly,isDefaultValue,isPath,parse,parseMetadata,setAlias,setOrder" name="keywords">
 <title>com.googlecode.flexxb.annotation.XmlMember</title>
 </head>
 <body>
@@ -134,7 +134,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ignoreOn">ignoreOn</a> : String<div class="summaryTableDescription">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ignoreOn">ignoreOn</a> : <a href="../api/Stage.html">Stage</a>
+<div class="summaryTableDescription">
    
    </div>
 </td><td class="summaryTableOwnerCol">XmlMember</td>
@@ -161,6 +162,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#qualifiedPathElements">qualifiedPathElements</a> : Array<div class="summaryTableDescription">[read-only]
    Get the list of virtual path consituents
+   </div>
+</td><td class="summaryTableOwnerCol">XmlMember</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#readOnly">readOnly</a> : Boolean<div class="summaryTableDescription">[read-only]
+   
+   </div>
+</td><td class="summaryTableOwnerCol">XmlMember</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#writeOnly">writeOnly</a> : Boolean<div class="summaryTableDescription">[read-only]
+   
    </div>
 </td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
@@ -272,26 +285,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="protectedMethodSummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Protected Methods</div>
-<div class="showHideLinks">
-<div class="hideInheritedProtectedMethod" id="hideInheritedProtectedMethod">
-<a onclick="javascript:setInheritedVisible(false,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Methods</a>
-</div>
-<div class="showInheritedProtectedMethod" id="showInheritedProtectedMethod">
-<a onclick="javascript:setInheritedVisible(true,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Methods</a>
-</div>
-</div>
 <table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
-<tr class="hideInheritedProtectedMethod">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="Annotation.html#parse()">parse</a>(field:XML):void</div>
-<div class="summaryTableDescription">
-   Analyze field/class descriptor to extract base informations like field's name and type
-   </div>
-</td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
+<a class="signatureLink" href="#parse()">parse</a>(field:XML):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -365,18 +368,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    </div>
 </td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#IGNORE_ON_DESERIALIZE">IGNORE_ON_DESERIALIZE</a> : String = "deserialize"<div class="summaryTableDescription">[static]
-   Do not deserialize this member
-   </div>
-</td><td class="summaryTableOwnerCol">XmlMember</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#IGNORE_ON_SERIALIZE">IGNORE_ON_SERIALIZE</a> : String = "serialize"<div class="summaryTableDescription">[static]
-   Do not serialize this member 
-   </div>
-</td><td class="summaryTableOwnerCol">XmlMember</td>
-</tr>
 </table>
 </div>
 <script type="text/javascript" language="javascript">
@@ -393,13 +384,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>ignoreOn:String</code>&nbsp;&nbsp;[read-write]<p>
+<code>ignoreOn:<a href="../api/Stage.html">Stage</a></code>&nbsp;&nbsp;[read-write]<p>
    
    </p><span class="label">Implementation</span>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get ignoreOn():String</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get ignoreOn():<a href="../api/Stage.html">Stage</a></code>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set ignoreOn(value:String):void</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set ignoreOn(value:<a href="../api/Stage.html">Stage</a>):void</code>
 <br>
 </div>
 <a name="order"></a>
@@ -442,6 +433,34 @@ showHideInherited();
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get qualifiedPathElements():Array</code>
+<br>
+</div>
+<a name="readOnly"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">readOnly</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>readOnly:Boolean</code>&nbsp;&nbsp;[read-only]<p>
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get readOnly():Boolean</code>
+<br>
+</div>
+<a name="writeOnly"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">writeOnly</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>writeOnly:Boolean</code>&nbsp;&nbsp;[read-only]<p>
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get writeOnly():Boolean</code>
 <br>
 </div>
 <a name="constructorDetail"></a>
@@ -508,6 +527,20 @@ showHideInherited();
 <td width="20"></td><td><code>Boolean</code> &mdash; true if virtual paths are defined, false otherwise
    
    </td>
+</tr>
+</table>
+</div>
+<a name="parse()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parse</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function parse(field:XML):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">field</span>:XML</code></td>
 </tr>
 </table>
 </div>
@@ -600,26 +633,6 @@ showHideInherited();
 <div class="detailBody">
 <code>public static const ARGUMENT_ORDER:String = "order"</code><p>
    
-   </p></div>
-<a name="IGNORE_ON_DESERIALIZE"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">IGNORE_ON_DESERIALIZE</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public static const IGNORE_ON_DESERIALIZE:String = "deserialize"</code><p>
-   Do not deserialize this member
-   </p></div>
-<a name="IGNORE_ON_SERIALIZE"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">IGNORE_ON_SERIALIZE</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public static const IGNORE_ON_SERIALIZE:String = "serialize"</code><p>
-   Do not serialize this member 
    </p></div>
 <br>
 <br>
