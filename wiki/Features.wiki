@@ -38,6 +38,8 @@ This page will contain a list of features and requirements I have planned for my
  The serializer should allow custom treatments at different stages in the xml processing. These stages are: _Pre-Serialize_, _Post-Serialize_, _Pre-Deserialize_ and _Post-Deserialize_.
  * FXB-015 *Xml Service*:
  FlexXB should provide a data service that is able to send xml requests and receive xml responses.
+ * FXB-016 *Annotation API*:
+ FlexXB should provide an API to allow developers to programatically describe object types to be registered in the FlexXB engine.
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
 ||FXB-002||Xml alias||1.0 _alpha_||
@@ -51,6 +53,7 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-015||Xml Service||1.0 _beta_||
 ||FXB-006||Class type identification by response's namespace on deserialization||1.0||
 ||FXB-009||Use paths in xml aliases||1.0||
-||FXB-013||Add method references to annotation's attribute values||1.1||
+||FXB-016||Annotation API||1.1||
+||FXB-013||Add method references to annotation's attribute values||2.0||
 ||FXB-007||Flex Model Object Designer||2.0||
 ||FXB-011||XSD validation against incoming XML||3.0||
