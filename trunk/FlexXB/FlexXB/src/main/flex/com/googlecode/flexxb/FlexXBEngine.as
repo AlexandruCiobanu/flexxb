@@ -17,6 +17,8 @@
  */ 
 package com.googlecode.flexxb
 {
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
+	import com.googlecode.flexxb.api.FXClass;
 	import com.googlecode.flexxb.converter.IConverter;
 	
 	import flash.events.Event;
@@ -122,6 +124,17 @@ package com.googlecode.flexxb
 			}
 		} 	
 		/**
+		 * 
+		 * @param type
+		 * @param apiDescriptor
+		 * 
+		 */		
+		public final function processAPIDescriptor(type : Class, apiDescriptor : FXClass) : void{
+			if(type && apiDescriptor){
+				
+			}
+		}
+		/**
 		 * Register a converter that defines how string values 
 		 * are transformed to a simple type object and viceversa
 		 * @param converter converter instance
@@ -142,7 +155,7 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void{
-			descriptorStore.registerAnnotation(name, annotationClazz, serializer, overrideExisting);
+			AnnotationFactory.instance.registerAnnotation(name, annotationClazz, serializer, overrideExisting);
 		}
 		/**
 		 * 
