@@ -195,19 +195,34 @@ package com.googlecode.flexxb.annotation
 		 * @see Annotation#parse()
 		 * 
 		 */		
-		protected override function parse(field:XML):void{
-			super.parse(field);
+		protected override function parse(descriptor : XML):void{
+			super.parse(descriptor);
 			var type : String;
-			if(field.name() == "type"){
+			if(descriptor.name() == "type"){
 				_fieldName = _fieldName.substring(_fieldName.lastIndexOf(":") + 1);
-				type = field.@name;
+				type = descriptor.@name;
 				_fieldType = getDefinitionByName(type) as Class;
-			}else if(field.name() == "factory"){
-				type = field.@type;
+			}else if(descriptor.name() == "factory"){
+				type = descriptor.@type;
 				_fieldName = type.substring(type.lastIndexOf(":") + 1);
 			}
 			if(!alias || alias.length == 0 || alias == type){
 				setAlias(_fieldName);
+			}
+			processMembers(descriptor);
+		}
+		/**
+		 * 
+		 * @param descriptor
+		 * 
+		 */		
+		protected function processMembers(descriptor : XML) : void{
+			var field : XML;
+			for each(field in descriptor..variable){
+				addMember(AnnotationFactory.instance.getAnnotation(field, this));
+			}
+			for each(field in descriptor..accessor){
+				addMember(AnnotationFactory.instance.getAnnotation(field, this));
 			}
 		}
 		/**

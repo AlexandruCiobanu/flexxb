@@ -18,6 +18,7 @@
  package com.googlecode.flexxb
 {
 	import com.googlecode.flexxb.annotation.Annotation;
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlAttribute;
 	import com.googlecode.flexxb.annotation.XmlClass;
@@ -62,10 +63,10 @@
 			}
 			_descriptorStore = descriptor;
 			_converterStore = converter;
-			_descriptorStore.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
-			_descriptorStore.registerAnnotation(XmlElement.ANNOTATION_NAME,   XmlElement,   XmlElementSerializer);
-			_descriptorStore.registerAnnotation(XmlArray.ANNOTATION_NAME, 	 XmlArray, 	   XmlArraySerializer);
-			_descriptorStore.registerAnnotation(XmlClass.ANNOTATION_NAME, 	 XmlClass, 	   XmlClassSerializer);
+			AnnotationFactory.instance.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
+			AnnotationFactory.instance.registerAnnotation(XmlElement.ANNOTATION_NAME,   XmlElement,   XmlElementSerializer);
+			AnnotationFactory.instance.registerAnnotation(XmlArray.ANNOTATION_NAME, 	 XmlArray, 	   XmlArraySerializer);
+			AnnotationFactory.instance.registerAnnotation(XmlClass.ANNOTATION_NAME, 	 XmlClass, 	   XmlClassSerializer);
 		}
 		/**
 		 * 
@@ -102,7 +103,7 @@
 				xmlData = IXmlSerializable(object).toXml();
 			}else{
 				var classDescriptor : XmlClass = _descriptorStore.getDescriptor(object);
-				xmlData = _descriptorStore.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
+				xmlData = AnnotationFactory.instance.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
 				var serializer : ISerializer;
 				if(partial && classDescriptor.idField){
 					doSerialize(object, classDescriptor.idField, xmlData);  
@@ -129,7 +130,7 @@
 		 * 
 		 */		
 		private function doSerialize(object : Object, annotation : Annotation, xmlData : XML) : void{
-			var serializer : ISerializer = _descriptorStore.getSerializer(annotation);
+			var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
 			var target : Object = object[annotation.fieldName];
 			if(target != null){
 				serializer.serialize(target, annotation, xmlData, this);
@@ -179,7 +180,7 @@
 							if(annotation.readOnly){
 								continue;
 							}
-							var serializer : ISerializer = _descriptorStore.getSerializer(annotation);
+							var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
 							result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 						}
 					}
@@ -222,7 +223,7 @@
 				id = _descriptorStore.getCustomSerializableReference(objectClass).getIdValue(xmlData);
 			}else{
 				var classDescriptor : XmlClass = _descriptorStore.getDescriptor(objectClass);
-				var idSerializer : ISerializer = _descriptorStore.getSerializer(classDescriptor.idField);
+				var idSerializer : ISerializer = AnnotationFactory.instance.getSerializer(classDescriptor.idField);
 				if(idSerializer){
 					id = String(idSerializer.deserialize(xmlData, classDescriptor.idField, this));
 				}

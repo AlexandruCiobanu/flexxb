@@ -18,8 +18,8 @@
 package com.googlecode.flexxb
 {
 	import com.googlecode.flexxb.annotation.Annotation;
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.XmlClass;
-	import com.googlecode.flexxb.serializer.ISerializer;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.describeType;
@@ -34,8 +34,6 @@ package com.googlecode.flexxb
 	internal final class DescriptorStore implements IDescriptorStore
 	{		
 		private var descriptorCache : Dictionary = new Dictionary();
-		
-		private var annotationMap : Dictionary = new Dictionary();
 		
 		private var classNamespaceMap : Dictionary;
 		/**
@@ -105,55 +103,14 @@ package com.googlecode.flexxb
 			}
 			return null;
 		}
-		/**
-		 * Register a new annotation and its serializer. If it founds a registration with the 
-		 * same name and <code>overrideExisting </code> is set to <code>false</code>, it will disregard the current attempt and keep the old value.
-		 * @param name the name of the annotation to be registered
-		 * @param annotationClazz annotation class type
-		 * @param serializerInstance instance of the serializer that will handle this annotation
-		 * @param overrideExisting
-		 * 
-		 */		
-		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void{
-			if(overrideExisting || !annotationMap[name]){
-				annotationMap[name] = {annotation: annotationClazz, serializer: new serializer() as ISerializer};
-			}
-		}
-		/**
-		 * Get serializer associated with the annotation
-		 * @param annotation target annotation
-		 * @return the serializer object or null if the annotation name is not registered
-		 * 
-		 */		
-		public function getSerializer(annotation : Annotation) : ISerializer{
-			if(annotation && annotationMap[annotation.annotationName]){
-				return annotationMap[annotation.annotationName].serializer as ISerializer;
-			}
-			return null;
-		}
-				
-		private function getAnnotationClass(annotationName : String) : Class{
-			if(annotationMap[annotationName]){
-				return annotationMap[annotationName].annotation as Class;
-			}
-			return null;
-		}
 		
-		private function xmlDescribeType(object : Object, xmlDescriptor : XML) : XmlClass{
+		private function xmlDescribeType(xmlDescriptor : XML) : XmlClass{
 			var descriptor : XML = xmlDescriptor;
-			if(object is Class){
+			if(descriptor.factory.length() > 0){
 				descriptor = descriptor.factory[0];
 			}
 			//get class annotation				
 			var classDescriptor : XmlClass = new XmlClass(descriptor);
-			//get namespace
-			var field : XML;
-			for each(field in descriptor..variable){
-				classDescriptor.addMember(getAnnotation(field, classDescriptor));
-			}
-			for each(field in descriptor..accessor){
-				classDescriptor.addMember(getAnnotation(field, classDescriptor));
-			}
 			//signal the class descriptor that no more members are to be added
 			classDescriptor.memberAddFinished();
 			//if the class descriptor defines a namespace, register it in the namespace map
@@ -164,17 +121,6 @@ package com.googlecode.flexxb
 				classNamespaceMap[classDescriptor.nameSpace.uri] = classDescriptor.fieldType;
 			}
 			return classDescriptor;
-		}
-		
-		private function getAnnotation(field : XML, classDescriptor : XmlClass) : Annotation{
-			var annotations : XMLList = field.metadata;
-			for each(var member : XML in annotations){
-				var annotationClass : Class = getAnnotationClass(member.@name);
-				if(annotationClass){
-					return new annotationClass(field, classDescriptor) as Annotation;
-				}
-			}
-			return null;
 		}
 		
 		private function getDefinition(object : Object, className : String) : Object{
@@ -200,7 +146,7 @@ package com.googlecode.flexxb
 				var cls : Class = Class(object is Class ? object : getDefinitionByName(className));
 				referenceObject = new cls();
 			}else{
-				xmlClass = xmlDescribeType(object, descriptor);
+				xmlClass = xmlDescribeType(descriptor);
 			}
 			var result : Object = {descriptor : xmlClass, customSerializable : customSerializable, reference : referenceObject};
 			descriptorCache[className] = result;
