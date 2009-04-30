@@ -44,6 +44,12 @@
 	 */	
 	public class SerializerCore extends EventDispatcher
 	{
+		{
+			AnnotationFactory.instance.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
+			AnnotationFactory.instance.registerAnnotation(XmlElement.ANNOTATION_NAME,   XmlElement,   XmlElementSerializer);
+			AnnotationFactory.instance.registerAnnotation(XmlArray.ANNOTATION_NAME, 	 XmlArray, 	   XmlArraySerializer);
+			AnnotationFactory.instance.registerAnnotation(XmlClass.ANNOTATION_NAME, 	 XmlClass, 	   XmlClassSerializer);
+		}
 		/**
 		 * 
 		 */		
@@ -63,10 +69,6 @@
 			}
 			_descriptorStore = descriptor;
 			_converterStore = converter;
-			AnnotationFactory.instance.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
-			AnnotationFactory.instance.registerAnnotation(XmlElement.ANNOTATION_NAME,   XmlElement,   XmlElementSerializer);
-			AnnotationFactory.instance.registerAnnotation(XmlArray.ANNOTATION_NAME, 	 XmlArray, 	   XmlArraySerializer);
-			AnnotationFactory.instance.registerAnnotation(XmlClass.ANNOTATION_NAME, 	 XmlClass, 	   XmlClassSerializer);
 		}
 		/**
 		 * 
