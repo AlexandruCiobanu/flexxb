@@ -1,12 +1,12 @@
 package com.googlecode.flexxb.api
 {
+	import com.googlecode.flexxb.FlexXBEngine;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlAttribute;
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.testData.Mock;
-	import com.googlecode.testData.Mock3;
+	import com.googlecode.flexxb.persistence.Person;
 	
 	import flexunit.framework.TestCase;
 	/**
@@ -60,19 +60,41 @@ package com.googlecode.flexxb.api
 		 * 
 		 */		
 		public function testFxClass() : void{
-			var cls : FXClass = new FXClass(Mock, "MyClass");
+			var cls : FxClass = buildDescriptor();
+			FlexXBEngine.instance.api.processTypeDescriptor(null);
+			var xmlCls : XmlClass = new XmlClass(cls.toXml());
+			assertEquals("wrong type", cls.type, xmlCls.fieldType);
+			assertEquals("wrong alias", cls.alias, xmlCls.alias);
+			assertEquals("wrong prefix", cls.prefix, xmlCls.nameSpace.prefix);
+			assertEquals("wrong uri", cls.uri, xmlCls.nameSpace.uri);
+			assertEquals("wrong member count", 4, xmlCls.members.length);
+		}
+		
+		private function buildDescriptor() : FxClass{
+			var cls : FxClass = new FxClass(Person, "APerson");
 			cls.prefix = "test";
 			cls.uri="http://www.axway.com/xmlns/passport/v1";
-			cls.addAttribute("aField", String, null, "stuff");
-			cls.addAttribute("date", Date, null).ignoreOn = Stage.SERIALIZE;
-			cls.addElement("version", Number, null, "objVersion");
-			cls.addElement("link", Mock3, null, "mock3").serializePartialElement = true;
-			cls.addElement("reference", Object).serializePartialElement = true;
-			cls.addArray("result", Array, null, "data").memberType = Mock;
-			cls.addElement("xmlData", XML);
-			cls.addElement("readOnly", String, AccessorType.READ_ONLY);
-			cls.addElement("writeOnly", String, AccessorType.WRITE_ONLY);
-			var xmlCls : XmlClass = new XmlClass(cls.toXml());
+			cls.addAttribute("firstName", String, null, "FirstName");
+			cls.addAttribute("lastName", String, null, "LastName");
+			cls.addElement("birthDate", Date, null, "BirthDate");
+			cls.addElement("age", Number, null, "Age").ignoreOn = Stage.SERIALIZE;
+			return cls;
+		}
+		
+		public function testSerializationWithApiDescriptor() : void{
+			var cls : FxClass = buildDescriptor();
+			FlexXBEngine.instance.api.processTypeDescriptor(cls);
+			var person : Person = new Person();
+			person.firstName = "John";
+			person.lastName = "Doe";
+			person.birthDate = new Date();
+			person.age = 34;
+			var xml  :XML = FlexXBEngine.instance.serialize(person);
+			var copy : Person = FlexXBEngine.instance.deserialize(xml, Person) as Person;
+			assertEquals("Wrong firstName", person.firstName, copy.firstName);
+			assertEquals("Wrong lastName", person.lastName, copy.lastName);
+			assertEquals("Wrong birthDate", person.birthDate.toString(), copy.birthDate.toString());
+			assertEquals("Wrong age", 0, copy.age);
 		}
 		
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void{

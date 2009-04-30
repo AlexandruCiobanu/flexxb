@@ -18,7 +18,7 @@
 package com.googlecode.flexxb
 {
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
-	import com.googlecode.flexxb.api.FXClass;
+	import com.googlecode.flexxb.api.IFlexXBApi;
 	import com.googlecode.flexxb.converter.IConverter;
 	
 	import flash.events.Event;
@@ -75,6 +75,8 @@ package com.googlecode.flexxb
 		private var converterStore : ConverterStore;
 		
 		private var core : SerializerCore;
+		
+		private var _api : IFlexXBApi;
 		/**
 		 * Constructor
 		 * 
@@ -87,6 +89,15 @@ package com.googlecode.flexxb
 			descriptorStore = new DescriptorStore();
 			converterStore = new ConverterStore();
 			core = new SerializerCore(descriptorStore, converterStore);
+			_api = new FlexXBApi(descriptorStore);
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public final function get api() : IFlexXBApi{
+			return _api;
 		}
 		/**
 		 * Convert an object to a xml representation.
@@ -121,17 +132,6 @@ package com.googlecode.flexxb
 						descriptorStore.getDescriptor(item);
 					}
 				}
-			}
-		} 	
-		/**
-		 * 
-		 * @param type
-		 * @param apiDescriptor
-		 * 
-		 */		
-		public final function processAPIDescriptor(type : Class, apiDescriptor : FXClass) : void{
-			if(type && apiDescriptor){
-				
 			}
 		}
 		/**

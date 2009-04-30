@@ -17,8 +17,6 @@
  */
 package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.XmlClass;
 	
 	import flash.utils.Dictionary;
@@ -103,6 +101,19 @@ package com.googlecode.flexxb
 			}
 			return null;
 		}
+		/**
+		 * 
+		 * @param xmlDescriptor
+		 * @param type
+		 * 
+		 */			
+		public function registerDescriptor(xmlDescriptor : XML, type : Class) : void{
+			var className : String = getQualifiedClassName(type);
+			if(hasDescriptorDefined(className)){
+				return;
+			} 
+			putDescriptorInCache(xmlDescriptor, className, false);
+		}
 		
 		private function xmlDescribeType(xmlDescriptor : XML) : XmlClass{
 			var descriptor : XML = xmlDescriptor;
@@ -123,14 +134,18 @@ package com.googlecode.flexxb
 			return classDescriptor;
 		}
 		
-		private function getDefinition(object : Object, className : String) : Object{
-			if(descriptorCache && descriptorCache[className] != null){
-				return descriptorCache[className];
-			}
-			return put(object, className);
+		private function hasDescriptorDefined(className : String) : Boolean{
+			return descriptorCache && descriptorCache[className] != null;
 		}
 		
-		private function put(object : Object, className : String) : Object{
+		private function getDefinition(object : Object, className : String) : Object{
+			if(!hasDescriptorDefined(className)){
+				put(object, className)
+			}
+			return descriptorCache[className];
+		}
+		
+		private function put(object : Object, className : String) : void{
 			var descriptor : XML = describeType(object);
 			var interfaces : XMLList = descriptor.name() == "type" ? descriptor.implementsInterface : descriptor.factory.implementsInterface
 			var customSerializable : Boolean;
@@ -140,17 +155,20 @@ package com.googlecode.flexxb
 					break;
 				}
 			}
+			putDescriptorInCache(descriptor, className, customSerializable);
+		}
+		
+		private function putDescriptorInCache(descriptor : XML, className : String, customSerializable : Boolean) : void{
 			var xmlClass : XmlClass;
 			var referenceObject : Object;
 			if(customSerializable){
-				var cls : Class = Class(object is Class ? object : getDefinitionByName(className));
+				var cls : Class = getDefinitionByName(className) as Class;
 				referenceObject = new cls();
 			}else{
 				xmlClass = xmlDescribeType(descriptor);
 			}
 			var result : Object = {descriptor : xmlClass, customSerializable : customSerializable, reference : referenceObject};
 			descriptorCache[className] = result;
-			return result;
 		}
 	}
 }
