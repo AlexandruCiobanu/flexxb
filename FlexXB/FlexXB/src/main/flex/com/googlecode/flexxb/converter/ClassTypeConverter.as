@@ -18,30 +18,33 @@
  package com.googlecode.flexxb.converter
 {
 	import com.googlecode.flexxb.FlexXBEngine;
+	
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 	/**
-	 * Converter for XML objects 
+	 * Converter for Class objects
 	 * @author Alexutz
 	 * 
-	 */		
-	internal class XmlConverter implements IConverter
+	 */	
+	internal class ClassTypeConverter implements IConverter
 	{
 		{
-			FlexXBEngine.instance.registerSimpleTypeConverter(new XmlConverter());
+			FlexXBEngine.instance.registerSimpleTypeConverter(new ClassTypeConverter());
 		}
 		
 		public function get type():Class
 		{
-			return XML;
+			return Class;
 		}
 		
 		public function toString(object:Object):String
 		{
-			return (object as XML).toString();
+			return getQualifiedClassName(object);
 		}
 		
 		public function fromString(value:String):Object
 		{
-			var result : XML = XML(value);			
+			var result : Object = getDefinitionByName(value);			
 			return result;
 		}		
 	}
