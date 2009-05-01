@@ -17,8 +17,13 @@
  */
 package com.googlecode.flexxb
 {
+	import com.googlecode.flexxb.api.FxApiWrapper;
 	import com.googlecode.flexxb.api.FxClass;
 	import com.googlecode.flexxb.api.IFlexXBApi;
+	
+	import flash.net.URLLoader;
+	
+	import mx.utils.StringUtil;
 	/**
 	 * 
 	 * @author Alexutz
@@ -38,8 +43,7 @@ package com.googlecode.flexxb
 		}
 		/**
 		 * 
-		 * @param type
-		 * @param apiDescriptor
+		 * @see IFlexXBApi#processTypeDescriptor()
 		 * 
 		 */		
 		public function processTypeDescriptor(apiDescriptor : FxClass) : void{
@@ -47,6 +51,23 @@ package com.googlecode.flexxb
 				var type : Class = apiDescriptor.type;
 				store.registerDescriptor(apiDescriptor.toXml(), type);
 			}
-		}		
+		}	
+		/**
+		 * 
+		 * @see IFlexXBApi#processDescriptorsFromXml()
+		 * 
+		 */		
+		public function processDescriptorsFromXml(xml : XML) : void{
+			if(xml){
+				var apiWrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper) as FxApiWrapper;
+				if(apiWrapper){
+					for each(var classDescriptor : FxClass in apiWrapper.descriptors){
+						if(classDescriptor){
+							processTypeDescriptor(classDescriptor);
+						}
+					}
+				}
+			}
+		}	
 	}
 }
