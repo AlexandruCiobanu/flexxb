@@ -101,7 +101,7 @@ package com.googlecode.fxmod
 		
 		private function setSelectHandler(item : NativeMenuItem, data : MenuItem, host : Object) : void{
 			if(data.selectHandler && host && host[data.selectHandler] is Function){
-				item.addEventListener(Event.SELECT, host[data.selectHandler] as Function);
+				item.addEventListener(Event.SELECT, host[data.selectHandler] as Function, false, 0, true);
 			}
 		}
 		
