@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="XmlClass,com.googlecode.flexxb.annotation.XmlClass,ANNOTATION_NAME,ARGUMENT_ID,ARGUMENT_NAMESPACE_PREFIX,ARGUMENT_NAMESPACE_URI,ARGUMENT_ORDERED,ARGUMENT_USE_CHILD_NAMESPACE,ARGUMENT_VALUE,members,annotationName,childNameSpaceFieldName,idField,ordered,valueField,addMember,getMember,hasDefaultValueField,memberAddFinished,parse,parseMetadata,useOwnNamespace" name="keywords">
+<meta content="XmlClass,com.googlecode.flexxb.annotation.XmlClass,ANNOTATION_NAME,ARGUMENT_ID,ARGUMENT_NAMESPACE_PREFIX,ARGUMENT_NAMESPACE_URI,ARGUMENT_ORDERED,ARGUMENT_USE_CHILD_NAMESPACE,ARGUMENT_VALUE,members,annotationName,childNameSpaceFieldName,idField,ordered,valueField,addMember,getMember,hasDefaultValueField,memberAddFinished,parse,parseMetadata,processMembers,useOwnNamespace" name="keywords">
 <title>com.googlecode.flexxb.annotation.XmlClass</title>
 </head>
 <body>
@@ -274,7 +274,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#parse()">parse</a>(field:XML):void</div>
+<a class="signatureLink" href="#parse()">parse</a>(descriptor:XML):void</div>
 <div class="summaryTableDescription">
    
    </div>
@@ -284,6 +284,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#parseMetadata()">parseMetadata</a>(metadata:XML):void</div>
+<div class="summaryTableDescription">
+   
+   </div>
+</td><td class="summaryTableOwnerCol">XmlClass</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#processMembers()">processMembers</a>(descriptor:XML):void</div>
 <div class="summaryTableDescription">
    
    </div>
@@ -557,12 +566,12 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected override function parse(field:XML):void</code><p>
+<code>protected override function parse(descriptor:XML):void</code><p>
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">field</span>:XML</code></td>
+<td width="20px"></td><td><code><span class="label">descriptor</span>:XML</code></td>
 </tr>
 </table>
 <p>
@@ -593,6 +602,22 @@ showHideInherited();
 <div class="seeAlso">
 <a href="Annotation.html#parseMetadata()" target="">Annotation.parseMetadata()</a>
 </div>
+</div>
+<a name="processMembers()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">processMembers</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function processMembers(descriptor:XML):void</code><p>
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">descriptor</span>:XML</code></td>
+</tr>
+</table>
 </div>
 <a name="useOwnNamespace()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
