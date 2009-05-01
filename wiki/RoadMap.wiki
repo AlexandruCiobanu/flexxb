@@ -11,5 +11,5 @@ Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estim
 ||   1.0 - _beta_   ||   10-Nov-2008   ||      [Features FXB-004], [Features FXB-005], [Features FXB-008], [Features FXB-012], [Features FXB-014], [Features FXB-015] _(preview)_     ||      Delivered   ||
 ||   1.0   ||   24-Mar-2009   ||      [Features FXB-006], [Features FXB-009] ||   Delivered    ||
 ||   1.0.1   ||   03-Apr-2009   ||      [http://code.google.com/p/flexxb/issues/detail?id=7 Issue 7], [http://code.google.com/p/flexxb/issues/detail?id=8 Issue 8] ||   Delivered (_Intermediary release to deliver some fixes on xml processing_)  ||
-||   1.1  || 30-Apr-2009 || [Features FXB-016]  || _intended delivery date_ ||
+||   1.1  || 30-Apr-2009 || [Features FXB-016]  || Delivered on 02-May-2009 ||
 ||   2.0 - _alpha_  ||   24-Jun-2009   ||      [Features FXB-007](_alpha_), [Features FXB-016]     ||  _intended delivery date_   ||
