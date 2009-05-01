@@ -126,8 +126,9 @@
 	</target>
 	
 	<target name="clean">
-		<delete failonerror="true">
+		<delete failonerror="true" includeemptydirs="true">
 			<fileset dir="${bin.dir}">
+				<include name="**/**"/>
 			</fileset>
 		</delete>
 	</target>
