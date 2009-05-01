@@ -57,9 +57,9 @@ package com.googlecode.flexxb.api
 		 *Constructor 
 		 * 
 		 */		
-		public function FxClass(type : Class, alias : String = null)
+		public function FxClass(type : Class = null, alias : String = null)
 		{
-			this.type = type;
+			this._type = type;
 			this.alias = alias;
 		}
 		/**
