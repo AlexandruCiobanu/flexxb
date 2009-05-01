@@ -1,5 +1,5 @@
 /****************************************************************************/
-/**					FlexXB version 1.0.1 (03-04-2009)				   **/
+/**					FlexXB version 1.1 (01-05-2009)				   **/
 /**							by Alex Ciobanu								   **/
 /****************************************************************************/
 
@@ -7,16 +7,17 @@ Copyright 2008 - 2009 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-FlexXB-1_0_1-03042009-bin.zip - contains the flexxb library along with the test 
+FlexXB-1_1-01052009-bin.zip - contains the flexxb library along with the test 
 							application
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
 			/bin/flexunit       - flexunit automated test reports
+			/bin/api-schema     - XSD schema defining the structure of the XML file that describes types that can't be annotated 
 			/doc/ 				- ASDOC
 			/samples/			- samples showing FlexXB's features 
 			/README.txt	- version release notes
 
-FlexXB-1_0_1-03042009-src.zip - contains source files
+FlexXB-1_1-01052009-src.zip - contains source files
 			/FlexXB/	- FlexXB project sources
 			/FlexXBTest - FlexXB test application sources
 
@@ -68,20 +69,24 @@ FEATURES
 	* FXB-014 Add events to signal processing start and finish 
 	* FXB-015 Xml Service
 	* FXB-009 Use paths in xml aliases
+	* FXB-016 Annotation API
 	
 USAGE
 
 To serialize an object to xml:
-com.googlecode.serializer.flexxb.FlexXBEngine.serialize(object)
+com.googlecode.serializer.flexxb.FlexXBEngine.instance.serialize(object)
 
 To deserialize a received xml to an object, given the object's class:
-com.googlecode.serializer.flexxb.FlexXBEngine.deserialize(xml, class)
+com.googlecode.serializer.flexxb.FlexXBEngine.instance.deserialize(xml, class)
 
 To register a custom annotation, subclass of com.googlecode.serializer.flexxb.Annotation:
-com.googlecode.serializer.flexxb.FlexXBEngine.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)
+com.googlecode.serializer.flexxb.FlexXBEngine.instance.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)
 
 To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the xml representation and viceversa:
-com.googlecode.serializer.flexxb.FlexXBEngine.registerSimpleTypeConverter(converterInstance, overrideExisting)
+com.googlecode.serializer.flexxb.FlexXBEngine.instance.registerSimpleTypeConverter(converterInstance, overrideExisting)
+
+In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to ad annotations:
+com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)
 
 Note: Make sure you add the following switches to your compiler settings:
 	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray
@@ -112,6 +117,12 @@ set to "*" then the deserialization process will return null for that field.
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+
+1.1 - 01-05-2009
+	- Fix: Issue 10 - Allow serialization of read-only properties
+	- Enhancement/Feature: Issue 6 - Include support for serializing objects that can't be decorated with Flexxb annotations  
+						   FXB-016 Annotation API
+	- Fix: Issue 9 - Still possible to have escaping problems    
 
 1.0.1 - 03-04-2009
 	- Fix: Issue 7 - Order annotation on XmlMember and Ordered on XmlClass (http://code.google.com/p/flexxb/issues/detail?id=7)

@@ -36,7 +36,7 @@ package com.googlecode.flexxb.api
 		 * 
 		 * @param xml
 		 * 
-		 */		
-		function processDescriptorsFromXml(xml : XML) : void;
+		 *		
+		function processDescriptorsFromXml(xml : XML) : void;*/
 	}
 }
