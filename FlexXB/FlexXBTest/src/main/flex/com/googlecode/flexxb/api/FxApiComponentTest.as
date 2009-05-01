@@ -6,7 +6,7 @@ package com.googlecode.flexxb.api
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.flexxb.persistence.Person;
+	import com.googlecode.testData.Person;
 	
 	import flexunit.framework.TestCase;
 	/**
@@ -97,6 +97,11 @@ package com.googlecode.flexxb.api
 			assertEquals("Wrong age", 0, copy.age);
 		}
 		
+		public function testFileDescriptorProcessing() : void{
+			var xml : XML = getXmlDescriptor();
+			FlexXBEngine.instance.api.processDescriptorsFromXml(xml);
+		}
+		
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void{
 			doElementAssertion(apiMember, xmlArray);
 			assertEquals("Wrong memberName", apiMember.memberName, xmlArray.memberName);
@@ -117,5 +122,47 @@ package com.googlecode.flexxb.api
 			assertEquals("Wrong ignoreOn", apiMember.ignoreOn, xmlMember.ignoreOn);
 			assertEquals("Wrong alias", apiMember.alias, xmlMember.alias);
 		}	
+		
+		private function getXmlDescriptor() : XML{
+			var xml : XML = 
+				<FlexXBAPI version="1">
+				  <Descriptors>
+				    <Class type="com.flexxb.cls" alias="" prefix="" uri="" useNamespaceFrom="" defaultValueField="" idField="" ordered="false">
+				      <Element alias="" ignoreOn="serialize" getFromCache="false" serializePartialElement="false" order="1">
+				        <Field name="" type="" access="readonly"/>
+				      </Element>
+				      <Attribute alias="" ignoreOn="deserialize" order="2">
+				        <Field name="" type="" access="writeonly"/>
+				      </Attribute>
+				      <Array alias="" ignoreOn="" memberName="" getFromCache="false" serializePartialElement="false" order="3">
+				        <Field name="" type="" access="readwrite"/>
+				      </Array>
+				    </Class>
+				    <Class type="com.flexxb.cls" alias="" prefix="" uri="" useNamespaceFrom="" defaultValueField="" idField="" ordered="false">
+				      <Element alias="" ignoreOn="serialize" getFromCache="false" serializePartialElement="false" order="1">
+				        <Field name="" type="" access="readonly"/>
+				      </Element>
+				      <Attribute alias="" ignoreOn="deserialize" order="2">
+				        <Field name="" type="" access="writeonly"/>
+				      </Attribute>
+				      <Array alias="" ignoreOn="" memberName="" getFromCache="false" serializePartialElement="false" order="3">
+				        <Field name="" type="" access="readwrite"/>
+				      </Array>
+				    </Class>
+				    <Class type="com.flexxb.cls" alias="" prefix="" uri="" useNamespaceFrom="" defaultValueField="" idField="" ordered="false">
+				      <Element alias="" ignoreOn="serialize" getFromCache="false" serializePartialElement="false" order="1">
+				        <Field name="" type="" access="readonly"/>
+				      </Element>
+				      <Attribute alias="" ignoreOn="deserialize" order="2">
+				        <Field name="" type="" access="writeonly"/>
+				      </Attribute>
+				      <Array alias="" ignoreOn="" memberName="" getFromCache="false" serializePartialElement="false" order="3">
+				        <Field name="" type="" access="readwrite"/>
+				      </Array>
+				    </Class>
+				  </Descriptors>
+				</FlexXBAPI>;
+			return xml;
+		}
 	}
 }

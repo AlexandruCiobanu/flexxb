@@ -1,4 +1,4 @@
-package com.googlecode.flexxb.persistence
+package com.googlecode.testData
 {
 	/**
 	 * 

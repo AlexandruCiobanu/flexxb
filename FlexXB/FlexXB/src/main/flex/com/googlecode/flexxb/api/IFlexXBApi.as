@@ -32,5 +32,11 @@ package com.googlecode.flexxb.api
 		 * 
 		 */		
 		function processTypeDescriptor(apiDescriptor : FxClass) : void;
+		/**
+		 * 
+		 * @param xml
+		 * 
+		 */		
+		function processDescriptorsFromXml(xml : XML) : void;
 	}
 }
