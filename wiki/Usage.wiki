@@ -201,8 +201,6 @@ _Notice the {{{defaultValueField}}} attribute. It specifies that the target fiel
 
 === 4. Ordering the xml sequence ===
 
-*This feature is available for users who have copies of FlexXB codebase via SVN. For public release it will be available from the 1.1 version of FlexXB.*
-
 _FlexXB supports ordering the fields of an object in the rendered xml either by order index or by field alias both defined in the annotation decorating the field. For ordering to be activated, the ordered attribute must be set to true._
 
 {{{
