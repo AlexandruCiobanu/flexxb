@@ -38,6 +38,8 @@
 			<arg line="-o '${flexxb.swc.output}'"/>
 			<arg line="-sp '${flexxb.src.dir}'"/>
 			<arg line="-is '${flexxb.src.dir}'"/>
+			<arg line="-debug=false"/>
+			<arg line="-external-library-path='${flex3sdk.lib.dir}','${flex3sdk.playerlib.dir}'"/>
 		</exec>
 	</target>
 	<!-- -->
