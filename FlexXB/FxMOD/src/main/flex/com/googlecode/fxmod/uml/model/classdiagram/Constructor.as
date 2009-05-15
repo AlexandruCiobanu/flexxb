@@ -1,6 +1,6 @@
 /**
- *   FxMOD
- *   Copyright (C) 2008 - 2009 Alex Ciobanu
+ *   FxMOD - FLEX Model Object Designer 
+ *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -15,34 +15,23 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.fxmod.model
+package com.googlecode.fxmod.uml.model.classdiagram
 {
-	import mx.collections.ArrayCollection;
-	
 	/**
 	 * 
 	 * @author aCiobanu
 	 * 
-	 */	
-	[Bindable]
-	public class Class extends PackageMember
+	 */
+	[Bindable]	
+	public class Constructor extends Method
 	{
-		private var _methods : ArrayCollection;
 		
-		private var properties : ArrayCollection;
-		
-		private var _implementedInterfaces : ArrayCollection;
-		
-		private var _extends : Class;
-		/**
-		 * Constructor 
-		 * 
-		 */		
-		public function Class()
+		public function Constructor(clasz : Class)
 		{
-			//TODO: implement function
-			super();
+			super(clasz);
+			_returnType = clasz;
 		}
 		
+		public override function set returnType(value : IType) : void{}
 	}
 }

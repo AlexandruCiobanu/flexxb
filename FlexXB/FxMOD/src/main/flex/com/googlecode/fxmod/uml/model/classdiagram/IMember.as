@@ -1,6 +1,6 @@
 /**
- *   FxMOD
- *   Copyright (C) 2008 - 2009 Alex Ciobanu
+ *   FxMOD - FLEX Model Object Designer 
+ *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -15,54 +15,50 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.fxmod.model
+package com.googlecode.fxmod.uml.model.classdiagram
 {
 	/**
 	 * 
 	 * @author aCiobanu
 	 * 
 	 */	
-	public class Visibility
+	public interface IMember extends IUMLObject
 	{
 		/**
 		 * 
+		 * @return 
+		 * 
 		 */		
-		public static const PUBLIC : Visibility = new Visibility("Public", "+");
+		function get classReference() : Class;
 		/**
 		 * 
+		 * @param value
+		 * 
 		 */		
-		public static const PROTECTED : Visibility = new Visibility("Protected", "#");
+		function set classReference(value : Class) : void;
 		/**
 		 * 
+		 * @return 
+		 * 
 		 */		
-		public static const PRIVATE : Visibility = new Visibility("Private", "-");
+		function get scope() : Scope;
 		/**
 		 * 
+		 * @param value
+		 * 
 		 */		
-		public static const PACKAGE : Visibility = new Visibility("Package", "~"); 
-		
-		private static var initialised : Boolean;
-		
-		{
-			initialised = true;
-		}
-		
-		private var _name : String;		
-		
-		private var _symbol : String;
+		function set scope(value : Scope) : void;
 		/**
 		 * 
-		 * @param name
-		 * @param symbol
+		 * @return 
 		 * 
 		 */		
-		public function Visibility(name : String, symbol : String)
-		{
-			if(initialised){
-				throw new Error("You should only use Scope.INSTANCE or Scope.CLASSIFIER");
-			}
-			this._name = name;
-			this._symbol = symbol;
-		}
+		function get visibility() : Visibility;
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
+		function set visibility(value : Visibility) : void;
 	}
 }

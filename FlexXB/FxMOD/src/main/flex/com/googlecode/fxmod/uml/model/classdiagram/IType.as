@@ -1,6 +1,6 @@
 /**
- *   FxMOD
- *   Copyright (C) 2008 - 2009 Alex Ciobanu
+ *   FxMOD - FLEX Model Object Designer 
+ *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -15,26 +15,16 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.fxmod.model
+package com.googlecode.fxmod.uml.model.classdiagram
 {
 	/**
 	 * 
 	 * @author aCiobanu
 	 * 
 	 */	
-	public interface IPackageMember extends IUMLObject
+	public interface IType
 	{
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		function get packageReference() : Package;
-		/**
-		 * 
-		 * @param value
-		 * 
-		 */		
-		function set packageReference(value : Package) : void;		
+		function get shortName() : String;
+		function get fullName() : String;
 	}
 }

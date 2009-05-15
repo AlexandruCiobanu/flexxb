@@ -1,6 +1,6 @@
 /**
- *   FxMOD
- *   Copyright (C) 2008 - 2009 Alex Ciobanu
+ *   FxMOD - FLEX Model Object Designer 
+ *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -15,50 +15,29 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.fxmod.model
+package com.googlecode.fxmod.uml.model.classdiagram
 {
 	/**
 	 * 
 	 * @author aCiobanu
 	 * 
-	 */	
-	public interface IMember extends IUMLObject
+	 */
+	[Bindable]	
+	public class Property extends Member
 	{
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		function get classReference() : Class;
-		/**
-		 * 
-		 * @param value
-		 * 
-		 */		
-		function set classReference(value : Class) : void;
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		function get scope() : Scope;
-		/**
-		 * 
-		 * @param value
-		 * 
-		 */		
-		function set scope(value : Scope) : void;
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		function get visibility() : Visibility;
-		/**
-		 * 
-		 * @param value
-		 * 
-		 */		
-		function set visibility(value : Visibility) : void;
+		private var _type : IType;
+		
+		public function Property(clasz : Class)
+		{
+			super();
+		}
+		
+		public function get type() : IType{
+			return _type;
+		}
+		
+		public function set type(value : IType) : void{
+			_type = value;
+		}			
 	}
 }

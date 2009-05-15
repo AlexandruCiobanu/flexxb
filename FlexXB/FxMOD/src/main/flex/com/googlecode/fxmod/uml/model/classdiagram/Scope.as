@@ -1,6 +1,6 @@
 /**
- *   FxMOD
- *   Copyright (C) 2008 - 2009 Alex Ciobanu
+ *   FxMOD - FLEX Model Object Designer 
+ *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -15,37 +15,38 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.fxmod.model
+package com.googlecode.fxmod.uml.model.classdiagram
 {
-	import mx.collections.ArrayCollection;
-	
 	/**
 	 * 
 	 * @author aCiobanu
 	 * 
-	 */
-	[Bindable]	
-	public class Method extends Member
+	 */	
+	public class Scope
 	{
-		protected var _parameters : ArrayCollection;
+		/**
+		 * 
+		 */		
+		public static const INSTANCE : Scope = new Scope("Instance");
+		/**
+		 * 
+		 */		
+		public static const CLASSIFIER : Scope = new Scope("Classifier"); 
 		
-		protected var _returnType : IType;
+		private static var initialised : Boolean;
 		
-		public function Method(clasz : Class)
 		{
-			super(clasz);
+			initialised = true;
 		}
 		
-		public function get returnType() : IType{
-			return _returnType;
-		}
+		private var name : String;
 		
-		public function set returnType(value : IType) : void{
-			_returnType = value;
+		public function Scope(name : String)
+		{
+			if(initialised){
+				throw new Error("You should only use Scope.INSTANCE or Scope.CLASSIFIER");
+			}
+			this.name = name;
 		}
-		
-		public function addParameter(parameter : Parameter) : void{
-			
-		}		
 	}
 }

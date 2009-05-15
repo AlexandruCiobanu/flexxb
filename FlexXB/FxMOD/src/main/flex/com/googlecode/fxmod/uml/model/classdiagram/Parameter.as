@@ -1,6 +1,6 @@
 /**
- *   FxMOD
- *   Copyright (C) 2008 - 2009 Alex Ciobanu
+ *   FxMOD - FLEX Model Object Designer 
+ *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -15,23 +15,31 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.fxmod.model
+package com.googlecode.fxmod.uml.model.classdiagram
 {
 	/**
 	 * 
 	 * @author aCiobanu
 	 * 
-	 */
-	[Bindable]	
-	public class Constructor extends Method
+	 */	
+	[Bindable]
+	public class Parameter extends UMLObject
 	{
+		private var _type : IType; 
 		
-		public function Constructor(clasz : Class)
+		private var _defaultValue : Object;
+		
+		public function Parameter()
 		{
-			super(clasz);
-			_returnType = clasz;
+			super();
 		}
 		
-		public override function set returnType(value : IType) : void{}
+		public function get type() : IType{
+			return _type;
+		}
+		
+		public function set type(value : IType) : void{
+			_type = value;
+		}		
 	}
 }
