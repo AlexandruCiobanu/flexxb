@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Window xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:html="flash.html.*"
+		minWidth="800" minHeight="600" layout="vertical" 
+		title="FxMOD Help" alwaysInFront="true">
+	<mx:HTML id="html" width="100%" height="100%" location="/assets/help/FxMODHelp.html" />
+</mx:Window>
