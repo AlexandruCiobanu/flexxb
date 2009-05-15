@@ -15,45 +15,54 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.fxmod.model
+package com.googlecode.fxmod.uml.model.classdiagram
 {
 	/**
 	 * 
 	 * @author aCiobanu
 	 * 
 	 */	
-	[Bindable]
-	public class UMLObject implements IUMLObject
+	public class Visibility
 	{
-		protected var _name : String;		
-		/**
-		 * Constructor 
-		 * 
-		 */		
-		public function UMLObject(){}
 		/**
 		 * 
-		 * @see IUMLObject#name()
+		 */		
+		public static const PUBLIC : Visibility = new Visibility("Public", "+");
+		/**
 		 * 
 		 */		
-		public function get name() : String
+		public static const PROTECTED : Visibility = new Visibility("Protected", "#");
+		/**
+		 * 
+		 */		
+		public static const PRIVATE : Visibility = new Visibility("Private", "-");
+		/**
+		 * 
+		 */		
+		public static const PACKAGE : Visibility = new Visibility("Package", "~"); 
+		
+		private static var initialised : Boolean;
+		
 		{
-			return _name;
-
+			initialised = true;
 		}
+		
+		private var _name : String;		
+		
+		private var _symbol : String;
 		/**
 		 * 
-		 * @see IUMLObject#name()
+		 * @param name
+		 * @param symbol
 		 * 
 		 */		
-		public function set name(value : String) : void
+		public function Visibility(name : String, symbol : String)
 		{
-			_name = value;
-		}		
-		/**
-		 * 
-		 * 
-		 */		
-		public function discard() : void { }
+			if(initialised){
+				throw new Error("You should only use Scope.INSTANCE or Scope.CLASSIFIER");
+			}
+			this._name = name;
+			this._symbol = symbol;
+		}
 	}
 }
