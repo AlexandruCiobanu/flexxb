@@ -1,9 +1,27 @@
+/**
+ *   FxMOD - FLEX Model Object Designer 
+ *   Copyright (C) 2008-2009 Alex Ciobanu
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ * 
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */ 
 package com.googlecode.fxmod
 {
 	import air.update.ApplicationUpdaterUI;
 	import air.update.events.UpdateEvent;
 	
 	import com.googlecode.fxmod.ui.AboutView;
+	import com.googlecode.fxmod.ui.HelpView;
 	
 	import flash.desktop.NativeApplication;
 	import flash.display.NativeMenuItem;
@@ -15,7 +33,6 @@ package com.googlecode.fxmod
 	import mx.core.WindowedApplication;
 	import mx.events.CloseEvent;
 	import mx.managers.PopUpManager;
-	import mx.styles.StyleManager;
 	/**
 	 * 
 	 * @author Alexutz
@@ -73,7 +90,8 @@ package com.googlecode.fxmod
 		 * 
 		 */		
 		public final function onHelpItemClick(event : Event) : void{
-			
+			var window : HelpView = new HelpView();
+			window.open(true);
 		}
 		/**
 		 * 
@@ -126,10 +144,7 @@ package com.googlecode.fxmod
 		 * 
 		 */		
 		public final function onAboutItemClick(event : Event) : void{
-			var popup : AboutView = new AboutView();
-			popup.addEventListener(CloseEvent.CLOSE, aboutViewClosed, false, 0, true);
-			PopUpManager.addPopUp(popup, view, true);
-			PopUpManager.centerPopUp(popup);
+			showAndCenterPopup(AboutView);
 		}
 		
 		private function checkSelectedItem(item : NativeMenuItem) : void{
@@ -141,7 +156,14 @@ package com.googlecode.fxmod
 			}
 		} 
 		
-		private function aboutViewClosed(event : CloseEvent) : void{
+		private function showAndCenterPopup(clasz : Class) : void{
+			var popup : IFlexDisplayObject = new clasz();
+			popup.addEventListener(CloseEvent.CLOSE, viewClosed, false, 0, true);
+			PopUpManager.addPopUp(popup, view, true);
+			PopUpManager.centerPopUp(popup);
+		}
+		
+		private function viewClosed(event : CloseEvent) : void{
 			PopUpManager.removePopUp(event.target as IFlexDisplayObject);
 		}
 	}
