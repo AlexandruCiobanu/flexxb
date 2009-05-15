@@ -103,12 +103,12 @@
 
 	<!-- The icon the system uses for the application. For at least one resolution,
 		 specify the path to a PNG file included in the AIR package. Optional. -->
-	<!-- <icon>
-		<image16x16></image16x16>
-		<image32x32></image32x32>
-		<image48x48></image48x48>
-		<image128x128></image128x128>
-	</icon> -->
+	<icon>
+		<image16x16>assets/icons/FxMOD_16.png</image16x16>
+		<image32x32>assets/icons/FxMOD_32.png</image32x32>
+		<image48x48>assets/icons/FxMOD_48.png</image48x48>
+		<image128x128>assets/icons/FxMOD_128.png</image128x128>
+	</icon>
 
 	<!-- Whether the application handles the update when a user double-clicks an update version
 	of the AIR file (true), or the default AIR application installer handles the update (false).
@@ -126,33 +126,25 @@
 		<fileType>
 
 			<!-- The name that the system displays for the registered file type. Required. -->
-			<name>FxMOD Design File</name>
+			<name>FxMODDesignFile</name>
 
 			<!-- The extension to register. Required. -->
 			<extension>fmd</extension>
 			
 			<!-- The description of the file type. Optional. -->
-			<!-- <description></description> -->
+			 <description>FLEX Model Object Designer Project File</description>
 			
 			<!-- The MIME type. Optional. -->
-			<!-- <contentType></contentType> -->
+			<contentType>text/xml</contentType>
 			
 			<!-- The icon to display for the file type. Optional. -->
-			<!-- <icon>
-				<image16x16></image16x16>
-				<image32x32></image32x32>
-				<image48x48></image48x48>
-				<image128x128></image128x128>
-			</icon> -->
+			<icon>
+				<image16x16>assets/icons/FxMOD_16.png</image16x16>
+				<image32x32>assets/icons/FxMOD_32.png</image32x32>
+				<image48x48>assets/icons/FxMOD_48.png</image48x48>
+				<image128x128>assets/icons/FxMOD_128.png</image128x128>
+			</icon>
 			
 		</fileType>
 	</fileTypes>
-	<!-- 
-		The themes section is used to define themes located in the themes directory,
-		giving the user the ability to dynamically change the theme of the application 
-	-->
-	<themes>
-		<theme label="Undefined" path="../themes/Undefined.swf" />
-		<theme label="Brownie" path="../themes/Brownie.swf" />
-	</themes>
 </application>
