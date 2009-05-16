@@ -14,30 +14,24 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
- package com.googlecode.flexxb.service
+ */ 
+package com.googlecode.flexxb
 {
-	import flash.events.Event;
 	/**
 	 * 
 	 * @author Alexutz
 	 * 
 	 */	
-	public class SettingsChangedEvent extends Event
+	public final class VERSION
 	{
-		/**
-		 * 
-		 */		
-		public static const SETTINGSCHANGE : String = "settingsChange";
-		/**
-		 * 
-		 * @param bubbles
-		 * @param cancelable
-		 * 
-		 */		
-		public function SettingsChangedEvent(bubbles:Boolean=false, cancelable:Boolean=false)
+		public static function get Version() : String{
+			return "1.1.0";
+		}
+		
+		public function VERSION()
 		{
-			super(SETTINGSCHANGE, bubbles, cancelable);
-		}		
+			throw new Error("Do not instanciate this class");
+		}
+
 	}
 }
