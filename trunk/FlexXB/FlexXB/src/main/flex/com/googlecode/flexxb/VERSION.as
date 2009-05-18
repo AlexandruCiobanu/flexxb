@@ -24,8 +24,29 @@ package com.googlecode.flexxb
 	 */	
 	public final class VERSION
 	{
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public static function get Version() : String{
 			return "1.1.0";
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public static function get Name() : String{
+			return "FlexXB";
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public static function get Link() : String{
+			return "http://code.google.com/p/fxmarker";
 		}
 		
 		public function VERSION()
