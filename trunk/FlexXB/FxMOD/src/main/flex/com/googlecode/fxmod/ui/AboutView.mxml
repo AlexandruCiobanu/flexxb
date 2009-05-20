@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" 
-	title="About..." height="194" showCloseButton="true">
+		title="About..." showCloseButton="true">
 	<mx:Script>
 		<![CDATA[
+			import com.googlecode.fxmod.ApplicationController;
 			import mx.events.CloseEvent;
-			
-			private function close(event : Event) : void{
-				dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
-			}
+			[Bindable]
+			public var applicationController : ApplicationController;
 		]]>
 	</mx:Script>
-	<mx:Label text="FxMOD" color="#FB0802" fontWeight="bold" fontSize="16"/>
-	<mx:Label text="FLEX Model Object Designer" width="292" textAlign="center"/>
-	<mx:Spacer height="100%"/>
+	<mx:HBox width="100%" height="100%">
+		<mx:Image source="/assets/icons/FxMOD_128.png"/>
+		<mx:VBox height="100%" verticalAlign="middle">
+			<mx:Label text="FxMOD" color="#FB0802" fontWeight="bold" fontSize="16"/>
+			<mx:Label text="FLEX Model Object Designer" width="292" textAlign="center"/>
+			<mx:Spacer height="10"/>
+			<mx:Label text="Component versions:"/>
+			<mx:List height="90" width="100%" dataProvider="{applicationController.getComponentVersions()}"
+					selectable="false" backgroundColor="#FFFFFF">
+				<mx:itemRenderer>
+					<mx:Component>
+						<mx:HBox width="100%">
+							<mx:Label toolTip="{data.link}" htmlText="&lt;b&gt;&lt;a href='{data.link}' target='_blank'&gt;{data.name}&lt;/a&gt;&lt;/b&gt;"/>
+							<mx:Spacer width="100%"/>
+							<mx:Label text="{data.version}"/>
+						</mx:HBox>
+					</mx:Component>
+				</mx:itemRenderer>
+			</mx:List>
+		</mx:VBox>
+	</mx:HBox>
+	<mx:Label text="Copyright (c) 2008-2009 Alex Ciobanu. All rights reserved" />
 	<mx:HBox width="100%" horizontalAlign="right">
-		<mx:Button label="OK" click="{close(event)}"/>
+		<mx:Button label="OK" click="{dispatchEvent(new CloseEvent(CloseEvent.CLOSE))}"/>
 	</mx:HBox>
 </mx:TitleWindow>

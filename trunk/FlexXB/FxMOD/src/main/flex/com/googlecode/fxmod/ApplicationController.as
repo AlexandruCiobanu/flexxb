@@ -33,6 +33,9 @@ package com.googlecode.fxmod
 	import mx.core.WindowedApplication;
 	import mx.events.CloseEvent;
 	import mx.managers.PopUpManager;
+	
+	import com.fxmarker.VERSION;
+	import com.googlecode.flexxb.VERSION;
 	/**
 	 * 
 	 * @author Alexutz
@@ -70,7 +73,7 @@ package com.googlecode.fxmod
 			});	
 	
 			// Configuration stuff - see update framework docs for more details
-			appUpdater.updateURL = "http://64.23.34.61/updatesample/update.xml"; // Server-side XML file describing update
+			appUpdater.updateURL = "http://localhost/fxmod/updates/update.xml"; // Server-side XML file describing update
 			appUpdater.isCheckForUpdateVisible = false; // We won't ask permission to check for an update
 			appUpdater.addEventListener(UpdateEvent.INITIALIZED, onUpdate); // Once initialized, run onUpdate
 			appUpdater.addEventListener(ErrorEvent.ERROR, onError); // If something goes wrong, run onError
@@ -138,13 +141,40 @@ package com.googlecode.fxmod
 				//StyleManager.loadStyleDeclarations(model.currentThemePath, true);
 			}
 		}
+		public function onUpdateItemClick(event : Event) : void{
+			
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function getComponentVersions() : Array{
+			var versions : Array = [];
+			versions.push(getVersionDescriptor(com.googlecode.fxmod.VERSION.Name, com.googlecode.fxmod.VERSION.Link, com.googlecode.fxmod.VERSION.Version));
+			versions.push(getVersionDescriptor(com.googlecode.flexxb.VERSION.Name, com.googlecode.flexxb.VERSION.Link, com.googlecode.flexxb.VERSION.Version));
+			versions.push(getVersionDescriptor(com.fxmarker.VERSION.Name, com.fxmarker.VERSION.Link, com.fxmarker.VERSION.Version));
+			return versions;
+		}
+		/**
+		 * 
+		 * @param name
+		 * @param link
+		 * @param version
+		 * @return 
+		 * 
+		 */		
+		private function getVersionDescriptor(name : String, link : String, version : String) : Object{
+			return {name: name, link: link, version: version};
+		}
 		/**
 		 * 
 		 * @param event
 		 * 
 		 */		
 		public final function onAboutItemClick(event : Event) : void{
-			showAndCenterPopup(AboutView);
+			var popup : AboutView = showAndCenterPopup(AboutView) as AboutView;
+			popup.applicationController = this;
 		}
 		
 		private function checkSelectedItem(item : NativeMenuItem) : void{
@@ -156,11 +186,12 @@ package com.googlecode.fxmod
 			}
 		} 
 		
-		private function showAndCenterPopup(clasz : Class) : void{
+		private function showAndCenterPopup(clasz : Class) : Object{
 			var popup : IFlexDisplayObject = new clasz();
 			popup.addEventListener(CloseEvent.CLOSE, viewClosed, false, 0, true);
 			PopUpManager.addPopUp(popup, view, true);
 			PopUpManager.centerPopUp(popup);
+			return popup;
 		}
 		
 		private function viewClosed(event : CloseEvent) : void{
