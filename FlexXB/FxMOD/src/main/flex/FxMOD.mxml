@@ -20,9 +20,10 @@
 		xmlns:fxmod="com.googlecode.fxmod.*"
 		layout="absolute"
 		addedToStage="{stage.nativeWindow.menu = generator.getMenu(controller)}"
-		creationComplete="controller.initialize(this)">
+		creationComplete="controller.initialize(this)" xmlns:text="flash.text.*">
 	<fxmod:ApplicationModelLocator id="model" />
 	<fxmod:ApplicationController id="controller"/>
 	<fxmod:DynamicMenuGenerator id="generator"/>
 	<mx:Canvas width="100%" height="100%"/>
+	<mx:Style source="/assets/css/FxMODStyle.css"/>
 </mx:WindowedApplication>
