@@ -26,7 +26,7 @@ package com.googlecode.flexxb.persistence
 	 */	
 	internal class ChangeTracker
 	{
-		public static function fromPropertyChange(changeEvent : PropertyChangeEvent) : ChangeTracker{
+		public static function fromPropertyChangeEvent(changeEvent : PropertyChangeEvent) : ChangeTracker{
 			if(!changeEvent){
 				throw new Error("Property change event can't be null");
 			}

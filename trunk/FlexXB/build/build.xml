@@ -77,19 +77,7 @@
     	 </exec>
 	</target>
 	<!-- -->
-	<target name="build.fxmod" depends="properties">
-		<exec executable="${amxmlc.bat}">
-			<arg value="-actionscript-file-encoding=UTF-8"/>
-			<arg value="-debug=false"/>
-			<arg value="-keep-generated-actionscript=false"/>
-			<arg value="-source-path+=${fxmod.src.dir}"/>
-			<arg value="-file-specs=${fxmod.src.dir}/FxMOD.mxml"/>
-			<arg value="-output=${fxmod.output}"/>
-			<arg line="-include-libraries ${flexxb.swc.output}"/>
-		</exec>
-	</target>
-	<!-- -->
-	<target name="development" depends="build.flexxb, build.flexxb.test, build.fxmod">
+	<target name="development" depends="build.flexxb, build.flexxb.test">
 		<antcall target="documentation" />
 	</target>
 	<!-- -->

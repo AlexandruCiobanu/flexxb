@@ -163,7 +163,7 @@
 					}
 					return;
 				}
-				var tracker : ChangeTracker = ChangeTracker.fromPropertyChange(event);
+				var tracker : ChangeTracker = ChangeTracker.fromPropertyChangeEvent(event);
 				if(!changeList){
 					changeList = new Dictionary();
 				}
