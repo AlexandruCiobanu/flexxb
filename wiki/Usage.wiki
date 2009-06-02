@@ -14,7 +14,7 @@ To register a custom annotation, subclass of {{{com.googlecode.serializer.flexxb
 To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the xml representation and viceversa:<br/>
 {{{com.googlecode.serializer.flexxb.FlexXBEngine.registerSimpleTypeConverter(converterInstance, overrideExisting)}}}
 
-In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to ad annotations:
+In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to add annotations:
 {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)}}}
 
 *Note*: Make sure you add the following switches to your compiler settings: {{{-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray}}}
@@ -238,4 +238,9 @@ _The resulting xml looks like:_
 
 == API Samples ==
 
-TODO
+The FlexXB API allows developers to specify the way classes should be processed without decorating them with annotations. This is particularly usefull is cases when using an external library whose sources are not available or when you can't modify existing sources for one reason or another. There are two ways of using the API:
+  
+ * Programatically: you can define in code the fields of a specific type that can be processed and how.
+ * Via xml config file: you can define an xml file containing all the information FlexXB engine needs to process thespecified types. This file must oblige to the api schema file located in _*FLEXXB_BINARIES_DIR/api-schema/FlexXB-api.xsd*_.
+
+The main access point for the api is {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api}}}.
