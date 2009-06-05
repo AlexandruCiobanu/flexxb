@@ -20,9 +20,14 @@
 	import com.googlecode.testData.Persist;
 	
 	import flexunit.framework.TestCase;
+	
+	import mx.binding.utils.BindingUtils;
+	import mx.binding.utils.ChangeWatcher;
 
 	public class PersistableObjectTest extends TestCase
 	{
+		public var bindedVar : String;
+		
 		public function PersistableObjectTest(methodName:String=null)
 		{
 			//TODO: implement function
@@ -41,6 +46,21 @@
 			target.test2 = "test 3"
 			target.rollback();
 			validate(target, true, 5, "test");
+		}
+		
+		public function testEditMode() : void{
+			var target : Persist = new Persist();
+			bindedVar = "";
+			var watcher : ChangeWatcher = BindingUtils.bindProperty(this, "bindedVar", target, "test2");
+			target.setEditMode(false);
+			target.test2 = "123";
+			assertEquals("Binded Var not notified (editMode false):", target.test2, bindedVar);
+			target.setEditMode(true);
+			target.test2 = "456";
+			assertEquals("Binded Var notified (editMode true):", "123", bindedVar);
+			target.setEditMode(false);
+			target.test2 +="789";
+			assertEquals("Binded Var not notified (editMode false):", target.test2, bindedVar);
 		}
 		
 		private function validate(target : Persist, ...args) : void{
