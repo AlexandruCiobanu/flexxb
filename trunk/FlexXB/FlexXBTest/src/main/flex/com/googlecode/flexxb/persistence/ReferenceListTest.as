@@ -28,7 +28,19 @@
 		}
 		
 		public function testList() : void{
-			
+			var list : ReferenceList = new ReferenceList(["1", "2", "3"]);
+			list.removeItemAt(0);
+			list.addItem("4");
+			list.addItem("5");
+			list.rollback();
+			assertEquals("Wrong length", 3, list.length);
+			assertEquals("Wronf first element", "1", list.getItemAt(0));
+			assertEquals("Wronf second element", "2", list.getItemAt(1));
+			assertEquals("Wronf third element", "3", list.getItemAt(2));
 		}		
+		
+		public function testEditMode() : void{
+			
+		}
 	}
 }
