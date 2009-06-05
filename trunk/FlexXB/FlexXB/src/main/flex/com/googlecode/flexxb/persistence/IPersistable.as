@@ -37,6 +37,18 @@
 		 */		
 		function get modified() : Boolean;
 		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		function get editMode() : Boolean;
+		/**
+		 * 
+		 * @param mode
+		 * 
+		 */		
+		function setEditMode(mode : Boolean) : void;
+		/**
 		 * Commit the changes made to the object since the previous commit
 		 * 
 		 */		

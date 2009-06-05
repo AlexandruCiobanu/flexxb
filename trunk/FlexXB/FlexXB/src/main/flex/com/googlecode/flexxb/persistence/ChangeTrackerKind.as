@@ -29,13 +29,15 @@ package com.googlecode.flexxb.persistence
 		public static const REMOVE : String = "remove";
 		public static const MOVE : String = "move";
 		public static const REPLACE : String = "replace";
+		public static const RESET : String = "reset";
 		
 		public static function isActionTracked(action : String) : Boolean{
 			return  action == UPDATE || 
 					action == ADD || 
 					action == REMOVE ||
 					action == MOVE || 
-					action == REPLACE;
+					action == REPLACE ||
+					action == RESET;
 		}
 		/**
 		 * Constructor 

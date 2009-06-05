@@ -18,14 +18,15 @@
  package com.googlecode.flexxb.persistence
 {
 	import flash.events.Event;
-	import flash.events.IEventDispatcher;
+	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 	
 	import mx.events.PropertyChangeEvent;
 		
 	[Bindable]
 	/**
-	 * Main implementation of IPersistable. It should be base for all model objects that need initial state memory capabilities such as IPersistable allows.
+	 * Main implementation of IPersistable. It should be base for all model objects that 
+	 * need initial state memory capabilities such as IPersistable allows.
 	 * It uses the methods <code>commit()</code> and <code>rollback()</code> to save the
 	 * current state or to revert to the previously saved state.
 	 * <p>Basically, this object listens for changes to all its public properties and 
@@ -38,13 +39,38 @@
 	 * @author Alexutz
 	 * 
 	 */	
-	public class PersistableObject implements IPersistable, IEventDispatcher
+	public class PersistableObject extends EventDispatcher implements IPersistable
 	{		
 		private var _modified  : Boolean;
 		
 		private var changeList : Dictionary;
 		
 		private var listen : Boolean = true;
+		
+		private var _editMode : Boolean;
+		/**
+		 * Constructor 
+		 * 
+		 */		
+		public function PersistableObject(){
+			addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, this.valueChanged, false, 150, false);
+		}
+		/**
+		 * 
+		 * @see IPersistable#editMode()
+		 * 
+		 */		
+		public function get editMode() : Boolean{
+			return _editMode;
+		}
+		/**
+		 * 
+		 * @see IPersistable#setEditMode()
+		 * 
+		 */		
+		public function setEditMode(mode : Boolean) : void{
+			_editMode = mode;
+		}
 		/**
 		 * 
 		 * @see IPersistable#modified() 
@@ -105,55 +131,24 @@
 			}
 		}
 		/**
-		 * Add a listener for an event type
-		 * @param type
-		 * @param listener
-		 * @param useCapture
-		 * @param priority
-		 * @param useWeakReference
-		 * 
-		 */		
-		public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void{}
-		/**
-		 * Remove a registered listener for an event type
-		 * @param type
-		 * @param listener
-		 * @param useCapture
-		 * 
-		 */		
-		public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void{}
-		/**
 		 * Dispacth the specified event
 		 * @param event
 		 * @return dispatch succeeded
 		 * 
 		 */		
-		public function dispatchEvent(event : Event):Boolean
+		public override function dispatchEvent(event : Event):Boolean
 		{
-			if(event is PropertyChangeEvent && event.type == PropertyChangeEvent.PROPERTY_CHANGE){
+			if(editMode && event is PropertyChangeEvent && event.type == PropertyChangeEvent.PROPERTY_CHANGE){
 				valueChanged(PropertyChangeEvent(event));
+				return true;
 			}
-			return true;
-		}
-		/**
-		 * Check if there is an event listener specified for the specific event
-		 * @param type event type
-		 * @return 
-		 * 
-		 */		
-		public function hasEventListener(type:String):Boolean{
-			return type==PropertyChangeEvent.PROPERTY_CHANGE;
-		}
-		/**
-		 * 
-		 * @param type
-		 * @return 
-		 * 
-		 */		
-		public function willTrigger(type:String):Boolean{
-			return hasEventListener(type);
+			return super.dispatchEvent(event);
 		}	
-		
+		/**
+		 * 
+		 * @param event
+		 * 
+		 */		
 		private function valueChanged(event : PropertyChangeEvent) : void{
 			if(listen){
 				var name : String = event.property as String;

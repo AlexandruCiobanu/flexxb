@@ -17,6 +17,7 @@
  */
 package com.googlecode.flexxb.persistence
 {
+	import flash.events.Event;
 	import flash.utils.Dictionary;
 	
 	import mx.collections.ArrayCollection;
@@ -31,8 +32,12 @@ package com.googlecode.flexxb.persistence
 	public class ReferenceList extends ArrayCollection implements IPersistable
 	{
 		private var _modified : Boolean;
+		
 		private var listen : Boolean = true;
+		
 		private var changeList : Dictionary;
+		
+		private var _editMode : Boolean;
 		/**
 		 * Constructor
 		 * @param source
@@ -41,7 +46,23 @@ package com.googlecode.flexxb.persistence
 		public function ReferenceList(source:Array=null)
 		{
 			super(source);
-			addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange);
+			addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 150, false);
+		}
+		/**
+		 * 
+		 * @see IPersistable#editMode() 
+		 * 
+		 */		
+		public function get editMode() : Boolean{
+			return _editMode;
+		}
+		/**
+		 * 
+		 * @see IPersistable#setEditMode()
+		 * 
+		 */		
+		public function setEditMode(mode : Boolean) : void{
+			_editMode = mode;
 		}
 		/**
 		 * 
@@ -91,7 +112,23 @@ package com.googlecode.flexxb.persistence
 				setModified(false);
 			}
 		}
-		
+		/**
+		 * 
+		 * @see flash.events.EventDispatcher#dispatchEvent() 
+		 * 
+		 */		
+		public override function dispatchEvent(event:Event) : Boolean{
+			if(event is CollectionEvent){
+				onCollectionChange(event as CollectionEvent);
+				return true;
+			}
+			return super.dispatchEvent(event);
+		}
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
 		private function setModified(value : Boolean) : void{
 			_modified = value;
 			if(!value && changeList){
