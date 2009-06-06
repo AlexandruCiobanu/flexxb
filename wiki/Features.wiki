@@ -20,8 +20,6 @@ This page will contain a list of features and requirements I have planned for my
  All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application.
  * FXB-006 *Class type identification by response's namespace on deserialization*: 
  Object types that should be used in deserialization should be determined from the namespaces present in the xml response.
- * FXB-007 *Flex Model Object Designer (FxMOD)*: 
- FXMOD is a utility designed to assist object composition and code generation. It allows the user to visualy assemble the classes it requires for its model and will automatically generate the AS code. The user will be able to deem its objects as being serializable (AMF or XML) and have the option of setting a custom serialization process if needed. If he opts for xml serialization he'll be able to specify the way he wants each field (de)serialized by setting the right annotations.
  * FXB-008 *Custom to and from string conversion for simple types*: 
  Some simple types (such as Date) may require custom conversion methods to and from String values.
  * FXB-009 *Use paths in xml aliases*: 
@@ -40,6 +38,8 @@ This page will contain a list of features and requirements I have planned for my
  FlexXB should provide a data service that is able to send xml requests and receive xml responses.
  * FXB-016 *Annotation API*:
  FlexXB should provide an API to allow developers to programatically describe object types to be registered in the FlexXB engine.
+ * FXB-017 *Constructor Annotation*:
+ There are cases in which the business objects have parametered constructors which should not default to null in order to inforce some business constraints. FlexXB should provide a way to annotate the constructors along with the parameers they take. Due to the fact that those parameters will more than likely have values found in the xml (like serialized object fields) the parameters will reference a field that will be the end-receiver of the value. 
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
 ||FXB-002||Xml alias||1.0 _alpha_||
@@ -54,6 +54,6 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-006||Class type identification by response's namespace on deserialization||1.0||
 ||FXB-009||Use paths in xml aliases||1.0||
 ||FXB-016||Annotation API||1.1||
+||FXB-017||Constructor Annotation||1.2||
 ||FXB-013||Add method references to annotation's attribute values||2.0||
-||FXB-007||Flex Model Object Designer||2.0||
 ||FXB-011||XSD validation against incoming XML||3.0||
