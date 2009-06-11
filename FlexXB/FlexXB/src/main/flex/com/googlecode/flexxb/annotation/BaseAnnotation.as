@@ -15,37 +15,41 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.util
+package com.googlecode.flexxb.annotation
 {
 	/**
 	 * 
 	 * @author Alexutz
 	 * 
 	 */	
-	public final class FlexXBUtil
+	internal class BaseAnnotation
 	{
 		/**
 		 * 
-		 */		
-		public static const CDATA_START : String = "<![CDATA[";
-		/**
+		 * @param descriptor
 		 * 
 		 */		
-		public static const CDATA_END : String = "]]>";
-		/**
-		 * 
-		 * @param value
-		 * @return 
-		 * 
-		 */		
-		public static function getCDATAValue(value : String) : String{
-			return CDATA_START + value + CDATA_END;
-		}
-		
-		
-		public function FlexXBUtil()
+		public function BaseAnnotation(descriptor : XML)
 		{
-			throw new Error("Do not instanciate FlexXBUtil class. Use static members instead");
+			if(!descriptor){
+				throw new Error("The xml descriptor must not be empty.");
+			}
+			parse(descriptor);
 		}
+		/**
+		 * Get the annotation's name used in descriptor
+		 * @return annotation name
+		 * 
+		 */	
+		public function get annotationName() : String{
+			return "";
+		}
+		/**
+		 * @private
+		 * Analyze field/class descriptor to extract base informations like field's name and type
+		 * @param field field descriptor
+		 * 
+		 */			
+		protected function parse(descriptor : XML) : void{ }
 	}
 }

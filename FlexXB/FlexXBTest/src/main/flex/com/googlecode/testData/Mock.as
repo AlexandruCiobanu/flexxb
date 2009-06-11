@@ -45,7 +45,7 @@
 		}
 		
 		public var someExcludedField  : Boolean;
-		
+		[Argument(ref="version", optional="false")]
 		public function Mock(){
 			//TODO: implement function
 		}

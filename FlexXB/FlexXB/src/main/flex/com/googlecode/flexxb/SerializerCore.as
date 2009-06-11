@@ -30,6 +30,7 @@
 	import com.googlecode.flexxb.serializer.XmlAttributeSerializer;
 	import com.googlecode.flexxb.serializer.XmlClassSerializer;
 	import com.googlecode.flexxb.serializer.XmlElementSerializer;
+	import com.googlecode.flexxb.util.Instanciator;
 	
 	import flash.events.EventDispatcher;
 
@@ -69,6 +70,8 @@
 			}
 			_descriptorStore = descriptor;
 			_converterStore = converter;
+			addEventListener(XmlEvent.PRE_DESERIALIZE, preDeserializeHandler, false, 150, true);
+			addEventListener(XmlEvent.POST_DESERIALIZE, postDeserializeHandler, false, 150, true);
 		}
 		/**
 		 * 
@@ -153,44 +156,59 @@
 				if(objectClass){
 					var result : Object;
 					var id : String = getId(objectClass, xmlData);
-									
+					var foundInCache : Boolean;				
+					
 					//get object from cache
 					if(id && ModelObjectCache.instance.isCached(id, objectClass)){
 						if(getFromCache){
 							return ModelObjectCache.instance.getObject(id, objectClass);
 						}
 						result = ModelObjectCache.instance.getObject(id, objectClass);
-					}else{
-						result = new objectClass();
+						if(result){
+							foundInCache = true;
+						}
+					}
+					
+					var classDescriptor : XmlClass;
+					if(!_descriptorStore.isCustomSerializable(objectClass)){	
+						classDescriptor = _descriptorStore.getDescriptor(objectClass);
+					}
+					
+					if(!foundInCache){
+						//if object is auto processed, get constructor arguments declarations
+						var _arguments : Array;				
+						if(!_descriptorStore.isCustomSerializable(objectClass) && !classDescriptor.constructor.isDefault()){
+							_arguments = [];
+							for each(var member : XmlMember in classDescriptor.constructor.parameterFields){
+								var data : Object = AnnotationFactory.instance.getSerializer(member).deserialize(xmlData, member, this);
+								_arguments.push(data);
+							}
+						}
+						//create object instance
+						result = Instanciator.getInstance(objectClass, _arguments);
+						//put new object in cache
 						if(id){
 							ModelObjectCache.instance.putObject(id, result);
-						}
+						}	
 					}
 					
 					//dispatch preDeserializeEvent
 					dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
 					
-					if(result is PersistableObject){
-						PersistableObject(result).stopListening();
-					}
 					//update object fields
-					if(result is IXmlSerializable){	
+					if(_descriptorStore.isCustomSerializable(objectClass)){	
 						IXmlSerializable(result).fromXml(xmlData);
 					}else{
-						var classDescriptor : XmlClass = _descriptorStore.getDescriptor(result);
+						//iterate through anotations
 						for each(var annotation : XmlMember in classDescriptor.members){	
-							if(annotation.readOnly){
+							if(annotation.readOnly || classDescriptor.constructor.hasParameterField(annotation)){
 								continue;
 							}
 							var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
 							result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
 						}
 					}
-					if(result is PersistableObject){
-						PersistableObject(result).commit();
-						PersistableObject(result).startListening();
-					}
-					
+									
 					//dispatch postDeserializeEvent
 					dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
 					
@@ -232,5 +250,27 @@
 			}
 			return id;
 		}
+		/**
+		 * 
+		 * @param event
+		 * 
+		 */		
+		private function preDeserializeHandler(event : XmlEvent) : void{
+			if(event.object is PersistableObject){
+				PersistableObject(event.object).stopListening();
+			}
+		}
+		/**
+		 * 
+		 * @param event
+		 * 
+		 */		
+		private function postDeserializeHandler(event : XmlEvent) : void{
+			var result : Object = event.object;
+			if(result is PersistableObject){
+				PersistableObject(result).commit();
+				PersistableObject(result).startListening();
+			}
+		}		
 	}
 }

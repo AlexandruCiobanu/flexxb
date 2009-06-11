@@ -17,13 +17,26 @@
  */ 
  package com.googlecode.flexxb.annotation
 {
+	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.Mock;
+	
+	import flash.utils.describeType;
 	
 	
 	public class XmlClassTest extends AnnotationTest
 	{
 		public function XmlClassTest(methodName:String=null){
 			super(methodName);
+		}
+		
+		public function testConstructorParameters() : void{
+			var target : ConstructorRefObj = new ConstructorRefObj("test", 1, true);
+			FlexXBEngine.instance.serialize(null);
+			var cls : XmlClass = new XmlClass(describeType(ConstructorRefObj));
+			assertFalse("Class constructor should not be default", cls.constructor.isDefault());
+			assertNotNull("ParameterFields is Null", cls.constructor.parameterFields);
+			assertEquals("There are more or less than 3 parameters",3, cls.constructor.parameterFields.length);			
 		}
 		
 		protected override function runTest(descriptor:XML):void{
