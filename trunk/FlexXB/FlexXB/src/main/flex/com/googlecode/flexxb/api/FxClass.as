@@ -186,6 +186,7 @@ package com.googlecode.flexxb.api
 			this.prefix = xmlData.@prefix;
 			this.uri = xmlData.@uri;
 			this.ordered = xmlData.@ordered == true;
+			
 			return this;
 		}
 		

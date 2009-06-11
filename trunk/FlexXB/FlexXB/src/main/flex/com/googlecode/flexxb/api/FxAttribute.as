@@ -24,6 +24,7 @@ package com.googlecode.flexxb.api
 	 */	
 	public class FxAttribute extends FxMember
 	{
+		public static const INCOMING_XML_NAME : String = "Attribute";
 		/**
 		 * 
 		 * @param name
