@@ -56,10 +56,10 @@ package com.googlecode.flexxb
 		 * 
 		 * @see IFlexXBApi#processDescriptorsFromXml()
 		 * 
-		 *	
+		 */	
 		public function processDescriptorsFromXml(xml : XML) : void{
 			if(xml){
-				var apiWrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper) as FxApiWrapper;
+				var apiWrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
 				if(apiWrapper){
 					for each(var classDescriptor : FxClass in apiWrapper.descriptors){
 						if(classDescriptor){
@@ -68,6 +68,6 @@ package com.googlecode.flexxb
 					}
 				}
 			}
-		}	*/
+		}
 	}
 }

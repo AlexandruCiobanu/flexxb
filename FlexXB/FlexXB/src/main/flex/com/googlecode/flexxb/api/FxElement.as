@@ -26,6 +26,7 @@ package com.googlecode.flexxb.api
 	 */	
 	public class FxElement extends FxMember
 	{
+		public static const INCOMING_XML_NAME : String = "Element";
 		/**
 		 * 
 		 * @param name
@@ -69,5 +70,10 @@ package com.googlecode.flexxb.api
 			items["serializePartialElement"] = serializePartialElement;
 			return items;
 		}	
+			
+		protected override function xmlToObject(xml : XML) : void{
+			this.getFromCache = xml.@getFromCache;
+			this.serializePartialElement = xml.@serializePartialElement;
+		}
 	}
 }

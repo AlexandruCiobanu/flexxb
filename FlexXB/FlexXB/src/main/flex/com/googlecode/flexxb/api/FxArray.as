@@ -18,6 +18,7 @@
 package com.googlecode.flexxb.api
 {
 	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * 
@@ -26,6 +27,7 @@ package com.googlecode.flexxb.api
 	 */	
 	public class FxArray extends FxElement
 	{
+		public static const INCOMING_XML_NAME : String = "Array";
 		/**
 		 * 
 		 * @param name
@@ -68,6 +70,12 @@ package com.googlecode.flexxb.api
 			items["memberName"] = memberName;
 			items["type"] = memberType;
 			return items;
-		}		
+		}	
+		
+		protected override function xmlToObject(xml : XML) : void{
+			super.xmlToObject(xml);
+			this.memberName = xml.@memberName;
+			this.memberType = getDefinitionByName(xml.@memberType) as Class;
+		}	
 	}
 }

@@ -28,6 +28,7 @@ package com.googlecode.flexxb.api
 	 * @author Alexutz
 	 * 
 	 */	
+	[XmlClass(alias="Field")]
 	public class FxField implements IXmlSerializable
 	{
 		/**
@@ -63,7 +64,8 @@ package com.googlecode.flexxb.api
 		 * 
 		 * @return 
 		 * 
-		 */		
+		 */	
+		[XmlAtribute]	
 		public function get name () : String{
 			return _name;
 		} 
@@ -82,7 +84,8 @@ package com.googlecode.flexxb.api
 		 * 
 		 * @return 
 		 * 
-		 */		
+		 */
+		[XmlAtribute]		
 		public function get type () : Class{
 			return _type;
 		} 
@@ -101,7 +104,8 @@ package com.googlecode.flexxb.api
 		 * 
 		 * @return 
 		 * 
-		 */		
+		 */
+		[XmlAtribute]		
 		public function get accessType () : AccessorType{
 			return _accessType;
 		} 

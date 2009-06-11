@@ -103,8 +103,21 @@ package com.googlecode.flexxb.api
 		 */		
 		public function fromXml(xmlData:XML):Object
 		{
+			this.alias = xmlData.@alias;
+			this.ignoreOn = xmlData.@ignoreOn; 
+			this.order = xmlData.@order;
+			//if(xmlData.children().length() == 1){
+			//	this.field = new FxField().fromXml(xmlData.children()[0]) as FxField;
+			//}
+			xmlToObject(xmlData);
 			return this;
 		}
+		/**
+		 * 
+		 * @param xml
+		 * 
+		 */		
+		protected function xmlToObject(xml : XML) : void{}
 		/**
 		 * 
 		 * @return 
