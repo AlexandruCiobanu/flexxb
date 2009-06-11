@@ -17,6 +17,7 @@
  */ 
  package com.googlecode.flexxb
 {
+	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
@@ -58,13 +59,22 @@
 		public function testSerializeWithNS() : void{
 			var target : Mock = getObject();
 			var xml : XML = FlexXBEngine.instance.serialize(target);
-			var copy : Mock = FlexXBEngine.instance.deserialize(xml, Mock) as Mock;
+			var copy : Mock = FlexXBEngine.instance.deserialize(xml, Mock);
 			compare(target, copy);
 			var nss  :Array = xml.inScopeNamespaces();
 			var str  :String = xml.toXMLString().split(nss[0].prefix+":").join("").split("xmlns:"+nss[0].prefix+"=\""+nss[0].uri+"\"").join("");
 			xml = XML(str);
-			copy = FlexXBEngine.instance.deserialize(xml, Mock) as Mock;
+			copy = FlexXBEngine.instance.deserialize(xml, Mock);
 			compare(target, copy);
+		}
+		
+		public function testCustomConstructor() : void{
+			var target : ConstructorRefObj = new ConstructorRefObj("test", 1, true);
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var copy : ConstructorRefObj = FlexXBEngine.instance.deserialize(xml, ConstructorRefObj);
+			assertEquals("Ref1 is different", target.ref1, copy.ref1);
+			assertEquals("Ref2 is different", target.ref2, copy.ref2);
+			assertEquals("Ref3 is different", target.ref3, copy.ref3);
 		}
 		
 		public function testSerializeWithoutNS() : void{
@@ -73,7 +83,7 @@
 			target.id = 5;
 			target.version = 33;
 			var xml : XML = FlexXBEngine.instance.serialize(target);
-			var copy : Mock3 = FlexXBEngine.instance.deserialize(xml, Mock3) as Mock3;
+			var copy : Mock3 = FlexXBEngine.instance.deserialize(xml, Mock3);
 			assertEquals("Attribute is wrong", target.attribute, copy.attribute);
 			assertEquals("id is wrong", target.id, copy.id);
 			assertEquals("version is wrong", target.version, copy.version);
@@ -85,7 +95,7 @@
 			target.identity = 345;
 			target.reference = "SOmeRef";
 			var xml : XML = FlexXBEngine.instance.serialize(target);
-			var copy : XmlPathObject = FlexXBEngine.instance.deserialize(xml, XmlPathObject) as XmlPathObject;
+			var copy : XmlPathObject = FlexXBEngine.instance.deserialize(xml, XmlPathObject);
 			assertEquals("Identity is wrong", target.identity, copy.identity);
 			assertEquals("Reference is wrong", target.reference, copy.reference);			
 			assertEquals("DefaultTest is wrong", target.defaultTest, copy.defaultTest);

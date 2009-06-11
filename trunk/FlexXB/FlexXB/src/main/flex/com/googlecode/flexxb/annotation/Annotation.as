@@ -29,7 +29,7 @@
 	 * @author aCiobanu
 	 * 
 	 */	
-	public class Annotation
+	public class Annotation extends BaseAnnotation
 	{
 		/**
 		 * 
@@ -65,10 +65,7 @@
 		 * 
 		 */				
 		public function Annotation(descriptor : XML){
-			if(!descriptor){
-				throw new Error("The field's xml descriptor must not be empty.");
-			}
-			parse(descriptor);
+			super(descriptor);
 		}
 		/**
 		 * 
@@ -118,14 +115,6 @@
 			}
 		}
 		/**
-		 * Get the annotation's name used in descriptor
-		 * @return annotation name
-		 * 
-		 */				
-		public function get annotationName() : String{
-			return "";
-		}
-		/**
 		 * 
 		 * @return 
 		 * 
@@ -147,7 +136,7 @@
 		 * @param field field descriptor
 		 * 
 		 */				
-		protected function parse(field : XML) : void
+		protected override function parse(field : XML) : void
 		{
 			if(field.@name.length() > 0){
 				_fieldName = field.@name;

@@ -24,7 +24,7 @@ package com.googlecode.flexxb
 			obj.id = 352;
 			obj.attribute = true;
 			var xml : XML = FlexXBEngine.instance.serialize(obj);
-			var copy : Mock3 = FlexXBEngine.instance.deserialize(xml, Mock3) as Mock3;
+			var copy : Mock3 = FlexXBEngine.instance.deserialize(xml, Mock3);
 			assertEquals(copy.id, obj.id);
 			assertTrue("Deserialized object not cached", ModelObjectCache.instance.isCached(String(copy.id), Mock3));
 			assertEquals("Different instances", copy, ModelObjectCache.instance.getObject(String(copy.id), Mock3));

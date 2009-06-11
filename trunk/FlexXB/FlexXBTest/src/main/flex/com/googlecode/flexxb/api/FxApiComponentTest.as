@@ -91,19 +91,18 @@ package com.googlecode.flexxb.api
 			person.lastName = "Doe";
 			person.birthDate = new Date();
 			person.age = 34;
-			var xml  :XML = FlexXBEngine.instance.serialize(person);
-			var copy : Person = FlexXBEngine.instance.deserialize(xml, Person) as Person;
+			var xml : XML = FlexXBEngine.instance.serialize(person);
+			var copy : Person = FlexXBEngine.instance.deserialize(xml, Person);
 			assertEquals("Wrong firstName", person.firstName, copy.firstName);
 			assertEquals("Wrong lastName", person.lastName, copy.lastName);
 			assertEquals("Wrong birthDate", person.birthDate.toString(), copy.birthDate.toString());
 			assertEquals("Wrong age", 0, copy.age);
 		}
 		
-		/*public function testFileDescriptorProcessing() : void{
-			new PhoneNumber();new Address();
-			var xml : XML = getXmlDescriptor();
-			FlexXBEngine.instance.api.processDescriptorsFromXml(xml);
-		}*/
+		public function testFileDescriptorProcessing() : void{
+			/*var xml : XML = getXmlDescriptor();
+			FlexXBEngine.instance.api.processDescriptorsFromXml(xml);*/
+		}
 		
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void{
 			doElementAssertion(apiMember, xmlArray);

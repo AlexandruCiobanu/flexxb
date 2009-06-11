@@ -84,14 +84,19 @@ package com.googlecode.flexxb.annotation
 		 */		
 		private var _useChildNamespace : String;
 		/**
-		 * 
+		 * @private
 		 */		
 		private var _ordered : Boolean;
+		/**
+		 * 
+		 */		
+		private var _constructor : Constructor;
 		/**
 		 *Constructor 
 		 * 
 		 */		
 		public function XmlClass(descriptor : XML){
+			_constructor = new Constructor(this);
 			super(descriptor);
 		}
 		/**
@@ -141,6 +146,10 @@ package com.googlecode.flexxb.annotation
 				}
 			}
 			return null;
+		}
+		
+		public function get constructor() : Constructor{
+			return _constructor;
 		}
 		/**
 		 * 
@@ -197,19 +206,17 @@ package com.googlecode.flexxb.annotation
 		 */		
 		protected override function parse(descriptor : XML):void{
 			super.parse(descriptor);
-			var type : String;
-			if(descriptor.name() == "type"){
-				_fieldName = _fieldName.substring(_fieldName.lastIndexOf(":") + 1);
-				type = descriptor.@name;
-				_fieldType = getDefinitionByName(type) as Class;
-			}else if(descriptor.name() == "factory"){
-				type = descriptor.@type;
-				_fieldName = type.substring(type.lastIndexOf(":") + 1);
-			}
+			var type : String = descriptor.@name;
+			_fieldName = type.substring(type.lastIndexOf(":") + 1);
+			_fieldType = getDefinitionByName(type) as Class;
 			if(!alias || alias.length == 0 || alias == type){
 				setAlias(_fieldName);
 			}
+			if(descriptor.factory.length() > 0){
+				descriptor = descriptor.factory[0];
+			}
 			processMembers(descriptor);
+			constructor.parse(descriptor);
 		}
 		/**
 		 * 
