@@ -116,7 +116,7 @@ package com.googlecode.flexxb
 		 * @return object of type objectClass 
 		 * 
 		 */		
-		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : Object{
+		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : *{
 			return core.deserialize(xmlData, objectClass, getFromCache);
 		}
 		/**
