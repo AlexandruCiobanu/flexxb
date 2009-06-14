@@ -1,5 +1,5 @@
 /****************************************************************************/
-/**					FlexXB version 1.1 (02-05-2009)				   **/
+/**					FlexXB version 1.2 (20-06-2009)				   **/
 /**							by Alex Ciobanu								   **/
 /****************************************************************************/
 
@@ -7,7 +7,7 @@ Copyright 2008 - 2009 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-FlexXB-1_1-02052009-bin.zip - contains the flexxb library along with the test 
+FlexXB-1_2-20062009-bin.zip - contains the flexxb library along with the test 
 							application
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
@@ -17,7 +17,7 @@ FlexXB-1_1-02052009-bin.zip - contains the flexxb library along with the test
 			/samples/			- samples showing FlexXB's features 
 			/README.txt	- version release notes
 
-FlexXB-1_1-02052009-src.zip - contains source files
+FlexXB-1_2-20062009-src.zip - contains source files
 			/FlexXB/	- FlexXB project sources
 			/FlexXBTest - FlexXB test application sources
 
@@ -70,6 +70,7 @@ FEATURES
 	* FXB-015 Xml Service
 	* FXB-009 Use paths in xml aliases
 	* FXB-016 Annotation API
+	* FXB-017 Constructor Annotation
 	
 USAGE
 
@@ -88,13 +89,16 @@ com.googlecode.serializer.flexxb.FlexXBEngine.instance.registerSimpleTypeConvert
 In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to ad annotations:
 com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)
 
-Note: Make sure you add the following switches to your compiler settings:
-	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray
+!NOTE!: Make sure you add the following switches to your compiler settings:
+	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray -keep-as3-metadata ConstructorArg
 
 Annotation syntax:
 
 XmlClass
 [XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")] 
+
+ConstructorArg
+[ConstructorArg(reference="element", optional="true|false")]
 
 XmlAttribute
 [XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")] 
@@ -117,6 +121,11 @@ set to "*" then the deserialization process will return null for that field.
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+
+1.2 - 20-06-2009
+	- Fix 11: Issue 11 - Error in library 1.1 ,mx.managers:ISystemManager does not implements interface mx.managers:ISystemManager 
+	- Feature: FXB-017 - Constructor Annotation
+	- Enhancement: PersistableObject
 
 1.1 - 01-05-2009
 	- Fix: Issue 10 - Allow serialization of read-only properties

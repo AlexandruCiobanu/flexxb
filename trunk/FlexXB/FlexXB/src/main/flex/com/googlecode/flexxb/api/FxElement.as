@@ -23,7 +23,10 @@ package com.googlecode.flexxb.api
 	 * 
 	 * @author Alexutz
 	 * 
-	 */	
+	 */
+	[XmlClass(alias="Element")]
+	[ConstructorArg(reference="field")]
+	[ConstructorArg(reference="alias")]	
 	public class FxElement extends FxMember
 	{
 		public static const INCOMING_XML_NAME : String = "Element";
@@ -41,10 +44,13 @@ package com.googlecode.flexxb.api
 			var element : FxElement = new FxElement(field, alias);
 			return element;
 		}
+		[XmlAttribute]
 		/**
 		 * 
 		 */		
 		public var getFromCache : Boolean;
+		
+		[XmlAttribute]
 		/**
 		 * 
 		 */

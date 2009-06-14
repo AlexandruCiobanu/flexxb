@@ -25,20 +25,26 @@ package com.googlecode.flexxb.api
 	 * @author Alexutz
 	 * 
 	 */	
-	internal class FxMember implements IXmlSerializable
+	internal class FxMember
 	{
 		/**
 		 * 
 		 */		
 		protected var field : FxField;
+		
+		[XmlAttribute]
 		/**
 		 * 
 		 */		
 		public var alias : String;
+		
+		[XmlAttribute]
 		/**
 		 * 
 		 */		
 		public var ignoreOn : Stage = null;
+		
+		[XmlAttribute]
 		/**
 		 * 
 		 */		

@@ -23,12 +23,8 @@
 	 * @author Alexutz
 	 * 
 	 */		
-	internal class XmlConverter implements IConverter
-	{
-		{
-			FlexXBEngine.instance.registerSimpleTypeConverter(new XmlConverter());
-		}
-		
+	public final class XmlConverter implements IConverter
+	{		
 		public function get type():Class
 		{
 			return XML;

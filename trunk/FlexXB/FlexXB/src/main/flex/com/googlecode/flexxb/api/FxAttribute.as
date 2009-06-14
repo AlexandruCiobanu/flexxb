@@ -22,6 +22,9 @@ package com.googlecode.flexxb.api
 	 * @author Alexutz
 	 * 
 	 */	
+	[XmlClass(alias="Attribute")]
+	[ConstructorArg(reference="field")]
+	[ConstructorArg(reference="alias")]
 	public class FxAttribute extends FxMember
 	{
 		public static const INCOMING_XML_NAME : String = "Attribute";

@@ -27,11 +27,15 @@ package com.googlecode.flexxb.api
 	 * @author Alexutz
 	 * 
 	 */	
-	public class FxClass implements IXmlSerializable
+	[XmlClass(alias="Class")]
+	[ConstructorArg(reference="type")]
+	[ConstructorArg(reference="alias")]
+	public class FxClass
 	{
 		/**
 		 * 
-		 */		
+		 */	
+		[XmlAttribute]	
 		public var alias : String;
 		/**
 		 * 
@@ -39,11 +43,13 @@ package com.googlecode.flexxb.api
 		public var prefix : String;
 		/**
 		 * 
-		 */		
+		 */	
+		[XmlAttribute]	
 		public var uri : String;
 		/**
 		 * 
-		 */		
+		 */	
+		[XmlAttribute]	
 		public var ordered : Boolean;
 		/**
 		 * 
@@ -57,11 +63,13 @@ package com.googlecode.flexxb.api
 		 *Constructor 
 		 * 
 		 */		
-		public function FxClass(type : Class = null, alias : String = null)
+		public function FxClass(type : Class, alias : String = null)
 		{
 			this._type = type;
 			this.alias = alias;
 		}
+		
+		[XmlAttribute]
 		/**
 		 * 
 		 * @return 
