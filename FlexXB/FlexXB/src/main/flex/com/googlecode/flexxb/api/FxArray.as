@@ -25,6 +25,9 @@ package com.googlecode.flexxb.api
 	 * @author Alexutz
 	 * 
 	 */	
+	[XmlClass(alias="Array")]
+	[ConstructorArg(reference="field")]
+	[ConstructorArg(reference="alias")]
 	public class FxArray extends FxElement
 	{
 		public static const INCOMING_XML_NAME : String = "Array";
@@ -42,10 +45,14 @@ package com.googlecode.flexxb.api
 			var array : FxArray = new FxArray(field, alias);
 			return array;
 		}
+		
+		[XmlAttribute]
 		/**
 		 * 
 		 */		
 		public var memberName : String;
+		
+		[XmlAttribute]
 		/**
 		 * 
 		 */		

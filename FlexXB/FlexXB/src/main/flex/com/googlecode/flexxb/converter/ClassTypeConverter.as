@@ -26,12 +26,8 @@
 	 * @author Alexutz
 	 * 
 	 */	
-	internal class ClassTypeConverter implements IConverter
-	{
-		{
-			FlexXBEngine.instance.registerSimpleTypeConverter(new ClassTypeConverter());
-		}
-		
+	public final class ClassTypeConverter implements IConverter
+	{		
 		public function get type():Class
 		{
 			return Class;

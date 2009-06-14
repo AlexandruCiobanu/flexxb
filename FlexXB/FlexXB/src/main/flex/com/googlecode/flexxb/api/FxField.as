@@ -29,6 +29,8 @@ package com.googlecode.flexxb.api
 	 * 
 	 */	
 	[XmlClass(alias="Field")]
+	[ConstructorArg(reference="name")]
+	[ConstructorArg(reference="type")]
 	public class FxField implements IXmlSerializable
 	{
 		/**
@@ -47,7 +49,7 @@ package com.googlecode.flexxb.api
 		 * 
 		 * @param name
 		 * @param type
-		 * @param accessTYpe
+		 * @param accessType
 		 * 
 		 */			
 		public function FxField(name : String, type : Class, accessType : AccessorType = null)

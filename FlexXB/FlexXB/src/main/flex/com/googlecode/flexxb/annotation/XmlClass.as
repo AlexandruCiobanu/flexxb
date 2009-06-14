@@ -206,7 +206,10 @@ package com.googlecode.flexxb.annotation
 		 */		
 		protected override function parse(descriptor : XML):void{
 			super.parse(descriptor);
-			var type : String = descriptor.@name;
+			var type : String = descriptor.@type;
+			if(!type){
+				type = descriptor.@name;
+			}
 			_fieldName = type.substring(type.lastIndexOf(":") + 1);
 			_fieldType = getDefinitionByName(type) as Class;
 			if(!alias || alias.length == 0 || alias == type){

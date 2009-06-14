@@ -100,8 +100,9 @@ package com.googlecode.flexxb.api
 		}
 		
 		public function testFileDescriptorProcessing() : void{
-			/*var xml : XML = getXmlDescriptor();
-			FlexXBEngine.instance.api.processDescriptorsFromXml(xml);*/
+			new PhoneNumber();new Person();new Address();
+			var xml : XML = getXmlDescriptor();
+			FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
 		}
 		
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void{

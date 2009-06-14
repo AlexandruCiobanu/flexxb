@@ -20,6 +20,8 @@ package com.googlecode.flexxb
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.api.IFlexXBApi;
 	import com.googlecode.flexxb.converter.IConverter;
+	import com.googlecode.flexxb.converter.ClassTypeConverter;
+	import com.googlecode.flexxb.converter.XmlConverter;
 	
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
@@ -90,6 +92,9 @@ package com.googlecode.flexxb
 			converterStore = new ConverterStore();
 			core = new SerializerCore(descriptorStore, converterStore);
 			_api = new FlexXBApi(descriptorStore);
+						
+			registerSimpleTypeConverter(new ClassTypeConverter());
+			registerSimpleTypeConverter(new XmlConverter());
 		}
 		/**
 		 * 

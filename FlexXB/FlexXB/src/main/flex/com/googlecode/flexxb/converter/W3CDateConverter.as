@@ -23,11 +23,8 @@
 	 * @author Alexutz
 	 * 
 	 */	
-	public class W3CDateConverter implements IConverter
+	public final class W3CDateConverter implements IConverter
 	{
-		public static function registerInSerializer() : void{
-			FlexXBEngine.instance.registerSimpleTypeConverter(new W3CDateConverter(), true);
-		}
 		/**
 		 * 
 		 * @see IConverter#type() 
