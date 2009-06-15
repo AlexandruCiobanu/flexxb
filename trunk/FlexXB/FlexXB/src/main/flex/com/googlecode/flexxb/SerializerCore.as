@@ -60,16 +60,21 @@
 		 */		
 		private var _converterStore : ConverterStore;
 		/**
+		 * 
+		 */		
+		private var _configuration : Configuration;
+		/**
 		 * Constructor
 		 * 
 		 */		
-		public function SerializerCore(descriptor : DescriptorStore, converter : ConverterStore)
+		public function SerializerCore(descriptor : DescriptorStore, converter : ConverterStore, configuration : Configuration)
 		{
 			if(!descriptor || !converter){
 				throw new Error("Converter and descriptor stores must not be null");
 			}
 			_descriptorStore = descriptor;
 			_converterStore = converter;
+			_configuration = configuration;
 			addEventListener(XmlEvent.PRE_DESERIALIZE, preDeserializeHandler, false, 150, true);
 			addEventListener(XmlEvent.POST_DESERIALIZE, postDeserializeHandler, false, 150, true);
 		}
@@ -224,11 +229,22 @@
 		 * 
 		 */		
 		public final function getIncomingType(incomingXML : XML) : Class{
-			if(!incomingXML || incomingXML.namespaceDeclarations().length == 0){
-				return null;
+			if(incomingXML){
+				if(_configuration.getResponseTypeByTagName){
+					var tagName : QName = incomingXML.name() as QName;
+					if(tagName){
+						return _descriptorStore.getClassByTagName(tagName.localName);
+					}
+				}
+				if(_configuration.getResponseTypeByNamespace){
+					if(incomingXML.namespaceDeclarations().length == 0){
+						var _namespace : String = (incomingXML.namespaceDeclarations()[0] as Namespace).uri;
+						return _descriptorStore.getClassByNamespace(_namespace);
+					}
+				}
+				
 			}
-			var _namespace : String = (incomingXML.namespaceDeclarations()[0] as Namespace).uri;
-			return _descriptorStore.getClassByNamespace(_namespace);
+			return null;
 		}
 		/**
 		 * 
