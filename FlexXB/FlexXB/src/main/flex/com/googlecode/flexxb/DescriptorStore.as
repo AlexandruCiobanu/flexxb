@@ -89,6 +89,20 @@ package com.googlecode.flexxb
 			return null;
 		}
 		/**
+		 * 
+		 * @param name
+		 * @return 
+		 * 
+		 */		
+		public function getClassByTagName(name : String) : Class{
+			for each(var store : ResultStore in descriptorCache){
+				if(store.descriptor && store.descriptor.alias == name){
+					return store.descriptor.fieldType;
+				}
+			}
+			return null;
+		}
+		/**
 		 * @see IDescriptorStore#getNamespace()
 		 * 
 		 */		
@@ -138,7 +152,7 @@ package com.googlecode.flexxb
 			return descriptorCache && descriptorCache[className] != null;
 		}
 		
-		private function getDefinition(object : Object, className : String) : Object{
+		private function getDefinition(object : Object, className : String) : ResultStore{
 			if(!hasDescriptorDefined(className)){
 				put(object, className)
 			}
@@ -167,8 +181,42 @@ package com.googlecode.flexxb
 			}else{
 				xmlClass = xmlDescribeType(descriptor);
 			}
-			var result : Object = {descriptor : xmlClass, customSerializable : customSerializable, reference : referenceObject};
+			var result : Object = new ResultStore(xmlClass, customSerializable, referenceObject);
 			descriptorCache[className] = result;
 		}
+	}
+}
+	import com.googlecode.flexxb.annotation.XmlClass;
+	
+
+/**
+ * 
+ * @author Alexutz
+ * @private
+ */
+internal class ResultStore{
+	/**
+	 * @private
+	 */	
+	public var descriptor : XmlClass;
+	/**
+	 * @private
+	 */	
+	public var customSerializable : Boolean;
+	/**
+	 * @private
+	 */	
+	public var reference : Object;
+	/**
+	 * @private
+	 * @param descriptor
+	 * @param customSerializable
+	 * @param reference
+	 * 
+	 */	
+	public function ResultStore(descriptor : XmlClass, customSerializable : Boolean, reference : Object){
+		this.descriptor = descriptor;
+		this.customSerializable = customSerializable;
+		this.reference = reference;
 	}
 }

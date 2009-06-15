@@ -19,8 +19,8 @@ package com.googlecode.flexxb
 {
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.api.IFlexXBApi;
-	import com.googlecode.flexxb.converter.IConverter;
 	import com.googlecode.flexxb.converter.ClassTypeConverter;
+	import com.googlecode.flexxb.converter.IConverter;
 	import com.googlecode.flexxb.converter.XmlConverter;
 	
 	import flash.events.Event;
@@ -78,6 +78,8 @@ package com.googlecode.flexxb
 		
 		private var core : SerializerCore;
 		
+		private var _configuration : Configuration;
+		
 		private var _api : IFlexXBApi;
 		/**
 		 * Constructor
@@ -89,12 +91,21 @@ package com.googlecode.flexxb
 				throw new Error("Use FlexXBEngine.instance instead!");
 			}
 			descriptorStore = new DescriptorStore();
+			_configuration = new Configuration();
 			converterStore = new ConverterStore();
-			core = new SerializerCore(descriptorStore, converterStore);
+			core = new SerializerCore(descriptorStore, converterStore, _configuration);
 			_api = new FlexXBApi(descriptorStore);
 						
 			registerSimpleTypeConverter(new ClassTypeConverter());
 			registerSimpleTypeConverter(new XmlConverter());
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get configuration() : Configuration{
+			return _configuration;
 		}
 		/**
 		 * 
