@@ -101,8 +101,9 @@ package com.googlecode.flexxb.api
 		
 		public function testFileDescriptorProcessing() : void{
 			new PhoneNumber();new Person();new Address();
+			FlexXBEngine.instance.processTypes(FxAttribute, FxElement, FxArray);
 			var xml : XML = getXmlDescriptor();
-			FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
+			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
 		}
 		
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void{
@@ -131,55 +132,61 @@ package com.googlecode.flexxb.api
 				<FlexXBAPI version="1">
 				  <Descriptors>
 				    <Class type="com.googlecode.testData.PhoneNumber" alias="TelephoneNumber" prefix="number" uri="http://www.aciobanu.com/schema/v1/phone" ordered="true">
-				      <Attribute order="1">
-				        <Field name="countryCode" type="String"/>
-				      </Attribute>
-				      <Attribute order="2">
-				        <Field name="areaCode" type="String" access="readwrite"/>
-				      </Attribute>
-				      <Attribute alias="phoneNumber" order="3">
-				        <Field name="number" type="String"/>
-				      </Attribute>
-				      <Attribute order="4">
-				        <Field name="interior" type="String"/>
-				      </Attribute>
+				      <Members>
+					      <Attribute order="1">
+					        <Field name="countryCode" type="String"/>
+					      </Attribute>
+					      <Attribute order="2">
+					        <Field name="areaCode" type="String" access="readwrite"/>
+					      </Attribute>
+					      <Attribute alias="phoneNumber" order="3">
+					        <Field name="number" type="String"/>
+					      </Attribute>
+					      <Attribute order="4">
+					        <Field name="interior" type="String"/>
+					      </Attribute>
+					   </Members>
 				    </Class>
 				    <Class type="com.googlecode.testData.Person" alias="Person" prefix="person" uri="http://www.aciobanu.com/schema/v1/person">
-				      <Element alias="BirthDate">
-				        <Field name="birthDate" type="Date"/>
-				      </Element>
-				      <Element alias="Age" ignoreOn="serialize">
-				        <Field name="birthDate" type="Date"/>
-				      </Element>
-				      <Attribute>
-				        <Field name="firstName" type="String"/>
-				      </Attribute>
-				      <Attribute>
-				        <Field name="lastName" type="String"/>
-				      </Attribute>
+				      <Members>
+					      <Element alias="BirthDate">
+					        <Field name="birthDate" type="Date"/>
+					      </Element>
+					      <Element alias="Age" ignoreOn="serialize">
+					        <Field name="birthDate" type="Date"/>
+					      </Element>
+					      <Attribute>
+					        <Field name="firstName" type="String"/>
+					      </Attribute>
+					      <Attribute>
+					        <Field name="lastName" type="String"/>
+					      </Attribute>
+					   </Members>
 				    </Class>
 				    <Class type="com.googlecode.testData.Address" alias="PersonAddress" prefix="add" uri="http://www.aciobanu.com/schema/v1/address" ordered="false">
-				      <Element getFromCache="true">
-				        <Field name="person" type="com.googlecode.testData.Person"/>
-				      </Element>
-				       <Element>
-				        <Field name="emailAddress" type="String"/>
-				      </Element>
-				      <Attribute>
-				        <Field name="street" type="String"/>
-				      </Attribute>
-				      <Attribute>
-				        <Field name="number" type="String"/>
-				      </Attribute>
-				      <Attribute>
-				        <Field name="city" type="String"/>
-				      </Attribute>
-				      <Attribute>
-				        <Field name="country" type="String"/>
-				      </Attribute>
-				      <Array alias="numbers" memberName="" type="com.googlecode.testData.PhoneNumber" getFromCache="false" serializePartialElement="false" order="3">
-				        <Field name="telephoneNumbers" type="Array" access="readwrite"/>
-				      </Array>
+				      <Members>
+					      <Element getFromCache="true">
+					        <Field name="person" type="com.googlecode.testData.Person"/>
+					      </Element>
+					       <Element>
+					        <Field name="emailAddress" type="String"/>
+					      </Element>
+					      <Attribute>
+					        <Field name="street" type="String"/>
+					      </Attribute>
+					      <Attribute>
+					        <Field name="number" type="String"/>
+					      </Attribute>
+					      <Attribute>
+					        <Field name="city" type="String"/>
+					      </Attribute>
+					      <Attribute>
+					        <Field name="country" type="String"/>
+					      </Attribute>
+					      <Array alias="numbers" memberName="" type="com.googlecode.testData.PhoneNumber" getFromCache="false" serializePartialElement="false" order="3">
+					        <Field name="telephoneNumbers" type="Array" access="readwrite"/>
+					      </Array>
+				      </Members>
 				    </Class>
 				  </Descriptors>
 				</FlexXBAPI>;

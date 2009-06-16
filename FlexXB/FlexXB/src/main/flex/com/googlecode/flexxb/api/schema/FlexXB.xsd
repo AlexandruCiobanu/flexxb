@@ -79,11 +79,17 @@
       <xs:documentation>Defines the enclosing xml the is rendered for the specified type.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
-        <xs:element ref="Element" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="Attribute" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="Array" minOccurs="0" maxOccurs="unbounded"/>
-      </xs:choice>
+      <xs:sequence>
+      	<xs:element name="Members">
+      	  <xs:complexType>
+	         <xs:choice minOccurs="1" maxOccurs="unbounded">
+		        <xs:element ref="Element" minOccurs="0" maxOccurs="unbounded"/>
+		        <xs:element ref="Attribute" minOccurs="0" maxOccurs="unbounded"/>
+		        <xs:element ref="Array" minOccurs="0" maxOccurs="unbounded"/>
+		      </xs:choice>
+	      </xs:complexType>
+      	</xs:element>
+      </xs:sequence>
       <xs:attribute name="type" type="xs:string" use="required"/>
       <xs:attribute name="alias" type="xs:string" use="optional"/>
       <xs:attribute name="prefix" type="xs:string" use="optional"/>
@@ -92,6 +98,23 @@
       <xs:attribute name="idField" type="xs:string" use="optional" />
       <xs:attribute name="defaultValueField" type="xs:string" use="optional"/>
       <xs:attribute name="ordered" type="xs:boolean" use="optional" default="false"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlexXBAPI">
+    <xs:annotation>
+      <xs:documentation>This is the root element</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="1">
+        <xs:element name="Descriptors">
+          <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+              <xs:element ref="Class"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:positiveInteger" use="required"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -233,7 +233,10 @@
 				if(_configuration.getResponseTypeByTagName){
 					var tagName : QName = incomingXML.name() as QName;
 					if(tagName){
-						return _descriptorStore.getClassByTagName(tagName.localName);
+						var clasz : Class = _descriptorStore.getClassByTagName(tagName.localName);
+						if(clasz){
+							return clasz;
+						}
 					}
 				}
 				if(_configuration.getResponseTypeByNamespace){

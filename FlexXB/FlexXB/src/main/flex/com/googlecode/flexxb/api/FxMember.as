@@ -17,8 +17,6 @@
  */
 package com.googlecode.flexxb.api
 {
-	import com.googlecode.flexxb.IXmlSerializable;
-	
 	import flash.utils.Dictionary;
 	/**
 	 * 
@@ -30,12 +28,11 @@ package com.googlecode.flexxb.api
 		/**
 		 * 
 		 */		
-		protected var field : FxField;
-		
-		[XmlAttribute]
+		protected var _field : FxField;
 		/**
 		 * 
-		 */		
+		 */	
+		[XmlAttribute]	
 		public var alias : String;
 		
 		[XmlAttribute]
@@ -43,11 +40,10 @@ package com.googlecode.flexxb.api
 		 * 
 		 */		
 		public var ignoreOn : Stage = null;
-		
-		[XmlAttribute]
 		/**
 		 * 
-		 */		
+		 */	
+		[XmlAttribute]	
 		public var order : Number;
 		/**
 		 * 
@@ -59,6 +55,26 @@ package com.googlecode.flexxb.api
 		{
 			this.field = field;
 			this.alias = alias;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */
+		[XmlElement(alias="*")]		
+		public function get field() : FxField{
+			return _field;
+		}
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
+		public function set field(value : FxField) : void{
+			if(!value){
+				throw new Error("Field cannot be null");
+			}
+			_field = value;
 		}
 		/**
 		 * 
