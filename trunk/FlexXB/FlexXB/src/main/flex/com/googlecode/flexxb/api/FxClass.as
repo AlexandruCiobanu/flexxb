@@ -58,14 +58,15 @@ package com.googlecode.flexxb.api
 		/**
 		 * 
 		 */		
-		private var members : Array = [];
+		[XmlArray(alias="Members")]
+		public var members : Array = [];
 		/**
 		 *Constructor 
 		 * 
 		 */		
 		public function FxClass(type : Class, alias : String = null)
 		{
-			this._type = type;
+			this.type = type;
 			this.alias = alias;
 		}
 		

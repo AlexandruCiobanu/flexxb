@@ -67,7 +67,7 @@ package com.googlecode.flexxb.api
 		 * @return 
 		 * 
 		 */	
-		[XmlAtribute]	
+		[XmlAttribute]	
 		public function get name () : String{
 			return _name;
 		} 
@@ -87,7 +87,7 @@ package com.googlecode.flexxb.api
 		 * @return 
 		 * 
 		 */
-		[XmlAtribute]		
+		[XmlAttribute]		
 		public function get type () : Class{
 			return _type;
 		} 
@@ -107,7 +107,7 @@ package com.googlecode.flexxb.api
 		 * @return 
 		 * 
 		 */
-		[XmlAtribute]		
+		[XmlAttribute]		
 		public function get accessType () : AccessorType{
 			return _accessType;
 		} 
@@ -118,7 +118,8 @@ package com.googlecode.flexxb.api
 		 */		
 		public function set accessType(value : AccessorType) : void{
 			if(value == null){
-				throw new Error("Field access type is null!");
+				_accessType = AccessorType.READ_WRITE;
+				return;
 			}
 			_accessType = value;
 		}
