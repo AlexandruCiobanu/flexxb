@@ -1,6 +1,8 @@
 #summary FlexXB architecture
 #labels Phase-Implementation,Phase-Design
 
+FlexXB accomplishes marshalling/unmarshalling of objects by using annotations defined on the model classes it works with. 
+
 = Annotations =
 
 === XmlClass ===
@@ -15,6 +17,10 @@
  Syntax:{{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]}}}
   * {{{alias}}}: The name of the attribute that represents this object in the xml request/response;
   * {{{ignoreOn}}}: Ignore this field from processing
+=== ConstructorArg ===
+Syntax:{{{[ConstructorArg(reference="FieldName", optional="true|false")]}}}
+  * {{{reference}}}: Holds the name of one of the classes' fields. 
+  * {{{optional}}}: Wether the parameter is optional or not in the constructor definition. Defaults to {{{false}}}.
 === XmlElement ===
  Syntax:{{{[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
   * {{{alias}}}: The name of the element that represents this object in the xml request/response;
