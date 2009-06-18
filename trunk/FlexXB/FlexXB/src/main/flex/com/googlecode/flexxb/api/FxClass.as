@@ -17,7 +17,8 @@
  */
 package com.googlecode.flexxb.api
 {
-	import com.googlecode.flexxb.IXmlSerializable;
+	import com.googlecode.flexxb.annotation.Annotation;
+	import com.googlecode.flexxb.annotation.XmlClass;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
@@ -61,6 +62,11 @@ package com.googlecode.flexxb.api
 		[XmlArray(alias="Members")]
 		public var members : Array = [];
 		/**
+		 * 
+		 */		
+		[XmlArray(alias="ConstructorArguments", memberType="com.googlecode.flexxb.api.FxConstructorArgument")]
+		public var constructorArguments : Array;
+		/**
 		 *Constructor 
 		 * 
 		 */		
@@ -69,13 +75,12 @@ package com.googlecode.flexxb.api
 			this.type = type;
 			this.alias = alias;
 		}
-		
-		[XmlAttribute]
 		/**
 		 * 
 		 * @return 
 		 * 
 		 */		
+		[XmlAttribute]
 		public function get type () : Class{
 			return _type;
 		} 
@@ -89,6 +94,18 @@ package com.googlecode.flexxb.api
 				throw new Error("Class type is null!");
 			}
 			_type = value;
+		}
+		/**
+		 * 
+		 * @param fieldName
+		 * @param optional
+		 * 
+		 */		
+		public function addArgument(fieldName : String, optional : Boolean = false) : void{
+			if(!constructorArguments){
+				constructorArguments = [];
+			}
+			constructorArguments.push(new FxConstructorArgument(fieldName, optional));
 		}
 		/**
 		 * 
@@ -158,10 +175,15 @@ package com.googlecode.flexxb.api
 			members.push(member);
 		}
 		
-		public function toXml():XML
+		public function toXml() : XML
 		{
 			var xml : XML = <type />;
 			xml.@name = getQualifiedClassName(type);
+			if(constructorArguments){
+				for(var i : int = constructorArguments.length - 1; i >= 0; i--){
+					xml.appendChild((constructorArguments[i] as FxConstructorArgument).toXml());
+				}
+			}
 			xml.appendChild(buildMetadata());			
 			for each(var member : FxMember in members){
 				xml.appendChild(member.toXml());
@@ -172,13 +194,13 @@ package com.googlecode.flexxb.api
 		
 		private function buildMetadata() : XML{
 			var xml : XML = <metadata />;
-			xml.@name = "XmlClass";
+			xml.@name = XmlClass.ANNOTATION_NAME;
 			
 			var items : Dictionary = new Dictionary();
-			items["alias"] = alias;
-			items["prefix"] = prefix;
-			items["uri"] = uri;
-			items["ordered"] = ordered;
+			items[Annotation.ARGUMENT_ALIAS] = alias;
+			items[XmlClass.ARGUMENT_NAMESPACE_PREFIX] = prefix;
+			items[XmlClass.ARGUMENT_NAMESPACE_URI] = uri;
+			items[XmlClass.ARGUMENT_ORDERED] = ordered;
 			
 			for(var key : * in items){
 				if(items[key]!= null){

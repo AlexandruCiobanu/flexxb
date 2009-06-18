@@ -15,31 +15,41 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- package com.googlecode.flexxb.converter
+package com.googlecode.flexxb.api
 {
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
+	import com.googlecode.flexxb.converter.IConverter;
 	/**
-	 * Converter for Class objects
+	 * 
 	 * @author Alexutz
 	 * 
 	 */	
-	public final class ClassTypeConverter implements IConverter
-	{		
-		public function get type():Class
-		{
-			return Class;
+	public class StageXmlConverter implements IConverter
+	{
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get type():Class{
+			return Stage;
 		}
-		
-		public function toString(object:Object):String
-		{
-			return getQualifiedClassName(object);
+		/**
+		 * 
+		 * @param object
+		 * @return 
+		 * 
+		 */		
+		public function toString(object:Object):String{
+			return (object as Stage).toString();
 		}
-		
-		public function fromString(value:String):Object
-		{
-			var result : Object = getDefinitionByName(value);			
-			return result;
+		/**
+		 * 
+		 * @param value
+		 * @return 
+		 * 
+		 */		
+		public function fromString(value:String):Object{
+			return Stage.fromString(value);
 		}		
 	}
 }

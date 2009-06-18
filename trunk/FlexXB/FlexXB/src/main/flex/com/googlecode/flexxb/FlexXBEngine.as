@@ -93,9 +93,7 @@ package com.googlecode.flexxb
 			descriptorStore = new DescriptorStore();
 			_configuration = new Configuration();
 			converterStore = new ConverterStore();
-			core = new SerializerCore(descriptorStore, converterStore, _configuration);
-			_api = new FlexXBApi(descriptorStore);
-						
+			core = new SerializerCore(descriptorStore, converterStore, _configuration);						
 			registerSimpleTypeConverter(new ClassTypeConverter());
 			registerSimpleTypeConverter(new XmlConverter());
 		}
@@ -113,6 +111,9 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public final function get api() : IFlexXBApi{
+			if(!_api){
+				_api = new FlexXBApi(descriptorStore);
+			}
 			return _api;
 		}
 		/**

@@ -74,12 +74,28 @@
       <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
     </xs:complexType>
   </xs:element>
+  <xs:element name="Argument">
+  	<xs:annotation>
+  		<xs:documentation></xs:documentation>
+  	</xs:annotation>
+  	<xs:complexType>
+  		<xs:attribute name="reference" type="xs:string" use="required"/>
+  		<xs:attribute name="optional" type="xs:boolean" use="optional" default="false"/>
+  	</xs:complexType>
+  </xs:element>
   <xs:element name="Class">
     <xs:annotation>
       <xs:documentation>Defines the enclosing xml the is rendered for the specified type.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
+      	<xs:element name="ConstructorArguments">
+      		<xs:complexType>
+      			<xs:choice minOccurs="0" maxOccurs="unbounded">
+      				<xs:element ref="Argument" minOccurs="0" maxOccurs="unbounded" />
+      			</xs:choice>
+      		</xs:complexType>
+      	</xs:element>
       	<xs:element name="Members">
       	  <xs:complexType>
 	         <xs:choice minOccurs="1" maxOccurs="unbounded">

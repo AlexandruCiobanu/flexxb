@@ -17,6 +17,9 @@
  */
 package com.googlecode.flexxb.api
 {
+	import com.googlecode.flexxb.annotation.Annotation;
+	import com.googlecode.flexxb.annotation.XmlMember;
+	
 	import flash.utils.Dictionary;
 	/**
 	 * 
@@ -34,11 +37,10 @@ package com.googlecode.flexxb.api
 		 */	
 		[XmlAttribute]	
 		public var alias : String;
-		
-		[XmlAttribute]
 		/**
 		 * 
-		 */		
+		 */
+		[XmlAttribute]		
 		public var ignoreOn : Stage = null;
 		/**
 		 * 
@@ -155,10 +157,10 @@ package com.googlecode.flexxb.api
 		 */		
 		protected function getContent() : Dictionary{
 			var items : Dictionary = new Dictionary();
-			items["alias"] = alias;
-			items["ignoreOn"] = ignoreOn;
+			items[Annotation.ARGUMENT_ALIAS] = alias;
+			items[XmlMember.ARGUMENT_IGNORE_ON] = ignoreOn;
 			if(!isNaN(order))
-				items["order"] = order;
+				items[XmlMember.ARGUMENT_ORDER] = order;
 			return items;
 		}
 		

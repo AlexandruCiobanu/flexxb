@@ -18,12 +18,13 @@
 package com.googlecode.flexxb
 {
 	import com.googlecode.flexxb.api.FxApiWrapper;
+	import com.googlecode.flexxb.api.FxArray;
+	import com.googlecode.flexxb.api.FxAttribute;
 	import com.googlecode.flexxb.api.FxClass;
+	import com.googlecode.flexxb.api.FxConstructorArgument;
+	import com.googlecode.flexxb.api.FxElement;
 	import com.googlecode.flexxb.api.IFlexXBApi;
-	
-	import flash.net.URLLoader;
-	
-	import mx.utils.StringUtil;
+	import com.googlecode.flexxb.api.StageXmlConverter;
 	/**
 	 * 
 	 * @author Alexutz
@@ -40,6 +41,8 @@ package com.googlecode.flexxb
 		public function FlexXBApi(store : DescriptorStore)
 		{
 			this.store = store;
+			FlexXBEngine.instance.registerSimpleTypeConverter(new StageXmlConverter());
+			FlexXBEngine.instance.processTypes(FxAttribute, FxElement, FxArray, FxConstructorArgument);
 		}
 		/**
 		 * 
