@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="FxClass,com.googlecode.flexxb.api.FxClass,alias,ordered,prefix,uri,id,thisType,type,addArray,addAttribute,addElement,fromXml,getIdValue,toXml" name="keywords">
+<meta content="FxClass,com.googlecode.flexxb.api.FxClass,alias,constructorArguments,members,ordered,prefix,uri,id,thisType,type,addArgument,addArray,addAttribute,addElement,fromXml,getIdValue,toXml" name="keywords">
 <title>com.googlecode.flexxb.api.FxClass</title>
 </head>
 <body>
@@ -37,13 +37,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FxClass</td>
 </tr>
-<tr>
-<td class="classHeaderTableLabel">Implements</td><td><a href="../IXmlSerializable.html">IXmlSerializable</a></td>
-</tr>
 </table>
 <p></p>
-  
-  <p></p>
+<p></p>
 <br>
 <hr>
 </div>
@@ -61,7 +57,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">FxClass</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#constructorArguments">constructorArguments</a> : Array<div class="summaryTableDescription">
+   
+   </div>
+</td><td class="summaryTableOwnerCol">FxClass</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">FxClass</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#members">members</a> : Array<div class="summaryTableDescription">
+   
+   </div>
 </td><td class="summaryTableOwnerCol">FxClass</td>
 </tr>
 <tr class="">
@@ -104,9 +112,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#FxClass()">FxClass</a>(type:Class = null, alias:String = null)</div>
+<a class="signatureLink" href="#FxClass()">FxClass</a>(type:Class, alias:String = null)</div>
 <div class="summaryTableDescription">
    onstructor 
+   
+   </div>
+</td><td class="summaryTableOwnerCol">FxClass</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addArgument()">addArgument</a>(fieldName:String, optional:Boolean = false):void</div>
+<div class="summaryTableDescription">
    
    </div>
 </td><td class="summaryTableOwnerCol">FxClass</td>
@@ -181,6 +198,16 @@ showHideInherited();
 <code>public var alias:String</code><p>
    
    </p></div>
+<a name="constructorArguments"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">constructorArguments</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var constructorArguments:Array</code><p>
+   
+   </p></div>
 <a name="id"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -193,6 +220,16 @@ showHideInherited();
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get id():String</code>
 <br>
 </div>
+<a name="members"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">members</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var members:Array</code><p>
+   
+   </p></div>
 <a name="ordered"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -260,13 +297,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function FxClass(type:Class = null, alias:String = null)</code><p>
+<code>public function FxClass(type:Class, alias:String = null)</code><p>
    onstructor 
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">type</span>:Class</code> (default = <code>null</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">type</span>:Class</code></td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
@@ -278,10 +315,32 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="addArgument()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addArgument</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addArgument(fieldName:String, optional:Boolean = false):void</code><p>
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">fieldName</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">optional</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+</div>
 <a name="addArray()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">addArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">addArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
