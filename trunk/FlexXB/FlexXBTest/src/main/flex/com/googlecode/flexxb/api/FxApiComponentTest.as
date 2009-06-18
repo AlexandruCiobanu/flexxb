@@ -20,8 +20,9 @@ package com.googlecode.flexxb.api
 	{
 		public function FxApiComponentTest(methodName:String=null)
 		{
-			//TODO: implement function
 			super(methodName);
+			new PhoneNumber();new Person();new Address();
+			FlexXBEngine.instance.api.processTypeDescriptor(null);
 		}
 		/**
 		 * 
@@ -63,13 +64,13 @@ package com.googlecode.flexxb.api
 		 */		
 		public function testFxClass() : void{
 			var cls : FxClass = buildDescriptor();
-			FlexXBEngine.instance.api.processTypeDescriptor(null);
 			var xmlCls : XmlClass = new XmlClass(cls.toXml());
 			assertEquals("wrong type", cls.type, xmlCls.fieldType);
 			assertEquals("wrong alias", cls.alias, xmlCls.alias);
 			assertEquals("wrong prefix", cls.prefix, xmlCls.nameSpace.prefix);
 			assertEquals("wrong uri", cls.uri, xmlCls.nameSpace.uri);
 			assertEquals("wrong member count", 4, xmlCls.members.length);
+			assertEquals("wrong constructor argument count", 2, xmlCls.constructor.parameterFields.length);
 		}
 		
 		private function buildDescriptor() : FxClass{
@@ -80,6 +81,8 @@ package com.googlecode.flexxb.api
 			cls.addAttribute("lastName", String, null, "LastName");
 			cls.addElement("birthDate", Date, null, "BirthDate");
 			cls.addElement("age", Number, null, "Age").ignoreOn = Stage.SERIALIZE;
+			cls.addArgument("firstName");
+			cls.addArgument("lastName");
 			return cls;
 		}
 		
@@ -100,8 +103,6 @@ package com.googlecode.flexxb.api
 		}
 		
 		public function testFileDescriptorProcessing() : void{
-			new PhoneNumber();new Person();new Address();
-			FlexXBEngine.instance.processTypes(FxAttribute, FxElement, FxArray);
 			var xml : XML = getXmlDescriptor();
 			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
 		}
@@ -183,7 +184,7 @@ package com.googlecode.flexxb.api
 					      <Attribute>
 					        <Field name="country" type="String"/>
 					      </Attribute>
-					      <Array alias="numbers" memberName="" type="com.googlecode.testData.PhoneNumber" getFromCache="false" serializePartialElement="false" order="3">
+					      <Array alias="numbers" memberName="" memberType="com.googlecode.testData.PhoneNumber" getFromCache="false" serializePartialElement="false" order="3">
 					        <Field name="telephoneNumbers" type="Array" access="readwrite"/>
 					      </Array>
 				      </Members>
