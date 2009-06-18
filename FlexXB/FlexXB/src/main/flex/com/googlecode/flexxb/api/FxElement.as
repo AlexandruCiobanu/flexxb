@@ -17,6 +17,8 @@
  */
 package com.googlecode.flexxb.api
 {
+	import com.googlecode.flexxb.annotation.XmlElement;
+	
 	import flash.utils.Dictionary;
 	
 	/**
@@ -44,10 +46,10 @@ package com.googlecode.flexxb.api
 			var element : FxElement = new FxElement(field, alias);
 			return element;
 		}
-		[XmlAttribute]
 		/**
 		 * 
-		 */		
+		 */
+		[XmlAttribute]		
 		public var getFromCache : Boolean;
 		
 		[XmlAttribute]
@@ -67,13 +69,13 @@ package com.googlecode.flexxb.api
 		}	
 		
 		protected override function getXmlAnnotationName() : String{
-			return "XmlElement";
+			return XmlElement.ANNOTATION_NAME;
 		}
 		
 		protected override function getContent() : Dictionary{
 			var items : Dictionary = super.getContent();
-			items["getFromCache"] = getFromCache;
-			items["serializePartialElement"] = serializePartialElement;
+			items[XmlElement.ARGUMENT_GET_FROM_CACHE] = getFromCache;
+			items[XmlElement.ARGUMENT_SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
 			return items;
 		}	
 			

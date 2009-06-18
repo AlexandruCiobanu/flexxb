@@ -17,6 +17,8 @@
  */
 package com.googlecode.flexxb.api
 {
+	import com.googlecode.flexxb.annotation.XmlArray;
+	
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
@@ -45,17 +47,15 @@ package com.googlecode.flexxb.api
 			var array : FxArray = new FxArray(field, alias);
 			return array;
 		}
-		
-		[XmlAttribute]
 		/**
 		 * 
-		 */		
+		 */
+		[XmlAttribute]		
 		public var memberName : String;
-		
-		[XmlAttribute]
 		/**
 		 * 
-		 */		
+		 */
+		[XmlAttribute]		
 		public var memberType : Class;
 		/**
 		 * 
@@ -69,13 +69,13 @@ package com.googlecode.flexxb.api
 		}		
 		
 		protected override function getXmlAnnotationName() : String{
-			return "XmlArray";
+			return XmlArray.ANNOTATION_NAME;
 		}
 		
 		protected override function getContent() : Dictionary{
 			var items : Dictionary = super.getContent();
-			items["memberName"] = memberName;
-			items["type"] = memberType;
+			items[XmlArray.ARGUMENT_MEMBER_NAME] = memberName;
+			items[XmlArray.ARGUMENT_TYPE] = memberType;
 			return items;
 		}	
 		

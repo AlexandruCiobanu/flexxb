@@ -10,6 +10,7 @@
 <classEntry path="com.googlecode.flexxb.IIdentifiable"/>
 <classEntry path="com.googlecode.flexxb.persistence.PersistableObject"/>
 <classEntry path="com.googlecode.flexxb.persistence.IPersistable"/>
+<classEntry path="com.googlecode.flexxb.api.FxConstructorArgument"/>
 <classEntry path="com.googlecode.flexxb.serializer.XmlMemberSerializer"/>
 <classEntry path="com.googlecode.flexxb.ConverterStore"/>
 <classEntry path="com.googlecode.flexxb.service.AbstractService"/>
@@ -36,6 +37,7 @@
 <classEntry path="com.googlecode.flexxb.api.Stage"/>
 <classEntry path="com.googlecode.flexxb.serializer.ISerializer"/>
 <classEntry path="com.googlecode.flexxb.serializer.XmlClassSerializer"/>
+<classEntry path="com.googlecode.flexxb.api.StageXmlConverter"/>
 <classEntry path="com.googlecode.flexxb.FlexXBEngine"/>
 <classEntry path="com.googlecode.flexxb.annotation.Constructor"/>
 <classEntry path="com.googlecode.flexxb.api.FxElement"/>
