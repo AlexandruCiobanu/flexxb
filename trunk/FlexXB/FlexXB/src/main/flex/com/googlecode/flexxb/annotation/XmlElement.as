@@ -34,13 +34,22 @@
 		public static const ARGUMENT_SERIALIZE_PARTIAL_ELEMENT : String = "serializePartialElement";
 		/**
 		 * 
+		 */		
+		public static const ARGUMENT_GET_FROM_CACHE : String = "getFromCache";
+		/**
+		 * 
 		 */
 		protected var _serializePartialElement : Boolean;
 		/**
 		 * 
 		 */		
 		protected var _getFromCache : Boolean;
-		
+		/**
+		 * 
+		 * @param descriptor
+		 * @param xmlClass
+		 * 
+		 */		
 		public function XmlElement(descriptor : XML, xmlClass : XmlClass = null){
 			super(descriptor, xmlClass);
 		}
@@ -68,7 +77,7 @@
 		protected override function parseMetadata(metadata : XML):void{
 			super.parseMetadata(metadata);
 			_serializePartialElement = metadata.arg.(@key == ARGUMENT_SERIALIZE_PARTIAL_ELEMENT).@value == "true";
-			_getFromCache =  metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value == "true";
+			_getFromCache =  metadata.arg.(@key == ARGUMENT_GET_FROM_CACHE).@value == "true";
 		}
 		/**
 		 * 
