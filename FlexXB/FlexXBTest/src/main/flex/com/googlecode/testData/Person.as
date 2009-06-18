@@ -24,6 +24,11 @@ package com.googlecode.testData
 	 */	
 	public class Person
 	{
+		public function Person(first : String = null, last : String = null){
+			firstName = first;
+			lastName = last;
+		}
+		
 		public var firstName : String;
 		
 		public var lastName : String;
