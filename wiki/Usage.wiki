@@ -17,7 +17,7 @@ To register a converter that will handle how an object of a specific type is con
 In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to add annotations:
 {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)}}}
 
-*Note*: Make sure you add the following switches to your compiler settings: {{{-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray}}}
+*Note*: Make sure you add the following switches to your compiler settings: {{{-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray -keep-as3-metadata ConstructorArg}}}
 
 = Annotating model classes =
 
