@@ -105,6 +105,9 @@ package com.googlecode.flexxb.api
 		public function testFileDescriptorProcessing() : void{
 			var xml : XML = getXmlDescriptor();
 			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
+			assertEquals("Wrong number of classes parsed", 3, wrapper.descriptors.length);
+			assertEquals("Wrong version", 1, wrapper.version);
+			assertEquals("Wrong Argument count ", 2, FxClass(wrapper.descriptors[1]).constructorArguments.length);
 		}
 		
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void{
@@ -149,6 +152,10 @@ package com.googlecode.flexxb.api
 					   </Members>
 				    </Class>
 				    <Class type="com.googlecode.testData.Person" alias="Person" prefix="person" uri="http://www.aciobanu.com/schema/v1/person">
+				      <ConstructorArguments>
+				      	<Argument reference="firstName" optional="true"/>
+				      	<Argument reference="lastName" />
+				      </ConstructorArguments>
 				      <Members>
 					      <Element alias="BirthDate">
 					        <Field name="birthDate" type="Date"/>
