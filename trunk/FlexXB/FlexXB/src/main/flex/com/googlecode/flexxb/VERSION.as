@@ -30,7 +30,7 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public static function get Version() : String{
-			return "1.1.0";
+			return "1.2.0";
 		}
 		/**
 		 * 
@@ -46,7 +46,7 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public static function get Link() : String{
-			return "http://code.google.com/p/fxmarker";
+			return "http://code.google.com/p/flexxb";
 		}
 		
 		public function VERSION()

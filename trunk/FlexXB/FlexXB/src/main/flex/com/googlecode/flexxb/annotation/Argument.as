@@ -18,7 +18,17 @@
 package com.googlecode.flexxb.annotation
 {
 	/**
-	 * 
+	 * Defines a constructor argument. This annotaton is used when a class has a 
+	 * non default constructor. In order to maintain the business restrictions, FlexXB 
+	 * will determine the values of the arguments based on the received xml and call 
+	 * the constructor with those values. 
+	 * <p/>An argument has a reference; the reference is the name of the class field  
+	 * whose value it represents. A non default constructor will most often configure 
+	 * some of the object's fields when called. Since the only available data is the 
+	 * incoming xml, arguments must specify the field the the constructor will modify 
+	 * with the received value. 
+	 * <p/><b>The class field referenced in the argument must have an annotation defined
+	 *  for it</b>
 	 * @author Alexutz
 	 * 
 	 */	
