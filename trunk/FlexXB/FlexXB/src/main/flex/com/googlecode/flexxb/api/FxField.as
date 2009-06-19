@@ -17,8 +17,6 @@
  */
 package com.googlecode.flexxb.api
 {
-	import com.googlecode.flexxb.IXmlSerializable;
-	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
@@ -31,7 +29,7 @@ package com.googlecode.flexxb.api
 	[XmlClass(alias="Field")]
 	[ConstructorArg(reference="name")]
 	[ConstructorArg(reference="type")]
-	public class FxField implements IXmlSerializable
+	public class FxField
 	{
 		/**
 		 * 
@@ -131,29 +129,10 @@ package com.googlecode.flexxb.api
 			xml.@type = getQualifiedClassName(type);
 			xml.@access = accessType.toString();
 			return xml;
-		}
+		}	
 		
-		public function get thisType() : Class
-		{
-			return FxField;
+		public function toString() : String{
+			return "Field[name: " + name + ", type:" + type + ", access: " + accessType + "]";
 		}
-		
-		public function fromXml(xmlData:XML) : Object
-		{
-			this.name = xmlData.@name;
-			this.type = getDefinitionByName(xmlData.@type) as Class;
-			this.accessType = AccessorType.fromString(xmlData.@access);
-			return this;
-		}
-		
-		public function get id() : String
-		{
-			return null;
-		}
-		
-		public function getIdValue(xmldata:XML) : String
-		{
-			return null;
-		}		
 	}
 }

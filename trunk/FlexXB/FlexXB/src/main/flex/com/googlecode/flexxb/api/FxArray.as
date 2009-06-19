@@ -77,12 +77,10 @@ package com.googlecode.flexxb.api
 			items[XmlArray.ARGUMENT_MEMBER_NAME] = memberName;
 			items[XmlArray.ARGUMENT_TYPE] = memberType;
 			return items;
-		}	
+		}
 		
-		protected override function xmlToObject(xml : XML) : void{
-			super.xmlToObject(xml);
-			this.memberName = xml.@memberName;
-			this.memberType = getDefinitionByName(xml.@memberType) as Class;
-		}	
+		public override function toString() : String{
+			return "Array[field: " + fieldName + ", type:" + fieldType + "]";
+		}
 	}
 }

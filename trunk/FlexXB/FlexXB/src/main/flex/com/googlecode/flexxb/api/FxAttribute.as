@@ -56,5 +56,9 @@ package com.googlecode.flexxb.api
 		protected override function getXmlAnnotationName() : String{
 			return "XmlAttribute";
 		}
+		
+		public function toString() : String{
+			return "Attribute[field: " + fieldName + ", type:" + fieldType + "]";
+		}
 	}
 }

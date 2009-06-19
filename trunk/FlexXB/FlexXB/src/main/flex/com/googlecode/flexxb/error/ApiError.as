@@ -14,23 +14,23 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package com.googlecode.flexxb.api
+ */ 
+package com.googlecode.flexxb.error
 {
-	/**
-	* 
-	*/	
-	[XmlClass(alias="FlexXBAPI")]
 	/**
 	 * 
 	 * @author Alexutz
 	 * 
 	 */	
-	public class FxApiWrapper
+	public class ApiError extends Error
 	{
-		[XmlArray(alias="Descriptors", type="com.googlecode.flexxb.api.FxClass")]
-		public var descriptors : Array;
-		[XmlAttribute]
-		public var version : Number;
+		public static const API_COMPONENT_TREE_BUILD_ERROR : int = 0;
+		
+		public function ApiError(message:String="", id:int=0)
+		{
+			//TODO: implement function
+			super(message, id);
+		}
+		
 	}
 }

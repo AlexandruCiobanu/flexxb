@@ -19,9 +19,9 @@ package com.googlecode.flexxb.api
 {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlClass;
+	import com.googlecode.flexxb.error.ApiError;
 	
 	import flash.utils.Dictionary;
-	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	/**
 	 * 
@@ -91,7 +91,7 @@ package com.googlecode.flexxb.api
 		 */		
 		public function set type(value : Class) : void{
 			if(value == null){
-				throw new Error("Class type is null!");
+				throw new ApiError("Class type is null!");
 			}
 			_type = value;
 		}
@@ -210,30 +210,8 @@ package com.googlecode.flexxb.api
 			return xml;
 		}
 		
-		public function fromXml(xmlData:XML):Object
-		{
-			this.type = getDefinitionByName(xmlData.@type) as Class;
-			this.alias = xmlData.@alias;
-			this.prefix = xmlData.@prefix;
-			this.uri = xmlData.@uri;
-			this.ordered = xmlData.@ordered == true;
-			
-			return this;
+		public function toString() : String{
+			return "Class[type: " + type + ", alias:" + alias + "]";
 		}
-		
-		public function get thisType():Class
-		{
-			return FxClass;
-		}
-		
-		public function get id():String
-		{
-			return null;
-		}
-		
-		public function getIdValue(xmldata:XML):String
-		{
-			return null;
-		}		
 	}
 }
