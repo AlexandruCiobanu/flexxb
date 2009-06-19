@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="FxArray,com.googlecode.flexxb.api.FxArray,INCOMING_XML_NAME,memberName,memberType,create,getContent,getXmlAnnotationName,xmlToObject" name="keywords">
+<meta content="FxArray,com.googlecode.flexxb.api.FxArray,INCOMING_XML_NAME,memberName,memberType,create,getContent,getXmlAnnotationName,toString" name="keywords">
 <title>com.googlecode.flexxb.api.FxArray</title>
 </head>
 <body>
@@ -113,6 +113,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    </div>
 </td><td class="summaryTableOwnerCol">FxArray</td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">FxArray</td>
+</tr>
 </table>
 </div>
 <a name="protectedMethodSummary"></a>
@@ -133,13 +140,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#getXmlAnnotationName()">getXmlAnnotationName</a>():String</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">FxArray</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#xmlToObject()">xmlToObject</a>(xml:XML):void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">FxArray</td>
 </tr>
@@ -284,17 +284,19 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="xmlToObject()"></a>
+<a name="toString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">xmlToObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>protected override function xmlToObject(xml:XML):void</code><span class="label">Parameters</span>
+<code>public override function toString():String</code>
+<p></p>
+<span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+<td width="20"></td><td><code>String</code></td>
 </tr>
 </table>
 </div>

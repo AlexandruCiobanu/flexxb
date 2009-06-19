@@ -39,7 +39,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 </tr>
 </table>
 <p></p>
-  
+  This interface defines the api structure and access points 
   <p></p>
 <br>
 <hr>
@@ -56,8 +56,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#processDescriptorsFromXml()">processDescriptorsFromXml</a>(xml:XML):void</div>
 <div class="summaryTableDescription">
-   
-   </div>
+   Register the type descriptors by the mmeans of an xml file.</div>
 </td><td class="summaryTableOwnerCol">IFlexXBApi</td>
 </tr>
 <tr class="">
@@ -65,8 +64,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#processTypeDescriptor()">processTypeDescriptor</a>(apiDescriptor:<a href="FxClass.html">FxClass</a>):void</div>
 <div class="summaryTableDescription">
-   
-   </div>
+   Register a type descriptor that is defined by the api components.</div>
 </td><td class="summaryTableOwnerCol">IFlexXBApi</td>
 </tr>
 </table>
@@ -86,7 +84,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function processDescriptorsFromXml(xml:XML):void</code><p>
-   
+   Register the type descriptors by the mmeans of an xml file. The content is converted 
+   to api components then they are processed to register the type described in the xml file. 
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -102,7 +101,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function processTypeDescriptor(apiDescriptor:<a href="FxClass.html">FxClass</a>):void</code><p>
-   
+   Register a type descriptor that is defined by the api components. This is especially
+   useful when not having access to source code.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
