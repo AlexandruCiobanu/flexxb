@@ -22,7 +22,8 @@ package com.googlecode.flexxb.annotation
 	import flash.utils.Dictionary;
 	
 	/**
-	 * 
+	 * Defines the class constructor. Notifies the owner XmlClass whether the 
+	 * described type has a default constructor or not.
 	 * @author Alexutz
 	 * 
 	 */	

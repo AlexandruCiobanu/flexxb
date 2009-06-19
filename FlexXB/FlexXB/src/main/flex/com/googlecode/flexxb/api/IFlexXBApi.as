@@ -20,20 +20,22 @@ package com.googlecode.flexxb.api
 	import com.googlecode.flexxb.annotation.XmlClass;
 	
 	/**
-	 * 
+	 * This interface defines the api structure and access points 
 	 * @author Alexutz
 	 * 
 	 */	
 	public interface IFlexXBApi
 	{
 		/**
-		 * 
+		 * Register a type descriptor that is defined by the api components. This is especially
+		 * useful when not having access to source code.
 		 * @param apiDescriptor
 		 * 
 		 */		
 		function processTypeDescriptor(apiDescriptor : FxClass) : void;
 		/**
-		 * 
+		 * Register the type descriptors by the mmeans of an xml file. The content is converted 
+		 * to api components then they are processed to register the type described in the xml file. 
 		 * @param xml
 		 * 
 		 */		

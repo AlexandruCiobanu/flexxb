@@ -18,7 +18,8 @@
 package com.googlecode.flexxb.api
 {
 	/**
-	 * 
+	 * Enumeration defining field acces types. A class field can be accessed 
+	 * in readonly, writeonly or readwrite modes.
 	 * @author Alexutz
 	 * 
 	 */	

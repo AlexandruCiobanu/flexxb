@@ -18,7 +18,8 @@
 package com.googlecode.flexxb.api
 {
 	/**
-	 * 
+	 * This enumeration defines the preocessing directions supported by the 
+	 * FlexXBEngine: serialize and deserialize  
 	 * @author Alexutz
 	 * 
 	 */	
