@@ -19,6 +19,7 @@ package com.googlecode.flexxb.api
 {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.error.ApiError;
 	
 	import flash.utils.Dictionary;
 	/**
@@ -74,7 +75,7 @@ package com.googlecode.flexxb.api
 		 */		
 		public function set field(value : FxField) : void{
 			if(!value){
-				throw new Error("Field cannot be null");
+				throw new ApiError("Field cannot be null");
 			}
 			_field = value;
 		}
@@ -122,28 +123,6 @@ package com.googlecode.flexxb.api
 		}
 		/**
 		 * 
-		 * @see com.googlecode.flexxb.IXmlSerializable#fromXml()
-		 * 
-		 */		
-		public function fromXml(xmlData:XML):Object
-		{
-			this.alias = xmlData.@alias;
-			this.ignoreOn = xmlData.@ignoreOn; 
-			this.order = xmlData.@order;
-			//if(xmlData.children().length() == 1){
-			//	this.field = new FxField().fromXml(xmlData.children()[0]) as FxField;
-			//}
-			xmlToObject(xmlData);
-			return this;
-		}
-		/**
-		 * 
-		 * @param xml
-		 * 
-		 */		
-		protected function xmlToObject(xml : XML) : void{}
-		/**
-		 * 
 		 * @return 
 		 * 
 		 */		
@@ -163,21 +142,5 @@ package com.googlecode.flexxb.api
 				items[XmlMember.ARGUMENT_ORDER] = order;
 			return items;
 		}
-		
-		public function get thisType():Class
-		{
-			return FxMember;
-		}
-		
-		public function get id():String
-		{
-			return null;
-		}
-		
-		public function getIdValue(xmldata:XML):String
-		{
-			return null;
-		}
-		
 	}
 }

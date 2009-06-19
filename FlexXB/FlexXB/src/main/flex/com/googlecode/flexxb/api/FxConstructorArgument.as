@@ -17,12 +17,15 @@
  */
 package com.googlecode.flexxb.api
 {
+	import com.googlecode.flexxb.error.ApiError;
+	
 	/**
 	 * 
 	 * @author Alexutz
 	 * 
 	 */	
 	[XmlClass(alias="Argument")]
+	[ConstructorArg(reference="reference")]
 	public class FxConstructorArgument
 	{
 		protected var _reference : String;
@@ -50,7 +53,7 @@ package com.googlecode.flexxb.api
 		 */		
 		public function set reference(value : String) : void{
 			if(!value){
-				throw new Error("Reference cannot be null for this constructor argument.");
+				throw new ApiError("Reference cannot be null for this constructor argument.");
 			}
 			_reference = value;
 		}
@@ -77,6 +80,10 @@ package com.googlecode.flexxb.api
 						<arg key="reference" value={reference} />
 						<arg key="optional" value={optional} />
 					</metadata>
+		}
+		
+		public function toString() : String{
+			return "Argument[reference: " + reference + ", optional:" + optional + "]";
 		}
 	}
 }

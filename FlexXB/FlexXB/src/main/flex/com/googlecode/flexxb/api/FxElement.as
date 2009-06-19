@@ -77,11 +77,10 @@ package com.googlecode.flexxb.api
 			items[XmlElement.ARGUMENT_GET_FROM_CACHE] = getFromCache;
 			items[XmlElement.ARGUMENT_SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
 			return items;
-		}	
-			
-		protected override function xmlToObject(xml : XML) : void{
-			this.getFromCache = xml.@getFromCache;
-			this.serializePartialElement = xml.@serializePartialElement;
+		}
+		
+		public function toString() : String{
+			return "Element[field: " + fieldName + ", type:" + fieldType + "]";
 		}
 	}
 }

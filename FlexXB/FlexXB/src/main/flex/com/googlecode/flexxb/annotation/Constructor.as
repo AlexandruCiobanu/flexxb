@@ -91,7 +91,7 @@ package com.googlecode.flexxb.annotation
 				_fieldMap = new Dictionary();
 			}
 			if(!argument){
-				throw new Error("Null argument.");
+				throw new DescriptorParsingError(owner.fieldType, "<<Constructor>>", "Null argument.");
 			}
 			if(_fieldMap[argument.referenceField] != null){
 				throw new DescriptorParsingError(owner.fieldType, argument.referenceField, "Argument " + argument.referenceField +  " already exists.");
