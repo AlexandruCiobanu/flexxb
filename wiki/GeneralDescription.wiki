@@ -31,8 +31,9 @@ All this information is linked to the object by adding metadata tags (annotation
 
 When an object is passed to it for serialization, it inspects the object's definition and extracts a list of annotations describing the way an object of that type needs to be (de)serialized. It keeps the generated list in a cache in order to reuse it if need arises and then builds the corresponding XML using the information provided by the annotations. Any object field that does not have an annotation defined is ignored in the (de)serialization process of that object.
 
-There are four built-in annotations for describing object serialization, one being class-scoped, the other field-scoped:
+There are five built-in annotations for describing object serialization, one being class-scoped, the other field-scoped:
  * *[Architecture XmlClass]*: Defines class's namespace (by uri and prefix) and xml alias;
+ * *[Architecture ConstructorArg]*: Defines the arguments with which the constructor should be run. Applies to classes with non default constructors and is defined at the same level with XmlXClass; 
  * *[Architecture XmlAttribute]*: Marks the field to be rendered as an attribute of the xml representation of the parent object;
  * *[Architecture XmlElement]*: Marks the field to be rendered as a child element of the xml representation of the parent object;
  * *[Architecture XmlArray]*: Is a particular type of element since it marks a field to be rendered as an Array of elements of a certain type.
