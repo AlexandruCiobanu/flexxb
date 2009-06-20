@@ -34,7 +34,7 @@ package com.googlecode.flexxb
 	{
 		private var store : DescriptorStore;
 		/**
-		 * 
+		 * Constructor
 		 * @param store
 		 * 
 		 */		
