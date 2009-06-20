@@ -73,11 +73,11 @@
 	public class XmlMember extends Annotation
 	{
 		/**
-		 * 
+		 * IgnoreOn attribute name
 		 */		
 		public static const ARGUMENT_IGNORE_ON : String = "ignoreOn";
 		/**
-		 * 
+		 * Order attribute name
 		 */		
 		public static const ARGUMENT_ORDER : String = "order";
 		/**
@@ -123,7 +123,7 @@
 			return _class && _class.valueField == this;
 		}
 		/**
-		 * 
+		 * Get the readOnly flag
 		 * @return 
 		 * 
 		 */		
@@ -131,7 +131,7 @@
 			return _accessorType.isReadOnly();
 		}
 		/**
-		 * 
+		 * Get the writeOnly flag
 		 * @return 
 		 * 
 		 */		
@@ -155,7 +155,7 @@
 			return pathElements;
 		}
 		/**
-		 * 
+		 * Get the order flag
 		 * @return 
 		 * 
 		 */		
@@ -163,7 +163,7 @@
 			return _order;
 		}
 		/**
-		 * 
+		 * Get the ignoreOn flag
 		 * @return 
 		 * 
 		 */		
@@ -179,8 +179,11 @@
 			return _class;
 		}
 		/**
-		 * 
-		 * @param value
+		 * Set the ignoreOn flag. Restrictions apply when setting this flag in 
+		 * compliance with the class field's accessType.
+		 * You cannot set the flag to <code>serialize</code> if the access type is <code>writeOnly/code>.
+		 * You cannot set the flag to <code>deserialize</code> if the access type is <code>readOnly</code>. 
+		 * @param value Stage
 		 * 
 		 */		
 		public function set ignoreOn(value : Stage) : void{
@@ -196,7 +199,11 @@
 				_ignoreOn = value;
 			}
 		}
-		
+		/**
+		 *  
+		 * @private
+		 * 
+		 */		
 		protected override function parse(field : XML):void{
 			_accessorType = AccessorType.fromString(field.@access);
 			super.parse(field);
@@ -211,7 +218,11 @@
 			ignoreOn = Stage.fromString(metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value);
 			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value)
 		}		
-		
+		/**
+		 * 
+		 * @private
+		 * 
+		 */		
 		protected function setOrder(value : String) : void{
 			if(value){
 				var nr : Number;

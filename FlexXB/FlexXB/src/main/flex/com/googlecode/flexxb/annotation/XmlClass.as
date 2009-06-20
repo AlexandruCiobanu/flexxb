@@ -60,7 +60,7 @@ package com.googlecode.flexxb.annotation
 		 */		
 		public static const ARGUMENT_ORDERED : String = "ordered";
 		/**
-		 * 
+		 * Class members
 		 */		
 		public var members : ArrayCollection = new ArrayCollection();
 		/**
@@ -88,7 +88,7 @@ package com.googlecode.flexxb.annotation
 		 */		
 		private var _ordered : Boolean;
 		/**
-		 * 
+		 * @private
 		 */		
 		private var _constructor : Constructor;
 		/**
@@ -147,7 +147,11 @@ package com.googlecode.flexxb.annotation
 			}
 			return null;
 		}
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get constructor() : Constructor{
 			return _constructor;
 		}
@@ -167,7 +171,11 @@ package com.googlecode.flexxb.annotation
 		public function get valueField() : Annotation{
 			return _defaultValueField;
 		}
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get ordered() : Boolean{
 			return _ordered;
 		}
@@ -187,7 +195,11 @@ package com.googlecode.flexxb.annotation
 		public function get childNameSpaceFieldName() : String{
 			return _useChildNamespace;
 		}
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function useOwnNamespace() : Boolean{
 			return _useChildNamespace == null || _useChildNamespace.length == 0;
 		}
@@ -222,8 +234,7 @@ package com.googlecode.flexxb.annotation
 			constructor.parse(descriptor);
 		}
 		/**
-		 * 
-		 * @param descriptor
+		 * @private
 		 * 
 		 */		
 		protected function processMembers(descriptor : XML) : void{
@@ -266,12 +277,7 @@ package com.googlecode.flexxb.annotation
 				_ordered = value == "true";
 			}
 		}
-		/**
-		 * 
-		 * @param metadata
-		 * @return 
-		 * 
-		 */		
+			
 		private function getNamespace(metadata : XML) : Namespace{
 			var prefix : String = metadata.arg.(@key == ARGUMENT_NAMESPACE_PREFIX).@value;
 			var uri : String = metadata.arg.(@key == ARGUMENT_NAMESPACE_URI).@value;
@@ -283,12 +289,7 @@ package com.googlecode.flexxb.annotation
 			}
 			return new Namespace(uri);			
 		}
-		/**
-		 * 
-		 * @param annotation
-		 * @return 
-		 * 
-		 */		
+			
 		private function isFieldRegistered(annotation : Annotation) : Boolean{
 			for each(var member : Annotation in members){
 				if(member.fieldName == annotation.fieldName){

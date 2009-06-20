@@ -44,15 +44,15 @@
 		 */		
 		public var nameSpace : Namespace;
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var _fieldName : String;
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var _fieldType : Class;
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var _alias : String = "";
 		/**
@@ -103,7 +103,7 @@
 			return _alias;
 		}
 		/**
-		 * 
+		 * @private
 		 * @param value name to be set
 		 * 
 		 */		

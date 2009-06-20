@@ -35,15 +35,15 @@ package com.googlecode.flexxb.annotation
 	public class Argument extends BaseAnnotation
 	{
 		/**
-		 * 
+		 * The annotation's name
 		 */		
 		public static const ANNOTATION_NAME : String = "ConstructorArg";
 		/**
-		 * 
+		 * Reference attribute name
 		 */		
 		public static const ARGUMENT_REF : String = "reference";
 		/**
-		 * 
+		 * Optional attribute name
 		 */		
 		public static const ARGUMENT_OPTIONAL : String = "optional";
 		/**
@@ -63,15 +63,14 @@ package com.googlecode.flexxb.annotation
 			super(descriptor);
 		}
 		/**
-		 * 
+		 * Get optional flag
 		 * @return 
 		 * 
 		 */		
 		public function get optional() : Boolean{
 			return _optional;
 		}
-		/**
-		 * 
+		/**the reference field name
 		 * @return 
 		 * 
 		 */		
