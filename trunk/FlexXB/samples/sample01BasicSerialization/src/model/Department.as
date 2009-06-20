@@ -3,6 +3,8 @@ package model
 	import com.googlecode.flexxb.IIdentifiable;
 	
 	[XmlClass(alias="CompanyDepartment", prefix="dept", uri="http://myCompanyUrl.com")]
+	[ConstructrArg(reference="id")]
+	[ConstructrArg(reference="name")]
 	[Bindable]
 	public class Department implements IIdentifiable
 	{
@@ -15,10 +17,11 @@ package model
 		[XmlElement(alias="Leader")]
 		public var departmentHead : Person;
 		
-		public function Department()
+		public function Department(id : String, name : String)
 		{
-			//TODO: implement function
 			super();
+			this.id = id;
+			this.name = name;
 		}
 		
 		public function get thisType():Class
