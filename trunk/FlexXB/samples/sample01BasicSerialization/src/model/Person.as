@@ -3,8 +3,8 @@ package model
 	import com.googlecode.flexxb.IIdentifiable;
 
 	[XmlClass(alias="Person")]
-	[ConstructrArg(reference="firstName")]
-	[ConstructrArg(reference="lastName")]
+	[ConstructorArg(reference="firstName")]
+	[ConstructorArg(reference="lastName")]
 	[Bindable]
 	public class Person implements IIdentifiable
 	{

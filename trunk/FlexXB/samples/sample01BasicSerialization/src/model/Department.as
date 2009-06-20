@@ -3,8 +3,8 @@ package model
 	import com.googlecode.flexxb.IIdentifiable;
 	
 	[XmlClass(alias="CompanyDepartment", prefix="dept", uri="http://myCompanyUrl.com")]
-	[ConstructrArg(reference="id")]
-	[ConstructrArg(reference="name")]
+	[ConstructorArg(reference="id")]
+	[ConstructorArg(reference="name")]
 	[Bindable]
 	public class Department implements IIdentifiable
 	{
