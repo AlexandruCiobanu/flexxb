@@ -25,7 +25,7 @@ package com.googlecode.flexxb.annotation
 	internal class BaseAnnotation
 	{
 		/**
-		 * 
+		 * Constructor
 		 * @param descriptor
 		 * 
 		 */		

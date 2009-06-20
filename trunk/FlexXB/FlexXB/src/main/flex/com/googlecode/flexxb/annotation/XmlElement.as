@@ -25,27 +25,27 @@
 	public class XmlElement extends XmlMember
 	{
 		/**
-		 * 
-		 */		
+		 * Annotation's name 
+		 */			
 		public static const ANNOTATION_NAME : String = "XmlElement";
 		/**
-		 * 
+		 * SerializePartialElement attribute name
 		 */		
 		public static const ARGUMENT_SERIALIZE_PARTIAL_ELEMENT : String = "serializePartialElement";
 		/**
-		 * 
+		 * GetFromCache attribute name
 		 */		
 		public static const ARGUMENT_GET_FROM_CACHE : String = "getFromCache";
 		/**
-		 * 
+		 * @private
 		 */
 		protected var _serializePartialElement : Boolean;
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var _getFromCache : Boolean;
 		/**
-		 * 
+		 * Constructor
 		 * @param descriptor
 		 * @param xmlClass
 		 * 
@@ -54,7 +54,7 @@
 			super(descriptor, xmlClass);
 		}
 		/**
-		 * 
+		 * Get serializePartialElement flag
 		 * @return 
 		 * 
 		 */		
@@ -62,7 +62,7 @@
 			return _serializePartialElement;
 		}
 		/**
-		 * 
+		 * Get getFromCache flag
 		 * @return 
 		 * 
 		 */		

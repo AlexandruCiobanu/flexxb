@@ -22,6 +22,10 @@ package com.googlecode.flexxb.annotation
 	import flash.utils.Dictionary;
 	
 	/**
+	 * This Factory will return an annotation instance based on the type required. Since each 
+	 * annotation has a specific serializer, it will also provide the serializer instance to be
+	 * used when processing a field. Since they are stateless, serializers do not need to be
+	 * instanciated more than once.
 	 * 
 	 * @author Alexutz
 	 * 
@@ -41,8 +45,7 @@ package com.googlecode.flexxb.annotation
 			return _instance;
 		} 
 		
-		private var annotationMap : Dictionary = new Dictionary();
-		
+		private var annotationMap : Dictionary = new Dictionary();		
 		/**
 		 * Constructor 
 		 * 
@@ -80,9 +83,9 @@ package com.googlecode.flexxb.annotation
 			return null;
 		}
 		/**
-		 * 
-		 * @param annotationName
-		 * @return 
+		 * Get the annotation class based on the annotation name
+		 * @param annotationName the name of the annotation
+		 * @return the Class object definition 
 		 * 
 		 */		
 		public function getAnnotationClass(annotationName : String) : Class{

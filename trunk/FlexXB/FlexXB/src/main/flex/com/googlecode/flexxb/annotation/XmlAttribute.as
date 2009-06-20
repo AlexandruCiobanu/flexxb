@@ -24,12 +24,16 @@
 	 */	
 	public final class XmlAttribute extends XmlMember
 	{
+		/**
+		 * Annotation's name 
+		 */		
 		public static const ANNOTATION_NAME : String = "XmlAttribute";
 		/**
+		 * Constructor 
+		 * @param descriptor xml descriptor from which to parse the data
+		 * @param classDescriptor owner XmlClass object
 		 * 
-		 * @param descriptor
-		 * 
-		 */		
+		 */			
 		public function XmlAttribute(descriptor : XML, classDescriptor : XmlClass = null){
 			super(descriptor, classDescriptor);
 		}

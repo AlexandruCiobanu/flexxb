@@ -38,7 +38,8 @@ package com.googlecode.flexxb.api
 		 */		
 		public static const READ_WRITE : AccessorType = new AccessorType("readwrite");
 		/**
-		 * 
+		 * Obtain an AccessorType instance from a string value. If the value is 
+		 * invalid the READ_WRITE instance will be returned by default.
 		 * @param value
 		 * @return 
 		 * 
@@ -63,8 +64,7 @@ package com.googlecode.flexxb.api
 		
 		private var name : String;
 		/**
-		 * 
-		 * @param name
+		 * @private
 		 * 
 		 */		
 		public function AccessorType(name : String){
@@ -74,34 +74,31 @@ package com.googlecode.flexxb.api
 			this.name = name;
 		}
 		/**
-		 * 
-		 * @param value
-		 * @return 
+		 * Check if the type is read only
+		 * @return true id type is read only, false otherwise
 		 * 
 		 */		
 		public function isReadOnly() : Boolean{
 			return READ_ONLY == this;
 		}
 		/**
-		 * 
-		 * @param value
-		 * @return 
+		 * Check if the type is write only
+		 * @return true id type is write only, false otherwise
 		 * 
 		 */		
 		public function isWriteOnly() : Boolean{
 			return WRITE_ONLY == this;
 		}
 		/**
+		 * Check if the type is read-write
+		 * @return true id type is read-write, false otherwise
 		 * 
-		 * @param value
-		 * @return 
-		 * 
-		 */		
+		 */ 	
 		public function isReadWrite() : Boolean{
 			return READ_WRITE == this;
 		}
 		/**
-		 * 
+		 * Get a string representation of the current instance
 		 * @return 
 		 * 
 		 */		

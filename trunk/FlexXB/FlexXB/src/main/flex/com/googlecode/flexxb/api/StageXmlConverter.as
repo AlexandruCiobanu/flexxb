@@ -19,7 +19,7 @@ package com.googlecode.flexxb.api
 {
 	import com.googlecode.flexxb.converter.IConverter;
 	/**
-	 * 
+	 * @private
 	 * @author Alexutz
 	 * 
 	 */	

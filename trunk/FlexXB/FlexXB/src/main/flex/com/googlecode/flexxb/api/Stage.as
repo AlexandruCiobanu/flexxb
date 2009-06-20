@@ -26,17 +26,17 @@ package com.googlecode.flexxb.api
 	public class Stage
 	{
 		/**
-		 * 
+		 * Serialization stage
 		 */		
 		public static const SERIALIZE : Stage = new Stage("serialize");
 		/**
-		 * 
+		 * Deserialization stage
 		 */		
 		public static const DESERIALIZE : Stage = new Stage("deserialize");
 		/**
-		 * 
-		 * @param value
-		 * @return 
+		 * Obtain a Stage instance from a string value.
+		 * @param value string representation
+		 * @return Stage instance if the value is valid, <code>null</code> otherwise
 		 * 
 		 */		
 		public static function fromString(value : String) : Stage{
@@ -57,8 +57,7 @@ package com.googlecode.flexxb.api
 		
 		private var name : String;
 		/**
-		 * 
-		 * @param name
+		 * @private
 		 * 
 		 */		
 		public function Stage(name : String)
@@ -69,7 +68,7 @@ package com.googlecode.flexxb.api
 			this.name = name;
 		}
 		/**
-		 * 
+		 * Get a string representation of the current instance
 		 * @return 
 		 * 
 		 */		

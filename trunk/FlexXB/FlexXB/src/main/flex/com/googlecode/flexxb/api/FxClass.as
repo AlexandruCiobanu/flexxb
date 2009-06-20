@@ -23,14 +23,16 @@ package com.googlecode.flexxb.api
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
-	/**
-	 * 
-	 * @author Alexutz
-	 * 
-	 */	
+	
 	[XmlClass(alias="Class")]
 	[ConstructorArg(reference="type")]
 	[ConstructorArg(reference="alias")]
+	/**
+	 * API wrapper for a class type. Allows programatically defining all the 
+	 * elements that would normally be specified via annotations.
+	 * @author Alexutz
+	 * 
+	 */	
 	public class FxClass
 	{
 		/**
@@ -94,6 +96,17 @@ package com.googlecode.flexxb.api
 				throw new ApiError("Class type is null!");
 			}
 			_type = value;
+		}
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
+		public function set nameSpace(value : Namespace) : void{
+			if(value){
+				uri = value.uri;
+				prefix = value.prefix;
+			}
 		}
 		/**
 		 * 

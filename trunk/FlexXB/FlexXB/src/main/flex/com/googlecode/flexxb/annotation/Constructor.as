@@ -37,15 +37,15 @@ package com.googlecode.flexxb.annotation
 		
 		private var _fields : Array;
 		/**
-		 * 
+		 * Constructor
 		 * 
 		 */		
 		public function Constructor(owner : XmlClass){
 			this.owner = owner;
 		}
 		/**
-		 * 
-		 * @return 
+		 * Get parameter list
+		 * @return Array of XMLMember objects
 		 * 
 		 */		
 		public function get parameterFields() : Array{

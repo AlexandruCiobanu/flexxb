@@ -39,29 +39,35 @@
 		 */		
 		public static const ARGUMENT_MEMBER_NAME : String = "memberName";
 		/**
-		 * 
+		 * @private
 		 */ 
 		protected var _type : Class;
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var _memberName : QName;
 		/**
-		 * Constructor
+		 * Constructor 
+		 * @param descriptor
+		 * @param xmlClass
 		 * 
-		 */		
+		 */			
 		public function XmlArray(descriptor : XML, xmlClass : XmlClass = null){
 			super(descriptor, xmlClass);
 		}
 		/**
-		 * 
+		 * Get the type of the list elements if it has been set
 		 * @return 
 		 * 
 		 */		
 		public function get type() : Class{
 			return _type;
 		}
-		
+		/**
+		 * Get the qualified name of list elements if it has been set 
+		 * @return 
+		 * 
+		 */		
 		public function get memberName() : QName{
 			return _memberName;
 		}
