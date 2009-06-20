@@ -3,6 +3,8 @@
 	layout="vertical" creationComplete="{init();}" >
 	<mx:Script>
 		<![CDATA[
+			import com.googlecode.flexxb.api.AccessorType;
+			import com.googlecode.flexxb.api.FxClass;
 			import com.googlecode.flexxb.FlexXBEngine;
 			import mx.controls.Alert;
 			import model.Person;
@@ -15,6 +17,35 @@
 			private function init() : void{
 				department = new Department("2", "Research & Development");
 				department.departmentHead = new Person("Mike","Johnson"); 
+				buildAPI();
+			}
+			
+			private function buildAPI() : void{
+				var apiClass : FxClass = new FxClass(Person, "Person");				
+				//Add class members descriptors
+				apiClass.addElement("id", String, AccessorType.READ_WRITE, "ID");
+				apiClass.addAttribute("firstName", String, AccessorType.READ_WRITE, "FirstName");
+				apiClass.addAttribute("lastName", String, AccessorType.READ_WRITE, "LastName");
+				apiClass.addAttribute("age", String, AccessorType.READ_WRITE, "Age");
+				apiClass.addElement("position", String, AccessorType.READ_WRITE, "Position");
+				//Set the constructpr arguments, if any
+				apiClass.addArgument("firstName");
+				apiClass.addArgument("lastName");
+				//Register the api descriptor class in the FlexXB engine
+				FlexXBEngine.instance.api.processTypeDescriptor(apiClass);
+				
+				apiClass = new FxClass(Department);
+				apiClass.alias = "CompanyDepartment";
+				apiClass.nameSpace = new Namespace("dept", "http://myCompanyUrl.com");
+				//Add clas members descriptors
+				apiClass.addAttribute("id", String, AccessorType.READ_WRITE, "ID");
+				apiClass.addElement("name", String, AccessorType.READ_WRITE, "DepartmentName");
+				apiClass.addElement("departmentHead", Person, AccessorType.READ_WRITE, "Leader");
+				//Set the constructpr arguments, if any
+				apiClass.addArgument("id");
+				apiClass.addArgument("name");
+				//Register the api descriptor class in the FlexXB engine
+				FlexXBEngine.instance.api.processTypeDescriptor(apiClass);
 			}
 			
 			private function serialize(event : Event) : void{
@@ -34,7 +65,7 @@
 			}
 		]]>
 	</mx:Script>
-	<mx:Label text="Sample 1 - Serialize and deserialize ActionScript objects to XML and viceversa" fontWeight="bold" fontSize="16" />
+	<mx:Label text="Sample 2 - Serialize and deserialize ActionScript by describing types in FlexXB API" fontWeight="bold" fontSize="16" />
 	<mx:HBox verticalAlign="middle" width="100%" height="300" paddingBottom="30"
 	paddingLeft="30" paddingRight="30" paddingTop="30">
 		<mx:Form width="50%" height="100%">
