@@ -245,4 +245,4 @@ The FlexXB API allows developers to specify the way classes should be processed 
   
  * Programatically: you can define in code the fields of a specific type that can be processed and how.
  * Via xml config file: you can define an xml file containing all the information FlexXB engine needs to process thespecified types. This file must oblige to the api schema file located in _*FLEXXB_BINARIES_DIR/api-schema/FlexXB-api.xsd*_.
-<br />The main access point for the api is {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api}}}.
+The main access point for the api is {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api}}}.
