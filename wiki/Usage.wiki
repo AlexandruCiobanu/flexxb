@@ -244,7 +244,7 @@ _The resulting xml looks like:_
 The FlexXB API allows developers to specify the way classes should be processed without decorating them with annotations. This is particularly usefull is cases when using an external library whose sources are not available or when you can't modify existing sources for one reason or another. There are two ways of using the API:
   
  * Programatically: you can define in code the fields of a specific type that can be processed and how.
- * Via xml config file: you can define an xml file containing all the information FlexXB engine needs to process thespecified types. This file must oblige to the api schema file located in _*FLEXXB_BINARIES_DIR/api-schema/FlexXB-api.xsd*_.
+ * Via xml config file: you can define an xml file containing all the information FlexXB engine needs to process the specified types. This file must oblige to the api schema file located in _*FLEXXB_BINARIES_DIR/api-schema/FlexXB-api.xsd*_.
 The main access point for the api is {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api}}}.
 
 === 1. Programatically building descriptor ===
@@ -288,7 +288,7 @@ package model
 }
 }}}
 
-Building the api descirptor should loomk like:
+Building the api descriptor should loomk like:
 
 {{{
         var apiClass : FxClass = new FxClass(Person, "Person");				
@@ -298,7 +298,7 @@ Building the api descirptor should loomk like:
 	apiClass.addAttribute("lastName", String, AccessorType.READ_WRITE, "LastName");
 	apiClass.addAttribute("age", String, AccessorType.READ_WRITE, "Age");
 	apiClass.addElement("position", String, AccessorType.READ_WRITE, "Position");
-	//Set the constructpr arguments, if any
+	//Set the constructor arguments, if any
 	apiClass.addArgument("firstName");
 	apiClass.addArgument("lastName");
 	//Register the api descriptor class in the FlexXB engine
@@ -353,7 +353,7 @@ The api descriptor is built like:
 	apiClass.addAttribute("id", String, AccessorType.READ_WRITE, "ID");
 	apiClass.addElement("name", String, AccessorType.READ_WRITE, "DepartmentName");
 	apiClass.addElement("departmentHead", Person, AccessorType.READ_WRITE, "Leader");
-	//Set the constructpr arguments, if any
+	//Set the constructor arguments, if any
 	apiClass.addArgument("id");
 	apiClass.addArgument("name");
 	//Register the api descriptor class in the FlexXB engine
