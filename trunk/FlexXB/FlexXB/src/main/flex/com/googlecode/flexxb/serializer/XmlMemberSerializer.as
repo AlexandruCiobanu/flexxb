@@ -88,6 +88,10 @@ package com.googlecode.flexxb.serializer
 				xmlElement = xmlData;
 			}
 			
+			if(xmlElement == null){
+				return null;
+			}
+			
 			var xmlName : QName;
 			if(element.useOwnerAlias()){
 				xmlName = serializer.descriptorStore.getXmlName(element.fieldType);
@@ -129,7 +133,9 @@ package com.googlecode.flexxb.serializer
 				if(list.length() > 0){
 					xmlElement = list[0];
 				}else{
-					throw new ProcessingError(element.ownerClass.fieldType, element.fieldName, false, "Path element not found(" + pathElement + ")");
+					xmlElement = null;
+					break;
+					//throw new ProcessingError(element.ownerClass.fieldType, element.fieldName, false, "Path element not found(" + pathElement + ")");
 				}
 			}
 			return xmlElement;
