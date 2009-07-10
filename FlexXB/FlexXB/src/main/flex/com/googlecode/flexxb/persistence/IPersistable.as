@@ -58,5 +58,17 @@
 		 * 
 		 */		
 		function rollback() : void;
+		/**
+		 * Stop listening for changes occuring to the object.
+		 * It is usually called before deserialization occurs.
+		 * 
+		 */		
+		function stopListening() : void;
+		/**
+		 * Start listening for changes occuring to the object.
+		 * Usually called after deserialization completes.
+		 * 
+		 */		
+		function startListening() : void;
 	}
 }

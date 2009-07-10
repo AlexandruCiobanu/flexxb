@@ -60,7 +60,7 @@
 		 * @see IPersistable#editMode()
 		 * 
 		 */		
-		public function get editMode() : Boolean{
+		public final function get editMode() : Boolean{
 			return _editMode;
 		}
 		/**
@@ -68,7 +68,7 @@
 		 * @see IPersistable#setEditMode()
 		 * 
 		 */		
-		public function setEditMode(mode : Boolean) : void{
+		public final function setEditMode(mode : Boolean) : void{
 			_editMode = mode;
 		}
 		/**
@@ -76,7 +76,7 @@
 		 * @see IPersistable#modified() 
 		 * 
 		 */		
-		public function get modified():Boolean
+		public final function get modified():Boolean
 		{
 			return _modified;
 		}
@@ -85,7 +85,7 @@
 		 * It is usually called before deserialization occurs.
 		 * 
 		 */		
-		public function stopListening() : void{
+		public final function stopListening() : void{
 			listen = false;
 		}
 		/**
@@ -93,7 +93,7 @@
 		 * Usually called after deserialization completes.
 		 * 
 		 */		
-		public function startListening() : void{
+		public final function startListening() : void{
 			listen = true;
 		}
 		
@@ -110,7 +110,7 @@
 		 * @see IPersistable#commit() 
 		 * 
 		 */		
-		public function commit():void
+		public final function commit():void
 		{
 			if(modified){
 				setModified(false);
@@ -120,7 +120,7 @@
 		 * @see IPersistable#rollback()
 		 * 
 		 */		
-		public function rollback():void
+		public final function rollback():void
 		{
 			if(modified){
 				listen = false;
@@ -136,7 +136,7 @@
 		 * @return dispatch succeeded
 		 * 
 		 */		
-		public override function dispatchEvent(event : Event):Boolean
+		public override final function dispatchEvent(event : Event):Boolean
 		{
 			if(editMode && event is PropertyChangeEvent && event.type == PropertyChangeEvent.PROPERTY_CHANGE){
 				valueChanged(PropertyChangeEvent(event));

@@ -18,6 +18,8 @@
  package com.googlecode.flexxb.persistence
 {
 	import flexunit.framework.TestCase;
+	
+	import mx.events.CollectionEvent;
 
 	public class ReferenceListTest extends TestCase
 	{
@@ -29,9 +31,11 @@
 		
 		public function testList() : void{
 			var list : ReferenceList = new ReferenceList(["1", "2", "3"]);
+			assertFalse("Modified wrongfully fired", list.modified);
 			list.removeItemAt(0);
 			list.addItem("4");
 			list.addItem("5");
+			assertTrue("Modified not set", list.modified);
 			list.rollback();
 			assertEquals("Wrong length", 3, list.length);
 			assertEquals("Wronf first element", "1", list.getItemAt(0));
@@ -40,7 +44,32 @@
 		}		
 		
 		public function testEditMode() : void{
-			
+			var list : ReferenceList = new ReferenceList(["1", "2", "3"]);
+			assertFalse("Modified wrongfully fired", list.modified);
+			var changeDiscovered : Boolean;
+			list.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(event : CollectionEvent) : void{
+				changeDiscovered = true;
+			});
+			list.setEditMode(true);
+			list.removeItemAt(0);
+			list.addItem("4");
+			list.addItem("5");
+			assertTrue("Modified not set", list.modified);
+			assertFalse("Change was wrongfully detected when editMode was set to true", changeDiscovered);
+			list.setEditMode(false);
+			list.addItem("5");
+			assertTrue("Change was not detected when editMode was setto false", changeDiscovered);
+		}
+		
+		public function testListenMode() : void{
+			var list : ReferenceList = new ReferenceList(["1", "2", "3"]);
+			assertFalse("Modified wrongfully fired", list.modified);
+			list.stopListening();
+			list.addItem("4");
+			list.addItem("5");
+			assertFalse("Modified is wrong", list.modified);
+			list.rollback();
+			assertEquals("Member count invalid", 5, list.length);
 		}
 	}
 }

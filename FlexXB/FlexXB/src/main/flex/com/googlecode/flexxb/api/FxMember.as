@@ -22,6 +22,8 @@ package com.googlecode.flexxb.api
 	import com.googlecode.flexxb.error.ApiError;
 	
 	import flash.utils.Dictionary;
+	
+	import com.googlecode.flexxb.api.flexxb_api_internal;
 	/**
 	 * 
 	 * @author Alexutz

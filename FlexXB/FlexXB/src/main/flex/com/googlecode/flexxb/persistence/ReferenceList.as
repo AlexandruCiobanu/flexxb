@@ -22,6 +22,7 @@ package com.googlecode.flexxb.persistence
 	
 	import mx.collections.ArrayCollection;
 	import mx.events.CollectionEvent;
+	import mx.events.CollectionEventKind;
 	/**
 	 * Adds to ArrayCollection the functionalities specified by IPersistable.
 	 * Should be used in model objects the require having lists of referenced objects.
@@ -46,14 +47,14 @@ package com.googlecode.flexxb.persistence
 		public function ReferenceList(source:Array=null)
 		{
 			super(source);
-			addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 150, false);
+			addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, Number.MAX_VALUE, false);
 		}
 		/**
 		 * 
 		 * @see IPersistable#editMode() 
 		 * 
 		 */		
-		public function get editMode() : Boolean{
+		public final function get editMode() : Boolean{
 			return _editMode;
 		}
 		/**
@@ -61,8 +62,24 @@ package com.googlecode.flexxb.persistence
 		 * @see IPersistable#setEditMode()
 		 * 
 		 */		
-		public function setEditMode(mode : Boolean) : void{
+		public final function setEditMode(mode : Boolean) : void{
 			_editMode = mode;
+		}
+		/**
+		 * Stop listening for changes occuring to the object.
+		 * It is usually called before deserialization occurs.
+		 * 
+		 */		
+		public final function stopListening() : void{
+			listen = false;
+		}
+		/**
+		 * Start listening for changes occuring to the object.
+		 * Usually called after deserialization completes.
+		 * 
+		 */		
+		public final function startListening() : void{
+			listen = true;
 		}
 		/**
 		 * 
@@ -70,7 +87,7 @@ package com.googlecode.flexxb.persistence
 		 * @return 
 		 * 
 		 */		
-		public function removeItem(item : Object) : Boolean{
+		public final function removeItem(item : Object) : Boolean{
 			if(item){
 				var index : int = getItemIndex(item);
 				if(index > -1){
@@ -81,10 +98,61 @@ package com.googlecode.flexxb.persistence
 			return false;
 		}
 		/**
+		 * 
+		 * @param index
+		 * @return 
+		 * 
+		 */		
+		public override function removeItemAt(index:int):Object{
+			if (index >= 0 && index < length){
+				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false,false, CollectionEventKind.REMOVE, index, -1, null));
+			}
+			return super.removeItemAt(index);
+		}
+		/**
+		 * 
+		 * @param item
+		 * @param index
+		 * 
+		 */		
+		public override function addItemAt(item:Object, index:int):void{
+			if (list && index >= 0 && index <= length){
+				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false,false, CollectionEventKind.ADD, index, -1, [item]));
+			}
+			super.addItemAt(item, index);
+		}
+		/**
+		 * 
+		 * @param item
+		 * @param index
+		 * @return 
+		 * 
+		 */		
+		public override function setItemAt(item:Object, index:int):Object{
+			if (list && index >= 0 && index < length){
+				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false,false, CollectionEventKind.REPLACE, index, -1, [item]));
+			}
+			return super.setItemAt(item, index);
+		}
+		/**
+		 * 
+		 * @param s
+		 * 
+		 */		
+		public override function set source(s:Array):void{
+			if(source && s!= source){
+				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false, false, CollectionEventKind.RESET));
+			}else{
+				listen = false;
+			}
+			super.source = s;
+			listen = true;
+		}
+		/**
 		 * @see IPersistable#modified()
 		 * 
 		 */			
-		public function get modified():Boolean
+		public final function get modified():Boolean
 		{
 			return _modified;
 		}
@@ -92,7 +160,7 @@ package com.googlecode.flexxb.persistence
 		 * @see IPersistable#commit()
 		 * 
 		 */		
-		public function commit():void
+		public final function commit():void
 		{
 			if(modified){
 				setModified(false);
@@ -102,7 +170,7 @@ package com.googlecode.flexxb.persistence
 		 * @see IPersistable#rollback()
 		 * 
 		 */			
-		public function rollback():void
+		public final function rollback():void
 		{
 			if(modified){
 				listen = false;
@@ -117,9 +185,8 @@ package com.googlecode.flexxb.persistence
 		 * @see flash.events.EventDispatcher#dispatchEvent() 
 		 * 
 		 */		
-		public override function dispatchEvent(event:Event) : Boolean{
-			if(event is CollectionEvent){
-				onCollectionChange(event as CollectionEvent);
+		public override final function dispatchEvent(event:Event) : Boolean{
+			if(event is CollectionEvent && editMode){
 				return true;
 			}
 			return super.dispatchEvent(event);
@@ -143,7 +210,7 @@ package com.googlecode.flexxb.persistence
 		 * @param event
 		 * 
 		 */		
-		protected function onCollectionChange(event : CollectionEvent) : void{
+		private function onCollectionChange(event : CollectionEvent) : void{
 			if(listen && !modified && ChangeTrackerKind.isActionTracked(event.kind)){
 				var initial : Array = [];
 				for each(var item : Object in this){
