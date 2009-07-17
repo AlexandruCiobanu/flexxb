@@ -8,5 +8,6 @@ This problem might appear on all list-like (Array, ArrayCollection etc.) fields 
 
 *Resolution:*
 
- 1. Use objects of type xxx somewhere in the application
- 2. Add [ArrayElementType("xxx")] annotation on the array field
+ * Use objects of type xxx somewhere in the application;
+ * Add [ArrayElementType("xxx")] annotation on the array field;
+ * Explicitly include the xxx type at compile time by adding include-classes attribute in the compiler arguments.
