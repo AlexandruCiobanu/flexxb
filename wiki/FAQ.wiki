@@ -8,5 +8,5 @@ This problem might appear on all list-like (Array, ArrayCollection etc.) fields 
 
 *Resolution:*
 
- 1) Use objects of type xxx somewhere in the application
- 2) Add [ArrayElementType("xxx")] annotation on the array field
+ 1. Use objects of type xxx somewhere in the application
+ 2. Add [ArrayElementType("xxx")] annotation on the array field
