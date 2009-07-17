@@ -28,3 +28,5 @@ public class Section implements IIdentifiable
 	public var units : Array;
 }
 }}}
+
+_Thanks to [http://code.google.com/u/willsp/ willsp] for bringing this to my attention_
