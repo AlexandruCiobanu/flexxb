@@ -14,3 +14,17 @@ To solve this problem do one of the following:
  * Use objects of type xxx somewhere in the application;
  * Add [ArrayElementType("xxx")] annotation on the array field;
  * Explicitly include the xxx type at compile time by adding include-classes attribute in the compiler arguments.
+
+*Example:*
+
+{{{
+public class Section implements IIdentifiable
+{
+	[XmlAttribute]
+	public var id : String;
+
+	[XmlArray(alias="units",type="model.Unit")]
+        [ArrayElementType("model.Unit")]
+	public var units : Array;
+}
+}}}
