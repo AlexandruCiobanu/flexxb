@@ -4,9 +4,11 @@
 
 *Cause:* 
 
-This problem might appear on all list-like (Array, ArrayCollection etc.) fields in class definitions if the type of the list members is not used anywhere else in the application. The Flex compiler will ignore class definitions that are not explicitly used in teh application, thus the #1065 will appear if FlexXB attempts to deserialize the specific object.
+This problem might appear on all list-like (Array, ArrayCollection)fields in class definitions if the type of the list members is not used anywhere else in the application. The Flex compiler will ignore class definitions that are not explicitly used in teh application, thus the #1065 will appear if FlexXB attempts to deserialize the specific object.
 
 *Resolution:*
+
+To solve this problem do one of the following:
 
  * Use objects of type xxx somewhere in the application;
  * Add [ArrayElementType("xxx")] annotation on the array field;
