@@ -1,0 +1,7 @@
+#summary Frequent questions
+
+== 1. Specifying member type for array annotations results in a ReferenceError: Error #1065: xxx variable is not defined ==
+
+*Cause:*  
+
+*Resolution:*
