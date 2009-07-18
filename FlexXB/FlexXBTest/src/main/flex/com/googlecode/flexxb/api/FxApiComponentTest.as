@@ -28,6 +28,7 @@ package com.googlecode.flexxb.api
 	import com.googlecode.testData.PhoneNumber;
 	
 	import flexunit.framework.TestCase;
+	import com.googlecode.flexxb.api.flexxb_api_internal;
 	/**
 	 * 
 	 * @author Alexutz
@@ -124,7 +125,7 @@ package com.googlecode.flexxb.api
 			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
 			assertEquals("Wrong number of classes parsed", 3, wrapper.descriptors.length);
 			assertEquals("Wrong version", 1, wrapper.version);
-			assertEquals("Wrong Argument count ", 2, FxClass(wrapper.descriptors[1]).constructorArguments.length);
+			assertEquals("Wrong Argument count ", 2, FxClass(wrapper.descriptors[1]).flexxb_api_internal::constructorArguments.length);
 		}
 		
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void{

@@ -21,6 +21,8 @@
 	layout="absolute" creationComplete="init()">
 	<mx:Script>
 		<![CDATA[
+			import com.googlecode.flexxb.serializer.XmlElementSerializer;
+			import com.googlecode.flexxb.api.FxClass;
 			import com.googlecode.flexxb.api.FxArray;
 			import com.googlecode.flexxb.api.ApiTests;
 			import com.googlecode.testData.Mock;
@@ -33,7 +35,6 @@
 			import com.googlecode.flexxb.XmlTests; 
 			
 			private function init() : void{
-				trace(describeType(FxArray).toXMLString());
 				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite(), ApiTests.suite()];
 			}
 		]]>

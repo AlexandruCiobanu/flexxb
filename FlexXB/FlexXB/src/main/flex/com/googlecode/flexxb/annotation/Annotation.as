@@ -46,7 +46,7 @@
 		/**
 		 * @private
 		 */		
-		protected var _fieldName : String;
+		protected var _fieldName : QName;
 		/**
 		 * @private
 		 */		
@@ -72,7 +72,7 @@
 		 * @return field name
 		 * 
 		 */		
-		public function get fieldName():String{
+		public function get fieldName():QName{
 			return _fieldName;
 		}
 		/**
@@ -111,7 +111,7 @@
 			if(value == null) return;
 			_alias = value;
 			if(_alias.length == 0){
-				_alias = _fieldName;
+				_alias = _fieldName.localName;
 			}
 		}
 		/**
@@ -139,7 +139,7 @@
 		protected override function parse(field : XML) : void
 		{
 			if(field.@name.length() > 0){
-				_fieldName = field.@name;
+				_fieldName = new QName(field.@uri, field.@name);
 			}
 			if(field.@type.length() > 0){
 				_fieldType = getDefinitionByName(field.@type) as Class;

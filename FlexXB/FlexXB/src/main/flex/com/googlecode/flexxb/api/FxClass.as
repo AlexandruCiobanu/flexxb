@@ -24,6 +24,9 @@ package com.googlecode.flexxb.api
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 	
+	import com.googlecode.flexxb.api.flexxb_api_internal;
+	use namespace flexxb_api_internal;
+	
 	[XmlClass(alias="Class")]
 	[ConstructorArg(reference="type")]
 	[ConstructorArg(reference="alias")]
@@ -56,18 +59,33 @@ package com.googlecode.flexxb.api
 		public var ordered : Boolean;
 		/**
 		 * 
+		 */	
+		[XmlAttribute]
+		public var useNamespaceFrom : String;
+		/**
+		 * 
+		 */	
+		[XmlAttribute]
+		public var idField : String;
+		/**
+		 * 
+		 */	
+		[XmlAttribute]
+		public var defaultValueField : String;
+		/**
+		 * 
 		 */		
 		private var _type : Class;
 		/**
 		 * 
 		 */		
 		[XmlArray(alias="Members")]
-		public var members : Array = [];
+		flexxb_api_internal var members : Array = [];
 		/**
 		 * 
 		 */		
 		[XmlArray(alias="ConstructorArguments", memberType="com.googlecode.flexxb.api.FxConstructorArgument")]
-		public var constructorArguments : Array;
+		flexxb_api_internal var constructorArguments : Array;
 		/**
 		 *Constructor 
 		 * 
@@ -214,6 +232,9 @@ package com.googlecode.flexxb.api
 			items[XmlClass.ARGUMENT_NAMESPACE_PREFIX] = prefix;
 			items[XmlClass.ARGUMENT_NAMESPACE_URI] = uri;
 			items[XmlClass.ARGUMENT_ORDERED] = ordered;
+			items[XmlClass.ARGUMENT_USE_CHILD_NAMESPACE] = useNamespaceFrom;
+			items[XmlClass.ARGUMENT_ID] = idField;
+			items[XmlClass.ARGUMENT_VALUE] = defaultValueField;
 			
 			for(var key : * in items){
 				if(items[key]!= null){

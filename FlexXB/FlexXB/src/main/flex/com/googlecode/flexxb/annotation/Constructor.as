@@ -58,7 +58,7 @@ package com.googlecode.flexxb.annotation
 		 * 
 		 */		
 		public function hasParameterField(fieldAnnotation : XmlMember) : Boolean{
-			return !isDefault() && fieldAnnotation && _fieldMap[fieldAnnotation.fieldName];
+			return !isDefault() && fieldAnnotation && _fieldMap[fieldAnnotation.fieldName.localName];
 		}
 		/**
 		 * 

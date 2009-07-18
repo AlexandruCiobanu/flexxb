@@ -108,7 +108,7 @@ package com.googlecode.flexxb.annotation
 			if(annotation && !isFieldRegistered(annotation)){
 				annotation.nameSpace = nameSpace;
 				members.addItem(annotation);
-				if(annotation.fieldName == id){
+				if(annotation.fieldName.localName == id){
 					_idField = annotation;
 				}
 				if(annotation.alias == defaultValue){
@@ -138,9 +138,9 @@ package com.googlecode.flexxb.annotation
 		 * 
 		 */		
 		public function getMember(memberFieldName : String) : Annotation{
-			if(fieldName && fieldName.length > 0){
+			if(memberFieldName && memberFieldName.length > 0){
 				for each(var member : Annotation in members){
-					if(member.fieldName == memberFieldName){
+					if(member.fieldName.localName == memberFieldName){
 						return member;
 					}
 				}
@@ -222,10 +222,10 @@ package com.googlecode.flexxb.annotation
 			if(!type){
 				type = descriptor.@name;
 			}
-			_fieldName = type.substring(type.lastIndexOf(":") + 1);
+			_fieldName = new QName(null, type.substring(type.lastIndexOf(":") + 1));
 			_fieldType = getDefinitionByName(type) as Class;
 			if(!alias || alias.length == 0 || alias == type){
-				setAlias(_fieldName);
+				setAlias(_fieldName.localName);
 			}
 			if(descriptor.factory.length() > 0){
 				descriptor = descriptor.factory[0];

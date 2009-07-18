@@ -229,7 +229,7 @@
 				try{
 					nr = Number(value);
 				}catch(error : Error){
-					throw new DescriptorParsingError(ownerClass.fieldType, fieldName, "The order attribute of the annotation is invalid as number");
+					throw new DescriptorParsingError(ownerClass.fieldType, fieldName.localName, "The order attribute of the annotation is invalid as number");
 				}
 				_order = nr;
 			}

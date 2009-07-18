@@ -36,6 +36,8 @@
 		 * GetFromCache attribute name
 		 */		
 		public static const ARGUMENT_GET_FROM_CACHE : String = "getFromCache";
+		
+		public static const ARGUMENT_GET_RUNTIME_TYPE: String="getRuntimeType";
 		/**
 		 * @private
 		 */
@@ -44,6 +46,10 @@
 		 * @private
 		 */		
 		protected var _getFromCache : Boolean;
+		/**
+		 *@private 
+		 */		
+		protected var _getRuntimeType : Boolean;
 		/**
 		 * Constructor
 		 * @param descriptor
@@ -62,6 +68,14 @@
 			return _serializePartialElement;
 		}
 		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get getRuntimeType() : Boolean{
+			return _getRuntimeType;
+		}
+		/**
 		 * Get getFromCache flag
 		 * @return 
 		 * 
@@ -78,6 +92,7 @@
 			super.parseMetadata(metadata);
 			_serializePartialElement = metadata.arg.(@key == ARGUMENT_SERIALIZE_PARTIAL_ELEMENT).@value == "true";
 			_getFromCache =  metadata.arg.(@key == ARGUMENT_GET_FROM_CACHE).@value == "true";
+			_getRuntimeType = metadata.arg.(@key == ARGUMENT_GET_RUNTIME_TYPE).@value == "true";
 		}
 		/**
 		 * 
