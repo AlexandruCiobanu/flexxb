@@ -18,6 +18,7 @@
  package com.googlecode.flexxb
 {
 	import com.googlecode.testData.ConstructorRefObj;
+	import com.googlecode.testData.CustomSerializabeObject;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
@@ -107,6 +108,16 @@
 			var xml : XML = FlexXBEngine.instance.serialize(target);
 			var copy : Object = FlexXBEngine.instance.deserialize(xml);
 			assertTrue("copy is null or not mock2", copy is Mock2);
+		}
+		
+		public function testCustomSerialization() : void{
+			var target : CustomSerializabeObject = new CustomSerializabeObject();
+			target.test = "acesta este un test";
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			assertNotNull("Empty xml!", xml);
+			var result : CustomSerializabeObject = FlexXBEngine.instance.deserialize(xml, CustomSerializabeObject);
+			assertEquals("Wrong test field values", target.test, result.test);
+			
 		}
 	}
 }
