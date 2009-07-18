@@ -69,8 +69,15 @@
 			if(list.length() == 0){
 				return null;
 			}
-			if(isComplexType(element.fieldType)){
-				return serializer.deserialize(list[0], element.fieldType, XmlElement(element).getFromCache);
+			var type : Class = element.fieldType;
+			if(XmlElement(element).getRuntimeType){
+				type = serializer.getIncomingType(list[0]);
+				if(!type){
+					type = element.fieldType;
+				}
+			}
+			if(isComplexType(type)){
+				return serializer.deserialize(list[0], type, XmlElement(element).getFromCache);
 			}
 			return serializer.converterStore.stringToObject(list[0].toString(), element.fieldType);
 		}		

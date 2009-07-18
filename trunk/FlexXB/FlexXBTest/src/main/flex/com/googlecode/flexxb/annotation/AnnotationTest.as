@@ -54,7 +54,7 @@
 		protected final function validate(annotation : Annotation, ...args) : void{
 			assertNotNull("Null annotation", annotation);
 			assertNotNull("Validation arguments are missing", args);
-			assertEquals("Field Name is incorrect", args[0], annotation.fieldName);
+			assertEquals("Field Name is incorrect", args[0], annotation.fieldName.localName);
 			assertEquals("Field Type is incorrect", args[1], annotation.fieldType);
 			assertEquals("Alias is incorrect", args[2], annotation.alias);
 			customValidate.apply(this, [annotation].concat(args));

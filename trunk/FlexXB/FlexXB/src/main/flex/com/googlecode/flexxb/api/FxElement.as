@@ -51,12 +51,16 @@ package com.googlecode.flexxb.api
 		 */
 		[XmlAttribute]		
 		public var getFromCache : Boolean;
-		
-		[XmlAttribute]
 		/**
 		 * 
 		 */
+		[XmlAttribute]
 		public var serializePartialElement : Boolean;
+		/**
+		 * 
+		 */	
+		[XmlAttribute]	
+		public var getRuntimeType : Boolean;
 		/**
 		 * 
 		 * @param field
@@ -76,6 +80,7 @@ package com.googlecode.flexxb.api
 			var items : Dictionary = super.getContent();
 			items[XmlElement.ARGUMENT_GET_FROM_CACHE] = getFromCache;
 			items[XmlElement.ARGUMENT_SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
+			items[XmlElement.ARGUMENT_GET_RUNTIME_TYPE] = getRuntimeType;
 			return items;
 		}
 		
