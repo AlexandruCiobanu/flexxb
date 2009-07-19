@@ -55,6 +55,7 @@
       <xs:attribute name="getFromCache" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="serializePartialElement" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
+      <xs:attribute name="getRuntimeType" type="xs:boolean" use="optional" default="false"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Array">
