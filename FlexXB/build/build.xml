@@ -7,11 +7,13 @@
 	<property file="./build/build.properties" />   
 	<property file="../svn.properties"/>
 	
-	<taskdef resource="com/adobe/ac/ant/tasks/tasks.properties"/>
-	<taskdef resource="flexTasks.tasks"/>
-	<taskdef format="xml" resource="org/tigris/subversion/svnant/svnantlib.xml">
+	<taskdef resource="com/adobe/ac/ant/tasks/tasks.properties" classpath="${basedir}/libs/ant/FlexAntTasks.jar"/>
+	<taskdef resource="flexTasks.tasks" classpath="${basedir}/libs/ant/flexTasks.jar"/>
+	<taskdef format="xml" resource="org/tigris/subversion/svnant/svnantlib.xml" >
 		<classpath>
-			<pathelement location="${basedir}/libs/ant/"/>
+			<pathelement location="${basedir}/libs/ant/svnant.jar"/>
+			<pathelement location="${basedir}/libs/ant/svnClientAdapter.jar"/>
+			<pathelement location="${basedir}/libs/ant/svnjavahl.jar"/>
 		</classpath>
 	</taskdef>
 	<!-- -->

@@ -1,5 +1,5 @@
 /*********************************************************************************************************************************/
-/**												FlexXB version 1.2 (20-06-2009)				   									**/
+/**												FlexXB version 1.3 (20-07-2009)				   									**/
 /**													by Alex Ciobanu						   										**/
 /*********************************************************************************************************************************/
 
@@ -7,7 +7,7 @@ Copyright 2008 - 2009 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-FlexXB-1_2-20062009-bin.zip - contains the flexxb library along with the test 
+FlexXB-1_3-20072009-bin.zip - contains the flexxb library along with the test 
 							application
 			/bin/ 				- SWC file and test application directory
 			/bin/test/ 			- the test application
@@ -17,7 +17,7 @@ FlexXB-1_2-20062009-bin.zip - contains the flexxb library along with the test
 			/samples/			- samples showing FlexXB's features 
 			/README.txt	- version release notes
 
-FlexXB-1_2-20062009-src.zip - contains source files
+FlexXB-1_3-20072009-src.zip - contains source files
 			/FlexXB/	- FlexXB project sources
 			/FlexXBTest - FlexXB test application sources
 
@@ -98,7 +98,7 @@ XmlAttribute
 [XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")] 
 
 XmlElement
-[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")] 
+[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", getRuntimeType="true|false")] 
 
 XmlArray
 [XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]
@@ -115,6 +115,13 @@ KNOWN LIMITATIONS
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+
+1.3 - 20-07-2009
+	- Fix: Issue 13 - IXmlSerializable not working... 
+	- Fix: Issue 14 - Add support for namepaced class fields
+	- Fix: Issue 15 - Not all XmlClass annotation attributes are covered in api 
+	- Enhancement: Added getRuntimeType flag to XmlElement to get the deserialization field type on the fly
+	- Enhancement: ReferenceList
 
 1.2 - 20-06-2009
 	- Fix 11: Issue 11 - Error in library 1.1 ,mx.managers:ISystemManager does not implements interface mx.managers:ISystemManager 
