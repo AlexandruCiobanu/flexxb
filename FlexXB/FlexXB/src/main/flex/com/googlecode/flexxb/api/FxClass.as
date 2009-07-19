@@ -23,8 +23,6 @@ package com.googlecode.flexxb.api
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
-	
-	import com.googlecode.flexxb.api.flexxb_api_internal;
 	use namespace flexxb_api_internal;
 	
 	[XmlClass(alias="Class")]
@@ -45,7 +43,8 @@ package com.googlecode.flexxb.api
 		public var alias : String;
 		/**
 		 * 
-		 */		
+		 */
+		[XmlAttribute]			
 		public var prefix : String;
 		/**
 		 * 
