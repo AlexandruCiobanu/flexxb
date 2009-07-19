@@ -3,6 +3,7 @@
 	<!-- Define variables/paths used in this build script --> 
 	<tstamp>
 		<format property="timestamp" pattern="ddMMyyyy"/>
+		<format property="currentDate" pattern="dd-MM-yyyy"/>
 	</tstamp>
 	<property file="./build/build.properties" />   
 	<property file="../svn.properties"/>
@@ -25,7 +26,6 @@
 		<echo message="OS : ${os.name}" />  
 		<echo message="Author: ${author}" />  
 		<echo message="=============================================="/> 
-		<echo message="${release.name.bin}"/>
 	</target>
 	<!-- -->
 	<target name="properties" depends="init">
@@ -85,9 +85,9 @@
 	</target>
 	<!-- -->
 	<target name="release" depends="development, junit.ui">
-		<copy file="${basedir}/README.txt" tofile="${basedir}/releasenotes/readme-v${release.version}.txt" overwrite="true"/>
 		<copy file="${flexxb.src.dir}/com/googlecode/flexxb/api/schema/FlexXB.xsd"
 			tofile="${bin.dir}/api-schema/FlexXB-api.xsd"/>
+		<make.readme />
 		<zip destfile="${bin.dir}/${release.name.bin}">
 			<fileset dir="${basedir}">
 				<exclude name="**/build/**"/>
@@ -156,6 +156,28 @@
 	                message="One or more flexunit tests failed. See test reports for details."
 	                if="flexunit.failed"/>
 	    </target>
+	
+	<macrodef name="make.readme">
+		<sequential>
+			<copy file="${basedir}/README.txt" tofile="${basedir}/releasenotes/readme-v${release.version}.txt" overwrite="true"/>
+			<replaceregexp file="${basedir}/releasenotes/readme-v${release.version}.txt"
+				flags="gs"
+				match="\$\{release.version\}"
+				replace="${release.version}"/>
+			<replaceregexp file="${basedir}/releasenotes/readme-v${release.version}.txt"
+				flags="gs"
+				match="\$\{project.version\}"
+				replace="${project.version}"/>
+			<replaceregexp file="${basedir}/releasenotes/readme-v${release.version}.txt"
+				flags="gs"
+				match="\$\{today\}"
+				replace="${timestamp}"/>
+			<replaceregexp file="${basedir}/releasenotes/readme-v${release.version}.txt"
+				flags="gs"
+				match="\$\{currentDate\}"
+				replace="${currentDate}"/>
+		</sequential>
+	</macrodef>
 	
 	<macrodef name="make.wrapper">
 	    <attribute name="width" default="100%" />
