@@ -30,3 +30,13 @@ public class Section implements IIdentifiable
 }}}
 
 _Thanks to [http://code.google.com/u/willsp/ willsp] for bringing this to my attention_
+
+== 2. Running build.xml under Windows Vista throws a _Cannot find javahl, svnkit nor command line svn client_ exception ==
+
+*Cause:* 
+
+Under Windows Vista, svn.exe fails if the SystemDrive variable is not set.
+
+*Resolution:*
+
+Set an environmental variable named SystemDrive with value _C:_
