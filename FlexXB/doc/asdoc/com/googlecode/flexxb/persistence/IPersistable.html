@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="IPersistable,com.googlecode.flexxb.persistence.IPersistable,editMode,modified,commit,rollback,setEditMode" name="keywords">
+<meta content="IPersistable,com.googlecode.flexxb.persistence.IPersistable,editMode,modified,commit,rollback,setEditMode,startListening,stopListening" name="keywords">
 <title>com.googlecode.flexxb.persistence.IPersistable</title>
 </head>
 <body>
@@ -110,6 +110,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
    </div>
 </td><td class="summaryTableOwnerCol">IPersistable</td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#startListening()">startListening</a>():void</div>
+<div class="summaryTableDescription">
+   Start listening for changes occuring to the object.</div>
+</td><td class="summaryTableOwnerCol">IPersistable</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#stopListening()">stopListening</a>():void</div>
+<div class="summaryTableDescription">
+   Stop listening for changes occuring to the object.</div>
+</td><td class="summaryTableOwnerCol">IPersistable</td>
+</tr>
 </table>
 </div>
 <script type="text/javascript" language="javascript">
@@ -187,6 +203,30 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="startListening()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">startListening</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function startListening():void</code><p>
+   Start listening for changes occuring to the object.
+   Usually called after deserialization completes.
+   
+   </p></div>
+<a name="stopListening()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">stopListening</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function stopListening():void</code><p>
+   Stop listening for changes occuring to the object.
+   It is usually called before deserialization occurs.
+   
+   </p></div>
 <br>
 <br>
 <hr>
