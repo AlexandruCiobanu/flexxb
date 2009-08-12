@@ -3,4 +3,4 @@
 
 = Introduction =
 
-Add your content here.
+Besides the powerfull xmp processing capabilities, FlexXB also offers support for communicating with the server as well as the notion of persistable objects.
