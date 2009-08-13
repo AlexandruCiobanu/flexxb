@@ -5,7 +5,7 @@
 
 Besides the powerful xml processing capabilities, FlexXB also offers support for communicating with the server as well as the notion of persistable objects.
 
-=== Server communication ===
+== Server communication ==
 
 Having the ability to convert ActionScript objects to xml and vice versa is quite redundant if not for a means of communicating with the back end server consuming and producing the xml request and responses.
 FlexXB offers server communication capabilities by the classes located in {{{com.googlecode.flex.service}}}. They are enumerated below along with a description of their purpose:
@@ -17,14 +17,14 @@ FlexXB offers server communication capabilities by the classes located in {{{com
  * {{{ServiceSettings}}} - 
  * {{{SettingsChangedEvent}}} - 
 
-==== 1. Translators ====
+=== 1. Translators ===
 
 TODO
 
-==== 2. Communicators ====
+=== 2. Communicators ===
 
 TODO
 
-=== Persistence ===
+== Persistence ==
 
 TODO
