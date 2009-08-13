@@ -8,18 +8,21 @@ Besides the powerful xml processing capabilities, FlexXB also offers support for
 == Server communication ==
 
 Having the ability to convert ActionScript objects to xml and vice versa is quite redundant if not for a means of communicating with the back end server consuming and producing the xml request and responses.
-FlexXB offers server communication capabilities by the classes located in {{{com.googlecode.flex.service}}}. They are enumerated below along with a description of their purpose:
+FlexXB offers server communication capabilities by the classes located in {{{com.googlecode.flex.service}}}. They are enumerated below along with a short description of their purpose:
 
- * {{{ITranslator}}} - 
- * {{{ICommunicator}}} - 
- * {{{Communicator}}} - 
- * {{{AbstractService}}} - 
- * {{{ServiceSettings}}} - 
- * {{{SettingsChangedEvent}}} - 
+ * {{{ITranslator}}} - Interface for defining a translator. Translators take care of creating the request objects, serialize them into a xml request, deserialize the xml response into a response object and retrieving the actual useful data from it.
+ * {{{ICommunicator}}} - Interface for defining a communicator. It is basically a wrapper for the object that sends requests to the server in the protocol and format required and receives responses from it.
+ * {{{Communicator}}} - Default implementation of ICommunicator. Allows sending/receiving xml via HTTP.
+ * {{{AbstractService}}} - This is the base for all service classes. Uses an instance of an ICommunicator implemetor to send requests and retrieve responses.
+ * {{{ServiceSettings}}} - Settings object for configuring the service. Contains several built-in variables covering the must-have settings like url, HTTP method etc.
+
+If one can understand the need for the {{{AbstractService}}} or {{{ServiceSettings}}, there are here two notions that might elude him/her: translators and communicators.
 
 === 1. Translators ===
 
-TODO
+When communicating with a server, besides the useful data, there is a sometimes significant amount of "protocol overhead". For example, connecting to a server requires a login and then the use of a session identifier. When sending a request to create an object you must format it in a specific manner, adding the session identifier to allow for the server's authentication process. Also, when receiving a response, it may come with additional data to it in the form of a wrapper around the useful response data, containing the exact date and time the response was processed, the status of the operation (executed successfully or threw an error) etc. All this apparent overhead represents the communication protocol with the server. It means that the xml received/sent has a specific format and must include some information besides of the data solely related with the operation being invoked (insert, update, delete etc). This protocol data doesn't need to be offered outside the service layer. It is related strictly with the communication with the server.
+
+This is where the translators come in. 
 
 === 2. Communicators ===
 
