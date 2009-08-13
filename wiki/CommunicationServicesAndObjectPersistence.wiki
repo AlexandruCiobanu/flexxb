@@ -24,7 +24,9 @@ When communicating with a server, besides the useful data, there is a sometimes 
 
 All this apparent overhead represents the communication protocol with the server. It means that the xml received/sent has a specific format and must include some information besides of the data solely related with the operation being invoked (insert, update, delete etc). This protocol data doesn't need to be offered outside the service layer. It is related strictly with the communication with the server.
 
-This is where the translators come in. 
+This is where the translators come in. They conceal the complexity of using the protocol objects by building the request in a form accepted by the server from application data and providing data that can be processed by the application from the server response. IN this process they also take care of the AS3 <-> XML conversion specific to each communication stage (SEND, RECEIVE). You can see them as adapters.
+
+
 
 === 2. Communicators ===
 
