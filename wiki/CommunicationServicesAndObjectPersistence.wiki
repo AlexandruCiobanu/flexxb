@@ -16,7 +16,7 @@ FlexXB offers server communication capabilities by the classes located in {{{com
  * {{{AbstractService}}} - This is the base for all service classes. Uses an instance of an ICommunicator implemetor to send requests and retrieve responses.
  * {{{ServiceSettings}}} - Settings object for configuring the service. Contains several built-in variables covering the must-have settings like url, HTTP method etc.
 
-If one can understand the need for the {{{AbstractService}}} or {{{ServiceSettings}}, there are here two notions that might elude him/her: translators and communicators.
+If one can understand the need for the {{{AbstractService}}} or {{{ServiceSettings}}}, there are here two notions that might elude him/her: translators and communicators.
 
 === 1. Translators ===
 
