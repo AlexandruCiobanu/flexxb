@@ -53,6 +53,10 @@ public interface ITranslator
 } 
 }}}
 
+The first method, {{{createRequest}}}, is responsible for building the actual XML to be sent to the server. There are two ways of building the request, basically: build the XML directly by simply writing it in the method's body or build the XML by creating the request object and then using the serializer to extract the xml request.
+
+{{{parseResponse}}} is designed for performing the deserialization from the received xml to AS objects. Basically, the resulting object is a representation of the entire response, containing all protocol overhead. At this point you can run different checks, for the validity of the response for example. After checkups pass, you can extract the usefull data from the response object, which is the purpose of the {{{extractResponseData}}} method.
+
 === 2. Communicators ===
 
 TODO
