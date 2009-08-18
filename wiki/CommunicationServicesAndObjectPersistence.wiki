@@ -55,7 +55,7 @@ public interface ITranslator
 
 The first method, {{{createRequest}}}, is responsible for building the actual XML to be sent to the server. There are two ways of building the request, basically: build the XML directly by simply writing it in the method's body or build the XML by creating the request object and then using the serializer to extract the xml request.
 
-{{{parseResponse}}} is designed for performing the deserialization from the received xml to AS objects. Basically, the resulting object is a representation of the entire response, containing all protocol overhead. At this point you can run different checks, for the validity of the response for example. After checkups pass, you can extract the usefull data from the response object, which is the purpose of the {{{extractResponseData}}} method.
+{{{parseResponse}}} is designed for performing the deserialization from the received xml to AS objects. Basically, the resulting object is a representation of the entire response, containing all protocol overhead. At this point you can run different checks, for the validity of the response for example. After checkups pass, you can extract the useful data from the response object, which is the purpose of the {{{extractResponseData}}} method.
 
 === 2. Communicators ===
 
@@ -63,4 +63,60 @@ TODO
 
 == Persistence ==
 
-TODO
+This option appeared in response to several issues I encountered at my job while working on editing an object. What we needed was to be able to edit an object without triggering bindings and also to be able to revert to the original object if canceling the edit. 
+
+Basically, the solution we employed back then was to clone the object. When we started the edit we would create a clone of the edited object; that clone would then be used in the view and be modified as needed. Upon cancel we would just discard the clone; on finish we would save the changed on the server then copy the values from the clone to the original object.
+
+Another solution is to have an object aware of the changes that occur on it from the last save, a persistable object. This object would remember the fields that were changed and will have the ability to revert the changes made to it. Thus there would be no need for cloning the edited object and running into all the problems that come with it. 
+
+How would this work? Basically, a persistable object will hold an internal list with the fields whose values changed along with the original values. This is the foothold for allowing the object to revert the changes made to it by iterating the change list and reinstating the original values.
+
+Let's take a look at the definition of a persitable object:
+
+{{{
+public interface IPersistable         
+{                 
+	/**                  
+	 * Get the object's status: has it been modified since the previous commit?
+	 * @return  true/false
+	 *
+	 */ 
+	function get modified() : Boolean;
+	/**
+	 * 
+	 * @return 
+	 *       
+	 */          
+	function get editMode() : Boolean; 
+	/**             
+	 *             
+	 * @param mode      
+	 *               
+         */                
+	function setEditMode(mode : Boolean) : void;  
+	/**            
+	 * Commit the changes made to the object since the previous commit 
+	 *            
+	 */            
+	function commit() : void;       
+	/**            
+	 * Revert all the changes made to the object since the previous commit  
+	 *              
+	 */               
+	function rollback() : void;      
+	/**               
+	 * Stop listening for changes occurring to the object.        
+	 * It is usually called before deserialization occurs.     
+	 *         
+	 */       
+	function stopListening() : void;      
+	/**             
+	 * Start listening for changes occuring to the object.     
+	 * Usually called after deserialization completes.
+	 *
+	 */  
+	function startListening() : void;
+} 
+}}}
+
+The main methods here are {{{commit()}}} and {{{rollback()}}}. As stated before an object will hold an internal list of changes. Upon commit, that list will be cleared making the current values resident. If rollback is done, then the values will be reverted to the original ones available from the latest commit. You can view it as a transactional object.
