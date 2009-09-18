@@ -1,12 +1,12 @@
 /**
- *   FlexXB - an annotation based xml serializer for Flex and Air applications 
+ *   FlexXB - an annotation based xml serializer for Flex and Air applications
  *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
  *   (at your option) any later version.
- * 
+ *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -14,11 +14,10 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
- package com.googlecode.flexxb.annotation
-{
+ */
+package com.googlecode.flexxb.annotation {
 	import flash.utils.getDefinitionByName;
-	
+
 	/**
 	 * This is the base class for a field xml annotation.
 	 * <p> It obtains basic informations about the field:
@@ -27,135 +26,145 @@
 	 *     <li>Alias (the name under which the field will be used in the xml reprezentation)</li>
 	 * </p>
 	 * @author aCiobanu
-	 * 
-	 */	
-	public class Annotation extends BaseAnnotation
-	{
+	 *
+	 */
+	public class Annotation extends BaseAnnotation {
 		/**
-		 * 
-		 */		
-		public static const ARGUMENT_ALIAS : String = "alias"; 
+		 *
+		 */
+		public static const ARGUMENT_ALIAS : String = "alias";
 		/**
-		 * 
-		 */		
+		 *
+		 */
 		public static const ALIAS_ANY : String = "*";
 		/**
-		 * 
-		 */		
+		 *
+		 */
 		public var nameSpace : Namespace;
 		/**
 		 * @private
-		 */		
+		 */
 		protected var _fieldName : QName;
 		/**
 		 * @private
-		 */		
+		 */
 		protected var _fieldType : Class;
 		/**
 		 * @private
-		 */		
+		 */
 		protected var _alias : String = "";
 		/**
-		 * 
-		 */		
+		 *
+		 */
 		private var _xmlName : QName;
+
 		/**
 		 * Constructor
 		 * @param descriptor
-		 * 
-		 */				
-		public function Annotation(descriptor : XML){
+		 *
+		 */
+		public function Annotation(descriptor : XML) {
 			super(descriptor);
 		}
+
 		/**
-		 * 
+		 *
 		 * @return field name
-		 * 
-		 */		
-		public function get fieldName():QName{
+		 *
+		 */
+		public function get fieldName() : QName {
 			return _fieldName;
 		}
+
 		/**
-		 * 
+		 *
 		 * @return field type
-		 * 
-		 */		
-		public function get fieldType() : Class{
+		 *
+		 */
+		public function get fieldType() : Class {
 			return _fieldType;
 		}
+
 		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public function get xmlName() : QName{
-			if(!_xmlName){
+		 *
+		 * @return
+		 *
+		 */
+		public function get xmlName() : QName {
+			if (!_xmlName) {
 				_xmlName = new QName(nameSpace, _alias == "" ? _fieldName : _alias);
 			}
 			return _xmlName;
 		}
+
 		/**
-		 * 
+		 *
 		 * @return name
-		 * 
-		 */		
-		public function get alias() : String{
+		 *
+		 */
+		public function get alias() : String {
 			return _alias;
 		}
+
 		/**
 		 * @private
 		 * @param value name to be set
-		 * 
-		 */		
-		protected function setAlias(value : String) : void{
-			if(value == null) return;
+		 *
+		 */
+		protected function setAlias(value : String) : void {
+			if (value == null)
+				return;
 			_alias = value;
-			if(_alias.length == 0){
+			if (_alias.length == 0) {
 				_alias = _fieldName.localName;
 			}
 		}
+
 		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public function hasNamespaceDeclaration() : Boolean{
+		 *
+		 * @return
+		 *
+		 */
+		public function hasNamespaceDeclaration() : Boolean {
 			return nameSpace && nameSpace.uri && nameSpace.uri.length > 0;
 		}
+
 		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public function useOwnerAlias() : Boolean{
+		 *
+		 * @return
+		 *
+		 */
+		public function useOwnerAlias() : Boolean {
 			return _alias == ALIAS_ANY;
 		}
+
 		/**
 		 * @private
 		 * Analyze field/class descriptor to extract base informations like field's name and type
 		 * @param field field descriptor
-		 * 
-		 */				
-		protected override function parse(field : XML) : void
-		{
-			if(field.@name.length() > 0){
+		 *
+		 */
+		protected override function parse(field : XML) : void {
+			if (field.@name.length() > 0) {
 				_fieldName = new QName(field.@uri, field.@name);
 			}
-			if(field.@type.length() > 0){
+			if (field.@type.length() > 0) {
 				_fieldType = getDefinitionByName(field.@type) as Class;
 			}
 			var metadata : XMLList = field.metadata.(@name == annotationName);
-			if(metadata.length()>0){
+			if (metadata.length() > 0) {
 				parseMetadata(metadata[0]);
 			}
 			return;
 		}
+
 		/**
 		 * @private
 		 * Process the metadata attached to the field to extract annotation specific data
 		 * @param field field descriptor
-		 * 
-		 */		
-		protected function parseMetadata(field : XML) : void{}
+		 *
+		 */
+		protected function parseMetadata(field : XML) : void {
+		}
 	}
 }
