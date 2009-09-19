@@ -1,12 +1,12 @@
 /**
- *   FlexXB - an annotation based xml serializer for Flex and Air applications 
+ *   FlexXB - an annotation based xml serializer for Flex and Air applications
  *   Copyright (C) 2008 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
  *   (at your option) any later version.
- * 
+ *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -17,24 +17,26 @@
  */
 package com.googlecode.testData
 {
+
 	/**
-	 * 
+	 *
 	 * @author Alexutz
-	 * 
-	 */	
+	 *
+	 */
 	public class Person
 	{
-		public function Person(first : String = null, last : String = null){
-			firstName = first;
-			lastName = last;
+		public function Person(first:String=null, last:String=null)
+		{
+			firstName=first;
+			lastName=last;
 		}
-		
-		public var firstName : String;
-		
-		public var lastName : String;
-		
-		public var birthDate : Date;
-		
-		public var age : Number;
+
+		public var firstName:String;
+
+		public var lastName:String;
+
+		public var birthDate:Date;
+
+		public var age:Number;
 	}
 }

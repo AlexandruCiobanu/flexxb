@@ -4,8 +4,8 @@ package com.googlecode.testData
 
 	public class CustomSerializabeObject implements IXmlSerializable
 	{
-		public var test : String;
-		
+		public var test:String;
+
 		public function CustomSerializabeObject()
 		{
 		}
@@ -14,26 +14,26 @@ package com.googlecode.testData
 		{
 			return null;
 		}
-		
+
 		public function toXml():XML
 		{
 			return <testObject><testField>{test}</testField></testObject>;
 		}
-		
+
 		public function get thisType():Class
 		{
 			return CustomSerializabeObject;
 		}
-		
+
 		public function fromXml(xmlData:XML):Object
 		{
-			test = xmlData.testField;
+			test=xmlData.testField;
 			return this;
 		}
-		
+
 		public function getIdValue(xmldata:XML):String
 		{
 			return null;
-		}		
+		}
 	}
 }
