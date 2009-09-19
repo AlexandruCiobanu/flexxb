@@ -19,6 +19,7 @@
 {
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.CustomSerializabeObject;
+	import com.googlecode.testData.List;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
@@ -88,6 +89,18 @@
 			assertEquals("Attribute is wrong", target.attribute, copy.attribute);
 			assertEquals("id is wrong", target.id, copy.id);
 			assertEquals("version is wrong", target.version, copy.version);
+		}
+		
+		public function testSimpleTypedArrays() : void{
+			var tst : List = new List();
+			tst.nums.push(1, 2, 3, 4);
+			var xml : XML = FlexXBEngine.instance.serialize(tst);
+			var copy : List = FlexXBEngine.instance.deserialize(xml, List);
+			assertEquals( "Length does not match", tst.nums.length, copy.nums.length);
+			var i : int = 0;
+			while(i < tst.nums.length){
+				assertEquals("Element " + i + " does not match", tst.nums[i], copy.nums[i++]);
+			}
 		}
 				
 		public function testVirtualPath() : void{
