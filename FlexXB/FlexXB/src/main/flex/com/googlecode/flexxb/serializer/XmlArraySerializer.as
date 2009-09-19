@@ -111,7 +111,7 @@ package com.googlecode.flexxb.serializer {
 			if (xmlArray && xmlArray.length() > 0) {
 				var list : Array = [];
 				for each (var xmlChild : XML in xmlArray) {
-					var member : Object = serializer.deserialize(xmlChild, array.type, array.getFromCache);
+					var member : Object = getValue(xmlChild, array.type, array.getFromCache, serializer);
 					if (member) {
 						list.push(member);
 					}

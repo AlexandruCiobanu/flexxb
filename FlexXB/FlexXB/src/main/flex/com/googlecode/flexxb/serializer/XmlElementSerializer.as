@@ -19,7 +19,7 @@ package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
-
+	
 	import flash.xml.XMLNode;
 	import flash.xml.XMLNodeType;
 
@@ -78,10 +78,14 @@ package com.googlecode.flexxb.serializer {
 					type = element.fieldType;
 				}
 			}
+			return getValue(list[0], type, XmlElement(element).getFromCache, serializer);
+		}
+		
+		protected final function getValue(xml : XML, type : Class, getFromCache : Boolean, serializer : SerializerCore) : Object{
 			if (isComplexType(type)) {
-				return serializer.deserialize(list[0], type, XmlElement(element).getFromCache);
+				return serializer.deserialize(xml, type, getFromCache);
 			}
-			return serializer.converterStore.stringToObject(list[0].toString(), element.fieldType);
+			return serializer.converterStore.stringToObject(xml.toString(), type);
 		}
 	}
 }
