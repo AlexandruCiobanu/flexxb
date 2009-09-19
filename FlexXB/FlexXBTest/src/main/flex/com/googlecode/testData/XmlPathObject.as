@@ -1,12 +1,12 @@
 /**
- *   FlexXB - an annotation based xml serializer for Flex and Air applications 
+ *   FlexXB - an annotation based xml serializer for Flex and Air applications
  *   Copyright (C) 2008-2009 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
  *   (at your option) any later version.
- * 
+ *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -16,21 +16,22 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.googlecode.testData
-{	
+{
+
 	[XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
 	public class XmlPathObject
 	{
 		[XmlElement(alias="subObject/id")]
-		public var identity : Number = 2;
+		public var identity:Number=2;
 		[XmlElement(alias="subObject/subSubObj/ref")]
-		public var reference : String = "ReferenceTo"; 
+		public var reference:String="ReferenceTo";
 		[XmlArray(alias="subObject/list")]
-		public var list : Array;
+		public var list:Array;
 		[XmlAttribute(alias="anotherSub/attTest")]
-		public var test : Date = new Date();
+		public var test:Date=new Date();
 		[XmlElement()]
-		public var defaultTest : String = "This is Default!!!"
-		
+		public var defaultTest:String="This is Default!!!"
+
 		public function XmlPathObject()
 		{
 		}
