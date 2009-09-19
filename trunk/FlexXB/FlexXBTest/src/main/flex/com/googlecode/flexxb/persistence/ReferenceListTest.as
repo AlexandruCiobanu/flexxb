@@ -15,24 +15,20 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.persistence
-{
+package com.googlecode.flexxb.persistence {
 	import flexunit.framework.TestCase;
 	import com.googlecode.flexxb.persistence.PersistableList;
 
 	import mx.events.CollectionEvent;
 
-	public class ReferenceListTest extends TestCase
-	{
-		public function ReferenceListTest(methodName:String=null)
-		{
+	public class ReferenceListTest extends TestCase {
+		public function ReferenceListTest(methodName : String = null) {
 			//TODO: implement function
 			super(methodName);
 		}
 
-		public function testList():void
-		{
-			var list:PersistableList=new PersistableList(["1", "2", "3"]);
+		public function testList() : void {
+			var list : PersistableList = new PersistableList(["1", "2", "3"]);
 			assertFalse("Modified wrongfully fired", list.modified);
 			list.removeItemAt(0);
 			list.addItem("4");
@@ -45,14 +41,12 @@ package com.googlecode.flexxb.persistence
 			assertEquals("Wronf third element", "3", list.getItemAt(2));
 		}
 
-		public function testEditMode():void
-		{
-			var list:PersistableList=new PersistableList(["1", "2", "3"]);
+		public function testEditMode() : void {
+			var list : PersistableList = new PersistableList(["1", "2", "3"]);
 			assertFalse("Modified wrongfully fired", list.modified);
-			var changeDiscovered:Boolean;
-			list.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(event:CollectionEvent):void
-				{
-					changeDiscovered=true;
+			var changeDiscovered : Boolean;
+			list.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(event : CollectionEvent) : void {
+					changeDiscovered = true;
 				});
 			list.setEditMode(true);
 			list.removeItemAt(0);
@@ -65,9 +59,8 @@ package com.googlecode.flexxb.persistence
 			assertTrue("Change was not detected when editMode was setto false", changeDiscovered);
 		}
 
-		public function testListenMode():void
-		{
-			var list:PersistableList=new PersistableList(["1", "2", "3"]);
+		public function testListenMode() : void {
+			var list : PersistableList = new PersistableList(["1", "2", "3"]);
 			assertFalse("Modified wrongfully fired", list.modified);
 			list.stopListening();
 			list.addItem("4");

@@ -15,19 +15,16 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
 	[XmlClass(alias="MOck2Replacement", idField="id")]
-	public class Mock3 extends Mock2
-	{
+	public class Mock3 extends Mock2 {
 		[XmlAttribute]
-		public var attribute:Boolean;
+		public var attribute : Boolean;
 		[XmlElement(alias="objectVersion")]
-		public var version:Number;
+		public var version : Number;
 
-		public function Mock3()
-		{
+		public function Mock3() {
 			super();
 		}
 	}

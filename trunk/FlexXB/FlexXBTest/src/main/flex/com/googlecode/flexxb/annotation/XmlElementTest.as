@@ -15,28 +15,24 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.annotation
-{
+package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.testData.Mock3;
 
-	public class XmlElementTest extends AnnotationTest
-	{
-		public function XmlElementTest(methodName:String=null)
-		{
+	public class XmlElementTest extends AnnotationTest {
+		public function XmlElementTest(methodName : String = null) {
 			super(methodName);
 		}
 
-		protected override function runTest(descriptor:XML):void
-		{
-			var att1:XmlElement=new XmlElement(getFieldDescriptor("version", descriptor));
+		protected override function runTest(descriptor : XML) : void {
+			var att1 : XmlElement = new XmlElement(getFieldDescriptor("version", descriptor));
 			validate(att1, "version", Number, "objVersion", null, false);
 
-			var att2:XmlElement=new XmlElement(getFieldDescriptor("reference", descriptor));
+			var att2 : XmlElement = new XmlElement(getFieldDescriptor("reference", descriptor));
 			validate(att2, "reference", Object, "reference", null, true);
 
-			var att3:XmlElement=new XmlElement(getFieldDescriptor("link", descriptor));
+			var att3 : XmlElement = new XmlElement(getFieldDescriptor("link", descriptor));
 			validate(att3, "link", Mock3, "mock3", null, true);
 		}
 
@@ -48,8 +44,7 @@ package com.googlecode.flexxb.annotation
 		 * @param args
 		 *
 		 */
-		protected override function customValidate(annotation:Annotation, ... args):void
-		{
+		protected override function customValidate(annotation : Annotation, ... args) : void {
 			assertEquals("IgnoreOn is incorrect", args[3], XmlElement(annotation).ignoreOn);
 			assertEquals("SerializePartialElement is incorrect", args[4], XmlElement(annotation).serializePartialElement);
 		}

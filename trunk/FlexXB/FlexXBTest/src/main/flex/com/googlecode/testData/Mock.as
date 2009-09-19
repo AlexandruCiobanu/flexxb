@@ -15,45 +15,40 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
 	[Bindable]
 	[XmlClass(alias="MyClass", prefix="test", uri="http://www.axway.com/xmlns/passport/v1")]
-	public class Mock
-	{
+	public class Mock {
 		[XmlAttribute(alias="stuff")]
-		public var aField:String="a";
+		public var aField : String = "a";
 		[XmlAttribute(ignoreOn="serialize")]
-		public var date:Date;
+		public var date : Date;
 		[XmlElement(alias="objVersion")]
-		public var version:Number=4;
+		public var version : Number = 4;
 		[XmlElement(alias="mock3", serializePartialElement="true")]
-		public var link:Mock3;
+		public var link : Mock3;
 		[XmlElement(serializePartialElement="true")]
-		public var reference:Object;
+		public var reference : Object;
 		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]
-		public var result:Array;
+		public var result : Array;
 		[XmlElement]
-		public var xmlData:XML;
+		public var xmlData : XML;
 
 		[XmlElement]
-		public function get readOnly():String
-		{
+		public function get readOnly() : String {
 			return "YES";
 		}
 
 		[XmlElement()]
-		public function set writeOnly(value:String):void
-		{
+		public function set writeOnly(value : String) : void {
 			trace("Mock - writeOnly");
 		}
 
-		public var someExcludedField:Boolean;
+		public var someExcludedField : Boolean;
 
 		[Argument(ref="version", optional="false")]
-		public function Mock()
-		{
+		public function Mock() {
 			//TODO: implement function
 		}
 	}

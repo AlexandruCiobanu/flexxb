@@ -15,25 +15,20 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.annotation
-{
+package com.googlecode.flexxb.annotation {
 	import com.googlecode.testData.Mock;
 
-	public class XmlArrayTest extends AnnotationTest
-	{
-		public function XmlArrayTest(methodName:String=null)
-		{
+	public class XmlArrayTest extends AnnotationTest {
+		public function XmlArrayTest(methodName : String = null) {
 			super(methodName);
 		}
 
-		protected override function runTest(descriptor:XML):void
-		{
-			var att1:XmlArray=new XmlArray(getFieldDescriptor("result", descriptor));
+		protected override function runTest(descriptor : XML) : void {
+			var att1 : XmlArray = new XmlArray(getFieldDescriptor("result", descriptor));
 			validate(att1, "result", Array, "data", null, false, Mock);
 		}
 
-		protected override function customValidate(annotation:Annotation, ... args):void
-		{
+		protected override function customValidate(annotation : Annotation, ... args) : void {
 			assertEquals("IgnoreOn is incorrect", args[3], XmlArray(annotation).ignoreOn);
 			assertEquals("SerializePartialElement is incorrect", args[4], XmlArray(annotation).serializePartialElement);
 			assertEquals("Type is incorrect", args[5], XmlArray(annotation).type);

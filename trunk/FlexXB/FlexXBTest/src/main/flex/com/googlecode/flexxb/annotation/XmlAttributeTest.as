@@ -15,29 +15,24 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.annotation
-{
+package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.api.Stage;
 
-	public class XmlAttributeTest extends AnnotationTest
-	{
-		public function XmlAttributeTest(methodName:String=null)
-		{
+	public class XmlAttributeTest extends AnnotationTest {
+		public function XmlAttributeTest(methodName : String = null) {
 			//TODO: implement function
 			super(methodName);
 		}
 
-		protected override function runTest(descriptor:XML):void
-		{
-			var att1:XmlAttribute=new XmlAttribute(getFieldDescriptor("aField", descriptor));
+		protected override function runTest(descriptor : XML) : void {
+			var att1 : XmlAttribute = new XmlAttribute(getFieldDescriptor("aField", descriptor));
 			validate(att1, "aField", String, "stuff", null);
 
-			var att2:XmlAttribute=new XmlAttribute(getFieldDescriptor("date", descriptor));
+			var att2 : XmlAttribute = new XmlAttribute(getFieldDescriptor("date", descriptor));
 			validate(att2, "date", Date, "date", Stage.SERIALIZE);
 		}
 
-		protected override function customValidate(annotation:Annotation, ... args):void
-		{
+		protected override function customValidate(annotation : Annotation, ... args) : void {
 			assertEquals("IgnoreOn is incorrect", args[3], XmlAttribute(annotation).ignoreOn);
 		}
 	}

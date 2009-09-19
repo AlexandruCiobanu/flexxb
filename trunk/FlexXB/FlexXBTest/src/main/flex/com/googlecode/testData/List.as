@@ -1,13 +1,10 @@
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
-	public class List
-	{
+	public class List {
 		[XmlArray(alias="nums", type="Number", memberName="n")]
-		public var nums:Array=new Array();
+		public var nums : Array = new Array();
 
-		public function List()
-		{
+		public function List() {
 		}
 	}
 }

@@ -15,8 +15,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb
-{
+package com.googlecode.flexxb {
 	import com.googlecode.testData.NameOrdered;
 
 	import flexunit.framework.TestCase;
@@ -26,20 +25,17 @@ package com.googlecode.flexxb
 	 * @author Alexutz
 	 *
 	 */
-	public class XmlSpecialCharEscapeTest extends TestCase
-	{
-		public function XmlSpecialCharEscapeTest(methodName:String=null)
-		{
+	public class XmlSpecialCharEscapeTest extends TestCase {
+		public function XmlSpecialCharEscapeTest(methodName : String = null) {
 			super(methodName);
 		}
 
-		public function testEscapeCharsOnElements():void
-		{
-			var target:NameOrdered=new NameOrdered();
-			target.test2="EscapeChar <b>OK</b>";
-			target.reference="<test </meeee>";
-			target.list=["Alt escape test <juice />", "nik", "test4<", "<test5>"];
-			var xml:XML=FlexXBEngine.instance.serialize(target);
+		public function testEscapeCharsOnElements() : void {
+			var target : NameOrdered = new NameOrdered();
+			target.test2 = "EscapeChar <b>OK</b>";
+			target.reference = "<test </meeee>";
+			target.list = ["Alt escape test <juice />", "nik", "test4<", "<test5>"];
+			var xml : XML = FlexXBEngine.instance.serialize(target);
 			assertEquals("Escape Char element is wrong", "EscapeChar <b>OK</b>", (xml.test2[0] as XML).children()[0]);
 			assertEquals("Reference has wrong escape chars", "<test </meeee>", (xml.reference[0] as XML).children()[0]);
 			assertEquals("Array member has wrong escape chars", "Alt escape test <juice />", xml.list[0].testerElem[0].children()[0]);

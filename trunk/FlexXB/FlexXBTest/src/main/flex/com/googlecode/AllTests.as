@@ -15,8 +15,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode
-{
+package com.googlecode {
 	import com.googlecode.flexxb.ModelObjectCacheTest;
 	import com.googlecode.flexxb.PartialSerializationTest;
 	import com.googlecode.flexxb.XmlTests;
@@ -30,14 +29,12 @@ package com.googlecode
 	 * @author Alexutz
 	 *
 	 */
-	public class AllTests
-	{
+	public class AllTests {
 		/**
 		 *
 		 *
 		 */
-		public function AllTests()
-		{
+		public function AllTests() {
 		}
 
 		/**
@@ -45,10 +42,9 @@ package com.googlecode
 		 * @return
 		 *
 		 */
-		public static function allTests():TestSuite
-		{
-			var ts:TestSuite=new TestSuite();
-			ts.name="All Tests";
+		public static function allTests() : TestSuite {
+			var ts : TestSuite = new TestSuite();
+			ts.name = "All Tests";
 			ts.addTest(XmlTests.suite());
 			ts.addTestSuite(ModelObjectCacheTest);
 			ts.addTestSuite(PartialSerializationTest);
