@@ -15,17 +15,14 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
 	[XmlClass(alias="MyMock", prefix="meee", uri="http://www.axway.com/xmlns/passport/v1/meee")]
-	public class Mock2
-	{
+	public class Mock2 {
 		[XmlAttribute]
-		public var id:Number=3;
+		public var id : Number = 3;
 
-		public function Mock2()
-		{
+		public function Mock2() {
 		}
 	}
 }

@@ -15,23 +15,21 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 	import com.googlecode.flexxb.persistence.PersistableObject;
 
 	[Bindable]
 	[XmlClass(name="OrderTest", ordered="true")]
-	public class NameOrdered
-	{
+	public class NameOrdered {
 		[XmlElement(alias="TestOk")]
-		public var isOK:Boolean=false;
+		public var isOK : Boolean = false;
 		[XmlElement(alias="variable")]
-		public var test1:int;
+		public var test1 : int;
 		[XmlElement()]
-		public var test2:String;
+		public var test2 : String;
 		[XmlElement()]
-		public var reference:String;
+		public var reference : String;
 		[XmlArray(alias="list", memberName="testerElem")]
-		public var list:Array;
+		public var list : Array;
 	}
 }

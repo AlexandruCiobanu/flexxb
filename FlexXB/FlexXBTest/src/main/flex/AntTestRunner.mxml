@@ -16,17 +16,14 @@
 	 -   You should have received a copy of the GNU General Public License
 	 -   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
-				layout="absolute"
-				creationComplete="init()">
+<mx:Application layout="absolute" creationComplete="init()" xmlns:mx="http://www.adobe.com/2006/mxml">
 	<mx:Script>
 		<![CDATA[
 			import com.googlecode.AllTests;
 			import flexunit.junit.JUnitTestRunner;
 
-			private function init():void
-			{
-				var runner:JUnitTestRunner=new JUnitTestRunner();
+			private function init() : void {
+				var runner : JUnitTestRunner = new JUnitTestRunner();
 				runner.run(AllTests.allTests());
 			}
 		]]>

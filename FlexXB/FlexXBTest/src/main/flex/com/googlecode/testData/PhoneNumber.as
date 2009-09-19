@@ -15,18 +15,16 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
-	public class PhoneNumber
-	{
-		public var countryCode:String;
+	public class PhoneNumber {
+		public var countryCode : String;
 
-		public var areaCode:String;
+		public var areaCode : String;
 
-		public var number:String;
+		public var number : String;
 
-		public var interior:String;
+		public var interior : String;
 
 	}
 }

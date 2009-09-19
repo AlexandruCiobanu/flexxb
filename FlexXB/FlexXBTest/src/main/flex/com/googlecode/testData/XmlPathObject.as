@@ -15,25 +15,22 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
 	[XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
-	public class XmlPathObject
-	{
+	public class XmlPathObject {
 		[XmlElement(alias="subObject/id")]
-		public var identity:Number=2;
+		public var identity : Number = 2;
 		[XmlElement(alias="subObject/subSubObj/ref")]
-		public var reference:String="ReferenceTo";
+		public var reference : String = "ReferenceTo";
 		[XmlArray(alias="subObject/list")]
-		public var list:Array;
+		public var list : Array;
 		[XmlAttribute(alias="anotherSub/attTest")]
-		public var test:Date=new Date();
+		public var test : Date = new Date();
 		[XmlElement()]
-		public var defaultTest:String="This is Default!!!"
+		public var defaultTest : String = "This is Default!!!"
 
-		public function XmlPathObject()
-		{
+		public function XmlPathObject() {
 		}
 	}
 }

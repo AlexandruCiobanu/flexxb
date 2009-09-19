@@ -15,8 +15,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.annotation
-{
+package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.FlexXBEngine;
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.Mock;
@@ -24,31 +23,26 @@ package com.googlecode.flexxb.annotation
 	import flash.utils.describeType;
 
 
-	public class XmlClassTest extends AnnotationTest
-	{
-		public function XmlClassTest(methodName:String=null)
-		{
+	public class XmlClassTest extends AnnotationTest {
+		public function XmlClassTest(methodName : String = null) {
 			super(methodName);
 		}
 
-		public function testConstructorParameters():void
-		{
-			var target:ConstructorRefObj=new ConstructorRefObj("test", 1, true);
+		public function testConstructorParameters() : void {
+			var target : ConstructorRefObj = new ConstructorRefObj("test", 1, true);
 			FlexXBEngine.instance.serialize(null);
-			var cls:XmlClass=new XmlClass(describeType(ConstructorRefObj));
+			var cls : XmlClass = new XmlClass(describeType(ConstructorRefObj));
 			assertFalse("Class constructor should not be default", cls.constructor.isDefault());
 			assertNotNull("ParameterFields is Null", cls.constructor.parameterFields);
 			assertEquals("There are more or less than 3 parameters", 3, cls.constructor.parameterFields.length);
 		}
 
-		protected override function runTest(descriptor:XML):void
-		{
-			var a:XmlClass=new XmlClass(descriptor);
+		protected override function runTest(descriptor : XML) : void {
+			var a : XmlClass = new XmlClass(descriptor);
 			validate(a, "Mock", Mock, "MyClass", "test", "http://www.axway.com/xmlns/passport/v1");
 		}
 
-		protected override function customValidate(annotation:Annotation, ... args):void
-		{
+		protected override function customValidate(annotation : Annotation, ... args) : void {
 			assertEquals("Namespace prefix is incorrect", args[3], annotation.nameSpace.prefix);
 			assertEquals("Namespace uri is incorrect", args[4], annotation.nameSpace.uri);
 		}

@@ -15,15 +15,12 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.persistence
-{
+package com.googlecode.flexxb.persistence {
 	import flexunit.framework.TestSuite;
 
-	public class PersistenceTests extends TestSuite
-	{
+	public class PersistenceTests extends TestSuite {
 
-		public function PersistenceTests(param:Object=null)
-		{
+		public function PersistenceTests(param : Object = null) {
 			super(param);
 		}
 
@@ -31,10 +28,9 @@ package com.googlecode.flexxb.persistence
 		 *
 		 * @return a test suite
 		 */
-		public static function suite():TestSuite
-		{
-			var ts:TestSuite=new TestSuite();
-			ts.name="Persistence Tests";
+		public static function suite() : TestSuite {
+			var ts : TestSuite = new TestSuite();
+			ts.name = "Persistence Tests";
 			ts.addTestSuite(PersistableObjectTest);
 			ts.addTestSuite(ReferenceListTest);
 			return ts;

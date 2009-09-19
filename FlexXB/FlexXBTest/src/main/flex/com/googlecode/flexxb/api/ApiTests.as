@@ -15,8 +15,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.api
-{
+package com.googlecode.flexxb.api {
 	import flexunit.framework.TestSuite;
 
 	/**
@@ -24,15 +23,13 @@ package com.googlecode.flexxb.api
 	 * @author Alexutz
 	 *
 	 */
-	public class ApiTests extends TestSuite
-	{
+	public class ApiTests extends TestSuite {
 		/**
 		 * Constructor
 		 * @param param
 		 *
 		 */
-		public function ApiTests(param:Object=null)
-		{
+		public function ApiTests(param : Object = null) {
 			super(param);
 		}
 
@@ -40,10 +37,9 @@ package com.googlecode.flexxb.api
 		 *
 		 * @return a test suite
 		 */
-		public static function suite():TestSuite
-		{
-			var ts:TestSuite=new TestSuite();
-			ts.name="Api Tests";
+		public static function suite() : TestSuite {
+			var ts : TestSuite = new TestSuite();
+			ts.name = "Api Tests";
 			ts.addTestSuite(FxApiComponentTest);
 			return ts;
 		}

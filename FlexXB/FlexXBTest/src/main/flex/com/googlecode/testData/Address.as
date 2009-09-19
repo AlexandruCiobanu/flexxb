@@ -15,23 +15,21 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
-	public class Address
-	{
-		public var person:Person;
+	public class Address {
+		public var person : Person;
 
-		public var emailAddress:String;
+		public var emailAddress : String;
 
-		public var telephoneNumbers:Array;
+		public var telephoneNumbers : Array;
 
-		public var street:String;
+		public var street : String;
 
-		public var number:String;
+		public var number : String;
 
-		public var city:String;
+		public var city : String;
 
-		public var country:String;
+		public var country : String;
 	}
 }

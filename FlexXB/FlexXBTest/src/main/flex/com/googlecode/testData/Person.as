@@ -15,28 +15,25 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
 	/**
 	 *
 	 * @author Alexutz
 	 *
 	 */
-	public class Person
-	{
-		public function Person(first:String=null, last:String=null)
-		{
-			firstName=first;
-			lastName=last;
+	public class Person {
+		public function Person(first : String = null, last : String = null) {
+			firstName = first;
+			lastName = last;
 		}
 
-		public var firstName:String;
+		public var firstName : String;
 
-		public var lastName:String;
+		public var lastName : String;
 
-		public var birthDate:Date;
+		public var birthDate : Date;
 
-		public var age:Number;
+		public var age : Number;
 	}
 }

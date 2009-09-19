@@ -15,8 +15,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb
-{
+package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.XmlArrayTest;
 	import com.googlecode.flexxb.annotation.XmlAttributeTest;
 	import com.googlecode.flexxb.annotation.XmlClassTest;
@@ -24,10 +23,8 @@ package com.googlecode.flexxb
 
 	import flexunit.framework.TestSuite;
 
-	public class XmlTests extends TestSuite
-	{
-		public function XmlTests(param:Object=null)
-		{
+	public class XmlTests extends TestSuite {
+		public function XmlTests(param : Object = null) {
 			super(param);
 		}
 
@@ -35,10 +32,9 @@ package com.googlecode.flexxb
 		 *
 		 * @return a test suite
 		 */
-		public static function suite():TestSuite
-		{
-			var ts:TestSuite=new TestSuite();
-			ts.name="Xml Tests";
+		public static function suite() : TestSuite {
+			var ts : TestSuite = new TestSuite();
+			ts.name = "Xml Tests";
 			ts.addTestSuite(XmlClassTest);
 			ts.addTestSuite(XmlAttributeTest);
 			ts.addTestSuite(XmlElementTest);

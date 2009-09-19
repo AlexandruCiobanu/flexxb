@@ -15,8 +15,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.annotation
-{
+package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.testData.Mock;
 
@@ -29,16 +28,13 @@ package com.googlecode.flexxb.annotation
 	 * @author Alexutz
 	 *
 	 */
-	public class AnnotationTest extends TestCase
-	{
+	public class AnnotationTest extends TestCase {
 
-		public function AnnotationTest(methodName:String=null)
-		{
+		public function AnnotationTest(methodName : String = null) {
 			super(methodName);
 		}
 
-		protected function getTestObject():Object
-		{
+		protected function getTestObject() : Object {
 			return new Mock();
 		}
 
@@ -55,8 +51,7 @@ package com.googlecode.flexxb.annotation
 		 * @param args values List
 		 *
 		 */
-		protected final function validate(annotation:Annotation, ... args):void
-		{
+		protected final function validate(annotation : Annotation, ... args) : void {
 			assertNotNull("Null annotation", annotation);
 			assertNotNull("Validation arguments are missing", args);
 			assertEquals("Field Name is incorrect", args[0], annotation.fieldName.localName);
@@ -71,8 +66,7 @@ package com.googlecode.flexxb.annotation
 		 * @param args
 		 *
 		 */
-		protected function customValidate(annotation:Annotation, ... args):void
-		{
+		protected function customValidate(annotation : Annotation, ... args) : void {
 		}
 
 		/**
@@ -80,8 +74,7 @@ package com.googlecode.flexxb.annotation
 		 * @param descriptor
 		 *
 		 */
-		protected function runTest(descriptor:XML):void
-		{
+		protected function runTest(descriptor : XML) : void {
 		}
 
 		/**
@@ -91,12 +84,10 @@ package com.googlecode.flexxb.annotation
 		 * @return
 		 *
 		 */
-		protected final function getFieldDescriptor(fieldName:String, descriptor:XML):XML
-		{
-			var result:XML=descriptor.variable.(@name == fieldName)[0];
-			if (result == null)
-			{
-				result=descriptor.accessor.(@name == fieldName)[0];
+		protected final function getFieldDescriptor(fieldName : String, descriptor : XML) : XML {
+			var result : XML = descriptor.variable.(@name == fieldName)[0];
+			if (result == null) {
+				result = descriptor.accessor.(@name == fieldName)[0];
 			}
 			return result;
 		}
@@ -105,9 +96,8 @@ package com.googlecode.flexxb.annotation
 		 *
 		 *
 		 */
-		public function testAnnotation():void
-		{
-			var descriptor:XML=describeType(getTestObject());
+		public function testAnnotation() : void {
+			var descriptor : XML = describeType(getTestObject());
 			runTest(descriptor);
 		}
 	}

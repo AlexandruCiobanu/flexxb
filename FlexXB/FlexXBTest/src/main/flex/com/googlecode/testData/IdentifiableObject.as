@@ -15,17 +15,14 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.testData
-{
+package com.googlecode.testData {
 
 	[XmlClass(alias="Identidiable", idField="identification")]
-	public class IdentifiableObject
-	{
+	public class IdentifiableObject {
 		[XmlElement(alias="Id")]
-		public var identification:String;
+		public var identification : String;
 
-		public function IdentifiableObject()
-		{
+		public function IdentifiableObject() {
 		}
 
 	}
