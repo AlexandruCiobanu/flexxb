@@ -18,6 +18,7 @@
  package com.googlecode.flexxb.persistence
 {
 	import flexunit.framework.TestCase;
+	import com.googlecode.flexxb.persistence.PersistableList;
 	
 	import mx.events.CollectionEvent;
 
@@ -30,7 +31,7 @@
 		}
 		
 		public function testList() : void{
-			var list : ReferenceList = new ReferenceList(["1", "2", "3"]);
+			var list : PersistableList = new PersistableList(["1", "2", "3"]);
 			assertFalse("Modified wrongfully fired", list.modified);
 			list.removeItemAt(0);
 			list.addItem("4");
@@ -44,7 +45,7 @@
 		}		
 		
 		public function testEditMode() : void{
-			var list : ReferenceList = new ReferenceList(["1", "2", "3"]);
+			var list : PersistableList = new PersistableList(["1", "2", "3"]);
 			assertFalse("Modified wrongfully fired", list.modified);
 			var changeDiscovered : Boolean;
 			list.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(event : CollectionEvent) : void{
@@ -62,7 +63,7 @@
 		}
 		
 		public function testListenMode() : void{
-			var list : ReferenceList = new ReferenceList(["1", "2", "3"]);
+			var list : PersistableList = new PersistableList(["1", "2", "3"]);
 			assertFalse("Modified wrongfully fired", list.modified);
 			list.stopListening();
 			list.addItem("4");
