@@ -105,7 +105,7 @@ package com.googlecode.flexxb.persistence {
 			return _kind;
 		}
 
-		public function set kind(value : String) {
+		public function set kind(value : String) : void {
 			_kind = value;
 		}
 
@@ -119,7 +119,7 @@ package com.googlecode.flexxb.persistence {
 			return _additional;
 		}
 
-		public function set additional(value : Object) {
+		public function set additional(value : Object) : void {
 			_additional = value;
 		}
 
