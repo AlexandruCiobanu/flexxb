@@ -17,5 +17,8 @@
  */
 package com.googlecode.flexxb.persistence
 {
+	/**
+	* Defines internal structures of the persistence framework.
+	*/	
 	internal namespace flexxb_persistence_internal = "http://code.google.com/p/flexxb/persistence"
 }
