@@ -39,12 +39,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  This Factory will return an annotation instance based on the type required. Since each 
+  This Factory will return an annotation instance based on the type required. Since each
   annotation has a specific serializer, it will also provide the serializer instance to be
   used when processing a field. Since they are stateless, serializers do not need to be
   instanciated more than once.
-  
-  <p></p>
+    <p></p>
 <br>
 <hr>
 </div>
@@ -76,9 +75,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#AnnotationFactory()">AnnotationFactory</a>()</div>
 <div class="summaryTableDescription">
-   Constructor 
-   
-   </div>
+   Constructor
+      </div>
 </td><td class="summaryTableOwnerCol">AnnotationFactory</td>
 </tr>
 <tr class="">
@@ -151,9 +149,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function AnnotationFactory()</code><p>
-   Constructor 
-   
-   </p></div>
+   Constructor
+      </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
 <a name="getAnnotation()"></a>
@@ -205,9 +202,8 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Class</code> &mdash; the Class object definition 
-   
-   </td>
+<td width="20"></td><td><code>Class</code> &mdash; the Class object definition
+      </td>
 </tr>
 </table>
 </div>
@@ -233,8 +229,7 @@ showHideInherited();
 <tr>
 <td width="20"></td><td><code><a href="../serializer/ISerializer.html">ISerializer</a></code> &mdash; 
                         the serializer object or null if the annotation name is not registered
-   
-   
+      
                         
                      </td>
 </tr>
@@ -248,7 +243,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function registerAnnotation(name:String, annotationClazz:Class, serializer:Class, overrideExisting:Boolean = false):void</code><p>
-   Register a new annotation and its serializer. If it founds a registration with the 
+   Register a new annotation and its serializer. If it founds a registration with the
    same name and <code>overrideExisting </code> is set to <code>false</code>, it will disregard the current attempt and keep the old value.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">

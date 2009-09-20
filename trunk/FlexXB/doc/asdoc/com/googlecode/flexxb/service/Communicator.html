@@ -42,7 +42,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  Communicates with the server by sending xml requests and receiving xml responses 
+  Communicates with the server by sending xml requests and receiving xml responses
   <p></p>
 <br>
 <hr>
@@ -59,7 +59,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#Communicator()">Communicator</a>(settings:<a href="ServiceSettings.html">ServiceSettings</a> = null, detectSettingsChange:Boolean = false)</div>
 <div class="summaryTableDescription">
-   Constructor 
+   Constructor
    </div>
 </td><td class="summaryTableOwnerCol">Communicator</td>
 </tr>
@@ -68,8 +68,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#applySettings()">applySettings</a>(settings:<a href="ServiceSettings.html">ServiceSettings</a>, detectSettingsChange:Boolean = false):void</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">Communicator</td>
 </tr>
 <tr class="">
@@ -77,9 +76,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#cancelRequest()">cancelRequest</a>():void</div>
 <div class="summaryTableDescription">
-   Cancel the last request made 
-   
-   </div>
+   Cancel the last request made
+      </div>
 </td><td class="summaryTableOwnerCol">Communicator</td>
 </tr>
 <tr class="">
@@ -93,10 +91,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#sendRequest()">sendRequest</a>(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):void</div>
+<a class="signatureLink" href="#sendRequest()">sendRequest</a>(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):AsyncToken</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">Communicator</td>
 </tr>
 </table>
@@ -116,7 +113,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function Communicator(settings:<a href="ServiceSettings.html">ServiceSettings</a> = null, detectSettingsChange:Boolean = false)</code><p>
-   Constructor 
+   Constructor
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -140,8 +137,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function applySettings(settings:<a href="ServiceSettings.html">ServiceSettings</a>, detectSettingsChange:Boolean = false):void</code><p>
-   
-   </p><span class="label">Parameters</span>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">settings</span>:<a href="ServiceSettings.html">ServiceSettings</a></code></td>
@@ -168,9 +164,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function cancelRequest():void</code><p>
-   Cancel the last request made 
-   
-   </p></div>
+   Cancel the last request made
+      </p></div>
 <a name="destroy()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -193,9 +188,8 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function sendRequest(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):void</code><p>
-   
-   </p><span class="label">Parameters</span>
+<code>public function sendRequest(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):AsyncToken</code><p>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">translator</span>:<a href="ITranslator.html">ITranslator</a></code></td>
@@ -211,6 +205,13 @@ showHideInherited();
 </tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">faultHandler</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>AsyncToken</code></td>
 </tr>
 </table>
 <p>
