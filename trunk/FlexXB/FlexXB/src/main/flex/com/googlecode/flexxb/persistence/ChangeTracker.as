@@ -19,20 +19,22 @@ package com.googlecode.flexxb.persistence {
 	import mx.events.CollectionEvent;
 	import mx.events.CollectionEventKind;
 	import mx.events.PropertyChangeEvent;
+	
+	use namespace flexxb_persistence_internal;
 
 	/**
 	 *
 	 * @author aCiobanu
 	 *
 	 */
-	internal class ChangeTracker {
+	public class ChangeTracker {
 		/**
 		 * Get a <code>ChangeTracker</code> instance from a property change event
 		 * @param changeEvent
 		 * @return <code>ChangeTracker</code> instance
-		 *
+		 * @private
 		 */
-		public static function fromPropertyChangeEvent(changeEvent : PropertyChangeEvent) : ChangeTracker {
+		flexxb_persistence_internal static function fromPropertyChangeEvent(changeEvent : PropertyChangeEvent) : ChangeTracker {
 			if (!changeEvent) {
 				throw new Error("Property change event can't be null");
 			}
@@ -43,9 +45,9 @@ package com.googlecode.flexxb.persistence {
 		 * Get a <code>ChangeTracker</code> instance from a collection change event
 		 * @param changeEvent
 		 * @return <code>ChangeTracker</code> instance
-		 *
+		 * @private
 		 */
-		public static function fromCollectionChangeEvent(changeEvent : CollectionEvent) : ChangeTracker {
+		flexxb_persistence_internal static function fromCollectionChangeEvent(changeEvent : CollectionEvent) : ChangeTracker {
 			if (!changeEvent) {
 				throw new Error("Collection change event can't be null");
 			}
@@ -104,8 +106,12 @@ package com.googlecode.flexxb.persistence {
 		public function get kind() : String {
 			return _kind;
 		}
-
-		public function set kind(value : String) : void {
+		/**
+		 * 
+		 * @param value
+		 * @private
+		 */		
+		flexxb_persistence_internal function setKind(value : String) : void {
 			_kind = value;
 		}
 
@@ -118,17 +124,38 @@ package com.googlecode.flexxb.persistence {
 		public function get additional() : Object {
 			return _additional;
 		}
-
-		public function set additional(value : Object) : void {
+		/**
+		 * 
+		 * @param value
+		 * @private
+		 */		
+		flexxb_persistence_internal function setAdditional(value : Object) : void {
 			_additional = value;
 		}
-
-		public function isAdd() : Boolean {
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function isAdded() : Boolean {
 			return kind == ChangeTrackerKind.ADD;
 		}
-
-		public function isRemove() : Boolean {
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function isRemoved() : Boolean {
 			return kind == ChangeTrackerKind.REMOVE;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function clone() : ChangeTracker{
+			var copy : ChangeTracker = new ChangeTracker(fieldName, persistedValue, kind, additional);
+			return copy;
 		}
 	}
 }

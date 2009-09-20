@@ -19,9 +19,11 @@ package com.googlecode.flexxb.persistence {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
-
+	
 	import mx.events.PropertyChangeEvent;
 	import mx.events.PropertyChangeEventKind;
+	
+	use namespace flexxb_persistence_internal;
 
 	[Bindable]
 	/**
@@ -315,7 +317,7 @@ package com.googlecode.flexxb.persistence {
 					}
 					return;
 				}
-				var tracker : ChangeTracker = ChangeTracker.fromPropertyChangeEvent(event);
+				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromPropertyChangeEvent(event);
 				if (!changeList) {
 					changeList = new Dictionary();
 				}
