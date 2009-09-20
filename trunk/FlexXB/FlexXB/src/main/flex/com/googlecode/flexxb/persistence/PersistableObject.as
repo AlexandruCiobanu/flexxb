@@ -16,6 +16,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.googlecode.flexxb.persistence {
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 
