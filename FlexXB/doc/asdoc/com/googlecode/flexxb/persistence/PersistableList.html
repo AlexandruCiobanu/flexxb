@@ -4,22 +4,22 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="PersistableObject,com.googlecode.flexxb.persistence.PersistableObject,editMode,modified,beforeCommit,beforeRollback,commit,dispatchEvent,exclude,hasWatchedFields,isChanged,isWatched,rollback,setEditMode,startListening,stopListening,watch" name="keywords">
-<title>com.googlecode.flexxb.persistence.PersistableObject</title>
+<meta content="PersistableList,com.googlecode.flexxb.persistence.PersistableList,changedItems,editMode,modified,source,addItemAt,beforeCommit,beforeRollback,commit,dispatchEvent,removeItem,removeItemAt,rollback,setEditMode,setItemAt,startListening,stopListening" name="keywords">
+<title>com.googlecode.flexxb.persistence.PersistableList</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'PersistableObject - FlexXB API Documentation';
+				asdocTitle = 'PersistableList - FlexXB API Documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">FlexXB API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?com/googlecode/flexxb/persistence/PersistableObject.html&amp;com/googlecode/flexxb/persistence/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">FlexXB API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?com/googlecode/flexxb/persistence/PersistableList.html&amp;com/googlecode/flexxb/persistence/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;PersistableObject</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;PersistableList</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class PersistableObject"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class PersistableList"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -35,29 +35,25 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.googlecode.flexxb.persistence</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class PersistableObject</td>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class PersistableList</td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">PersistableObject <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">PersistableList <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> mx.collections.ArrayCollection</td>
 </tr>
 <tr>
 <td class="classHeaderTableLabel">Implements</td><td><a href="IPersistable.html">IPersistable</a></td>
 </tr>
 </table>
 <p></p>
-  Main implementation of IPersistable. A persistable object is capable of
-  tracking changes done to it and reverting to initial values if required.
-  It should be base for all model objects that need initial state memory
-  capabilities such as IPersistable allows. It uses the methods <code>commit()</code> and <code>rollback()</code> to save the
-  current state or to revert to the previously saved state.
-  <p>Basically, this object listens for changes to all its public properties and
-  variables and saves the initial value set for that field. Upon commit, the list of
-  initial values is discarded, the new values thus becoming initial values. On rollback,
-  the initial values are reinstated the object returning to the state before eny change
-  had been made.</p>
-  <p><b>Note</b>: Subclasses should be decorated with the <code>[Bindable]</code> annotation so all
-  changes to the public fields would be registered.</p>
+  Adds to ArrayCollection the functionalities specified by IPersistable.
+  Should be used in model objects the require having lists of referenced objects.
   <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="PersistableObject.html" target="">PersistableObject</a>
+</div>
 <br>
 <hr>
 </div>
@@ -69,14 +65,24 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#changedItems">changedItems</a> : Array<div class="summaryTableDescription">[read-only]
+      </div>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#editMode">editMode</a> : Boolean<div class="summaryTableDescription">[read-only]
       </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#modified">modified</a> : Boolean<div class="summaryTableDescription">[read-only]
+   </div>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#source">source</a> : Array<div class="summaryTableDescription">[write-only]
       </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 </table>
 </div>
@@ -90,11 +96,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#PersistableObject()">PersistableObject</a>(listenMode:Boolean = true)</div>
+<a class="signatureLink" href="#PersistableList()">PersistableList</a>(source:Array = null, listenMode:Boolean = true)</div>
 <div class="summaryTableDescription">
    Constructor
+   </div>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addItemAt()">addItemAt</a>(item:Object, index:int):void</div>
+<div class="summaryTableDescription">
       </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -102,50 +116,31 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#commit()">commit</a>():void</div>
 <div class="summaryTableDescription">
    </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#dispatchEvent()">dispatchEvent</a>(event:Event):Boolean</div>
 <div class="summaryTableDescription">
-   Dispacth the specified event
-   </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+      </div>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#exclude()">exclude</a>(fieldName:String):void</div>
+<a class="signatureLink" href="#removeItem()">removeItem</a>(item:Object):Boolean</div>
 <div class="summaryTableDescription">
-   Exclude a field from being listened for changes.</div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+      </div>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#hasWatchedFields()">hasWatchedFields</a>():Boolean</div>
+<a class="signatureLink" href="#removeItemAt()">removeItemAt</a>(index:int):Object</div>
 <div class="summaryTableDescription">
-   Check if watched fields have been defined for the current object
-   </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#isChanged()">isChanged</a>(fieldName:String):Boolean</div>
-<div class="summaryTableDescription">
-   Check if the value of a specific field has been changed since the last commit
-   </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#isWatched()">isWatched</a>(fieldName:String):Boolean</div>
-<div class="summaryTableDescription">
-   Check if an object's field is marked as watched.</div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+      </div>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -153,7 +148,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#rollback()">rollback</a>():void</div>
 <div class="summaryTableDescription">
    </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -161,7 +156,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#setEditMode()">setEditMode</a>(mode:Boolean):void</div>
 <div class="summaryTableDescription">
       </div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setItemAt()">setItemAt</a>(item:Object, index:int):Object</div>
+<div class="summaryTableDescription">
+      </div>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -169,7 +172,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#startListening()">startListening</a>():void</div>
 <div class="summaryTableDescription">
    Start listening for changes occuring to the object.</div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -177,15 +180,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#stopListening()">stopListening</a>():void</div>
 <div class="summaryTableDescription">
    Stop listening for changes occuring to the object.</div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#watch()">watch</a>(fieldName:String):void</div>
-<div class="summaryTableDescription">
-   This method allows an object to keep track of changes occuring in its sub-object.</div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 </table>
 </div>
@@ -204,7 +199,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    This is an entry point allowing you to do some computations prior
    to commit being executed, that is, before the change list is
    discarded.</div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -215,7 +210,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    to rollback being executed, that is, before the change list is
    iterated and changed fields having their values reverted to the
    original ones.</div>
-</td><td class="summaryTableOwnerCol">PersistableObject</td>
+</td><td class="summaryTableOwnerCol">PersistableList</td>
 </tr>
 </table>
 </div>
@@ -226,16 +221,28 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="changedItems"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">changedItems</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>changedItems:Array</code>&nbsp;&nbsp;[read-only]<p>
+      </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get changedItems():Array</code>
+<br>
+</div>
 <a name="editMode"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">editMode</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">editMode</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
 <code>editMode:Boolean</code>&nbsp;&nbsp;[read-only]<p>
-      </p><p>This property can be used as the source for data binding.</p>
-<span class="label">Implementation</span>
+      </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get editMode():Boolean</code>
 <br>
@@ -254,8 +261,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>modified:Boolean</code>&nbsp;&nbsp;[read-only]<p>
-      </p><p>This property can be used as the source for data binding.</p>
-<span class="label">Implementation</span>
+   </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get modified():Boolean</code>
 <br>
@@ -266,19 +272,38 @@ showHideInherited();
 <a href="IPersistable.html#modified()" target="">IPersistable.modified()</a>
 </div>
 </div>
-<a name="constructorDetail"></a>
-<div class="detailSectionHeader">Constructor detail</div>
-<a name="PersistableObject()"></a>
+<a name="source"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">PersistableObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+<td class="detailHeaderName">source</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function PersistableObject(listenMode:Boolean = true)</code><p>
+<code>source:Array</code>&nbsp;&nbsp;[write-only]<p>
+      </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set source(value:Array):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="PersistableList()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">PersistableList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function PersistableList(source:Array = null, listenMode:Boolean = true)</code><p>
    Constructor
-      </p><span class="label">Parameters</span>
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">source</span>:Array</code> (default = <code>null</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">listenMode</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
 </tr>
@@ -286,10 +311,31 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="addItemAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addItemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function addItemAt(item:Object, index:int):void</code><p>
+      </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:Object</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code></td>
+</tr>
+</table>
+</div>
 <a name="beforeCommit()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">beforeCommit</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">beforeCommit</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -334,8 +380,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public final override function dispatchEvent(event:Event):Boolean</code><p>
-   Dispacth the specified event
-   </p><span class="label">Parameters</span>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">event</span>:Event</code></td>
@@ -345,84 +390,26 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Boolean</code> &mdash; dispatch succeeded
-      </td>
-</tr>
-</table>
-</div>
-<a name="exclude()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">exclude</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public final function exclude(fieldName:String):void</code><p>
-   Exclude a field from being listened for changes. The object will no longer track changes
-   that occur to the value of that field.
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">fieldName</span>:String</code> &mdash; field's name
-      </td>
-</tr>
-</table>
-</div>
-<a name="hasWatchedFields()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">hasWatchedFields</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function hasWatchedFields():Boolean</code><p>
-   Check if watched fields have been defined for the current object
-   </p><p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
 <td width="20"></td><td><code>Boolean</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">flash.events.EventDispatcher.dispatchEvent()</div>
 </div>
-<a name="isChanged()"></a>
+<a name="removeItem()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">isChanged</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">removeItem</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public final function isChanged(fieldName:String):Boolean</code><p>
-   Check if the value of a specific field has been changed since the last commit
-   </p><span class="label">Parameters</span>
+<code>public final function removeItem(item:Object):Boolean</code><p>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">fieldName</span>:String</code> &mdash; the name of the object's field to check
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Boolean</code> &mdash; true if the field exists and its value has been changed, false otherwise
-      </td>
-</tr>
-</table>
-</div>
-<a name="isWatched()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">isWatched</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public final function isWatched(fieldName:String):Boolean</code><p>
-   Check if an object's field is marked as watched.
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">fieldName</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">item</span>:Object</code></td>
 </tr>
 </table>
 <p></p>
@@ -430,6 +417,28 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="removeItemAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeItemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function removeItemAt(index:int):Object</code><p>
+      </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
 </tr>
 </table>
 </div>
@@ -469,6 +478,34 @@ showHideInherited();
 <a href="IPersistable.html#setEditMode()" target="">IPersistable.setEditMode()</a>
 </div>
 </div>
+<a name="setItemAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setItemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function setItemAt(item:Object, index:int):Object</code><p>
+      </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:Object</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
+</tr>
+</table>
+</div>
 <a name="startListening()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -477,9 +514,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public final function startListening():void</code><p>
-   Start listening for changes occuring to the object. Configuring listen
-   mode also propagates to watched fields of tye <code>IPersistable</code>.
-   <br />It is usually called after deserialization completes.
+   Start listening for changes occuring to the object.
+   Usually called after deserialization completes.
       </p></div>
 <a name="stopListening()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -489,30 +525,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public final function stopListening():void</code><p>
-   Stop listening for changes occuring to the object. Configuring listen
-   mode also propagates to watched fields of tye <code>IPersistable</code>.
-   <br />It is usually called before deserialization occurs.
+   Stop listening for changes occuring to the object.
+   It is usually called before deserialization occurs.
       </p></div>
-<a name="watch()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">watch</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public final function watch(fieldName:String):void</code><p>
-   This method allows an object to keep track of changes occuring in its sub-object. In fact
-   it will only monitor the modified status of those sub objects. On rollback or commit it
-   will propagate the commands to those sub-objec it was instructed to watch.
-   <p/><b>NOTE: Make sure watched objects are also persistable objects</b>
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">fieldName</span>:String</code> &mdash; field's name
-      </td>
-</tr>
-</table>
-</div>
 <br>
 <br>
 <hr>

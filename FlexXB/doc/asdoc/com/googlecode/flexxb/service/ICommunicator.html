@@ -69,17 +69,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <a class="signatureLink" href="#destroy()">destroy</a>():void</div>
 <div class="summaryTableDescription">
    Release all resources
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">ICommunicator</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#sendRequest()">sendRequest</a>(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):void</div>
+<a class="signatureLink" href="#sendRequest()">sendRequest</a>(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):AsyncToken</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">ICommunicator</td>
 </tr>
 </table>
@@ -122,8 +120,7 @@ showHideInherited();
 <div class="detailBody">
 <code>public function destroy():void</code><p>
    Release all resources
-   
-   </p></div>
+      </p></div>
 <a name="sendRequest()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -131,9 +128,8 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function sendRequest(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):void</code><p>
-   
-   </p><span class="label">Parameters</span>
+<code>public function sendRequest(translator:<a href="ITranslator.html">ITranslator</a>, resultHandler:Function, faultHandler:Function = null):AsyncToken</code><p>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">translator</span>:<a href="ITranslator.html">ITranslator</a></code></td>
@@ -150,8 +146,14 @@ showHideInherited();
 </tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">faultHandler</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; Metod callback that will be called if the request fails
-   
    </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>AsyncToken</code></td>
 </tr>
 </table>
 </div>

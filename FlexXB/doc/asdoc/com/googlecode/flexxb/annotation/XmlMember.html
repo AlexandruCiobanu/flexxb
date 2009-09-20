@@ -45,12 +45,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  Defines a member of an XmlClass, that is, a field of the class definition. 
-  The XmlMember is base for XmlAttribute and XmlElement since field values can 
+  Defines a member of an XmlClass, that is, a field of the class definition.
+  The XmlMember is base for XmlAttribute and XmlElement since field values can
   be rendered as XML in the form of attributes or elements.
-  <p>A member's alias can define "virtual paths". Virtual paths allow definition 
+  <p>A member's alias can define "virtual paths". Virtual paths allow definition
   of complex xml structures for a field without complicating the model design. Thus,
-  structures can be present in the xml just by adding vistual paths in the alias 
+  structures can be present in the xml just by adding vistual paths in the alias
   definition of a member.
   <p>Example: Lets assume the xml representation looks like:
   <p><code><pre>
@@ -68,7 +68,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
       &lt;/subSubObj&gt;
     &lt;/subObject&gt;
   &lt;/myPathTester&gt;
-  </pre></code> 
+  </pre></code>
   <p>This would normally translate itself in about 4 model classes. Using virtual paths, one can describe it in just one model class:
   <p><code><pre>
   [XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
@@ -77,19 +77,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    [XmlElement(alias="subObject/id")]
    public var identity : Number = 2;
    [XmlElement(alias="subObject/subSubObj/ref")]
-   public var reference : String = "ReferenceTo"; 
+   public var reference : String = "ReferenceTo";
    [XmlArray(alias="subObject/list")]
    public var list : Array;
    [XmlAttribute(alias="anotherSub/attTest")]
    public var test : Date = new Date();
    [XmlElement()]
    public var defaultTest : String = "This is Default!!!"
-   
-   public function XmlPathObject()
+     public function XmlPathObject()
    {
    }
   }
-  <pre></code> 
+  <pre></code>
   <p></p>
 <br>
 <hr>
@@ -111,20 +110,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#alias">alias</a> : String<div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#fieldName">fieldName</a> : QName<div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#fieldType">fieldType</a> : Class<div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
@@ -136,8 +132,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#nameSpace">nameSpace</a> : Namespace<div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
@@ -173,8 +168,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#xmlName">xmlName</a> : QName<div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 </table>
@@ -199,7 +193,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#XmlMember()">XmlMember</a>(descriptor:XML, _class:<a href="XmlClass.html">XmlClass</a>)</div>
 <div class="summaryTableDescription">
-   Constructor 
+   Constructor
    </div>
 </td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
@@ -208,8 +202,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="Annotation.html#hasNamespaceDeclaration()">hasNamespaceDeclaration</a>():Boolean</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
@@ -235,8 +228,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="Annotation.html#useOwnerAlias()">useOwnerAlias</a>():Boolean</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 </table>
@@ -253,8 +245,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#parseMetadata()">parseMetadata</a>(metadata:XML):void</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
 <tr class="">
@@ -262,8 +253,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#setAlias()">setAlias</a>(value:String):void</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">XmlMember</td>
 </tr>
 </table>
@@ -285,8 +275,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="hideInheritedConstant">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#ALIAS_ANY">ALIAS_ANY</a> : String = "*"<div class="summaryTableDescription">[static]
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
@@ -297,8 +286,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="hideInheritedConstant">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="Annotation.html#ARGUMENT_ALIAS">ARGUMENT_ALIAS</a> : String = "alias"<div class="summaryTableDescription">[static]
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol"><a href="Annotation.html">Annotation</a></td>
 </tr>
 <tr class="">
@@ -418,7 +406,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function XmlMember(descriptor:XML, _class:<a href="XmlClass.html">XmlClass</a>)</code><p>
-   Constructor 
+   Constructor
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -430,8 +418,7 @@ showHideInherited();
 </tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">_class</span>:<a href="XmlClass.html">XmlClass</a></code> &mdash; owner XmlClass entity
-   
-   </td>
+      </td>
 </tr>
 </table>
 </div>
@@ -451,8 +438,7 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>Boolean</code> &mdash; true if the member is default, false otherwise
-   
-   </td>
+      </td>
 </tr>
 </table>
 </div>
@@ -470,8 +456,7 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>Boolean</code> &mdash; true if virtual paths are defined, false otherwise
-   
-   </td>
+      </td>
 </tr>
 </table>
 </div>
@@ -483,8 +468,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected override function parseMetadata(metadata:XML):void</code><p>
-   
-   </p><span class="label">Parameters</span>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">metadata</span>:XML</code></td>
@@ -505,8 +489,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected override function setAlias(value:String):void</code><p>
-   
-   </p><span class="label">Parameters</span>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">value</span>:String</code></td>

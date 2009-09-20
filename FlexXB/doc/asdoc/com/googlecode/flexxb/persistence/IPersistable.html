@@ -38,16 +38,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <td class="classHeaderTableLabel">Interface</td><td class="classSignature">public interface IPersistable</td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Implementors</td><td><a href="../persistence/PersistableObject.html">PersistableObject</a>, <a href="../persistence/ReferenceList.html">ReferenceList</a></td>
+<td class="classHeaderTableLabel">Implementors</td><td><a href="../persistence/PersistableList.html">PersistableList</a>, <a href="../persistence/PersistableObject.html">PersistableObject</a></td>
 </tr>
 </table>
 <p></p>
-  Interface defining an object that can be persisted. 
-  It exposes three methods:
+  Interface defining an object that can be persisted. A persistable object
+  is capable of tracking changes done to it and reverting to initial values
+  if required.
+  <code>IPersistable</code> exposes three methods:
   <ul>
-   <li>modified - check if object has been changed since its last save</li>
-   <li>commit - make changes done from the last save persistent</li>
-   <li>rollback - revert to the initial state of the object</li>
+   <li><code>modified</code> - check if object has been changed since its last save</li>
+   <li><code>commit</code> - make changes done from the last save persistent</li>
+   <li><code>rollback</code> - revert to the initial state of the object</li>
   </ul>
   <p></p>
 <br>
@@ -62,8 +64,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#editMode">editMode</a> : Boolean<div class="summaryTableDescription">[read-only]
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">IPersistable</td>
 </tr>
 <tr class="">
@@ -87,8 +88,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <a class="signatureLink" href="#commit()">commit</a>():void</div>
 <div class="summaryTableDescription">
    Commit the changes made to the object since the previous commit
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">IPersistable</td>
 </tr>
 <tr class="">
@@ -97,8 +97,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <a class="signatureLink" href="#rollback()">rollback</a>():void</div>
 <div class="summaryTableDescription">
    Revert all the changes made to the object since the previous commit
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">IPersistable</td>
 </tr>
 <tr class="">
@@ -106,8 +105,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#setEditMode()">setEditMode</a>(mode:Boolean):void</div>
 <div class="summaryTableDescription">
-   
-   </div>
+      </div>
 </td><td class="summaryTableOwnerCol">IPersistable</td>
 </tr>
 <tr class="">
@@ -143,8 +141,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>editMode:Boolean</code>&nbsp;&nbsp;[read-only]<p>
-   
-   </p><span class="label">Implementation</span>
+      </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get editMode():Boolean</code>
 <br>
@@ -174,8 +171,7 @@ showHideInherited();
 <div class="detailBody">
 <code>public function commit():void</code><p>
    Commit the changes made to the object since the previous commit
-   
-   </p></div>
+      </p></div>
 <a name="rollback()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -185,8 +181,7 @@ showHideInherited();
 <div class="detailBody">
 <code>public function rollback():void</code><p>
    Revert all the changes made to the object since the previous commit
-   
-   </p></div>
+      </p></div>
 <a name="setEditMode()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -195,8 +190,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function setEditMode(mode:Boolean):void</code><p>
-   
-   </p><span class="label">Parameters</span>
+      </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">mode</span>:Boolean</code></td>
@@ -213,8 +207,7 @@ showHideInherited();
 <code>public function startListening():void</code><p>
    Start listening for changes occuring to the object.
    Usually called after deserialization completes.
-   
-   </p></div>
+      </p></div>
 <a name="stopListening()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -225,8 +218,7 @@ showHideInherited();
 <code>public function stopListening():void</code><p>
    Stop listening for changes occuring to the object.
    It is usually called before deserialization occurs.
-   
-   </p></div>
+      </p></div>
 <br>
 <br>
 <hr>
