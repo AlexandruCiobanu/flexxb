@@ -18,10 +18,12 @@
 package com.googlecode.flexxb.persistence {
 	import flash.events.Event;
 	import flash.utils.Dictionary;
-
+	
 	import mx.collections.ArrayCollection;
 	import mx.events.CollectionEvent;
 	import mx.events.CollectionEventKind;
+	
+	use namespace flexxb_persistence_internal;
 
 	/**
 	 * Adds to ArrayCollection the functionalities specified by IPersistable.
@@ -272,7 +274,7 @@ package com.googlecode.flexxb.persistence {
 					}
 				}
 				if (ChangeTrackerKind.isActionTracked(event.kind)) {
-					var tracker : ChangeTracker = ChangeTracker.fromCollectionChangeEvent(event);
+					var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromCollectionChangeEvent(event);
 					if (!changeList) {
 						changeList = new Dictionary();
 					}
@@ -297,12 +299,12 @@ package com.googlecode.flexxb.persistence {
 		private function trackChange(object : Object, tracker : ChangeTracker) : void {
 			var originalTracker : ChangeTracker = changeList[object];
 			if (originalTracker) {
-				if (originalTracker.isAdd() && tracker.isRemove()) {
+				if (originalTracker.isAdded() && tracker.isRemoved()) {
 					delete changeList[object];
 					return;
-				} else if (originalTracker.isRemove() && tracker.isAdd()) {
-					originalTracker.kind = ChangeTrackerKind.MOVE;
-					originalTracker.additional = tracker.additional;
+				} else if (originalTracker.isRemoved() && tracker.isAdded()) {
+					originalTracker.flexxb_persistence_internal::setKind(ChangeTrackerKind.MOVE);
+					originalTracker.flexxb_persistence_internal::setAdditional(tracker.additional);
 					return;
 				}
 			}
