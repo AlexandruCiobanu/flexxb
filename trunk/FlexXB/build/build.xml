@@ -41,7 +41,7 @@
 			<arg line="-sp '${project.src.dir}'"/>
 			<arg line="-is '${project.src.dir}'"/>
 			<arg line="-debug=false"/>
-			<arg line="-external-library-path='${flex3sdk.lib.dir}','${flex3sdk.playerlib.dir}'"/>
+			<arg line="-external-library-path='${flexsdk.lib.dir}','${flexsdk.playerlib.dir}'"/>
 			<arg line="${compile.metadata}"/>
 		</exec>
 	</target>
