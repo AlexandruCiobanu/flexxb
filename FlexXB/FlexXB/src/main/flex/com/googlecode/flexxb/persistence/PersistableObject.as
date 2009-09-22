@@ -19,10 +19,10 @@ package com.googlecode.flexxb.persistence {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
-	
+
 	import mx.events.PropertyChangeEvent;
 	import mx.events.PropertyChangeEventKind;
-	
+
 	use namespace flexxb_persistence_internal;
 
 	[Bindable]
@@ -81,15 +81,15 @@ package com.googlecode.flexxb.persistence {
 		public final function setEditMode(mode : Boolean) : void {
 			_editMode = mode;
 			//try and set the edit mode for the connected objects also
-			if (hasWatchedFields()) {
-				var value : Object;
-				for each (var field : String in watchedFields) {
-					value = this[field];
-					if (value is IPersistable) {
-						IPersistable(value).setEditMode(mode);
-					}
-				}
-			}
+		/*if (hasWatchedFields()) {
+		   var value : Object;
+		   for each (var field : String in watchedFields) {
+		   value = this[field];
+		   if (value is IPersistable) {
+		   IPersistable(value).setEditMode(mode);
+		   }
+		   }
+		 }*/
 		}
 
 		/**
@@ -129,7 +129,7 @@ package com.googlecode.flexxb.persistence {
 			if (modified) {
 
 				beforeCommit();
-				//if the object is in editMode, changes do not propagate to bound components, 
+				//if the object is in editMode, changes do not propagate to bound components,
 				//thus property change events must be dispatched for changed fields
 				if (editMode) {
 					setEditMode(false);
@@ -160,7 +160,7 @@ package com.googlecode.flexxb.persistence {
 				listen = false;
 
 				beforeRollback();
-				//revert changes to the 
+				//revert changes to the
 				for each (var tracker : ChangeTracker in changeList) {
 					this[tracker.fieldName] = tracker.persistedValue;
 				}
@@ -208,6 +208,7 @@ package com.googlecode.flexxb.persistence {
 				}
 			}
 		}
+
 
 		/**
 		 * Exclude a field from being listened for changes. The object will no longer track changes
@@ -271,7 +272,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public final function isChanged(fieldName : String) : Boolean {
 			var changed : Boolean = _modified && fieldName && changeList[fieldName] is ChangeTracker;
-			//if the field is marked as watched, then check is the field value is modified internally 
+			//if the field is marked as watched, then check is the field value is modified internally
 			if (!changed && isWatched(fieldName)) {
 				var value : Object = this[fieldName];
 				if (value is IPersistable) {

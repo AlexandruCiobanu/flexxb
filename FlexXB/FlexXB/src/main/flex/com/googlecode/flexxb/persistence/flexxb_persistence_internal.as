@@ -15,10 +15,9 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.googlecode.flexxb.persistence
-{
+package com.googlecode.flexxb.persistence {
 	/**
-	* Defines internal structures of the persistence framework.
-	*/	
+	 * Defines internal structures of the persistence framework.
+	 */
 	internal namespace flexxb_persistence_internal = "http://code.google.com/p/flexxb/persistence"
 }

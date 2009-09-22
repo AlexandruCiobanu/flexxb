@@ -23,15 +23,53 @@ package com.googlecode.flexxb.persistence {
 	 *
 	 */
 	internal class ChangeTrackerKind {
+		/**
+		 *
+		 * @default
+		 */
 		public static const UPDATE : String = "update";
+		/**
+		 *
+		 * @default
+		 */
 		public static const ADD : String = "add";
+		/**
+		 *
+		 * @default
+		 */
 		public static const REMOVE : String = "remove";
+		/**
+		 *
+		 * @default
+		 */
+		public static const DELETE : String = "delete";
+		/**
+		 *
+		 * @default
+		 */
 		public static const MOVE : String = "move";
+		/**
+		 *
+		 * @default
+		 */
 		public static const REPLACE : String = "replace";
-		public static const RESET : String = "reset";
 
+		/**
+		 *
+		 * @param action
+		 * @return
+		 */
 		public static function isActionTracked(action : String) : Boolean {
-			return action == UPDATE || action == ADD || action == REMOVE || action == MOVE || action == REPLACE || action == RESET;
+			return action == UPDATE || action == DELETE;
+		}
+
+		/**
+		 *
+		 * @param action
+		 * @return
+		 */
+		public static function isCollectionActionTracked(action : String) : Boolean {
+			return action == ADD || action == REMOVE || action == MOVE || action == REPLACE;
 		}
 
 		/**
