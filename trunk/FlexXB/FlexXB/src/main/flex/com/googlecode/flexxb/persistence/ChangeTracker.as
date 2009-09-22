@@ -19,7 +19,7 @@ package com.googlecode.flexxb.persistence {
 	import mx.events.CollectionEvent;
 	import mx.events.CollectionEventKind;
 	import mx.events.PropertyChangeEvent;
-	
+
 	use namespace flexxb_persistence_internal;
 
 	/**
@@ -51,7 +51,7 @@ package com.googlecode.flexxb.persistence {
 			if (!changeEvent) {
 				throw new Error("Collection change event can't be null");
 			}
-			var tracker : ChangeTracker = new ChangeTracker("", changeEvent.items, changeEvent.type);
+			var tracker : ChangeTracker = new ChangeTracker("", changeEvent.items, changeEvent.kind);
 			if (changeEvent.kind == CollectionEventKind.REMOVE || changeEvent.kind == CollectionEventKind.ADD) {
 				tracker._additional = changeEvent.location;
 			}
@@ -106,14 +106,6 @@ package com.googlecode.flexxb.persistence {
 		public function get kind() : String {
 			return _kind;
 		}
-		/**
-		 * 
-		 * @param value
-		 * @private
-		 */		
-		flexxb_persistence_internal function setKind(value : String) : void {
-			_kind = value;
-		}
 
 		/**
 		 * Get additional information. Usualy, this additional information is
@@ -124,36 +116,31 @@ package com.googlecode.flexxb.persistence {
 		public function get additional() : Object {
 			return _additional;
 		}
+
 		/**
-		 * 
-		 * @param value
-		 * @private
-		 */		
-		flexxb_persistence_internal function setAdditional(value : Object) : void {
-			_additional = value;
-		}
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
+		 *
+		 * @return
+		 *
+		 */
 		public function isAdded() : Boolean {
 			return kind == ChangeTrackerKind.ADD;
 		}
+
 		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
+		 *
+		 * @return
+		 *
+		 */
 		public function isRemoved() : Boolean {
 			return kind == ChangeTrackerKind.REMOVE;
 		}
+
 		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
-		public function clone() : ChangeTracker{
+		 *
+		 * @return
+		 *
+		 */
+		public function clone() : ChangeTracker {
 			var copy : ChangeTracker = new ChangeTracker(fieldName, persistedValue, kind, additional);
 			return copy;
 		}

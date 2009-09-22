@@ -18,11 +18,11 @@
 package com.googlecode.flexxb.persistence {
 	import flash.events.Event;
 	import flash.utils.Dictionary;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.events.CollectionEvent;
 	import mx.events.CollectionEventKind;
-	
+
 	use namespace flexxb_persistence_internal;
 
 	/**
@@ -48,7 +48,7 @@ package com.googlecode.flexxb.persistence {
 		 * @param source
 		 *
 		 */
-		public function PersistableList(source : Array = null, listenMode : Boolean = true) {
+		public function PersistableList(source : Array = null, listenMode : Boolean = false) {
 			super(source);
 			addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, Number.MAX_VALUE, false);
 			listen = listenMode;
@@ -178,24 +178,75 @@ package com.googlecode.flexxb.persistence {
 			if (modified) {
 
 				beforeCommit();
-
+				
+				for(var key : * in changeList){
+					delete changeList[key];
+				}				
+				backup = null;
+				
 				setModified(false);
 			}
 		}
 
 		/**
+		 * Get the list of changed items (added removed, moved) in the current instance.
+		 * Each item is a <code>ChangeTracker</code> instance, a wrapper around the the real list member, containing information
+		 * on the action took on that object as well as relevant addtional data (such as
+		 * the objects's position).
+		 * @return array of <code>ChangeTracker</code> instances
 		 *
+		 */
+		public function get changedItemWrappers() : Array {
+			var items : Array = [];
+			for (var key : *in changeList) {
+				items.push(changeList[key]);
+			}
+			return items;
+		}
+
+		/**
+		 * Get the list of changed members (added removed, moved) in the current instance.
 		 * @return
 		 *
 		 */
 		public function get changedItems() : Array {
 			var items : Array = [];
-			var tracker : ChangeTracker;
 			for (var key : *in changeList) {
-				tracker = changeList[key];
-
+				items.push(key);
 			}
 			return items;
+		}
+
+		/**
+		 *
+		 * @param member
+		 * @return
+		 *
+		 */
+		public function isAdded(member : Object) : Boolean {
+			if (member) {
+				var tracker : ChangeTracker = changeList[member];
+				if (tracker) {
+					return tracker.isAdded();
+				}
+			}
+			return false;
+		}
+
+		/**
+		 *
+		 * @param member
+		 * @return
+		 *
+		 */
+		public function isRemoved(member : Object) : Boolean {
+			if (member) {
+				var tracker : ChangeTracker = changeList[member];
+				if (tracker) {
+					return tracker.isRemoved();
+				}
+			}
+			return false;
 		}
 
 		/**
@@ -206,10 +257,18 @@ package com.googlecode.flexxb.persistence {
 			if (modified) {
 				listen = false;
 
+
 				beforeRollback();
 
 				source = backup;
 				refresh();
+								
+				for(var key : * in changeList){
+					delete changeList[key];
+				}
+				
+				backup = null;
+				
 				setModified(false);
 			}
 		}
@@ -266,25 +325,23 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		private function onCollectionChange(event : CollectionEvent) : void {
-			if (listen) {
+			if (listen && ChangeTrackerKind.isCollectionActionTracked(event.kind)) {
 				if (!backup) {
 					backup = [];
 					for each (var item : Object in this) {
 						backup.push(item);
 					}
 				}
-				if (ChangeTrackerKind.isActionTracked(event.kind)) {
-					var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromCollectionChangeEvent(event);
-					if (!changeList) {
-						changeList = new Dictionary();
+				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromCollectionChangeEvent(event);
+				if (!changeList) {
+					changeList = new Dictionary();
+				}
+				if (tracker.persistedValue is Array) {
+					for each (var object : Object in tracker.persistedValue) {
+						trackChange(object, tracker);
 					}
-					if (tracker.persistedValue is Array) {
-						for each (var object : Object in tracker.persistedValue) {
-							trackChange(object, tracker);
-						}
-					} else {
-						trackChange(tracker.persistedValue, tracker);
-					}
+				} else {
+					trackChange(tracker.persistedValue, tracker);
 				}
 				setModified(true);
 			}
@@ -303,8 +360,8 @@ package com.googlecode.flexxb.persistence {
 					delete changeList[object];
 					return;
 				} else if (originalTracker.isRemoved() && tracker.isAdded()) {
-					originalTracker.flexxb_persistence_internal::setKind(ChangeTrackerKind.MOVE);
-					originalTracker.flexxb_persistence_internal::setAdditional(tracker.additional);
+					var key : ChangeTracker = new ChangeTracker(tracker.fieldName, tracker.persistedValue, ChangeTrackerKind.MOVE, tracker.additional);
+					changeList[object] = key;
 					return;
 				}
 			}
