@@ -81,15 +81,15 @@ package com.googlecode.flexxb.persistence {
 		public final function setEditMode(mode : Boolean) : void {
 			_editMode = mode;
 			//try and set the edit mode for the connected objects also
-		/*if (hasWatchedFields()) {
-		   var value : Object;
-		   for each (var field : String in watchedFields) {
-		   value = this[field];
-		   if (value is IPersistable) {
-		   IPersistable(value).setEditMode(mode);
-		   }
-		   }
-		 }*/
+			if (hasWatchedFields()) {
+				var value : Object;
+				for each (var field : String in watchedFields) {
+					value = this[field];
+					if (value is IPersistable) {
+						IPersistable(value).setEditMode(mode);
+					}
+				}
+			}
 		}
 
 		/**

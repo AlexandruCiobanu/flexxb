@@ -28,7 +28,7 @@ package com.googlecode.flexxb.persistence {
 		}
 
 		public function testList() : void {
-			var list : PersistableList = new PersistableList(["1", "2", "3"]);
+			var list : PersistableList = new PersistableList(["1", "2", "3"], true);
 			assertFalse("Modified wrongfully fired", list.modified);
 			list.removeItemAt(0);
 			list.addItem("4");
@@ -42,7 +42,7 @@ package com.googlecode.flexxb.persistence {
 		}
 
 		public function testEditMode() : void {
-			var list : PersistableList = new PersistableList(["1", "2", "3"]);
+			var list : PersistableList = new PersistableList(["1", "2", "3"], true);
 			assertFalse("Modified wrongfully fired", list.modified);
 			var changeDiscovered : Boolean;
 			list.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(event : CollectionEvent) : void {
@@ -56,11 +56,11 @@ package com.googlecode.flexxb.persistence {
 			assertFalse("Change was wrongfully detected when editMode was set to true", changeDiscovered);
 			list.setEditMode(false);
 			list.addItem("5");
-			assertTrue("Change was not detected when editMode was setto false", changeDiscovered);
+			assertTrue("Change was not detected when editMode was set to false", changeDiscovered);
 		}
 
 		public function testListenMode() : void {
-			var list : PersistableList = new PersistableList(["1", "2", "3"]);
+			var list : PersistableList = new PersistableList(["1", "2", "3"], true);
 			assertFalse("Modified wrongfully fired", list.modified);
 			list.stopListening();
 			list.addItem("4");
