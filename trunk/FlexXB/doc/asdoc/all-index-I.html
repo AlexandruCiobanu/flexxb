@@ -172,7 +172,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
   Interface defining an object that can be persisted.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html#isAdded()">isAdded</a>() &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html">ObjectActivity</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ChangeTracker.html#isAdded()">isAdded</a>() &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ChangeTracker.html">ChangeTracker</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Determine if the object was added in the list
+   </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/PersistableList.html#isAdded()">isAdded</a>(member) &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/PersistableList.html">PersistableList</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -185,13 +193,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td width="20"></td><td>
    Determines whether an object with the given id is aleady cached
    </td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html#isChanged()">isChanged</a>() &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html">ObjectActivity</a></td>
-</tr>
-<tr>
-<td width="20"></td><td>
-      </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/PersistableObject.html#isChanged()">isChanged</a>(fieldName) &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/PersistableObject.html">PersistableObject</a></td>
@@ -231,6 +232,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
       </td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ChangeTracker.html#isMoved()">isMoved</a>() &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ChangeTracker.html">ChangeTracker</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Determine if the object was moved within the list
+   </td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/annotation/class-list.html');" href="com/googlecode/flexxb/annotation/XmlMember.html#isPath()">isPath</a>() &mdash; Method in class com.googlecode.flexxb.annotation.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/annotation/class-list.html');" href="com/googlecode/flexxb/annotation/XmlMember.html">XmlMember</a></td>
 </tr>
 <tr>
@@ -255,7 +264,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
    </td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html#isRemoved()">isRemoved</a>() &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html">ObjectActivity</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ChangeTracker.html#isRemoved()">isRemoved</a>() &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ChangeTracker.html">ChangeTracker</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Determine if the objects was removed from the list 
+   </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/PersistableList.html#isRemoved()">isRemoved</a>(member) &mdash; Method in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/PersistableList.html">PersistableList</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -275,12 +292,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td width="20"></td><td>
    Check if the type is write only
    </td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html#item">item</a> &mdash; Property in class com.googlecode.flexxb.persistence.<a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/persistence/class-list.html');" href="com/googlecode/flexxb/persistence/ObjectActivity.html">ObjectActivity</a></td>
-</tr>
-<tr>
-<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/service/class-list.html');" href="com/googlecode/flexxb/service/ITranslator.html"><i>ITranslator</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/googlecode/flexxb/service/class-list.html');" href="com/googlecode/flexxb/service/package-detail.html">com.googlecode.flexxb.service</a></td>

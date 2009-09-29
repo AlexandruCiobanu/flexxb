@@ -118,7 +118,7 @@ package com.googlecode.flexxb.persistence {
 		}
 
 		/**
-		 *
+		 * Determine if the object was added in the list
 		 * @return
 		 *
 		 */
@@ -127,7 +127,7 @@ package com.googlecode.flexxb.persistence {
 		}
 
 		/**
-		 *
+		 * Determine if the objects was removed from the list 
 		 * @return
 		 *
 		 */
@@ -136,7 +136,16 @@ package com.googlecode.flexxb.persistence {
 		}
 
 		/**
+		 * Determine if the object was moved within the list
+		 * @return
 		 *
+		 */
+		public function isMoved() : Boolean {
+			return kind == ChangeTrackerKind.MOVE;
+		}
+
+		/**
+		 * Clone the current tracker
 		 * @return
 		 *
 		 */

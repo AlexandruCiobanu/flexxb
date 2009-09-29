@@ -46,6 +46,7 @@ package com.googlecode.flexxb.persistence {
 		/**
 		 * Constructor
 		 * @param source
+		 * @param listenMode
 		 *
 		 */
 		public function PersistableList(source : Array = null, listenMode : Boolean = false) {
@@ -115,7 +116,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public override function removeItemAt(index : int) : Object {
 			if (index >= 0 && index < length) {
-				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false, false, CollectionEventKind.REMOVE, index, -1, null));
+				doBackup();
 			}
 			return super.removeItemAt(index);
 		}
@@ -128,7 +129,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public override function addItemAt(item : Object, index : int) : void {
 			if (list && index >= 0 && index <= length) {
-				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false, false, CollectionEventKind.ADD, index, -1, [item]));
+				doBackup();
 			}
 			super.addItemAt(item, index);
 		}
@@ -142,7 +143,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public override function setItemAt(item : Object, index : int) : Object {
 			if (list && index >= 0 && index < length) {
-				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false, false, CollectionEventKind.REPLACE, index, -1, [item]));
+				doBackup();
 			}
 			return super.setItemAt(item, index);
 		}
@@ -154,12 +155,10 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public override function set source(s : Array) : void {
 			if (source && s != source) {
+				doBackup();
 				onCollectionChange(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE, false, false, CollectionEventKind.RESET));
-			} else {
-				listen = false;
 			}
 			super.source = s;
-			listen = true;
 		}
 
 		/**
@@ -178,12 +177,12 @@ package com.googlecode.flexxb.persistence {
 			if (modified) {
 
 				beforeCommit();
-				
-				for(var key : * in changeList){
+
+				for (var key : *in changeList) {
 					delete changeList[key];
-				}				
+				}
 				backup = null;
-				
+
 				setModified(false);
 			}
 		}
@@ -262,13 +261,13 @@ package com.googlecode.flexxb.persistence {
 
 				source = backup;
 				refresh();
-								
-				for(var key : * in changeList){
+
+				for (var key : *in changeList) {
 					delete changeList[key];
 				}
-				
+
 				backup = null;
-				
+
 				setModified(false);
 			}
 		}
@@ -279,7 +278,8 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public override final function dispatchEvent(event : Event) : Boolean {
-			if (event is CollectionEvent && editMode) {
+			if (editMode && event is CollectionEvent && ChangeTrackerKind.isCollectionActionTracked(CollectionEvent(event).kind)) {
+				onCollectionChange(event as CollectionEvent);
 				return true;
 			}
 			return super.dispatchEvent(event);
@@ -325,13 +325,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		private function onCollectionChange(event : CollectionEvent) : void {
-			if (listen && ChangeTrackerKind.isCollectionActionTracked(event.kind)) {
-				if (!backup) {
-					backup = [];
-					for each (var item : Object in this) {
-						backup.push(item);
-					}
-				}
+			if (listen) {
 				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromCollectionChangeEvent(event);
 				if (!changeList) {
 					changeList = new Dictionary();
@@ -344,6 +338,15 @@ package com.googlecode.flexxb.persistence {
 					trackChange(tracker.persistedValue, tracker);
 				}
 				setModified(true);
+			}
+		}
+
+		private function doBackup() : void {
+			if (listen && !backup) {
+				backup = [];
+				for each (var item : Object in this) {
+					backup.push(item);
+				}
 			}
 		}
 
