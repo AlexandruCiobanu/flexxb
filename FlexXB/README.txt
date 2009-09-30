@@ -89,20 +89,19 @@ com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processDescriptorsFro
 Annotation syntax:
 
 XmlClass
-[XmlClass(alias="MyClass", useNamespaceFrom="FieldName", idField="FieldName", prefix="my", uri="http://www.you.com/schema/", defaultValueField="fieldName")] 
+[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false")] 
 
 ConstructorArg
 [ConstructorArg(reference="element", optional="true|false")]
 
 XmlAttribute
-[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")] 
+[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index")]
 
 XmlElement
-[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", getRuntimeType="true|false")] 
+[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false")] 
 
 XmlArray
-[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]
-
+[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index")]
 
 
 Note: Using as alias "*" on a field will force the serializer to serialize that field using an alias computed at runtime by the 
