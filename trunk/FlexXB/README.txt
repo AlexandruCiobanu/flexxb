@@ -116,6 +116,10 @@ KNOWN LIMITATIONS
 
 RELEASE NOTES
 
+1.4 - 27-09-2009
+	- Fix: Issue 16 - Support Array of int or Number 
+	- Enhancement: Persistence updates 
+
 1.3 - 20-07-2009
 	- Fix: Issue 13 - IXmlSerializable not working... 
 	- Fix: Issue 14 - Add support for namepaced class fields

@@ -27,9 +27,14 @@ package com.googlecode.testData {
 		public var test1 : int;
 		[XmlElement(order="2")]
 		public var test2 : String;
+		
+		public var watchedRef : Persist2 = new Persist2();
+		
+		public var unwatched : Persist2 = new Persist2();
 
 		public function Persist() {
 			super();
+			watch("watchedRef");
 		}
 	}
 }
