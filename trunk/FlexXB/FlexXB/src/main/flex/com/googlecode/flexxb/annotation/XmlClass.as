@@ -24,7 +24,7 @@ package com.googlecode.flexxb.annotation {
 
 	/**
 	 *
-	 * <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></p>
+	 * <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false")]</code></p>
 	 * @author aCiobanu
 	 *
 	 */

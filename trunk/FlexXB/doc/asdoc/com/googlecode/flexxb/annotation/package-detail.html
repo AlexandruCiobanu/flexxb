@@ -52,22 +52,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="XmlArray.html">XmlArray</a></td><td class="summaryTableLastCol">
-  <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></p>
+  <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index")]</code></p>
   </td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="XmlAttribute.html">XmlAttribute</a></td><td class="summaryTableLastCol">
-  <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]</code></p>
+  <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index")]</code></p>
   </td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="XmlClass.html">XmlClass</a></td><td class="summaryTableLastCol">
-    <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></p>
+    <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false")]</code></p>
   </td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="XmlElement.html">XmlElement</a></td><td class="summaryTableLastCol">
-  Usage: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code>
+  Usage: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimrType="true|false")]</code>
   </td>
 </tr>
 <tr class="prow0">

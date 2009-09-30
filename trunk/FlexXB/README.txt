@@ -103,6 +103,8 @@ XmlElement
 XmlArray
 [XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]
 
+
+
 Note: Using as alias "*" on a field will force the serializer to serialize that field using an alias computed at runtime by the 
 runtime type of the field's value, except for XmlArray. For XmlArray using the "*" alias will cause the members of the array value 
 to be rendered as children of the owner object xml rather than children of an xml element specifying the array.
@@ -116,7 +118,7 @@ KNOWN LIMITATIONS
 
 RELEASE NOTES
 
-1.4 - 27-09-2009
+1.4 - 01-10-2009
 	- Fix: Issue 16 - Support Array of int or Number 
 	- Enhancement: Persistence: Added watch referenced fields feature to PersistableObject
 	- Enhancement: Persistence: Added exclude field from listening feature to PersistableObject

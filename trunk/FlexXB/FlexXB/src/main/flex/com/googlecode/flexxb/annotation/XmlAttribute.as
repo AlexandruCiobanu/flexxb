@@ -18,7 +18,7 @@
 package com.googlecode.flexxb.annotation {
 
 	/**
-	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")]</code></p>
+	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index")]</code></p>
 	 * @author aCiobanu
 	 *
 	 */
