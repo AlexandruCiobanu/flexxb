@@ -19,7 +19,7 @@ package com.googlecode.flexxb.annotation {
 	import flash.utils.getDefinitionByName;
 
 	/**
-	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></p>
+	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index")]</code></p>
 	 * @author aCiobanu
 	 *
 	 */
