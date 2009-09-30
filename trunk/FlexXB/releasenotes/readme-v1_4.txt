@@ -1,5 +1,5 @@
 /*********************************************************************************************************************************/
-/**												FlexXB version 1.4 (30-09-2009)				   									**/
+/**												FlexXB version 1.4 (01-10-2009)				   									**/
 /**													by Alex Ciobanu						   										**/
 /*********************************************************************************************************************************/
 
@@ -7,7 +7,7 @@ Copyright 2008 - 2009 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-FlexXB-1_4-30092009-bin.zip - contains the FlexXB library along with the test 
+FlexXB-1_4-01102009-bin.zip - contains the FlexXB library along with the test 
 							application
 			/bin/ 				 - SWC file and test application directory
 			/bin/test/ 			 - the test application
@@ -17,7 +17,7 @@ FlexXB-1_4-30092009-bin.zip - contains the FlexXB library along with the test
 			/samples/			 - samples showing FlexXB features 
 			/README.txt			 - version release notes
 
-FlexXB-1_4-30092009-src.zip - contains source files
+FlexXB-1_4-01102009-src.zip - contains source files
 			/FlexXB/	 - FlexXB project sources
 			/FlexXBTest - FlexXB test application sources
 
@@ -89,19 +89,20 @@ com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processDescriptorsFro
 Annotation syntax:
 
 XmlClass
-[XmlClass(alias="MyClass", useNamespaceFrom="FieldName", idField="FieldName", prefix="my", uri="http://www.you.com/schema/", defaultValueField="fieldName")] 
+[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false")] 
 
 ConstructorArg
 [ConstructorArg(reference="element", optional="true|false")]
 
 XmlAttribute
-[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize")] 
+[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index")]
 
 XmlElement
-[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", getRuntimeType="true|false")] 
+[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false")] 
 
 XmlArray
-[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]
+[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index")]
+
 
 Note: Using as alias "*" on a field will force the serializer to serialize that field using an alias computed at runtime by the 
 runtime type of the field's value, except for XmlArray. For XmlArray using the "*" alias will cause the members of the array value 
@@ -116,7 +117,7 @@ KNOWN LIMITATIONS
 
 RELEASE NOTES
 
-1.4 - 27-09-2009
+1.4 - 01-10-2009
 	- Fix: Issue 16 - Support Array of int or Number 
 	- Enhancement: Persistence: Added watch referenced fields feature to PersistableObject
 	- Enhancement: Persistence: Added exclude field from listening feature to PersistableObject

@@ -29,7 +29,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public static function get Version() : String {
-			return "1.3.0";
+			return "1.4.0";
 		}
 
 		/**
