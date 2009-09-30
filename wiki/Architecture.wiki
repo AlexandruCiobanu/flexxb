@@ -39,7 +39,7 @@ Is used at field level and defines the details of the field being rendered as an
   * {{{ignoreOn}}}: Ignore this field from processing;
   * {{{serializePartialElement}}}: Serialize only the id of this field's value (implies that the field represents a complex object that has an id);
   * {{{order}}}: Numeric value specifying the order ot the field on serialization. the order is used only if the ordered flag was set to true at class level;
-  * {{{getRuntimeType}}}: Get the element type on deserialization based on teh xml name at runtime.
+  * {{{getRuntimeType}}}: Get the element type on deserialization based on the xml name at runtime.
 === XmlArray ===
 Is used at field level and defines the details of the field being rendered as an element of the wrapping xml element. The element will contain the rendering of the list elements. 
  Syntax:{{{[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]}}}
