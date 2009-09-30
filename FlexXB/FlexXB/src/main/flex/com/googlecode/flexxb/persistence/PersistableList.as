@@ -49,7 +49,7 @@ package com.googlecode.flexxb.persistence {
 		 * @param listenMode
 		 *
 		 */
-		public function PersistableList(source : Array = null, listenMode : Boolean = false) {
+		public function PersistableList(source : Array = null, listenMode : Boolean = true) {
 			super(source);
 			addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, Number.MAX_VALUE, false);
 			listen = listenMode;
@@ -325,7 +325,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		private function onCollectionChange(event : CollectionEvent) : void {
-			if (listen) {
+			if (listen && ChangeTrackerKind.isCollectionActionTracked(event.kind)) {
 				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromCollectionChangeEvent(event);
 				if (!changeList) {
 					changeList = new Dictionary();

@@ -17,9 +17,9 @@
  */
 package com.googlecode.flexxb.persistence {
 	import com.googlecode.testData.Persist;
-
+	
 	import flexunit.framework.TestCase;
-
+	
 	import mx.binding.utils.BindingUtils;
 	import mx.binding.utils.ChangeWatcher;
 
@@ -58,6 +58,15 @@ package com.googlecode.flexxb.persistence {
 			target.setEditMode(false);
 			target.test2 += "789";
 			assertEquals("Binded Var not notified (editMode false):", target.test2, bindedVar);
+		}
+		
+		public function testWatchFeature() : void{
+			var target : Persist = new Persist();
+			assertFalse("Modified flag was not set to false", target.modified);
+			target.unwatched.someField = "testValue";
+			assertFalse("Modified flag was not set to false", target.modified);
+			target.watchedRef.someField = "testValue";
+			assertTrue("Modified flag was not set to true", target.modified);
 		}
 
 		private function validate(target : Persist, ... args) : void {
