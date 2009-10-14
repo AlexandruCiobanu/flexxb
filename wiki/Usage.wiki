@@ -87,7 +87,7 @@ _The object defines its own namespace under which it is serialized. Notice the s
 
 {{{
         [Bindable]
-	[XmlClass(alias="MyClass", prefix="test", uri="http://www.axway.com/xmlns/passport/v1")]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.yourcompany.com/xmlns/yourNs")]
 	public class Mock
 	{
 		[XmlAttribute(alias="stuff")]
@@ -132,7 +132,7 @@ _The object to be serialized has been built as_
 _The resulting XML is:_
 
 {{{
-<test:MyClass test:stuff="test1" xmlns:test="http://www.axway.com/xmlns/passport/v1">
+<test:MyClass test:stuff="test1" xmlns:test="http://www.yourcompany.com/xmlns/yourNs">
   <test:data>
     <test:MyClass test:stuff="mocktestfield">
       <test:objVersion>
