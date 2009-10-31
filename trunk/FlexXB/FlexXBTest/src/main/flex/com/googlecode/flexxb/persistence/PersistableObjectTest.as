@@ -60,6 +60,14 @@ package com.googlecode.flexxb.persistence {
 			assertEquals("Binded Var not notified (editMode false):", target.test2, bindedVar);
 		}
 		
+		public function testExclude() : void{
+			var target : Persist = new Persist();
+			target.startListening();
+			assertFalse("Target wrongfully determined as modified", target.modified);
+			target.selected = true;
+			assertFalse("Target wrongfully determined as modified", target.modified);
+		}
+		
 		public function testWatchFeature() : void{
 			var target : Persist = new Persist();
 			assertFalse("Modified flag was not set to false", target.modified);

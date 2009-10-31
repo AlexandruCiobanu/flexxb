@@ -19,7 +19,7 @@ package com.googlecode.flexxb.persistence {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
-
+	
 	import mx.events.PropertyChangeEvent;
 	import mx.events.PropertyChangeEventKind;
 
@@ -75,7 +75,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public function PersistableObject(listenMode : Boolean = true) {
-			addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, this.valueChanged, false, 150, false);
+			addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, this.valueChanged, false, Number.MAX_VALUE, false);
 			listen = listenMode;
 		}
 
@@ -199,7 +199,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public override final function dispatchEvent(event : Event) : Boolean {
-			if (editMode && event is PropertyChangeEvent && event.type == PropertyChangeEvent.PROPERTY_CHANGE && !isExcluded(PropertyChangeEvent(event).property)) {
+			if (editMode && event is PropertyChangeEvent && event.type == PropertyChangeEvent.PROPERTY_CHANGE) {
 				valueChanged(PropertyChangeEvent(event));
 				return true;
 			}
@@ -327,6 +327,9 @@ package com.googlecode.flexxb.persistence {
 		private function valueChanged(event : PropertyChangeEvent) : void {
 			if (listen) {
 				var name : String = event.property as String;
+				if(isExcluded(name)){
+					return;
+				}
 				if (changeList && changeList[name]) {
 					if (ChangeTracker(changeList[name]).persistedValue == event.newValue) {
 						delete changeList[name];

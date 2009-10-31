@@ -28,12 +28,15 @@ package com.googlecode.testData {
 		[XmlElement(order="2")]
 		public var test2 : String;
 		
+		public var selected : Boolean;
+		
 		public var watchedRef : Persist2 = new Persist2();
 		
 		public var unwatched : Persist2 = new Persist2();
 
 		public function Persist() {
 			super();
+			exclude("selected");
 			watch("watchedRef");
 		}
 	}
