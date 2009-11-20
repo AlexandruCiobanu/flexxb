@@ -64,7 +64,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#editMode">editMode</a> : Boolean<div class="summaryTableDescription">[read-only]
-      </div>
+   The editMode flag will cause the object not to issue PropertyChangeEvents whenever 
+   one of its fields is changed.</div>
 </td><td class="summaryTableOwnerCol">IPersistable</td>
 </tr>
 <tr class="">
@@ -105,7 +106,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#setEditMode()">setEditMode</a>(mode:Boolean):void</div>
 <div class="summaryTableDescription">
-      </div>
+   Set edit mode.<br/>
+   The editMode flag will cause the object not to issue PropertyChangeEvents whenever 
+   one of its fields is changed.</div>
 </td><td class="summaryTableOwnerCol">IPersistable</td>
 </tr>
 <tr class="">
@@ -141,7 +144,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>editMode:Boolean</code>&nbsp;&nbsp;[read-only]<p>
-      </p><span class="label">Implementation</span>
+   The editMode flag will cause the object not to issue PropertyChangeEvents whenever 
+   one of its fields is changed. This means that components bound to that object will 
+   not update to reflect changes in the object because thare are no change events being 
+   dispatched from the object. In cases where you would edit the object in a view for 
+   example, it would be akward to change the name and see it changed in the background 
+   component displaying basic object details. In conclusion, it is not really an edit flag 
+   preventing the object from being edited but rather a notifier for the object to turn into 
+   a sort of a black box while that flag is active.
+   </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get editMode():Boolean</code>
 <br>
@@ -190,10 +201,20 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function setEditMode(mode:Boolean):void</code><p>
-      </p><span class="label">Parameters</span>
+   Set edit mode.<br/>
+   The editMode flag will cause the object not to issue PropertyChangeEvents whenever 
+   one of its fields is changed. This means that components bound to that object will 
+   not update to reflect changes in the object because thare are no change events being 
+   dispatched from the object. In cases where you would edit the object in a view for 
+   example, it would be akward to change the name and see it changed in the background 
+   component displaying basic object details. In conclusion, it is not really an edit flag 
+   preventing the object from being edited but rather a notifier for the object to turn into 
+   a sort of a black box while that flag is active.
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">mode</span>:Boolean</code></td>
+<td width="20px"></td><td><code><span class="label">mode</span>:Boolean</code> &mdash; boolean value specifing id the flag must be active or not
+      </td>
 </tr>
 </table>
 </div>
