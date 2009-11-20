@@ -17,7 +17,6 @@
  */
 package com.googlecode.flexxb.persistence {
 	import mx.events.CollectionEvent;
-	import mx.events.CollectionEventKind;
 	import mx.events.PropertyChangeEvent;
 
 	use namespace flexxb_persistence_internal;
@@ -34,11 +33,11 @@ package com.googlecode.flexxb.persistence {
 		 * @return <code>ChangeTracker</code> instance
 		 * @private
 		 */
-		flexxb_persistence_internal static function fromPropertyChangeEvent(changeEvent : PropertyChangeEvent) : ChangeTracker {
+		flexxb_persistence_internal static function fromPropertyChangeEvent(changeEvent : PropertyChangeEvent, index : Number) : ChangeTracker {
 			if (!changeEvent) {
 				throw new Error("Property change event can't be null");
 			}
-			return new ChangeTracker(changeEvent.property as String, changeEvent.oldValue, ChangeTrackerKind.UPDATE);
+			return new ChangeTracker(changeEvent.property as String, changeEvent.oldValue, ChangeTrackerKind.UPDATE, index);
 		}
 
 		/**
@@ -47,14 +46,12 @@ package com.googlecode.flexxb.persistence {
 		 * @return <code>ChangeTracker</code> instance
 		 * @private
 		 */
-		flexxb_persistence_internal static function fromCollectionChangeEvent(changeEvent : CollectionEvent) : ChangeTracker {
+		flexxb_persistence_internal static function fromCollectionChangeEvent(changeEvent : CollectionEvent, index : Number) : ChangeTracker {
 			if (!changeEvent) {
 				throw new Error("Collection change event can't be null");
 			}
-			var tracker : ChangeTracker = new ChangeTracker("", changeEvent.items, changeEvent.kind);
-			if (changeEvent.kind == CollectionEventKind.REMOVE || changeEvent.kind == CollectionEventKind.ADD) {
-				tracker._additional = changeEvent.location;
-			}
+			var tracker : ChangeTracker = new ChangeTracker("", changeEvent.items, changeEvent.kind, index);
+			tracker._additional = changeEvent.location;
 			return tracker;
 		}
 
@@ -62,6 +59,7 @@ package com.googlecode.flexxb.persistence {
 		private var _persistedValue : Object;
 		private var _kind : String;
 		private var _additional : Object;
+		private var _index : Number;
 
 		/**
 		 * Constructor
@@ -71,11 +69,12 @@ package com.googlecode.flexxb.persistence {
 		 * @param additionalInfo
 		 *
 		 */
-		public function ChangeTracker(property : String, value : Object, type : String, additionalInfo : Object = null) {
+		public function ChangeTracker(property : String, value : Object, type : String, index : int = 0, additionalInfo : Object = null) {
 			_field = property;
 			_persistedValue = value;
 			_kind = type;
 			_additional = additionalInfo;
+			_index = index;
 		}
 
 		/**
@@ -105,6 +104,15 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public function get kind() : String {
 			return _kind;
+		}
+		
+		/**
+		 * Get the index of the current operation being tracked
+		 * @return 
+		 * 
+		 */		
+		public function get index() : Number{
+			return _index;
 		}
 
 		/**
@@ -150,7 +158,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public function clone() : ChangeTracker {
-			var copy : ChangeTracker = new ChangeTracker(fieldName, persistedValue, kind, additional);
+			var copy : ChangeTracker = new ChangeTracker(fieldName, persistedValue, kind, index, additional);
 			return copy;
 		}
 	}

@@ -38,14 +38,29 @@ package com.googlecode.flexxb.persistence {
 		 */
 		function get modified() : Boolean;
 		/**
-		 *
+		 * The editMode flag will cause the object not to issue PropertyChangeEvents whenever 
+		 * one of its fields is changed. This means that components bound to that object will 
+		 * not update to reflect changes in the object because thare are no change events being 
+		 * dispatched from the object. In cases where you would edit the object in a view for 
+		 * example, it would be akward to change the name and see it changed in the background 
+		 * component displaying basic object details. In conclusion, it is not really an edit flag 
+		 * preventing the object from being edited but rather a notifier for the object to turn into 
+		 * a sort of a black box while that flag is active.
 		 * @return
 		 *
 		 */
 		function get editMode() : Boolean;
 		/**
-		 *
-		 * @param mode
+		 * Set edit mode.<br/>
+		 * The editMode flag will cause the object not to issue PropertyChangeEvents whenever 
+		 * one of its fields is changed. This means that components bound to that object will 
+		 * not update to reflect changes in the object because thare are no change events being 
+		 * dispatched from the object. In cases where you would edit the object in a view for 
+		 * example, it would be akward to change the name and see it changed in the background 
+		 * component displaying basic object details. In conclusion, it is not really an edit flag 
+		 * preventing the object from being edited but rather a notifier for the object to turn into 
+		 * a sort of a black box while that flag is active.
+		 * @param mode boolean value specifing id the flag must be active or not
 		 *
 		 */
 		function setEditMode(mode : Boolean) : void;

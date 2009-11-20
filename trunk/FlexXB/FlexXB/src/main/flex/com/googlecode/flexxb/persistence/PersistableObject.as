@@ -37,21 +37,6 @@ package com.googlecode.flexxb.persistence {
 	 * initial values is discarded, the new values thus becoming initial values. On rollback,
 	 * the initial values are reinstated the object returning to the state before eny change
 	 * had been made.</p>
-	 * <p>A <code>PersistableObject</code> can become aware of changes within him or within 
-	 * associated objects that is, references to other objects that extend PersistableObject. 
-	 * The watch feature is not meant for simple values or values whose class definitions do 
-	 * not implement <code>IPersistable</code> cos those objects do not monitor changes 
-	 * occuring on them or their fields. By using <code>watch(fieldName : String)</code> method
-	 * the current object is instructed to monitor changes occuring on the value contained by 
-	 * the specified field. Whenever the value is modified, the current object will be marked 
-	 * as moodified also. By using <code>hasWatchedFields()</code> and <code>isWatched(fieldName : String)</code> 
-	 * methods, one could determine if an instance has been configured to watch any of it's fields 
-	 * or if a specific field is being watched.</p>
-	 * <p>There are cases when some fields are used solely for display purposes, thus are not 
-	 * used in persisting object changes, for example, a selected flag signaling if an object 
-	 * has been selected from a list. In this case, the selected flag needs not be monitored 
-	 * and this can be configured by using the <code>exclude(fieldName : String)</code> method.</p>
-	 * 
 	 * <p><b>Note</b>: Subclasses should be decorated with the <code>[Bindable]</code> annotation so all
 	 * changes to the public fields would be registered.</p>
 	 * @author Alexutz
@@ -69,6 +54,8 @@ package com.googlecode.flexxb.persistence {
 		private var listen : Boolean = true;
 
 		private var _editMode : Boolean;
+		
+		private var opIndex : Number;
 
 		/**
 		 * Constructor
@@ -79,20 +66,10 @@ package com.googlecode.flexxb.persistence {
 			listen = listenMode;
 		}
 
-		/**
-		 *
-		 * @see IPersistable#editMode()
-		 *
-		 */
 		public final function get editMode() : Boolean {
 			return _editMode;
 		}
 
-		/**
-		 *
-		 * @see IPersistable#setEditMode()
-		 *
-		 */
 		public final function setEditMode(mode : Boolean) : void {
 			_editMode = mode;
 			//try and set the edit mode for the connected objects also
@@ -160,7 +137,7 @@ package com.googlecode.flexxb.persistence {
 						IPersistable(value).commit();
 					}
 				}
-
+				opIndex = 0;
 				setModified(false);
 			}
 			setEditMode(false);
@@ -187,6 +164,7 @@ package com.googlecode.flexxb.persistence {
 						IPersistable(value).rollback();
 					}
 				}
+				opIndex = 0;
 
 				setModified(false);
 			}
@@ -336,7 +314,7 @@ package com.googlecode.flexxb.persistence {
 					}
 					return;
 				}
-				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromPropertyChangeEvent(event);
+				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromPropertyChangeEvent(event, opIndex++);
 				if (!changeList) {
 					changeList = new Dictionary();
 				}

@@ -18,7 +18,7 @@
 package com.googlecode.flexxb.persistence {
 	import flash.events.Event;
 	import flash.utils.Dictionary;
-
+	
 	import mx.collections.ArrayCollection;
 	import mx.events.CollectionEvent;
 	import mx.events.CollectionEventKind;
@@ -42,17 +42,23 @@ package com.googlecode.flexxb.persistence {
 		private var backup : Array;
 
 		private var _editMode : Boolean;
+		
+		private var _watchItems : Boolean;
+		
+		private var opIndex : Number = 0;
 
 		/**
 		 * Constructor
 		 * @param source
 		 * @param listenMode
+		 * @param watchChildChanges
 		 *
 		 */
-		public function PersistableList(source : Array = null, listenMode : Boolean = true) {
+		public function PersistableList(source : Array = null, listenMode : Boolean = true, watchChildChanges : Boolean = false) {
 			super(source);
 			addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, Number.MAX_VALUE, false);
 			listen = listenMode;
+			_watchItems = watchChildChanges;
 		}
 
 		/**
@@ -89,6 +95,15 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public final function startListening() : void {
 			listen = true;
+		}
+		
+		/**
+		 * 
+		 * @param watch
+		 * 
+		 */		
+		public final function watchItemChanges(watch : Boolean = true) : void{
+			_watchItems = watch;
 		}
 
 		/**
@@ -166,7 +181,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public final function get modified() : Boolean {
-			return _modified;
+			return _modified || (_watchItems && areItemsModified());
 		}
 
 		/**
@@ -177,21 +192,23 @@ package com.googlecode.flexxb.persistence {
 			if (modified) {
 
 				beforeCommit();
-
+				
 				for (var key : *in changeList) {
 					delete changeList[key];
 				}
 				backup = null;
-
+				opIndex = 0;
+				
 				setModified(false);
 			}
 		}
 
 		/**
 		 * Get the list of changed items (added removed, moved) in the current instance.
-		 * Each item is a <code>ChangeTracker</code> instance, a wrapper around the the real list member, containing information
-		 * on the action took on that object as well as relevant addtional data (such as
-		 * the objects's position).
+		 * Each item is a <code>ChangeTracker</code> instance, a wrapper around the the 
+		 * real list member, containing information on the action took on that object as 
+		 * well as relevant additional data (such as the objects's position). The array 
+		 * is ordered according to the temporal sequence in which the actions were performed.
 		 * @return array of <code>ChangeTracker</code> instances
 		 *
 		 */
@@ -200,6 +217,7 @@ package com.googlecode.flexxb.persistence {
 			for (var key : *in changeList) {
 				items.push(changeList[key]);
 			}
+			items.sortOn("index", Array.NUMERIC);
 			return items;
 		}
 
@@ -247,6 +265,22 @@ package com.googlecode.flexxb.persistence {
 			}
 			return false;
 		}
+		
+		/**
+		 * 
+		 * @param member
+		 * @return 
+		 * 
+		 */		
+		public function isMoved(member : Object) : Boolean{
+			if(member){
+				var tracker : ChangeTracker = changeList[member];
+				if (tracker) {
+					return tracker.isMoved();
+				}
+			}
+			return false;
+		}
 
 		/**
 		 * @see IPersistable#rollback()
@@ -267,6 +301,7 @@ package com.googlecode.flexxb.persistence {
 				}
 
 				backup = null;
+				opIndex = 0;
 
 				setModified(false);
 			}
@@ -326,7 +361,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		private function onCollectionChange(event : CollectionEvent) : void {
 			if (listen && ChangeTrackerKind.isCollectionActionTracked(event.kind)) {
-				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromCollectionChangeEvent(event);
+				var tracker : ChangeTracker = ChangeTracker.flexxb_persistence_internal::fromCollectionChangeEvent(event, opIndex++);
 				if (!changeList) {
 					changeList = new Dictionary();
 				}
@@ -363,12 +398,21 @@ package com.googlecode.flexxb.persistence {
 					delete changeList[object];
 					return;
 				} else if (originalTracker.isRemoved() && tracker.isAdded()) {
-					var key : ChangeTracker = new ChangeTracker(tracker.fieldName, tracker.persistedValue, ChangeTrackerKind.MOVE, tracker.additional);
+					var key : ChangeTracker = new ChangeTracker(tracker.fieldName, tracker.persistedValue, ChangeTrackerKind.MOVE, tracker.index, tracker.additional);
 					changeList[object] = key;
 					return;
 				}
 			}
 			changeList[object] = tracker;
+		}
+		
+		private function areItemsModified() : Boolean{
+			for each(var item : Object in source){
+				if(item is IPersistable && IPersistable(item).modified){
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }
