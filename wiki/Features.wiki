@@ -55,5 +55,5 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-009||Use paths in xml aliases||1.0||
 ||FXB-016||Annotation API||1.1||
 ||FXB-017||Constructor Annotation||1.2||
-||FXB-013||Add method references to annotation's attribute values||2.0||
-||FXB-011||XSD validation against incoming XML||3.0||
+||FXB-013||Add method references to annotation's attribute values||?||
+||FXB-011||XSD validation against incoming XML||?||
