@@ -19,6 +19,8 @@ package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.api.AccessorType;
 	import com.googlecode.flexxb.api.Stage;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
+	
+	import mx.utils.StringUtil;
 
 	/**
 	 * Defines a member of an XmlClass, that is, a field of the class definition.
@@ -82,6 +84,8 @@ package com.googlecode.flexxb.annotation {
 		 * Path separator used for defining virtual paths in the alias
 		 */
 		public static const ALIAS_PATH_SEPARATOR : String = "/";
+		
+		public static const ARGUMENT_NAMESPACE_REF : String = "ns";
 		/**
 		 * @private
 		 */
@@ -94,6 +98,10 @@ package com.googlecode.flexxb.annotation {
 		 * @private
 		 */
 		protected var _class : XmlClass;
+		/**
+		 * @private 
+		 */		
+		protected var _nsRef : String;
 		/**
 		 * @private
 		 */
@@ -139,6 +147,19 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public function get writeOnly() : Boolean {
 			return _accessorType.isWriteOnly();
+		}
+		
+		/**
+		 * Get the namespace reference value
+		 * @return
+		 *
+		 */
+		public function get namespaceRef() : String {
+			return _nsRef;
+		}
+		
+		public function hasNamespaceRef() : Boolean{
+			return _nsRef && StringUtil.trim(_nsRef).length > 0;
 		}
 
 		/**
@@ -226,7 +247,8 @@ package com.googlecode.flexxb.annotation {
 		protected override function parseMetadata(metadata : XML) : void {
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
 			ignoreOn = Stage.fromString(metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value);
-			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value)
+			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value);
+			_nsRef = metadata.arg.(@key == ARGUMENT_NAMESPACE_REF).@value;
 		}
 
 		/**

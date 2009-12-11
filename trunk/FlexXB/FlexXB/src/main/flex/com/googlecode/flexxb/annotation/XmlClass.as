@@ -16,8 +16,11 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.googlecode.flexxb.annotation {
+	import com.googlecode.flexxb.error.DescriptorParsingError;
+	
+	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
-
+	
 	import mx.collections.ArrayCollection;
 	import mx.collections.Sort;
 	import mx.collections.SortField;
@@ -37,6 +40,10 @@ package com.googlecode.flexxb.annotation {
 		 * Namespace prefix
 		 */
 		public static const ARGUMENT_NAMESPACE_PREFIX : String = "prefix";
+		/**
+		 * 
+		 */		
+		public static const ARGUMENT_NAMESPACE : String = "Namespace";
 		/**
 		 * Namespace uri
 		 */
@@ -89,6 +96,10 @@ package com.googlecode.flexxb.annotation {
 		 * @private
 		 */
 		private var _constructor : Constructor;
+		/**
+		 * @private
+		 */		
+		private var _namespaces : Dictionary;
 
 		/**
 		 *Constructor
@@ -104,9 +115,13 @@ package com.googlecode.flexxb.annotation {
 		 * @param annotation
 		 *
 		 */
-		public function addMember(annotation : Annotation) : void {
+		public function addMember(annotation : XmlMember) : void {
 			if (annotation && !isFieldRegistered(annotation)) {
-				annotation.nameSpace = nameSpace;
+				if(annotation.hasNamespaceRef()){
+					annotation.nameSpace = getRegisteredNamespace(annotation.namespaceRef);
+				}else{
+					annotation.nameSpace = nameSpace;
+				}
 				members.addItem(annotation);
 				if (annotation.fieldName.localName == id) {
 					_idField = annotation;
@@ -241,6 +256,7 @@ package com.googlecode.flexxb.annotation {
 			if (descriptor.factory.length() > 0) {
 				descriptor = descriptor.factory[0];
 			}
+			processNamespaces(descriptor);
 			processMembers(descriptor);
 			constructor.parse(descriptor);
 		}
@@ -252,10 +268,10 @@ package com.googlecode.flexxb.annotation {
 		protected function processMembers(descriptor : XML) : void {
 			var field : XML;
 			for each (field in descriptor..variable) {
-				addMember(AnnotationFactory.instance.getAnnotation(field, this));
+				addMember(AnnotationFactory.instance.getAnnotation(field, this) as XmlMember);
 			}
 			for each (field in descriptor..accessor) {
-				addMember(AnnotationFactory.instance.getAnnotation(field, this));
+				addMember(AnnotationFactory.instance.getAnnotation(field, this) as XmlMember);
 			}
 		}
 
@@ -289,6 +305,25 @@ package com.googlecode.flexxb.annotation {
 			if (value && value.length > 0) {
 				_ordered = value == "true";
 			}
+		}
+		
+		private function processNamespaces(descriptor : XML) : void{
+			var nss : XMLList = descriptor.metadata.(@name=="Namespace");
+			if(nss.length() > 0){
+				_namespaces = new Dictionary();
+				var ns : Namespace;
+				for each(var nsXml : XML in nss){
+					ns = getNamespace(nsXml);
+					_namespaces[ns.prefix] = ns;
+				}
+			}
+		}
+		
+		private function getRegisteredNamespace(ref : String) : Namespace{
+			if(!_namespaces || !_namespaces[ref]){
+				throw new DescriptorParsingError(fieldType, "", "Namespace reference <<" + ref + ">> could not be found. Make sure you typed the prefix correctly and the namespace is registered as annotation of the containing class.");
+			}
+			return _namespaces[ref] as Namespace;
 		}
 
 		private function getNamespace(metadata : XML) : Namespace {
