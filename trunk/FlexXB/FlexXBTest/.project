@@ -3,7 +3,6 @@
 	<name>FlexXBTest</name>
 	<comment></comment>
 	<projects>
-		<project>FlexXB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
