@@ -19,10 +19,8 @@ package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.error.ApiError;
-
+	
 	import flash.utils.Dictionary;
-
-	import com.googlecode.flexxb.api.flexxb_api_internal;
 
 	/**
 	 *
@@ -103,6 +101,10 @@ package com.googlecode.flexxb.api {
 
 		public function get fieldAccessType() : AccessorType {
 			return field.accessType;
+		}
+		
+		public function setNamespace(ns : Namespace) : void{
+			
 		}
 
 		/**
