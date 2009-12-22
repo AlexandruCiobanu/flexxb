@@ -85,6 +85,15 @@ package com.googlecode.flexxb.serializer {
 			if (isComplexType(type)) {
 				return serializer.deserialize(xml, type, getFromCache);
 			}
+			//FIX: if the type is XML then we have a bit of processing to do
+			//xml data is stored as child of an xml element whch can be namespaced
+			//we remove the wrapper, along with its namespace(s) and keep the
+			//content.
+			if(type == XML){
+				var value : String = xml.toXMLString();
+				value = value.substring(value.indexOf(">") + 1, value.lastIndexOf("<") - 1);
+				xml = XML(value);
+			}
 			return serializer.converterStore.stringToObject(xml.toString(), type);
 		}
 	}
