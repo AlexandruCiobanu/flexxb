@@ -19,6 +19,15 @@
       <xs:enumeration value="deserialize"/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:element name="Namespace">
+  	<xs:annotation>
+  		<xs:documentation></xs:documentation>
+  	</xs:annotation>
+  	<xs:complexType>
+  		<xs:attribute name="prefix" type="xs:string" use="optional"/>
+  		<xs:attribute name="uri" type="xs:anyURI"" use="required"/>
+  	</xs:complexType>
+  </xs:element>
   <xs:element name="Field">
     <xs:annotation>
       <xs:documentation>Defined the class field (field, getter and/or setter definition). A field is identified by name, type and access type.</xs:documentation>
@@ -36,6 +45,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Namespace" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
       <xs:attribute name="alias" type="xs:string" use="optional" />
       <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
@@ -49,6 +59,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Namespace" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
       <xs:attribute name="alias" type="xs:string" use="optional" />
       <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
@@ -65,6 +76,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Namespace" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
       <xs:attribute name="alias" type="xs:string" use="optional" />
       <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />

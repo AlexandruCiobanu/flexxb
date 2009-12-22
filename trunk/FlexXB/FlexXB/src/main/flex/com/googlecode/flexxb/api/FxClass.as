@@ -19,9 +19,10 @@ package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.error.ApiError;
-
+	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
+	
 	use namespace flexxb_api_internal;
 
 	[XmlClass(alias="Class")]
@@ -120,7 +121,7 @@ package com.googlecode.flexxb.api {
 		 * @param value
 		 *
 		 */
-		public function set nameSpace(value : Namespace) : void {
+		public function set defaultNamespace(value : Namespace) : void {
 			if (value) {
 				uri = value.uri;
 				prefix = value.prefix;
