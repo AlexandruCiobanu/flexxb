@@ -20,7 +20,8 @@ package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.error.ApiError;
 	
-	import flash.utils.Dictionary;
+	import flash.utils.Dictionary; 
+	use namespace flexxb_api_internal;
 
 	/**
 	 *
@@ -33,19 +34,33 @@ package com.googlecode.flexxb.api {
 		 */
 		protected var _field : FxField;
 		/**
-		 *
-		 */
+		 * 
+		 */		
+		protected var _nameSpace : FxNamespace;
+		/**
+		 * 
+		 */		
+		internal var owner : FxClass;
+		
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var alias : String;
-		/**
-		 *
-		 */
+		
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var ignoreOn : Stage = null;
-		/**
-		 *
-		 */
+		
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var order : Number;
 
 		/**
@@ -59,14 +74,30 @@ package com.googlecode.flexxb.api {
 			this.alias = alias;
 		}
 
-		/**
-		 *
-		 * @return
-		 *
-		 */
 		[XmlElement(alias="*")]
+		/**
+		 * 
+		 * @return 
+		 */
 		public function get field() : FxField {
 			return _field;
+		}
+		
+		[XmlElement(alias="*")]
+		/**
+		 * 
+		 * @return 
+		 */
+		public function get nameSpace() : FxNamespace{
+			return _nameSpace;
+		}
+		
+		/**
+		 * 
+		 * @param value
+		 */
+		public function set nameSpace(value : FxNamespace) : void{
+			_nameSpace = value;
 		}
 
 		/**
@@ -99,12 +130,20 @@ package com.googlecode.flexxb.api {
 			return field.type;
 		}
 
+		/**
+		 * 
+		 * @return 
+		 */
 		public function get fieldAccessType() : AccessorType {
 			return field.accessType;
 		}
 		
+		/**
+		 * 
+		 * @param ns
+		 */
 		public function setNamespace(ns : Namespace) : void{
-			
+			nameSpace = FxNamespace.create(ns);
 		}
 
 		/**
