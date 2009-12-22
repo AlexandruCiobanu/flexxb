@@ -20,12 +20,14 @@
 	<mx:Script>
 		<![CDATA[
 			import com.googlecode.AllTests;
-			import com.googlecode.flexxb.api.ApiTests;
-			import com.googlecode.flexxb.api.FxClass;
-			import com.googlecode.flexxb.api.flexxb_api_internal;
 			import com.googlecode.flexxb.XmlTests;
+			import com.googlecode.flexxb.api.ApiTests;
+			import com.googlecode.flexxb.api.FxArray;
+			import com.googlecode.testData.Mock;
 			
 			private function init() : void {
+				trace(describeType(Mock));
+				trace(describeType(FxArray));
 				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite(), ApiTests.suite()];
 			}
 		]]>
