@@ -84,7 +84,7 @@ To provide an API descriptor file content in which the class descriptors are dep
 com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processDescriptorsFromXml(xml)
 
 !NOTE!: Make sure you add the following switches to your compiler settings:
-	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray -keep-as3-metadata ConstructorArg
+	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray -keep-as3-metadata ConstructorArg -keep-as3-metadata Namespace
 
 Annotation syntax:
 
@@ -117,6 +117,10 @@ KNOWN LIMITATIONS
 
 RELEASE NOTES
 
+1.4.1 - 28-12-2009
+	- Enhancement: Issue 17: Multiple namespaces per class definition 
+	- Fix: Issue 18: Fields of type xml are not deserialized correctly 
+	
 1.4 - 01-10-2009
 	- Fix: Issue 16 - Support Array of int or Number 
 	- Enhancement: Persistence: Added watch referenced fields feature to PersistableObject

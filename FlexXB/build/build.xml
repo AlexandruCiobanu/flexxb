@@ -49,7 +49,7 @@
 	<target name="build.project.test" depends="build.project">
 		 <exec executable="${mxmlc.exe}" failonerror="true">
     	 	<arg value="-source-path=${project.tests.src.dir}"/>
-    	 	<arg value="-file-specs=${project.tests.src.dir}/SerializerTestView.mxml"/>
+    	 	<arg value="-file-specs=${project.tests.src.dir}/FlexXBTest.mxml"/>
     	 	<arg value="-output=${bin.dir}/test/FlexXBTest.swf"/>		
     	 	    	 	
     	 	<arg value="-actionscript-file-encoding=UTF-8"/>
