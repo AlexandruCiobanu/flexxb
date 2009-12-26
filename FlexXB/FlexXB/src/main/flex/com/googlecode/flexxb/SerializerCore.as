@@ -23,6 +23,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.api.Stage;
 	import com.googlecode.flexxb.persistence.PersistableObject;
 	import com.googlecode.flexxb.serializer.ISerializer;
 	import com.googlecode.flexxb.serializer.XmlArraySerializer;
@@ -30,7 +31,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.serializer.XmlClassSerializer;
 	import com.googlecode.flexxb.serializer.XmlElementSerializer;
 	import com.googlecode.flexxb.util.Instanciator;
-
+	
 	import flash.events.EventDispatcher;
 
 	[Event(name="preserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
@@ -42,7 +43,7 @@ package com.googlecode.flexxb {
 	 * @author Alexutz
 	 *
 	 */
-	public class SerializerCore extends EventDispatcher {
+	public final class SerializerCore extends EventDispatcher {
 		{
 			AnnotationFactory.instance.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
 			AnnotationFactory.instance.registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
@@ -72,9 +73,14 @@ package com.googlecode.flexxb {
 			}
 			_descriptorStore = descriptor;
 			_converterStore = converter;
-			_configuration = configuration;
+			//We always have a reference to a configuration object
+			_configuration = configuration ? configuration : new Configuration();
 			addEventListener(XmlEvent.PRE_DESERIALIZE, preDeserializeHandler, false, 150, true);
 			addEventListener(XmlEvent.POST_DESERIALIZE, postDeserializeHandler, false, 150, true);
+		}
+		
+		public function get configuration() : Configuration{
+			return _configuration;
 		}
 
 		/**
@@ -119,16 +125,16 @@ package com.googlecode.flexxb {
 				var annotation : XmlMember;
 				if (partial && classDescriptor.idField) {
 					doSerialize(object, classDescriptor.idField, xmlData);
-				} else if (_configuration.onlySerializeChangedValueFields && object is PersistableObject) {
+				} else if (configuration.onlySerializeChangedValueFields && object is PersistableObject) {
 					for each (annotation in classDescriptor.members) {
-						if (annotation.writeOnly || !PersistableObject(object).isChanged(annotation.fieldName.localName)) {
+						if (annotation.writeOnly  || annotation.ignoreOn == Stage.SERIALIZE || !PersistableObject(object).isChanged(annotation.fieldName.localName)) {
 							continue;
 						}
 						doSerialize(object, annotation, xmlData);
 					}
 				} else {
 					for each (annotation in classDescriptor.members) {
-						if (annotation.writeOnly) {
+						if (annotation.writeOnly || annotation.ignoreOn == Stage.SERIALIZE) {
 							continue;
 						}
 						doSerialize(object, annotation, xmlData);
@@ -195,7 +201,10 @@ package com.googlecode.flexxb {
 						var _arguments : Array;
 						if (!_descriptorStore.isCustomSerializable(objectClass) && !classDescriptor.constructor.isDefault()) {
 							_arguments = [];
+							var stageCache : Stage;
 							for each (var member : XmlMember in classDescriptor.constructor.parameterFields) {
+								//On deserialization, when using constructor arguments, we need to process them even though the ignoreOn 
+								//flag is set to deserialize stage.
 								var data : Object = AnnotationFactory.instance.getSerializer(member).deserialize(xmlData, member, this);
 								_arguments.push(data);
 							}
@@ -220,8 +229,15 @@ package com.googlecode.flexxb {
 							if (annotation.readOnly || classDescriptor.constructor.hasParameterField(annotation)) {
 								continue;
 							}
-							var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
-							result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
+							if(annotation.ignoreOn == Stage.DESERIALIZE){
+								// Let's keep the old behavior for now. If the ignoreOn flag is set on deserialize, 
+								// the field's value is set to null.
+								// TODO: check if this can be removed
+								result[annotation.fieldName] = null;
+							}else{
+								var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
+								result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
+							}
 						}
 					}
 
@@ -242,7 +258,7 @@ package com.googlecode.flexxb {
 		 */
 		public final function getIncomingType(incomingXML : XML) : Class {
 			if (incomingXML) {
-				if (_configuration.getResponseTypeByTagName) {
+				if (configuration.getResponseTypeByTagName) {
 					var tagName : QName = incomingXML.name() as QName;
 					if (tagName) {
 						var clasz : Class = _descriptorStore.getClassByTagName(tagName.localName);
@@ -251,7 +267,7 @@ package com.googlecode.flexxb {
 						}
 					}
 				}
-				if (_configuration.getResponseTypeByNamespace) {
+				if (configuration.getResponseTypeByNamespace) {
 					if (incomingXML.namespaceDeclarations().length == 0) {
 						var _namespace : String = (incomingXML.namespaceDeclarations()[0] as Namespace).uri;
 						return _descriptorStore.getClassByNamespace(_namespace);

@@ -20,7 +20,9 @@ package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.error.ApiError;
 	
-	import flash.utils.Dictionary; 
+	import flash.errors.MemoryError;
+	import flash.utils.Dictionary;
+
 	use namespace flexxb_api_internal;
 
 	/**
@@ -29,19 +31,7 @@ package com.googlecode.flexxb.api {
 	 *
 	 */
 	internal class FxMember {
-		/**
-		 *
-		 */
-		protected var _field : FxField;
-		/**
-		 * 
-		 */		
-		protected var _nameSpace : FxNamespace;
-		/**
-		 * 
-		 */		
-		internal var owner : FxClass;
-		
+				
 		[XmlAttribute]
 		/**
 		 * 
@@ -62,6 +52,19 @@ package com.googlecode.flexxb.api {
 		 * @default 
 		 */
 		public var order : Number;
+		
+		/**
+		 *
+		 */
+		protected var _field : FxField;
+		/**
+		 * @private
+		 */		
+		protected var _nameSpace : FxNamespace;
+		/**
+		 * @private
+		 */		
+		internal var owner : FxClass;
 
 		/**
 		 *
@@ -88,7 +91,7 @@ package com.googlecode.flexxb.api {
 		 * 
 		 * @return 
 		 */
-		public function get nameSpace() : FxNamespace{
+		public final function get nameSpace() : FxNamespace{
 			return _nameSpace;
 		}
 		
@@ -96,8 +99,15 @@ package com.googlecode.flexxb.api {
 		 * 
 		 * @param value
 		 */
-		public function set nameSpace(value : FxNamespace) : void{
+		public final function set nameSpace(value : FxNamespace) : void{
 			_nameSpace = value;
+			if(owner){
+				if(value){
+					_nameSpace = owner.addNamespace(value);
+				}else{
+					owner.removeNamespace(value);
+				}
+			}
 		}
 
 		/**
@@ -159,6 +169,10 @@ package com.googlecode.flexxb.api {
 			metadata.@name = getXmlAnnotationName();
 
 			var items : Dictionary = getContent();
+			
+			if(items && _nameSpace){
+				items[XmlMember.ARGUMENT_NAMESPACE_REF] = _nameSpace.prefix;
+			}
 
 			for (var key : *in items) {
 				if (items[key] != null) {

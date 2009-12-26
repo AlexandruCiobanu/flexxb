@@ -30,7 +30,7 @@ package com.googlecode.flexxb {
 	 * @author Alexutz
 	 *
 	 */
-	internal class FlexXBApi implements IFlexXBApi {
+	internal final class FlexXBApi implements IFlexXBApi {
 		private var store : DescriptorStore;
 
 		/**

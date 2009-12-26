@@ -35,9 +35,7 @@ package com.googlecode.flexxb.serializer {
 		 */
 		public function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML {
 			var element : XmlMember = annotation as XmlMember;
-			if (element.ignoreOn == Stage.SERIALIZE) {
-				return null;
-			}
+			
 			if (element.isDefaultValue()) {
 				parentXml.appendChild(serializer.converterStore.objectToString(object, element.fieldType));
 				return null;
@@ -69,9 +67,7 @@ package com.googlecode.flexxb.serializer {
 		 */
 		public function deserialize(xmlData : XML, annotation : Annotation, serializer : SerializerCore) : Object {
 			var element : XmlMember = annotation as XmlMember;
-			if (element.ignoreOn == Stage.DESERIALIZE) {
-				return null;
-			}
+			
 			if (element.isDefaultValue()) {
 				for each (var child : XML in xmlData.children()) {
 					if (child.nodeKind() == "text") {

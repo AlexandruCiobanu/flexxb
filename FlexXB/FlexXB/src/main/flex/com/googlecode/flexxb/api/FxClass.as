@@ -39,51 +39,82 @@ package com.googlecode.flexxb.api {
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var alias : String;
 		/**
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var prefix : String;
 		/**
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var uri : String;
 		/**
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var ordered : Boolean;
 		/**
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var useNamespaceFrom : String;
 		/**
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var idField : String;
 		/**
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @default 
+		 */
 		public var defaultValueField : String;
 		/**
 		 *
 		 */
-		private var _type : Class;
-		/**
-		 *
-		 */
-		[XmlArray(alias="Members")]
-		flexxb_api_internal var members : Array = [];
+		private var _members : Array = [];
 		/**
 		 *
 		 */
 		[XmlArray(alias="ConstructorArguments", memberType="com.googlecode.flexxb.api.FxConstructorArgument")]
 		flexxb_api_internal var constructorArguments : Array;
+		/**
+		 * 
+		 */		
+		flexxb_api_internal var namespaces : Dictionary;
+		/**
+		 *
+		 */
+		private var _type : Class;
 
 		/**
 		 *Constructor
@@ -93,6 +124,28 @@ package com.googlecode.flexxb.api {
 			this.type = type;
 			this.alias = alias;
 		}
+		
+		[XmlArray(alias="Members")]
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		flexxb_api_internal function get members() : Array{
+			return _members;
+		}
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
+		flexxb_api_internal function set members(value : Array) : void{
+			_members = value;
+			for each(var member : FxMember in value){
+				member.owner = this;
+				addNamespace(member.nameSpace);
+			}
+		}
 
 		/**
 		 *
@@ -100,6 +153,10 @@ package com.googlecode.flexxb.api {
 		 *
 		 */
 		[XmlAttribute]
+		/**
+		 * 
+		 * @return 
+		 */
 		public function get type() : Class {
 			return _type;
 		}
@@ -125,6 +182,44 @@ package com.googlecode.flexxb.api {
 			if (value) {
 				uri = value.uri;
 				prefix = value.prefix;
+			}
+		}
+		/**
+		 * 
+		 * @param ns
+		 * @return 
+		 * 
+		 */		
+		internal function addNamespace(ns : FxNamespace) : FxNamespace{
+			if(ns){
+				if(namespaces){
+					var existing : FxNamespace = namespaces[ns.prefix];
+					if(existing){
+						if(existing.uri != ns.uri){
+							throw new Error("A namespace already exists with the same prefix but a different uri!\n Existing namespace: " + existing + "\nNamespace to add: " + ns);
+						}
+						return existing;
+					}
+				}else{
+					namespaces = new Dictionary();
+				}
+				namespaces[ns.prefix] = ns;
+			}
+			return ns;
+		}
+		/**
+		 * 
+		 * @param ns
+		 * 
+		 */		
+		internal function removeNamespace(ns : FxNamespace) : void{
+			if(ns && namespaces){
+				for each(var member : FxMember in members){
+					if(member.nameSpace && member.nameSpace.prefix == ns.prefix){
+						return;
+					}
+				}
+				delete namespaces[ns.prefix];
 			}
 		}
 
@@ -206,13 +301,19 @@ package com.googlecode.flexxb.api {
 		 * @param member
 		 *
 		 */
-		private function addMember(member : FxMember) : void {
+		public function addMember(member : FxMember) : void {
 			if (hasMember(member.fieldName)) {
 				throw new Error("Field <" + member.fieldName + "> has already been defined for class type " + type);
 			}
+			member.owner = this;
+			addNamespace(member.nameSpace);
 			members.push(member);
 		}
 
+		/**
+		 * 
+		 * @return 
+		 */
 		public function toXml() : XML {
 			var xml : XML = <type />;
 			xml.@name = getQualifiedClassName(type);
@@ -222,6 +323,9 @@ package com.googlecode.flexxb.api {
 				}
 			}
 			xml.appendChild(buildMetadata());
+			for each (var ns : FxNamespace in namespaces) {
+				xml.appendChild(ns.toXml());
+			}
 			for each (var member : FxMember in members) {
 				xml.appendChild(member.toXml());
 			}
@@ -250,6 +354,10 @@ package com.googlecode.flexxb.api {
 			return xml;
 		}
 
+		/**
+		 * 
+		 * @return 
+		 */
 		public function toString() : String {
 			return "Class[type: " + type + ", alias:" + alias + "]";
 		}
