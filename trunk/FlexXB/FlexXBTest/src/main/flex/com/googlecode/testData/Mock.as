@@ -19,12 +19,13 @@ package com.googlecode.testData {
 
 	[Bindable]
 	[XmlClass(alias="MyClass", prefix="test", uri="http://www.axway.com/xmlns/passport/v1")]
+	[Namespace(prefix="me", uri="www.me.com")]
 	public class Mock {
 		[XmlAttribute(alias="stuff")]
 		public var aField : String = "a";
 		[XmlAttribute(ignoreOn="serialize")]
 		public var date : Date;
-		[XmlElement(alias="objVersion")]
+		[XmlElement(alias="objVersion", namespace="me")]
 		public var version : Number = 4;
 		[XmlElement(alias="mock3", serializePartialElement="true")]
 		public var link : Mock3;

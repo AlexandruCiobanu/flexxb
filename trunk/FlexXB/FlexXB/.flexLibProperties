@@ -33,10 +33,10 @@
     <classEntry path="com.googlecode.flexxb.api.FxElement"/>
     <classEntry path="com.googlecode.flexxb.api.FxField"/>
     <classEntry path="com.googlecode.flexxb.api.FxMember"/>
+    <classEntry path="com.googlecode.flexxb.api.FxNamespace"/>
     <classEntry path="com.googlecode.flexxb.api.IFlexXBApi"/>
     <classEntry path="com.googlecode.flexxb.api.Stage"/>
     <classEntry path="com.googlecode.flexxb.api.StageXmlConverter"/>
-    <classEntry path="com.googlecode.flexxb.api.flexxb_api_internal"/>
     <classEntry path="com.googlecode.flexxb.converter.ClassTypeConverter"/>
     <classEntry path="com.googlecode.flexxb.converter.IConverter"/>
     <classEntry path="com.googlecode.flexxb.converter.W3CDateConverter"/>
@@ -49,6 +49,7 @@
     <classEntry path="com.googlecode.flexxb.persistence.IPersistable"/>
     <classEntry path="com.googlecode.flexxb.persistence.PersistableList"/>
     <classEntry path="com.googlecode.flexxb.persistence.PersistableObject"/>
+    <classEntry path="com.googlecode.flexxb.persistence.flexxb_persistence_internal"/>
     <classEntry path="com.googlecode.flexxb.serializer.ISerializer"/>
     <classEntry path="com.googlecode.flexxb.serializer.PropertyInspector"/>
     <classEntry path="com.googlecode.flexxb.serializer.XmlArraySerializer"/>
@@ -63,7 +64,6 @@
     <classEntry path="com.googlecode.flexxb.service.ServiceSettings"/>
     <classEntry path="com.googlecode.flexxb.service.SettingsChangedEvent"/>
     <classEntry path="com.googlecode.flexxb.util.Instanciator"/>
-    <classEntry path="com.googlecode.flexxb.persistence.flexxb_persistence_internal"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

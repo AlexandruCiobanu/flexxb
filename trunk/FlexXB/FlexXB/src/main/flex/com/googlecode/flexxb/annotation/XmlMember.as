@@ -84,8 +84,10 @@ package com.googlecode.flexxb.annotation {
 		 * Path separator used for defining virtual paths in the alias
 		 */
 		public static const ALIAS_PATH_SEPARATOR : String = "/";
-		
-		public static const ARGUMENT_NAMESPACE_REF : String = "ns";
+		/**
+		 * 
+		 */		
+		public static const ARGUMENT_NAMESPACE_REF : String = "namespace";
 		/**
 		 * @private
 		 */
@@ -107,10 +109,9 @@ package com.googlecode.flexxb.annotation {
 		 */
 		private var pathElements : Array;
 		/**
-		 *@private
+		 * @private
 		 */
 		private var _accessorType : AccessorType;
-
 		/**
 		 * Constructor
 		 * @param descriptor xml descriptor of the class' field
@@ -121,7 +122,6 @@ package com.googlecode.flexxb.annotation {
 			super(descriptor);
 			this._class = _class;
 		}
-
 		/**
 		 * Check if this member is marked as default in the (de)serialization process
 		 * @return true if the member is default, false otherwise
@@ -158,12 +158,17 @@ package com.googlecode.flexxb.annotation {
 			return _nsRef;
 		}
 		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function hasNamespaceRef() : Boolean{
 			return _nsRef && StringUtil.trim(_nsRef).length > 0;
 		}
 
 		/**
-		 * Chenck if the alias defines virtual paths
+		 * Check if the alias defines virtual paths
 		 * @return true if virtual paths are defined, false otherwise
 		 *
 		 */

@@ -23,7 +23,7 @@ package com.googlecode.flexxb.api {
 	 * @author Alexutz
 	 *
 	 */
-	public class Stage {
+	public final class Stage {
 		/**
 		 * Serialization stage
 		 */

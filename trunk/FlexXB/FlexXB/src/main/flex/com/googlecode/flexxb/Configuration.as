@@ -38,12 +38,10 @@ package com.googlecode.flexxb {
 		 * whose values have been changed.
 		 */
 		public var onlySerializeChangedValueFields : Boolean = false;
-
 		/**
 		 * Constructor
 		 *
 		 */
-		public function Configuration() {
-		}
+		public function Configuration() {}
 	}
 }

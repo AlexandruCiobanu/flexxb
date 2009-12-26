@@ -27,6 +27,8 @@ package com.googlecode.flexxb.api {
 	import com.googlecode.testData.Person;
 	import com.googlecode.testData.PhoneNumber;
 	
+	import flash.utils.Dictionary;
+	
 	import flexunit.framework.TestCase;
 
 	/**
@@ -129,6 +131,8 @@ package com.googlecode.flexxb.api {
 			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
 			assertEquals("Wrong number of classes parsed", 3, wrapper.descriptors.length);
 			assertEquals("Wrong version", 1, wrapper.version);
+			assertEquals("Wrong member count for first class", 4, FxClass(wrapper.descriptors[0]).flexxb_api_internal::members.length);
+			assertEquals("Wrong constructor argument count for second class", 2, FxClass(wrapper.descriptors[1]).flexxb_api_internal::constructorArguments.length);
 		}
 
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void {
@@ -154,11 +158,25 @@ package com.googlecode.flexxb.api {
 		
 		public function testMultipleNamespace() : void{
 			var cls : FxClass = new FxClass(Mock);
-			/*var member : FxMember = cls.addAttribute("version", Number, null, "Version");
+			var member : FxMember = cls.addAttribute("version", Number, null, "Version");
 			member.setNamespace(new Namespace("me", "www.me.com"));
 			member = cls.addElement("tester", String);
 			member.setNamespace(new Namespace("us", "www.us.com"));
-			member = cls.addAttribute("uue", String);*/
+			member = cls.addAttribute("uue", String);
+			member = cls.addAttribute("uueedr", String);
+			member.setNamespace(new Namespace("me", "www.me.com"));
+			assertEquals("Wrong number of registered namespaces upon programatic build", 2, count(cls.flexxb_api_internal::namespaces));
+			var xml : XML = getXmlDescriptor();
+			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
+			assertEquals("Wrong number of registered namespaces upon deserialization", 2, count(FxClass(wrapper.descriptors[0]).flexxb_api_internal::namespaces));
+		}
+		
+		private function count(map : Dictionary) : int{
+			var size : int = 0;
+			for(var key : * in map){
+				size++;	
+			}
+			return size;
 		}
 
 		private function getXmlDescriptor() : XML {
@@ -168,15 +186,18 @@ package com.googlecode.flexxb.api {
 							<Members>
 								<Attribute order="1">
 									<Field name="countryCode" type="String"/>
+									<Namespace prefix="test" uri="http://www.test.org" />
 								</Attribute>
 								<Attribute order="2">
 									<Field name="areaCode" type="String" access="readwrite"/>
 								</Attribute>
 								<Attribute alias="phoneNumber" order="3">
 									<Field name="number" type="String"/>
+									<Namespace prefix="test" uri="http://www.test.org" />
 								</Attribute>
 								<Attribute order="4">
 									<Field name="interior" type="String"/>
+									<Namespace prefix="ns2" uri="http://www.test.org/ns/2" />
 								</Attribute>
 							</Members>
 						</Class>
