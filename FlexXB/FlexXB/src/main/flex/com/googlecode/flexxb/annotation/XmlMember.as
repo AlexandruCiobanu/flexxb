@@ -122,6 +122,17 @@ package com.googlecode.flexxb.annotation {
 			super(descriptor);
 			this._class = _class;
 		}
+		
+		public override function set nameSpace(value : Namespace) : void{
+			super.nameSpace = value;
+			if(isPath()){
+				var path : QName;
+				for(var i : int = 0; i < pathElements.length; i++){
+					path = pathElements[i] as QName;
+					pathElements[i] = new QName(value, path.localName);
+				}
+			}
+		}
 		/**
 		 * Check if this member is marked as default in the (de)serialization process
 		 * @return true if the member is default, false otherwise
@@ -250,12 +261,11 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		protected override function parseMetadata(metadata : XML) : void {
+			_nsRef = metadata.arg.(@key == ARGUMENT_NAMESPACE_REF).@value;
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
 			ignoreOn = Stage.fromString(metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value);
 			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value);
-			_nsRef = metadata.arg.(@key == ARGUMENT_NAMESPACE_REF).@value;
 		}
-
 		/**
 		 *
 		 * @private
