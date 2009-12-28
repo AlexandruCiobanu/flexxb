@@ -22,6 +22,8 @@ package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.converter.W3CDateConverter;
+	import com.googlecode.testData.APITestObject;
 	import com.googlecode.testData.Address;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Person;
@@ -30,6 +32,8 @@ package com.googlecode.flexxb.api {
 	import flash.utils.Dictionary;
 	
 	import flexunit.framework.TestCase;
+	
+	import mx.collections.ArrayCollection;
 
 	/**
 	 *
@@ -169,6 +173,47 @@ package com.googlecode.flexxb.api {
 			var xml : XML = getXmlDescriptor();
 			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
 			assertEquals("Wrong number of registered namespaces upon deserialization", 2, count(FxClass(wrapper.descriptors[0]).flexxb_api_internal::namespaces));
+		}
+		
+		public function testFullAPIProcessing() : void{
+			FlexXBEngine.instance.registerSimpleTypeConverter(new W3CDateConverter());
+			var cls : FxClass = new FxClass(APITestObject, "ATO");
+			cls.prefix = "apitest";
+			cls.uri = "http://www.apitest.com/api/test";
+			cls.addAttribute("id", Number);
+			cls.addArgument("id", false);
+			var member : FxMember = cls.addAttribute("name", String, AccessorType.READ_WRITE, "meta/objName");
+			member.setNamespace(new Namespace("pref1", "http://www.p.r.com"));
+			cls.addElement("version", Number, null, "meta/objVersion");
+			member = cls.addElement("currentDate", Date, null, "todayIs");
+			member.setNamespace(new Namespace("pref1", "http://www.p.r.com"));
+			member = cls.addElement("xmlData", XML, null, "data");
+			member.setNamespace(new Namespace("pref2", "http://www.p3.r2.com"));
+			cls.addAttribute("xmlAtts", XML, null, "attributes");
+			var array : FxArray = cls.addArray("results", ArrayCollection, null, "Results");
+			array.memberName = "resultItem";
+			array.memberType = String;
+			FlexXBEngine.instance.api.processTypeDescriptor(cls);
+			var target : APITestObject = new APITestObject(1234);
+			target.currentDate = new Date();
+			target.name = "MyName";
+			target.results = new ArrayCollection(["me", "you", "us"]);
+			target.version = 3;
+			target.xmlAtts = <atts><att index="0"/><att index="1"/><att index="2"/></atts>;
+			target.xmlData = <data id="34"><result value="one"/></data>;
+			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var copy : APITestObject = FlexXBEngine.instance.deserialize(xml, APITestObject);
+			
+			assertEquals("Id is wrong", target.id, copy.id);
+			assertEquals("Name is wrong", target.name, copy.name);
+			assertEquals("Version is wrong", target.version, copy.version);
+			assertEquals("XmlAtts is wrong", target.xmlAtts.toXMLString(), copy.xmlAtts.toXMLString());
+			assertEquals("XmlData is wrong", target.xmlData.toXMLString(), copy.xmlData.toXMLString());
+			assertEquals("Results count is wrong", target.results.length, copy.results.length);
+			for(var i : int = 0; i < target.results.length; i++){
+				assertEquals("Results memeber indexed " + i + " is wrong", target.results[i], copy.results[i]);
+			}
+			assertEquals("Current date is wrong", target.currentDate.time, copy.currentDate.time);
 		}
 		
 		private function count(map : Dictionary) : int{
