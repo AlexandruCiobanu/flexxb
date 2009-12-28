@@ -17,9 +17,9 @@
  */
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.XmlArray;
-
+	
 	import flash.utils.Dictionary;
-	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 *
@@ -74,7 +74,9 @@ package com.googlecode.flexxb.api {
 		protected override function getContent() : Dictionary {
 			var items : Dictionary = super.getContent();
 			items[XmlArray.ARGUMENT_MEMBER_NAME] = memberName;
-			items[XmlArray.ARGUMENT_TYPE] = memberType;
+			if(memberType is Class){
+				items[XmlArray.ARGUMENT_TYPE] =  getQualifiedClassName(memberType);
+			}
 			return items;
 		}
 
