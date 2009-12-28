@@ -62,6 +62,7 @@ FEATURES
 	* FXB-009 Use paths in xml aliases
 	* FXB-016 Annotation API
 	* FXB-017 Constructor Annotation
+	* FXB-018 Multiple namespace support
 	
 USAGE
 
@@ -99,13 +100,13 @@ Namespace
 [Namespace(prefix="NS_Prefix", uri="NS_Uri")]
 
 XmlAttribute
-[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index")]
+[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="ns_prefix")]
 
 XmlElement
-[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false")] 
+[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="ns_prefix")] 
 
 XmlArray
-[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index")]
+[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index", namespace="ns_prefix")]
 
 
 Note: Using as alias "*" on a field will force the serializer to serialize that field using an alias computed at runtime by the 
@@ -122,7 +123,7 @@ KNOWN LIMITATIONS
 RELEASE NOTES
 
 1.4.1 - 28-12-2009
-	- Enhancement: Issue 17: Multiple namespaces per class definition - Added Namespace annotation 
+	- Enhancement: Issue 17, FXB-018: Multiple namespaces per class definition - Added Namespace annotation 
 	- Fix: Issue 18: Fields of type xml are not deserialized correctly 
 	- Fix: The API Array member would not properly set memberType when retrieving the xml descriptor
 	- Fix: When using virtual paths along with namespaces (class or member namespace), the namespace was not embedded in the virtual elements.
