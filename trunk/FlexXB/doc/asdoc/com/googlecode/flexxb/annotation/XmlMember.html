@@ -48,12 +48,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   Defines a member of an XmlClass, that is, a field of the class definition.
   The XmlMember is base for XmlAttribute and XmlElement since field values can
   be rendered as XML in the form of attributes or elements.
-  <p>A member's alias can define "virtual paths". Virtual paths allow definition
+  <p/>A member's alias can define "virtual paths". Virtual paths allow definition
   of complex xml structures for a field without complicating the model design. Thus,
   structures can be present in the xml just by adding vistual paths in the alias
   definition of a member.
-  <p>Example: Lets assume the xml representation looks like:
-  <p><code><pre>
+  <p/>Example: Lets assume the xml representation looks like:
+  <p/><code><pre>
   &lt;myPathTester&gt;
     &lt;anotherSub attTest="Thu Mar 19 15:49:32 GMT+0200 2009"/&gt;
     This is Default!!!
@@ -69,8 +69,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
     &lt;/subObject&gt;
   &lt;/myPathTester&gt;
   </pre></code>
-  <p>This would normally translate itself in about 4 model classes. Using virtual paths, one can describe it in just one model class:
-  <p><code><pre>
+  <p/>This would normally translate itself in about 4 model classes. Using virtual paths, one can describe it in just one model class:
+  <p/><code><pre>
   [XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
   public class XmlPathObject
   {
@@ -88,7 +88,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    {
    }
   }
-  <pre></code>
+  </pre></code>
   <p></p>
 <br>
 <hr>
@@ -456,7 +456,7 @@ showHideInherited();
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">descriptor</span>:XML</code> &mdash; xml descriptor of the class' field
+<td width="20px"></td><td><code><span class="label">descriptor</span>:XML</code> &mdash; xml descriptor of the class field
    </td>
 </tr>
 <tr>

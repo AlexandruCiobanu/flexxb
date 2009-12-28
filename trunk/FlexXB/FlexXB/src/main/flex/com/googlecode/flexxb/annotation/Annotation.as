@@ -24,6 +24,7 @@ package com.googlecode.flexxb.annotation {
 	 * <ul><li>Field name</li>
 	 *     <li>Field type</li>
 	 *     <li>Alias (the name under which the field will be used in the xml reprezentation)</li>
+	 * </ul>
 	 * </p>
 	 * @author aCiobanu
 	 *

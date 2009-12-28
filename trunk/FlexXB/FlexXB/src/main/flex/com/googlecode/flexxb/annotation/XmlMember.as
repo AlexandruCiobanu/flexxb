@@ -26,12 +26,12 @@ package com.googlecode.flexxb.annotation {
 	 * Defines a member of an XmlClass, that is, a field of the class definition.
 	 * The XmlMember is base for XmlAttribute and XmlElement since field values can
 	 * be rendered as XML in the form of attributes or elements.
-	 * <p>A member's alias can define "virtual paths". Virtual paths allow definition
+	 * <p/>A member's alias can define "virtual paths". Virtual paths allow definition
 	 * of complex xml structures for a field without complicating the model design. Thus,
 	 * structures can be present in the xml just by adding vistual paths in the alias
 	 * definition of a member.
-	 * <p>Example: Lets assume the xml representation looks like:
-	 * <p><code><pre>
+	 * <p/>Example: Lets assume the xml representation looks like:
+	 * <p/><code><pre>
 	 * &lt;myPathTester&gt;
 	 *	  &lt;anotherSub attTest="Thu Mar 19 15:49:32 GMT+0200 2009"/&gt;
 	 *	  This is Default!!!
@@ -47,8 +47,8 @@ package com.googlecode.flexxb.annotation {
 	 *	  &lt;/subObject&gt;
 	 *	&lt;/myPathTester&gt;
 	 * </pre></code>
-	 * <p>This would normally translate itself in about 4 model classes. Using virtual paths, one can describe it in just one model class:
-	 * <p><code><pre>
+	 * <p/>This would normally translate itself in about 4 model classes. Using virtual paths, one can describe it in just one model class:
+	 * <p/><code><pre>
 	 * [XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
 	 *	public class XmlPathObject
 	 *	{
@@ -67,7 +67,7 @@ package com.googlecode.flexxb.annotation {
 	 *		{
 	 *		}
 	 *	}
-	 * <pre></code>
+	 * </pre></code>
 	 * @author aCiobanu
 	 *
 	 */
@@ -114,7 +114,7 @@ package com.googlecode.flexxb.annotation {
 		private var _accessorType : AccessorType;
 		/**
 		 * Constructor
-		 * @param descriptor xml descriptor of the class' field
+		 * @param descriptor xml descriptor of the class field
 		 * @param _class owner XmlClass entity
 		 *
 		 */
@@ -226,7 +226,7 @@ package com.googlecode.flexxb.annotation {
 		/**
 		 * Set the ignoreOn flag. Restrictions apply when setting this flag in
 		 * compliance with the class field's accessType.
-		 * You cannot set the flag to <code>serialize</code> if the access type is <code>writeOnly/code>.
+		 * You cannot set the flag to <code>serialize</code> if the access type is <code>writeOnly</code>.
 		 * You cannot set the flag to <code>deserialize</code> if the access type is <code>readOnly</code>.
 		 * @param value Stage
 		 *
