@@ -16,6 +16,7 @@ Is used at class level. It defines the wrapper in which the class' fields are se
   * {{{uri}}}: Namespace uri for object representations received from and transmitted to server;
   * {{{defaultValueField}}}: name of the field whose value will be renderer as a free text element in the xml representation;
   * {{{ordered}}}: boolean flag signaling whether a specific order has been specified for the fields or not. If true, on serialization, the fields values will be serialized in teh order specified by the field annotations.
+
 === ConstructorArg ===
 Is defined at class level and multiple definitions are allowed for the same class. In classes that define parametered constructors the marshalling engine must be aware of the type and order of parameters with witch the constructor is being called. Usually, a constructor would configure its field values with values received as parameters. Since the received xml contains field rendering it is not possible to inject different values in the constructor parameter list. 
 
@@ -25,6 +26,7 @@ Defining constructor arguments allow for preservation of business object structu
  Syntax:{{{[ConstructorArg(reference="FieldName", optional="true|false")]}}}
   * {{{reference}}}: Holds the name of one of the classes' fields. 
   * {{{optional}}}: Whether the parameter is optional or not in the constructor definition. Defaults to {{{false}}}.
+
 === Namespace ===
 Is defined at class level and multiple definitions are allowed for the same class. 
 
@@ -39,6 +41,7 @@ Is used at field level and defines the details of the field being rendered as an
   * {{{ignoreOn}}}: Ignore this field from processing;
   * {{{order}}}: Numeric value specifying the order ot the field on serialization. the order is used only if the ordered flag was set to true at class level. 
   * {{{namespace}}}: References by prefix a namespace registered for the current class. Allows the current item to be rendered with a qualified name containing the referenced namespace.
+
 === XmlElement ===
 Is used at field level and defines the details of the field being rendered as an element of the wrapping xml element.
  Syntax:{{{[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="NameSpace_Prefix")]}}}
@@ -49,6 +52,7 @@ Is used at field level and defines the details of the field being rendered as an
   * {{{order}}}: Numeric value specifying the order ot the field on serialization. the order is used only if the ordered flag was set to true at class level;
   * {{{getRuntimeType}}}: Get the element type on deserialization based on the xml name at runtime.
   * {{{namespace}}}: References by prefix a namespace registered for the current class. Allows the current item to be rendered with a qualified name containing the referenced namespace.
+
 === XmlArray ===
 Is used at field level and defines the details of the field being rendered as an element of the wrapping xml element. The element will contain the rendering of the list elements. 
  Syntax:{{{[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index", namespace="NameSpace_Prefix")]}}}
