@@ -91,7 +91,8 @@ package com.googlecode.flexxb.serializer {
 			//content.
 			if(type == XML){
 				var value : String = xml.toXMLString();
-				value = value.substring(value.indexOf(">") + 1, value.lastIndexOf("<") - 1);
+				value = value.substring(value.indexOf(">") + 1, value.lastIndexOf("<"));
+				trace(value);
 				xml = XML(value);
 			}
 			return serializer.converterStore.stringToObject(xml.toString(), type);
