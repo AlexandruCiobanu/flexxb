@@ -38,10 +38,6 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public static const ALIAS_ANY : String = "*";
 		/**
-		 *
-		 */
-		public var nameSpace : Namespace;
-		/**
 		 * @private
 		 */
 		protected var _fieldName : QName;
@@ -57,6 +53,10 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		private var _xmlName : QName;
+		/**
+		 *
+		 */
+		private var _nameSpace : Namespace;
 
 		/**
 		 * Constructor
@@ -66,7 +66,25 @@ package com.googlecode.flexxb.annotation {
 		public function Annotation(descriptor : XML) {
 			super(descriptor);
 		}
-
+		
+		/**
+		 *
+		 * @return field name
+		 *
+		 */
+		public function get nameSpace() : Namespace {
+			return _nameSpace;
+		}
+		
+		/**
+		 *
+		 * @return field type
+		 *
+		 */
+		public function set nameSpace(value : Namespace) : void {
+			_nameSpace = value;
+		}
+		
 		/**
 		 *
 		 * @return field name
