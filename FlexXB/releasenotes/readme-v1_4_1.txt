@@ -1,5 +1,5 @@
 /*********************************************************************************************************************************/
-/**												${project.name} version ${project.version} (${currentDate})				   									**/
+/**												FlexXB version 1.4.1 (28-12-2009)				   									**/
 /**													by Alex Ciobanu						   										**/
 /*********************************************************************************************************************************/
 
@@ -7,19 +7,19 @@ Copyright 2008 - 2009 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-${project.name}-${release.version}-${today}-bin.zip - contains the ${project.name} library along with the test 
+FlexXB-1_4_1-28122009-bin.zip - contains the FlexXB library along with the test 
 							application
 			/bin/ 				 - SWC file and test application directory
 			/bin/test/ 			 - the test application
 			/bin/flexunit        - flexunit automated test reports
 			/bin/api-schema      - XSD schema defining the structure of the XML file that describes types that can't be annotated 
 			/doc/ 				 - ASDOC
-			/samples/			 - samples showing ${project.name} features 
+			/samples/			 - samples showing FlexXB features 
 			/README.txt			 - version release notes
 
-${project.name}-${release.version}-${today}-src.zip - contains source files
-			/${project.name}/	 - ${project.name} project sources
-			/${project.name}Test - ${project.name} test application sources
+FlexXB-1_4_1-28122009-src.zip - contains source files
+			/FlexXB/	 - FlexXB project sources
+			/FlexXBTest - FlexXB test application sources
 
 DESCRIPTION
 
@@ -42,7 +42,6 @@ There are five built-in annotations for describing object serialization, one bei
  * XmlClass: Defines class's namespace (by uri and prefix) and xml alias; 
  * ConstructorArg: Defines the arguments with which the constructor should be run. Applies to classes with non default constructors and
  		is defined at the same level with XmlXClass; 
- * Namespace: defines alternate namespaces used by elements of the class. It is defined at class level and multiple definitions are allowed;
  * XmlAttribute: Marks the field to be rendered as an attribute of the xml representation of the parent object; 
  * XmlElement: Marks the field to be rendered as a child element of the xml representation of the parent object;
  * XmlArray: Is a particular type of element since it marks a field to be rendered as an Array of elements of a certain type.
@@ -95,9 +94,6 @@ XmlClass
 ConstructorArg
 [ConstructorArg(reference="element", optional="true|false")]
 
-Namespace
-[Namespace(prefix="NS_Prefix", uri="NS_Uri")]
-
 XmlAttribute
 [XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index")]
 
@@ -122,10 +118,8 @@ KNOWN LIMITATIONS
 RELEASE NOTES
 
 1.4.1 - 28-12-2009
-	- Enhancement: Issue 17: Multiple namespaces per class definition - Added Namespace annotation 
+	- Enhancement: Issue 17: Multiple namespaces per class definition 
 	- Fix: Issue 18: Fields of type xml are not deserialized correctly 
-	- Fix: The API Array member would not properly set memberType when retrieving the xml descriptor
-	- Fix: When using virtual paths along with namespaces (class or member namespace), the namespace was not embedded in the virtual elements.
 	
 1.4 - 01-10-2009
 	- Fix: Issue 16 - Support Array of int or Number 
