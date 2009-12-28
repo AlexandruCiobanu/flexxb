@@ -40,6 +40,9 @@ This page will contain a list of features and requirements I have planned for my
  FlexXB should provide an API to allow developers to programatically describe object types to be registered in the FlexXB engine.
  * FXB-017 *Constructor Annotation*:
  There are cases in which the business objects have parametered constructors which should not default to null in order to inforce some business constraints. FlexXB should provide a way to annotate the constructors along with the parameers they take. Due to the fact that those parameters will more than likely have values found in the xml (like serialized object fields) the parameters will reference a field that will be the end-receiver of the value. 
+ * FXB-018 *Multiple namespace support*: 
+ Allow multiple namespaces to be defined for a class. Various members of the class can use different namespaces.
+
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
 ||FXB-002||Xml alias||1.0 _alpha_||
@@ -55,5 +58,6 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-009||Use paths in xml aliases||1.0||
 ||FXB-016||Annotation API||1.1||
 ||FXB-017||Constructor Annotation||1.2||
+||FXB-018||Multiple namespace support||1.4.1||
 ||FXB-013||Add method references to annotation's attribute values||?||
 ||FXB-011||XSD validation against incoming XML||?||
