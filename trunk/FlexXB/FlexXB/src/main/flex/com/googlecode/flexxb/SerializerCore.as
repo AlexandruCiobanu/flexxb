@@ -268,7 +268,7 @@ package com.googlecode.flexxb {
 					}
 				}
 				if (configuration.getResponseTypeByNamespace) {
-					if (incomingXML.namespaceDeclarations().length == 0) {
+					if (incomingXML.namespaceDeclarations().length > 0) {
 						var _namespace : String = (incomingXML.namespaceDeclarations()[0] as Namespace).uri;
 						return _descriptorStore.getClassByNamespace(_namespace);
 					}
