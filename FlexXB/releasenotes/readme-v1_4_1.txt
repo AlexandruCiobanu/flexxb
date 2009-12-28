@@ -42,6 +42,7 @@ There are five built-in annotations for describing object serialization, one bei
  * XmlClass: Defines class's namespace (by uri and prefix) and xml alias; 
  * ConstructorArg: Defines the arguments with which the constructor should be run. Applies to classes with non default constructors and
  		is defined at the same level with XmlXClass; 
+ * Namespace: defines alternate namespaces used by elements of the class. It is defined at class level and multiple definitions are allowed;
  * XmlAttribute: Marks the field to be rendered as an attribute of the xml representation of the parent object; 
  * XmlElement: Marks the field to be rendered as a child element of the xml representation of the parent object;
  * XmlArray: Is a particular type of element since it marks a field to be rendered as an Array of elements of a certain type.
@@ -94,6 +95,9 @@ XmlClass
 ConstructorArg
 [ConstructorArg(reference="element", optional="true|false")]
 
+Namespace
+[Namespace(prefix="NS_Prefix", uri="NS_Uri")]
+
 XmlAttribute
 [XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index")]
 
@@ -118,8 +122,10 @@ KNOWN LIMITATIONS
 RELEASE NOTES
 
 1.4.1 - 28-12-2009
-	- Enhancement: Issue 17: Multiple namespaces per class definition 
+	- Enhancement: Issue 17: Multiple namespaces per class definition - Added Namespace annotation 
 	- Fix: Issue 18: Fields of type xml are not deserialized correctly 
+	- Fix: The API Array member would not properly set memberType when retrieving the xml descriptor
+	- Fix: When using virtual paths along with namespaces (class or member namespace), the namespace was not embedded in the virtual elements.
 	
 1.4 - 01-10-2009
 	- Fix: Issue 16 - Support Array of int or Number 
