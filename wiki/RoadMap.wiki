@@ -15,4 +15,4 @@ Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estim
 ||   1.2  || 20-Jun-2009 || [Features FXB-017], _Various fixes and enhancements_  || Delivered ||
 ||   1.3  || 19-Jul-2009 || Issue 13, Issue 14, Issue 15, _Various fixes and enhancements_  || Delivered ||
 ||   1.4  || 01-Oct-2009 || Issue 16, _Various fixes and enhancements_  || Delivered ||
-||   1.4.1  || 15-Dec-2009 || Issue 17, Issue 18, [Features FXB-017], _Various fixes and enhancements_  || Delivered ||
+||   1.4.1  || 15-Dec-2009 || Issue 17, Issue 18, [Features FXB-017], _Various fixes and enhancements_  || Delivered on 28-Dec-2009 ||
