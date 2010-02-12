@@ -30,3 +30,15 @@ public class Section implements IIdentifiable
 }}}
 
 _Thanks to [http://code.google.com/u/willsp/ willsp] for bringing this to my attention_
+
+== 2. The annotations defined on classes and class fields or the custom annotations are ignored by FlexXB ==
+
+*Cause:* 
+
+This problem might appear because the compiler does not retain by default user defined metadata (including FlexXB metadata).
+
+*Resolution:*
+
+To solve this problem make sure the compiler arguments are updated with the addition of the necessary metadata inclusions. For each annotation in question add:
+-keep-as3-metadata AnnotationName
+For the regular FlexXB annotations there probably would not be a need to manually include them in the keep metadata list since those arguments were supplied when the FlexXB swc was built. If you built the FlexXB swc yourself or if you created custom annotations to handle specific serialization/ deserialization cases, make sure all the annotations are set in the compiler argument list. 
