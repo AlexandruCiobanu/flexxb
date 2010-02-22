@@ -42,4 +42,6 @@ This problem might appear because the compiler does not retain by default user d
 To solve this problem make sure the compiler arguments are updated with the addition of the necessary metadata inclusions. For each annotation in question add:
 -keep-as3-metadata Annotation-Name.
 
+_Note:_ If you created a custom annotation you will need to make sure you overrode the _annotationName_ getter in your custom annotation class
+
 For the regular FlexXB annotations there probably would not be a need to manually include them in the keep metadata list since those arguments were supplied when the FlexXB swc was built. If you built the FlexXB swc yourself or if you created custom annotations to handle specific serialization/ deserialization cases, make sure all the annotations are set in the compiler argument list. 
