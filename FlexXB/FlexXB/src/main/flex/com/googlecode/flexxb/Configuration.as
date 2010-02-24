@@ -39,6 +39,13 @@ package com.googlecode.flexxb {
 		 */
 		public var onlySerializeChangedValueFields : Boolean = false;
 		/**
+		 * Set this flag to true if you want special chars to be escaped in the xml. 
+		 * If set to false, text containing special characters will be enveloped in a CDATA tag.
+		 * This option applies to xml elements. For xml attributes special chars are automatically 
+		 * escaped.
+		 */		
+		public var escapeSpecialChars : Boolean = false;
+		/**
 		 * Constructor
 		 *
 		 */

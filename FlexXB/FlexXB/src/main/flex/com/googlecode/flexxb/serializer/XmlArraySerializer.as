@@ -19,10 +19,8 @@ package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
-
-	import flash.xml.XMLNode;
-	import flash.xml.XMLNodeType;
-
+	import com.googlecode.flexxb.util.cdata;
+	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 
@@ -59,8 +57,7 @@ package com.googlecode.flexxb.serializer {
 					try {
 						xmlValue = XML(stringValue);
 					} catch (error : Error) {
-						stringValue = XML(new XMLNode(XMLNodeType.TEXT_NODE, stringValue)).toXMLString();
-						xmlValue = XML(stringValue);
+						xmlValue = escapeValue(stringValue, serializer.configuration);
 					}
 
 					if (xmlArray.memberName) {

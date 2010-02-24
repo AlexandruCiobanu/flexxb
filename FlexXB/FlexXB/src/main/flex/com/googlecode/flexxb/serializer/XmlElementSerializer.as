@@ -16,9 +16,11 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.googlecode.flexxb.serializer {
+	import com.googlecode.flexxb.Configuration;
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.util.cdata;
 	
 	import flash.xml.XMLNode;
 	import flash.xml.XMLNodeType;
@@ -48,7 +50,7 @@ package com.googlecode.flexxb.serializer {
 				try {
 					child.appendChild(stringValue);
 				} catch (error : Error) {
-					child.appendChild(XML(new XMLNode(XMLNodeType.TEXT_NODE, stringValue)).toXMLString());
+					child.appendChild(escapeValue(stringValue, serializer.configuration));
 				}
 			}
 
@@ -61,6 +63,14 @@ package com.googlecode.flexxb.serializer {
 				child.setName(annotation.xmlName);
 			}
 			parentXml.appendChild(child);
+		}
+		
+		protected final function escapeValue(value : *, configuration : Configuration) : XML{
+			if(configuration.escapeSpecialChars){
+				return XML(new XMLNode(XMLNodeType.TEXT_NODE, value));
+			}else{
+				return cdata(value);
+			}
 		}
 
 		/**
