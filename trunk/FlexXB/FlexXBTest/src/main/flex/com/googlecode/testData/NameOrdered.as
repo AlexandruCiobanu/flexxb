@@ -27,6 +27,8 @@ package com.googlecode.testData {
 		public var test1 : int;
 		[XmlElement()]
 		public var test2 : String;
+		[XmlAttribute()]
+		public var test3 : String;
 		[XmlElement()]
 		public var reference : String;
 		[XmlArray(alias="list", memberName="testerElem")]
