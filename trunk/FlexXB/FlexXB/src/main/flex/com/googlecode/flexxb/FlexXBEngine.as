@@ -61,7 +61,7 @@ package com.googlecode.flexxb {
 		private static var _instance : FlexXBEngine;
 
 		/**
-		 * Singleton accessor
+		 * Not a singleton, but an easy access instance.
 		 * @return instance of FlexXBEngine
 		 *
 		 */
@@ -87,9 +87,6 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public function FlexXBEngine() {
-			if (_instance) {
-				throw new Error("Use FlexXBEngine.instance instead!");
-			}
 			descriptorStore = new DescriptorStore();
 			_configuration = new Configuration();
 			converterStore = new ConverterStore();
