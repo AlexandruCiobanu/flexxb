@@ -241,7 +241,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public function isAdded(member : Object) : Boolean {
-			if (member) {
+			if (member && changeList) {
 				var tracker : ChangeTracker = changeList[member];
 				if (tracker) {
 					return tracker.isAdded();
@@ -257,7 +257,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public function isRemoved(member : Object) : Boolean {
-			if (member) {
+			if (member && changeList) {
 				var tracker : ChangeTracker = changeList[member];
 				if (tracker) {
 					return tracker.isRemoved();
@@ -273,7 +273,7 @@ package com.googlecode.flexxb.persistence {
 		 * 
 		 */		
 		public function isMoved(member : Object) : Boolean{
-			if(member){
+			if(member && changeList){
 				var tracker : ChangeTracker = changeList[member];
 				if (tracker) {
 					return tracker.isMoved();
