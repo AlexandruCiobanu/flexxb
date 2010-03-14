@@ -35,7 +35,7 @@
     <xs:complexType >
       <xs:attribute name="name" type="xs:string" use="required" />
       <xs:attribute name="type" type="xs:string" use="required" />
-      <xs:attribute name="access" type="AccessType" use="optional" default="readwrite" />
+      <xs:attribute name="accessType" type="AccessType" use="optional" default="readwrite" />
     </xs:complexType>
   </xs:element>
   <xs:element name="Attribute">

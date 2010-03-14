@@ -16,6 +16,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.googlecode.flexxb {
+	import com.googlecode.flexxb.api.AccessorTypeConverter;
 	import com.googlecode.flexxb.api.FxApiWrapper;
 	import com.googlecode.flexxb.api.FxArray;
 	import com.googlecode.flexxb.api.FxAttribute;
@@ -41,6 +42,7 @@ package com.googlecode.flexxb {
 		public function FlexXBApi(store : DescriptorStore) {
 			this.store = store;
 			FlexXBEngine.instance.registerSimpleTypeConverter(new StageXmlConverter());
+			FlexXBEngine.instance.registerSimpleTypeConverter(new AccessorTypeConverter());
 			FlexXBEngine.instance.processTypes(FxAttribute, FxElement, FxArray, FxConstructorArgument);
 		}
 
