@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="Configuration,com.googlecode.flexxb.Configuration,getResponseTypeByNamespace,getResponseTypeByTagName,onlySerializeChangedValueFields" name="keywords">
+<meta content="Configuration,com.googlecode.flexxb.Configuration,escapeSpecialChars,getResponseTypeByNamespace,getResponseTypeByTagName,onlySerializeChangedValueFields" name="keywords">
 <title>com.googlecode.flexxb.Configuration</title>
 </head>
 <body>
@@ -51,6 +51,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#escapeSpecialChars">escapeSpecialChars</a> : Boolean = false<div class="summaryTableDescription">
+   Set this flag to true if you want special chars to be escaped in the xml.</div>
+</td><td class="summaryTableOwnerCol">Configuration</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#getResponseTypeByNamespace">getResponseTypeByNamespace</a> : Boolean = true<div class="summaryTableDescription">
    Determine the type of the object the response will be deserialised into
    by the namespace defined in the received xml.</div>
@@ -95,10 +100,23 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="escapeSpecialChars"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">escapeSpecialChars</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var escapeSpecialChars:Boolean = false</code><p>
+   Set this flag to true if you want special chars to be escaped in the xml. 
+   If set to false, text containing special characters will be enveloped in a CDATA tag.
+   This option applies to xml elements. For xml attributes special chars are automatically 
+   escaped.
+   </p></div>
 <a name="getResponseTypeByNamespace"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">getResponseTypeByNamespace</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">getResponseTypeByNamespace</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
