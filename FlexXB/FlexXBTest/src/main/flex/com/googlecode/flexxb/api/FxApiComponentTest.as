@@ -275,7 +275,7 @@ package com.googlecode.flexxb.api {
 									<Field name="emailAddress" type="String"/>
 								</Element>
 								<Attribute>
-									<Field name="street" type="String"/>
+									<Field name="street" type="String" accessType="readwrite"/>
 								</Attribute>
 								<Attribute>
 									<Field name="number" type="String"/>
@@ -287,7 +287,7 @@ package com.googlecode.flexxb.api {
 									<Field name="country" type="String"/>
 								</Attribute>
 								<Array alias="numbers" memberName="" memberType="com.googlecode.testData.PhoneNumber" getFromCache="false" serializePartialElement="false" order="3">
-									<Field name="telephoneNumbers" type="Array" access="readwrite"/>
+									<Field name="telephoneNumbers" type="Array" accessType="readwrite"/>
 								</Array>
 							</Members>
 						</Class>

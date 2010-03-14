@@ -243,7 +243,7 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		protected override function parse(descriptor : XML) : void {
-			super.parse(descriptor);
+			//super.parse(descriptor);
 			var type : String = descriptor.@type;
 			if (!type) {
 				type = descriptor.@name;
@@ -252,6 +252,10 @@ package com.googlecode.flexxb.annotation {
 			_fieldType = getDefinitionByName(type) as Class;
 			if (!alias || alias.length == 0 || alias == type) {
 				setAlias(_fieldName.localName);
+			}
+			var metadata : XMLList = descriptor.metadata.(@name == annotationName);
+			if (metadata.length() > 0) {
+				parseMetadata(metadata[0]);
 			}
 			if (descriptor.factory.length() > 0) {
 				descriptor = descriptor.factory[0];
