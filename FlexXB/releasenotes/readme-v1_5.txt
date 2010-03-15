@@ -1,5 +1,5 @@
 /*********************************************************************************************************************************/
-/**												${project.name} version ${project.version} (${currentDate})				   									**/
+/**												FlexXB version 1.5 (15-03-2010)				   									**/
 /**													by Alex Ciobanu						   										**/
 /*********************************************************************************************************************************/
 
@@ -7,19 +7,19 @@ Copyright 2008 - 2010 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-${project.name}-${release.version}-${today}-bin.zip - contains the ${project.name} library along with the test 
+FlexXB-1_5-15032010-bin.zip - contains the FlexXB library along with the test 
 							application
 			/bin/ 				 - SWC file and test application directory
 			/bin/test/ 			 - the test application
 			/bin/flexunit        - flexunit automated test reports
 			/bin/api-schema      - XSD schema defining the structure of the XML file that describes types that can't be annotated 
 			/doc/ 				 - ASDOC
-			/samples/			 - samples showing ${project.name} features 
+			/samples/			 - samples showing FlexXB features 
 			/README.txt			 - version release notes
 
-${project.name}-${release.version}-${today}-src.zip - contains source files
-			/${project.name}/	 - ${project.name} project sources
-			/${project.name}Test - ${project.name} test application sources
+FlexXB-1_5-15032010-src.zip - contains source files
+			/FlexXB/	 - FlexXB project sources
+			/FlexXBTest - FlexXB test application sources
 
 DESCRIPTION
 
