@@ -109,7 +109,7 @@ package com.googlecode.flexxb.serializer {
 				var list : Array = [];
 				for each (var xmlChild : XML in xmlArray) {
 					var member : Object = getValue(xmlChild, array.type, array.getFromCache, serializer);
-					if (member) {
+					if (member != null) {
 						list.push(member);
 					}
 				}
