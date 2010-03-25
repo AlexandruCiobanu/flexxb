@@ -287,7 +287,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public final function rollback() : void {
-			if (modified) {
+			if (_modified) {
 				listen = false;
 
 
@@ -304,6 +304,13 @@ package com.googlecode.flexxb.persistence {
 				opIndex = 0;
 
 				setModified(false);
+			}
+			if(_watchItems){
+				for each(var item : Object in source){
+					if(item is IPersistable){
+						IPersistable(item).rollback();
+					}
+				}
 			}
 		}
 
@@ -365,6 +372,7 @@ package com.googlecode.flexxb.persistence {
 				if (!changeList) {
 					changeList = new Dictionary();
 				}
+				doBackup();
 				if (tracker.persistedValue is Array) {
 					for each (var object : Object in tracker.persistedValue) {
 						trackChange(object, tracker);
