@@ -137,6 +137,16 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		public function memberAddFinished() : void {
+			//Flex SDK 4 hotfix: we need to put the default field first, if it exists,
+			// otherwise the default text will be added as a child of a previous element 
+			var member : XmlMember;
+			for (var i : int = 0; i < members.length; i++){
+				member = members[i] as XmlMember;
+				if(member.isDefaultValue()){
+					members.addItemAt(members.removeItemAt(i), 0);
+					break;
+				}
+			}
 			if (ordered) {
 				var sort : Sort = new Sort();
 				var fields : Array = [];
