@@ -19,7 +19,7 @@ package com.googlecode.flexxb.error {
 	import mx.utils.StringUtil;
 
 	/**
-	 *
+	 * Error thrown when the FlexXB engine encounters problems parsing the type descriptor xml  
 	 * @author Alexutz
 	 *
 	 */

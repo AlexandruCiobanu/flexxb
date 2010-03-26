@@ -1,302 +1,60 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
-<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="ModelObjectCache,com.googlecode.flexxb.ModelObjectCache,instance,clearCache,forEachOfType,getObject,isCached,putObject" name="keywords">
-<title>com.googlecode.flexxb.ModelObjectCache</title>
-</head>
-<body>
-<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
-<!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="ModelObjectCache,com.googlecode.flexxb.ModelObjectCache,Link,Name,POST_DESERIALIZE,POST_SERIALIZE,PRE_DESERIALIZE,PRE_SERIALIZE,Version,api,configuration,configuration,converterStore,descriptorStore,escapeSpecialChars,getResponseTypeByNamespace,getResponseTypeByTagName,id,instance,instance,object,onlySerializeChangedValueFields,thisType,xml,addEventListener,clearCache,createPostDeserializeEvent,createPostSerializeEvent,createPreDeserializeEvent,createPreSerializeEvent,deserialize,deserialize,dispatchEvent,forEachOfType,fromXml,getClassByNamespace,getIdValue,getIncomingType,getNamespace,getObject,getXmlName,hasEventListener,isCached,objectToString,processTypes,putObject,registerAnnotation,registerSimpleTypeConverter,removeEventListener,serialize,serialize,stringToObject,toXml,willTrigger"><title>com.googlecode.flexxb.ModelObjectCache</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
 				asdocTitle = 'ModelObjectCache - FlexXB API Documentation';
 				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
-<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
-<tr>
-<td align="left" class="titleTableTitle">FlexXB API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/googlecode/flexxb/ModelObjectCache.html&amp;com/googlecode/flexxb/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
-</tr>
-<tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;ModelObjectCache</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
-</tr>
-<tr class="titleTableRow3">
-<td colspan="2">&nbsp;</td>
-</tr>
-</table>
-<script type="text/javascript" language="javascript">
-<!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class ModelObjectCache"); titleBar_setSubNav(true,false,false,false,false,false,true,false,false,false,false,false,false,false);}
---></script>
-<div class="MainContent">
-<table cellspacing="0" cellpadding="0" class="classHeaderTable">
-<tr>
-<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.googlecode.flexxb</a></td>
-</tr>
-<tr>
-<td class="classHeaderTableLabel">Class</td><td class="classSignature">public final  class ModelObjectCache</td>
-</tr>
-</table>
-<p></p>
-  Object cache used to ensure object uniqueness across the application.
-  <p></p>
-<br>
-<hr>
-</div>
-<a name="methodSummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Public Methods</div>
-<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#ModelObjectCache()">ModelObjectCache</a>()</div>
-<div class="summaryTableDescription">
-   Do not call this constructor in code; use <code>ModelObjectCache.instance</code> instead.</div>
-</td><td class="summaryTableOwnerCol">ModelObjectCache</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#clearCache()">clearCache</a>(clasz:Class = null):void</div>
-<div class="summaryTableDescription">
-   Clears the cache for all the objects with given class.</div>
-</td><td class="summaryTableOwnerCol">ModelObjectCache</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#forEachOfType()">forEachOfType</a>(clasz:Class, callback:Function):void</div>
-<div class="summaryTableDescription">
-   Iterate through all the cached objects of the given type, calling the callback method for each
-   </div>
-</td><td class="summaryTableOwnerCol">ModelObjectCache</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#getObject()">getObject</a>(id:String, clasz:Class):Object</div>
-<div class="summaryTableDescription">
-   Get a cached object by id and type
-   </div>
-</td><td class="summaryTableOwnerCol">ModelObjectCache</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#isCached()">isCached</a>(id:String, clasz:Class):Boolean</div>
-<div class="summaryTableDescription">
-   Determines whether an object with the given id is aleady cached
-   </div>
-</td><td class="summaryTableOwnerCol">ModelObjectCache</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#putObject()">putObject</a>(id:String, object:Object):Boolean</div>
-<div class="summaryTableDescription">
-   Put an object in the cache
-   </div>
-</td><td class="summaryTableOwnerCol">ModelObjectCache</td>
-</tr>
-</table>
-</div>
-<a name="constantSummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Public Constants</div>
-<table id="summaryTableConstant" class="summaryTable " cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#instance">instance</a> : <a href="../flexxb/ModelObjectCache.html">ModelObjectCache</a>
-<div class="summaryTableDescription">[static]
-   Singleton
-   </div>
-</td><td class="summaryTableOwnerCol">ModelObjectCache</td>
-</tr>
-</table>
-</div>
-<script type="text/javascript" language="javascript">
-<!--
-showHideInherited();
---></script>
-<div class="MainContent">
-<a name="constructorDetail"></a>
-<div class="detailSectionHeader">Constructor detail</div>
-<a name="ModelObjectCache()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">ModelObjectCache</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function ModelObjectCache()</code><p>
-   Do not call this constructor in code; use <code>ModelObjectCache.instance</code> instead.
-      </p></div>
-<a name="methodDetail"></a>
-<div class="detailSectionHeader">Method detail</div>
-<a name="clearCache()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">clearCache</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function clearCache(clasz:Class = null):void</code><p>
-   Clears the cache for all the objects with given class.
-   If no class is specified, then all cache is cleared.
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> (default = <code>null</code>)<code></code></td>
-</tr>
-</table>
-</div>
-<a name="forEachOfType()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">forEachOfType</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function forEachOfType(clasz:Class, callback:Function):void</code><p>
-   Iterate through all the cached objects of the given type, calling the callback method for each
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> &mdash; object type
-   </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> &mdash; method that gets called for each object of the given type in the cache
-      </td>
-</tr>
-</table>
-</div>
-<a name="getObject()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">getObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function getObject(id:String, clasz:Class):Object</code><p>
-   Get a cached object by id and type
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">id</span>:String</code> &mdash; object's id
-   </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> &mdash; object's type
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Object</code> &mdash; the object cached under the given id and class.
-      </td>
-</tr>
-</table>
-</div>
-<a name="isCached()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">isCached</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function isCached(id:String, clasz:Class):Boolean</code><p>
-   Determines whether an object with the given id is aleady cached
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">id</span>:String</code> &mdash; the id under which the object should have been cached
-   </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> &mdash; the class of the object
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Boolean</code> &mdash; true if there is an object cached under the given id and class.
-      </td>
-</tr>
-</table>
-</div>
-<a name="putObject()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">putObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function putObject(id:String, object:Object):Boolean</code><p>
-   Put an object in the cache
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">id</span>:String</code> &mdash; the id under which the object will be cached
-   </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; the object itself
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Boolean</code> &mdash; if the object was succesfuly cached.
-      </td>
-</tr>
-</table>
-</div>
-<a name="constantDetail"></a>
-<div class="detailSectionHeader">Constant detail</div>
-<a name="instance"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">instance</td><td class="detailHeaderType">constant</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public static const instance:<a href="../flexxb/ModelObjectCache.html">ModelObjectCache</a></code><p>
-   Singleton
-   </p></div>
-<br>
-<br>
-<hr>
-<br>
-<p></p>
-<center class="copyright"> 
-</center>
-</div>
-</body>
-</html>
-<!-- -->
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">FlexXB API Documentation</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?com/googlecode/flexxb/ModelObjectCache.html&amp;com/googlecode/flexxb/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">ModelObjectCache</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("ModelObjectCache"); titleBar_setSubNav(true,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">com.googlecode.flexxb</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public final   class  ModelObjectCache</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ModelObjectCache  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><p></p><p></p>
+	 Object cache used to ensure object uniqueness across the application.
+	 <p></p><br/><hr></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#ModelObjectCache()" class="signatureLink">ModelObjectCache</a>()</div><div class="summaryTableDescription">
+		 Do not call this constructor in code; use ModelObjectCache.instance instead.</div></td><td class="summaryTableOwnerCol">ModelObjectCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#clearCache()" class="signatureLink">clearCache</a>(clasz:Class = null):void</div><div class="summaryTableDescription">
+		 Clears the cache for all the objects with given class.</div></td><td class="summaryTableOwnerCol">ModelObjectCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#forEachOfType()" class="signatureLink">forEachOfType</a>(clasz:Class, callback:Function):void</div><div class="summaryTableDescription">
+		 Iterate through all the cached objects of the given type, calling the callback method for each
+		 </div></td><td class="summaryTableOwnerCol">ModelObjectCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getObject()" class="signatureLink">getObject</a>(id:String, clasz:Class):Object</div><div class="summaryTableDescription">
+		 Get a cached object by id and type
+		 </div></td><td class="summaryTableOwnerCol">ModelObjectCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isCached()" class="signatureLink">isCached</a>(id:String, clasz:Class):Boolean</div><div class="summaryTableDescription">
+		 Determines whether an object with the given id is aleady cached
+		 </div></td><td class="summaryTableOwnerCol">ModelObjectCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#putObject()" class="signatureLink">putObject</a>(id:String, object:Object):Boolean</div><div class="summaryTableDescription">
+		 Put an object in the cache
+		 </div></td><td class="summaryTableOwnerCol">ModelObjectCache</td></tr></table></div><a name="constantSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Constants</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableConstant"><tr><th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#instance" class="signatureLink">instance</a> : <a href="../../../com/googlecode/flexxb/ModelObjectCache.html">ModelObjectCache</a><div class="summaryTableDescription">[static] 
+		 Singleton
+		 </div></td><td class="summaryTableOwnerCol">ModelObjectCache</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="ModelObjectCache()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">ModelObjectCache</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function ModelObjectCache()</code><p></p><p>
+		 Do not call this constructor in code; use <code>ModelObjectCache.instance</code> instead.
+		 
+		 </p></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="clearCache()"></a><a name="clearCache(Class)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">clearCache</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function clearCache(clasz:Class = null):void</code><p></p><p></p><p>
+		 Clears the cache for all the objects with given class.
+		 If no class is specified, then all cache is cleared.
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> (default = <code>null</code>)<code></code></td></tr></table></p></div><a name="forEachOfType()"></a><a name="forEachOfType(Class,Function)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">forEachOfType</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function forEachOfType(clasz:Class, callback:Function):void</code><p></p><p></p><p>
+		 Iterate through all the cached objects of the given type, calling the callback method for each
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> &mdash; object type
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">callback</span>:Function</code> &mdash; method that gets called for each object of the given type in the cache
+		 
+		 </td></tr></table></p></div><a name="getObject()"></a><a name="getObject(String,Class)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getObject(id:String, clasz:Class):Object</code><p></p><p></p><p>
+		 Get a cached object by id and type
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">id</span>:String</code> &mdash; object's id
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> &mdash; object's type
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; the object cached under the given id and class.
+		 
+		 </td></tr></table></div><a name="isCached()"></a><a name="isCached(String,Class)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isCached</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function isCached(id:String, clasz:Class):Boolean</code><p></p><p></p><p>
+		 Determines whether an object with the given id is aleady cached
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">id</span>:String</code> &mdash; the id under which the object should have been cached
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">clasz</span>:Class</code> &mdash; the class of the object
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if there is an object cached under the given id and class.
+		 
+		 </td></tr></table></div><a name="putObject()"></a><a name="putObject(String,Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">putObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function putObject(id:String, object:Object):Boolean</code><p></p><p></p><p>
+		 Put an object in the cache
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">id</span>:String</code> &mdash; the id under which the object will be cached
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; the object itself
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; if the object was succesfuly cached.
+		 
+		 </td></tr></table></div><div class="detailSectionHeader">Constant Detail</div><a name="constantDetail"></a><a name="instance"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">instance</td><td class="detailHeaderType">Constant</td></tr></table><div class="detailBody"><code>public static const instance:<a href="../../../com/googlecode/flexxb/ModelObjectCache.html">ModelObjectCache</a></code><p></p><p></p><p>
+		 Singleton
+		 </p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Fri Mar 26 2010, 10:41 PM +02:00  </center></div></body></html><!--<br/>Fri Mar 26 2010, 10:41 PM +02:00  -->

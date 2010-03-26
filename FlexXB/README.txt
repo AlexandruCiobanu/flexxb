@@ -122,6 +122,10 @@ KNOWN LIMITATIONS
 
 RELEASE NOTES
 
+1.6 - 26-03-2010
+	- Support for Flex 4 SDK
+	- Fix: Proper null check in PersistableList and XmlArraySerializer
+
 1.5 - 15-03-2010
 	- Fix: Issue 19: Problem appears when using a class as a type provider 
 	- Fix: Issue 20: FlexXB API fails if using xml description file  

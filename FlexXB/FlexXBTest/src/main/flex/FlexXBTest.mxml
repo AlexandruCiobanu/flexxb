@@ -24,6 +24,9 @@
 			import com.googlecode.flexxb.api.ApiTests;
 			
 			private function init() : void {
+				var xml : XML = <test />;
+				xml.appendChild("testerdferdghhr dffdvd dfvdf");
+				xml.appendChild(<me a="b"/>);
 				testRunner.testsToRun = [AllTests.allTests(), XmlTests.suite(), ApiTests.suite()];
 			}
 		]]>

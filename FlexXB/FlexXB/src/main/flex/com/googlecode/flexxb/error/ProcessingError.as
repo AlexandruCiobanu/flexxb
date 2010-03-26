@@ -18,7 +18,8 @@
 package com.googlecode.flexxb.error {
 
 	/**
-	 *
+	 * Error thrown when the FlexXB engine encounters problems processing the xml, 
+	 * be it in the serialize or the deserialize stages.
 	 * @author Alexutz
 	 *
 	 */

@@ -138,6 +138,9 @@
 			<arg line="-output ${doc.dir}/asdoc"/>
 			<arg line="-main-title ${doc.title}"/>
 			<arg line="-window-title ${doc.title}"/>
+			<arg line="-strict=false"/>
+			<arg line="-lenient"/>
+			<arg line="-package-description-file ${doc.dir}/packageDescriptor.xml"/>
 		</exec>
 	</target>
 	
