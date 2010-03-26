@@ -30,13 +30,9 @@ package com.googlecode.flexxb.annotation {
 	 *
 	 */
 	public class Annotation extends BaseAnnotation {
-		/**
-		 *
-		 */
+		
 		public static const ARGUMENT_ALIAS : String = "alias";
-		/**
-		 *
-		 */
+		
 		public static const ALIAS_ANY : String = "*";
 		/**
 		 * @private
@@ -50,13 +46,9 @@ package com.googlecode.flexxb.annotation {
 		 * @private
 		 */
 		protected var _alias : String = "";
-		/**
-		 *
-		 */
+		
 		private var _xmlName : QName;
-		/**
-		 *
-		 */
+		
 		private var _nameSpace : Namespace;
 
 		/**
@@ -69,8 +61,8 @@ package com.googlecode.flexxb.annotation {
 		}
 		
 		/**
-		 *
-		 * @return field name
+		 * Get the annotation namespace
+		 * @return namespace instance
 		 *
 		 */
 		public function get nameSpace() : Namespace {
@@ -78,8 +70,7 @@ package com.googlecode.flexxb.annotation {
 		}
 		
 		/**
-		 *
-		 * @return field type
+		 * Set the annotation namepsace
 		 *
 		 */
 		public function set nameSpace(value : Namespace) : void {
@@ -87,7 +78,7 @@ package com.googlecode.flexxb.annotation {
 		}
 		
 		/**
-		 *
+		 * Get the field name
 		 * @return field name
 		 *
 		 */
@@ -96,7 +87,7 @@ package com.googlecode.flexxb.annotation {
 		}
 
 		/**
-		 *
+		 * Get the field type
 		 * @return field type
 		 *
 		 */
@@ -105,7 +96,7 @@ package com.googlecode.flexxb.annotation {
 		}
 
 		/**
-		 *
+		 * Get the qualified xml name
 		 * @return
 		 *
 		 */
@@ -117,8 +108,8 @@ package com.googlecode.flexxb.annotation {
 		}
 
 		/**
-		 *
-		 * @return name
+		 * Get the alias
+		 * @return annotation alias
 		 *
 		 */
 		public function get alias() : String {
@@ -140,8 +131,8 @@ package com.googlecode.flexxb.annotation {
 		}
 
 		/**
-		 *
-		 * @return
+		 * Get a flag to signal wether this annotation declares a namespace or not
+		 * @return true if it has namespace declarations, false otherwise
 		 *
 		 */
 		public function hasNamespaceDeclaration() : Boolean {
@@ -149,8 +140,8 @@ package com.googlecode.flexxb.annotation {
 		}
 
 		/**
-		 *
-		 * @return
+		 * Get a flag to signal wether to use the owner's alias or not
+		 * @return true if it must use the owner's alias, false otherwise
 		 *
 		 */
 		public function useOwnerAlias() : Boolean {

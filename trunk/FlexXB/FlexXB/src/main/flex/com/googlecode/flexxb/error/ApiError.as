@@ -18,7 +18,7 @@
 package com.googlecode.flexxb.error {
 
 	/**
-	 *
+	 * This error is thrown when the FlexXB API engine encounters execution problems.
 	 * @author Alexutz
 	 *
 	 */
