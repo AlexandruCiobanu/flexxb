@@ -19,6 +19,7 @@ package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.XmlClass;
+	import com.googlecode.flexxb.util.Logger;
 
 	/**
 	 *
@@ -26,6 +27,8 @@ package com.googlecode.flexxb.serializer {
 	 *
 	 */
 	public final class XmlClassSerializer implements ISerializer {
+		
+		private static var log : Logger = new Logger(XmlClassSerializer);
 		/**
 		 * @see ISerializer#serialize()
 		 */

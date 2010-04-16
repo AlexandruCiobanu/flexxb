@@ -20,6 +20,7 @@ package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.util.Logger;
 	import com.googlecode.flexxb.util.cdata;
 	
 	import flash.xml.XMLNode;
@@ -31,6 +32,8 @@ package com.googlecode.flexxb.serializer {
 	 *
 	 */
 	public class XmlElementSerializer extends XmlMemberSerializer {
+		
+		private static var log : Logger = new Logger(XmlElementSerializer);
 		/**
 		 * Constructor
 		 *
