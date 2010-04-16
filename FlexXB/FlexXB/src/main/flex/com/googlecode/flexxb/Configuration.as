@@ -46,6 +46,10 @@ package com.googlecode.flexxb {
 		 */		
 		public var escapeSpecialChars : Boolean = false;
 		/**
+		 * 
+		 */		
+		public var enableLogging : Boolean = false;
+		/**
 		 * Constructor
 		 *
 		 */

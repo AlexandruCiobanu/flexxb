@@ -25,6 +25,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.api.FxElement;
 	import com.googlecode.flexxb.api.IFlexXBApi;
 	import com.googlecode.flexxb.api.StageXmlConverter;
+	import com.googlecode.flexxb.util.Logger;
 
 	/**
 	 *
@@ -32,18 +33,23 @@ package com.googlecode.flexxb {
 	 *
 	 */
 	internal final class FlexXBApi implements IFlexXBApi {
-		private var store : DescriptorStore;
+		
+		private static var log : Logger = new Logger(FlexXBApi);
+		
+		private var engine : FlexXBEngine;
+		private var store : DescriptorStore
 
 		/**
 		 * Constructor
 		 * @param store
 		 *
 		 */
-		public function FlexXBApi(store : DescriptorStore) {
+		public function FlexXBApi(engine : FlexXBEngine, store : DescriptorStore) {
+			this.engine = engine;
 			this.store = store;
-			FlexXBEngine.instance.registerSimpleTypeConverter(new StageXmlConverter());
-			FlexXBEngine.instance.registerSimpleTypeConverter(new AccessorTypeConverter());
-			FlexXBEngine.instance.processTypes(FxAttribute, FxElement, FxArray, FxConstructorArgument);
+			engine.registerSimpleTypeConverter(new StageXmlConverter());
+			engine.registerSimpleTypeConverter(new AccessorTypeConverter());
+			engine.processTypes(FxAttribute, FxElement, FxArray, FxConstructorArgument);
 		}
 
 		/**
@@ -65,7 +71,7 @@ package com.googlecode.flexxb {
 		 */
 		public function processDescriptorsFromXml(xml : XML) : void {
 			if (xml) {
-				var apiWrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
+				var apiWrapper : FxApiWrapper = engine.deserialize(xml, FxApiWrapper);
 				if (apiWrapper) {
 					for each (var classDescriptor : FxClass in apiWrapper.descriptors) {
 						if (classDescriptor) {

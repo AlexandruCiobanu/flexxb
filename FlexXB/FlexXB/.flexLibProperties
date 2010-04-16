@@ -66,6 +66,7 @@
     <classEntry path="com.googlecode.flexxb.util.Instanciator"/>
     <classEntry path="com.googlecode.flexxb.util.cdata"/>
     <classEntry path="com.googlecode.flexxb.api.AccessorTypeConverter"/>
+    <classEntry path="com.googlecode.flexxb.util.Logger"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
