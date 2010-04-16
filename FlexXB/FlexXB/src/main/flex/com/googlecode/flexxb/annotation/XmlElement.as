@@ -18,7 +18,7 @@
 package com.googlecode.flexxb.annotation {
 
 	/**
-	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="Namespace_Prefix")]</code>
+	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="Namespace_Prefix", default="DEFAULT_VALUE")]</code>
 	 * @author aCiobanu
 	 *
 	 */

@@ -17,6 +17,7 @@
  */
 package com.googlecode.testData
 {
+	[XmlClass]
 	public class XmlTypedObj
 	{
 		[XmlElement]

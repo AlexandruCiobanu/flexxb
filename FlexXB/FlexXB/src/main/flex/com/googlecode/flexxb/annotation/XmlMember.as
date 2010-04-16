@@ -89,6 +89,10 @@ package com.googlecode.flexxb.annotation {
 		 */		
 		public static const ARGUMENT_NAMESPACE_REF : String = "namespace";
 		/**
+		 * 
+		 */		
+		public static const ARGUMENT_DEFAULT : String = "default";
+		/**
 		 * @private
 		 */
 		protected var _ignoreOn : Stage;
@@ -112,6 +116,10 @@ package com.googlecode.flexxb.annotation {
 		 * @private
 		 */
 		private var _accessorType : AccessorType;
+		/**
+		 * @private 
+		 */		
+		private var _default : String;
 		/**
 		 * Constructor
 		 * @param descriptor xml descriptor of the class field
@@ -167,6 +175,15 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public function get namespaceRef() : String {
 			return _nsRef;
+		}
+		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get defaultSetValue() : String{
+			return _default;
 		}
 		
 		/**
@@ -265,6 +282,7 @@ package com.googlecode.flexxb.annotation {
 			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
 			ignoreOn = Stage.fromString(metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value);
 			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value);
+			_default = metadata.arg.(@key == ARGUMENT_DEFAULT).@value;
 		}
 		/**
 		 *

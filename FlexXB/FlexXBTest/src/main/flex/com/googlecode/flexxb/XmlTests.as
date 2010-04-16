@@ -16,11 +16,12 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.googlecode.flexxb {
+	import com.googlecode.flexxb.annotation.DefaultValueTest;
 	import com.googlecode.flexxb.annotation.XmlArrayTest;
 	import com.googlecode.flexxb.annotation.XmlAttributeTest;
 	import com.googlecode.flexxb.annotation.XmlClassTest;
 	import com.googlecode.flexxb.annotation.XmlElementTest;
-
+	
 	import flexunit.framework.TestSuite;
 
 	public class XmlTests extends TestSuite {
@@ -42,6 +43,7 @@ package com.googlecode.flexxb {
 			ts.addTestSuite(XmlSerializerTest);
 			ts.addTestSuite(XmlElementOrderTest);
 			ts.addTestSuite(XmlSpecialCharEscapeTest);
+			ts.addTestSuite(DefaultValueTest);
 			return ts;
 		}
 	}
