@@ -21,7 +21,8 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.converter.ClassTypeConverter;
 	import com.googlecode.flexxb.converter.IConverter;
 	import com.googlecode.flexxb.converter.XmlConverter;
-	import com.googlecode.flexxb.util.Logger;
+	import com.googlecode.flexxb.util.log.ILogger;
+	import com.googlecode.flexxb.util.log.LogFactory;
 	
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
@@ -61,7 +62,7 @@ package com.googlecode.flexxb {
 	public class FlexXBEngine implements IEventDispatcher {
 		private static var _instance : FlexXBEngine;
 		
-		private static var log : Logger = new Logger(FlexXBEngine);
+		private static var log : ILogger = LogFactory.getLog(FlexXBEngine);
 
 		/**
 		 * Not a singleton, but an easy access instance.
