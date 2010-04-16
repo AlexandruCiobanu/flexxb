@@ -27,7 +27,7 @@ package com.googlecode.flexxb.annotation {
 
 		protected override function runTest(descriptor : XML) : void {
 			var att1 : XmlElement = new XmlElement(getFieldDescriptor("version", descriptor));
-			validate(att1, "version", Number, "objVersion", null, false);
+			validate(att1, "version", int, "objVersion", null, false);
 
 			var att2 : XmlElement = new XmlElement(getFieldDescriptor("reference", descriptor));
 			validate(att2, "reference", Object, "reference", null, true);

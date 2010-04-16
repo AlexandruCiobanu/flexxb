@@ -44,7 +44,13 @@ package com.googlecode.flexxb.serializer {
 		 * @see XmlMemberSerializer#deserializeObject()
 		 */
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, attribute : XmlMember, serializer : SerializerCore) : Object {
-			var value : String = xmlData.attribute(xmlName);
+			var valueXML : XMLList = xmlData.attribute(xmlName);
+			var value : String = "";
+			if(valueXML.length() > 0){
+				value = valueXML[0];
+			}else{
+				value = attribute.defaultSetValue;
+			}
 			var result : Object = serializer.converterStore.stringToObject(value, attribute.fieldType);
 			return result;
 		}

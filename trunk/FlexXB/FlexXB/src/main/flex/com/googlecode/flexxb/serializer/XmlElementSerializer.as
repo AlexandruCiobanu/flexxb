@@ -78,8 +78,15 @@ package com.googlecode.flexxb.serializer {
 		 */
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object {
 			var list : XMLList = xmlData.child(xmlName);
+			var xml : XML;
 			if (list.length() == 0) {
-				return null;
+				if(element.defaultSetValue){
+					xml = XML(element.defaultSetValue);
+				}else{
+					return null;
+				}
+			}else{
+				xml = list[0];
 			}
 			var type : Class = element.fieldType;
 			if (XmlElement(element).getRuntimeType) {
@@ -88,7 +95,7 @@ package com.googlecode.flexxb.serializer {
 					type = element.fieldType;
 				}
 			}
-			return getValue(list[0], type, XmlElement(element).getFromCache, serializer);
+			return getValue(xml, type, XmlElement(element).getFromCache, serializer);
 		}
 		
 		protected final function getValue(xml : XML, type : Class, getFromCache : Boolean, serializer : SerializerCore) : Object{

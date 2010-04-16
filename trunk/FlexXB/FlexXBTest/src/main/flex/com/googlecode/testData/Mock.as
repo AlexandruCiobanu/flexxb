@@ -26,7 +26,7 @@ package com.googlecode.testData {
 		[XmlAttribute(ignoreOn="serialize")]
 		public var date : Date;
 		[XmlElement(alias="objVersion", namespace="me")]
-		public var version : Number = 4;
+		public var version : int = 4;
 		[XmlElement(alias="mock3", serializePartialElement="true")]
 		public var link : Mock3;
 		[XmlElement(serializePartialElement="true")]

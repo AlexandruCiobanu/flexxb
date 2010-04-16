@@ -41,6 +41,7 @@ package com.googlecode.flexxb.api {
 			var ts : TestSuite = new TestSuite();
 			ts.name = "Api Tests";
 			ts.addTestSuite(FxApiComponentTest);
+			ts.addTestSuite(CustomClassTest);
 			return ts;
 		}
 	}

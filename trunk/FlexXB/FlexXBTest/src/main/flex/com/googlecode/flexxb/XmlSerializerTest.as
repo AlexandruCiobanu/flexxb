@@ -71,8 +71,10 @@ package com.googlecode.flexxb {
 			var target : XmlTypedObj = new XmlTypedObj();
 			target.firstXml = <test id="1"><element>retw</element></test>;
 			target.secondXml = <person id="3"><name>Doe</name></person>;
-			var xml : XML = FlexXBEngine.instance.serialize(target);
-			var copy : XmlTypedObj = FlexXBEngine.instance.deserialize(xml, XmlTypedObj);
+			var engine : FlexXBEngine = new FlexXBEngine();
+			engine.processTypes(XmlTypedObj);
+			var xml : XML = engine.serialize(target);
+			var copy : XmlTypedObj = engine.deserialize(xml, XmlTypedObj);
 			assertEquals("firstXml stinks", target.firstXml.toXMLString(), copy.firstXml.toXMLString());
 			assertEquals("secondXml stinks", target.secondXml.toXMLString(), copy.secondXml.toXMLString());
 		}
