@@ -18,7 +18,8 @@
 package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.flexxb.util.Logger;
+	import com.googlecode.flexxb.util.log.ILogger;
+	import com.googlecode.flexxb.util.log.LogFactory;
 
 	/**
 	 * Insures serialization/deserialization for object field decorated with the XmlAttribute annotation
@@ -27,7 +28,7 @@ package com.googlecode.flexxb.serializer {
 	 */
 	public final class XmlAttributeSerializer extends XmlMemberSerializer {
 		
-		private static var log : Logger = new Logger(XmlAttributeSerializer);
+		private static var log : ILogger = LogFactory.getLog(XmlAttributeSerializer);
 		/**
 		 * Constructor
 		 *

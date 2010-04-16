@@ -19,8 +19,8 @@ package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
 	import com.googlecode.flexxb.annotation.XmlArray;
 	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.flexxb.util.Logger;
-	import com.googlecode.flexxb.util.cdata;
+	import com.googlecode.flexxb.util.log.ILogger;
+	import com.googlecode.flexxb.util.log.LogFactory;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
@@ -32,7 +32,7 @@ package com.googlecode.flexxb.serializer {
 	 */
 	public final class XmlArraySerializer extends XmlElementSerializer {
 		
-		private static var log : Logger = new Logger(XmlArraySerializer);
+		private static var log : ILogger = LogFactory.getLog(XmlArraySerializer);
 		/**
 		 *Constructor
 		 *

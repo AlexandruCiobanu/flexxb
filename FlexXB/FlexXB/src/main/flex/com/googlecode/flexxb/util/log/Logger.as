@@ -1,5 +1,7 @@
-package com.googlecode.flexxb.util
+package com.googlecode.flexxb.util.log
 {
+	import com.googlecode.flexxb.util.log.ILogger;
+	
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.utils.StringUtil;
@@ -9,7 +11,7 @@ package com.googlecode.flexxb.util
 	 * @author Alexutz
 	 * 
 	 */	
-	public final class Logger
+	internal final class Logger implements ILogger
 	{
 		private static const INFO : String = "INFO";
 		private static const ERROR : String = "ERROR";

@@ -25,7 +25,8 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.api.FxElement;
 	import com.googlecode.flexxb.api.IFlexXBApi;
 	import com.googlecode.flexxb.api.StageXmlConverter;
-	import com.googlecode.flexxb.util.Logger;
+	import com.googlecode.flexxb.util.log.ILogger;
+	import com.googlecode.flexxb.util.log.LogFactory;
 
 	/**
 	 *
@@ -34,7 +35,7 @@ package com.googlecode.flexxb {
 	 */
 	internal final class FlexXBApi implements IFlexXBApi {
 		
-		private static var log : Logger = new Logger(FlexXBApi);
+		private static var log : ILogger = LogFactory.getLog(FlexXBApi);
 		
 		private var engine : FlexXBEngine;
 		private var store : DescriptorStore
