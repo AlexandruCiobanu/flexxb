@@ -46,7 +46,9 @@ package com.googlecode.flexxb {
 		 */		
 		public var escapeSpecialChars : Boolean = false;
 		/**
-		 * 
+		 * Use this flag to control whether to permit logging or not. This is mostly intended for
+		 * debugging the (de)serialization process.<br/>
+		 * <b>Logging can slow down the process up to 20 times. Use with caution!</b>
 		 */		
 		public var enableLogging : Boolean = false;
 		/**

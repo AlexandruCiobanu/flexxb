@@ -152,7 +152,12 @@ package com.googlecode.flexxb {
 			if (args && args.length > 0) {
 				for each (var item : Object in args) {
 					if (item is Class) {
+						if(configuration.enableLogging){
+							log.info("Processing class {0}", item);
+						}
 						descriptorStore.getDescriptor(item);
+					}else if(configuration.enableLogging){
+						log.info("Excluded from processing because it is not a class: {0}", item);
 					}
 				}
 			}

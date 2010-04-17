@@ -76,6 +76,9 @@ package com.googlecode.flexxb {
 				if (apiWrapper) {
 					for each (var classDescriptor : FxClass in apiWrapper.descriptors) {
 						if (classDescriptor) {
+							if(engine.configuration.enableLogging){
+								log.info("Processing class {0}", classDescriptor.type);
+							}
 							processTypeDescriptor(classDescriptor);
 						}
 					}

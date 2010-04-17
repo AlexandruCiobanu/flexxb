@@ -46,6 +46,9 @@ package com.googlecode.flexxb.serializer {
 		 * @see XmlMemberSerializer#serializeObject()
 		 */
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
+			if(serializer.configuration.enableLogging){
+				log.info("Serializing field {0} as element", annotation.fieldName);
+			}
 			var child : XML = <xml />;
 			if (isComplexType(object)) {
 				child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
@@ -81,6 +84,9 @@ package com.googlecode.flexxb.serializer {
 		 * @see XmlMemberSerializer#deserializeObject()
 		 */
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object {
+			if(serializer.configuration.enableLogging){
+				log.info("Deserializing element <<{0}>> to field {1}", xmlName, element.fieldName);
+			}
 			var list : XMLList = xmlData.child(xmlName);
 			var xml : XML;
 			if (list.length() == 0) {

@@ -31,6 +31,8 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.serializer.XmlClassSerializer;
 	import com.googlecode.flexxb.serializer.XmlElementSerializer;
 	import com.googlecode.flexxb.util.Instanciator;
+	import com.googlecode.flexxb.util.log.ILogger;
+	import com.googlecode.flexxb.util.log.LogFactory;
 	
 	import flash.events.EventDispatcher;
 
@@ -44,6 +46,9 @@ package com.googlecode.flexxb {
 	 *
 	 */
 	public final class SerializerCore extends EventDispatcher {
+		
+		private static var log : ILogger = LogFactory.getLog(SerializerCore);
+		
 		{
 			AnnotationFactory.instance.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
 			AnnotationFactory.instance.registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
@@ -108,7 +113,13 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function serialize(object : Object, partial : Boolean = false) : XML {
+			if(configuration.enableLogging){
+				log.info("Started object serialization. Partial flag is {0}", partial);
+			}
 			if (object == null) {
+				if(configuration.enableLogging){
+					log.info("Object is null. Ended serialization");
+				}
 				return null;
 			}
 			var xmlData : XML;
@@ -144,7 +155,11 @@ package com.googlecode.flexxb {
 
 			//dispatch postSerializeEvent
 			dispatchEvent(XmlEvent.createPostSerializeEvent(object, xmlData));
-
+			
+			if(configuration.enableLogging){
+				log.info("Ended object serialization");
+			}
+			
 			return xmlData;
 		}
 
@@ -171,6 +186,9 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : Object {
+			if(configuration.enableLogging){
+				log.info("Started xml deserialization to type {0}. GetFromCache flag is {1}", objectClass, getFromCache);
+			}
 			if (xmlData) {
 				if (!objectClass) {
 					objectClass = getIncomingType(xmlData);
@@ -243,9 +261,16 @@ package com.googlecode.flexxb {
 
 					//dispatch postDeserializeEvent
 					dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
-
+					
+					if(configuration.enableLogging){
+						log.info("Ended xml deserialization");
+					}
+					
 					return result;
 				}
+			}
+			if(configuration.enableLogging){
+				log.info("Ended xml deserialization");
 			}
 			return null;
 		}
