@@ -34,6 +34,9 @@ package com.googlecode.flexxb.serializer {
 		 * @see ISerializer#serialize()
 		 */
 		public function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML {
+			if(serializer.configuration.enableLogging){
+				log.info("Serializing object of type {0}", annotation.fieldName);
+			}
 			var xmlClass : XmlClass = annotation as XmlClass;
 			var xml : XML = <xml />
 			xml.setNamespace(xmlClass.nameSpace);

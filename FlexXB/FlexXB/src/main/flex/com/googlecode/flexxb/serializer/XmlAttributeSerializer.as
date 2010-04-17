@@ -40,6 +40,9 @@ package com.googlecode.flexxb.serializer {
 		 * @see XmlMemberSerializer#serializeObject()
 		 */
 		protected override function serializeObject(object : Object, attribute : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
+			if(serializer.configuration.enableLogging){
+				log.info("Serializing field {0} as attribute", attribute.fieldName);
+			}
 			var value : String = serializer.converterStore.objectToString(object, attribute.fieldType);
 			parentXml.@[attribute.xmlName] = value;
 		}
@@ -48,6 +51,9 @@ package com.googlecode.flexxb.serializer {
 		 * @see XmlMemberSerializer#deserializeObject()
 		 */
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, attribute : XmlMember, serializer : SerializerCore) : Object {
+			if(serializer.configuration.enableLogging){
+				log.info("Deserializing attribute <<{0}>> to field {1}", xmlName, attribute.fieldName);
+			}
 			var valueXML : XMLList = xmlData.attribute(xmlName);
 			var value : String = "";
 			if(valueXML.length() > 0){
