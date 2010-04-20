@@ -1,5 +1,5 @@
 /*********************************************************************************************************************************/
-/**												FlexXB version 1.6 (26-03-2010)				   									**/
+/**												FlexXB version 1.6 (20-04-2010)				   									**/
 /**													by Alex Ciobanu						   										**/
 /*********************************************************************************************************************************/
 
@@ -7,7 +7,7 @@ Copyright 2008 - 2010 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 CONTENTS
 
-FlexXB-1_6-26032010-bin.zip - contains the FlexXB library along with the test 
+FlexXB-1_6-20042010-bin.zip - contains the FlexXB library along with the test 
 							application
 			/bin/ 				 - SWC file and test application directory
 			/bin/test/ 			 - the test application
@@ -17,7 +17,7 @@ FlexXB-1_6-26032010-bin.zip - contains the FlexXB library along with the test
 			/samples/			 - samples showing FlexXB features 
 			/README.txt			 - version release notes
 
-FlexXB-1_6-26032010-src.zip - contains source files
+FlexXB-1_6-20042010-src.zip - contains source files
 			/FlexXB/	 - FlexXB project sources
 			/FlexXBTest - FlexXB test application sources
 
