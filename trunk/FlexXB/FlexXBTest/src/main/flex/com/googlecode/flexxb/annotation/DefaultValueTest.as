@@ -22,8 +22,6 @@ package com.googlecode.flexxb.annotation
 	
 	import flexunit.framework.TestCase;
 	
-	import org.flexunit.asserts.assertEquals;
-	
 	public class DefaultValueTest extends TestCase
 	{
 		public function DefaultValueTest(methodName:String=null)
