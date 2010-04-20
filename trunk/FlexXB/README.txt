@@ -100,10 +100,10 @@ Namespace
 [Namespace(prefix="NS_Prefix", uri="NS_Uri")]
 
 XmlAttribute
-[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="ns_prefix")]
+[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="ns_prefix", default="defaultStringValue")]
 
 XmlElement
-[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="ns_prefix")] 
+[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="ns_prefix", default="defaultStringValue")] 
 
 XmlArray
 [XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index", namespace="ns_prefix")]
@@ -121,6 +121,9 @@ KNOWN LIMITATIONS
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+1.6.1 - 20-04-2010
+	- Enhancement: Issue 22: Add the ability to specify a default value upon deserialization
+	- Enhancement: Issue 23: Add logging support
 
 1.6 - 26-03-2010
 	- Support for Flex 4 SDK
