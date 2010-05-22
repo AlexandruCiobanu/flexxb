@@ -1,51 +1,381 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="SerializerCore,com.googlecode.flexxb.SerializerCore,Link,Name,POST_DESERIALIZE,POST_SERIALIZE,PRE_DESERIALIZE,PRE_SERIALIZE,Version,api,configuration,configuration,converterStore,descriptorStore,enableLogging,escapeSpecialChars,getResponseTypeByNamespace,getResponseTypeByTagName,id,instance,instance,object,onlySerializeChangedValueFields,thisType,xml,addEventListener,clearCache,createPostDeserializeEvent,createPostSerializeEvent,createPreDeserializeEvent,createPreSerializeEvent,deserialize,deserialize,dispatchEvent,forEachOfType,fromXml,getClassByNamespace,getIdValue,getIncomingType,getNamespace,getObject,getXmlName,hasEventListener,isCached,objectToString,processTypes,putObject,registerAnnotation,registerSimpleTypeConverter,removeEventListener,serialize,serialize,stringToObject,toXml,willTrigger"><title>com.googlecode.flexxb.SerializerCore</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="SerializerCore,com.googlecode.flexxb.SerializerCore,configuration,converterStore,descriptorStore,deserialize,getIncomingType,serialize" name="keywords">
+<title>com.googlecode.flexxb.SerializerCore</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
 				asdocTitle = 'SerializerCore - FlexXB API Documentation';
 				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
-<script type="text/javascript">
-			scrollToNameAnchor();
-		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">FlexXB API Documentation</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?com/googlecode/flexxb/SerializerCore.html&amp;com/googlecode/flexxb/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">SerializerCore</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
-				<!--
-				
-					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("SerializerCore"); titleBar_setSubNav(false,true,false,false,false,false,true,false,true,false,false	,false,false,false,false,false);}	
-				-->
-			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">com.googlecode.flexxb</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public final   class  SerializerCore</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">SerializerCore  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> flash.events.EventDispatcher</td></tr></table><p></p><p></p><p></p>
-	 
-	 <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#configuration" class="signatureLink">configuration</a> : <a href="../../../com/googlecode/flexxb/Configuration.html">Configuration</a><div class="summaryTableDescription">[read-only] </div></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#converterStore" class="signatureLink">converterStore</a> : <a href="../../../com/googlecode/flexxb/IConverterStore.html">IConverterStore</a><div class="summaryTableDescription">[read-only] 
-		 
-		 </div></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#descriptorStore" class="signatureLink">descriptorStore</a> : <a href="../../../com/googlecode/flexxb/IDescriptorStore.html">IDescriptorStore</a><div class="summaryTableDescription">[read-only] 
-		 
-		 </div></td><td class="summaryTableOwnerCol">SerializerCore</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#SerializerCore()" class="signatureLink">SerializerCore</a>(descriptor:DescriptorStore, converter:ConverterStore, configuration:<a href="../../../com/googlecode/flexxb/Configuration.html">Configuration</a>)</div><div class="summaryTableDescription">
-		 Constructor
-		 
-		 </div></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#deserialize()" class="signatureLink">deserialize</a>(xmlData:XML, objectClass:Class = null, getFromCache:Boolean = false):Object</div><div class="summaryTableDescription">
-		 Convert an xml to an AS3 object counterpart
-		 </div></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getIncomingType()" class="signatureLink">getIncomingType</a>(incomingXML:XML):Class</div><div class="summaryTableDescription">
-		 Get the type class corresponding to the namespace defined in the incoming xml
-		 </div></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#serialize()" class="signatureLink">serialize</a>(object:Object, partial:Boolean = false):XML</div><div class="summaryTableDescription">
-		 Convert an object to a xml representation.</div></td><td class="summaryTableOwnerCol">SerializerCore</td></tr></table></div><a name="eventSummary"></a><div class="summarySection"><div class="summaryTableTitle">Events</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableEvent"><tr><th>&nbsp;</th><th colspan="2">Event</th><th> Summary </th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:postdeserialize" class="signatureLink">postdeserialize</a></div></td><td class="summaryTableDescription summaryTableCol"></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:postserialize" class="signatureLink">postserialize</a></div></td><td class="summaryTableDescription summaryTableCol"></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:predeserialize" class="signatureLink">predeserialize</a></div></td><td class="summaryTableDescription summaryTableCol"></td><td class="summaryTableOwnerCol">SerializerCore</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:preserialize" class="signatureLink">preserialize</a></div></td><td class="summaryTableDescription summaryTableCol"></td><td class="summaryTableOwnerCol">SerializerCore</td></tr></table></div><script language="javascript" type="text/javascript"><!--
-										showHideInherited();
-										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="configuration"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">configuration</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>configuration:<a href="../../../com/googlecode/flexxb/Configuration.html">Configuration</a></code>&nbsp;&nbsp;[read-only] <p></p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get configuration():<a href="../../../com/googlecode/flexxb/Configuration.html">Configuration</a></code><br/></div><a name="propertyDetail"></a><a name="converterStore"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">converterStore</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>converterStore:<a href="../../../com/googlecode/flexxb/IConverterStore.html">IConverterStore</a></code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
-		 
-		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get converterStore():<a href="../../../com/googlecode/flexxb/IConverterStore.html">IConverterStore</a></code><br/></div><a name="propertyDetail"></a><a name="descriptorStore"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">descriptorStore</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>descriptorStore:<a href="../../../com/googlecode/flexxb/IDescriptorStore.html">IDescriptorStore</a></code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
-		 
-		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get descriptorStore():<a href="../../../com/googlecode/flexxb/IDescriptorStore.html">IDescriptorStore</a></code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="SerializerCore()"></a><a name="SerializerCore(com.googlecode.flexxb.DescriptorStore,com.googlecode.flexxb.ConverterStore,com.googlecode.flexxb.Configuration)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">SerializerCore</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function SerializerCore(descriptor:DescriptorStore, converter:ConverterStore, configuration:<a href="../../../com/googlecode/flexxb/Configuration.html">Configuration</a>)</code><p></p><p>
-		 Constructor
-		 
-		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">descriptor</span>:DescriptorStore</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">converter</span>:ConverterStore</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">configuration</span>:<a href="../../../com/googlecode/flexxb/Configuration.html">Configuration</a></code></td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="deserialize()"></a><a name="deserialize(XML,Class,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">deserialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public final function deserialize(xmlData:XML, objectClass:Class = null, getFromCache:Boolean = false):Object</code><p></p><p></p><p>
-		 Convert an xml to an AS3 object counterpart
-		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xmlData</span>:XML</code> &mdash; xml to be deserialized
-		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">objectClass</span>:Class</code> (default = <code>null</code>)<code></code> &mdash; object class
-		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">getFromCache</span>:Boolean</code> (default = <code>false</code>)<code></code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; object of type objectClass
-		 
-		 </td></tr></table></div><a name="getIncomingType()"></a><a name="getIncomingType(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getIncomingType</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public final function getIncomingType(incomingXML:XML):Class</code><p></p><p></p><p>
-		 Get the type class corresponding to the namespace defined in the incoming xml
-		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">incomingXML</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Class</code> &mdash; class
-		 
-		 </td></tr></table></div><a name="serialize()"></a><a name="serialize(Object,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">serialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public final function serialize(object:Object, partial:Boolean = false):XML</code><p></p><p></p><p>
-		 Convert an object to a xml representation.
-		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; object to be converted.
-		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">partial</span>:Boolean</code> (default = <code>false</code>)<code></code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>XML</code> &mdash; xml representation of the given object
-		 
-		 </td></tr></table></div><div class="detailSectionHeader"> Event Detail </div><a name="event:postdeserialize"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">postdeserialize</td><td class="detailHeaderType"> Event </td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><code>com.googlecode.serializer.flexxb.XmlEvent</code><br/><p></p><p></p><p></p></div><a name="event:postserialize"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">postserialize</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><code>com.googlecode.serializer.flexxb.XmlEvent</code><br/><p></p><p></p><p></p></div><a name="event:predeserialize"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">predeserialize</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><code>com.googlecode.serializer.flexxb.XmlEvent</code><br/><p></p><p></p><p></p></div><a name="event:preserialize"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">preserialize</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><code>com.googlecode.serializer.flexxb.XmlEvent</code><br/><p></p><p></p><p></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Tue Apr 20 2010, 09:56 PM +03:00  </center></div></body></html><!--<br/>Tue Apr 20 2010, 09:56 PM +03:00  -->
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">FlexXB API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/googlecode/flexxb/SerializerCore.html&amp;com/googlecode/flexxb/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SerializerCore</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class SerializerCore"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.googlecode.flexxb</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public final  class SerializerCore</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">SerializerCore <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+</table>
+<p></p>
+    <p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#configuration">configuration</a> : <a href="../flexxb/Configuration.html">Configuration</a>
+<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#converterStore">converterStore</a> : <a href="../flexxb/IConverterStore.html">IConverterStore</a>
+<div class="summaryTableDescription">[read-only]
+      </div>
+</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#descriptorStore">descriptorStore</a> : <a href="../flexxb/IDescriptorStore.html">IDescriptorStore</a>
+<div class="summaryTableDescription">[read-only]
+      </div>
+</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#SerializerCore()">SerializerCore</a>(descriptor:DescriptorStore, converter:ConverterStore, configuration:<a href="Configuration.html">Configuration</a>)</div>
+<div class="summaryTableDescription">
+   Constructor
+      </div>
+</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#deserialize()">deserialize</a>(xmlData:XML, objectClass:Class = null, getFromCache:Boolean = false):Object</div>
+<div class="summaryTableDescription">
+   Convert an xml to an AS3 object counterpart
+   </div>
+</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getIncomingType()">getIncomingType</a>(incomingXML:XML):Class</div>
+<div class="summaryTableDescription">
+   Get the type class corresponding to the namespace defined in the incoming xml
+   </div>
+</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#serialize()">serialize</a>(object:Object, partial:Boolean = false):XML</div>
+<div class="summaryTableDescription">
+   Convert an object to a xml representation.</div>
+</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:postdeserialize">postdeserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:postserialize">postserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:predeserialize">predeserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:preserialize">preserialize</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">SerializerCore</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="configuration"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">configuration</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>configuration:<a href="../flexxb/Configuration.html">Configuration</a></code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get configuration():<a href="../flexxb/Configuration.html">Configuration</a></code>
+<br>
+</div>
+<a name="converterStore"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">converterStore</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>converterStore:<a href="../flexxb/IConverterStore.html">IConverterStore</a></code>&nbsp;&nbsp;[read-only]<p>
+      </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get converterStore():<a href="../flexxb/IConverterStore.html">IConverterStore</a></code>
+<br>
+</div>
+<a name="descriptorStore"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">descriptorStore</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>descriptorStore:<a href="../flexxb/IDescriptorStore.html">IDescriptorStore</a></code>&nbsp;&nbsp;[read-only]<p>
+      </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get descriptorStore():<a href="../flexxb/IDescriptorStore.html">IDescriptorStore</a></code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="SerializerCore()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">SerializerCore</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function SerializerCore(descriptor:DescriptorStore, converter:ConverterStore, configuration:<a href="Configuration.html">Configuration</a>)</code><p>
+   Constructor
+      </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">descriptor</span>:DescriptorStore</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">converter</span>:ConverterStore</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">configuration</span>:<a href="Configuration.html">Configuration</a></code></td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="deserialize()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">deserialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public final function deserialize(xmlData:XML, objectClass:Class = null, getFromCache:Boolean = false):Object</code><p>
+   Convert an xml to an AS3 object counterpart
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xmlData</span>:XML</code> &mdash; xml to be deserialized
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">objectClass</span>:Class</code> (default = <code>null</code>)<code></code> &mdash; object class
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">getFromCache</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code> &mdash; object of type objectClass
+      </td>
+</tr>
+</table>
+</div>
+<a name="getIncomingType()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getIncomingType</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public final function getIncomingType(incomingXML:XML):Class</code><p>
+   Get the type class corresponding to the namespace defined in the incoming xml
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">incomingXML</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Class</code> &mdash; class
+      </td>
+</tr>
+</table>
+</div>
+<a name="serialize()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">serialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public final function serialize(object:Object, partial:Boolean = false):XML</code><p>
+   Convert an object to a xml representation.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">object</span>:Object</code> &mdash; object to be converted.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">partial</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>XML</code> &mdash; xml representation of the given object
+      </td>
+</tr>
+</table>
+</div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:postdeserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">postdeserialize</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p>
+</div>
+<a name="event:postserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">postserialize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p>
+</div>
+<a name="event:predeserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">predeserialize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p>
+</div>
+<a name="event:preserialize"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">preserialize</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>com.googlecode.serializer.flexxb.XmlEvent</code></a>
+<br>
+<p></p>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->
