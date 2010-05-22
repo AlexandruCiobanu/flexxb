@@ -1,47 +1,57 @@
-/*********************************************************************************************************************************/
-/**												${project.name} version ${project.version} (${currentDate})				   									**/
-/**													by Alex Ciobanu						   										**/
-/*********************************************************************************************************************************/
+/*******************************************************************************************************/
+/**			 ${project.name} version ${project.version} (${currentDate})		      **/
+/**								by Alex Ciobanu 		      **/
+/*******************************************************************************************************/
 
 Copyright 2008 - 2010 Alex Ciobanu (http://code.google.com/p/flexxb)
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 CONTENTS
 
-${project.name}-${release.version}-${today}-bin.zip - contains the ${project.name} library along with the test 
-							application
-			/bin/ 				 - SWC file and test application directory
-			/bin/test/ 			 - the test application
-			/bin/flexunit        - flexunit automated test reports
-			/bin/api-schema      - XSD schema defining the structure of the XML file that describes types that can't be annotated 
-			/doc/ 				 - ASDOC
-			/samples/			 - samples showing ${project.name} features 
-			/README.txt			 - version release notes
+${project.name}-${release.version}-${today}-bin.zip - contains the ${project.name} library along with the test application
+			/bin/ 			    - SWC file and test application directory
+			/bin/test/ 		    - the test application
+			/bin/flexunit               - flexunit automated test reports
+			/bin/api-schema             - XSD schema defining the structure of the XML file that describes types that can't be annotated 
+			/doc/ 			    - ASDOC
+			/samples/	            - samples showing ${project.name} features 
+			/README.txt		    - version release notes
 
 ${project.name}-${release.version}-${today}-src.zip - contains source files
-			/${project.name}/	 - ${project.name} project sources
-			/${project.name}Test - ${project.name} test application sources
+			/${project.name}/	    - ${project.name} project sources
+			/${project.name}Test        - ${project.name} test application sources
 
 DESCRIPTION
 
-FlexXB is an ActionScript library designed to automate the AS3 objects' serialization to XML to be sent to a backend server and the 
-xml deserialization into AS3 objects of a response received from that server.
+FlexXB is an ActionScript library designed to automate the AS3 objects' serialization to XML to be sent to a backend server
+and the xml deserialization into AS3 objects of a response received from that server.
 
-In order for FlexXB to be able to automate the (de)serialization process, the model objects involved must be "decorated" with AS3 
-metadata tags that will instruct it on how they should be processed: 
+In order for FlexXB to be able to automate the (de)serialization process, the model objects involved must be "decorated" with
+AS3 metadata tags that will instruct it on how they should be processed: 
  * Which object fields translate into xml attributes, which into xml elements and which should be ignored? 
  * Should we use namespaces to build the request xml and parse the response one? If so, what are the namespaces? 
  * The object's fields need to have different names in the xml representation? 
 
-All this information is linked to the object by adding metadata tags (annotations - in Java - or attributes - in .NET) to the class 
-definition of the object in question. 
-When an object is passed to it for serialization, it inspects the object's definition and extracts a list of annotations describing 
-the way an object of that type needs to be (de)serialized. It keeps the generated list in a cache in order to reuse it if need arises 
-and then builds the corresponding XML using the information provided by the annotations. Any object field that does not have an 
-annotation defined is ignored in the (de)serialization process of that object. 
+All this information is linked to the object by adding metadata tags (annotations - in Java - or attributes - in .NET) to the
+class definition of the object in question. 
+When an object is passed to it for serialization, it inspects the object's definition and extracts a list of annotations 
+describing the way an object of that type needs to be (de)serialized. It keeps the generated list in a cache in order to 
+reuse it if need arises and then builds the corresponding XML using the information provided by the annotations. Any object 
+field that does not have an annotation defined is ignored in the (de)serialization process of that object. 
 There are five built-in annotations for describing object serialization, one being class-scoped, the other field-scoped: 
  * XmlClass: Defines class's namespace (by uri and prefix) and xml alias; 
- * ConstructorArg: Defines the arguments with which the constructor should be run. Applies to classes with non default constructors and
- 		is defined at the same level with XmlXClass; 
+ * ConstructorArg: Defines the arguments with which the constructor should be run. Applies to classes with non default constructors and is defined at the same level with XmlXClass; 
  * Namespace: defines alternate namespaces used by elements of the class. It is defined at class level and multiple definitions are allowed;
  * XmlAttribute: Marks the field to be rendered as an attribute of the xml representation of the parent object; 
  * XmlElement: Marks the field to be rendered as a child element of the xml representation of the parent object;
@@ -121,6 +131,10 @@ KNOWN LIMITATIONS
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+1.6.1-R2 - 24-05-2010
+	 - Changed the licensing scheme to Apache License v2.0
+	 - Upgraded the unit testing to Flex Unit 4
+
 1.6.1 - 20-04-2010
 	- Enhancement: Issue 22: Add the ability to specify a default value upon deserialization
 	- Enhancement: Issue 23: Add logging support

@@ -1,38 +1,31 @@
 /**
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
- *   Copyright (C) 2008 - 2010 Alex Ciobanu
+ *   Copyright (C) 2008-2010 Alex Ciobanu
  *
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.testData.Mock;
-
+	import org.flexunit.Assert;
 	import flash.utils.describeType;
-
-	import flexunit.framework.TestCase;
 
 	/**
 	 *
 	 * @author Alexutz
 	 *
 	 */
-	public class AnnotationTest extends TestCase {
-
-		public function AnnotationTest(methodName : String = null) {
-			super(methodName);
-		}
+	public class AnnotationTest {
 
 		protected function getTestObject() : Object {
 			return new Mock();
@@ -52,11 +45,11 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		protected final function validate(annotation : Annotation, ... args) : void {
-			assertNotNull("Null annotation", annotation);
-			assertNotNull("Validation arguments are missing", args);
-			assertEquals("Field Name is incorrect", args[0], annotation.fieldName.localName);
-			assertEquals("Field Type is incorrect", args[1], annotation.fieldType);
-			assertEquals("Alias is incorrect", args[2], annotation.alias);
+			Assert.assertNotNull("Null annotation", annotation);
+			Assert.assertNotNull("Validation arguments are missing", args);
+			Assert.assertEquals("Field Name is incorrect", args[0], annotation.fieldName.localName);
+			Assert.assertEquals("Field Type is incorrect", args[1], annotation.fieldType);
+			Assert.assertEquals("Alias is incorrect", args[2], annotation.alias);
 			customValidate.apply(this, [annotation].concat(args));
 		}
 
@@ -92,10 +85,7 @@ package com.googlecode.flexxb.annotation {
 			return result;
 		}
 
-		/**
-		 *
-		 *
-		 */
+		[Test]
 		public function testAnnotation() : void {
 			var descriptor : XML = describeType(getTestObject());
 			runTest(descriptor);

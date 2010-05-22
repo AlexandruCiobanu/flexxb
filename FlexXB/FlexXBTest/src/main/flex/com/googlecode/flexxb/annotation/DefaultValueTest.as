@@ -2,43 +2,27 @@
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
  *   Copyright (C) 2008-2010 Alex Ciobanu
  *
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation
 {
 	import com.googlecode.flexxb.FlexXBEngine;
 	import com.googlecode.testData.DefaultValueTestObj;
+	import org.flexunit.Assert;
 	
-	import flexunit.framework.TestCase;
-	
-	public class DefaultValueTest extends TestCase
+	public class DefaultValueTest
 	{
-		public function DefaultValueTest(methodName:String=null)
-		{
-			super(methodName);
-		}
-		
-		override public function setUp():void
-		{
-			super.setUp();
-		}
-		
-		override public function tearDown():void
-		{
-			super.tearDown();
-		}
-		
+		[Test]
 		public function testDefaultValue() : void{
 			var v : DefaultValueTestObj ;
 			var xml : XML =
@@ -46,9 +30,9 @@ package com.googlecode.flexxb.annotation
 					<min>3</min>
 				</DefaultValueTestObj>;
 			v = FlexXBEngine.instance.deserialize(xml, DefaultValueTestObj);
-			assertEquals("String field wrong", "MyValue", v.string);
-			assertEquals("min field wrong", 3, v.min);
-			assertEquals("max field wrong", 5, v.max);
+			Assert.assertEquals("String field wrong", "MyValue", v.string);
+			Assert.assertEquals("min field wrong", 3, v.min);
+			Assert.assertEquals("max field wrong", 5, v.max);
 		}	
 	}
 }

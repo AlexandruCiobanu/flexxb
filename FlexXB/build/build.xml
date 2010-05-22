@@ -13,7 +13,7 @@
 	<property name="flexSDKName" value="${flex-sdk-description.name}"/>
 	<property name="flexSDKBuild" value="${flex-sdk-description.build}"/>
 	
-	<taskdef resource="com/adobe/ac/ant/tasks/tasks.properties" classpath="${basedir}/libs/ant/FlexAntTasks.jar"/>
+	<taskdef resource="flexUnitTasks.tasks" classpath="${basedir}/libs/ant/flexUnitTasks-4.0.0.jar"/>
 	<taskdef resource="flexTasks.tasks" classpath="${basedir}/libs/ant/flexTasks.jar"/>
 	<taskdef format="xml" resource="org/tigris/subversion/svnant/svnantlib.xml" >
 		<classpath>
@@ -54,8 +54,8 @@
 	<target name="build.project.test" depends="build.project">
 		 <exec executable="${mxmlc.exe}" failonerror="true">
     	 	<arg value="-source-path=${project.tests.src.dir}"/>
-    	 	<arg value="-file-specs=${project.tests.src.dir}/FlexXBTest.mxml"/>
-    	 	<arg value="-output=${bin.dir}/test/FlexXBTest.swf"/>		
+    	 	<arg value="-file-specs=${project.tests.src.dir}/${project.name}Test.mxml"/>
+    	 	<arg value="-output=${bin.dir}/test/${project.name}Test.swf"/>		
     	 	    	 	
     	 	<arg value="-actionscript-file-encoding=UTF-8"/>
     	 	<arg value="-debug=false"/>
@@ -68,7 +68,7 @@
     	 </exec>
 		<make.wrapper application="${project.test.name}" output.dir="${bin.dir}/test" wrapper.dir="${project.test.dir}/html-template"
 			output.html="${bin.dir}/test/${project.test.name}.html" swf="${project.test.name}"
-			title="FlexXB Test"/>
+			title="${project.name} Test"/>
 		<exec executable="${mxmlc.exe}" failonerror="true">
     	 	<arg value="-source-path=${project.tests.src.dir}"/>
     	 	<arg value="-file-specs=${project.tests.src.dir}/AntTestRunner.mxml"/>
@@ -90,14 +90,12 @@
 	</target>
 	<!-- -->
 	<target name="release" depends="development, junit.ui">
-		<copy file="${project.src.dir}/com/googlecode/flexxb/api/schema/FlexXB.xsd"
-			tofile="${bin.dir}/api-schema/FlexXB-api.xsd"/>
 		<make.readme />
 		<zip destfile="${bin.dir}/${release.name.bin}">
 			<fileset dir="${basedir}">
 				<exclude name="**/build/**"/>
-				<exclude name="**/FlexXB/**"/>
-				<exclude name="**/FlexXBTest/**"/>
+				<exclude name="**/${project.name}/**"/>
+				<exclude name="**/${project.name}Test/**"/>
 				<exclude name="**/libs/**"/>
 				<exclude name="**/.*"/>
 				<exclude name="**/.*/**"/>
@@ -108,17 +106,15 @@
 				<exclude name="**/*.zip"/>
 				<exclude name="**/bin/*.*"/>
 				<exclude name="**/bin/*/**"/>
-				<exclude name="**/FlexXB/bin/*.*"/>
-				<exclude name="**/FlexXBTest/bin-debug/*.*"/>
-				<exclude name="**/FlexXBTest/bin-debug/*/**"/>
-				<exclude name="**/FxMOD/bin-debug/*.*"/>
-				<exclude name="**/FxMOD/bin-debug/*/**"/>
+				<exclude name="**/${project.name}/bin/*.*"/>
+				<exclude name="**/${project.name}Test/bin-debug/*.*"/>
+				<exclude name="**/${project.name}Test/bin-debug/*/**"/>
 			</fileset>
 		</zip>
 		<svn username="${svn.username}" password="${svn.password}">
 			<commit dir="${basedir}/doc" recurse="true" message="commited doc updates"/>
 			<commit dir="${basedir}/releasenotes" message="commited the latest readme"/>
-			<copy message="release ${release.version} branch" revision="HEAD" srcUrl="${svn.HEAD.dir}" destUrl="${svn.branch.dir}/flexxb_${release.version}"/>
+			<copy message="release ${release.version} branch" revision="HEAD" srcUrl="${svn.HEAD.dir}" destUrl="${svn.branch.dir}/${release.name}_${release.version}"/>
 		</svn>
 	</target>
 	
@@ -138,31 +134,35 @@
 			<arg line="-output ${doc.dir}/asdoc"/>
 			<arg line="-main-title ${doc.title}"/>
 			<arg line="-window-title ${doc.title}"/>
-			<arg line="-strict=false"/>
-			<arg line="-lenient"/>
-			<arg line="-package-description-file ${doc.dir}/packageDescriptor.xml"/>
 		</exec>
 	</target>
 	
 	<target name="junit.ui" depends="build.project.test">
-	        <flexunit
-	                swf="${project.test.ant.output}"
-	                toDir="${bin.dir}/flexunit/reports/FlexXBTest"
-	                haltonfailure="false"
-	                verbose="true"
-	                failureproperty="flexunit.failed"/>
+		<mkdir dir="${bin.dir}/flexunit/reports/${project.name}Test"/>
+		<flexunit
+				player="flash"
+				swf="${project.test.ant.output}"
+				toDir="${bin.dir}/flexunit/reports/${project.name}Test"
+				haltonfailure="false"
+				verbose="true"
+				failureproperty="flexunit.failed"
+				localTrusted="false"
+				port="1024"
+				buffer="262144"
+				timeout="60000"
+				headless="false"/>
 
-	        <junitreport todir="${bin.dir}/flexunit/reports/FlexXBTest">
-	            <fileset dir="${bin.dir}/flexunit/reports/FlexXBTest">
-	                <include name="TEST-*.xml"/>
-	            </fileset>
-	            <report format="frames" todir="${bin.dir}/flexunit/reports/flex"/>
-	        </junitreport>
+		<junitreport todir="${bin.dir}/flexunit/reports/${project.name}Test">
+			<fileset dir="${bin.dir}/flexunit/reports/${project.name}Test">
+				<include name="TEST-*.xml"/>
+			</fileset>
+			<report format="frames" todir="${bin.dir}/flexunit/reports/flex"/>
+		</junitreport>
 
-	        <fail
-	                message="One or more flexunit tests failed. See test reports for details."
-	                if="flexunit.failed"/>
-	    </target>
+		<fail
+				message="One or more flexunit tests failed. See test reports for details."
+				if="flexunit.failed"/>
+	</target>
 	
 	<macrodef name="make.readme">
 		<sequential>

@@ -2,18 +2,17 @@
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
  *   Copyright (C) 2008-2010 Alex Ciobanu
  *
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.Annotation;
@@ -40,7 +39,7 @@ package com.googlecode.flexxb.api {
 		 */
 		[XmlAttribute]
 		/**
-		 * 
+		 * Class alias
 		 * @default 
 		 */
 		public var alias : String;
@@ -49,7 +48,7 @@ package com.googlecode.flexxb.api {
 		 */
 		[XmlAttribute]
 		/**
-		 * 
+		 * Namespace prefix
 		 * @default 
 		 */
 		public var prefix : String;
@@ -58,7 +57,7 @@ package com.googlecode.flexxb.api {
 		 */
 		[XmlAttribute]
 		/**
-		 * 
+		 * Namespace uri
 		 * @default 
 		 */
 		public var uri : String;
@@ -67,7 +66,7 @@ package com.googlecode.flexxb.api {
 		 */
 		[XmlAttribute]
 		/**
-		 * 
+		 * Flag signaling whether the class members are ordered or not in the xml processing stages
 		 * @default 
 		 */
 		public var ordered : Boolean;
@@ -85,7 +84,7 @@ package com.googlecode.flexxb.api {
 		 */
 		[XmlAttribute]
 		/**
-		 * 
+		 * Name of the field which will be considered as an identifier for the class instance
 		 * @default 
 		 */
 		public var idField : String;
@@ -94,7 +93,7 @@ package com.googlecode.flexxb.api {
 		 */
 		[XmlAttribute]
 		/**
-		 * 
+		 * Name of the field which is considered to be the default value
 		 * @default 
 		 */
 		public var defaultValueField : String;
@@ -103,12 +102,12 @@ package com.googlecode.flexxb.api {
 		 */
 		private var _members : Array = [];
 		/**
-		 *
+		 * Constructor argument list
 		 */
 		[XmlArray(alias="ConstructorArguments", memberType="com.googlecode.flexxb.api.FxConstructorArgument")]
 		flexxb_api_internal var constructorArguments : Array;
 		/**
-		 * 
+		 * Class namespace list
 		 */		
 		flexxb_api_internal var namespaces : Dictionary;
 		/**
@@ -117,8 +116,9 @@ package com.googlecode.flexxb.api {
 		private var _type : Class;
 
 		/**
-		 *Constructor
-		 *
+		 * Constructor
+		 * @param	type class type
+		 * @param	alias class alias
 		 */
 		public function FxClass(type : Class, alias : String = null) {
 			this.type = type;
@@ -127,15 +127,15 @@ package com.googlecode.flexxb.api {
 		
 		[XmlArray(alias="Members")]
 		/**
-		 * 
-		 * @return 
+		 * Get the class members
+		 * @return Array of FxMember items 
 		 * 
 		 */		
 		flexxb_api_internal function get members() : Array{
 			return _members;
 		}
 		/**
-		 * 
+		 * Set the class members
 		 * @param value
 		 * 
 		 */		
@@ -147,14 +147,9 @@ package com.googlecode.flexxb.api {
 			}
 		}
 
-		/**
-		 *
-		 * @return
-		 *
-		 */
 		[XmlAttribute]
 		/**
-		 * 
+		 * Get the type
 		 * @return 
 		 */
 		public function get type() : Class {
@@ -162,8 +157,8 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 *
-		 * @param value
+		 * Set the type
+		 * @param value type
 		 *
 		 */
 		public function set type(value : Class) : void {
@@ -174,7 +169,7 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 *
+		 * Set the default namespace for this class
 		 * @param value
 		 *
 		 */
@@ -185,10 +180,11 @@ package com.googlecode.flexxb.api {
 			}
 		}
 		/**
-		 * 
-		 * @param ns
-		 * @return 
-		 * 
+		 * Add a namespace to the class namespace list
+		 * @param ns target namespace
+		 * @return reference to the target namespace
+		 * @throws error if the namespace is already registered in the class' namespace list
+		 * @see FxNamesapce
 		 */		
 		internal function addNamespace(ns : FxNamespace) : FxNamespace{
 			if(ns){
@@ -208,8 +204,8 @@ package com.googlecode.flexxb.api {
 			return ns;
 		}
 		/**
-		 * 
-		 * @param ns
+		 * Remove a namespace from the class namespace list
+		 * @param ns target namespace
 		 * 
 		 */		
 		internal function removeNamespace(ns : FxNamespace) : void{
@@ -224,9 +220,10 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 *
-		 * @param fieldName
-		 * @param optional
+		 * Add a constructor argument. Arguments are used in order to correctly instantiate objects upon deserialization
+		 * taking into account default and parameterized constructor. 
+		 * @param fieldName field name
+		 * @param optional Flag signaling whether the argument is optional or not (eg. default valued parameters)
 		 *
 		 */
 		public function addArgument(fieldName : String, optional : Boolean = false) : void {
@@ -237,12 +234,14 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 *
-		 * @param fieldName
-		 * @param fieldType
-		 * @param access
-		 * @param alias
-		 * @return
+		 * Add a field mapped to an xml attribute
+		 * @param fieldName name of the target field
+		 * @param fieldType type of the target field
+		 * @param access field access type
+		 * @param alias field alias in the xml mapping
+		 * @return FxAttribute instance
+		 * @see FxAttribute
+		 * @see AccessorType
 		 *
 		 */
 		public function addAttribute(fieldName : String, fieldType : Class, access : AccessorType = null, alias : String = null) : FxAttribute {
@@ -252,12 +251,14 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 *
-		 * @param fieldName
-		 * @param fieldType
-		 * @param access
-		 * @param alias
-		 * @return
+		 * Add a field mapped to an xml element
+		 * @param fieldName name of the target field
+		 * @param fieldType type of the target field
+		 * @param access field access type
+		 * @param alias field alias in the xml mapping
+		 * @return FxElement instance
+		 * @see FxElement
+		 * @see AccessorType
 		 *
 		 */
 		public function addElement(fieldName : String, fieldType : Class, access : AccessorType = null, alias : String = null) : FxElement {
@@ -267,12 +268,14 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 *
-		 * @param fieldName
-		 * @param fieldType
-		 * @param access
-		 * @param alias
-		 * @return
+		 * Add an array field mapped to an xml element
+		 * @param fieldName name of the target field
+		 * @param fieldType type of the target field (Array, ArrayCollection, ListCollectionView etc.)
+		 * @param access field access type
+		 * @param alias field alias in the xml mapping
+		 * @return FxArray instance
+		 * @see FxArray
+		 * @see AccessorType
 		 *
 		 */
 		public function addArray(fieldName : String, fieldType : Class, access : AccessorType = null, alias : String = null) : FxArray {
@@ -297,8 +300,8 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 *
-		 * @param member
+		 * Add a class member 
+		 * @param member class member (subclass of FxMember)
 		 *
 		 */
 		public function addMember(member : FxMember) : void {
@@ -355,8 +358,8 @@ package com.googlecode.flexxb.api {
 		}
 
 		/**
-		 * 
-		 * @return 
+		 * Get string representation of the current instance
+		 * @return string representing the current instance
 		 */
 		public function toString() : String {
 			return "Class[type: " + type + ", alias:" + alias + "]";

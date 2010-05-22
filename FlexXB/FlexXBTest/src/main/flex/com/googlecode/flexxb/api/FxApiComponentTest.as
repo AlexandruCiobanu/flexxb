@@ -2,18 +2,17 @@
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
  *   Copyright (C) 2008-2010 Alex Ciobanu
  *
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.FlexXBEngine;
@@ -31,29 +30,25 @@ package com.googlecode.flexxb.api {
 	
 	import flash.utils.Dictionary;
 	
-	import flexunit.framework.TestCase;
-	
 	import mx.collections.ArrayCollection;
+	
+	import org.flexunit.Assert; 
 
 	/**
 	 *
 	 * @author Alexutz
 	 *
 	 */
-	public class FxApiComponentTest extends TestCase {
-		public function FxApiComponentTest(methodName : String = null) {
-			super(methodName);
+	public class FxApiComponentTest {
+		
+		public function FxApiComponentTest() {
 			new PhoneNumber();
 			new Person();
 			new Address();
 			FlexXBEngine.instance.api.processTypeDescriptor(null);
 		}
 
-		/**
-		 *
-		 * @return
-		 *
-		 */
+		[Test]
 		public function testFxAttribute() : void {
 			var api : FxAttribute = FxAttribute.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
@@ -61,11 +56,7 @@ package com.googlecode.flexxb.api {
 			doMemberAssertion(api, att);
 		}
 
-		/**
-		 *
-		 * @return
-		 *
-		 */
+		[Test]
 		public function testFxElement() : void {
 			var api : FxElement = FxElement.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
@@ -73,11 +64,7 @@ package com.googlecode.flexxb.api {
 			doElementAssertion(api, att);
 		}
 
-		/**
-		 *
-		 * @return
-		 *
-		 */
+		[Test]
 		public function testFxArray() : void {
 			var api : FxArray = FxArray.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
@@ -85,20 +72,16 @@ package com.googlecode.flexxb.api {
 			doArrayAssertion(api, att);
 		}
 
-		/**
-		 *
-		 * @return
-		 *
-		 */
+		[Test]
 		public function testFxClass() : void {
 			var cls : FxClass = buildDescriptor();
 			var xmlCls : XmlClass = new XmlClass(cls.toXml());
-			assertEquals("wrong type", cls.type, xmlCls.fieldType);
-			assertEquals("wrong alias", cls.alias, xmlCls.alias);
-			assertEquals("wrong prefix", cls.prefix, xmlCls.nameSpace.prefix);
-			assertEquals("wrong uri", cls.uri, xmlCls.nameSpace.uri);
-			assertEquals("wrong member count", 4, xmlCls.members.length);
-			assertEquals("wrong constructor argument count", 2, xmlCls.constructor.parameterFields.length);
+			Assert.assertEquals("wrong type", cls.type, xmlCls.fieldType);
+			Assert.assertEquals("wrong alias", cls.alias, xmlCls.alias);
+			Assert.assertEquals("wrong prefix", cls.prefix, xmlCls.nameSpace.prefix);
+			Assert.assertEquals("wrong uri", cls.uri, xmlCls.nameSpace.uri);
+			Assert.assertEquals("wrong member count", 4, xmlCls.members.length);
+			Assert.assertEquals("wrong constructor argument count", 2, xmlCls.constructor.parameterFields.length);
 		}
 
 		private function buildDescriptor() : FxClass {
@@ -113,7 +96,8 @@ package com.googlecode.flexxb.api {
 			cls.addArgument("lastName");
 			return cls;
 		}
-
+		
+		[Test]
 		public function testSerializationWithApiDescriptor() : void {
 			var cls : FxClass = buildDescriptor();
 			FlexXBEngine.instance.api.processTypeDescriptor(cls);
@@ -124,42 +108,44 @@ package com.googlecode.flexxb.api {
 			person.age = 34;
 			var xml : XML = FlexXBEngine.instance.serialize(person);
 			var copy : Person = FlexXBEngine.instance.deserialize(xml, Person);
-			assertEquals("Wrong firstName", person.firstName, copy.firstName);
-			assertEquals("Wrong lastName", person.lastName, copy.lastName);
-			assertEquals("Wrong birthDate", person.birthDate.toString(), copy.birthDate.toString());
-			assertEquals("Wrong age", 0, copy.age);
+			Assert.assertEquals("Wrong firstName", person.firstName, copy.firstName);
+			Assert.assertEquals("Wrong lastName", person.lastName, copy.lastName);
+			Assert.assertEquals("Wrong birthDate", person.birthDate.toString(), copy.birthDate.toString());
+			Assert.assertEquals("Wrong age", 0, copy.age);
 		}
-
+		
+		[Test]
 		public function testFileDescriptorProcessing() : void {
 			var xml : XML = getXmlDescriptor();
 			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
-			assertEquals("Wrong number of classes parsed", 3, wrapper.descriptors.length);
-			assertEquals("Wrong version", 1, wrapper.version);
-			assertEquals("Wrong member count for first class", 4, FxClass(wrapper.descriptors[0]).flexxb_api_internal::members.length);
-			assertEquals("Wrong constructor argument count for second class", 2, FxClass(wrapper.descriptors[1]).flexxb_api_internal::constructorArguments.length);
+			Assert.assertEquals("Wrong number of classes parsed", 3, wrapper.descriptors.length);
+			Assert.assertEquals("Wrong version", 1, wrapper.version);
+			Assert.assertEquals("Wrong member count for first class", 4, FxClass(wrapper.descriptors[0]).flexxb_api_internal::members.length);
+			Assert.assertEquals("Wrong constructor argument count for second class", 2, FxClass(wrapper.descriptors[1]).flexxb_api_internal::constructorArguments.length);
 		}
 
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void {
 			doElementAssertion(apiMember, xmlArray);
-			assertEquals("Wrong memberName", apiMember.memberName, xmlArray.memberName);
-			assertEquals("Wrong memberType", apiMember.memberType, xmlArray.type);
+			Assert.assertEquals("Wrong memberName", apiMember.memberName, xmlArray.memberName);
+			Assert.assertEquals("Wrong memberType", apiMember.memberType, xmlArray.type);
 		}
 
 		private function doElementAssertion(apiMember : FxElement, xmlElement : XmlElement) : void {
 			doMemberAssertion(apiMember, xmlElement);
-			assertEquals("Wrong getFromCache", apiMember.getFromCache, xmlElement.getFromCache);
-			assertEquals("Wrong serializePartialElement", apiMember.serializePartialElement, xmlElement.serializePartialElement);
+			Assert.assertEquals("Wrong getFromCache", apiMember.getFromCache, xmlElement.getFromCache);
+			Assert.assertEquals("Wrong serializePartialElement", apiMember.serializePartialElement, xmlElement.serializePartialElement);
 		}
 
 		private function doMemberAssertion(apiMember : FxMember, xmlMember : XmlMember) : void {
-			assertEquals("Wrong field name", apiMember.fieldName, xmlMember.fieldName);
-			assertEquals("Wrong field type", apiMember.fieldType, xmlMember.fieldType);
-			assertEquals("Field access type is wrong for writeOnly", apiMember.fieldAccessType == AccessorType.WRITE_ONLY, xmlMember.writeOnly);
-			assertEquals("Field access type is wrong for readOnly", apiMember.fieldAccessType == AccessorType.READ_ONLY, xmlMember.readOnly);
-			assertEquals("Wrong ignoreOn", apiMember.ignoreOn, xmlMember.ignoreOn);
-			assertEquals("Wrong alias", apiMember.alias, xmlMember.alias);
+			Assert.assertEquals("Wrong field name", apiMember.fieldName, xmlMember.fieldName);
+			Assert.assertEquals("Wrong field type", apiMember.fieldType, xmlMember.fieldType);
+			Assert.assertEquals("Field access type is wrong for writeOnly", apiMember.fieldAccessType == AccessorType.WRITE_ONLY, xmlMember.writeOnly);
+			Assert.assertEquals("Field access type is wrong for readOnly", apiMember.fieldAccessType == AccessorType.READ_ONLY, xmlMember.readOnly);
+			Assert.assertEquals("Wrong ignoreOn", apiMember.ignoreOn, xmlMember.ignoreOn);
+			Assert.assertEquals("Wrong alias", apiMember.alias, xmlMember.alias);
 		}
 		
+		[Test]
 		public function testMultipleNamespace() : void{
 			var cls : FxClass = new FxClass(Mock);
 			var member : FxMember = cls.addAttribute("version", Number, null, "Version");
@@ -169,12 +155,13 @@ package com.googlecode.flexxb.api {
 			member = cls.addAttribute("uue", String);
 			member = cls.addAttribute("uueedr", String);
 			member.setNamespace(new Namespace("me", "www.me.com"));
-			assertEquals("Wrong number of registered namespaces upon programatic build", 2, count(cls.flexxb_api_internal::namespaces));
+			Assert.assertEquals("Wrong number of registered namespaces upon programatic build", 2, count(cls.flexxb_api_internal::namespaces));
 			var xml : XML = getXmlDescriptor();
 			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
-			assertEquals("Wrong number of registered namespaces upon deserialization", 2, count(FxClass(wrapper.descriptors[0]).flexxb_api_internal::namespaces));
+			Assert.assertEquals("Wrong number of registered namespaces upon deserialization", 2, count(FxClass(wrapper.descriptors[0]).flexxb_api_internal::namespaces));
 		}
 		
+		[Test]
 		public function testFullAPIProcessing() : void{
 			FlexXBEngine.instance.registerSimpleTypeConverter(new W3CDateConverter());
 			var cls : FxClass = new FxClass(APITestObject, "ATO");
@@ -204,16 +191,16 @@ package com.googlecode.flexxb.api {
 			var xml : XML = FlexXBEngine.instance.serialize(target);
 			var copy : APITestObject = FlexXBEngine.instance.deserialize(xml, APITestObject);
 			
-			assertEquals("Id is wrong", target.id, copy.id);
-			assertEquals("Name is wrong", target.name, copy.name);
-			assertEquals("Version is wrong", target.version, copy.version);
-			assertEquals("XmlAtts is wrong", target.xmlAtts.toXMLString(), copy.xmlAtts.toXMLString());
-			assertEquals("XmlData is wrong", target.xmlData.toXMLString(), copy.xmlData.toXMLString());
-			assertEquals("Results count is wrong", target.results.length, copy.results.length);
+			Assert.assertEquals("Id is wrong", target.id, copy.id);
+			Assert.assertEquals("Name is wrong", target.name, copy.name);
+			Assert.assertEquals("Version is wrong", target.version, copy.version);
+			Assert.assertEquals("XmlAtts is wrong", target.xmlAtts.toXMLString(), copy.xmlAtts.toXMLString());
+			Assert.assertEquals("XmlData is wrong", target.xmlData.toXMLString(), copy.xmlData.toXMLString());
+			Assert.assertEquals("Results count is wrong", target.results.length, copy.results.length);
 			for(var i : int = 0; i < target.results.length; i++){
-				assertEquals("Results memeber indexed " + i + " is wrong", target.results[i], copy.results[i]);
+				Assert.assertEquals("Results memeber indexed " + i + " is wrong", target.results[i], copy.results[i]);
 			}
-			assertEquals("Current date is wrong", target.currentDate.time, copy.currentDate.time);
+			Assert.assertEquals("Current date is wrong", target.currentDate.time, copy.currentDate.time);
 		}
 		
 		private function count(map : Dictionary) : int{
