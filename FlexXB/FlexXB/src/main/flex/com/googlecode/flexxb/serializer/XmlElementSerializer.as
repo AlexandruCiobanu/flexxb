@@ -51,7 +51,9 @@ package com.googlecode.flexxb.serializer {
 			var child : XML = <xml />;
 			if (isComplexType(object)) {
 				child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
-			} else {
+			}else if(annotation.fieldType == XML){
+				child.appendChild(new XML(object));
+			}else{
 				var stringValue : String = serializer.converterStore.objectToString(object, annotation.fieldType);
 				try {
 					child.appendChild(stringValue);
