@@ -29,9 +29,7 @@ package com.googlecode.flexxb.serializer {
 	 *
 	 */
 	internal class XmlMemberSerializer implements ISerializer {
-		/**
-		 * @see ISerializer#serialize
-		 */
+		
 		public function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML {
 			var element : XmlMember = annotation as XmlMember;
 			
@@ -60,10 +58,7 @@ package com.googlecode.flexxb.serializer {
 		 */
 		protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
 		}
-
-		/**
-		 * @see ISerializer#deserialize()
-		 */
+		
 		public function deserialize(xmlData : XML, annotation : Annotation, serializer : SerializerCore) : Object {
 			var element : XmlMember = annotation as XmlMember;
 			
@@ -132,7 +127,6 @@ package com.googlecode.flexxb.serializer {
 				} else {
 					xmlElement = null;
 					break;
-						//throw new ProcessingError(element.ownerClass.fieldType, element.fieldName, false, "Path element not found(" + pathElement + ")");
 				}
 			}
 			return xmlElement;

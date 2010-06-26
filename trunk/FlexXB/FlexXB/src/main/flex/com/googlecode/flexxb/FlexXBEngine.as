@@ -99,8 +99,8 @@ package com.googlecode.flexxb {
 		}
 
 		/**
-		 *
-		 * @return
+		 * Get a reference to the configuration object
+		 * @return instance of type <code>com.googlecode.flexxb.Configuration</code>
 		 *
 		 */
 		public function get configuration() : Configuration {
@@ -108,8 +108,8 @@ package com.googlecode.flexxb {
 		}
 
 		/**
-		 *
-		 * @return
+		 * Get a reference to the api object
+		 * @return instance of type <code>com.googlecode.flexxb.api.IFlexXBApi</code>
 		 *
 		 */
 		public final function get api() : IFlexXBApi {
@@ -186,48 +186,23 @@ package com.googlecode.flexxb {
 		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
 			AnnotationFactory.instance.registerAnnotation(name, annotationClazz, serializer, overrideExisting);
 		}
-
-		/**
-		 *
-		 * @see flash.events.IEventDispatcher#addEventListener()
-		 *
-		 */
+		
 		public function addEventListener(type : String, listener : Function, useCapture : Boolean = false, priority : int = 0, useWeakReference : Boolean = false) : void {
 			core.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
-
-		/**
-		 *
-		 * @see flash.events.IEventDispatcher#removeEventListener()
-		 *
-		 */
+		
 		public function removeEventListener(type : String, listener : Function, useCapture : Boolean = false) : void {
 			core.removeEventListener(type, listener, useCapture);
 		}
-
-		/**
-		 *
-		 * @see flash.events.IEventDispatcher#dispatchEvent()
-		 *
-		 */
+		
 		public function dispatchEvent(event : Event) : Boolean {
 			return false;
 		}
-
-		/**
-		 *
-		 * @see flash.events.IEventDispatcher#hasEventListener()
-		 *
-		 */
+		
 		public function hasEventListener(type : String) : Boolean {
 			return false;
 		}
-
-		/**
-		 *
-		 * @see flash.events.IEventDispatcher#willTrigger()
-		 *
-		 */
+		
 		public function willTrigger(type : String) : Boolean {
 			return false;
 		}
