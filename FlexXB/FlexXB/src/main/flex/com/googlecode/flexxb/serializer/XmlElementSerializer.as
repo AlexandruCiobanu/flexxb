@@ -40,10 +40,7 @@ package com.googlecode.flexxb.serializer {
 		 */
 		public function XmlElementSerializer() {
 		}
-
-		/**
-		 * @see XmlMemberSerializer#serializeObject()
-		 */
+		
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
 			if(serializer.configuration.enableLogging){
 				log.info("Serializing field {0} as element", annotation.fieldName);
@@ -80,24 +77,21 @@ package com.googlecode.flexxb.serializer {
 				return cdata(value);
 			}
 		}
-
-		/**
-		 * @see XmlMemberSerializer#deserializeObject()
-		 */
+		
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object {
 			if(serializer.configuration.enableLogging){
 				log.info("Deserializing element <<{0}>> to field {1}", xmlName, element.fieldName);
 			}
 			var list : XMLList = xmlData.child(xmlName);
 			var xml : XML;
-			if (list.length() == 0) {
+			if (list.length() > 0){
+				xml = list[0];
+			}else{
 				if(element.defaultSetValue){
 					xml = XML(element.defaultSetValue);
 				}else{
 					return null;
 				}
-			}else{
-				xml = list[0];
 			}
 			var type : Class = element.fieldType;
 			if (XmlElement(element).getRuntimeType) {
@@ -113,16 +107,20 @@ package com.googlecode.flexxb.serializer {
 			if (isComplexType(type)) {
 				return serializer.deserialize(xml, type, getFromCache);
 			}
+			var stringValue : String = xml.toString();
 			//FIX: if the type is XML then we have a bit of processing to do
 			//xml data is stored as child of an xml element whch can be namespaced
 			//we remove the wrapper, along with its namespace(s) and keep the
 			//content.
 			if(type == XML){
-				var value : String = xml.toXMLString();
-				value = value.substring(value.indexOf(">") + 1, value.lastIndexOf("<"));
-				xml = XML(value);
+				stringValue = xml.toXMLString();
+				if(xml.length() > 0){
+					stringValue = stringValue.substring(stringValue.indexOf(">") + 1, stringValue.lastIndexOf("<") - 1);
+				}else{
+					stringValue = "";
+				}
 			}
-			return serializer.converterStore.stringToObject(xml.toString(), type);
+			return serializer.converterStore.stringToObject(stringValue, type);
 		}
 	}
 }
