@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>FlexXB-MP</name>
+	<comment>FlexXB Main Project</comment>
+	<projects>
+		<project>FlexXB</project>
+		<project>FlexXBTest</project>
+		<project>FxMOD</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>
