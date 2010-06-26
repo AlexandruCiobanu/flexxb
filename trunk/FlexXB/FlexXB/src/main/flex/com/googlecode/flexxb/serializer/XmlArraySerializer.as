@@ -39,10 +39,7 @@ package com.googlecode.flexxb.serializer {
 		public function XmlArraySerializer() {
 			super();
 		}
-
-		/**
-		 * @see XmlMemberSerializer#serializeObject()
-		 */
+		
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
 			if(serializer.configuration.enableLogging){
 				log.info("Serializing field {0} as array element", annotation.fieldName);
@@ -85,10 +82,7 @@ package com.googlecode.flexxb.serializer {
 				parentXml.appendChild(result);
 			}
 		}
-
-		/**
-		 * @see XmlMemberSerializer#deserializeObject()
-		 */
+		
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object {
 			if(serializer.configuration.enableLogging){
 				log.info("Deserializing array element <<{0}>> to field {1} with items of type <<{2}>>", xmlName, element.fieldName, XmlArray(element).type);
@@ -98,7 +92,7 @@ package com.googlecode.flexxb.serializer {
 			var array : XmlArray = element as XmlArray;
 
 			var xmlArray : XMLList;
-
+			//get the xml list representing the array
 			if (array.useOwnerAlias()) {
 				if (array.memberName) {
 					xmlName = array.memberName;
@@ -113,12 +107,22 @@ package com.googlecode.flexxb.serializer {
 					xmlArray = xmlArray.children();
 				}
 			}
+			//extract the items from xml, build the result array and return it
 			if (xmlArray && xmlArray.length() > 0) {
 				var list : Array = [];
-				for each (var xmlChild : XML in xmlArray) {
-					var member : Object = getValue(xmlChild, array.type, array.getFromCache, serializer);
-					if (member != null) {
-						list.push(member);
+				if(!array.memberName && xmlArray.length() == 1 && xmlArray[0].nodeKind() == "text"){
+					// we need to handle differently the case in which we have items of simple type 
+					// and have no item name defined
+					var values : Array = xmlArray[0].toString().split("\n");
+					for each(var value : String in values){
+						list.push(getValue(XML(value), array.type, array.getFromCache, serializer))
+					}
+				}else{
+					for each (var xmlChild : XML in xmlArray) {
+						var member : Object = getValue(xmlChild, array.type, array.getFromCache, serializer);
+						if (member != null) {
+							list.push(member);
+						}
 					}
 				}
 				addMembersToResult(list, result);
