@@ -23,6 +23,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.Mock3;
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
+	
 	import org.flexunit.Assert;
 	
 	public class XmlSerializerTest {
@@ -66,7 +67,7 @@ package com.googlecode.flexxb {
 		[Test]
 		public function testXmlTypedFields() : void{
 			var target : XmlTypedObj = new XmlTypedObj();
-			target.firstXml = <test id="1"><element>retw</element></test>;
+			target.firstXml = <test id="1" xmlns="http://com.example/model"/>;
 			target.secondXml = <person id="3"><name>Doe</name></person>;
 			var engine : FlexXBEngine = new FlexXBEngine();
 			engine.processTypes(XmlTypedObj);
@@ -110,6 +111,25 @@ package com.googlecode.flexxb {
 			while (i < tst.nums.length) {
 				Assert.assertEquals("Element " + i + " does not match", tst.nums[i], copy.nums[i++]);
 			}
+		}
+		
+		[Test]
+		public function verifySimpleTypedNoWrapperArrays() : void{
+			var list : List = new List();
+			list.items = ["one", "two", "three"];
+			var xml : XML = FlexXBEngine.instance.serialize(list);
+			var copy : List = FlexXBEngine.instance.deserialize(xml, List);
+			Assert.assertEquals("Item count is incorrect", 3, copy.items.length);
+			xml = <List>
+					  <items>
+					    one
+					    two
+					    three
+					  </items>
+				  </List>;
+			copy = FlexXBEngine.instance.deserialize(xml, List);
+			Assert.assertEquals("Item count is incorrect", 3, copy.items.length);
+			
 		}
 		
 		[Test]
