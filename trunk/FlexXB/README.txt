@@ -131,6 +131,11 @@ KNOWN LIMITATIONS
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+1.6.2 - 27-06-2010
+	  - Fix: Issue 26 - Xml fields get serialized in escaped chars 
+	  - Fix: Issue 27 - Xml fields are not correctly deserialized if the value only contains an inline element
+	  -	Fix: Issue 28 - Array of simple typed items without wrapping elements is not deserialized correctly 
+
 1.6.1-R2 - 24-05-2010
 	 - Changed the licensing scheme to Apache License v2.0
 	 - Upgraded the unit testing to Flex Unit 4
