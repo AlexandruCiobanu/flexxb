@@ -30,7 +30,7 @@ package com.googlecode.flexxb {
 	/**
 	 *
 	 * @author Alexutz
-	 *
+	 * @private
 	 */
 	internal final class FlexXBApi implements IFlexXBApi {
 		
@@ -51,24 +51,14 @@ package com.googlecode.flexxb {
 			engine.registerSimpleTypeConverter(new AccessorTypeConverter());
 			engine.processTypes(FxAttribute, FxElement, FxArray, FxConstructorArgument);
 		}
-
-		/**
-		 *
-		 * @see IFlexXBApi#processTypeDescriptor()
-		 *
-		 */
+		
 		public function processTypeDescriptor(apiDescriptor : FxClass) : void {
 			if (apiDescriptor) {
 				var type : Class = apiDescriptor.type;
 				store.registerDescriptor(apiDescriptor.toXml(), type);
 			}
 		}
-
-		/**
-		 *
-		 * @see IFlexXBApi#processDescriptorsFromXml()
-		 *
-		 */
+		
 		public function processDescriptorsFromXml(xml : XML) : void {
 			if (xml) {
 				var apiWrapper : FxApiWrapper = engine.deserialize(xml, FxApiWrapper);
