@@ -147,7 +147,7 @@
 				haltonfailure="false"
 				verbose="true"
 				failureproperty="flexunit.failed"
-				localTrusted="false"
+				localTrusted="true"
 				port="1024"
 				buffer="262144"
 				timeout="60000"
