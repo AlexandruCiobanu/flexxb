@@ -69,9 +69,7 @@ package com.googlecode.flexxb.service {
 		 */
 		public function set url(value : String) : void {
 			_url = value;
-			if (hasEventListener(SettingsChangedEvent.SETTINGSCHANGE)) {
-				dispatchEvent(new SettingsChangedEvent());
-			}
+			notify("url");
 		}
 
 		/**
@@ -90,9 +88,7 @@ package com.googlecode.flexxb.service {
 		 */
 		public function set method(value : String) : void {
 			_method = value;
-			if (hasEventListener(SettingsChangedEvent.SETTINGSCHANGE)) {
-				dispatchEvent(new SettingsChangedEvent());
-			}
+			notify("method");
 		}
 
 		/**
@@ -111,9 +107,7 @@ package com.googlecode.flexxb.service {
 		 */
 		public function set destination(value : String) : void {
 			_destination = value;
-			if (hasEventListener(SettingsChangedEvent.SETTINGSCHANGE)) {
-				dispatchEvent(new SettingsChangedEvent());
-			}
+			notify("destination");
 		}
 
 		/**
@@ -132,9 +126,7 @@ package com.googlecode.flexxb.service {
 		 */
 		public function set timeout(value : int) : void {
 			_timeout = value;
-			if (hasEventListener(SettingsChangedEvent.SETTINGSCHANGE)) {
-				dispatchEvent(new SettingsChangedEvent());
-			}
+			notify("timeout");
 		}
 
 		/**
@@ -153,8 +145,12 @@ package com.googlecode.flexxb.service {
 		 */
 		public function set logMessages(value : Boolean) : void {
 			_logMessages = value;
+			notify("logMessages");
+		}
+		
+		protected final function notify(field : String, oldValue : Object = null, newValue : Object = null) : void{
 			if (hasEventListener(SettingsChangedEvent.SETTINGSCHANGE)) {
-				dispatchEvent(new SettingsChangedEvent());
+				dispatchEvent(new SettingsChangedEvent(field, oldValue, newValue));
 			}
 		}
 	}
