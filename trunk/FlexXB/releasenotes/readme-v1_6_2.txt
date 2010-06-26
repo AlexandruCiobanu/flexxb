@@ -1,5 +1,5 @@
 /*******************************************************************************************************/
-/**			 FlexXB version 1.6.2 (26-06-2010)		      **/
+/**			 FlexXB version 1.6.2 (27-06-2010)		      **/
 /**								by Alex Ciobanu 		      **/
 /*******************************************************************************************************/
 
@@ -19,7 +19,7 @@ limitations under the License.
 
 CONTENTS
 
-FlexXB-1_6_2-26062010-bin.zip - contains the FlexXB library along with the test application
+FlexXB-1_6_2-27062010-bin.zip - contains the FlexXB library along with the test application
 			/bin/ 			    - SWC file and test application directory
 			/bin/test/ 		    - the test application
 			/bin/flexunit               - flexunit automated test reports
@@ -28,7 +28,7 @@ FlexXB-1_6_2-26062010-bin.zip - contains the FlexXB library along with the test 
 			/samples/	            - samples showing FlexXB features 
 			/README.txt		    - version release notes
 
-FlexXB-1_6_2-26062010-src.zip - contains source files
+FlexXB-1_6_2-27062010-src.zip - contains source files
 			/FlexXB/	    - FlexXB project sources
 			/FlexXBTest        - FlexXB test application sources
 
@@ -131,6 +131,11 @@ KNOWN LIMITATIONS
 - Circular references in the object graph will cause StackOverflow exceptions.
 
 RELEASE NOTES
+1.6.2 - 27-06-2010
+	  - Fix: Issue 26 - Xml fields get serialized in escaped chars 
+	  - Fix: Issue 27 - Xml fields are not correctly deserialized if the value only contains an inline element
+	  -	Fix: Issue 28 - Array of simple typed items without wrapping elements is not deserialized correctly 
+
 1.6.1-R2 - 24-05-2010
 	 - Changed the licensing scheme to Apache License v2.0
 	 - Upgraded the unit testing to Flex Unit 4
