@@ -15,8 +15,12 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
+	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.testData.List;
 	import com.googlecode.testData.Mock;
+	
 	import org.flexunit.Assert;
+	import org.flexunit.assertThat;
 	
 	public class XmlArrayTest extends AnnotationTest {
 		
@@ -30,6 +34,5 @@ package com.googlecode.flexxb.annotation {
 			Assert.assertEquals("SerializePartialElement is incorrect", args[4], XmlArray(annotation).serializePartialElement);
 			Assert.assertEquals("Type is incorrect", args[5], XmlArray(annotation).type);
 		}
-
 	}
 }
