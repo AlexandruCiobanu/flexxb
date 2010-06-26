@@ -25,6 +25,7 @@
     <classEntry path="com.googlecode.flexxb.annotation.XmlElement"/>
     <classEntry path="com.googlecode.flexxb.annotation.XmlMember"/>
     <classEntry path="com.googlecode.flexxb.api.AccessorType"/>
+    <classEntry path="com.googlecode.flexxb.api.AccessorTypeConverter"/>
     <classEntry path="com.googlecode.flexxb.api.FxApiWrapper"/>
     <classEntry path="com.googlecode.flexxb.api.FxArray"/>
     <classEntry path="com.googlecode.flexxb.api.FxAttribute"/>
@@ -37,6 +38,7 @@
     <classEntry path="com.googlecode.flexxb.api.IFlexXBApi"/>
     <classEntry path="com.googlecode.flexxb.api.Stage"/>
     <classEntry path="com.googlecode.flexxb.api.StageXmlConverter"/>
+    <classEntry path="com.googlecode.flexxb.api.flexxb_api_internal"/>
     <classEntry path="com.googlecode.flexxb.converter.ClassTypeConverter"/>
     <classEntry path="com.googlecode.flexxb.converter.IConverter"/>
     <classEntry path="com.googlecode.flexxb.converter.W3CDateConverter"/>
@@ -65,9 +67,9 @@
     <classEntry path="com.googlecode.flexxb.service.SettingsChangedEvent"/>
     <classEntry path="com.googlecode.flexxb.util.Instanciator"/>
     <classEntry path="com.googlecode.flexxb.util.cdata"/>
-    <classEntry path="com.googlecode.flexxb.api.AccessorTypeConverter"/>
     <classEntry path="com.googlecode.flexxb.util.log.ILogger"/>
     <classEntry path="com.googlecode.flexxb.util.log.LogFactory"/>
+    <classEntry path="com.googlecode.flexxb.util.log.Logger"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
