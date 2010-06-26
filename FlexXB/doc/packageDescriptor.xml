@@ -75,7 +75,7 @@
          <package name="com.googlecode.flexxb.serializer"> 
             <shortDescription> 
                 <![CDATA[ 
-                    Holds the FlxXB defined serializers.
+                    Holds the FlexXB defined serializers.
                 ]]> 
             </shortDescription> 
             <description> 
@@ -105,6 +105,18 @@
             <description> 
                 <![CDATA[ 
                     Holds various utilities used by the project: the cdata function and the Instanciator class, allowing instantiating objects with a variable list of arguments.  
+                ]]> 
+            </description> 
+        </package> 
+        <package name="com.googlecode.flexxb.util.log"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
                 ]]> 
             </description> 
         </package> 
