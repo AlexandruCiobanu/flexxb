@@ -27,6 +27,12 @@ package com.googlecode.flexxb.service {
 		 *
 		 */
 		public static const SETTINGSCHANGE : String = "settingsChange";
+		
+		private var _fieldName : String;
+		
+		private var _oldValue : Object;
+		
+		private var _newValue : Object;
 
 		/**
 		 *
@@ -34,8 +40,24 @@ package com.googlecode.flexxb.service {
 		 * @param cancelable
 		 *
 		 */
-		public function SettingsChangedEvent(bubbles : Boolean = false, cancelable : Boolean = false) {
-			super(SETTINGSCHANGE, bubbles, cancelable);
+		public function SettingsChangedEvent(fieldName : String, oldValue : Object = null, newValue : Object = null) {
+			super(SETTINGSCHANGE);
+			_fieldName = fieldName;
+			_oldValue = oldValue;
+			_newValue = newValue;
+		}
+		
+		
+		public function get fieldName() : String{
+			return _fieldName;
+		}
+
+		public function get oldValue() : Object{
+			return _oldValue;
+		}
+
+		public function get newValue() : Object{
+			return _newValue;
 		}
 	}
 }
