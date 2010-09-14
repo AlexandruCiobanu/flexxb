@@ -16,8 +16,6 @@
  */
 package com.googlecode.flexxb.util.log
 {
-	import com.googlecode.flexxb.util.log.ILogger;
-	
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.utils.StringUtil;
