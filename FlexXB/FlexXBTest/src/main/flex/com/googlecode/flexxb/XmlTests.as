@@ -40,5 +40,7 @@ package com.googlecode.flexxb {
 		public var specialChars : XmlSpecialCharEscapeTest;
 		
 		public var defaultValue : DefaultValueTest;
+		
+		public var namespaceTest : NamespaceTest;
 	}
 }

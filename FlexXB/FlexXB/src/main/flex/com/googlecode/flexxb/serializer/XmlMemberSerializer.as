@@ -20,7 +20,7 @@ package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.api.Stage;
 	import com.googlecode.flexxb.error.ProcessingError;
-
+	
 	import flash.utils.getQualifiedClassName;
 
 	/**
@@ -41,6 +41,10 @@ package com.googlecode.flexxb.serializer {
 
 			if (element.isPath()) {
 				location = setPathElement(element, parentXml);
+			}
+			
+			if(element.hasNamespaceRef() && element.nameSpace != element.ownerClass.nameSpace && mustAddNamespace(element.nameSpace, parentXml)){
+				parentXml.addNamespace(element.nameSpace);
 			}
 
 			serializeObject(object, element, location, serializer);
@@ -89,7 +93,8 @@ package com.googlecode.flexxb.serializer {
 				xmlName = element.xmlName;
 			}
 
-			return deserializeObject(xmlElement, xmlName, element, serializer);
+			var value : Object = deserializeObject(xmlElement, xmlName, element, serializer);
+			return value;
 		}
 
 		/**
@@ -148,14 +153,24 @@ package com.googlecode.flexxb.serializer {
 				if (path.length() > 0) {
 					cursor = path[0];
 				} else {
-					var c : XML = <xml />;
-					c.setName(pathElement);
-					cursor.appendChild(c);
-					cursor = c;
+					var pathItem : XML = <xml />;
+					pathItem.setName(pathElement);
+					cursor.appendChild(pathItem);
+					cursor = pathItem;
 				}
 				count++;
 			}
 			return cursor;
+		}
+		
+		private function mustAddNamespace(ns : Namespace, xml : XML) : Boolean{
+			var inScopeNs : Array = xml.inScopeNamespaces();
+			for each(var inNs : Namespace in inScopeNs){
+				if(inNs.uri == ns.uri){
+					return false;
+				}
+			}
+			return true;
 		}
 
 		/**
@@ -173,11 +188,11 @@ package com.googlecode.flexxb.serializer {
 				case "String":
 				case "Boolean":
 				case "Date":
-				case "XML":  {
+				case "XML":
 					return false;
-				}
+				default:
+					return true;
 			}
-			return true;
 		}
 	}
 }
