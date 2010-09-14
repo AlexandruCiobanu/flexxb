@@ -20,4 +20,5 @@ Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estim
 ||   1.6  || 26-Mar-2010 || Flex 4 support  || Delivered ||
 ||   1.6.1  || 20-Apr-2010 || Issue 22, Issue 23  || Delivered||
 ||   1.6.2  || 27-Jun-2010 || Issue 26, Issue 27, Issue 28  || Delivered||
+||   1.6.3  || 15-Sep-2010 || Issue 29  || Delivered||
 ||   1.7  || _To be decided_ || || _To be delivered_||
