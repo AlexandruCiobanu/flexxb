@@ -16,7 +16,7 @@
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.error.DescriptorParsingError;
-
+	
 	import flash.utils.Dictionary;
 
 	/**

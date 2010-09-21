@@ -31,7 +31,7 @@ package com.googlecode.flexxb.serializer {
 	 */
 	public final class XmlArraySerializer extends XmlElementSerializer {
 		
-		private static var log : ILogger = LogFactory.getLog(XmlArraySerializer);
+		private static const LOG : ILogger = LogFactory.getLog(XmlArraySerializer);
 		/**
 		 *Constructor
 		 *
@@ -42,7 +42,7 @@ package com.googlecode.flexxb.serializer {
 		
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
 			if(serializer.configuration.enableLogging){
-				log.info("Serializing field {0} as array element", annotation.fieldName);
+				LOG.info("Serializing field {0} as array element", annotation.fieldName);
 			}
 			var result : XML = <xml />;
 			var xmlArray : XmlArray = annotation as XmlArray;
@@ -85,7 +85,7 @@ package com.googlecode.flexxb.serializer {
 		
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object {
 			if(serializer.configuration.enableLogging){
-				log.info("Deserializing array element <<{0}>> to field {1} with items of type <<{2}>>", xmlName, element.fieldName, XmlArray(element).type);
+				LOG.info("Deserializing array element <<{0}>> to field {1} with items of type <<{2}>>", xmlName, element.fieldName, XmlArray(element).type);
 			}
 			var result : Object = new element.fieldType();
 

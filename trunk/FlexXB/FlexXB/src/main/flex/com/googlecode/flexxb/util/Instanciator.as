@@ -47,45 +47,39 @@ package com.googlecode.flexxb.util {
 		 *
 		 */
 		public static function getInstance(clasz : Class, args : Array = null) : Object {
-			if (!args || args.length == 0) {
-				return new clasz();
+			if (!args) {
+				args = [];
 			}
-			if (args.length == 1) {
-				return new clasz(args[0]);
+			switch(args.length){
+				case 0:
+					return new clasz();
+				case 1:
+					return new clasz(args[0]);
+				case 2:
+					return new clasz(args[0], args[1]);
+				case 3:
+					return new clasz(args[0], args[1], args[2]);
+				case 4:
+					return new clasz(args[0], args[1], args[2], args[3]);
+				case 5:
+					return new clasz(args[0], args[1], args[2], args[3], args[4]);
+				case 6:
+					return new clasz(args[0], args[1], args[2], args[3], args[4], args[5]);
+				case 7:
+					return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+				case 8:
+					return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+				case 9:
+					return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+				case 10:
+					return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
+				default:
+					return null;
 			}
-			if (args.length == 2) {
-				return new clasz(args[0], args[1]);
-			}
-			if (args.length == 3) {
-				return new clasz(args[0], args[1], args[2]);
-			}
-			if (args.length == 4) {
-				return new clasz(args[0], args[1], args[2], args[3]);
-			}
-			if (args.length == 5) {
-				return new clasz(args[0], args[1], args[2], args[3], args[4]);
-			}
-			if (args.length == 6) {
-				return new clasz(args[0], args[1], args[2], args[3], args[4], args[5]);
-			}
-			if (args.length == 7) {
-				return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
-			}
-			if (args.length == 8) {
-				return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
-			}
-			if (args.length == 9) {
-				return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
-			}
-			if (args.length == 10) {
-				return new clasz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
-			}
-			return null;
 		}
 
 		public function Instanciator() {
 			throw new Error("Access static memebers!");
 		}
-
 	}
 }

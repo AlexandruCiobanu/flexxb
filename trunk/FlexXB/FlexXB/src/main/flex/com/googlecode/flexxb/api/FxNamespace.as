@@ -16,14 +16,15 @@
  */
 package com.googlecode.flexxb.api
 {
+		
+	[XmlClass(alias="Namespace")]
+	[ConstructorArg(reference="prefix")]
+	[ConstructorArg(reference="uri")]
 	/**
 	 * 
 	 * @author Alexutz
 	 * 
-	 */	
-	[XmlClass(alias="Namespace")]
-	[ConstructorArg(reference="prefix")]
-	[ConstructorArg(reference="uri")]
+	 */
 	public final class FxNamespace
 	{
 		/**

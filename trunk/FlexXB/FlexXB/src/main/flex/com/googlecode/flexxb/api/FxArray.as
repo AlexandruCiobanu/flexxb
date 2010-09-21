@@ -19,15 +19,15 @@ package com.googlecode.flexxb.api {
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
-
-	/**
-	 *
-	 * @author Alexutz
-	 *
-	 */
+	
 	[XmlClass(alias="Array")]
 	[ConstructorArg(reference="field")]
 	[ConstructorArg(reference="alias")]
+	/**
+	 * 
+	 * @author User
+	 * 
+	 */	
 	public class FxArray extends FxElement {
 		public static const INCOMING_XML_NAME : String = "Array";
 

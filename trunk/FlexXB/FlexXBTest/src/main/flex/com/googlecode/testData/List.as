@@ -22,6 +22,9 @@ package com.googlecode.testData {
 		
 		[XmlArray(alias="items", type="String")]
 		public var items : Array = new Array();
+		
+		[XmlArray(alias="nbrs", type="int")]
+		public var numbers : Array = new Array();
 
 		public function List() {
 		}

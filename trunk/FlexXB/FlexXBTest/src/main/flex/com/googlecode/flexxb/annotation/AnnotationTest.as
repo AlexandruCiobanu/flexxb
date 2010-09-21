@@ -17,8 +17,10 @@
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.testData.Mock;
-	import org.flexunit.Assert;
+	
 	import flash.utils.describeType;
+	
+	import org.flexunit.Assert;
 
 	/**
 	 *

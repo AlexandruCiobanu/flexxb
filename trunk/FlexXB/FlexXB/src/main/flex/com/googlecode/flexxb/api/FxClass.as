@@ -349,7 +349,7 @@ package com.googlecode.flexxb.api {
 			items[XmlClass.ARGUMENT_ID] = idField;
 			items[XmlClass.ARGUMENT_VALUE] = defaultValueField;
 
-			for (var key : *in items) {
+			for (var key : * in items) {
 				if (items[key] != null) {
 					xml.appendChild(<arg key={key} value={items[key]} />)
 				}

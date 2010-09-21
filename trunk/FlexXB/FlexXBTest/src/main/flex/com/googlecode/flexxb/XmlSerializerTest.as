@@ -126,9 +126,15 @@ package com.googlecode.flexxb {
 					    two
 					    three
 					  </items>
+					  <nbrs>
+					    1
+					    2
+					    3
+					  </nbrs>		
 				  </List>;
 			copy = FlexXBEngine.instance.deserialize(xml, List);
 			Assert.assertEquals("Item count is incorrect", 3, copy.items.length);
+			Assert.assertEquals("Numbers count is incorrect", 3, copy.numbers.length);
 			
 		}
 		

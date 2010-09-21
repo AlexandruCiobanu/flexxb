@@ -17,28 +17,23 @@
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
-	import com.googlecode.flexxb.annotation.XmlArray;
-	import com.googlecode.flexxb.annotation.XmlAttribute;
 	import com.googlecode.flexxb.annotation.XmlClass;
-	import com.googlecode.flexxb.annotation.XmlElement;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.api.Stage;
+	import com.googlecode.flexxb.cache.ObjectCache;
+	import com.googlecode.flexxb.cache.ObjectPool;
+	import com.googlecode.flexxb.interfaces.IConverterStore;
+	import com.googlecode.flexxb.interfaces.IDescriptorStore;
+	import com.googlecode.flexxb.IXmlSerializable;
+	import com.googlecode.flexxb.persistence.IPersistable;
 	import com.googlecode.flexxb.persistence.PersistableObject;
 	import com.googlecode.flexxb.serializer.ISerializer;
-	import com.googlecode.flexxb.serializer.XmlArraySerializer;
-	import com.googlecode.flexxb.serializer.XmlAttributeSerializer;
-	import com.googlecode.flexxb.serializer.XmlClassSerializer;
-	import com.googlecode.flexxb.serializer.XmlElementSerializer;
 	import com.googlecode.flexxb.util.Instanciator;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 	
 	import flash.events.EventDispatcher;
-
-	[Event(name="preserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
-	[Event(name="postserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
-	[Event(name="predeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
-	[Event(name="postdeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	
 	/**
 	 *
 	 * @author Alexutz
@@ -46,14 +41,8 @@ package com.googlecode.flexxb {
 	 */
 	public final class SerializerCore extends EventDispatcher {
 		
-		private static var log : ILogger = LogFactory.getLog(SerializerCore);
+		private static const LOG : ILogger = LogFactory.getLog(SerializerCore);
 		
-		{
-			AnnotationFactory.instance.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
-			AnnotationFactory.instance.registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
-			AnnotationFactory.instance.registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
-			AnnotationFactory.instance.registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
-		}
 		/**
 		 *
 		 */
@@ -66,6 +55,8 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		private var _configuration : Configuration;
+		
+		private var itemStack : Array;
 
 		/**
 		 * Constructor
@@ -74,7 +65,8 @@ package com.googlecode.flexxb {
 		public function SerializerCore(descriptor : DescriptorStore, converter : ConverterStore, configuration : Configuration) {
 			if (!descriptor || !converter) {
 				throw new Error("Converter and descriptor stores must not be null");
-			}
+			}ObjectCache;ObjectPool;
+			itemStack = [];
 			_descriptorStore = descriptor;
 			_converterStore = converter;
 			//We always have a reference to a configuration object
@@ -113,11 +105,11 @@ package com.googlecode.flexxb {
 		 */
 		public final function serialize(object : Object, partial : Boolean = false) : XML {
 			if(configuration.enableLogging){
-				log.info("Started object serialization. Partial flag is {0}", partial);
+				LOG.info("Started object serialization. Partial flag is {0}", partial);
 			}
 			if (object == null) {
 				if(configuration.enableLogging){
-					log.info("Object is null. Ended serialization");
+					LOG.info("Object is null. Ended serialization");
 				}
 				return null;
 			}
@@ -156,7 +148,7 @@ package com.googlecode.flexxb {
 			dispatchEvent(XmlEvent.createPostSerializeEvent(object, xmlData));
 			
 			if(configuration.enableLogging){
-				log.info("Ended object serialization");
+				LOG.info("Ended object serialization");
 			}
 			
 			return xmlData;
@@ -186,7 +178,7 @@ package com.googlecode.flexxb {
 		 */
 		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : Object {
 			if(configuration.enableLogging){
-				log.info("Started xml deserialization to type {0}. GetFromCache flag is {1}", objectClass, getFromCache);
+				LOG.info("Started xml deserialization to type {0}. GetFromCache flag is {1}", objectClass, getFromCache);
 			}
 			if (xmlData) {
 				if (!objectClass) {
@@ -194,18 +186,16 @@ package com.googlecode.flexxb {
 				}
 				if (objectClass) {
 					var result : Object;
-					var id : String = getId(objectClass, xmlData);
+					var itemId : String = getId(objectClass, xmlData);
 					var foundInCache : Boolean;
 
 					//get object from cache
-					if (id && ModelObjectCache.instance.isCached(id, objectClass)) {
+					if (configuration.allowCaching && itemId && configuration.cacheProvider.isInCache(itemId, objectClass)) {
 						if (getFromCache) {
-							return ModelObjectCache.instance.getObject(id, objectClass);
+							return configuration.cacheProvider.getFromCache(itemId, objectClass);
 						}
-						result = ModelObjectCache.instance.getObject(id, objectClass);
-						if (result) {
-							foundInCache = true;
-						}
+						result = configuration.cacheProvider.getFromCache(itemId, objectClass);
+						foundInCache = result != null;
 					}
 
 					var classDescriptor : XmlClass;
@@ -227,16 +217,16 @@ package com.googlecode.flexxb {
 							}
 						}
 						//create object instance
-						result = Instanciator.getInstance(objectClass, _arguments);
-						//put new object in cache
-						if (id) {
-							ModelObjectCache.instance.putObject(id, result);
+						if(configuration.allowCaching){
+							result = configuration.cacheProvider.getNewInstance(objectClass, itemId, _arguments);
+						}else{
+							result = Instanciator.getInstance(objectClass, _arguments);
 						}
 					}
 
 					//dispatch preDeserializeEvent
 					dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
-
+					itemStack.push(result);
 					//update object fields
 					if (_descriptorStore.isCustomSerializable(objectClass)) {
 						IXmlSerializable(result).fromXml(xmlData);
@@ -257,19 +247,19 @@ package com.googlecode.flexxb {
 							}
 						}
 					}
-
+					itemStack.pop();
 					//dispatch postDeserializeEvent
 					dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
 					
 					if(configuration.enableLogging){
-						log.info("Ended xml deserialization");
+						LOG.info("Ended xml deserialization");
 					}
 					
 					return result;
 				}
 			}
 			if(configuration.enableLogging){
-				log.info("Ended xml deserialization");
+				LOG.info("Ended xml deserialization");
 			}
 			return null;
 		}
@@ -310,17 +300,17 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		private function getId(objectClass : Class, xmlData : XML) : String {
-			var id : String;
+			var itemId : String;
 			if (_descriptorStore.isCustomSerializable(objectClass)) {
-				id = _descriptorStore.getCustomSerializableReference(objectClass).getIdValue(xmlData);
+				itemId = _descriptorStore.getCustomSerializableReference(objectClass).getIdValue(xmlData);
 			} else {
 				var classDescriptor : XmlClass = _descriptorStore.getDescriptor(objectClass);
 				var idSerializer : ISerializer = AnnotationFactory.instance.getSerializer(classDescriptor.idField);
 				if (idSerializer) {
-					id = String(idSerializer.deserialize(xmlData, classDescriptor.idField, this));
+					itemId = String(idSerializer.deserialize(xmlData, classDescriptor.idField, this));
 				}
 			}
-			return id;
+			return itemId;
 		}
 
 		/**
@@ -329,8 +319,8 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		private function preDeserializeHandler(event : XmlEvent) : void {
-			if (event.object is PersistableObject) {
-				PersistableObject(event.object).stopListening();
+			if (event.object is IPersistable) {
+				IPersistable(event.object).stopListening();
 			}
 		}
 
@@ -341,9 +331,9 @@ package com.googlecode.flexxb {
 		 */
 		private function postDeserializeHandler(event : XmlEvent) : void {
 			var result : Object = event.object;
-			if (result is PersistableObject) {
-				PersistableObject(result).commit();
-				PersistableObject(result).startListening();
+			if (result is IPersistable) {
+				IPersistable(result).commit();
+				IPersistable(result).startListening();
 			}
 		}
 	}

@@ -14,30 +14,34 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode {
-	import com.googlecode.flexxb.cache.CacheTest;
-	import com.googlecode.flexxb.PartialSerializationTest;
-	import com.googlecode.flexxb.XmlTests;
-	import com.googlecode.flexxb.api.ApiTests;
-	import com.googlecode.flexxb.persistence.PersistenceTests;
-	
-	[Suite]
-    [RunWith("org.flexunit.runners.Suite")]
+package com.googlecode.flexxb.interfaces {
+
 	/**
 	 *
 	 * @author Alexutz
 	 *
 	 */
-	public class AllTests {
-		
-		public var xmlTests : XmlTests;
-		
-		public var modelObjectCacheTests : CacheTest;
-		
-		public var persistenceTests : PersistenceTests;
-		
-		public var partialSerializationTests : PartialSerializationTest;
-		
-		public var apiTests : ApiTests;
+	public interface IDescriptorStore {
+		/**
+		 * Get the namespace defined for an object type
+		 * @param object target instance
+		 * @return
+		 *
+		 */
+		function getNamespace(object : Object) : Namespace;
+		/**
+		 * Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
+		 * @param object
+		 * @return
+		 *
+		 */
+		function getXmlName(object : Object) : QName;
+		/**
+		 *
+		 * @param ns
+		 * @return
+		 *
+		 */
+		function getClassByNamespace(ns : String) : Class;
 	}
 }

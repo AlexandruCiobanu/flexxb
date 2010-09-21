@@ -34,7 +34,7 @@ package com.googlecode.flexxb {
 	 */
 	internal final class FlexXBApi implements IFlexXBApi {
 		
-		private static var log : ILogger = LogFactory.getLog(FlexXBApi);
+		private static const LOG : ILogger = LogFactory.getLog(FlexXBApi);
 		
 		private var engine : FlexXBEngine;
 		private var store : DescriptorStore
@@ -66,7 +66,7 @@ package com.googlecode.flexxb {
 					for each (var classDescriptor : FxClass in apiWrapper.descriptors) {
 						if (classDescriptor) {
 							if(engine.configuration.enableLogging){
-								log.info("Processing class {0}", classDescriptor.type);
+								LOG.info("Processing class {0}", classDescriptor.type);
 							}
 							processTypeDescriptor(classDescriptor);
 						}

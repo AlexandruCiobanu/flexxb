@@ -18,7 +18,9 @@ package com.googlecode.flexxb.annotation {
 	import flash.utils.getDefinitionByName;
 
 	/**
-	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", namespace="Namespace_Prefix")]</code></p>
+	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", 
+	 * type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
+	 * order="order_index", namespace="Namespace_Prefix")]</code></p>
 	 * @author aCiobanu
 	 *
 	 */
@@ -38,11 +40,11 @@ package com.googlecode.flexxb.annotation {
 		/**
 		 * @private
 		 */
-		protected var _type : Class;
+		private var _type : Class;
 		/**
 		 * @private
 		 */
-		protected var _memberName : QName;
+		private var _memberName : QName;
 
 		/**
 		 * Constructor

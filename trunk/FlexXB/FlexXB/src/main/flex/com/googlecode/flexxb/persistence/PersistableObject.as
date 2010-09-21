@@ -23,8 +23,7 @@ package com.googlecode.flexxb.persistence {
 	import mx.events.PropertyChangeEventKind;
 
 	use namespace flexxb_persistence_internal;
-
-	[Bindable]
+	
 	/**
 	 * Main implementation of IPersistable. A persistable object is capable of
 	 * tracking changes done to it and reverting to initial values if required.
@@ -64,7 +63,7 @@ package com.googlecode.flexxb.persistence {
 			addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, this.valueChanged, false, Number.MAX_VALUE, false);
 			listen = listenMode;
 		}
-
+		
 		public final function get editMode() : Boolean {
 			return _editMode;
 		}
@@ -82,12 +81,7 @@ package com.googlecode.flexxb.persistence {
 				}
 			}
 		}
-
-		/**
-		 *
-		 * @see IPersistable#modified()
-		 *
-		 */
+		
 		public final function get modified() : Boolean {
 			return _modified || areWatchedFieldsModified();
 		}
@@ -141,11 +135,7 @@ package com.googlecode.flexxb.persistence {
 			}
 			setEditMode(false);
 		}
-
-		/**
-		 * @see IPersistable#rollback()
-		 *
-		 */
+		
 		public final function rollback() : void {
 			if (modified) {
 				listen = false;
@@ -294,7 +284,7 @@ package com.googlecode.flexxb.persistence {
 		private function setModified(value : Boolean) : void {
 			_modified = value;
 			if (!value && changeList) {
-				for (var tracker : *in changeList) {
+				for (var tracker : * in changeList) {
 					delete changeList[tracker];
 				}
 			}

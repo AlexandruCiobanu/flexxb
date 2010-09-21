@@ -16,7 +16,11 @@
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.serializer.ISerializer;
-
+	import com.googlecode.flexxb.serializer.XmlArraySerializer;
+	import com.googlecode.flexxb.serializer.XmlAttributeSerializer;
+	import com.googlecode.flexxb.serializer.XmlClassSerializer;
+	import com.googlecode.flexxb.serializer.XmlElementSerializer;
+	
 	import flash.utils.Dictionary;
 
 	/**
@@ -53,6 +57,10 @@ package com.googlecode.flexxb.annotation {
 			if (_instance) {
 				throw new Error("Use AnnotationFactory.instance instead!");
 			}
+			registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
+			registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
+			registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
+			registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
 		}
 
 		/**

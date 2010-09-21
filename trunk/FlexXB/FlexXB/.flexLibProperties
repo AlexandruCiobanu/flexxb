@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="false" version="1">
   <includeClasses>
+    <classEntry path="com.googlecode.flexxb.CircularReferenceDetector"/>
     <classEntry path="com.googlecode.flexxb.Configuration"/>
     <classEntry path="com.googlecode.flexxb.ConverterStore"/>
     <classEntry path="com.googlecode.flexxb.DescriptorStore"/>
     <classEntry path="com.googlecode.flexxb.FlexXBApi"/>
     <classEntry path="com.googlecode.flexxb.FlexXBEngine"/>
-    <classEntry path="com.googlecode.flexxb.IConverterStore"/>
-    <classEntry path="com.googlecode.flexxb.IDescriptorStore"/>
     <classEntry path="com.googlecode.flexxb.IIdentifiable"/>
     <classEntry path="com.googlecode.flexxb.IXmlSerializable"/>
-    <classEntry path="com.googlecode.flexxb.ModelObjectCache"/>
+    <classEntry path="com.googlecode.flexxb.IdResolver"/>
+    <classEntry path="com.googlecode.flexxb.MetaParser"/>
     <classEntry path="com.googlecode.flexxb.SerializerCore"/>
     <classEntry path="com.googlecode.flexxb.VERSION"/>
     <classEntry path="com.googlecode.flexxb.XmlEvent"/>
@@ -39,6 +39,11 @@
     <classEntry path="com.googlecode.flexxb.api.Stage"/>
     <classEntry path="com.googlecode.flexxb.api.StageXmlConverter"/>
     <classEntry path="com.googlecode.flexxb.api.flexxb_api_internal"/>
+    <classEntry path="com.googlecode.flexxb.cache.ICacheProvider"/>
+    <classEntry path="com.googlecode.flexxb.cache.IPooledObject"/>
+    <classEntry path="com.googlecode.flexxb.cache.ObjectCache"/>
+    <classEntry path="com.googlecode.flexxb.cache.ObjectPool"/>
+    <classEntry path="com.googlecode.flexxb.cache.TypeCache"/>
     <classEntry path="com.googlecode.flexxb.converter.ClassTypeConverter"/>
     <classEntry path="com.googlecode.flexxb.converter.IConverter"/>
     <classEntry path="com.googlecode.flexxb.converter.W3CDateConverter"/>
@@ -46,6 +51,11 @@
     <classEntry path="com.googlecode.flexxb.error.ApiError"/>
     <classEntry path="com.googlecode.flexxb.error.DescriptorParsingError"/>
     <classEntry path="com.googlecode.flexxb.error.ProcessingError"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.IConverterStore"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.ICycleRecoverable"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.IDescriptorStore"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.IDeserializeNotifiable"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.ISerializeNotifiable"/>
     <classEntry path="com.googlecode.flexxb.persistence.ChangeTracker"/>
     <classEntry path="com.googlecode.flexxb.persistence.ChangeTrackerKind"/>
     <classEntry path="com.googlecode.flexxb.persistence.IPersistable"/>
@@ -53,7 +63,6 @@
     <classEntry path="com.googlecode.flexxb.persistence.PersistableObject"/>
     <classEntry path="com.googlecode.flexxb.persistence.flexxb_persistence_internal"/>
     <classEntry path="com.googlecode.flexxb.serializer.ISerializer"/>
-    <classEntry path="com.googlecode.flexxb.serializer.PropertyInspector"/>
     <classEntry path="com.googlecode.flexxb.serializer.XmlArraySerializer"/>
     <classEntry path="com.googlecode.flexxb.serializer.XmlAttributeSerializer"/>
     <classEntry path="com.googlecode.flexxb.serializer.XmlClassSerializer"/>

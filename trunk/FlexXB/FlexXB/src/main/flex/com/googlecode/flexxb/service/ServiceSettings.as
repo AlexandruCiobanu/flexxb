@@ -17,12 +17,12 @@
 package com.googlecode.flexxb.service {
 	import flash.events.EventDispatcher;
 
+	[Event(name="settingsChange", type="com.googlecode.flexxb.service.SettingsChangedEvent")]
 	/**
 	 *
 	 * @author Alexutz
 	 *
 	 */
-	[Event(name="settingsChange", type="com.googlecode.flexxb.service.SettingsChangedEvent")]
 	public class ServiceSettings extends EventDispatcher {
 		/**
 		 *
