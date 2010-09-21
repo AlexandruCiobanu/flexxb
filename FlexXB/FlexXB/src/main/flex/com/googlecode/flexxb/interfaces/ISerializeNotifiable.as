@@ -14,43 +14,18 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.serializer {
-	import com.googlecode.flexxb.annotation.Annotation;
-
+package com.googlecode.flexxb.interfaces
+{
 	/**
-	 *
+	 * 
 	 * @author Alexutz
-	 *
-	 */
-	internal class PropertyInspector {
-		private static var instance : PropertyInspector;
-
-		public static function get inspectorInstance() : PropertyInspector {
-			if (!instance) {
-				instance = new PropertyInspector();
-			}
-			return instance;
-		}
-
-
-		public var target : Object;
-
-		/**
-		 *
-		 *
-		 */
-		public function PropertyInspector() {
-		}
-
-		/**
-		 *
-		 * @param annotation
-		 * @param field
-		 * @return
-		 *
-		 */
-		protected function inspect(annotation : Annotation, field : String) : Object {
-			return null;
-		}
+	 * 
+	 */	
+	public interface ISerializeNotifiable
+	{
+		
+		function onPreSerialize() : void;
+		
+		function onPostSerialize() : void;
 	}
 }

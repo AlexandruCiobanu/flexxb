@@ -59,5 +59,9 @@ package com.googlecode.flexxb.service {
 		public function get newValue() : Object{
 			return _newValue;
 		}
+		
+		public override function clone():Event{
+			return new SettingsChangedEvent(this.fieldName, this._oldValue, this._newValue);
+		}
 	}
 }

@@ -29,29 +29,32 @@ package com.googlecode.flexxb {
 	/**
 	 * Triggers prior to the serialization of an object into XML
 	 */
-	[Event(name="preserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	[Event(name="preserialize", type="com.googlecode.flexxb.XmlEvent")]
 	/**
 	 * Triggers after the serialization of an AS3 object into XML
 	 */
-	[Event(name="postserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	[Event(name="postserialize", type="com.googlecode.flexxb.XmlEvent")]
 	/**
 	 * Triggers prior to the deserialization of a XML into an AS3 object
 	 */
-	[Event(name="predeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	[Event(name="predeserialize", type="com.googlecode.flexxb.XmlEvent")]
 	/**
 	 * Triggers after the deserialization of a XML into an AS3 object
 	 */
-	[Event(name="postdeserialize", type="com.googlecode.serializer.flexxb.XmlEvent")]
+	[Event(name="postdeserialize", type="com.googlecode.flexxb.XmlEvent")]
 	/**
 	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration.
 	 * The main access point consist of two methods: <code>serialize()</code> and <code>deserialize</code>, each corresponding to the specific stage in the conversion process.
 	 * By default it registeres the built-in annotations at startup.
 	 * <p>Built-in anotation usage:
 	 *  <ul>
-	 *  <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></li>
+	 *  <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", 
+	 *                        uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></li>
 	 *  <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
-	 *  <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
-	 *  <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false")]</code></li>
+	 *  <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", 
+	 *                     serializePartialElement="true|false")]</code></li>
+	 *  <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", 
+	 *                   serializePartialElement="true|false")]</code></li>
 	 *  </ul></p>
 	 * <p>Make sure you add the following switches to your compiler settings:
 	 * <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code></p>
@@ -61,7 +64,7 @@ package com.googlecode.flexxb {
 	public class FlexXBEngine implements IEventDispatcher {
 		private static var _instance : FlexXBEngine;
 		
-		private static var log : ILogger = LogFactory.getLog(FlexXBEngine);
+		private static const LOG : ILogger = LogFactory.getLog(FlexXBEngine);
 
 		/**
 		 * Not a singleton, but an easy access instance.
@@ -152,11 +155,11 @@ package com.googlecode.flexxb {
 				for each (var item : Object in args) {
 					if (item is Class) {
 						if(configuration.enableLogging){
-							log.info("Processing class {0}", item);
+							LOG.info("Processing class {0}", item);
 						}
 						descriptorStore.getDescriptor(item);
 					}else if(configuration.enableLogging){
-						log.info("Excluded from processing because it is not a class: {0}", item);
+						LOG.info("Excluded from processing because it is not a class: {0}", item);
 					}
 				}
 			}
@@ -175,12 +178,7 @@ package com.googlecode.flexxb {
 		}
 
 		/**
-		 * Register a new annotation and its serializer. If it founds a registration with the
-		 * same name and <code>overrideExisting </code> is set to <code>false</code>, it will disregard the current attempt and keep the old value.
-		 * @param name the name of the annotation to be registered
-		 * @param annotationClazz annotation class type
-		 * @param serializerInstance instance of the serializer that will handle this annotation
-		 * @param overrideExisting
+		 * @see AnnotationFactory#registerAnnotation()
 		 *
 		 */
 		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {

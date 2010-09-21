@@ -15,6 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb {
+	import com.googlecode.flexxb.cache.ICacheProvider;
 
 	/**
 	 *
@@ -51,9 +52,21 @@ package com.googlecode.flexxb {
 		 */		
 		public var enableLogging : Boolean = false;
 		/**
+		 * 
+		 */		
+		public var cacheProvider : ICacheProvider;
+		/**
 		 * Constructor
 		 *
 		 */
 		public function Configuration() {}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get allowCaching() : Boolean{
+			return cacheProvider != null;
+		}
 	}
 }

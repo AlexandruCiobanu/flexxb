@@ -28,11 +28,11 @@ package com.googlecode.flexxb.serializer {
 	 */
 	public final class XmlClassSerializer implements ISerializer {
 		
-		private static var log : ILogger = LogFactory.getLog(XmlClassSerializer);
+		private static const LOG : ILogger = LogFactory.getLog(XmlClassSerializer);
 		
 		public function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML {
 			if(serializer.configuration.enableLogging){
-				log.info("Serializing object of type {0}", annotation.fieldName);
+				LOG.info("Serializing object of type {0}", annotation.fieldName);
 			}
 			var xmlClass : XmlClass = annotation as XmlClass;
 			var xml : XML = <xml />
@@ -53,7 +53,6 @@ package com.googlecode.flexxb.serializer {
 		}
 		
 		public function deserialize(xmlData : XML, annotation : Annotation, serializer : SerializerCore) : Object {
-			var xmlClass : XmlClass = annotation as XmlClass;
 			return null;
 		}
 	}

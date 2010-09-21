@@ -14,34 +14,18 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb {
-
+package com.googlecode.flexxb.interfaces
+{
 	/**
-	 *
+	 * 
 	 * @author Alexutz
-	 *
-	 */
-	public interface IDescriptorStore {
-		/**
-		 * Get the namespace defined for an object type
-		 * @param object target instance
-		 * @return
-		 *
-		 */
-		function getNamespace(object : Object) : Namespace;
-		/**
-		 * Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
-		 * @param object
-		 * @return
-		 *
-		 */
-		function getXmlName(object : Object) : QName;
-		/**
-		 *
-		 * @param ns
-		 * @return
-		 *
-		 */
-		function getClassByNamespace(ns : String) : Class;
+	 * 
+	 */	
+	public interface IDeserializeNotifiable
+	{
+			
+		function onPreDeserialize() : void;
+		
+		function onPostDeserialize() : void;
 	}
 }

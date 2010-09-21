@@ -173,7 +173,7 @@ package com.googlecode.flexxb.api {
 				items[XmlMember.ARGUMENT_NAMESPACE_REF] = _nameSpace.prefix;
 			}
 
-			for (var key : *in items) {
+			for (var key : * in items) {
 				if (items[key] != null) {
 					metadata.appendChild(<arg key={key} value={items[key]} />)
 				}

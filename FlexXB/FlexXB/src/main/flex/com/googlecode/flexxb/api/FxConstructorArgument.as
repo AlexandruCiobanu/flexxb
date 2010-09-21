@@ -17,6 +17,8 @@
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.error.ApiError;
 
+	[XmlClass(alias="Argument")]
+	[ConstructorArg(reference="reference")]
 	/**
 	 * A constructor argument is a way to say to the FlexXB engine that objects of a certain type
 	 * need a special way to be instantiated in the deserialization stage. A constructor argument 
@@ -25,8 +27,6 @@ package com.googlecode.flexxb.api {
 	 * @author Alexutz
 	 *
 	 */
-	[XmlClass(alias="Argument")]
-	[ConstructorArg(reference="reference")]
 	public class FxConstructorArgument {
 		protected var _reference : String;
 

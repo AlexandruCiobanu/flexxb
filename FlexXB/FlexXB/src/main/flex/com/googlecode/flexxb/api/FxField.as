@@ -20,14 +20,14 @@ package com.googlecode.flexxb.api {
 
 	import mx.utils.StringUtil;
 
+	[XmlClass(alias="Field")]
+	[ConstructorArg(reference="name")]
+	[ConstructorArg(reference="type")]
 	/**
 	 *
 	 * @author Alexutz
 	 *
 	 */
-	[XmlClass(alias="Field")]
-	[ConstructorArg(reference="name")]
-	[ConstructorArg(reference="type")]
 	public class FxField {
 		/**
 		 *

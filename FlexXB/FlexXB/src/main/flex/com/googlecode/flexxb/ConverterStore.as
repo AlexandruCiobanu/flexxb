@@ -18,6 +18,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.converter.IConverter;
 
 	import flash.utils.Dictionary;
+	import com.googlecode.flexxb.interfaces.IConverterStore;
 
 	/**
 	 *
@@ -114,6 +115,7 @@ package com.googlecode.flexxb {
 			try {
 				return object.toString();
 			} catch (e : Error) {
+				//should we do something here? I guess not
 			}
 			return "";
 		}

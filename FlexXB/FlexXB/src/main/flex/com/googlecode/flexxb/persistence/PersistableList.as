@@ -192,7 +192,7 @@ package com.googlecode.flexxb.persistence {
 
 				beforeCommit();
 				
-				for (var key : *in changeList) {
+				for (var key : * in changeList) {
 					delete changeList[key];
 				}
 				backup = null;
@@ -213,7 +213,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public function get changedItemWrappers() : Array {
 			var items : Array = [];
-			for (var key : *in changeList) {
+			for (var key : * in changeList) {
 				items.push(changeList[key]);
 			}
 			items.sortOn("index", Array.NUMERIC);
@@ -227,7 +227,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public function get changedItems() : Array {
 			var items : Array = [];
-			for (var key : *in changeList) {
+			for (var key : * in changeList) {
 				items.push(key);
 			}
 			return items;
@@ -295,7 +295,7 @@ package com.googlecode.flexxb.persistence {
 				source = backup;
 				refresh();
 
-				for (var key : *in changeList) {
+				for (var key : * in changeList) {
 					delete changeList[key];
 				}
 
@@ -353,7 +353,7 @@ package com.googlecode.flexxb.persistence {
 		private function setModified(value : Boolean) : void {
 			_modified = value;
 			if (!value && changeList) {
-				for (var key : *in changeList) {
+				for (var key : * in changeList) {
 					delete changeList[key];
 				}
 			}

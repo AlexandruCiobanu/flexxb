@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="XmlSerializer.as" projectUUID="95c36fa0-7ebf-4bbf-89ee-2ee17d6bffa7" version="6">
+<actionScriptProperties analytics="false" mainApplicationPath="XmlSerializer.as" projectUUID="95c36fa0-7ebf-4bbf-89ee-2ee17d6bffa7" version="6">
   <compiler additionalCompilerArguments="-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray -keep-as3-metadata ConstructorArg" autoRSLOrdering="true" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" sourceFolderPath="src/main/flex" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="src/main/flex"/>

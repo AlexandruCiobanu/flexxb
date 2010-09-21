@@ -18,15 +18,15 @@ package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.annotation.XmlElement;
 
 	import flash.utils.Dictionary;
-
+	
+	[XmlClass(alias="Element")]
+	[ConstructorArg(reference="field")]
+	[ConstructorArg(reference="alias")]
 	/**
 	 *
 	 * @author Alexutz
 	 *
 	 */
-	[XmlClass(alias="Element")]
-	[ConstructorArg(reference="field")]
-	[ConstructorArg(reference="alias")]
 	public class FxElement extends FxMember {
 		public static const INCOMING_XML_NAME : String = "Element";
 
