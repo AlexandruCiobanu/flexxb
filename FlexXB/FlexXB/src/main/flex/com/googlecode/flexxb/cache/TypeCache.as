@@ -101,6 +101,7 @@ package com.googlecode.flexxb.cache
 		internal function putObject(id : String, object : Object) : void{
 			objectStore.push(object)
 			objectUsage.push(true);
+			currentIndex++;
 		}
 	}
 }
