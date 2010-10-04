@@ -17,10 +17,77 @@
  */
 package com.googlecode.flexxb
 {
+	/**
+	 * 
+	 * @author User
+	 * 
+	 */	
 	public class CircularReferenceDetector
 	{
-		public function CircularReferenceDetector()
-		{
+		private var cycleDetectionStack : Array;
+		/**
+		 * 
+		 * 
+		 */		
+		public function CircularReferenceDetector(){
+			cycleDetectionStack = [];
+		}
+		/**
+		 * 
+		 * @param item
+		 * @return 
+		 * 
+		 */		
+		public function push(item : Object) : Boolean{
+			if(cycleDetectionStack.indexOf(item) == -1){
+				cycleDetectionStack.push(item);
+				return true;
+			}
+			return false;
+		}
+		/**
+		 * 
+		 * @param item
+		 * 
+		 */		
+		public function pushNoCheck(item : Object) : void{
+			cycleDetectionStack.push(item);
+		} 
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function pop() : Object{
+			return cycleDetectionStack.pop();
+		}
+		/**
+		 * Returns a reference to the current object being processed
+		 * @return 
+		 * 
+		 */	
+		public function getCurrent() : Object{
+			if(cycleDetectionStack.length > 0){
+				return cycleDetectionStack[cycleDetectionStack.length - 1];
+			}
+			return null;
+		}
+		/**
+		 * Returns a reference to the current object's parent. 
+		 * @return 
+		 * 
+		 */		
+		public function getParent() : Object{
+			if(cycleDetectionStack.length > 1){
+				return cycleDetectionStack[cycleDetectionStack.length - 2];
+			}
+			return null;
+		}
+		
+		public function clear() : void{
+			while(cycleDetectionStack.length > 0){
+				cycleDetectionStack.pop();
+			}
 		}
 	}
 }

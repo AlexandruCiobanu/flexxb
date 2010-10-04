@@ -14,31 +14,25 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb {
-	import com.googlecode.flexxb.IIdentifiable;
+package com.googlecode.flexxb.interfaces {
 
 	/**
-	 * Interface for an object that requires custom serialization/deserialization into/from Xml
-	 * @author aciobanu
-	 *
+	 * Provides a method to uniquely identify objects of a certain type.
+	 * @author Alexutz
 	 *
 	 */
-	public interface IXmlSerializable extends IIdentifiable {
+	public interface IIdentifiable {
 		/**
-		 * Serialize current object into Xml
-		 */
-		function toXml() : XML;
-		/**
-		 * Deserialize this object from one of it's possible XML representation.
-		 * @param xmlData xml data source
-		 */
-		function fromXml(xmlData : XML) : Object;
-		/**
+		 * Get object id
+		 * @return id
 		 *
-		 * @param xmldata
+		 */
+		function get id() : String;
+		/**
+		 * Return the current object's type
 		 * @return
 		 *
 		 */
-		function getIdValue(xmldata : XML) : String;
+		function get thisType() : Class;
 	}
 }

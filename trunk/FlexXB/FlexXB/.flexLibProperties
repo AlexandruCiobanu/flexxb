@@ -7,8 +7,8 @@
     <classEntry path="com.googlecode.flexxb.DescriptorStore"/>
     <classEntry path="com.googlecode.flexxb.FlexXBApi"/>
     <classEntry path="com.googlecode.flexxb.FlexXBEngine"/>
-    <classEntry path="com.googlecode.flexxb.IIdentifiable"/>
-    <classEntry path="com.googlecode.flexxb.IXmlSerializable"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.IIdentifiable"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.IXmlSerializable"/>
     <classEntry path="com.googlecode.flexxb.IdResolver"/>
     <classEntry path="com.googlecode.flexxb.MetaParser"/>
     <classEntry path="com.googlecode.flexxb.SerializerCore"/>
@@ -53,7 +53,7 @@
     <classEntry path="com.googlecode.flexxb.error.ProcessingError"/>
     <classEntry path="com.googlecode.flexxb.interfaces.IConverterStore"/>
     <classEntry path="com.googlecode.flexxb.interfaces.ICycleRecoverable"/>
-    <classEntry path="com.googlecode.flexxb.interfaces.IDescriptorStore"/>
+    <classEntry path="com.googlecode.flexxb.IDescriptorStore"/>
     <classEntry path="com.googlecode.flexxb.interfaces.IDeserializeNotifiable"/>
     <classEntry path="com.googlecode.flexxb.interfaces.ISerializeNotifiable"/>
     <classEntry path="com.googlecode.flexxb.persistence.ChangeTracker"/>
@@ -79,6 +79,8 @@
     <classEntry path="com.googlecode.flexxb.util.log.ILogger"/>
     <classEntry path="com.googlecode.flexxb.util.log.LogFactory"/>
     <classEntry path="com.googlecode.flexxb.util.log.Logger"/>
+    <classEntry path="com.googlecode.flexxb.MappingModel"/>
+    <classEntry path="com.googlecode.flexxb.ProcessNotifier"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
