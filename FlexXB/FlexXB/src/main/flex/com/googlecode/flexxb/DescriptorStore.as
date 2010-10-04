@@ -21,8 +21,8 @@ package com.googlecode.flexxb {
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-	import com.googlecode.flexxb.interfaces.IDescriptorStore;
-	import com.googlecode.flexxb.IXmlSerializable;
+	import com.googlecode.flexxb.interfaces.IXmlSerializable;
+	import com.googlecode.flexxb.interfaces.IXmlSerializable;
 
 	/**
 	 *

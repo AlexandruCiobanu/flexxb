@@ -18,7 +18,11 @@
 package com.googlecode.flexxb
 {
 	import flash.utils.Dictionary;
-
+	/**
+	 * @private 
+	 * @author User
+	 * 
+	 */	
 	internal final class IdResolver
 	{
 		private var idMap : Dictionary;

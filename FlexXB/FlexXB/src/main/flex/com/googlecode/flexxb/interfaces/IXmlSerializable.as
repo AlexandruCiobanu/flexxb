@@ -15,33 +15,30 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.interfaces {
+	import com.googlecode.flexxb.interfaces.IIdentifiable;
 
 	/**
+	 * Interface for an object that requires custom serialization/deserialization into/from Xml
+	 * @author aciobanu
 	 *
-	 * @author Alexutz
 	 *
 	 */
-	public interface IDescriptorStore {
+	public interface IXmlSerializable extends IIdentifiable {
 		/**
-		 * Get the namespace defined for an object type
-		 * @param object target instance
+		 * Serialize current object into Xml
+		 */
+		function toXml() : XML;
+		/**
+		 * Deserialize this object from one of it's possible XML representation.
+		 * @param xmlData xml data source
+		 */
+		function fromXml(xmlData : XML) : Object;
+		/**
+		 *
+		 * @param xmldata
 		 * @return
 		 *
 		 */
-		function getNamespace(object : Object) : Namespace;
-		/**
-		 * Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
-		 * @param object
-		 * @return
-		 *
-		 */
-		function getXmlName(object : Object) : QName;
-		/**
-		 *
-		 * @param ns
-		 * @return
-		 *
-		 */
-		function getClassByNamespace(ns : String) : Class;
+		function getIdValue(xmldata : XML) : String;
 	}
 }

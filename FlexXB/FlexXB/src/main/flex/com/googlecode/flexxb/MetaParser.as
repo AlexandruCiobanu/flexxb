@@ -18,7 +18,7 @@
 package com.googlecode.flexxb
 {
 	/**
-	 * 
+	 * @private
 	 * @author User
 	 * 
 	 */	

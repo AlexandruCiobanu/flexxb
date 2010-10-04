@@ -23,6 +23,10 @@ package com.googlecode.flexxb.annotation {
 	 */
 	internal class BaseAnnotation {
 		/**
+		 * 
+		 */		
+		public var verision : String;
+		/**
 		 * Constructor
 		 * @param descriptor
 		 *

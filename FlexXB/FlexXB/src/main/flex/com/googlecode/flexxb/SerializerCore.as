@@ -20,11 +20,8 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.XmlClass;
 	import com.googlecode.flexxb.annotation.XmlMember;
 	import com.googlecode.flexxb.api.Stage;
-	import com.googlecode.flexxb.cache.ObjectCache;
-	import com.googlecode.flexxb.cache.ObjectPool;
 	import com.googlecode.flexxb.interfaces.IConverterStore;
-	import com.googlecode.flexxb.interfaces.IDescriptorStore;
-	import com.googlecode.flexxb.IXmlSerializable;
+	import com.googlecode.flexxb.interfaces.ICycleRecoverable;
 	import com.googlecode.flexxb.persistence.IPersistable;
 	import com.googlecode.flexxb.persistence.PersistableObject;
 	import com.googlecode.flexxb.serializer.ISerializer;
@@ -33,6 +30,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.util.log.LogFactory;
 	
 	import flash.events.EventDispatcher;
+	import com.googlecode.flexxb.interfaces.IXmlSerializable;
 	
 	/**
 	 *
@@ -43,40 +41,23 @@ package com.googlecode.flexxb {
 		
 		private static const LOG : ILogger = LogFactory.getLog(SerializerCore);
 		
-		/**
-		 *
-		 */
-		private var _descriptorStore : DescriptorStore;
-		/**
-		 *
-		 */
-		private var _converterStore : ConverterStore;
-		/**
-		 *
-		 */
-		private var _configuration : Configuration;
-		
-		private var itemStack : Array;
+		private var mappingModel : MappingModel;
 
 		/**
 		 * Constructor
 		 *
 		 */
-		public function SerializerCore(descriptor : DescriptorStore, converter : ConverterStore, configuration : Configuration) {
-			if (!descriptor || !converter) {
-				throw new Error("Converter and descriptor stores must not be null");
-			}ObjectCache;ObjectPool;
-			itemStack = [];
-			_descriptorStore = descriptor;
-			_converterStore = converter;
-			//We always have a reference to a configuration object
-			_configuration = configuration ? configuration : new Configuration();
+		public function SerializerCore(mappingModel : MappingModel){
+			if (!MappingModel) {
+				throw new Error("Mapping model must not be null");
+			}
+			this.mappingModel = mappingModel;
 			addEventListener(XmlEvent.PRE_DESERIALIZE, preDeserializeHandler, false, 150, true);
 			addEventListener(XmlEvent.POST_DESERIALIZE, postDeserializeHandler, false, 150, true);
 		}
 		
 		public function get configuration() : Configuration{
-			return _configuration;
+			return mappingModel.configuration;
 		}
 
 		/**
@@ -85,7 +66,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public function get descriptorStore() : IDescriptorStore {
-			return _descriptorStore;
+			return mappingModel.descriptorStore;
 		}
 
 		/**
@@ -94,7 +75,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public function get converterStore() : IConverterStore {
-			return _converterStore;
+			return mappingModel.converterStore;
 		}
 
 		/**
@@ -114,14 +95,15 @@ package com.googlecode.flexxb {
 				return null;
 			}
 			var xmlData : XML;
+			
+			object = pushObject(object, partial);
+			
+			mappingModel.processNotifier.notifyPreSerialize(this, xmlData);
 
-			//dispatch preSerializeEvent
-			dispatchEvent(XmlEvent.createPreSerializeEvent(object, xmlData));
-
-			if (_descriptorStore.isCustomSerializable(object)) {
+			if (mappingModel.descriptorStore.isCustomSerializable(object)) {
 				xmlData = IXmlSerializable(object).toXml();
 			} else {
-				var classDescriptor : XmlClass = _descriptorStore.getDescriptor(object);
+				var classDescriptor : XmlClass = mappingModel.descriptorStore.getDescriptor(object);
 				xmlData = AnnotationFactory.instance.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
 				var serializer : ISerializer;
 				var annotation : XmlMember;
@@ -144,14 +126,30 @@ package com.googlecode.flexxb {
 				}
 			}
 
-			//dispatch postSerializeEvent
-			dispatchEvent(XmlEvent.createPostSerializeEvent(object, xmlData));
+			mappingModel.processNotifier.notifyPostSerialize(this, xmlData);
+			
+			mappingModel.collisionDetector.pop();
 			
 			if(configuration.enableLogging){
 				LOG.info("Ended object serialization");
 			}
 			
 			return xmlData;
+		}
+		
+		private function pushObject(obj : Object, partial : Boolean) : Object{
+			var collisionDetected : Boolean = !mappingModel.collisionDetector.push(obj);
+			if(collisionDetected){
+				if(partial){
+					mappingModel.collisionDetector.pushNoCheck(obj);
+				}else if(obj is ICycleRecoverable){
+					obj = ICycleRecoverable(obj).onCycleDetected(mappingModel.collisionDetector.getCurrent());
+					obj = pushObject(obj, partial);
+				}else{
+					throw new Error("Cycle detected!");
+				}
+			}
+			return obj;
 		}
 
 		/**
@@ -199,14 +197,14 @@ package com.googlecode.flexxb {
 					}
 
 					var classDescriptor : XmlClass;
-					if (!_descriptorStore.isCustomSerializable(objectClass)) {
-						classDescriptor = _descriptorStore.getDescriptor(objectClass);
+					if (!mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
+						classDescriptor = mappingModel.descriptorStore.getDescriptor(objectClass);
 					}
 
 					if (!foundInCache) {
 						//if object is auto processed, get constructor arguments declarations
 						var _arguments : Array;
-						if (!_descriptorStore.isCustomSerializable(objectClass) && !classDescriptor.constructor.isDefault()) {
+						if (!mappingModel.descriptorStore.isCustomSerializable(objectClass) && !classDescriptor.constructor.isDefault()) {
 							_arguments = [];
 							var stageCache : Stage;
 							for each (var member : XmlMember in classDescriptor.constructor.parameterFields) {
@@ -226,9 +224,8 @@ package com.googlecode.flexxb {
 
 					//dispatch preDeserializeEvent
 					dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
-					itemStack.push(result);
 					//update object fields
-					if (_descriptorStore.isCustomSerializable(objectClass)) {
+					if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
 						IXmlSerializable(result).fromXml(xmlData);
 					} else {
 						//iterate through anotations
@@ -247,7 +244,6 @@ package com.googlecode.flexxb {
 							}
 						}
 					}
-					itemStack.pop();
 					//dispatch postDeserializeEvent
 					dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
 					
@@ -275,7 +271,7 @@ package com.googlecode.flexxb {
 				if (configuration.getResponseTypeByTagName) {
 					var tagName : QName = incomingXML.name() as QName;
 					if (tagName) {
-						var clasz : Class = _descriptorStore.getClassByTagName(tagName.localName);
+						var clasz : Class = mappingModel.descriptorStore.getClassByTagName(tagName.localName);
 						if (clasz) {
 							return clasz;
 						}
@@ -284,7 +280,7 @@ package com.googlecode.flexxb {
 				if (configuration.getResponseTypeByNamespace) {
 					if (incomingXML.namespaceDeclarations().length > 0) {
 						var _namespace : String = (incomingXML.namespaceDeclarations()[0] as Namespace).uri;
-						return _descriptorStore.getClassByNamespace(_namespace);
+						return mappingModel.descriptorStore.getClassByNamespace(_namespace);
 					}
 				}
 
@@ -301,10 +297,10 @@ package com.googlecode.flexxb {
 		 */
 		private function getId(objectClass : Class, xmlData : XML) : String {
 			var itemId : String;
-			if (_descriptorStore.isCustomSerializable(objectClass)) {
-				itemId = _descriptorStore.getCustomSerializableReference(objectClass).getIdValue(xmlData);
+			if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
+				itemId = mappingModel.descriptorStore.getCustomSerializableReference(objectClass).getIdValue(xmlData);
 			} else {
-				var classDescriptor : XmlClass = _descriptorStore.getDescriptor(objectClass);
+				var classDescriptor : XmlClass = mappingModel.descriptorStore.getDescriptor(objectClass);
 				var idSerializer : ISerializer = AnnotationFactory.instance.getSerializer(classDescriptor.idField);
 				if (idSerializer) {
 					itemId = String(idSerializer.deserialize(xmlData, classDescriptor.idField, this));

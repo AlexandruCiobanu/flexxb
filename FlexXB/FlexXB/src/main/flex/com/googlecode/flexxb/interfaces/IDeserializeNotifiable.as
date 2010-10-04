@@ -17,15 +17,28 @@
 package com.googlecode.flexxb.interfaces
 {
 	/**
-	 * 
+	 * Optional interface to be implemented by objects which need specific
+	 * notification on the deserialization process.<br> 
+	 * If the current object to be serialized implements this interface, the
+	 * engine will call the methods implemented on each process step (pre and 
+	 * post deserialize) instead of firing an XmlEvent on the engine instance for
+	 * each step. <br>
+	 * Implementing this interface overrides the normal event dispatching in the 
+	 * engine.   
 	 * @author Alexutz
 	 * 
 	 */	
 	public interface IDeserializeNotifiable
 	{
-			
+		/**
+		 * Called before the deserialization process of the current object begins.
+		 * 
+		 */		
 		function onPreDeserialize() : void;
-		
+		/**
+		 * Called after the deserialization process of the current object ends.
+		 * 
+		 */	
 		function onPostDeserialize() : void;
 	}
 }

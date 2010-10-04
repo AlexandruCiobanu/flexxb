@@ -77,14 +77,10 @@ package com.googlecode.flexxb {
 			}
 			return _instance;
 		}
-
-		private var descriptorStore : DescriptorStore;
-
-		private var converterStore : ConverterStore;
-
+		
+		private var mappingModel : MappingModel;
+		
 		private var core : SerializerCore;
-
-		private var _configuration : Configuration;
 
 		private var _api : IFlexXBApi;
 
@@ -93,10 +89,8 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public function FlexXBEngine() {
-			descriptorStore = new DescriptorStore();
-			_configuration = new Configuration();
-			converterStore = new ConverterStore();
-			core = new SerializerCore(descriptorStore, converterStore, _configuration);
+			mappingModel = new MappingModel();
+			core = new SerializerCore(mappingModel);
 			registerSimpleTypeConverter(new ClassTypeConverter());
 			registerSimpleTypeConverter(new XmlConverter());
 		}
@@ -107,7 +101,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public function get configuration() : Configuration {
-			return _configuration;
+			return mappingModel.configuration;
 		}
 
 		/**
@@ -117,7 +111,7 @@ package com.googlecode.flexxb {
 		 */
 		public final function get api() : IFlexXBApi {
 			if (!_api) {
-				_api = new FlexXBApi(this, descriptorStore);
+				_api = new FlexXBApi(this, mappingModel.descriptorStore);
 			}
 			return _api;
 		}
@@ -129,7 +123,9 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function serialize(object : Object, partial : Boolean = false) : XML {
-			return core.serialize(object, partial);
+			var xml : XML = core.serialize(object, partial);
+			mappingModel.collisionDetector.clear();
+			return xml;
 		}
 
 		/**
@@ -141,7 +137,9 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : * {
-			return core.deserialize(xmlData, objectClass, getFromCache);
+			var object : Object = core.deserialize(xmlData, objectClass, getFromCache);
+			mappingModel.idResolver.clear();
+			return object;
 		}
 
 		/**
@@ -157,7 +155,7 @@ package com.googlecode.flexxb {
 						if(configuration.enableLogging){
 							LOG.info("Processing class {0}", item);
 						}
-						descriptorStore.getDescriptor(item);
+						mappingModel.descriptorStore.getDescriptor(item);
 					}else if(configuration.enableLogging){
 						LOG.info("Excluded from processing because it is not a class: {0}", item);
 					}
@@ -174,7 +172,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public function registerSimpleTypeConverter(converter : IConverter, overrideExisting : Boolean = false) : Boolean {
-			return converterStore.registerSimpleTypeConverter(converter, overrideExisting);
+			return mappingModel.converterStore.registerSimpleTypeConverter(converter, overrideExisting);
 		}
 
 		/**

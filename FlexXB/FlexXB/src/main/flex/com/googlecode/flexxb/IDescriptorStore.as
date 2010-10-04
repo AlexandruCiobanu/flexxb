@@ -17,22 +17,31 @@
 package com.googlecode.flexxb {
 
 	/**
-	 * Provides a method to uniquely identify objects of a certain type.
+	 *
 	 * @author Alexutz
 	 *
 	 */
-	public interface IIdentifiable {
+	public interface IDescriptorStore {
 		/**
-		 * Get object id
-		 * @return id
-		 *
-		 */
-		function get id() : String;
-		/**
-		 * Return the current object's type
+		 * Get the namespace defined for an object type
+		 * @param object target instance
 		 * @return
 		 *
 		 */
-		function get thisType() : Class;
+		function getNamespace(object : Object) : Namespace;
+		/**
+		 * Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
+		 * @param object
+		 * @return
+		 *
+		 */
+		function getXmlName(object : Object) : QName;
+		/**
+		 *
+		 * @param ns
+		 * @return
+		 *
+		 */
+		function getClassByNamespace(ns : String) : Class;
 	}
 }

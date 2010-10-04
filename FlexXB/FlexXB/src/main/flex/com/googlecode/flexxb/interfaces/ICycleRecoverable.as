@@ -17,8 +17,26 @@
  */
 package com.googlecode.flexxb.interfaces
 {
+	/**
+	 * Optional interface that can be implemented by FlexXB bound objects to handle 
+	 * cycles in the object graph.
+	 * <p>Normally a cycle in the object graph causes the engine to throw an error.
+	 * This is not always a desired behavior.Implementing this interface allows the 
+	 * user application to change this behavior.
+	 * 
+	 * @author User
+	 * 
+	 */	
 	public interface ICycleRecoverable
 	{
-		
+		/**
+		 * Called when a cycle is detected by the engine to nominate a new
+		 * object to be serialized instead.
+		 * @param parentCaller reference to the parent object referencing the current one 
+		 * @return the object to be serialized instead of <code>this</code> or null to 
+		 * instruct the engine to behave as if the object does not implement this interface. 
+		 * 
+		 */			
+		function onCycleDetected(parentCaller : Object) : Object;
 	}
 }
