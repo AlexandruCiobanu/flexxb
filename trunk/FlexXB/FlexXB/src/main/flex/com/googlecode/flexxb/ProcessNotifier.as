@@ -16,6 +16,7 @@
  */
 package com.googlecode.flexxb
 {
+	import com.googlecode.flexxb.interfaces.IDeserializeNotifiable;
 	import com.googlecode.flexxb.interfaces.ISerializeNotifiable;
 	
 	import flash.events.IEventDispatcher;
@@ -44,19 +45,26 @@ package com.googlecode.flexxb
 		 */		
 		public function notifyPreSerialize(dispatcher : IEventDispatcher, xmlData : XML) : void{
 			var object : Object = mappingModel.collisionDetector.getCurrent();
+			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(object is ISerializeNotifiable){
-				ISerializeNotifiable(object).onPreSerialize();
+				ISerializeNotifiable(object).onPreSerialize(parent, xmlData);
 			}else{
-				dispatcher.dispatchEvent(XmlEvent.createPreSerializeEvent(object, xmlData));
+				dispatcher.dispatchEvent(XmlEvent.createPreSerializeEvent(object, parent, xmlData));
 			}
 		}
 		/**
 		 * 
 		 * @param dispatcher
+		 * @param item
+		 * @param xmlData
 		 * 
 		 */		
-		public function notifyPreDeserialize(dispatcher : IEventDispatcher) : void{
-			
+		public function notifyPreDeserialize(dispatcher : IEventDispatcher, item : Object, xmlData : XML) : void{
+			if(item is IDeserializeNotifiable){
+				IDeserializeNotifiable(item).onPreDeserialize(xmlData);
+			}else{
+				dispatcher.dispatchEvent(XmlEvent.createPreDeserializeEvent(item, xmlData));
+			}			
 		}
 		/**
 		 * 
@@ -66,19 +74,26 @@ package com.googlecode.flexxb
 		 */		
 		public function notifyPostSerialize(dispatcher : IEventDispatcher, xmlData : XML) : void{
 			var object : Object = mappingModel.collisionDetector.getCurrent();
+			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(object is ISerializeNotifiable){
-				ISerializeNotifiable(object).onPostSerialize();
+				ISerializeNotifiable(object).onPostSerialize(parent, xmlData);
 			}else{
-				dispatcher.dispatchEvent(XmlEvent.createPostSerializeEvent(object, xmlData));
+				dispatcher.dispatchEvent(XmlEvent.createPostSerializeEvent(object, parent, xmlData));
 			}
 		}
 		/**
 		 * 
 		 * @param dispatcher
+		 * @param item
+		 * @param xmlData
 		 * 
-		 */		
-		public function notifyPostDeserialize(dispatcher : IEventDispatcher) : void{
-			
+		 */			
+		public function notifyPostDeserialize(dispatcher : IEventDispatcher, item : Object, xmlData : XML) : void{
+			if(item is IDeserializeNotifiable){
+				IDeserializeNotifiable(item).onPostDeserialize(xmlData);
+			}else{
+				dispatcher.dispatchEvent(XmlEvent.createPostDeserializeEvent(item, xmlData));
+			}
 		}
 	}
 }

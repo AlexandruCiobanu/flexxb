@@ -38,6 +38,10 @@ package com.googlecode.flexxb
 			}
 		}
 		
+		public function beginDocument() : void{
+			
+		}
+		
 		public function resolve(id : String, clasz : Class) : Function{
 			return function() : Object {
 				if(idMap==null){
@@ -47,7 +51,11 @@ package com.googlecode.flexxb
 			};
 		}
 		
-		public function clear() : void{
+		public function endDocument() : void{
+			clear();
+		}
+		
+		private function clear() : void{
 			if(idMap){
 				for(var key : * in idMap){
 					delete idMap[key];
