@@ -123,8 +123,9 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function serialize(object : Object, partial : Boolean = false) : XML {
+			mappingModel.collisionDetector.beginDocument();
 			var xml : XML = core.serialize(object, partial);
-			mappingModel.collisionDetector.clear();
+			mappingModel.collisionDetector.endDocument();
 			return xml;
 		}
 
@@ -137,8 +138,9 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : * {
+			mappingModel.idResolver.beginDocument();
 			var object : Object = core.deserialize(xmlData, objectClass, getFromCache);
-			mappingModel.idResolver.clear();
+			mappingModel.idResolver.endDocument();
 			return object;
 		}
 

@@ -33,8 +33,8 @@ package com.googlecode.flexxb {
 		 * @return 
 		 * 
 		 */		
-		public static function createPreSerializeEvent(object : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(PRE_SERIALIZE, object, xml);
+		public static function createPreSerializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(PRE_SERIALIZE, object, parent, xml);
 		}
 		/**
 		 * 
@@ -43,8 +43,8 @@ package com.googlecode.flexxb {
 		 * @return 
 		 * 
 		 */		
-		public static function createPostSerializeEvent(object : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(POST_SERIALIZE, object, xml);
+		public static function createPostSerializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(POST_SERIALIZE, object, parent, xml);
 		}
 		/**
 		 * 
@@ -54,7 +54,7 @@ package com.googlecode.flexxb {
 		 * 
 		 */		
 		public static function createPreDeserializeEvent(object : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(PRE_DESERIALIZE, object, xml);
+			return new XmlEvent(PRE_DESERIALIZE, object, null, xml);
 		}
 		/**
 		 * 
@@ -64,23 +64,23 @@ package com.googlecode.flexxb {
 		 * 
 		 */		
 		public static function createPostDeserializeEvent(object : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(POST_DESERIALIZE, object, xml);
+			return new XmlEvent(POST_DESERIALIZE, object, null, xml);
 		}
 
 		private var _object : Object;
+		private var _parent : Object;
 		private var _xml : XML;
 		/**
 		 * 
 		 * @param type
 		 * @param object
 		 * @param xml
-		 * @param bubbles
-		 * @param cancelable
 		 * 
 		 */		
-		public function XmlEvent(type : String, object : Object, xml : XML, bubbles : Boolean = false, cancelable : Boolean = false) {
-			super(type, bubbles, cancelable);
+		public function XmlEvent(type : String, object : Object, parent : Object, xml : XML) {
+			super(type);
 			_object = object;
+			_parent = parent;
 			_xml = xml;
 		}
 		/**
@@ -96,12 +96,20 @@ package com.googlecode.flexxb {
 		 * @return 
 		 * 
 		 */		
+		public function get parent() : Object{
+			return _parent;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get xml() : XML {
 			return _xml;
 		}
 		
 		public override function clone():Event{
-			return new XmlEvent(type, _object, xml, bubbles, cancelable);
+			return new XmlEvent(type, _object, parent, xml);
 		}
 	}
 }

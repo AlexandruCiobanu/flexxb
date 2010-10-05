@@ -32,6 +32,10 @@ package com.googlecode.flexxb
 		public function CircularReferenceDetector(){
 			cycleDetectionStack = [];
 		}
+		
+		public function beginDocument() : void{
+			
+		}
 		/**
 		 * 
 		 * @param item
@@ -84,7 +88,11 @@ package com.googlecode.flexxb
 			return null;
 		}
 		
-		public function clear() : void{
+		public function endDocument() : void{
+			clear();
+		}
+		
+		private function clear() : void{
 			while(cycleDetectionStack.length > 0){
 				cycleDetectionStack.pop();
 			}

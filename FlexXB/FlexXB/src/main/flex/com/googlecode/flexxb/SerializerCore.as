@@ -221,9 +221,13 @@ package com.googlecode.flexxb {
 							result = Instanciator.getInstance(objectClass, _arguments);
 						}
 					}
-
+					
+					if(itemId){
+						mappingModel.idResolver.bind(itemId, result);
+					}
 					//dispatch preDeserializeEvent
-					dispatchEvent(XmlEvent.createPreDeserializeEvent(result, xmlData));
+					mappingModel.processNotifier.notifyPreDeserialize(this, result, xmlData);
+					
 					//update object fields
 					if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
 						IXmlSerializable(result).fromXml(xmlData);
