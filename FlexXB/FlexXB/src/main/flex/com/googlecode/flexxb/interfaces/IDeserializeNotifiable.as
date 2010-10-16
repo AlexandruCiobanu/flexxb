@@ -32,15 +32,17 @@ package com.googlecode.flexxb.interfaces
 	{
 		/**
 		 * Called before the deserialization process of the current object begins.
+		 * @param parent
 		 * @param xmlData
 		 * 
 		 */		
-		function onPreDeserialize(xmlData : XML) : void;
+		function onPreDeserialize(parent : Object, xmlData : XML) : void;
 		/**
 		 * Called after the deserialization process of the current object ends.
+		 * @param parent
 		 * @param xmlData
 		 * 
 		 */	
-		function onPostDeserialize(xmlData : XML) : void;
+		function onPostDeserialize(parent : Object, xmlData : XML) : void;
 	}
 }

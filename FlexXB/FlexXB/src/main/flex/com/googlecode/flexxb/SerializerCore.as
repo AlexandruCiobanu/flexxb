@@ -22,6 +22,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.api.Stage;
 	import com.googlecode.flexxb.interfaces.IConverterStore;
 	import com.googlecode.flexxb.interfaces.ICycleRecoverable;
+	import com.googlecode.flexxb.interfaces.IXmlSerializable;
 	import com.googlecode.flexxb.persistence.IPersistable;
 	import com.googlecode.flexxb.persistence.PersistableObject;
 	import com.googlecode.flexxb.serializer.ISerializer;
@@ -30,7 +31,6 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.util.log.LogFactory;
 	
 	import flash.events.EventDispatcher;
-	import com.googlecode.flexxb.interfaces.IXmlSerializable;
 	
 	/**
 	 *
@@ -76,6 +76,14 @@ package com.googlecode.flexxb {
 		 */
 		public function get converterStore() : IConverterStore {
 			return mappingModel.converterStore;
+		}
+		
+		public function get idResolver() : IdResolver{
+			return mappingModel.idResolver;
+		}
+		
+		public function get currentObject() : Object{
+			return mappingModel.collisionDetector.getCurrent();
 		}
 
 		/**
@@ -137,6 +145,14 @@ package com.googlecode.flexxb {
 			return xmlData;
 		}
 		
+		public function getObjectId(object : Object) : String{
+			var classDescriptor : XmlClass = mappingModel.descriptorStore.getDescriptor(object);
+			if(classDescriptor.idField){
+				return object[classDescriptor.idField.fieldName];
+			}
+			return "";
+		} 
+		
 		private function pushObject(obj : Object, partial : Boolean) : Object{
 			var collisionDetected : Boolean = !mappingModel.collisionDetector.push(obj);
 			if(collisionDetected){
@@ -160,6 +176,9 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		private function doSerialize(object : Object, annotation : Annotation, xmlData : XML) : void {
+			if(configuration.enableLogging){
+				LOG.info("Serializing field {0} as {1}", annotation.fieldName, annotation.annotationName);
+			}
 			var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
 			var target : Object = object[annotation.fieldName];
 			if (target != null) {
@@ -225,6 +244,9 @@ package com.googlecode.flexxb {
 					if(itemId){
 						mappingModel.idResolver.bind(itemId, result);
 					}
+					
+					mappingModel.collisionDetector.pushNoCheck(result);
+					
 					//dispatch preDeserializeEvent
 					mappingModel.processNotifier.notifyPreDeserialize(this, result, xmlData);
 					
@@ -249,7 +271,9 @@ package com.googlecode.flexxb {
 						}
 					}
 					//dispatch postDeserializeEvent
-					dispatchEvent(XmlEvent.createPostDeserializeEvent(result, xmlData));
+					mappingModel.processNotifier.notifyPostDeserialize(this, result, xmlData);
+					
+					mappingModel.collisionDetector.pop();
 					
 					if(configuration.enableLogging){
 						LOG.info("Ended xml deserialization");

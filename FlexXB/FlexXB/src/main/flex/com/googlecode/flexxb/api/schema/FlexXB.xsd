@@ -50,6 +50,7 @@
       <xs:attribute name="alias" type="xs:string" use="optional" />
       <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
       <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
+      <xs:attribute name="idRef" type="xs:boolean" use="optional" default="false"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Element">
@@ -66,6 +67,7 @@
       <xs:attribute name="getFromCache" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="serializePartialElement" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
+      <xs:attribute name="idRef" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="getRuntimeType" type="xs:boolean" use="optional" default="false"/>
     </xs:complexType>
   </xs:element>
@@ -82,6 +84,7 @@
       <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
       <xs:attribute name="memberName" type="xs:string" use="optional"/>
       <xs:attribute name="memberType" type="xs:string" use="optional"/>
+      <xs:attribute name="idRef" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="getFromCache" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="serializePartialElement" type="xs:boolean" use="optional" default="false"/>
       <xs:attribute name="order" type="xs:unsignedInt" use="optional" />

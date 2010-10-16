@@ -42,12 +42,13 @@ package com.googlecode.flexxb.serializer {
 		}
 		
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
-			if(serializer.configuration.enableLogging){
-				LOG.info("Serializing field {0} as element", annotation.fieldName);
-			}
 			var child : XML = <xml />;
 			if (isComplexType(object)) {
-				child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
+				if(annotation.isIDRef){
+					child.appendChild(serializer.getObjectId(object));
+				}else{
+					child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
+				}
 			}else if(annotation.fieldType == XML){
 				child.appendChild(new XML(object));
 			}else{
@@ -93,6 +94,11 @@ package com.googlecode.flexxb.serializer {
 					return null;
 				}
 			}
+			if(element.isIDRef){
+				serializer.idResolver.addResolutionTask(serializer.currentObject, element.fieldName, xml.toString());
+				return null;
+			}
+			
 			var type : Class = element.fieldType;
 			if (XmlElement(element).getRuntimeType) {
 				type = serializer.getIncomingType(list[0]);

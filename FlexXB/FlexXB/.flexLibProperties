@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="false" version="1">
   <includeClasses>
-    <classEntry path="com.googlecode.flexxb.CircularReferenceDetector"/>
+    <classEntry path="com.googlecode.flexxb.ElementStack"/>
     <classEntry path="com.googlecode.flexxb.Configuration"/>
     <classEntry path="com.googlecode.flexxb.ConverterStore"/>
     <classEntry path="com.googlecode.flexxb.DescriptorStore"/>

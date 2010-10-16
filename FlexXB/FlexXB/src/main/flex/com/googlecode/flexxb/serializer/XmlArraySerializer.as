@@ -41,9 +41,6 @@ package com.googlecode.flexxb.serializer {
 		}
 		
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
-			if(serializer.configuration.enableLogging){
-				LOG.info("Serializing field {0} as array element", annotation.fieldName);
-			}
 			var result : XML = <xml />;
 			var xmlArray : XmlArray = annotation as XmlArray;
 			var child : XML;

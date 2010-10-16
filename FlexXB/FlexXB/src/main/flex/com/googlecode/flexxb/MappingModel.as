@@ -32,20 +32,37 @@ package com.googlecode.flexxb
 		
 		public var processNotifier : ProcessNotifier;
 		
-		public var collisionDetector : CircularReferenceDetector;
+		public var collisionDetector : ElementStack;
 		
 		public var idResolver : IdResolver;
 		
+		private var _itemStack : Array;
+		/**
+		 * 
+		 * 
+		 */		
 		public function MappingModel(){
 			processNotifier = new ProcessNotifier(this);
-			collisionDetector = new CircularReferenceDetector();
+			_itemStack = [];
+			collisionDetector = new ElementStack(_itemStack);
 			idResolver = new IdResolver();
 			
 			descriptorStore = new DescriptorStore();
 			configuration = new Configuration();
 			converterStore = new ConverterStore();
 		}	
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get itemStack() : Array{
+			return _itemStack;
+		}
+		/**
+		 * 
+		 * 
+		 */		
 		public function performCleanup() : void{
 			
 		}
