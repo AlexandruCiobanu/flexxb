@@ -29,6 +29,7 @@ package com.googlecode.flexxb {
 		/**
 		 * 
 		 * @param object
+		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
@@ -39,6 +40,7 @@ package com.googlecode.flexxb {
 		/**
 		 * 
 		 * @param object
+		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
@@ -49,22 +51,24 @@ package com.googlecode.flexxb {
 		/**
 		 * 
 		 * @param object
+		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
 		 */		
-		public static function createPreDeserializeEvent(object : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(PRE_DESERIALIZE, object, null, xml);
+		public static function createPreDeserializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(PRE_DESERIALIZE, object, parent, xml);
 		}
 		/**
 		 * 
 		 * @param object
+		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
 		 */		
-		public static function createPostDeserializeEvent(object : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(POST_DESERIALIZE, object, null, xml);
+		public static function createPostDeserializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(POST_DESERIALIZE, object, parent, xml);
 		}
 
 		private var _object : Object;

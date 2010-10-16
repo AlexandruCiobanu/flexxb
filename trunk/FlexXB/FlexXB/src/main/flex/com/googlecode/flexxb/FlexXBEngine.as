@@ -139,8 +139,10 @@ package com.googlecode.flexxb {
 		 */
 		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : * {
 			mappingModel.idResolver.beginDocument();
+			mappingModel.collisionDetector.beginDocument();
 			var object : Object = core.deserialize(xmlData, objectClass, getFromCache);
 			mappingModel.idResolver.endDocument();
+			mappingModel.collisionDetector.endDocument();
 			return object;
 		}
 

@@ -88,24 +88,14 @@ package com.googlecode.flexxb.annotation {
 		public function get getFromCache() : Boolean {
 			return _getFromCache;
 		}
-
-		/**
-		 *
-		 * @see Annotation#parseMetadata()
-		 *
-		 */
+		
 		protected override function parseMetadata(metadata : XML) : void {
 			super.parseMetadata(metadata);
 			_serializePartialElement = metadata.arg.(@key == ARGUMENT_SERIALIZE_PARTIAL_ELEMENT).@value == "true";
 			_getFromCache = metadata.arg.(@key == ARGUMENT_GET_FROM_CACHE).@value == "true";
 			_getRuntimeType = metadata.arg.(@key == ARGUMENT_GET_RUNTIME_TYPE).@value == "true";
 		}
-
-		/**
-		 *
-		 * @see Annotation#annotationName
-		 *
-		 */
+		
 		public override function get annotationName() : String {
 			return ANNOTATION_NAME;
 		}

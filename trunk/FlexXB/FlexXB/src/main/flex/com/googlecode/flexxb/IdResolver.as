@@ -27,8 +27,15 @@ package com.googlecode.flexxb
 	{
 		private var idMap : Dictionary;
 		
-		public function IdResolver(){ }
+		private var taskList : Array;
 		
+		public function IdResolver(){ }
+		/**
+		 * 
+		 * @param id
+		 * @param object
+		 * 
+		 */		
 		public function bind(id : String, object : Object) : void{
 			if(idMap == null){
 				idMap = new Dictionary();
@@ -37,22 +44,56 @@ package com.googlecode.flexxb
 				idMap[id] = object;
 			}
 		}
-		
+		/**
+		 * 
+		 * 
+		 */		
 		public function beginDocument() : void{
 			
 		}
-		
-		public function resolve(id : String, clasz : Class) : Function{
-			return function() : Object {
-				if(idMap==null){
-					return null;
+		/**
+		 * 
+		 * @param id
+		 * @param clasz
+		 * @return 
+		 * 
+		 */		
+		private function resolve(id : String, clasz : Class = null) : Object{
+			if(idMap==null){
+				return null;
+			}
+			return idMap[id];
+		}
+		/**
+		 * 
+		 * @param item
+		 * @param field
+		 * @param id
+		 * 
+		 */		
+		public function addResolutionTask(item : Object, field : QName, id : String) : void{
+			if(item && item.hasOwnProperty(field)){
+				if(taskList == null){
+					taskList = [];
 				}
-				return idMap[id];
-			};
+				taskList.push(new ResolverTask(item, field, id));
+			}
+		}
+		/**
+		 * 
+		 * 
+		 */		
+		public function endDocument() : void{
+			resolveTasks();
+			clear();
 		}
 		
-		public function endDocument() : void{
-			clear();
+		private function resolveTasks() : void{
+			if(taskList){
+				for each(var task : ResolverTask in taskList){
+					task.object[task.field] = resolve(task.id);
+				}
+			}
 		}
 		
 		private function clear() : void{
@@ -61,6 +102,32 @@ package com.googlecode.flexxb
 					delete idMap[key];
 				}
 			}
+			if(taskList){
+				var task : ResolverTask;
+				while(taskList.length > 0){
+					task = taskList.pop();
+					task.clear();
+					task = null;
+				}
+			}
 		}
 	}
+}
+
+class ResolverTask{
+	public var object : Object;
+	public var field : QName;
+	public var id : String;
+	
+	public function ResolverTask(object : Object, field : QName, id : String){
+		this.object = object;
+		this.field = field;
+		this.id = id;
+	}
+	
+	public function clear() : void{
+		object = null;
+		field = null;
+		id = null;
+	}	
 }

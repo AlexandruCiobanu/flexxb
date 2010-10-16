@@ -48,6 +48,13 @@ package com.googlecode.flexxb.api {
 		[XmlAttribute]
 		/**
 		 * 
+		 *  @default
+		 */		
+		public var idRef : Boolean;
+		
+		[XmlAttribute]
+		/**
+		 * 
 		 * @default 
 		 */
 		public var order : Number;
@@ -201,6 +208,7 @@ package com.googlecode.flexxb.api {
 			items[XmlMember.ARGUMENT_IGNORE_ON] = ignoreOn;
 			if (!isNaN(order))
 				items[XmlMember.ARGUMENT_ORDER] = order;
+			items[XmlMember.ARGUMENT_IDREF] = idRef;
 			return items;
 		}
 	}

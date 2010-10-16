@@ -60,10 +60,11 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public function notifyPreDeserialize(dispatcher : IEventDispatcher, item : Object, xmlData : XML) : void{
+			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(item is IDeserializeNotifiable){
-				IDeserializeNotifiable(item).onPreDeserialize(xmlData);
+				IDeserializeNotifiable(item).onPreDeserialize(parent, xmlData);
 			}else{
-				dispatcher.dispatchEvent(XmlEvent.createPreDeserializeEvent(item, xmlData));
+				dispatcher.dispatchEvent(XmlEvent.createPreDeserializeEvent(item, parent, xmlData));
 			}			
 		}
 		/**
@@ -89,10 +90,11 @@ package com.googlecode.flexxb
 		 * 
 		 */			
 		public function notifyPostDeserialize(dispatcher : IEventDispatcher, item : Object, xmlData : XML) : void{
+			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(item is IDeserializeNotifiable){
-				IDeserializeNotifiable(item).onPostDeserialize(xmlData);
+				IDeserializeNotifiable(item).onPostDeserialize(parent, xmlData);
 			}else{
-				dispatcher.dispatchEvent(XmlEvent.createPostDeserializeEvent(item, xmlData));
+				dispatcher.dispatchEvent(XmlEvent.createPostDeserializeEvent(item, parent, xmlData));
 			}
 		}
 	}

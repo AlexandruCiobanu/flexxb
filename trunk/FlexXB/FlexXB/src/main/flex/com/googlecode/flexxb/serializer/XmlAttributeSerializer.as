@@ -36,10 +36,12 @@ package com.googlecode.flexxb.serializer {
 		}
 		
 		protected override function serializeObject(object : Object, attribute : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
-			if(serializer.configuration.enableLogging){
-				LOG.info("Serializing field {0} as attribute", attribute.fieldName);
-			}
-			var value : String = serializer.converterStore.objectToString(object, attribute.fieldType);
+			var value : String;
+			if(isComplexType(object) && attribute.isIDRef){
+				value = serializer.getObjectId(object);
+			}else{
+				value = serializer.converterStore.objectToString(object, attribute.fieldType);
+			}			
 			parentXml.@[attribute.xmlName] = value;
 		}
 		
@@ -54,7 +56,12 @@ package com.googlecode.flexxb.serializer {
 			}else{
 				value = attribute.defaultSetValue;
 			}
-			var result : Object = serializer.converterStore.stringToObject(value, attribute.fieldType);
+			var result : Object;
+			if(attribute.isIDRef){
+				serializer.idResolver.addResolutionTask(serializer.currentObject, attribute.fieldName, value);
+			}else{
+				result = serializer.converterStore.stringToObject(value, attribute.fieldType);
+			}
 			return result;
 		}
 	}

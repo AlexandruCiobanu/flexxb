@@ -80,6 +80,10 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public static const ARGUMENT_ORDER : String = "order";
 		/**
+		 * Id reference 
+		 */		
+		public static const ARGUMENT_IDREF : String = "idref";
+		/**
 		 * Path separator used for defining virtual paths in the alias
 		 */
 		public static const ALIAS_PATH_SEPARATOR : String = "/";
@@ -119,6 +123,10 @@ package com.googlecode.flexxb.annotation {
 		 * @private 
 		 */		
 		private var _default : String;
+		/**
+		 * @private 
+		 */		
+		private var _isIDRef : Boolean;
 		/**
 		 * Constructor
 		 * @param descriptor xml descriptor of the class field
@@ -229,6 +237,14 @@ package com.googlecode.flexxb.annotation {
 		public function get ignoreOn() : Stage {
 			return _ignoreOn;
 		}
+		/**
+		 * Get the IDRef flag 
+		 * @return 
+		 * 
+		 */		
+		public function get isIDRef() : Boolean{
+			return _isIDRef;
+		}
 
 		/**
 		 * Get the owner XmlClass entity
@@ -282,6 +298,7 @@ package com.googlecode.flexxb.annotation {
 			ignoreOn = Stage.fromString(metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value);
 			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value);
 			_default = metadata.arg.(@key == ARGUMENT_DEFAULT).@value;
+			_isIDRef = metadata.arg.(@key == ARGUMENT_IDREF).@value == "true";
 		}
 		/**
 		 *

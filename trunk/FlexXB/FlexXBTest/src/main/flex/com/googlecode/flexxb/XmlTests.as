@@ -42,5 +42,7 @@ package com.googlecode.flexxb {
 		public var defaultValue : DefaultValueTest;
 		
 		public var namespaceTest : NamespaceTest;
+		
+		public var collisionDetectionTest : CircularReferenceTest;
 	}
 }

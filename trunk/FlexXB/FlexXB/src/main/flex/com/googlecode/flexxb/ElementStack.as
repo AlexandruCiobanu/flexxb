@@ -22,15 +22,20 @@ package com.googlecode.flexxb
 	 * @author User
 	 * 
 	 */	
-	public class CircularReferenceDetector
+	public class ElementStack
 	{
-		private var cycleDetectionStack : Array;
+		private var stack : Array;
 		/**
+		 * Constructor 
+		 * @param stackReference
 		 * 
-		 * 
-		 */		
-		public function CircularReferenceDetector(){
-			cycleDetectionStack = [];
+		 */			
+		public function ElementStack(stackReference : Array = null){
+			if(stackReference){
+				stack = stackReference;
+			}else{
+				stack = [];
+			}
 		}
 		
 		public function beginDocument() : void{
@@ -43,8 +48,8 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public function push(item : Object) : Boolean{
-			if(cycleDetectionStack.indexOf(item) == -1){
-				cycleDetectionStack.push(item);
+			if(stack.indexOf(item) == -1){
+				stack.push(item);
 				return true;
 			}
 			return false;
@@ -55,7 +60,7 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public function pushNoCheck(item : Object) : void{
-			cycleDetectionStack.push(item);
+			stack.push(item);
 		} 
 		/**
 		 * 
@@ -63,7 +68,7 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public function pop() : Object{
-			return cycleDetectionStack.pop();
+			return stack.pop();
 		}
 		/**
 		 * Returns a reference to the current object being processed
@@ -71,8 +76,8 @@ package com.googlecode.flexxb
 		 * 
 		 */	
 		public function getCurrent() : Object{
-			if(cycleDetectionStack.length > 0){
-				return cycleDetectionStack[cycleDetectionStack.length - 1];
+			if(stack.length > 0){
+				return stack[stack.length - 1];
 			}
 			return null;
 		}
@@ -82,8 +87,8 @@ package com.googlecode.flexxb
 		 * 
 		 */		
 		public function getParent() : Object{
-			if(cycleDetectionStack.length > 1){
-				return cycleDetectionStack[cycleDetectionStack.length - 2];
+			if(stack.length > 1){
+				return stack[stack.length - 2];
 			}
 			return null;
 		}
@@ -93,8 +98,8 @@ package com.googlecode.flexxb
 		}
 		
 		private function clear() : void{
-			while(cycleDetectionStack.length > 0){
-				cycleDetectionStack.pop();
+			while(stack.length > 0){
+				stack.pop();
 			}
 		}
 	}
