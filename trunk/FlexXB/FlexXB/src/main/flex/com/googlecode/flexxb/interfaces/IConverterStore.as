@@ -17,7 +17,8 @@
 package com.googlecode.flexxb.interfaces {
 
 	/**
-	 *
+	 * Defines a converter store, used to convert objects to string 
+	 * representations and viceversa.
 	 * @author Alexutz
 	 *
 	 */

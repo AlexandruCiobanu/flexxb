@@ -5,7 +5,6 @@
 	<projects>
 		<project>FlexXB</project>
 		<project>FlexXBTest</project>
-		<project>FxMOD</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>

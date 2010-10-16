@@ -24,11 +24,21 @@ package com.googlecode.flexxb.cache
 	 * @private
 	 */	
 	internal final class TypeCache{
+		/**
+		 * Type of objects being stored 
+		 */		
 		public var type : Class;
-		
+		/**
+		 * @private 
+		 */			
 		private var objectStore : Array = [];
+		/**
+		 * @private 
+		 */		
 		private var objectUsage : Array = [];
-		
+		/**
+		 * @private 
+		 */			
 		private var currentIndex : int = 0;
 		/**
 		 * Constructor
@@ -84,7 +94,11 @@ package com.googlecode.flexxb.cache
 				objectUsage[loop++] = false;
 			}
 		}
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function hasItemsAvailable() : Boolean{
 			return objectStore && currentIndex < objectStore.length;
 		}
@@ -97,7 +111,12 @@ package com.googlecode.flexxb.cache
 			objectStore = [];
 			objectUsage = [];
 		}
-		
+		/**
+		 * @private 
+		 * @param id
+		 * @param object
+		 * 
+		 */		
 		internal function putObject(id : String, object : Object) : void{
 			objectStore.push(object)
 			objectUsage.push(true);

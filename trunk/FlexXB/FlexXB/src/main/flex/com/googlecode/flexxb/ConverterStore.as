@@ -75,12 +75,7 @@ package com.googlecode.flexxb {
 		public function getConverter(clasz : Class) : IConverter {
 			return converterMap[clasz] as IConverter;
 		}
-
-		/**
-		 *
-		 * @see IConverterStore#stringToObject()
-		 *
-		 */
+		
 		public final function stringToObject(value : String, clasz : Class) : Object {
 			if (hasConverter(clasz)) {
 				return getConverter(clasz).fromString(value);
@@ -100,11 +95,7 @@ package com.googlecode.flexxb {
 			}
 			return clasz(value);
 		}
-
-		/**
-		 *
-		 * @see IConverterStore#objectToString()
-		 */
+		
 		public final function objectToString(object : Object, clasz : Class) : String {
 			if (hasConverter(clasz)) {
 				return getConverter(clasz).toString(object);
