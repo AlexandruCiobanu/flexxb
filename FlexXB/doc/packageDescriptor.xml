@@ -24,6 +24,30 @@
                 ]]> 
             </description> 
         </package> 
+        <package name="com.googlecode.flexxb.interfaces"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds interfaces that objects involved in the xml processing may implement.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                    Holds interfaces that objects involved in the xml processing may implement in order to receive notifications from the engine or to instruct it to handle them in specific manner.
+                ]]> 
+            </description> 
+        </package> 
+        <package name="com.googlecode.flexxb.cache"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds the cache provider implementations that FlexXB uses.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                    Holds the cache provider implementations that FlexXB uses.
+                ]]> 
+            </description> 
+        </package> 
         <package name="com.googlecode.flexxb.api"> 
             <shortDescription> 
                 <![CDATA[ 

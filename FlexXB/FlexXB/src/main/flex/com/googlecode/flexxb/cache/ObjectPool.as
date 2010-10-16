@@ -31,7 +31,7 @@ package com.googlecode.flexxb.cache
 	 * then released to be used by others. While an object is in use it cannot
 	 * be reasigned to other. Once the user is done with the instance, it must 
 	 * call releaseInstance method. 
-	 * <p> ObjectPool does not use an id. Objects are assigned baed on the used 
+	 * <p/> ObjectPool does not use an id. Objects are assigned baed on the used 
 	 * state. If all available objects are in use then a new instance will be 
 	 * created. If there is an object released, it will be passed on for use.
 	 * That's why sometimes it is required to clean the objects after use. This 
@@ -52,7 +52,9 @@ package com.googlecode.flexxb.cache
 		public static function get instance() : ObjectPool{
 			return _instance;
 		}
-		
+		/**
+		 * @private 
+		 */		
 		private var cacheMap : Dictionary;
 		/**
 		 * Constructor

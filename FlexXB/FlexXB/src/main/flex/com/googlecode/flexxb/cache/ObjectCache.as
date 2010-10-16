@@ -30,6 +30,9 @@ package com.googlecode.flexxb.cache
 	 */	
 	public class ObjectCache implements ICacheProvider
 	{
+		/**
+		 *@private 
+		 */		
 		private static const _instance : ObjectCache = new ObjectCache();
 		/**
 		 * Easy access instance. 
@@ -40,11 +43,11 @@ package com.googlecode.flexxb.cache
 			return _instance;
 		}
 		/**
-		 * 
+		 * @private
 		 */		
 		private var cacheMap : Dictionary = new Dictionary();
 		/**
-		 * 
+		 * Constructor
 		 * 
 		 */		
 		public function ObjectCache(){
