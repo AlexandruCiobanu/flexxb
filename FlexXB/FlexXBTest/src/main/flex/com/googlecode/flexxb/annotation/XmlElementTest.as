@@ -15,21 +15,23 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlElement;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlElement;
 	import com.googlecode.testData.Mock3;
 	import org.flexunit.Assert;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlElement;
 
 	public class XmlElementTest extends AnnotationTest {
 		
 		protected override function runTest(descriptor : XML) : void {
-			var att1 : XmlElement = new XmlElement(getFieldDescriptor("version", descriptor));
+			var att1 : XmlElement = new XmlElement();//getFieldDescriptor("version", descriptor));
 			validate(att1, "version", int, "objVersion", null, false);
 
-			var att2 : XmlElement = new XmlElement(getFieldDescriptor("reference", descriptor));
+			var att2 : XmlElement = new XmlElement();//getFieldDescriptor("reference", descriptor));
 			validate(att2, "reference", Object, "reference", null, true);
 
-			var att3 : XmlElement = new XmlElement(getFieldDescriptor("link", descriptor));
+			var att3 : XmlElement = new XmlElement();//getFieldDescriptor("link", descriptor));
 			validate(att3, "link", Mock3, "mock3", null, true);
 		}
 

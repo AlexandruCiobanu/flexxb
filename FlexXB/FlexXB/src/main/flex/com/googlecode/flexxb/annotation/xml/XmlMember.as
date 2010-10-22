@@ -14,12 +14,14 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.api.AccessorType;
-	import com.googlecode.flexxb.api.Stage;
+package com.googlecode.flexxb.annotation.xml {
+	import com.googlecode.flexxb.annotation.contract.Stage;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import mx.utils.StringUtil;
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
+	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
 
 	/**
 	 * Defines a member of an XmlClass, that is, a field of the class definition.
@@ -70,31 +72,8 @@ package com.googlecode.flexxb.annotation {
 	 * @author aCiobanu
 	 *
 	 */
-	public class XmlMember extends Annotation {
-		/**
-		 * IgnoreOn attribute name
-		 */
-		public static const ARGUMENT_IGNORE_ON : String = "ignoreOn";
-		/**
-		 * Order attribute name
-		 */
-		public static const ARGUMENT_ORDER : String = "order";
-		/**
-		 * Id reference 
-		 */		
-		public static const ARGUMENT_IDREF : String = "idref";
-		/**
-		 * Path separator used for defining virtual paths in the alias
-		 */
-		public static const ALIAS_PATH_SEPARATOR : String = "/";
-		/**
-		 * 
-		 */		
-		public static const ARGUMENT_NAMESPACE_REF : String = "namespace";
-		/**
-		 * 
-		 */		
-		public static const ARGUMENT_DEFAULT : String = "default";
+	public class XmlMember extends Annotation implements IMemberAnnotation {
+		
 		/**
 		 * @private
 		 */
@@ -133,11 +112,14 @@ package com.googlecode.flexxb.annotation {
 		 * @param _class owner XmlClass entity
 		 *
 		 */
-		public function XmlMember(descriptor : XML, _class : XmlClass) {
-			super(descriptor);
-			this._class = _class;
+		public function XmlMember() {
+			super();
 		}
 		
+		public function get classAnnotation() : IClassAnnotation{
+			return _class;
+		}
+				
 		public override function set nameSpace(value : Namespace) : void{
 			super.nameSpace = value;
 			if(isPath()){
@@ -174,6 +156,10 @@ package com.googlecode.flexxb.annotation {
 		public function get writeOnly() : Boolean {
 			return _accessorType.isWriteOnly();
 		}
+		
+		public function get accessor() : AccessorType{
+			return _accessorType;
+		} 
 		
 		/**
 		 * Get the namespace reference value
@@ -293,12 +279,12 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		protected override function parseMetadata(metadata : XML) : void {
-			_nsRef = metadata.arg.(@key == ARGUMENT_NAMESPACE_REF).@value;
-			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
-			ignoreOn = Stage.fromString(metadata.arg.(@key == ARGUMENT_IGNORE_ON).@value);
-			setOrder(metadata.arg.(@key == ARGUMENT_ORDER).@value);
-			_default = metadata.arg.(@key == ARGUMENT_DEFAULT).@value;
-			_isIDRef = metadata.arg.(@key == ARGUMENT_IDREF).@value == "true";
+			_nsRef = metadata.arg.(@key == Constants.NAMESPACE_REF).@value;
+			setAlias(metadata.arg.(@key == Constants.ALIAS).@value);
+			ignoreOn = Stage.fromString(metadata.arg.(@key == Constants.IGNORE_ON).@value);
+			setOrder(metadata.arg.(@key == Constants.ORDER).@value);
+			_default = metadata.arg.(@key == Constants.DEFAULT).@value;
+			_isIDRef = metadata.arg.(@key == Constants.IDREF).@value == "true";
 		}
 		/**
 		 *
@@ -311,7 +297,7 @@ package com.googlecode.flexxb.annotation {
 				try {
 					nr = Number(value);
 				} catch (error : Error) {
-					throw new DescriptorParsingError(ownerClass.fieldType, fieldName.localName, "The order attribute of the annotation is invalid as number");
+					throw new DescriptorParsingError(ownerClass.type, name.localName, "The order attribute of the annotation is invalid as number");
 				}
 				_order = nr;
 			}
@@ -323,8 +309,8 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		protected override function setAlias(value : String) : void {
-			if (value && value.indexOf(ALIAS_PATH_SEPARATOR) > 0) {
-				var elems : Array = value.split(ALIAS_PATH_SEPARATOR);
+			if (value && value.indexOf(XmlConstants.ALIAS_PATH_SEPARATOR) > 0) {
+				var elems : Array = value.split(XmlConstants.ALIAS_PATH_SEPARATOR);
 				pathElements = [];
 				var localName : String;
 				for (var i : int = 0; i < elems.length; i++) {

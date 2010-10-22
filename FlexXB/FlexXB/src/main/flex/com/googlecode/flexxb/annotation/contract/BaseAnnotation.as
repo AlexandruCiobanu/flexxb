@@ -14,33 +14,40 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api
-{
-	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
+package com.googlecode.flexxb.annotation.contract {
 
 	/**
-	 * @private 
-	 * @author Alexutzutz
-	 * 
-	 */	
-	public final class AccessorTypeConverter implements IConverter
-	{
-		public function AccessorTypeConverter(){ }
+	 *
+	 * @author Alexutz
+	 *
+	 */
+	public class BaseAnnotation implements IAnnotation {
 		
-		public function get type() : Class {
-			return AccessorType;
-		}
+		protected var _version : String;
+		/**
+		 * @private
+		 */
+		public function BaseAnnotation() { }
 		
-		public function toString(object : Object) : String {
-			if(object is AccessorType){
-				return AccessorType(object).toString();
-			}
+		public function get annotationName() : String {
 			return "";
 		}
 		
-		public function fromString(value : String) : Object {
-			return AccessorType.fromString(value);
+		public function get version() : String{
+			return _version;
+		}
+		
+		protected function setVersion(value : String) : void{
+			_version = value ? value : Constants.DEFAULT;
+		}
+
+		/**
+		 * @private
+		 * Analyze field/class descriptor to extract base informations like field's name and type
+		 * @param field field descriptor
+		 *
+		 */
+		protected function parse(descriptor : XML) : void {
 		}
 	}
 }

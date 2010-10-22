@@ -18,7 +18,7 @@ package com.googlecode.flexxb {
 	import flash.events.Event;
 	/**
 	 * 
-	 * @author User
+	 * @author Alexutzutz
 	 * 
 	 */	
 	public class XmlEvent extends Event {

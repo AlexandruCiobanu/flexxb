@@ -16,10 +16,18 @@
  */
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
+	import com.googlecode.flexxb.annotation.xml.XmlArray;
+	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
+	import com.googlecode.flexxb.annotation.xml.XmlClass;
+	import com.googlecode.flexxb.annotation.xml.XmlElement;
 	import com.googlecode.flexxb.api.IFlexXBApi;
 	import com.googlecode.flexxb.converter.ClassTypeConverter;
 	import com.googlecode.flexxb.converter.IConverter;
 	import com.googlecode.flexxb.converter.XmlConverter;
+	import com.googlecode.flexxb.serializer.XmlArraySerializer;
+	import com.googlecode.flexxb.serializer.XmlAttributeSerializer;
+	import com.googlecode.flexxb.serializer.XmlClassSerializer;
+	import com.googlecode.flexxb.serializer.XmlElementSerializer;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 	
@@ -61,7 +69,7 @@ package com.googlecode.flexxb {
 	 * @author aCiobanu
 	 *
 	 */
-	public class FlexXBEngine implements IEventDispatcher {
+	public final class FlexXBEngine implements IEventDispatcher {
 		private static var _instance : FlexXBEngine;
 		
 		private static const LOG : ILogger = LogFactory.getLog(FlexXBEngine);
@@ -93,6 +101,11 @@ package com.googlecode.flexxb {
 			core = new SerializerCore(mappingModel);
 			registerSimpleTypeConverter(new ClassTypeConverter());
 			registerSimpleTypeConverter(new XmlConverter());
+			
+			registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
+			registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
+			registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
+			registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
 		}
 
 		/**
@@ -119,12 +132,14 @@ package com.googlecode.flexxb {
 		/**
 		 * Convert an object to a xml representation.
 		 * @param object object to be converted.
+		 * @param partial serialize the object in partial mode (only the object tag with id field)
+		 * @param version 
 		 * @return xml representation of the given object
 		 *
 		 */
-		public final function serialize(object : Object, partial : Boolean = false) : XML {
+		public final function serialize(object : Object, partial : Boolean = false, version : String = "") : XML {
 			mappingModel.collisionDetector.beginDocument();
-			var xml : XML = core.serialize(object, partial);
+			var xml : XML = core.serialize(object, partial, version);
 			mappingModel.collisionDetector.endDocument();
 			return xml;
 		}
@@ -134,13 +149,14 @@ package com.googlecode.flexxb {
 		 * @param xmlData xml to be deserialized
 		 * @param objectClass object class
 		 * @param getFromCache get the object from the model object cache if it exists, without applying the xml
+		 * @param version
 		 * @return object of type objectClass
 		 *
 		 */
-		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : * {
+		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : * {
 			mappingModel.idResolver.beginDocument();
 			mappingModel.collisionDetector.beginDocument();
-			var object : Object = core.deserialize(xmlData, objectClass, getFromCache);
+			var object : Object = core.deserialize(xmlData, objectClass, getFromCache, version);
 			mappingModel.idResolver.endDocument();
 			mappingModel.collisionDetector.endDocument();
 			return object;

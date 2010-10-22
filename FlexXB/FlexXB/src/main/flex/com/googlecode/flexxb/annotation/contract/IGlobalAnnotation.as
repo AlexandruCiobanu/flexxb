@@ -14,33 +14,24 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api
+package com.googlecode.flexxb.annotation.contract
 {
-	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
-
 	/**
-	 * @private 
-	 * @author Alexutzutz
+	 * This interface describes a metadata defined at class level, that is bound 
+	 * to the class owner metadata but defines particularities specific to the
+	 * class itself. Good examples to this end are constructor arguments metadata
+	 * or namespaces used by the class fields. They are not bound to a field name 
+	 * and type but they afect the class representation.
+	 * @author Alexutz
 	 * 
 	 */	
-	public final class AccessorTypeConverter implements IConverter
+	public interface IGlobalAnnotation
 	{
-		public function AccessorTypeConverter(){ }
-		
-		public function get type() : Class {
-			return AccessorType;
-		}
-		
-		public function toString(object : Object) : String {
-			if(object is AccessorType){
-				return AccessorType(object).toString();
-			}
-			return "";
-		}
-		
-		public function fromString(value : String) : Object {
-			return AccessorType.fromString(value);
-		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		function get classAnnotation() : IClassAnnotation;
 	}
 }

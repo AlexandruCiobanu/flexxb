@@ -24,7 +24,7 @@ package com.googlecode.flexxb.interfaces
 	 * This is not always a desired behavior.Implementing this interface allows the 
 	 * user application to change this behavior.
 	 * 
-	 * @author User
+	 * @author Alexutzutz
 	 * 
 	 */	
 	public interface ICycleRecoverable

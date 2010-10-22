@@ -18,8 +18,8 @@
 package com.googlecode.flexxb
 {
 	/**
-	 * 
-	 * @author User
+	 * @private
+	 * @author Alexutzutz
 	 * 
 	 */	
 	public class ElementStack

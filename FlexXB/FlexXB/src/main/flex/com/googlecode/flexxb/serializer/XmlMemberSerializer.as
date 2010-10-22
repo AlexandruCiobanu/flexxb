@@ -16,10 +16,8 @@
  */
 package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.flexxb.api.Stage;
-	import com.googlecode.flexxb.error.ProcessingError;
+	import com.googlecode.flexxb.annotation.contract.IAnnotation;
+	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	
 	import flash.utils.getQualifiedClassName;
 
@@ -30,11 +28,11 @@ package com.googlecode.flexxb.serializer {
 	 */
 	internal class XmlMemberSerializer implements ISerializer {
 		
-		public function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML {
+		public function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializerCore) : XML {
 			var element : XmlMember = annotation as XmlMember;
 			
 			if (element.isDefaultValue()) {
-				parentXml.appendChild(serializer.converterStore.objectToString(object, element.fieldType));
+				parentXml.appendChild(serializer.converterStore.objectToString(object, element.type));
 				return null;
 			}
 			var location : XML = parentXml;
@@ -63,13 +61,13 @@ package com.googlecode.flexxb.serializer {
 		protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void {
 		}
 		
-		public function deserialize(xmlData : XML, annotation : Annotation, serializer : SerializerCore) : Object {
+		public function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializerCore) : Object {
 			var element : XmlMember = annotation as XmlMember;
 			
 			if (element.isDefaultValue()) {
 				for each (var child : XML in xmlData.children()) {
 					if (child.nodeKind() == "text") {
-						return serializer.converterStore.stringToObject(child.toXMLString(), element.fieldType);
+						return serializer.converterStore.stringToObject(child.toXMLString(), element.type);
 					}
 				}
 			}
@@ -88,7 +86,7 @@ package com.googlecode.flexxb.serializer {
 
 			var xmlName : QName;
 			if (element.useOwnerAlias()) {
-				xmlName = serializer.descriptorStore.getXmlName(element.fieldType);
+				xmlName = serializer.descriptorStore.getXmlName(element.type);
 			} else {
 				xmlName = element.xmlName;
 			}

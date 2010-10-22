@@ -15,9 +15,11 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.annotation.XmlElement;
-
+	import com.googlecode.flexxb.annotation.xml.XmlConstants;
+	import com.googlecode.flexxb.annotation.xml.XmlElement;
+	
 	import flash.utils.Dictionary;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
 	
 	[XmlClass(alias="Element")]
 	[ConstructorArg(reference="field")]
@@ -76,9 +78,9 @@ package com.googlecode.flexxb.api {
 
 		protected override function getContent() : Dictionary {
 			var items : Dictionary = super.getContent();
-			items[XmlElement.ARGUMENT_GET_FROM_CACHE] = getFromCache;
-			items[XmlElement.ARGUMENT_SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
-			items[XmlElement.ARGUMENT_GET_RUNTIME_TYPE] = getRuntimeType;
+			items[XmlConstants.GET_FROM_CACHE] = getFromCache;
+			items[XmlConstants.SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
+			items[XmlConstants.GET_RUNTIME_TYPE] = getRuntimeType;
 			return items;
 		}
 		

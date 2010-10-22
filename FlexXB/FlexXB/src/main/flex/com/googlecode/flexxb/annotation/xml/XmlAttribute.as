@@ -14,7 +14,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
+package com.googlecode.flexxb.annotation.xml {
 
 	/**
 	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="NameSpace_Prefix", default="DEFAULT_VALUE")]</code></p>
@@ -33,8 +33,8 @@ package com.googlecode.flexxb.annotation {
 		 * @param classDescriptor owner XmlClass object
 		 *
 		 */
-		public function XmlAttribute(descriptor : XML, classDescriptor : XmlClass = null) {
-			super(descriptor, classDescriptor);
+		public function XmlAttribute() {
+			super();
 		}
 
 		/**

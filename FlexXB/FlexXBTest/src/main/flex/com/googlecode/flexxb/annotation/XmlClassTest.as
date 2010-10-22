@@ -22,6 +22,8 @@ package com.googlecode.flexxb.annotation {
 	import flash.utils.describeType;
 	
 	import org.flexunit.Assert;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlClass;
 
 
 	public class XmlClassTest extends AnnotationTest {

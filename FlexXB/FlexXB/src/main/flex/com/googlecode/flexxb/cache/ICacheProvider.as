@@ -19,7 +19,7 @@ package com.googlecode.flexxb.cache
 {
 	/**
 	 * This interface defines a cache provider recognised by FlexXB engine.  
-	 * @author User
+	 * @author Alexutzutz
 	 * 
 	 */	
 	public interface ICacheProvider

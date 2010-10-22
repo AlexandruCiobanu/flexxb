@@ -15,12 +15,11 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb {
-	import com.googlecode.flexxb.annotation.Annotation;
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
-	import com.googlecode.flexxb.annotation.XmlClass;
-	import com.googlecode.flexxb.annotation.XmlMember;
-	import com.googlecode.flexxb.api.Stage;
-	import com.googlecode.flexxb.interfaces.IConverterStore;
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
+	import com.googlecode.flexxb.annotation.contract.IFieldAnnotation;
+	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
+	import com.googlecode.flexxb.annotation.contract.Stage;
 	import com.googlecode.flexxb.interfaces.ICycleRecoverable;
 	import com.googlecode.flexxb.interfaces.IXmlSerializable;
 	import com.googlecode.flexxb.persistence.IPersistable;
@@ -33,7 +32,7 @@ package com.googlecode.flexxb {
 	import flash.events.EventDispatcher;
 	
 	/**
-	 *
+	 * @private
 	 * @author Alexutz
 	 *
 	 */
@@ -89,10 +88,11 @@ package com.googlecode.flexxb {
 		/**
 		 * Convert an object to a xml representation.
 		 * @param object object to be converted.
+		 * @param version
 		 * @return xml representation of the given object
 		 *
 		 */
-		public final function serialize(object : Object, partial : Boolean = false) : XML {
+		public final function serialize(object : Object, partial : Boolean = false, version : String = "") : XML {
 			if(configuration.enableLogging){
 				LOG.info("Started object serialization. Partial flag is {0}", partial);
 			}
@@ -111,15 +111,15 @@ package com.googlecode.flexxb {
 			if (mappingModel.descriptorStore.isCustomSerializable(object)) {
 				xmlData = IXmlSerializable(object).toXml();
 			} else {
-				var classDescriptor : XmlClass = mappingModel.descriptorStore.getDescriptor(object);
+				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(object);
 				xmlData = AnnotationFactory.instance.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
 				var serializer : ISerializer;
-				var annotation : XmlMember;
+				var annotation : IMemberAnnotation;
 				if (partial && classDescriptor.idField) {
 					doSerialize(object, classDescriptor.idField, xmlData);
 				} else if (configuration.onlySerializeChangedValueFields && object is PersistableObject) {
 					for each (annotation in classDescriptor.members) {
-						if (annotation.writeOnly  || annotation.ignoreOn == Stage.SERIALIZE || !PersistableObject(object).isChanged(annotation.fieldName.localName)) {
+						if (annotation.writeOnly  || annotation.ignoreOn == Stage.SERIALIZE || !PersistableObject(object).isChanged(annotation.name.localName)) {
 							continue;
 						}
 						doSerialize(object, annotation, xmlData);
@@ -146,9 +146,9 @@ package com.googlecode.flexxb {
 		}
 		
 		public function getObjectId(object : Object) : String{
-			var classDescriptor : XmlClass = mappingModel.descriptorStore.getDescriptor(object);
+			var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(object);
 			if(classDescriptor.idField){
-				return object[classDescriptor.idField.fieldName];
+				return object[classDescriptor.idField.name];
 			}
 			return "";
 		} 
@@ -175,12 +175,12 @@ package com.googlecode.flexxb {
 		 * @param xmlData
 		 *
 		 */
-		private function doSerialize(object : Object, annotation : Annotation, xmlData : XML) : void {
+		private function doSerialize(object : Object, annotation : IFieldAnnotation, xmlData : XML) : void {
 			if(configuration.enableLogging){
-				LOG.info("Serializing field {0} as {1}", annotation.fieldName, annotation.annotationName);
+				LOG.info("Serializing field {0} as {1}", annotation.name, annotation.annotationName);
 			}
 			var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
-			var target : Object = object[annotation.fieldName];
+			var target : Object = object[annotation.name];
 			if (target != null) {
 				serializer.serialize(target, annotation, xmlData, this);
 			}
@@ -190,10 +190,12 @@ package com.googlecode.flexxb {
 		 * Convert an xml to an AS3 object counterpart
 		 * @param xmlData xml to be deserialized
 		 * @param objectClass object class
+		 * @param getFromCache
+		 * @param version
 		 * @return object of type objectClass
 		 *
 		 */
-		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false) : Object {
+		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : Object {
 			if(configuration.enableLogging){
 				LOG.info("Started xml deserialization to type {0}. GetFromCache flag is {1}", objectClass, getFromCache);
 			}
@@ -215,7 +217,7 @@ package com.googlecode.flexxb {
 						foundInCache = result != null;
 					}
 
-					var classDescriptor : XmlClass;
+					var classDescriptor : IClassAnnotation;
 					if (!mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
 						classDescriptor = mappingModel.descriptorStore.getDescriptor(objectClass);
 					}
@@ -226,7 +228,7 @@ package com.googlecode.flexxb {
 						if (!mappingModel.descriptorStore.isCustomSerializable(objectClass) && !classDescriptor.constructor.isDefault()) {
 							_arguments = [];
 							var stageCache : Stage;
-							for each (var member : XmlMember in classDescriptor.constructor.parameterFields) {
+							for each (var member : IMemberAnnotation in classDescriptor.constructor.parameterFields) {
 								//On deserialization, when using constructor arguments, we need to process them even though the ignoreOn 
 								//flag is set to deserialize stage.
 								var data : Object = AnnotationFactory.instance.getSerializer(member).deserialize(xmlData, member, this);
@@ -255,7 +257,7 @@ package com.googlecode.flexxb {
 						IXmlSerializable(result).fromXml(xmlData);
 					} else {
 						//iterate through anotations
-						for each (var annotation : XmlMember in classDescriptor.members) {
+						for each (var annotation : IMemberAnnotation in classDescriptor.members) {
 							if (annotation.readOnly || classDescriptor.constructor.hasParameterField(annotation)) {
 								continue;
 							}
@@ -263,10 +265,10 @@ package com.googlecode.flexxb {
 								// Let's keep the old behavior for now. If the ignoreOn flag is set on deserialize, 
 								// the field's value is set to null.
 								// TODO: check if this can be removed
-								result[annotation.fieldName] = null;
+								result[annotation.name] = null;
 							}else{
 								var serializer : ISerializer = AnnotationFactory.instance.getSerializer(annotation);
-								result[annotation.fieldName] = serializer.deserialize(xmlData, annotation, this);
+								result[annotation.name] = serializer.deserialize(xmlData, annotation, this);
 							}
 						}
 					}
@@ -328,7 +330,7 @@ package com.googlecode.flexxb {
 			if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
 				itemId = mappingModel.descriptorStore.getCustomSerializableReference(objectClass).getIdValue(xmlData);
 			} else {
-				var classDescriptor : XmlClass = mappingModel.descriptorStore.getDescriptor(objectClass);
+				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(objectClass);
 				var idSerializer : ISerializer = AnnotationFactory.instance.getSerializer(classDescriptor.idField);
 				if (idSerializer) {
 					itemId = String(idSerializer.deserialize(xmlData, classDescriptor.idField, this));

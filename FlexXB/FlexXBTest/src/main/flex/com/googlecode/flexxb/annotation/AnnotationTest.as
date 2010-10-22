@@ -15,12 +15,13 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.annotation.Annotation;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
 	import com.googlecode.testData.Mock;
 	
 	import flash.utils.describeType;
 	
 	import org.flexunit.Assert;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
 
 	/**
 	 *
@@ -49,8 +50,8 @@ package com.googlecode.flexxb.annotation {
 		protected final function validate(annotation : Annotation, ... args) : void {
 			Assert.assertNotNull("Null annotation", annotation);
 			Assert.assertNotNull("Validation arguments are missing", args);
-			Assert.assertEquals("Field Name is incorrect", args[0], annotation.fieldName.localName);
-			Assert.assertEquals("Field Type is incorrect", args[1], annotation.fieldType);
+			Assert.assertEquals("Field Name is incorrect", args[0], annotation.name.localName);
+			Assert.assertEquals("Field Type is incorrect", args[1], annotation.type);
 			Assert.assertEquals("Alias is incorrect", args[2], annotation.alias);
 			customValidate.apply(this, [annotation].concat(args));
 		}

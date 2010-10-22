@@ -14,8 +14,10 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
+package com.googlecode.flexxb.annotation.xml {
 	import flash.utils.getDefinitionByName;
+	import com.googlecode.flexxb.annotation.contract.IFieldAnnotation;
+	import com.googlecode.flexxb.annotation.contract.BaseAnnotation;
 
 	/**
 	 * This is the base class for a field xml annotation.
@@ -28,19 +30,17 @@ package com.googlecode.flexxb.annotation {
 	 * @author aCiobanu
 	 *
 	 */
-	public class Annotation extends BaseAnnotation {
-		
-		public static const ARGUMENT_ALIAS : String = "alias";
-		
-		public static const ALIAS_ANY : String = "*";
+	public class Annotation extends BaseAnnotation implements IFieldAnnotation {
 		/**
 		 * @private
 		 */
-		protected var _fieldName : QName;
+		protected var _name : QName;
 		/**
 		 * @private
 		 */
-		protected var _fieldType : Class;
+		protected var _type : Class;
+		
+		
 		/**
 		 * @private
 		 */
@@ -55,9 +55,7 @@ package com.googlecode.flexxb.annotation {
 		 * @param descriptor
 		 *
 		 */
-		public function Annotation(descriptor : XML) {
-			super(descriptor);
-		}
+		public function Annotation() { }
 		
 		/**
 		 * Get the annotation namespace
@@ -76,22 +74,12 @@ package com.googlecode.flexxb.annotation {
 			_nameSpace = value;
 		}
 		
-		/**
-		 * Get the field name
-		 * @return field name
-		 *
-		 */
-		public function get fieldName() : QName {
-			return _fieldName;
+		public function get name() : QName {
+			return _name;
 		}
-
-		/**
-		 * Get the field type
-		 * @return field type
-		 *
-		 */
-		public function get fieldType() : Class {
-			return _fieldType;
+		
+		public function get type() : Class {
+			return _type;
 		}
 
 		/**
@@ -101,7 +89,7 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public function get xmlName() : QName {
 			if (!_xmlName) {
-				_xmlName = new QName(nameSpace, _alias == "" ? _fieldName : _alias);
+				_xmlName = new QName(nameSpace, _alias == "" ? _name : _alias);
 			}
 			return _xmlName;
 		}
@@ -125,7 +113,7 @@ package com.googlecode.flexxb.annotation {
 				return;
 			_alias = value;
 			if (_alias.length == 0) {
-				_alias = _fieldName.localName;
+				_alias = _name.localName;
 			}
 		}
 
@@ -144,7 +132,7 @@ package com.googlecode.flexxb.annotation {
 		 *
 		 */
 		public function useOwnerAlias() : Boolean {
-			return _alias == ALIAS_ANY;
+			return _alias == XmlConstants.ALIAS_ANY;
 		}
 
 		/**
@@ -155,13 +143,14 @@ package com.googlecode.flexxb.annotation {
 		 */
 		protected override function parse(field : XML) : void {
 			if (field.@name.length() > 0) {
-				_fieldName = new QName(field.@uri, field.@name);
+				_name = new QName(field.@uri, field.@name);
 			}
 			if (field.@type.length() > 0) {
-				_fieldType = getDefinitionByName(field.@type) as Class;
+				_type = getDefinitionByName(field.@type) as Class;
 			}
 			var metadata : XMLList = field.metadata.(@name == annotationName);
 			if (metadata.length() > 0) {
+				setVersion(metadata[0].arg.(@key == ARGUMENT_VERSION).@value);
 				parseMetadata(metadata[0]);
 			}
 			return;

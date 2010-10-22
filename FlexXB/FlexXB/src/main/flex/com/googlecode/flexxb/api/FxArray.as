@@ -15,17 +15,19 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.annotation.XmlArray;
+	import com.googlecode.flexxb.annotation.xml.XmlConstants;
+	import com.googlecode.flexxb.annotation.xml.XmlArray;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
 	
 	[XmlClass(alias="Array")]
 	[ConstructorArg(reference="field")]
 	[ConstructorArg(reference="alias")]
 	/**
 	 * 
-	 * @author User
+	 * @author Alexutzutz
 	 * 
 	 */	
 	public class FxArray extends FxElement {
@@ -72,9 +74,9 @@ package com.googlecode.flexxb.api {
 
 		protected override function getContent() : Dictionary {
 			var items : Dictionary = super.getContent();
-			items[XmlArray.ARGUMENT_MEMBER_NAME] = memberName;
+			items[XmlConstants.MEMBER_NAME] = memberName;
 			if(memberType is Class){
-				items[XmlArray.ARGUMENT_TYPE] =  getQualifiedClassName(memberType);
+				items[XmlConstants.TYPE] =  getQualifiedClassName(memberType);
 			}
 			return items;
 		}

@@ -21,11 +21,13 @@ package com.googlecode.flexxb.annotation {
 	
 	import org.flexunit.Assert;
 	import org.flexunit.assertThat;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlArray;
 	
 	public class XmlArrayTest extends AnnotationTest {
 		
 		protected override function runTest(descriptor : XML) : void {
-			var att1 : XmlArray = new XmlArray(getFieldDescriptor("result", descriptor));
+			var att1 : XmlArray = new XmlArray();//getFieldDescriptor("result", descriptor));
 			validate(att1, "result", Array, "data", null, false, Mock);
 		}
 

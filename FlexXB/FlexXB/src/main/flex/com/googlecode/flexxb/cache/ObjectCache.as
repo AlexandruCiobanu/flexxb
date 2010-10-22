@@ -25,7 +25,7 @@ package com.googlecode.flexxb.cache
 
 	/**
 	 * 
-	 * @author User
+	 * @author Alexutzutz
 	 * 
 	 */	
 	public class ObjectCache implements ICacheProvider

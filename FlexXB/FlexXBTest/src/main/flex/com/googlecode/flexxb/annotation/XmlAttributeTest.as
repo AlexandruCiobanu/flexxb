@@ -15,16 +15,18 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.api.Stage;
+	import com.googlecode.flexxb.annotation.contract.Stage;
 	import org.flexunit.Assert;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
 
 	public class XmlAttributeTest extends AnnotationTest {
 		
 		protected override function runTest(descriptor : XML) : void {
-			var att1 : XmlAttribute = new XmlAttribute(getFieldDescriptor("aField", descriptor));
+			var att1 : XmlAttribute = new XmlAttribute();//getFieldDescriptor("aField", descriptor));
 			validate(att1, "aField", String, "stuff", null);
 
-			var att2 : XmlAttribute = new XmlAttribute(getFieldDescriptor("date", descriptor));
+			var att2 : XmlAttribute = new XmlAttribute();//getFieldDescriptor("date", descriptor));
 			validate(att2, "date", Date, "date", Stage.SERIALIZE);
 		}
 

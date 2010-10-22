@@ -14,46 +14,45 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
+package com.googlecode.flexxb.annotation.contract
+{
+	import mx.collections.ArrayCollection;
 
 	/**
-	 *
+	 * 
 	 * @author Alexutz
-	 *
-	 */
-	internal class BaseAnnotation {
+	 * 
+	 */	
+	public interface IClassAnnotation extends IFieldAnnotation
+	{
+		[ArrayElementType("com.googlecode.flexxb.annotation.contract.IMemberAnnotation")]
 		/**
 		 * 
+		 * @return 
+		 * 
 		 */		
-		public var verision : String;
+		function get members() : ArrayCollection;
+		
 		/**
-		 * Constructor
-		 * @param descriptor
-		 *
-		 */
-		public function BaseAnnotation(descriptor : XML) {
-			if (!descriptor) {
-				throw new Error("The xml descriptor must not be empty.");
-			}
-			parse(descriptor);
-		}
-
+		 * 
+		 * @param fieldName
+		 * @return 
+		 * 
+		 */		
+		function getMember(fieldName : String) : IMemberAnnotation; 
+		
 		/**
-		 * Get the annotation's name used in descriptor
-		 * @return annotation name
-		 *
-		 */
-		public function get annotationName() : String {
-			return "";
-		}
-
+		 * 
+		 * @return 
+		 * 
+		 */		
+		function get idField() : IMemberAnnotation;
+		
 		/**
-		 * @private
-		 * Analyze field/class descriptor to extract base informations like field's name and type
-		 * @param field field descriptor
-		 *
-		 */
-		protected function parse(descriptor : XML) : void {
-		}
+		 * 
+		 * @return 
+		 * 
+		 */		
+		function get constructor() : Constructor;
 	}
 }

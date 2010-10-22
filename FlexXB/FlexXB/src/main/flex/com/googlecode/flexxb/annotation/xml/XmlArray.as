@@ -14,7 +14,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
+package com.googlecode.flexxb.annotation.xml {
 	import flash.utils.getDefinitionByName;
 
 	/**
@@ -30,17 +30,9 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public static const ANNOTATION_NAME : String = "XmlArray";
 		/**
-		 *
-		 */
-		public static const ARGUMENT_TYPE : String = "type";
-		/**
-		 *
-		 */
-		public static const ARGUMENT_MEMBER_NAME : String = "memberName";
-		/**
 		 * @private
 		 */
-		private var _type : Class;
+		private var _memberType : Class;
 		/**
 		 * @private
 		 */
@@ -52,8 +44,8 @@ package com.googlecode.flexxb.annotation {
 		 * @param xmlClass
 		 *
 		 */
-		public function XmlArray(descriptor : XML, xmlClass : XmlClass = null) {
-			super(descriptor, xmlClass);
+		public function XmlArray() {
+			super();
 		}
 
 		/**
@@ -61,8 +53,8 @@ package com.googlecode.flexxb.annotation {
 		 * @return
 		 *
 		 */
-		public function get type() : Class {
-			return _type;
+		public function get memberType() : Class {
+			return _memberType;
 		}
 
 		/**

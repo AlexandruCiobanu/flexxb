@@ -16,8 +16,9 @@
  */
 package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlClass;
+	import com.googlecode.flexxb.annotation.contract.IAnnotation;
+	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
+	import com.googlecode.flexxb.annotation.xml.XmlClass;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 
@@ -30,20 +31,20 @@ package com.googlecode.flexxb.serializer {
 		
 		private static const LOG : ILogger = LogFactory.getLog(XmlClassSerializer);
 		
-		public function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML {
-			if(serializer.configuration.enableLogging){
-				LOG.info("Serializing object of type {0}", annotation.fieldName);
-			}
+		public function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializerCore) : XML {
 			var xmlClass : XmlClass = annotation as XmlClass;
+			if(serializer.configuration.enableLogging){
+				LOG.info("Serializing object of type {0}", xmlClass.name);
+			}
 			var xml : XML = <xml />
 			xml.setNamespace(xmlClass.nameSpace);
 			xml.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
 			if (xmlClass.useOwnNamespace()) {
 				xml.addNamespace(xmlClass.nameSpace);
 			} else {
-				var member : Annotation = xmlClass.getMember(xmlClass.childNameSpaceFieldName);
+				var member : IMemberAnnotation = xmlClass.getMember(xmlClass.childNameSpaceFieldName);
 				if (member) {
-					var ns : Namespace = serializer.descriptorStore.getNamespace(object[member.fieldName]);
+					var ns : Namespace = serializer.descriptorStore.getNamespace(object[member.name]);
 					if (ns) {
 						xml.addNamespace(ns);
 					}
@@ -52,7 +53,7 @@ package com.googlecode.flexxb.serializer {
 			return xml;
 		}
 		
-		public function deserialize(xmlData : XML, annotation : Annotation, serializer : SerializerCore) : Object {
+		public function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializerCore) : Object {
 			return null;
 		}
 	}

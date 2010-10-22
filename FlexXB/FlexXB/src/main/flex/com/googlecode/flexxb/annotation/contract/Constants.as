@@ -14,33 +14,33 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api
+package com.googlecode.flexxb.annotation.contract
 {
-	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
-
 	/**
-	 * @private 
-	 * @author Alexutzutz
+	 * 
+	 * @author User
 	 * 
 	 */	
-	public final class AccessorTypeConverter implements IConverter
+	public class Constants
 	{
-		public function AccessorTypeConverter(){ }
-		
-		public function get type() : Class {
-			return AccessorType;
-		}
-		
-		public function toString(object : Object) : String {
-			if(object is AccessorType){
-				return AccessorType(object).toString();
-			}
-			return "";
-		}
-		
-		public function fromString(value : String) : Object {
-			return AccessorType.fromString(value);
+		/**
+		 * 
+		 */		
+		public static const VERSION : String = "version";
+		/**
+		 * 
+		 */		
+		public static const DEFAULT : String = "default";
+		/**
+		 * 
+		 */		
+		public static const ANNOTATION_CONSTRUCTOR_ARGUMENT : String = "ConstructorArg";
+		/**
+		 * @private 
+		 * 
+		 */		
+		public function Constants(){
+			throw new Error("Can't instanciate this class. Use static accessors instead");
 		}
 	}
 }

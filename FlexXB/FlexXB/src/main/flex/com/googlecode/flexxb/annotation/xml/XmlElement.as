@@ -14,7 +14,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
+package com.googlecode.flexxb.annotation.xml {
 
 	/**
 	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", 
@@ -29,16 +29,6 @@ package com.googlecode.flexxb.annotation {
 		 * Annotation's name
 		 */
 		public static const ANNOTATION_NAME : String = "XmlElement";
-		/**
-		 * SerializePartialElement attribute name
-		 */
-		public static const ARGUMENT_SERIALIZE_PARTIAL_ELEMENT : String = "serializePartialElement";
-		/**
-		 * GetFromCache attribute name
-		 */
-		public static const ARGUMENT_GET_FROM_CACHE : String = "getFromCache";
-
-		public static const ARGUMENT_GET_RUNTIME_TYPE : String = "getRuntimeType";
 		/**
 		 * @private
 		 */
@@ -58,8 +48,8 @@ package com.googlecode.flexxb.annotation {
 		 * @param xmlClass
 		 *
 		 */
-		public function XmlElement(descriptor : XML, xmlClass : XmlClass = null) {
-			super(descriptor, xmlClass);
+		public function XmlElement() {
+			super();
 		}
 
 		/**
