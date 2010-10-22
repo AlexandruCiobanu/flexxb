@@ -14,7 +14,8 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
+package com.googlecode.flexxb.annotation.contract {
+	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import flash.utils.Dictionary;
@@ -25,8 +26,8 @@ package com.googlecode.flexxb.annotation {
 	 * @author Alexutz
 	 *
 	 */
-	internal class Constructor {
-		private var owner : XmlClass;
+	public class Constructor {
+		private var owner : IClassAnnotation;
 
 		private var _arguments : Array;
 
@@ -38,7 +39,7 @@ package com.googlecode.flexxb.annotation {
 		 * Constructor
 		 *
 		 */
-		public function Constructor(owner : XmlClass) {
+		public function Constructor(owner : IClassAnnotation) {
 			this.owner = owner;
 		}
 
@@ -57,8 +58,8 @@ package com.googlecode.flexxb.annotation {
 		 * @return
 		 *
 		 */
-		public function hasParameterField(fieldAnnotation : XmlMember) : Boolean {
-			return !isDefault() && fieldAnnotation && _fieldMap[fieldAnnotation.fieldName.localName];
+		public function hasParameterField(fieldAnnotation : IMemberAnnotation) : Boolean {
+			return !isDefault() && fieldAnnotation && _fieldMap[fieldAnnotation.name.localName];
 		}
 
 		/**
@@ -79,7 +80,7 @@ package com.googlecode.flexxb.annotation {
 			var arguments : Object = descriptor.metadata.(@name == Argument.ANNOTATION_NAME);
 			// multiple annotations on the same field are returned in reverse order with describeType
 			for (var i : int = XMLList(arguments).length() - 1; i >= 0; i--) {
-				addArgument(new Argument(arguments[i]));
+				addArgument(new ConstructorArgument());
 			}
 		}
 
@@ -88,22 +89,22 @@ package com.googlecode.flexxb.annotation {
 		 * @param argument
 		 *
 		 */
-		private function addArgument(argument : Argument) : void {
+		private function addArgument(argument : ConstructorArgument) : void {
 			if (!_arguments) {
 				_arguments = [];
 				_fields = [];
 				_fieldMap = new Dictionary();
 			}
 			if (!argument) {
-				throw new DescriptorParsingError(owner.fieldType, "<<Constructor>>", "Null argument.");
+				throw new DescriptorParsingError(owner.type, "<<Constructor>>", "Null argument.");
 			}
 			if (_fieldMap[argument.referenceField] != null) {
-				throw new DescriptorParsingError(owner.fieldType, argument.referenceField, "Argument " + argument.referenceField + " already exists.");
+				throw new DescriptorParsingError(owner.type, argument.referenceField, "Argument " + argument.referenceField + " already exists.");
 			}
 			_arguments.push(argument);
-			var fieldAnnotation : XmlMember = owner.getMember(argument.referenceField) as XmlMember;
+			var fieldAnnotation : IMemberAnnotation = owner.getMember(argument.referenceField);
 			if (!fieldAnnotation) {
-				throw new DescriptorParsingError(owner.fieldType, argument.referenceField, "Annotation for referred field does not exist");
+				throw new DescriptorParsingError(owner.type, argument.referenceField, "Annotation for referred field does not exist");
 			}
 			_fieldMap[argument.referenceField] = fieldAnnotation;
 			_fields.push(fieldAnnotation);

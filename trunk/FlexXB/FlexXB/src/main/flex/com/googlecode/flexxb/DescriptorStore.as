@@ -15,14 +15,14 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb {
-	import com.googlecode.flexxb.annotation.XmlClass;
-
+	import com.googlecode.flexxb.annotation.parser.MetaParser;
+	import com.googlecode.flexxb.annotation.xml.XmlClass;
+	import com.googlecode.flexxb.interfaces.IXmlSerializable;
+	
 	import flash.utils.Dictionary;
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-	import com.googlecode.flexxb.interfaces.IXmlSerializable;
-	import com.googlecode.flexxb.interfaces.IXmlSerializable;
 
 	/**
 	 *
@@ -33,6 +33,8 @@ package com.googlecode.flexxb {
 		private var descriptorCache : Dictionary = new Dictionary();
 
 		private var classNamespaceMap : Dictionary;
+		
+		private var parser : MetaParser = new MetaParser();
 
 		/**
 		 * Get the class descriptor associated with the object type
@@ -40,9 +42,9 @@ package com.googlecode.flexxb {
 		 * @return XmlClass descriptor
 		 *
 		 */
-		public function getDescriptor(object : Object) : XmlClass {
+		public function getDescriptor(object : Object, version : String = "") : XmlClass {
 			var className : String = getQualifiedClassName(object);
-			return getDefinition(object, className).descriptor as XmlClass;
+			return getDefinition(object, className).getDescriptor(version);
 		}
 
 		/**
@@ -99,10 +101,12 @@ package com.googlecode.flexxb {
 		 * @return
 		 *
 		 */
-		public function getClassByTagName(name : String) : Class {
+		public function getClassByTagName(name : String, version : String = "") : Class {
+			var descriptor : XmlClass;
 			for each (var store : ResultStore in descriptorCache) {
-				if (store.descriptor && store.descriptor.alias == name) {
-					return store.descriptor.fieldType;
+				descriptor = store.getDescriptor(version);
+				if (descriptor && descriptor.alias == name) {
+					return descriptor.type;
 				}
 			}
 			return null;
@@ -136,23 +140,26 @@ package com.googlecode.flexxb {
 			putDescriptorInCache(xmlDescriptor, className, false);
 		}
 
-		private function xmlDescribeType(xmlDescriptor : XML) : XmlClass {
+		private function xmlDescribeType(xmlDescriptor : XML) : Array {
 			var descriptor : XML = xmlDescriptor;
 			if (descriptor.factory.length() > 0) {
 				descriptor = descriptor.factory[0];
 			}
 			//get class annotation				
-			var classDescriptor : XmlClass = new XmlClass(descriptor);
-			//signal the class descriptor that no more members are to be added
-			classDescriptor.memberAddFinished();
-			//if the class descriptor defines a namespace, register it in the namespace map
-			if (classDescriptor.nameSpace) {
-				if (!classNamespaceMap) {
-					classNamespaceMap = new Dictionary();
+			var classDescriptor : XmlClass;
+			var descriptors : Array = parser.parseDescriptor(descriptor);
+			for each(classDescriptor in descriptors){
+				//signal the class descriptor that no more members are to be added
+				classDescriptor.memberAddFinished();
+				//if the class descriptor defines a namespace, register it in the namespace map
+				if (classDescriptor.nameSpace) {
+					if (!classNamespaceMap) {
+						classNamespaceMap = new Dictionary();
+					}
+					classNamespaceMap[classDescriptor.nameSpace.uri] = classDescriptor.type;
 				}
-				classNamespaceMap[classDescriptor.nameSpace.uri] = classDescriptor.fieldType;
 			}
-			return classDescriptor;
+			return descriptors;
 		}
 
 		private function hasDescriptorDefined(className : String) : Boolean {
@@ -185,20 +192,23 @@ package com.googlecode.flexxb {
 		}
 
 		private function putDescriptorInCache(descriptor : XML, className : String, customSerializable : Boolean) : void {
-			var xmlClass : XmlClass;
+			var xmlClasses : Array;
 			var referenceObject : Object;
 			if (customSerializable) {
 				var cls : Class = getDefinitionByName(className) as Class;
 				referenceObject = new cls();
 			} else {
-				xmlClass = xmlDescribeType(descriptor);
+				xmlClasses = xmlDescribeType(descriptor);
 			}
-			var result : Object = new ResultStore(xmlClass, customSerializable, referenceObject);
+			var result : Object = new ResultStore(xmlClasses, customSerializable, referenceObject);
 			descriptorCache[className] = result;
 		}
 	}
 }
-import com.googlecode.flexxb.annotation.XmlClass;
+import com.googlecode.flexxb.annotation.contract.Constants;
+import com.googlecode.flexxb.annotation.xml.XmlClass;
+
+import flash.utils.Dictionary;
 
 
 /**
@@ -210,7 +220,7 @@ internal class ResultStore {
 	/**
 	 * @private
 	 */
-	public var descriptor : XmlClass;
+	private var descriptors : Dictionary;
 	/**
 	 * @private
 	 */
@@ -227,9 +237,17 @@ internal class ResultStore {
 	 * @param reference
 	 *
 	 */
-	public function ResultStore(descriptor : XmlClass, customSerializable : Boolean, reference : Object) {
-		this.descriptor = descriptor;
+	public function ResultStore(descriptors : Array, customSerializable : Boolean, reference : Object) {
 		this.customSerializable = customSerializable;
 		this.reference = reference;
+		this.descriptors = new Dictionary();
+		for each(var descriptor : XmlClass in descriptors){
+			this.descriptors[descriptor.version] = descriptor;
+		}
+	}
+	
+	public function getDescriptor(version : String) : XmlClass{
+		var annotationVersion : String = version ? version : Constants.DEFAULT;
+		return descriptors[annotationVersion] as XmlClass;
 	}
 }

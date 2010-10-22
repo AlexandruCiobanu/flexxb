@@ -16,8 +16,8 @@
  */
 package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
-	import com.googlecode.flexxb.annotation.XmlArray;
-	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.annotation.xml.XmlArray;
+	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 	
@@ -82,9 +82,9 @@ package com.googlecode.flexxb.serializer {
 		
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object {
 			if(serializer.configuration.enableLogging){
-				LOG.info("Deserializing array element <<{0}>> to field {1} with items of type <<{2}>>", xmlName, element.fieldName, XmlArray(element).type);
+				LOG.info("Deserializing array element <<{0}>> to field {1} with items of type <<{2}>>", xmlName, element.name, XmlArray(element).type);
 			}
-			var result : Object = new element.fieldType();
+			var result : Object = new element.type();
 
 			var array : XmlArray = element as XmlArray;
 

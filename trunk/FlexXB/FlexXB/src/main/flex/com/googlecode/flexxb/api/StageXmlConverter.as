@@ -16,6 +16,7 @@
  */
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.converter.IConverter;
+	import com.googlecode.flexxb.annotation.contract.Stage;
 
 	/**
 	 * @private

@@ -14,33 +14,30 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api
-{
-	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
+package com.googlecode.flexxb {
 
 	/**
-	 * @private 
-	 * @author Alexutzutz
+	 * @private
+	 * Defines a converter store, used to convert objects to string 
+	 * representations and viceversa.
+	 * @author Alexutz
 	 * 
-	 */	
-	public final class AccessorTypeConverter implements IConverter
-	{
-		public function AccessorTypeConverter(){ }
-		
-		public function get type() : Class {
-			return AccessorType;
-		}
-		
-		public function toString(object : Object) : String {
-			if(object is AccessorType){
-				return AccessorType(object).toString();
-			}
-			return "";
-		}
-		
-		public function fromString(value : String) : Object {
-			return AccessorType.fromString(value);
-		}
+	 */
+	public interface IConverterStore {
+		/**
+		 * Convert string value to object
+		 * @param value value to be converted to object
+		 * @param clasz type of the object to which the value is converted
+		 * @return instance of type passed as argument
+		 *
+		 */
+		function stringToObject(value : String, clasz : Class) : Object;
+		/**
+		 * Convert object value to string
+		 * @param object instance to be converted to string
+		 * @return string value
+		 *
+		 */
+		function objectToString(object : Object, clasz : Class) : String;
 	}
 }

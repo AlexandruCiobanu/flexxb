@@ -14,7 +14,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.annotation {
+package com.googlecode.flexxb.annotation.contract {
 
 	/**
 	 * Defines a constructor argument. This annotaton is used when a class has a
@@ -31,19 +31,7 @@ package com.googlecode.flexxb.annotation {
 	 * @author Alexutz
 	 *
 	 */
-	public class Argument extends BaseAnnotation {
-		/**
-		 * The annotation's name
-		 */
-		public static const ANNOTATION_NAME : String = "ConstructorArg";
-		/**
-		 * Reference attribute name
-		 */
-		public static const ARGUMENT_REF : String = "reference";
-		/**
-		 * Optional attribute name
-		 */
-		public static const ARGUMENT_OPTIONAL : String = "optional";
+	public class ConstructorArgument extends BaseAnnotation implements IGlobalAnnotation {
 		/**
 		 *
 		 */
@@ -57,8 +45,10 @@ package com.googlecode.flexxb.annotation {
 		 * Constructor
 		 *
 		 */
-		public function Argument(descriptor : XML) {
-			super(descriptor);
+		public function ConstructorArgument() { }
+		
+		public function get classAnnotation() : IClassAnnotation{
+			return null;
 		}
 
 		/**
@@ -77,24 +67,9 @@ package com.googlecode.flexxb.annotation {
 		public function get referenceField() : String {
 			return _referenceField;
 		}
-
-		/**
-		 *
-		 * @see com.googlecode.flexxb.annotation.BaseAnnotation#parse()
-		 *
-		 */
-		protected override function parse(descriptor : XML) : void {
-			_referenceField = descriptor.arg.(@key == ARGUMENT_REF).@value;
-			_optional = descriptor.arg.(@key == ARGUMENT_OPTIONAL).@value == "true";
-		}
-
-		/**
-		 *
-		 * @see com.googlecode.flexxb.annotation.BaseAnnotation#annotationName()
-		 *
-		 */
+		
 		public override function get annotationName() : String {
-			return ANNOTATION_NAME;
+			return Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT;
 		}
 	}
 }

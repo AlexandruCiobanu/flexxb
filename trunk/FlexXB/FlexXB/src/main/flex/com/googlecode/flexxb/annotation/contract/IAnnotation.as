@@ -14,33 +14,26 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api
+package com.googlecode.flexxb.annotation.contract
 {
-	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
-
 	/**
-	 * @private 
-	 * @author Alexutzutz
+	 * 
+	 * @author Alexutz
 	 * 
 	 */	
-	public final class AccessorTypeConverter implements IConverter
+	public interface IAnnotation
 	{
-		public function AccessorTypeConverter(){ }
-		
-		public function get type() : Class {
-			return AccessorType;
-		}
-		
-		public function toString(object : Object) : String {
-			if(object is AccessorType){
-				return AccessorType(object).toString();
-			}
-			return "";
-		}
-		
-		public function fromString(value : String) : Object {
-			return AccessorType.fromString(value);
-		}
+		/**
+		 * Get the version of the current annotation
+		 * @return 
+		 * 
+		 */		
+		function get version() : String;
+		/**
+		 * Get the annotation's name used in descriptor
+		 * @return annotation name
+		 *
+		 */	
+		function get annotationName() : String;
 	}
 }

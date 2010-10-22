@@ -19,6 +19,7 @@ package com.googlecode.flexxb.api {
 	import flash.utils.getQualifiedClassName;
 
 	import mx.utils.StringUtil;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
 
 	[XmlClass(alias="Field")]
 	[ConstructorArg(reference="name")]

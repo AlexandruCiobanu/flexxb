@@ -15,12 +15,15 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlConstants;
+	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	import com.googlecode.flexxb.error.ApiError;
 	
 	import flash.errors.MemoryError;
 	import flash.utils.Dictionary;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.annotation.contract.Stage;
 
 	use namespace flexxb_api_internal;
 
@@ -177,7 +180,7 @@ package com.googlecode.flexxb.api {
 			var items : Dictionary = getContent();
 			
 			if(items && _nameSpace){
-				items[XmlMember.ARGUMENT_NAMESPACE_REF] = _nameSpace.prefix;
+				items[XmlConstants.NAMESPACE_REF] = _nameSpace.prefix;
 			}
 
 			for (var key : * in items) {
@@ -204,11 +207,11 @@ package com.googlecode.flexxb.api {
 		 */
 		protected function getContent() : Dictionary {
 			var items : Dictionary = new Dictionary();
-			items[Annotation.ARGUMENT_ALIAS] = alias;
-			items[XmlMember.ARGUMENT_IGNORE_ON] = ignoreOn;
+			items[XmlConstants.ALIAS] = alias;
+			items[XmlConstants.IGNORE_ON] = ignoreOn;
 			if (!isNaN(order))
-				items[XmlMember.ARGUMENT_ORDER] = order;
-			items[XmlMember.ARGUMENT_IDREF] = idRef;
+				items[XmlConstants.ORDER] = order;
+			items[XmlConstants.IDREF] = idRef;
 			return items;
 		}
 	}

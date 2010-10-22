@@ -16,7 +16,7 @@
  */
 package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
-	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 
@@ -40,14 +40,14 @@ package com.googlecode.flexxb.serializer {
 			if(isComplexType(object) && attribute.isIDRef){
 				value = serializer.getObjectId(object);
 			}else{
-				value = serializer.converterStore.objectToString(object, attribute.fieldType);
+				value = serializer.converterStore.objectToString(object, attribute.type);
 			}			
 			parentXml.@[attribute.xmlName] = value;
 		}
 		
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, attribute : XmlMember, serializer : SerializerCore) : Object {
 			if(serializer.configuration.enableLogging){
-				LOG.info("Deserializing attribute <<{0}>> to field {1}", xmlName, attribute.fieldName);
+				LOG.info("Deserializing attribute <<{0}>> to field {1}", xmlName, attribute.name);
 			}
 			var valueXML : XMLList = xmlData.attribute(xmlName);
 			var value : String = "";
@@ -58,9 +58,9 @@ package com.googlecode.flexxb.serializer {
 			}
 			var result : Object;
 			if(attribute.isIDRef){
-				serializer.idResolver.addResolutionTask(serializer.currentObject, attribute.fieldName, value);
+				serializer.idResolver.addResolutionTask(serializer.currentObject, attribute.name, value);
 			}else{
-				result = serializer.converterStore.stringToObject(value, attribute.fieldType);
+				result = serializer.converterStore.stringToObject(value, attribute.type);
 			}
 			return result;
 		}

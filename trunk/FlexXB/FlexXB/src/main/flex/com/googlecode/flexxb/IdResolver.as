@@ -20,7 +20,7 @@ package com.googlecode.flexxb
 	import flash.utils.Dictionary;
 	/**
 	 * @private 
-	 * @author User
+	 * @author Alexutzutz
 	 * 
 	 */	
 	internal final class IdResolver

@@ -16,11 +16,11 @@
  */
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.FlexXBEngine;
-	import com.googlecode.flexxb.annotation.XmlArray;
-	import com.googlecode.flexxb.annotation.XmlAttribute;
-	import com.googlecode.flexxb.annotation.XmlClass;
-	import com.googlecode.flexxb.annotation.XmlElement;
-	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.annotation.xml.XmlArray;
+	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
+	import com.googlecode.flexxb.annotation.xml.XmlClass;
+	import com.googlecode.flexxb.annotation.xml.XmlElement;
+	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	import com.googlecode.flexxb.converter.W3CDateConverter;
 	import com.googlecode.testData.APITestObject;
 	import com.googlecode.testData.Address;
@@ -33,6 +33,8 @@ package com.googlecode.flexxb.api {
 	import mx.collections.ArrayCollection;
 	
 	import org.flexunit.Assert; 
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.annotation.contract.Stage;
 
 	/**
 	 *
@@ -52,7 +54,7 @@ package com.googlecode.flexxb.api {
 		public function testFxAttribute() : void {
 			var api : FxAttribute = FxAttribute.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
-			var att : XmlAttribute = new XmlAttribute(descriptor);
+			var att : XmlAttribute = new XmlAttribute();
 			doMemberAssertion(api, att);
 		}
 
@@ -60,7 +62,7 @@ package com.googlecode.flexxb.api {
 		public function testFxElement() : void {
 			var api : FxElement = FxElement.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
-			var att : XmlElement = new XmlElement(descriptor);
+			var att : XmlElement = new XmlElement();
 			doElementAssertion(api, att);
 		}
 
@@ -68,7 +70,7 @@ package com.googlecode.flexxb.api {
 		public function testFxArray() : void {
 			var api : FxArray = FxArray.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
-			var att : XmlArray = new XmlArray(descriptor);
+			var att : XmlArray = new XmlArray();
 			doArrayAssertion(api, att);
 		}
 
@@ -76,7 +78,7 @@ package com.googlecode.flexxb.api {
 		public function testFxClass() : void {
 			var cls : FxClass = buildDescriptor();
 			var xmlCls : XmlClass = new XmlClass(cls.toXml());
-			Assert.assertEquals("wrong type", cls.type, xmlCls.fieldType);
+			Assert.assertEquals("wrong type", cls.type, xmlCls.type);
 			Assert.assertEquals("wrong alias", cls.alias, xmlCls.alias);
 			Assert.assertEquals("wrong prefix", cls.prefix, xmlCls.nameSpace.prefix);
 			Assert.assertEquals("wrong uri", cls.uri, xmlCls.nameSpace.uri);
@@ -137,8 +139,8 @@ package com.googlecode.flexxb.api {
 		}
 
 		private function doMemberAssertion(apiMember : FxMember, xmlMember : XmlMember) : void {
-			Assert.assertEquals("Wrong field name", apiMember.fieldName, xmlMember.fieldName);
-			Assert.assertEquals("Wrong field type", apiMember.fieldType, xmlMember.fieldType);
+			Assert.assertEquals("Wrong field name", apiMember.fieldName, xmlMember.name);
+			Assert.assertEquals("Wrong field type", apiMember.fieldType, xmlMember.type);
 			Assert.assertEquals("Field access type is wrong for writeOnly", apiMember.fieldAccessType == AccessorType.WRITE_ONLY, xmlMember.writeOnly);
 			Assert.assertEquals("Field access type is wrong for readOnly", apiMember.fieldAccessType == AccessorType.READ_ONLY, xmlMember.readOnly);
 			Assert.assertEquals("Wrong ignoreOn", apiMember.ignoreOn, xmlMember.ignoreOn);

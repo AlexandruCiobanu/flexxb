@@ -18,10 +18,9 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.converter.IConverter;
 
 	import flash.utils.Dictionary;
-	import com.googlecode.flexxb.interfaces.IConverterStore;
 
 	/**
-	 *
+	 * @private
 	 * @author Alexutz
 	 *
 	 */

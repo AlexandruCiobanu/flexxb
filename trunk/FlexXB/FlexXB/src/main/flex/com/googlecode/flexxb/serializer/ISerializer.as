@@ -16,7 +16,7 @@
  */
 package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.SerializerCore;
-	import com.googlecode.flexxb.annotation.Annotation;
+	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 
 	/**
 	 * Interface for an annotation bound xml serializer.
@@ -33,7 +33,7 @@ package com.googlecode.flexxb.serializer {
 		 * @return Generated xml
 		 *
 		 */
-		function serialize(object : Object, annotation : Annotation, parentXml : XML, serializer : SerializerCore) : XML;
+		function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializerCore) : XML;
 		/**
 		 * Deserialize an xml into the appropiate AS3 object
 		 * @param xmlData Xml to be deserialized
@@ -42,6 +42,6 @@ package com.googlecode.flexxb.serializer {
 		 * @return Generated object
 		 *
 		 */
-		function deserialize(xmlData : XML, annotation : Annotation, serializer : SerializerCore) : Object;
+		function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializerCore) : Object;
 	}
 }

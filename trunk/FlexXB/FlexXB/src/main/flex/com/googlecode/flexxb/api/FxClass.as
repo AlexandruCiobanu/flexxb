@@ -15,12 +15,14 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.annotation.Annotation;
-	import com.googlecode.flexxb.annotation.XmlClass;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlConstants;
+	import com.googlecode.flexxb.annotation.xml.XmlClass;
 	import com.googlecode.flexxb.error.ApiError;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
 	
 	use namespace flexxb_api_internal;
 
@@ -341,13 +343,13 @@ package com.googlecode.flexxb.api {
 			xml.@name = XmlClass.ANNOTATION_NAME;
 
 			var items : Dictionary = new Dictionary();
-			items[Annotation.ARGUMENT_ALIAS] = alias;
-			items[XmlClass.ARGUMENT_NAMESPACE_PREFIX] = prefix;
-			items[XmlClass.ARGUMENT_NAMESPACE_URI] = uri;
-			items[XmlClass.ARGUMENT_ORDERED] = ordered;
-			items[XmlClass.ARGUMENT_USE_CHILD_NAMESPACE] = useNamespaceFrom;
-			items[XmlClass.ARGUMENT_ID] = idField;
-			items[XmlClass.ARGUMENT_VALUE] = defaultValueField;
+			items[XmlConstants.ALIAS] = alias;
+			items[XmlConstants.NAMESPACE_PREFIX] = prefix;
+			items[XmlConstants.NAMESPACE_URI] = uri;
+			items[XmlConstants.ORDERED] = ordered;
+			items[XmlConstants.USE_CHILD_NAMESPACE] = useNamespaceFrom;
+			items[XmlConstants.ID] = idField;
+			items[XmlConstants.VALUE] = defaultValueField;
 
 			for (var key : * in items) {
 				if (items[key] != null) {

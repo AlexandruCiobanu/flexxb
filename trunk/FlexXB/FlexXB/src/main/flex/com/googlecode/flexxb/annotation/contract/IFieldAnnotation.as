@@ -14,29 +14,27 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.interfaces {
-
+package com.googlecode.flexxb.annotation.contract
+{
 	/**
-	 * Defines a converter store, used to convert objects to string 
-	 * representations and viceversa.
+	 * This interface defines a metadata decorating a class field or class. 
+	 * It exposes a name and a type. 
 	 * @author Alexutz
-	 *
-	 */
-	public interface IConverterStore {
+	 * 
+	 */	
+	public interface IFieldAnnotation extends IAnnotation
+	{
 		/**
-		 * Convert string value to object
-		 * @param value value to be converted to object
-		 * @param clasz type of the object to which the value is converted
-		 * @return instance of type passed as argument
-		 *
-		 */
-		function stringToObject(value : String, clasz : Class) : Object;
+		 * Get the qualified name of the field that is annotated by the current metadata
+		 * @return class field qualified name
+		 * 
+		 */		
+		function get name() : QName;
 		/**
-		 * Convert object value to string
-		 * @param object instance to be converted to string
-		 * @return string value
-		 *
-		 */
-		function objectToString(object : Object, clasz : Class) : String;
+		 * Get the type of the field that is annotated by the current metadata
+		 * @return class field type 
+		 * 
+		 */		
+		function get type() : Class;		
 	}
 }

@@ -17,8 +17,8 @@
 package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.Configuration;
 	import com.googlecode.flexxb.SerializerCore;
-	import com.googlecode.flexxb.annotation.XmlElement;
-	import com.googlecode.flexxb.annotation.XmlMember;
+	import com.googlecode.flexxb.annotation.xml.XmlElement;
+	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	import com.googlecode.flexxb.util.cdata;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
@@ -49,10 +49,10 @@ package com.googlecode.flexxb.serializer {
 				}else{
 					child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
 				}
-			}else if(annotation.fieldType == XML){
+			}else if(annotation.type == XML){
 				child.appendChild(new XML(object));
 			}else{
-				var stringValue : String = serializer.converterStore.objectToString(object, annotation.fieldType);
+				var stringValue : String = serializer.converterStore.objectToString(object, annotation.type);
 				try {
 					child.appendChild(stringValue);
 				} catch (error : Error) {
@@ -81,7 +81,7 @@ package com.googlecode.flexxb.serializer {
 		
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializerCore) : Object {
 			if(serializer.configuration.enableLogging){
-				LOG.info("Deserializing element <<{0}>> to field {1}", xmlName, element.fieldName);
+				LOG.info("Deserializing element <<{0}>> to field {1}", xmlName, element.name);
 			}
 			var list : XMLList = xmlData.child(xmlName);
 			var xml : XML;
@@ -95,15 +95,15 @@ package com.googlecode.flexxb.serializer {
 				}
 			}
 			if(element.isIDRef){
-				serializer.idResolver.addResolutionTask(serializer.currentObject, element.fieldName, xml.toString());
+				serializer.idResolver.addResolutionTask(serializer.currentObject, element.name, xml.toString());
 				return null;
 			}
 			
-			var type : Class = element.fieldType;
+			var type : Class = element.type;
 			if (XmlElement(element).getRuntimeType) {
 				type = serializer.getIncomingType(list[0]);
 				if (!type) {
-					type = element.fieldType;
+					type = element.type;
 				}
 			}
 			return getValue(xml, type, XmlElement(element).getFromCache, serializer);

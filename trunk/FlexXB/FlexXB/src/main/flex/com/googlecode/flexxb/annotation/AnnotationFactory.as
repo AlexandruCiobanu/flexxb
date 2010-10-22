@@ -15,11 +15,8 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
+	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 	import com.googlecode.flexxb.serializer.ISerializer;
-	import com.googlecode.flexxb.serializer.XmlArraySerializer;
-	import com.googlecode.flexxb.serializer.XmlAttributeSerializer;
-	import com.googlecode.flexxb.serializer.XmlClassSerializer;
-	import com.googlecode.flexxb.serializer.XmlElementSerializer;
 	
 	import flash.utils.Dictionary;
 
@@ -57,14 +54,20 @@ package com.googlecode.flexxb.annotation {
 			if (_instance) {
 				throw new Error("Use AnnotationFactory.instance instead!");
 			}
-			registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
-			registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
-			registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
-			registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
+		}
+		
+		/**
+		 * Check if there is an annotation with the given name registered in the factory.
+		 * @param metaName annotation name
+		 * @return true if an annotation with this name is registered, false otherwise
+		 * 
+		 */		
+		public function isRegistered(metaName : String) : Boolean{
+			return metaName && annotationMap[metaName];
 		}
 
 		/**
-		 * Register a new annotation and its serializer. If it founds a registration with the
+		 * Register a new annotation and its serializer. If it finds a registration with the
 		 * same name and <code>overrideExisting </code> is set to <code>false</code>, it will disregard the current attempt and keep the old value.
 		 * @param name the name of the annotation to be registered
 		 * @param annotationClazz annotation class type
@@ -84,7 +87,7 @@ package com.googlecode.flexxb.annotation {
 		 * @return the serializer object or null if the annotation name is not registered
 		 *
 		 */
-		public function getSerializer(annotation : Annotation) : ISerializer {
+		public function getSerializer(annotation : IAnnotation) : ISerializer {
 			if (annotation && annotationMap[annotation.annotationName]) {
 				return annotationMap[annotation.annotationName].serializer as ISerializer;
 			}
@@ -111,14 +114,11 @@ package com.googlecode.flexxb.annotation {
 		 * @return
 		 *
 		 */
-		public function getAnnotation(field : XML, classDescriptor : XmlClass) : Annotation {
-			if (field && classDescriptor) {
-				var annotations : XMLList = field.metadata;
-				for each (var member : XML in annotations) {
-					var annotationClass : Class = getAnnotationClass(member.@name);
-					if (annotationClass) {
-						return new annotationClass(field, classDescriptor) as Annotation;
-					}
+		public function getAnnotation(name : String) : IAnnotation {
+			if (name) {
+				var annotationClass : Class = getAnnotationClass(name);
+				if (annotationClass) {
+					return new annotationClass() as IAnnotation;
 				}
 			}
 			return null;

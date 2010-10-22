@@ -17,7 +17,7 @@
 package com.googlecode.flexxb {
 
 	/**
-	 *
+	 * @private
 	 * @author Alexutz
 	 *
 	 */
