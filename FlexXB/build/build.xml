@@ -60,6 +60,7 @@
     	 	<arg value="-actionscript-file-encoding=UTF-8"/>
     	 	<arg value="-debug=false"/>
     	 	<arg value="-incremental=false"/>
+		 	<arg value="-optimize=true"/>
     	 	<arg value="-keep-generated-actionscript=false"/>
     	 	    		
     	 	<arg line="${compile.metadata}"/>
@@ -77,6 +78,7 @@
     	 	<arg value="-actionscript-file-encoding=UTF-8"/>
     	 	<arg value="-debug=false"/>
     	 	<arg value="-incremental=false"/>
+			<arg value="-optimize=true"/>
     	 	<arg value="-keep-generated-actionscript=false"/>
     	 	    		
     	 	<arg line="${compile.metadata}"/>
