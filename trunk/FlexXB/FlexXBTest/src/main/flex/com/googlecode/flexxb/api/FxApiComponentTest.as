@@ -131,7 +131,7 @@ package com.googlecode.flexxb.api {
 		private function doArrayAssertion(apiMember : FxArray, xmlArray : XmlArray) : void {
 			doElementAssertion(apiMember, xmlArray);
 			Assert.assertEquals("Wrong memberName", apiMember.memberName, xmlArray.memberName);
-			Assert.assertEquals("Wrong memberType", apiMember.memberType, xmlArray.type);
+			Assert.assertEquals("Wrong memberType", apiMember.memberType, xmlArray.memberType);
 		}
 
 		private function doElementAssertion(apiMember : FxElement, xmlElement : XmlElement) : void {
