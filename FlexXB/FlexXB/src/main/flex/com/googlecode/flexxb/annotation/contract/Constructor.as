@@ -15,7 +15,9 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.contract {
-	import com.googlecode.flexxb.annotation.xml.XmlMember;
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
+	import com.googlecode.flexxb.annotation.parser.ClassMetaDescriptor;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import flash.utils.Dictionary;
@@ -76,11 +78,11 @@ package com.googlecode.flexxb.annotation.contract {
 		 * @param metadata
 		 *
 		 */
-		public function parse(descriptor : XML) : void {
-			var arguments : Object = descriptor.metadata.(@name == Argument.ANNOTATION_NAME);
+		public function parse(descriptor : ClassMetaDescriptor) : void {
+			var arguments : Array = descriptor.getConfigItemsByName(Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT);
 			// multiple annotations on the same field are returned in reverse order with describeType
-			for (var i : int = XMLList(arguments).length() - 1; i >= 0; i--) {
-				addArgument(new ConstructorArgument());
+			for (var i : int = arguments.length - 1; i >= 0; i--) {
+				addArgument(AnnotationFactory.instance.getAnnotation(arguments[i] as MetaDescriptor, owner) as ConstructorArgument);
 			}
 		}
 

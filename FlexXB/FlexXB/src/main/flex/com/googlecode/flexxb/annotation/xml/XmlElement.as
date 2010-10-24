@@ -15,6 +15,8 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.xml {
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 
 	/**
 	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", 
@@ -48,8 +50,8 @@ package com.googlecode.flexxb.annotation.xml {
 		 * @param xmlClass
 		 *
 		 */
-		public function XmlElement() {
-			super();
+		public function XmlElement(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+			super(descriptor, owner);
 		}
 
 		/**
@@ -79,11 +81,11 @@ package com.googlecode.flexxb.annotation.xml {
 			return _getFromCache;
 		}
 		
-		protected override function parseMetadata(metadata : XML) : void {
-			super.parseMetadata(metadata);
-			_serializePartialElement = metadata.arg.(@key == ARGUMENT_SERIALIZE_PARTIAL_ELEMENT).@value == "true";
-			_getFromCache = metadata.arg.(@key == ARGUMENT_GET_FROM_CACHE).@value == "true";
-			_getRuntimeType = metadata.arg.(@key == ARGUMENT_GET_RUNTIME_TYPE).@value == "true";
+		protected override function parse(metadata : MetaDescriptor) : void {
+			super.parse(metadata);
+			_serializePartialElement = metadata.getBooleanAttribute(XmlConstants.SERIALIZE_PARTIAL_ELEMENT);
+			_getFromCache = metadata.getBooleanAttribute(XmlConstants.GET_FROM_CACHE);
+			_getRuntimeType = metadata.getBooleanAttribute(XmlConstants.GET_RUNTIME_TYPE);
 		}
 		
 		public override function get annotationName() : String {

@@ -15,6 +15,9 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.xml {
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
+	
 	import flash.utils.getDefinitionByName;
 
 	/**
@@ -44,8 +47,8 @@ package com.googlecode.flexxb.annotation.xml {
 		 * @param xmlClass
 		 *
 		 */
-		public function XmlArray() {
-			super();
+		public function XmlArray(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+			super(descriptor, owner);
 		}
 
 		/**
@@ -71,17 +74,17 @@ package com.googlecode.flexxb.annotation.xml {
 		 * @see Annotation#parseMetadata()
 		 *
 		 */
-		protected override function parseMetadata(metadata : XML) : void {
-			super.parseMetadata(metadata);
-			var classType : String = metadata.arg.(@key == ARGUMENT_TYPE).@value;
+		protected override function parse(metadata : MetaDescriptor) : void {
+			super.parse(metadata);
+			var classType : String = metadata.attributes[XmlConstants.TYPE];
 			if (classType) {
 				try {
-					_type = getDefinitionByName(classType) as Class;
+					_memberType = getDefinitionByName(classType) as Class;
 				} catch (e : Error) {
 					trace(e);
 				}
 			}
-			var arrayMemberName : String = metadata.arg.(@key == ARGUMENT_MEMBER_NAME).@value;
+			var arrayMemberName : String = metadata.attributes[XmlConstants.MEMBER_NAME];
 			if (arrayMemberName) {
 				_memberName = new QName(nameSpace, arrayMemberName);
 			}

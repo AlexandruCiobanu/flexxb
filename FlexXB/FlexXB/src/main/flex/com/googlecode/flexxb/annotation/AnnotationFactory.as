@@ -16,6 +16,8 @@
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.contract.IAnnotation;
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 	import com.googlecode.flexxb.serializer.ISerializer;
 	
 	import flash.utils.Dictionary;
@@ -65,6 +67,45 @@ package com.googlecode.flexxb.annotation {
 		public function isRegistered(metaName : String) : Boolean{
 			return metaName && annotationMap[metaName];
 		}
+		
+		/**
+		 * 
+		 * @param metaName
+		 * @return 
+		 * 
+		 */		
+		public function isClassAnnotation(metaName : String) : Boolean{
+			if(annotationMap[metaName]){
+				return MetaStore(annotationMap[metaName]).isClass;
+			}
+			return false;
+		}
+		
+		/**
+		 * 
+		 * @param metaName
+		 * @return 
+		 * 
+		 */		
+		public function isMemberAnnotation(metaName : String) : Boolean{
+			if(annotationMap[metaName]){
+				return MetaStore(annotationMap[metaName]).isMember;
+			}
+			return false;
+		}
+		
+		/**
+		 * 
+		 * @param metaName
+		 * @return 
+		 * 
+		 */		
+		public function isGlobalAnnotation(metaName : String) : Boolean{
+			if(annotationMap[metaName]){
+				return MetaStore(annotationMap[metaName]).isGlobal;
+			}
+			return false;
+		}
 
 		/**
 		 * Register a new annotation and its serializer. If it finds a registration with the
@@ -77,7 +118,7 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
 			if (overrideExisting || !annotationMap[name]) {
-				annotationMap[name] = {annotation: annotationClazz, serializer: new serializer() as ISerializer};
+				annotationMap[name] = new MetaStore(annotationClazz, serializer);
 			}
 		}
 
@@ -89,7 +130,7 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public function getSerializer(annotation : IAnnotation) : ISerializer {
 			if (annotation && annotationMap[annotation.annotationName]) {
-				return annotationMap[annotation.annotationName].serializer as ISerializer;
+				return  MetaStore(annotationMap[annotation.annotationName]).serializer as ISerializer;
 			}
 			return null;
 		}
@@ -102,7 +143,7 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public function getAnnotationClass(annotationName : String) : Class {
 			if (annotationMap[annotationName]) {
-				return annotationMap[annotationName].annotation as Class;
+				return MetaStore(annotationMap[annotationName]).annotation as Class;
 			}
 			return null;
 		}
@@ -110,18 +151,74 @@ package com.googlecode.flexxb.annotation {
 		/**
 		 * Get the annotation representing the xml field descriptor
 		 * @param field
-		 * @param classDescriptor
+		 * @param descriptor
 		 * @return
 		 *
 		 */
-		public function getAnnotation(name : String) : IAnnotation {
-			if (name) {
-				var annotationClass : Class = getAnnotationClass(name);
+		public function getAnnotation(descriptor : MetaDescriptor, owner : IClassAnnotation) : IAnnotation {
+			if (descriptor) {
+				var annotationClass : Class = getAnnotationClass(descriptor.metadataName);
 				if (annotationClass) {
-					return new annotationClass() as IAnnotation;
+					if(isClassAnnotation(descriptor.metadataName)){
+						return new annotationClass(descriptor) as IAnnotation;
+					}else{
+						return new annotationClass(descriptor, owner) as IAnnotation;
+					}
 				}
 			}
 			return null;
 		}
+	}
+}
+import com.googlecode.flexxb.serializer.ISerializer;
+import mx.utils.DescribeTypeCache;
+
+final class MetaStore{
+	
+	public var annotation : Class;
+	
+	public var serializer : ISerializer;
+	
+	private var _isClass : Boolean;
+	
+	private var _isGlobal : Boolean;
+	
+	private var _isMember : Boolean;
+	
+	public function MetaStore(annotation : Class, serializerClass : Class){
+		this.annotation = annotation;
+		if(serializerClass){
+			this.serializer = new serializerClass() as ISerializer;
+		}
+		var xml : XML = DescribeTypeCache.describeType(annotation).typeDescription;
+		if(xml.factory.length() > 0){
+			xml = xml.factory[0];
+		}
+		for each(var interf : XML in xml.implementsInterface){
+			if(interf.@type == "com.googlecode.flexxb.annotation.contract::IClassAnnotation"){
+				_isClass = true;
+				break;
+			}
+			if(interf.@type == "com.googlecode.flexxb.annotation.contract::IMemberAnnotation"){
+				_isMember = true;
+				break;
+			}
+			if(interf.@type == "com.googlecode.flexxb.annotation.contract::IGlobalAnnotation"){
+				_isGlobal = true;
+				break;
+			}
+		}
+	}
+	
+	public function get isClass() : Boolean{
+		return _isClass;
+	}
+	
+	public function get isGlobal() : Boolean{
+		return _isGlobal;
+	}
+	
+	public function get isMember() : Boolean{
+		return _isMember;
 	}
 }

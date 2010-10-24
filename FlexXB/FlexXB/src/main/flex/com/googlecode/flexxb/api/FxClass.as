@@ -106,7 +106,7 @@ package com.googlecode.flexxb.api {
 		/**
 		 * Constructor argument list
 		 */
-		[XmlArray(alias="ConstructorArguments", memberType="com.googlecode.flexxb.api.FxConstructorArgument")]
+		[XmlArray(alias="ConstructorArguments", type="com.googlecode.flexxb.api.FxConstructorArgument")]
 		flexxb_api_internal var constructorArguments : Array;
 		/**
 		 * Class namespace list

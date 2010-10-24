@@ -17,13 +17,17 @@
  */
 package com.googlecode.flexxb.annotation.xml
 {
+	import com.googlecode.flexxb.annotation.contract.Constants;
+
 	/**
 	 * @private 
 	 * @author Alexutz
 	 * 
 	 */	
-	public final class XmlConstants
+	public class XmlConstants extends Constants
 	{
+		
+		public static const ANNOTATION_NAMESPACE : String = "Namespace";
 		/**
 		 * 
 		 */		
@@ -39,7 +43,7 @@ package com.googlecode.flexxb.annotation.xml
 		/**
 		 * 
 		 */		
-		public static const NAMESPACE : String = "Namespace";
+		public static const NAMESPACE : String = "namespace";
 		/**
 		 * Namespace uri
 		 */
@@ -80,14 +84,6 @@ package com.googlecode.flexxb.annotation.xml
 		 * 
 		 */		
 		public static const NAMESPACE_REF : String = "namespace";
-		/**
-		 * Reference attribute name
-		 */
-		public static const REF : String = "reference";
-		/**
-		 * Optional attribute name
-		 */
-		public static const OPTIONAL : String = "optional";
 		/**
 		 * SerializePartialElement attribute name
 		 */

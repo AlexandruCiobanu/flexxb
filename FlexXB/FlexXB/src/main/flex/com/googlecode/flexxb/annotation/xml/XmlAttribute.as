@@ -15,6 +15,8 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.xml {
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 
 	/**
 	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="NameSpace_Prefix", default="DEFAULT_VALUE")]</code></p>
@@ -33,8 +35,8 @@ package com.googlecode.flexxb.annotation.xml {
 		 * @param classDescriptor owner XmlClass object
 		 *
 		 */
-		public function XmlAttribute() {
-			super();
+		public function XmlAttribute(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+			super(descriptor, owner);
 		}
 
 		/**

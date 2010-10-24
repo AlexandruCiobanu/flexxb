@@ -22,7 +22,7 @@ package com.googlecode.testData
 	public class Node
 	{
 		[XmlAttribute(namespace="xsi")]
-		public var type : String = "xml"
+		public var type : String = "xml";
 		
 		public function Node()
 		{

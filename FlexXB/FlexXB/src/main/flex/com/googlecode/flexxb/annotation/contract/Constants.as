@@ -34,7 +34,15 @@ package com.googlecode.flexxb.annotation.contract
 		/**
 		 * 
 		 */		
-		public static const ANNOTATION_CONSTRUCTOR_ARGUMENT : String = "ConstructorArg";
+		public static const ANNOTATION_CONSTRUCTOR_ARGUMENT : String = "ConstructorArg";		
+		/**
+		 * Reference attribute name
+		 */
+		public static const REF : String = "reference";
+		/**
+		 * Optional attribute name
+		 */
+		public static const OPTIONAL : String = "optional";
 		/**
 		 * @private 
 		 * 

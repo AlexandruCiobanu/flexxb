@@ -16,17 +16,20 @@
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.contract.Stage;
-	import org.flexunit.Assert;
+	import com.googlecode.flexxb.annotation.parser.MetaParser;
 	import com.googlecode.flexxb.annotation.xml.Annotation;
 	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
+	
+	import org.flexunit.Assert;
 
 	public class XmlAttributeTest extends AnnotationTest {
 		
 		protected override function runTest(descriptor : XML) : void {
-			var att1 : XmlAttribute = new XmlAttribute();//getFieldDescriptor("aField", descriptor));
+			var parser : MetaParser = new MetaParser();
+			var att1 : XmlAttribute = new XmlAttribute(parser.parseField(getFieldDescriptor("aField", descriptor))[0], null);
 			validate(att1, "aField", String, "stuff", null);
 
-			var att2 : XmlAttribute = new XmlAttribute();//getFieldDescriptor("date", descriptor));
+			var att2 : XmlAttribute = new XmlAttribute(parser.parseField(getFieldDescriptor("date", descriptor))[0], null);
 			validate(att2, "date", Date, "date", Stage.SERIALIZE);
 		}
 

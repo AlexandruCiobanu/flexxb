@@ -15,6 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.contract {
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 
 	/**
 	 * Defines a constructor argument. This annotaton is used when a class has a
@@ -40,15 +41,20 @@ package com.googlecode.flexxb.annotation.contract {
 		 *
 		 */
 		private var _optional : Boolean;
+		
+		private var _owner : IClassAnnotation;
 
 		/**
 		 * Constructor
 		 *
 		 */
-		public function ConstructorArgument() { }
+		public function ConstructorArgument(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+			super(descriptor);
+			_owner = owner;
+		}
 		
 		public function get classAnnotation() : IClassAnnotation{
-			return null;
+			return _owner;
 		}
 
 		/**
@@ -71,5 +77,11 @@ package com.googlecode.flexxb.annotation.contract {
 		public override function get annotationName() : String {
 			return Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT;
 		}
+		
+		protected override function parse(descriptor:MetaDescriptor):void{
+			super.parse(descriptor);
+			_referenceField = descriptor.attributes[Constants.REF];
+			_optional = descriptor.getBooleanAttribute(Constants.OPTIONAL);
+		} 
 	}
 }

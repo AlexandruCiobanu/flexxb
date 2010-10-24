@@ -15,6 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.contract {
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 
 	/**
 	 *
@@ -27,27 +28,32 @@ package com.googlecode.flexxb.annotation.contract {
 		/**
 		 * @private
 		 */
-		public function BaseAnnotation() { }
+		public function BaseAnnotation(descriptor : MetaDescriptor) {
+			if(descriptor){
+				parse(descriptor);
+			}
+		}
 		
 		public function get annotationName() : String {
 			return "";
 		}
 		
-		public function get version() : String{
+		public final function get version() : String{
 			return _version;
 		}
 		
-		protected function setVersion(value : String) : void{
+		protected final function setVersion(value : String) : void{
 			_version = value ? value : Constants.DEFAULT;
 		}
 
 		/**
 		 * @private
 		 * Analyze field/class descriptor to extract base informations like field's name and type
-		 * @param field field descriptor
+		 * @param descriptor
 		 *
 		 */
-		protected function parse(descriptor : XML) : void {
+		protected function parse(descriptor : MetaDescriptor) : void {
+			setVersion(descriptor.version);
 		}
 	}
 }

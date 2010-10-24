@@ -18,12 +18,12 @@ package com.googlecode.flexxb.annotation.xml {
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.contract.Constructor;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
-	import com.googlecode.flexxb.annotation.contract.IFieldAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
+	import com.googlecode.flexxb.annotation.parser.ClassMetaDescriptor;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import flash.utils.Dictionary;
-	import flash.utils.getDefinitionByName;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.Sort;
@@ -85,57 +85,9 @@ package com.googlecode.flexxb.annotation.xml {
 		 *Constructor
 		 *
 		 */
-		public function XmlClass(descriptor : XML) {
+		public function XmlClass(descriptor : ClassMetaDescriptor) {
 			_constructor = new Constructor(this);
-			super();
-		}
-
-		/**
-		 *
-		 * @param annotation
-		 *
-		 */
-		public function addMember(annotation : XmlMember) : void {
-			if (annotation && !isFieldRegistered(annotation)) {
-				if(annotation.hasNamespaceRef()){
-					annotation.nameSpace = getRegisteredNamespace(annotation.namespaceRef);
-				}else{
-					annotation.nameSpace = nameSpace;
-				}
-				members.addItem(annotation);
-				if (annotation.name.localName == id) {
-					_idField = annotation;
-				}
-				if (annotation.alias == defaultValue) {
-					_defaultValueField = annotation;
-				}
-			}
-		}
-
-		/**
-		 *
-		 *
-		 */
-		public function memberAddFinished() : void {
-			//Flex SDK 4 hotfix: we need to put the default field first, if it exists,
-			// otherwise the default text will be added as a child of a previous element 
-			var member : XmlMember;
-			for (var i : int = 0; i < members.length; i++){
-				member = members[i] as XmlMember;
-				if(member.isDefaultValue()){
-					members.addItemAt(members.removeItemAt(i), 0);
-					break;
-				}
-			}
-			if (ordered) {
-				var sort : Sort = new Sort();
-				var fields : Array = [];
-				fields.push(new SortField("order", false, false, true));
-				fields.push(new SortField("alias", true, false, false));
-				sort.fields = fields;
-				members.sort = sort;
-				members.refresh();
-			}
+			super(descriptor);
 		}
 
 		/**
@@ -217,97 +169,84 @@ package com.googlecode.flexxb.annotation.xml {
 		public function useOwnNamespace() : Boolean {
 			return _useChildNamespace == null || _useChildNamespace.length == 0;
 		}
-
-		/**
-		 *
-		 * @see Annotation#annotationName
-		 *
-		 */
+		
 		public override function get annotationName() : String {
 			return ANNOTATION_NAME;
 		}
-
+		
+		protected override function parse(descriptor : MetaDescriptor) : void {
+			nameSpace = getNamespace(descriptor);
+			
+			super.parse(descriptor);
+			
+			var desc : ClassMetaDescriptor = descriptor as ClassMetaDescriptor;
+			id = desc.attributes[XmlConstants.ID];
+			_useChildNamespace = desc.attributes[XmlConstants.USE_CHILD_NAMESPACE];
+			_ordered = desc.getBooleanAttribute(XmlConstants.ORDERED);
+			defaultValue = desc.attributes[XmlConstants.VALUE];
+			
+			processNamespaces(desc);
+			
+			for each(var meta : MetaDescriptor in desc.members){
+				addMember(AnnotationFactory.instance.getAnnotation(meta, this) as XmlMember);
+			}
+			
+			constructor.parse(desc);
+			
+			memberAddFinished();
+		}
+		
 		/**
 		 *
-		 * @see Annotation#parse()
+		 * @param annotation
 		 *
 		 */
-		protected override function parse(descriptor : XML) : void {
-			//super.parse(descriptor);
-			var type : String = descriptor.@type;
-			if (!type) {
-				type = descriptor.@name;
-			}
-			_name = new QName(null, type.substring(type.lastIndexOf(":") + 1));
-			_type = getDefinitionByName(type) as Class;
-			if (!alias || alias.length == 0 || alias == type) {
-				setAlias(_name.localName);
-			}
-			var metadata : XMLList = descriptor.metadata.(@name == annotationName);
-			if (metadata.length() > 0) {
-				parseMetadata(metadata[0]);
-			}
-			if (descriptor.factory.length() > 0) {
-				descriptor = descriptor.factory[0];
-			}
-			processNamespaces(descriptor);
-			processMembers(descriptor);
-			constructor.parse(descriptor);
-		}
-
-		/**
-		 * @private
-		 *
-		 */
-		protected function processMembers(descriptor : XML) : void {
-			var field : XML;
-			for each (field in descriptor..variable) {
-				addMember(AnnotationFactory.instance.getAnnotation(field) as XmlMember);
-			}
-			for each (field in descriptor..accessor) {
-				addMember(AnnotationFactory.instance.getAnnotation(field) as XmlMember);
-			}
-		}
-
-		/**
-		 *
-		 * @see Annotation#parseMetadata()
-		 *
-		 */
-		protected override function parseMetadata(metadata : XML) : void {
-			nameSpace = getNamespace(metadata);
-			setAlias(metadata.arg.(@key == ARGUMENT_ALIAS).@value);
-			setIdField(metadata.arg.(@key == ARGUMENT_ID).@value);
-			_useChildNamespace = metadata.arg.(@key == ARGUMENT_USE_CHILD_NAMESPACE).@value;
-			setValueField(metadata.arg.(@key == ARGUMENT_VALUE).@value);
-			setOrdered(metadata.arg.(@key == ARGUMENT_ORDERED).@value);
-		}
-
-		private function setIdField(field : String) : void {
-			if (field && field.length > 0) {
-				id = field;
-			}
-		}
-
-		private function setValueField(field : String) : void {
-			if (field && field.length > 0) {
-				defaultValue = field;
-			}
-		}
-
-		private function setOrdered(value : String) : void {
-			if (value && value.length > 0) {
-				_ordered = value == "true";
+		private function addMember(annotation : XmlMember) : void {
+			if (annotation && !isFieldRegistered(annotation)) {
+				if(annotation.hasNamespaceRef()){
+					annotation.nameSpace = getRegisteredNamespace(annotation.namespaceRef);
+				}else{
+					annotation.nameSpace = nameSpace;
+				}
+				members.addItem(annotation);
+				if (annotation.name.localName == id) {
+					_idField = annotation;
+				}
+				if (annotation.alias == defaultValue) {
+					_defaultValueField = annotation;
+				}
 			}
 		}
 		
-		private function processNamespaces(descriptor : XML) : void{
-			var nss : XMLList = descriptor.metadata.(@name=="Namespace");
-			if(nss.length() > 0){
+		private function memberAddFinished() : void {
+			//Flex SDK 4 hotfix: we need to put the default field first, if it exists,
+			// otherwise the default text will be added as a child of a previous element 
+			var member : XmlMember;
+			for (var i : int = 0; i < members.length; i++){
+				member = members[i] as XmlMember;
+				if(member.isDefaultValue()){
+					members.addItemAt(members.removeItemAt(i), 0);
+					break;
+				}
+			}
+			if (ordered) {
+				var sort : Sort = new Sort();
+				var fields : Array = [];
+				fields.push(new SortField("order", false, false, true));
+				fields.push(new SortField("alias", true, false, false));
+				sort.fields = fields;
+				members.sort = sort;
+				members.refresh();
+			}
+		}
+		
+		private function processNamespaces(descriptor : ClassMetaDescriptor) : void{
+			var nss : Array = descriptor.getConfigItemsByName(XmlConstants.ANNOTATION_NAMESPACE);
+			if(nss.length > 0){
 				_namespaces = new Dictionary();
 				var ns : Namespace;
-				for each(var nsXml : XML in nss){
-					ns = getNamespace(nsXml);
+				for each(var nsDesc : MetaDescriptor in nss){
+					ns = getNamespace(nsDesc);
 					_namespaces[ns.prefix] = ns;
 				}
 			}
@@ -320,13 +259,13 @@ package com.googlecode.flexxb.annotation.xml {
 			return _namespaces[ref] as Namespace;
 		}
 
-		private function getNamespace(metadata : XML) : Namespace {
-			var prefix : String = metadata.arg.(@key == ARGUMENT_NAMESPACE_PREFIX).@value;
-			var uri : String = metadata.arg.(@key == ARGUMENT_NAMESPACE_URI).@value;
+		private function getNamespace(descriptor : MetaDescriptor) : Namespace {
+			var prefix : String = descriptor.attributes[XmlConstants.NAMESPACE_PREFIX];
+			var uri : String =  descriptor.attributes[XmlConstants.NAMESPACE_URI];
 			if (uri == null || uri.length == 0) {
 				return null;
 			}
-			if (prefix.length > 0) {
+			if (prefix != null && prefix.length > 0) {
 				return new Namespace(prefix, uri);
 			}
 			return new Namespace(uri);
