@@ -93,8 +93,8 @@ package com.googlecode.flexxb.serializer {
 			if (array.useOwnerAlias()) {
 				if (array.memberName) {
 					xmlName = array.memberName;
-				} else if (array.type) {
-					xmlName = serializer.descriptorStore.getXmlName(array.type);
+				} else if (array.memberType) {
+					xmlName = serializer.descriptorStore.getXmlName(array.memberType);
 				}
 				xmlArray = xmlData.child(xmlName);
 			} else {
@@ -112,11 +112,11 @@ package com.googlecode.flexxb.serializer {
 					// and have no item name defined
 					var values : Array = xmlArray[0].toString().split("\n");
 					for each(var value : String in values){
-						list.push(getValue(XML(value), array.type, array.getFromCache, serializer))
+						list.push(getValue(XML(value), array.memberType, array.getFromCache, serializer))
 					}
 				}else{
 					for each (var xmlChild : XML in xmlArray) {
-						var member : Object = getValue(xmlChild, array.type, array.getFromCache, serializer);
+						var member : Object = getValue(xmlChild, array.memberType, array.getFromCache, serializer);
 						if (member != null) {
 							list.push(member);
 						}

@@ -272,8 +272,8 @@ package com.googlecode.flexxb.annotation.xml {
 		 *
 		 */
 		protected override function parse(descriptor : MetaDescriptor) : void {
-			_accessorType = descriptor.fieldAccess;
 			super.parse(descriptor);
+			_accessorType = descriptor.fieldAccess;
 			_nsRef = descriptor.attributes[XmlConstants.NAMESPACE];
 			ignoreOn = Stage.fromString(descriptor.attributes[XmlConstants.IGNORE_ON]);
 			setOrder(descriptor.attributes[XmlConstants.ORDER]);
