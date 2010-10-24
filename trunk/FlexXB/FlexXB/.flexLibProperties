@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="false" version="1">
   <includeClasses>
-    <classEntry path="com.googlecode.flexxb.ElementStack"/>
     <classEntry path="com.googlecode.flexxb.Configuration"/>
     <classEntry path="com.googlecode.flexxb.ConverterStore"/>
     <classEntry path="com.googlecode.flexxb.DescriptorStore"/>
+    <classEntry path="com.googlecode.flexxb.ElementStack"/>
     <classEntry path="com.googlecode.flexxb.FlexXBApi"/>
     <classEntry path="com.googlecode.flexxb.FlexXBEngine"/>
-    <classEntry path="com.googlecode.flexxb.interfaces.IIdentifiable"/>
-    <classEntry path="com.googlecode.flexxb.interfaces.IXmlSerializable"/>
+    <classEntry path="com.googlecode.flexxb.IConverterStore"/>
+    <classEntry path="com.googlecode.flexxb.IDescriptorStore"/>
     <classEntry path="com.googlecode.flexxb.IdResolver"/>
-    <classEntry path="com.googlecode.flexxb.MetaParser"/>
+    <classEntry path="com.googlecode.flexxb.MappingModel"/>
+    <classEntry path="com.googlecode.flexxb.ProcessNotifier"/>
     <classEntry path="com.googlecode.flexxb.SerializerCore"/>
     <classEntry path="com.googlecode.flexxb.VERSION"/>
     <classEntry path="com.googlecode.flexxb.XmlEvent"/>
-    <classEntry path="com.googlecode.flexxb.annotation.Annotation"/>
     <classEntry path="com.googlecode.flexxb.annotation.AnnotationFactory"/>
-    <classEntry path="com.googlecode.flexxb.annotation.Argument"/>
-    <classEntry path="com.googlecode.flexxb.annotation.BaseAnnotation"/>
-    <classEntry path="com.googlecode.flexxb.annotation.Constructor"/>
-    <classEntry path="com.googlecode.flexxb.annotation.XmlArray"/>
-    <classEntry path="com.googlecode.flexxb.annotation.XmlAttribute"/>
-    <classEntry path="com.googlecode.flexxb.annotation.XmlClass"/>
-    <classEntry path="com.googlecode.flexxb.annotation.XmlElement"/>
-    <classEntry path="com.googlecode.flexxb.annotation.XmlMember"/>
-    <classEntry path="com.googlecode.flexxb.api.AccessorType"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.AccessorType"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.BaseAnnotation"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.Constants"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.Constructor"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.ConstructorArgument"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.IAnnotation"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.IClassAnnotation"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.IFieldAnnotation"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.IGlobalAnnotation"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.IMemberAnnotation"/>
+    <classEntry path="com.googlecode.flexxb.annotation.contract.Stage"/>
+    <classEntry path="com.googlecode.flexxb.annotation.parser.ClassMetaDescriptor"/>
+    <classEntry path="com.googlecode.flexxb.annotation.parser.MetaDescriptor"/>
+    <classEntry path="com.googlecode.flexxb.annotation.parser.MetaParser"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.Annotation"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.XmlArray"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.XmlAttribute"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.XmlClass"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.XmlConstants"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.XmlElement"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.XmlMember"/>
+    <classEntry path="com.googlecode.flexxb.annotation.xml.XmlNamespace"/>
     <classEntry path="com.googlecode.flexxb.api.AccessorTypeConverter"/>
     <classEntry path="com.googlecode.flexxb.api.FxApiWrapper"/>
     <classEntry path="com.googlecode.flexxb.api.FxArray"/>
@@ -36,7 +49,6 @@
     <classEntry path="com.googlecode.flexxb.api.FxMember"/>
     <classEntry path="com.googlecode.flexxb.api.FxNamespace"/>
     <classEntry path="com.googlecode.flexxb.api.IFlexXBApi"/>
-    <classEntry path="com.googlecode.flexxb.api.Stage"/>
     <classEntry path="com.googlecode.flexxb.api.StageXmlConverter"/>
     <classEntry path="com.googlecode.flexxb.api.flexxb_api_internal"/>
     <classEntry path="com.googlecode.flexxb.cache.ICacheProvider"/>
@@ -51,11 +63,11 @@
     <classEntry path="com.googlecode.flexxb.error.ApiError"/>
     <classEntry path="com.googlecode.flexxb.error.DescriptorParsingError"/>
     <classEntry path="com.googlecode.flexxb.error.ProcessingError"/>
-    <classEntry path="com.googlecode.flexxb.interfaces.IConverterStore"/>
     <classEntry path="com.googlecode.flexxb.interfaces.ICycleRecoverable"/>
-    <classEntry path="com.googlecode.flexxb.IDescriptorStore"/>
     <classEntry path="com.googlecode.flexxb.interfaces.IDeserializeNotifiable"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.IIdentifiable"/>
     <classEntry path="com.googlecode.flexxb.interfaces.ISerializeNotifiable"/>
+    <classEntry path="com.googlecode.flexxb.interfaces.IXmlSerializable"/>
     <classEntry path="com.googlecode.flexxb.persistence.ChangeTracker"/>
     <classEntry path="com.googlecode.flexxb.persistence.ChangeTrackerKind"/>
     <classEntry path="com.googlecode.flexxb.persistence.IPersistable"/>
@@ -79,8 +91,6 @@
     <classEntry path="com.googlecode.flexxb.util.log.ILogger"/>
     <classEntry path="com.googlecode.flexxb.util.log.LogFactory"/>
     <classEntry path="com.googlecode.flexxb.util.log.Logger"/>
-    <classEntry path="com.googlecode.flexxb.MappingModel"/>
-    <classEntry path="com.googlecode.flexxb.ProcessNotifier"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

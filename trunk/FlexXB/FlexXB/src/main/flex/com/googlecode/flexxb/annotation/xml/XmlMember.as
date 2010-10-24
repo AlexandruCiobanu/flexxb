@@ -15,13 +15,15 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.xml {
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.annotation.contract.Constants;
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
+	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
 	import com.googlecode.flexxb.annotation.contract.Stage;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import mx.utils.StringUtil;
-	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
-	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
 
 	/**
 	 * Defines a member of an XmlClass, that is, a field of the class definition.
@@ -112,8 +114,9 @@ package com.googlecode.flexxb.annotation.xml {
 		 * @param _class owner XmlClass entity
 		 *
 		 */
-		public function XmlMember() {
-			super();
+		public function XmlMember(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+			super(descriptor);
+			_class = owner as XmlClass;
 		}
 		
 		public function get classAnnotation() : IClassAnnotation{
@@ -268,23 +271,14 @@ package com.googlecode.flexxb.annotation.xml {
 		 * @private
 		 *
 		 */
-		protected override function parse(field : XML) : void {
-			_accessorType = AccessorType.fromString(field.@access);
-			super.parse(field);
-		}
-
-		/**
-		 *
-		 * @see Annotation#parseMetadata()
-		 *
-		 */
-		protected override function parseMetadata(metadata : XML) : void {
-			_nsRef = metadata.arg.(@key == Constants.NAMESPACE_REF).@value;
-			setAlias(metadata.arg.(@key == Constants.ALIAS).@value);
-			ignoreOn = Stage.fromString(metadata.arg.(@key == Constants.IGNORE_ON).@value);
-			setOrder(metadata.arg.(@key == Constants.ORDER).@value);
-			_default = metadata.arg.(@key == Constants.DEFAULT).@value;
-			_isIDRef = metadata.arg.(@key == Constants.IDREF).@value == "true";
+		protected override function parse(descriptor : MetaDescriptor) : void {
+			_accessorType = descriptor.fieldAccess;
+			super.parse(descriptor);
+			_nsRef = descriptor.attributes[XmlConstants.NAMESPACE];
+			ignoreOn = Stage.fromString(descriptor.attributes[XmlConstants.IGNORE_ON]);
+			setOrder(descriptor.attributes[XmlConstants.ORDER]);
+			_default = descriptor.attributes[Constants.DEFAULT];
+			_isIDRef = descriptor.getBooleanAttribute(XmlConstants.IDREF);
 		}
 		/**
 		 *
@@ -302,12 +296,7 @@ package com.googlecode.flexxb.annotation.xml {
 				_order = nr;
 			}
 		}
-
-		/**
-		 *
-		 * @see Annotation#setAlias()
-		 *
-		 */
+		
 		protected override function setAlias(value : String) : void {
 			if (value && value.indexOf(XmlConstants.ALIAS_PATH_SEPARATOR) > 0) {
 				var elems : Array = value.split(XmlConstants.ALIAS_PATH_SEPARATOR);

@@ -16,10 +16,14 @@
  */
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
+	import com.googlecode.flexxb.annotation.contract.Constants;
+	import com.googlecode.flexxb.annotation.contract.ConstructorArgument;
 	import com.googlecode.flexxb.annotation.xml.XmlArray;
 	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
 	import com.googlecode.flexxb.annotation.xml.XmlClass;
+	import com.googlecode.flexxb.annotation.xml.XmlConstants;
 	import com.googlecode.flexxb.annotation.xml.XmlElement;
+	import com.googlecode.flexxb.annotation.xml.XmlNamespace;
 	import com.googlecode.flexxb.api.IFlexXBApi;
 	import com.googlecode.flexxb.converter.ClassTypeConverter;
 	import com.googlecode.flexxb.converter.IConverter;
@@ -106,6 +110,8 @@ package com.googlecode.flexxb {
 			registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
 			registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
 			registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
+			registerAnnotation(XmlConstants.ANNOTATION_NAMESPACE, XmlNamespace, null);
+			registerAnnotation(Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT, ConstructorArgument, null);
 		}
 
 		/**

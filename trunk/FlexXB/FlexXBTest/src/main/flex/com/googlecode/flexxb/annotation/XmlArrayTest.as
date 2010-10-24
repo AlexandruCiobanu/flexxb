@@ -16,25 +16,27 @@
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.annotation.parser.MetaParser;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlArray;
 	import com.googlecode.testData.List;
 	import com.googlecode.testData.Mock;
 	
 	import org.flexunit.Assert;
 	import org.flexunit.assertThat;
-	import com.googlecode.flexxb.annotation.xml.Annotation;
-	import com.googlecode.flexxb.annotation.xml.XmlArray;
 	
 	public class XmlArrayTest extends AnnotationTest {
 		
 		protected override function runTest(descriptor : XML) : void {
-			var att1 : XmlArray = new XmlArray();//getFieldDescriptor("result", descriptor));
+			var parser : MetaParser = new MetaParser();
+			var att1 : XmlArray = new XmlArray(parser.parseField(getFieldDescriptor("result", descriptor))[0], null);
 			validate(att1, "result", Array, "data", null, false, Mock);
 		}
 
 		protected override function customValidate(annotation : Annotation, ... args) : void {
 			Assert.assertEquals("IgnoreOn is incorrect", args[3], XmlArray(annotation).ignoreOn);
 			Assert.assertEquals("SerializePartialElement is incorrect", args[4], XmlArray(annotation).serializePartialElement);
-			Assert.assertEquals("Type is incorrect", args[5], XmlArray(annotation).type);
+			Assert.assertEquals("Type is incorrect", args[5], XmlArray(annotation).memberType);
 		}
 	}
 }

@@ -22,6 +22,7 @@ package com.googlecode.flexxb.annotation.contract
 	 * class itself. Good examples to this end are constructor arguments metadata
 	 * or namespaces used by the class fields. They are not bound to a field name 
 	 * and type but they afect the class representation.
+	 * This kind of annotations does not usually need a serializer.
 	 * @author Alexutz
 	 * 
 	 */	

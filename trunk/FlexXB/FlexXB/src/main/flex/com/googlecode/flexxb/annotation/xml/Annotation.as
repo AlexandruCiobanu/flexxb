@@ -15,9 +15,12 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation.xml {
-	import flash.utils.getDefinitionByName;
-	import com.googlecode.flexxb.annotation.contract.IFieldAnnotation;
 	import com.googlecode.flexxb.annotation.contract.BaseAnnotation;
+	import com.googlecode.flexxb.annotation.contract.Constants;
+	import com.googlecode.flexxb.annotation.contract.IFieldAnnotation;
+	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
+	
+	import flash.utils.getDefinitionByName;
 
 	/**
 	 * This is the base class for a field xml annotation.
@@ -31,20 +34,12 @@ package com.googlecode.flexxb.annotation.xml {
 	 *
 	 */
 	public class Annotation extends BaseAnnotation implements IFieldAnnotation {
-		/**
-		 * @private
-		 */
-		protected var _name : QName;
-		/**
-		 * @private
-		 */
+		
+		private var _name : QName;
+		
 		protected var _type : Class;
 		
-		
-		/**
-		 * @private
-		 */
-		protected var _alias : String = "";
+		private var _alias : String = "";
 		
 		private var _xmlName : QName;
 		
@@ -55,7 +50,9 @@ package com.googlecode.flexxb.annotation.xml {
 		 * @param descriptor
 		 *
 		 */
-		public function Annotation() { }
+		public function Annotation(descriptor : MetaDescriptor) { 
+			super(descriptor);
+		}
 		
 		/**
 		 * Get the annotation namespace
@@ -66,20 +63,20 @@ package com.googlecode.flexxb.annotation.xml {
 			return _nameSpace;
 		}
 		
-		/**
-		 * Set the annotation namepsace
-		 *
-		 */
-		public function set nameSpace(value : Namespace) : void {
-			_nameSpace = value;
-		}
-		
 		public function get name() : QName {
 			return _name;
 		}
 		
 		public function get type() : Class {
 			return _type;
+		}
+		
+		/**
+		 * Set the annotation namepsace
+		 *
+		 */
+		public function set nameSpace(value : Namespace) : void {
+			_nameSpace = value;
 		}
 
 		/**
@@ -109,10 +106,8 @@ package com.googlecode.flexxb.annotation.xml {
 		 *
 		 */
 		protected function setAlias(value : String) : void {
-			if (value == null)
-				return;
 			_alias = value;
-			if (_alias.length == 0) {
+			if (!_alias || _alias.length == 0) {
 				_alias = _name.localName;
 			}
 		}
@@ -134,35 +129,11 @@ package com.googlecode.flexxb.annotation.xml {
 		public function useOwnerAlias() : Boolean {
 			return _alias == XmlConstants.ALIAS_ANY;
 		}
-
-		/**
-		 * @private
-		 * Analyze field/class descriptor to extract base informations like field's name and type
-		 * @param field field descriptor
-		 *
-		 */
-		protected override function parse(field : XML) : void {
-			if (field.@name.length() > 0) {
-				_name = new QName(field.@uri, field.@name);
-			}
-			if (field.@type.length() > 0) {
-				_type = getDefinitionByName(field.@type) as Class;
-			}
-			var metadata : XMLList = field.metadata.(@name == annotationName);
-			if (metadata.length() > 0) {
-				setVersion(metadata[0].arg.(@key == ARGUMENT_VERSION).@value);
-				parseMetadata(metadata[0]);
-			}
-			return;
-		}
-
-		/**
-		 * @private
-		 * Process the metadata attached to the field to extract annotation specific data
-		 * @param field field descriptor
-		 *
-		 */
-		protected function parseMetadata(field : XML) : void {
+		
+		protected override function parse(descriptor : MetaDescriptor) : void {
+			_name = descriptor.fieldName;
+			_type = descriptor.fieldType;
+			setAlias(descriptor.attributes[XmlConstants.ALIAS]);			
 		}
 	}
 }

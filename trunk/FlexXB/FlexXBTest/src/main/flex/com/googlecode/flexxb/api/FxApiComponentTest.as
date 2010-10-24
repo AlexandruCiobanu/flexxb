@@ -16,6 +16,9 @@
  */
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.annotation.contract.Stage;
+	import com.googlecode.flexxb.annotation.parser.MetaParser;
 	import com.googlecode.flexxb.annotation.xml.XmlArray;
 	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
 	import com.googlecode.flexxb.annotation.xml.XmlClass;
@@ -32,9 +35,7 @@ package com.googlecode.flexxb.api {
 	
 	import mx.collections.ArrayCollection;
 	
-	import org.flexunit.Assert; 
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
-	import com.googlecode.flexxb.annotation.contract.Stage;
+	import org.flexunit.Assert;
 
 	/**
 	 *
@@ -54,7 +55,7 @@ package com.googlecode.flexxb.api {
 		public function testFxAttribute() : void {
 			var api : FxAttribute = FxAttribute.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
-			var att : XmlAttribute = new XmlAttribute();
+			var att : XmlAttribute = new XmlAttribute(new MetaParser().parseField(descriptor)[0], null);
 			doMemberAssertion(api, att);
 		}
 
@@ -62,7 +63,7 @@ package com.googlecode.flexxb.api {
 		public function testFxElement() : void {
 			var api : FxElement = FxElement.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
-			var att : XmlElement = new XmlElement();
+			var att : XmlElement = new XmlElement(new MetaParser().parseField(descriptor)[0], null);
 			doElementAssertion(api, att);
 		}
 
@@ -70,14 +71,15 @@ package com.googlecode.flexxb.api {
 		public function testFxArray() : void {
 			var api : FxArray = FxArray.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = api.toXml();
-			var att : XmlArray = new XmlArray();
+			var att : XmlArray = new XmlArray(new MetaParser().parseField(descriptor)[0], null);
 			doArrayAssertion(api, att);
 		}
 
 		[Test]
 		public function testFxClass() : void {
+			var parser : MetaParser = new MetaParser();
 			var cls : FxClass = buildDescriptor();
-			var xmlCls : XmlClass = new XmlClass(cls.toXml());
+			var xmlCls : XmlClass = parser.parseDescriptor(cls.toXml())[0];
 			Assert.assertEquals("wrong type", cls.type, xmlCls.type);
 			Assert.assertEquals("wrong alias", cls.alias, xmlCls.alias);
 			Assert.assertEquals("wrong prefix", cls.prefix, xmlCls.nameSpace.prefix);

@@ -16,14 +16,15 @@
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.annotation.parser.MetaParser;
+	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.annotation.xml.XmlClass;
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.Mock;
-
+	
 	import flash.utils.describeType;
 	
 	import org.flexunit.Assert;
-	import com.googlecode.flexxb.annotation.xml.Annotation;
-	import com.googlecode.flexxb.annotation.xml.XmlClass;
 
 
 	public class XmlClassTest extends AnnotationTest {
@@ -32,14 +33,16 @@ package com.googlecode.flexxb.annotation {
 		public function testConstructorParameters() : void {
 			var target : ConstructorRefObj = new ConstructorRefObj("test", 1, true);
 			FlexXBEngine.instance.serialize(null);
-			var cls : XmlClass = new XmlClass(describeType(ConstructorRefObj));
+			var parser : MetaParser = new MetaParser();
+			var cls : XmlClass = parser.parseDescriptor(describeType(ConstructorRefObj))[0];
 			Assert.assertFalse("Class constructor should not be default", cls.constructor.isDefault());
 			Assert.assertNotNull("ParameterFields is Null", cls.constructor.parameterFields);
 			Assert.assertEquals("There are more or less than 3 parameters", 3, cls.constructor.parameterFields.length);
 		}
 
 		protected override function runTest(descriptor : XML) : void {
-			var a : XmlClass = new XmlClass(descriptor);
+			var parser : MetaParser = new MetaParser();
+			var a : XmlClass = parser.parseDescriptor(descriptor)[0];
 			validate(a, "Mock", Mock, "MyClass", "test", "http://www.axway.com/xmlns/passport/v1");
 		}
 

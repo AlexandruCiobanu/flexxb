@@ -20,9 +20,10 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.interfaces.IXmlSerializable;
 	
 	import flash.utils.Dictionary;
-	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
+	
+	import mx.utils.DescribeTypeCache;
 
 	/**
 	 *
@@ -44,7 +45,7 @@ package com.googlecode.flexxb {
 		 */
 		public function getDescriptor(object : Object, version : String = "") : XmlClass {
 			var className : String = getQualifiedClassName(object);
-			return getDefinition(object, className).getDescriptor(version);
+			return getDefinition(object, className).getDescriptor(version) as XmlClass;
 		}
 
 		/**
@@ -104,7 +105,7 @@ package com.googlecode.flexxb {
 		public function getClassByTagName(name : String, version : String = "") : Class {
 			var descriptor : XmlClass;
 			for each (var store : ResultStore in descriptorCache) {
-				descriptor = store.getDescriptor(version);
+				descriptor = store.getDescriptor(version) as XmlClass;
 				if (descriptor && descriptor.alias == name) {
 					return descriptor.type;
 				}
@@ -141,16 +142,10 @@ package com.googlecode.flexxb {
 		}
 
 		private function xmlDescribeType(xmlDescriptor : XML) : Array {
-			var descriptor : XML = xmlDescriptor;
-			if (descriptor.factory.length() > 0) {
-				descriptor = descriptor.factory[0];
-			}
 			//get class annotation				
 			var classDescriptor : XmlClass;
-			var descriptors : Array = parser.parseDescriptor(descriptor);
+			var descriptors : Array = parser.parseDescriptor(xmlDescriptor);
 			for each(classDescriptor in descriptors){
-				//signal the class descriptor that no more members are to be added
-				classDescriptor.memberAddFinished();
 				//if the class descriptor defines a namespace, register it in the namespace map
 				if (classDescriptor.nameSpace) {
 					if (!classNamespaceMap) {
@@ -174,7 +169,7 @@ package com.googlecode.flexxb {
 		}
 
 		private function put(object : Object, className : String) : void {
-			var descriptor : XML = describeType(object);
+			var descriptor : XML = DescribeTypeCache.describeType(object).typeDescription;
 			var interfaces : XMLList;
 			if (descriptor.factory.length() > 0) {
 				interfaces = descriptor.factory.implementsInterface;
@@ -206,10 +201,9 @@ package com.googlecode.flexxb {
 	}
 }
 import com.googlecode.flexxb.annotation.contract.Constants;
-import com.googlecode.flexxb.annotation.xml.XmlClass;
+import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 
 import flash.utils.Dictionary;
-
 
 /**
  *
@@ -241,13 +235,13 @@ internal class ResultStore {
 		this.customSerializable = customSerializable;
 		this.reference = reference;
 		this.descriptors = new Dictionary();
-		for each(var descriptor : XmlClass in descriptors){
-			this.descriptors[descriptor.version] = descriptor;
+		for each(var descriptor : IClassAnnotation in descriptors){
+			this.descriptors[descriptor.version ? descriptor.version : Constants.DEFAULT] = descriptor;
 		}
 	}
 	
-	public function getDescriptor(version : String) : XmlClass{
+	public function getDescriptor(version : String) : IClassAnnotation{
 		var annotationVersion : String = version ? version : Constants.DEFAULT;
-		return descriptors[annotationVersion] as XmlClass;
+		return descriptors[annotationVersion] as IClassAnnotation;
 	}
 }
