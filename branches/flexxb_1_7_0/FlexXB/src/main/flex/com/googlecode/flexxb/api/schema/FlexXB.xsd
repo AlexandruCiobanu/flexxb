@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:flexxb="http://code.google.com/p/flexxb/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="AccessType">
+    <xs:annotation>
+      <xs:documentation>Specifies the type of access defined by the class field: readonly(only a getter is defined), writeonly (only a setter is defined), readwrite (getter and setter are defined or a field)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="readonly"/>
+      <xs:enumeration value="writeonly"/>
+      <xs:enumeration value="readwrite"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProcessStage">
+    <xs:annotation>
+      <xs:documentation>Specifies the current stage of processing. Takes two values: serialize, deserialize.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="serialize"/>
+      <xs:enumeration value="deserialize"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Namespace">
+  	<xs:annotation>
+  		<xs:documentation></xs:documentation>
+  	</xs:annotation>
+  	<xs:complexType>
+  		<xs:attribute name="prefix" type="xs:string" use="optional"/>
+  		<xs:attribute name="uri" type="xs:anyURI"" use="required"/>
+  	</xs:complexType>
+  </xs:element>
+  <xs:element name="Field">
+    <xs:annotation>
+      <xs:documentation>Defined the class field (field, getter and/or setter definition). A field is identified by name, type and access type.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType >
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="type" type="xs:string" use="required" />
+      <xs:attribute name="accessType" type="AccessType" use="optional" default="readwrite" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Attribute">
+    <xs:annotation>
+      <xs:documentation>Defines the field as being rendered as an attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Namespace" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="alias" type="xs:string" use="optional" />
+      <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
+      <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
+      <xs:attribute name="idref" type="xs:boolean" use="optional" default="false"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Element">
+    <xs:annotation>
+      <xs:documentation>Defines the field as being rendered as an element.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Namespace" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="alias" type="xs:string" use="optional" />
+      <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
+      <xs:attribute name="getFromCache" type="xs:boolean" use="optional" default="false"/>
+      <xs:attribute name="serializePartialElement" type="xs:boolean" use="optional" default="false"/>
+      <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
+      <xs:attribute name="idRef" type="xs:boolean" use="optional" default="false"/>
+      <xs:attribute name="getRuntimeType" type="xs:boolean" use="optional" default="false"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Array">
+    <xs:annotation>
+      <xs:documentation>Defines the field as being rendered as a list of elements.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Namespace" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="alias" type="xs:string" use="optional" />
+      <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
+      <xs:attribute name="memberName" type="xs:string" use="optional"/>
+      <xs:attribute name="memberType" type="xs:string" use="optional"/>
+      <xs:attribute name="idRef" type="xs:boolean" use="optional" default="false"/>
+      <xs:attribute name="getFromCache" type="xs:boolean" use="optional" default="false"/>
+      <xs:attribute name="serializePartialElement" type="xs:boolean" use="optional" default="false"/>
+      <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Argument">
+  	<xs:annotation>
+  		<xs:documentation></xs:documentation>
+  	</xs:annotation>
+  	<xs:complexType>
+  		<xs:attribute name="reference" type="xs:string" use="required"/>
+  		<xs:attribute name="optional" type="xs:boolean" use="optional" default="false"/>
+  	</xs:complexType>
+  </xs:element>
+  <xs:element name="Class">
+    <xs:annotation>
+      <xs:documentation>Defines the enclosing xml the is rendered for the specified type.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+      	<xs:element name="ConstructorArguments">
+      		<xs:complexType>
+      			<xs:choice minOccurs="0" maxOccurs="unbounded">
+      				<xs:element ref="Argument" minOccurs="0" maxOccurs="unbounded" />
+      			</xs:choice>
+      		</xs:complexType>
+      	</xs:element>
+      	<xs:element name="Members">
+      	  <xs:complexType>
+	         <xs:choice minOccurs="1" maxOccurs="unbounded">
+		        <xs:element ref="Element" minOccurs="0" maxOccurs="unbounded"/>
+		        <xs:element ref="Attribute" minOccurs="0" maxOccurs="unbounded"/>
+		        <xs:element ref="Array" minOccurs="0" maxOccurs="unbounded"/>
+		      </xs:choice>
+	      </xs:complexType>
+      	</xs:element>
+      </xs:sequence>
+      <xs:attribute name="type" type="xs:string" use="required"/>
+      <xs:attribute name="alias" type="xs:string" use="optional"/>
+      <xs:attribute name="prefix" type="xs:string" use="optional"/>
+      <xs:attribute name="uri" type="xs:anyURI" use="optional"/>
+      <xs:attribute name="useNamespaceFrom" type="xs:string" use="optional"/>
+      <xs:attribute name="idField" type="xs:string" use="optional" />
+      <xs:attribute name="defaultValueField" type="xs:string" use="optional"/>
+      <xs:attribute name="ordered" type="xs:boolean" use="optional" default="false"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlexXBAPI">
+    <xs:annotation>
+      <xs:documentation>This is the root element</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="1">
+        <xs:element name="Descriptors">
+          <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+              <xs:element ref="Class"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:positiveInteger" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
