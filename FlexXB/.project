@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>FlexXB-MP</name>
-	<comment>FlexXB Main Project</comment>
+	<name>FlexXB</name>
+	<comment></comment>
 	<projects>
-		<project>FlexXB</project>
-		<project>FlexXBTest</project>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>com.adobe.flexbuilder.project.flexlibnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
 </projectDescription>
