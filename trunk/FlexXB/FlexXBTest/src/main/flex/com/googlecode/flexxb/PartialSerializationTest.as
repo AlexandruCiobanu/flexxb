@@ -34,7 +34,7 @@ package com.googlecode.flexxb {
 			target.link.id = 325;
 			target.link.version = 2;
 			var xml : XML = FlexXBEngine.instance.serialize(target);
-			var mk3 : XML = xml.child(new QName(new Namespace("http://www.axway.com/xmlns/passport/v1"), "mock3"))[0];
+			var mk3 : XML = xml.child(new QName(new Namespace("http://www.test.com/xmlns/pp/v1"), "mock3"))[0];
 			Assert.assertTrue(mk3.length() > 0);
 			Assert.assertEquals("Link id is wrong", "325", mk3.@id);
 			Assert.assertEquals("Link attribute is wrong", "", mk3.@attribute.toString());

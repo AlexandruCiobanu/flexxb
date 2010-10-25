@@ -163,7 +163,7 @@ package com.googlecode.flexxb {
 
 		private function getDefinition(object : Object, className : String) : ResultStore {
 			if (!hasDescriptorDefined(className)) {
-				put(object, className)
+				put(object, className);
 			}
 			return descriptorCache[className];
 		}

@@ -95,7 +95,7 @@ package com.googlecode.flexxb
 			var engine : FlexXBEngine = new FlexXBEngine();
 			var clasz : FxClass = new FxClass(DepartmentEmployee);
 			clasz.addAttribute("name", String);
-			clasz.addElement("department", Department).idRef = true;
+			clasz.addElement("department", Department).idref = true;
 			engine.api.processTypeDescriptor(clasz);
 			var xml : XML = engine.serialize(company);
 			var clone : Company = engine.deserialize(xml);

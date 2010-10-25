@@ -17,15 +17,18 @@
 package com.googlecode.testData {
 
 	[Bindable]
-	[XmlClass(alias="MyClass", prefix="test", uri="http://www.axway.com/xmlns/passport/v1")]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.test.com/xmlns/pp/v1")]
+	[XmlClass(alias="V2", version="v2", prefix="ulala", uri="www.me.com")]
 	[Namespace(prefix="me", uri="www.me.com")]
 	public class Mock {
 		[XmlAttribute(alias="stuff")]
 		public var aField : String = "a";
 		[XmlAttribute(ignoreOn="serialize")]
 		public var date : Date;
+		[XmlAttribute(version="v2")]
 		[XmlElement(alias="objVersion", namespace="me")]
 		public var version : int = 4;
+		[XmlElement(version="v2", alias="v2Tested")]
 		[XmlElement(alias="mock3", serializePartialElement="true")]
 		public var link : Mock3;
 		[XmlElement(serializePartialElement="true")]

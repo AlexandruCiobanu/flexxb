@@ -111,7 +111,7 @@ package com.googlecode.flexxb {
 			if (mappingModel.descriptorStore.isCustomSerializable(object)) {
 				xmlData = IXmlSerializable(object).toXml();
 			} else {
-				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(object);
+				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(object, version);
 				xmlData = AnnotationFactory.instance.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
 				var serializer : ISerializer;
 				var annotation : IMemberAnnotation;
@@ -219,7 +219,7 @@ package com.googlecode.flexxb {
 
 					var classDescriptor : IClassAnnotation;
 					if (!mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
-						classDescriptor = mappingModel.descriptorStore.getDescriptor(objectClass);
+						classDescriptor = mappingModel.descriptorStore.getDescriptor(objectClass, version);
 					}
 
 					if (!foundInCache) {
