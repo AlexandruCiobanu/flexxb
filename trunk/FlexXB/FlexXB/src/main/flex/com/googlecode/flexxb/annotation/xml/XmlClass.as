@@ -33,7 +33,7 @@ package com.googlecode.flexxb.annotation.xml {
 	 *
 	 * <p>Usage: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", 
 	 * idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", 
-	 * defaultValueField="fieldName", ordered="true|false")]</code></p>
+	 * defaultValueField="fieldName", ordered="true|false", version="versionName")]</code></p>
 	 * @author aCiobanu
 	 *
 	 */
