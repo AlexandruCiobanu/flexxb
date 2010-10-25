@@ -53,7 +53,7 @@ package com.googlecode.flexxb.api {
 		 * 
 		 *  @default
 		 */		
-		public var idRef : Boolean;
+		public var idref : Boolean;
 		
 		[XmlAttribute]
 		/**
@@ -211,7 +211,7 @@ package com.googlecode.flexxb.api {
 			items[XmlConstants.IGNORE_ON] = ignoreOn;
 			if (!isNaN(order))
 				items[XmlConstants.ORDER] = order;
-			items[XmlConstants.IDREF] = idRef;
+			items[XmlConstants.IDREF] = idref;
 			return items;
 		}
 	}

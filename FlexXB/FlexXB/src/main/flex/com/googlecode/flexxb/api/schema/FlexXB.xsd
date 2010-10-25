@@ -50,7 +50,7 @@
       <xs:attribute name="alias" type="xs:string" use="optional" />
       <xs:attribute name="ignoreOn" type="ProcessStage" use="optional" />
       <xs:attribute name="order" type="xs:unsignedInt" use="optional" />
-      <xs:attribute name="idRef" type="xs:boolean" use="optional" default="false"/>
+      <xs:attribute name="idref" type="xs:boolean" use="optional" default="false"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Element">

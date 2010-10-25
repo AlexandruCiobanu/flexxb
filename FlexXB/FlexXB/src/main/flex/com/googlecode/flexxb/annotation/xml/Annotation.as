@@ -19,6 +19,7 @@ package com.googlecode.flexxb.annotation.xml {
 	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.annotation.contract.IFieldAnnotation;
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
+	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import flash.utils.getDefinitionByName;
 
@@ -131,6 +132,7 @@ package com.googlecode.flexxb.annotation.xml {
 		}
 		
 		protected override function parse(descriptor : MetaDescriptor) : void {
+			super.parse(descriptor);
 			_name = descriptor.fieldName;
 			_type = descriptor.fieldType;
 			setAlias(descriptor.attributes[XmlConstants.ALIAS]);			

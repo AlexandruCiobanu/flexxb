@@ -16,6 +16,7 @@
  */
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.DefaultValueTest;
+	import com.googlecode.flexxb.annotation.VersioningTest;
 	import com.googlecode.flexxb.annotation.XmlArrayTest;
 	import com.googlecode.flexxb.annotation.XmlAttributeTest;
 	import com.googlecode.flexxb.annotation.XmlClassTest;
@@ -40,6 +41,8 @@ package com.googlecode.flexxb {
 		public var specialChars : XmlSpecialCharEscapeTest;
 		
 		public var defaultValue : DefaultValueTest;
+		
+		public var versioning : VersioningTest;
 		
 		public var namespaceTest : NamespaceTest;
 		

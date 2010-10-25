@@ -42,8 +42,19 @@ package com.googlecode.flexxb.annotation {
 
 		protected override function runTest(descriptor : XML) : void {
 			var parser : MetaParser = new MetaParser();
-			var a : XmlClass = parser.parseDescriptor(descriptor)[0];
-			validate(a, "Mock", Mock, "MyClass", "test", "http://www.axway.com/xmlns/passport/v1");
+			var clss : Array = parser.parseDescriptor(descriptor);
+			var a : XmlClass = clss[0];
+			if(a.version == "v2"){
+				validate(a, "Mock", Mock, "V2", "ulala", "www.me.com");
+			}else{
+				validate(a, "Mock", Mock, "MyClass", "test", "http://www.test.com/xmlns/pp/v1");
+			}
+			a = clss[1];
+			if(a.version == "v2"){
+				validate(a, "Mock", Mock, "V2", "ulala", "www.me.com");
+			}else{
+				validate(a, "Mock", Mock, "MyClass", "test", "http://www.test.com/xmlns/pp/v1");
+			}
 		}
 
 		protected override function customValidate(annotation : Annotation, ... args) : void {
