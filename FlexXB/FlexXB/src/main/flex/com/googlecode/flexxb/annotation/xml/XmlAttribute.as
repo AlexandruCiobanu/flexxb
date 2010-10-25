@@ -19,7 +19,8 @@ package com.googlecode.flexxb.annotation.xml {
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 
 	/**
-	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="NameSpace_Prefix", default="DEFAULT_VALUE")]</code></p>
+	 * <p>Usage: <code>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", 
+	 * namespace="NameSpace_Prefix", default="DEFAULT_VALUE", idref="true|false", version="versionName")]</code></p>
 	 * @author aCiobanu
 	 *
 	 */

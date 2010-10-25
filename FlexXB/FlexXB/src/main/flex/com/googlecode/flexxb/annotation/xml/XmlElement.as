@@ -22,7 +22,7 @@ package com.googlecode.flexxb.annotation.xml {
 	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", 
 	 * ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
 	 * order="order_index", getRuntimeType="true|false", namespace="Namespace_Prefix", 
-	 * default="DEFAULT_VALUE")]</code>
+	 * default="DEFAULT_VALUE", idref="true|false", version="versionName")]</code>
 	 * @author aCiobanu
 	 *
 	 */
