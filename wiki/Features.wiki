@@ -64,7 +64,7 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-016||Annotation API||1.1||
 ||FXB-017||Constructor Annotation||1.2||
 ||FXB-018||Multiple namespace support||1.4.1||
-||FXB-019||Annotation versioning||1.7.0 ?||
+||FXB-019||Annotation versioning||1.7.0||
 ||FXB-020||Circular reference handling||1.7.0||
 ||FXB-013||Add method references to annotation's attribute values||?||
 ||FXB-011||XSD validation against incoming XML||?||
