@@ -21,10 +21,15 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
+	import com.googlecode.testData.VectoredElement;
+	import com.googlecode.testData.VersionedItem;
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
 	
 	import org.flexunit.Assert;
+	import org.flexunit.assertThat;
+	import org.flexunit.asserts.assertNotNull;
+	import org.hamcrest.object.equalTo;
 	
 	public class XmlSerializerTest {
 		
@@ -169,6 +174,22 @@ package com.googlecode.flexxb {
 			var result : CustomSerializabeObject = FlexXBEngine.instance.deserialize(xml, CustomSerializabeObject);
 			Assert.assertEquals("Wrong test field values", target.test, result.test);
 
+		}
+		
+		[Test]
+		public function testVectorTypeFields() : void{
+			var item : VectoredElement = new VectoredElement();
+			item.id = "test";
+			item.list = new Vector.<String>();
+			item.list.push("one", "two", "ten");
+			var xml : XML = FlexXBEngine.instance.serialize(item);
+			var clone : VectoredElement = FlexXBEngine.instance.deserialize(xml, VectoredElement);
+			assertThat(clone.id, equalTo(item.id));
+			assertNotNull(clone.list);
+			assertThat(clone.list.length, equalTo(item.list.length));
+			for(var i : int = 0; i < item.list.length; i++){
+				assertThat(clone.list[i], equalTo(item.list[i]));
+			}
 		}
 	}
 }

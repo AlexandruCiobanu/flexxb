@@ -153,21 +153,5 @@ package com.googlecode.flexxb.cache
 			}
 			store.putObject(id, object);
 		}
-		
-		/**
-		 * Get the cache store associated to the specified type.
-		 * It the store does not exist it wil be created.  
-		 * @param type
-		 * @return 
-		 * 
-		 */		
-		private function getStore(type : Class) : TypeCache{
-			var store : TypeCache = cacheMap[type] as TypeCache;
-			if(!store){
-				store = new TypeCache(type);
-				cacheMap[type] = store;
-			}
-			return store;
-		}
 	}
 }

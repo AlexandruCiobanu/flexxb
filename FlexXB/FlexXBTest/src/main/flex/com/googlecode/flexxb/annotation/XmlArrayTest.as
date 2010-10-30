@@ -21,9 +21,13 @@ package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.xml.XmlArray;
 	import com.googlecode.testData.List;
 	import com.googlecode.testData.Mock;
+	import com.googlecode.testData.VectoredElement;
+	
+	import flash.utils.describeType;
 	
 	import org.flexunit.Assert;
 	import org.flexunit.assertThat;
+	import org.hamcrest.object.equalTo;
 	
 	public class XmlArrayTest extends AnnotationTest {
 		
@@ -37,6 +41,15 @@ package com.googlecode.flexxb.annotation {
 			Assert.assertEquals("IgnoreOn is incorrect", args[3], XmlArray(annotation).ignoreOn);
 			Assert.assertEquals("SerializePartialElement is incorrect", args[4], XmlArray(annotation).serializePartialElement);
 			Assert.assertEquals("Type is incorrect", args[5], XmlArray(annotation).memberType);
+		}
+		
+		[Test]
+		public function validateVectorSupport() : void{
+			var parser : MetaParser = new MetaParser();
+			var xml : XML = describeType(VectoredElement);
+			var att1 : XmlArray = new XmlArray(parser.parseField(xml.factory.variable.(@name=="list")[0])[0], null);
+			assertThat(att1.type, equalTo(Vector.<String>));
+			assertThat(att1.memberType, equalTo(String));
 		}
 	}
 }
