@@ -34,10 +34,10 @@ package com.googlecode.flexxb {
 		function stringToObject(value : String, clasz : Class) : Object;
 		/**
 		 * Convert object value to string
-		 * @param object instance to be converted to string
+		 * @param item instance to be converted to string
 		 * @return string value
 		 *
 		 */
-		function objectToString(object : Object, clasz : Class) : String;
+		function objectToString(item : Object, clasz : Class) : String;
 	}
 }

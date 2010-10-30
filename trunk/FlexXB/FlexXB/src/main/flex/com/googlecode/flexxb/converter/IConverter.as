@@ -31,11 +31,11 @@ package com.googlecode.flexxb.converter {
 		function get type() : Class;
 		/**
 		 * Get the string representation of the specified object
-		 * @param object Target object
+		 * @param item Target object
 		 * @return String representation of the specified object
 		 *
 		 */
-		function toString(object : Object) : String;
+		function toString(item : Object) : String;
 		/**
 		 * Get the object whose representation is the specified value
 		 * @param value String parameter from which the object is created

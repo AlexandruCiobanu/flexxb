@@ -28,47 +28,47 @@ package com.googlecode.flexxb {
 		public static const POST_DESERIALIZE : String = "postdeserialize";
 		/**
 		 * 
-		 * @param object
+		 * @param item
 		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
 		 */		
-		public static function createPreSerializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(PRE_SERIALIZE, object, parent, xml);
+		public static function createPreSerializeEvent(item : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(PRE_SERIALIZE, item, parent, xml);
 		}
 		/**
 		 * 
-		 * @param object
+		 * @param item
 		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
 		 */		
-		public static function createPostSerializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(POST_SERIALIZE, object, parent, xml);
+		public static function createPostSerializeEvent(item : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(POST_SERIALIZE, item, parent, xml);
 		}
 		/**
 		 * 
-		 * @param object
+		 * @param item
 		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
 		 */		
-		public static function createPreDeserializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(PRE_DESERIALIZE, object, parent, xml);
+		public static function createPreDeserializeEvent(item : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(PRE_DESERIALIZE, item, parent, xml);
 		}
 		/**
 		 * 
-		 * @param object
+		 * @param item
 		 * @param parent
 		 * @param xml
 		 * @return 
 		 * 
 		 */		
-		public static function createPostDeserializeEvent(object : Object, parent : Object, xml : XML) : XmlEvent {
-			return new XmlEvent(POST_DESERIALIZE, object, parent, xml);
+		public static function createPostDeserializeEvent(item : Object, parent : Object, xml : XML) : XmlEvent {
+			return new XmlEvent(POST_DESERIALIZE, item, parent, xml);
 		}
 
 		private var _object : Object;
@@ -81,9 +81,9 @@ package com.googlecode.flexxb {
 		 * @param xml
 		 * 
 		 */		
-		public function XmlEvent(type : String, object : Object, parent : Object, xml : XML) {
+		public function XmlEvent(type : String, item : Object, parent : Object, xml : XML) {
 			super(type);
-			_object = object;
+			_object = item;
 			_parent = parent;
 			_xml = xml;
 		}
