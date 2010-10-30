@@ -187,7 +187,7 @@ package com.googlecode.flexxb.serializer {
 				case "Boolean":
 				case "Date":
 				case "XML":
-					return false;
+					return false;break;
 				default:
 					return true;
 			}

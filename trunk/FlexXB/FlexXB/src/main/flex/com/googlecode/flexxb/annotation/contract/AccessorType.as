@@ -46,13 +46,14 @@ package com.googlecode.flexxb.annotation.contract {
 		public static function fromString(value : String) : AccessorType {
 			switch (value) {
 				case "readonly":
-					return READ_ONLY;
+					return READ_ONLY;break;
 				case "writeonly":
-					return WRITE_ONLY;
+					return WRITE_ONLY;break;
 				case "readwrite":
+					return READ_WRITE;break;
+				default:
 					return READ_WRITE;
-			}
-			return READ_WRITE;
+			}			
 		}
 
 		private static var initialized : Boolean = false;

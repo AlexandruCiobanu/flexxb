@@ -17,8 +17,10 @@
 package com.googlecode.flexxb.annotation.xml {
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
+	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", 
@@ -68,35 +70,39 @@ package com.googlecode.flexxb.annotation.xml {
 		public function get memberName() : QName {
 			return _memberName;
 		}
-
-		/**
-		 *
-		 * @see Annotation#parseMetadata()
-		 *
-		 */
+		
 		protected override function parse(metadata : MetaDescriptor) : void {
 			super.parse(metadata);
-			var classType : String = metadata.attributes[XmlConstants.TYPE];
-			if (classType) {
-				try {
-					_memberType = getDefinitionByName(classType) as Class;
-				} catch (e : Error) {
-					trace(e);
-				}
-			}
+			_memberType = determineElementType(metadata);
 			var arrayMemberName : String = metadata.attributes[XmlConstants.MEMBER_NAME];
 			if (arrayMemberName) {
 				_memberName = new QName(nameSpace, arrayMemberName);
 			}
 		}
-
-		/**
-		 *
-		 * @see Annotation#annotationName
-		 *
-		 */
+		
 		public override function get annotationName() : String {
 			return ANNOTATION_NAME;
+		}
+		
+		private function determineElementType(metadata : MetaDescriptor) : Class{
+			var type : Class;
+			//handle the vector type. We need to check for it first as it will override settings in the member type 
+			var classType : String = getQualifiedClassName(metadata.fieldType);
+			if(classType.indexOf(getQualifiedClassName(Vector)) == 0){
+				if(classType.lastIndexOf("<") > -1){
+					classType = classType.substring(classType.lastIndexOf("<") + 1, classType.length - 1);
+				}
+			}else{
+				classType = metadata.attributes[XmlConstants.TYPE];
+			}
+			if (classType) {
+				try {
+					type = getDefinitionByName(classType) as Class;
+				} catch (e : Error) {
+					throw new DescriptorParsingError(ownerClass.type, memberName.localName, "Member type <<" + classType + ">> can't be found as specified in the metadata. Make sure you spelled it correctly"); 
+				}
+			}
+			return type;
 		}
 	}
 }

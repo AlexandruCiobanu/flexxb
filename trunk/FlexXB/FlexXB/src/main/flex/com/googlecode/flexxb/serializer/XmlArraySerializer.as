@@ -21,6 +21,8 @@ package com.googlecode.flexxb.serializer {
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 	
+	import flash.utils.getQualifiedClassName;
+	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;
 
@@ -137,6 +139,8 @@ package com.googlecode.flexxb.serializer {
 				for each (var member : Object in members) {
 					ListCollectionView(result).addItem(member);
 				}
+			}else if(getQualifiedClassName(result).indexOf(getQualifiedClassName(Vector)) == 0){
+				result.push.apply(null, members);
 			}
 		}
 	}
