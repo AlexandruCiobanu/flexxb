@@ -52,21 +52,39 @@ package com.googlecode.flexxb {
 		 */		
 		public var enableLogging : Boolean = false;
 		/**
-		 * 
+		 * Reference to an ICacheProvider implementor. Use this field to instruct the engine to use
+		 * an object caching mechanism.
 		 */		
 		public var cacheProvider : ICacheProvider;
+		/**
+		 * Reference to a version extractor instance used to determine automatically the version of
+		 * an xml document.
+		 */		
+		public var versionExtractor : VersionExtractor;
 		/**
 		 * Constructor
 		 *
 		 */
 		public function Configuration() {}
 		/**
-		 * 
-		 * @return 
+		 * Flag signaling the presence or not of a cache provider. It is a
+		 * quick determination of the use of a caching mechanism. 
+		 * @return true if cache is used, false otherwise
 		 * 
 		 */		
 		public function get allowCaching() : Boolean{
 			return cacheProvider != null;
 		}
+		/**
+		 * Flag signaling whether the engine should attempt to automatically
+		 * determine the version of the received xml document. This setting
+		 * is overridden by specifying a non empty version value when 
+		 * deserializing the xml document. 
+		 * @return true if detection is auto, false otherwise
+		 * 
+		 */		
+		public function get autoDetectVersion() : Boolean{
+			return versionExtractor != null;
+		} 
 	}
 }

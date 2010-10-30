@@ -38,11 +38,13 @@ package com.googlecode.flexxb {
 		private var parser : MetaParser = new MetaParser();
 
 		/**
-		 * Get the class descriptor associated with the object type
-		 * @param object
-		 * @return XmlClass descriptor
-		 *
-		 */
+		 * Get the class descriptor associated with the object type. <b>If the required version is not found, 
+		 * it will fallback to the default version.</b>
+		 * @param object target object 
+		 * @param version xml version to be used
+		 * @return XmlClass descriptor 
+		 * 
+		 */		
 		public function getDescriptor(object : Object, version : String = "") : XmlClass {
 			var className : String = getQualifiedClassName(object);
 			return getDefinition(object, className).getDescriptor(version) as XmlClass;
@@ -239,9 +241,18 @@ internal class ResultStore {
 			this.descriptors[descriptor.version ? descriptor.version : Constants.DEFAULT] = descriptor;
 		}
 	}
-	
+	/**
+	 * Get the descriptor associated to the version supplied. If none is found
+	 * the default descriptor will be returned 
+	 * @param version version value
+	 * @return IClassAnnotation implementor instance
+	 * 
+	 */	
 	public function getDescriptor(version : String) : IClassAnnotation{
-		var annotationVersion : String = version ? version : Constants.DEFAULT;
+		var annotationVersion : String = version;
+		if(!descriptors[annotationVersion]){
+			annotationVersion = Constants.DEFAULT;
+		}
 		return descriptors[annotationVersion] as IClassAnnotation;
 	}
 }
