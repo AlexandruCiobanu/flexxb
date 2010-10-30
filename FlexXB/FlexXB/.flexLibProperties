@@ -91,6 +91,7 @@
     <classEntry path="com.googlecode.flexxb.util.log.ILogger"/>
     <classEntry path="com.googlecode.flexxb.util.log.LogFactory"/>
     <classEntry path="com.googlecode.flexxb.util.log.Logger"/>
+    <classEntry path="com.googlecode.flexxb.VersionExtractor"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

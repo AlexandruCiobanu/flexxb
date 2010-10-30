@@ -1,6 +1,7 @@
 package com.googlecode.flexxb.annotation
 {
 	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.VersionExtractor;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.VersionedItem;
@@ -52,6 +53,20 @@ package com.googlecode.flexxb.annotation
 			assertThat(item.name, equalTo(cloneV2.name));
 			assertNotNull(cloneV2.value);
 			assertNull(cloneV2.mock2);
+		}
+		
+		[Test]
+		public function autoVersionDetectionTest() : void{
+			var v2Xml : XML = <VersionedItem itemName="MyName" version="v2"><id>MyId</id><mock test:stuff="field1" xmlns:test="http://www.test.com/xmlns/pp/v1" xmlns:me="www.me.com"><test:readOnly>YES</test:readOnly><me:objVersion>6</me:objVersion></mock></VersionedItem>;
+			var engine : FlexXBEngine = new FlexXBEngine();
+			engine.configuration.versionExtractor = new VersionExtractor();
+			var item : VersionedItem = engine.deserialize(v2Xml, VersionedItem);
+			assertThat(item.id, equalTo("MyId"));
+			assertThat(item.name, equalTo("MyName"));
+			assertNull(item.mock2);
+			assertNotNull(item.value);
+			assertThat(item.value.readOnly, equalTo("YES"));
+			assertThat(item.value.version, equalTo(6));
 		}
 	}
 }

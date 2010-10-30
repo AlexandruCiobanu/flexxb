@@ -162,6 +162,10 @@ package com.googlecode.flexxb {
 		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : * {
 			mappingModel.idResolver.beginDocument();
 			mappingModel.collisionDetector.beginDocument();
+			//determine the xml document version
+			if(!version && configuration.autoDetectVersion){
+				version = configuration.versionExtractor.getVersion(xmlData);
+			}
 			var object : Object = core.deserialize(xmlData, objectClass, getFromCache, version);
 			mappingModel.idResolver.endDocument();
 			mappingModel.collisionDetector.endDocument();
