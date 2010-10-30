@@ -15,8 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.interfaces {
-	import com.googlecode.flexxb.interfaces.IIdentifiable;
-
+	
 	/**
 	 * Interface for an object that requires custom serialization/deserialization into/from Xml
 	 * @author aciobanu

@@ -24,18 +24,18 @@ package com.googlecode.flexxb {
 	public interface IDescriptorStore {
 		/**
 		 * Get the namespace defined for an object type
-		 * @param object target instance
+		 * @param item target instance
 		 * @return
 		 *
 		 */
-		function getNamespace(object : Object) : Namespace;
+		function getNamespace(item : Object) : Namespace;
 		/**
 		 * Get the qualified name that defines the object type as specified in the XmlClass annotation assigned to it
-		 * @param object
+		 * @param item
 		 * @return
 		 *
 		 */
-		function getXmlName(object : Object) : QName;
+		function getXmlName(item : Object) : QName;
 		/**
 		 *
 		 * @param ns

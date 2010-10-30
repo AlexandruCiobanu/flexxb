@@ -55,7 +55,7 @@ package com.googlecode.flexxb.annotation.xml {
 		/**
 		 * @private
 		 */
-		protected var _idField : XmlMember;
+		private var _idField : XmlMember;
 		/**
 		 * @private
 		 */
@@ -63,7 +63,7 @@ package com.googlecode.flexxb.annotation.xml {
 		/**
 		 * @private
 		 */
-		protected var _defaultValueField : Annotation;
+		private var _defaultValueField : Annotation;
 		/**
 		 * @private
 		 */

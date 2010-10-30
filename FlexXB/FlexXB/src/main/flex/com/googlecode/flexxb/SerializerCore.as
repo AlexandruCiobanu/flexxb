@@ -51,8 +51,8 @@ package com.googlecode.flexxb {
 				throw new Error("Mapping model must not be null");
 			}
 			this.mappingModel = mappingModel;
-			addEventListener(XmlEvent.PRE_DESERIALIZE, preDeserializeHandler, false, 150, true);
-			addEventListener(XmlEvent.POST_DESERIALIZE, postDeserializeHandler, false, 150, true);
+			addEventListener(XmlEvent.PRE_DESERIALIZE, onPreDeserialize, false, 150, true);
+			addEventListener(XmlEvent.POST_DESERIALIZE, onPostDeserialize, false, 150, true);
 		}
 		
 		public function get configuration() : Configuration{
@@ -344,7 +344,7 @@ package com.googlecode.flexxb {
 		 * @param event
 		 *
 		 */
-		private function preDeserializeHandler(event : XmlEvent) : void {
+		private function onPreDeserialize(event : XmlEvent) : void {
 			if (event.object is IPersistable) {
 				IPersistable(event.object).stopListening();
 			}
@@ -355,7 +355,7 @@ package com.googlecode.flexxb {
 		 * @param event
 		 *
 		 */
-		private function postDeserializeHandler(event : XmlEvent) : void {
+		private function onPostDeserialize(event : XmlEvent) : void {
 			var result : Object = event.object;
 			if (result is IPersistable) {
 				IPersistable(result).commit();

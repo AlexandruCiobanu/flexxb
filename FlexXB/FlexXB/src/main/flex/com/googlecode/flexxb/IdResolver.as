@@ -33,15 +33,15 @@ package com.googlecode.flexxb
 		/**
 		 * 
 		 * @param id
-		 * @param object
+		 * @param item
 		 * 
 		 */		
-		public function bind(id : String, object : Object) : void{
+		public function bind(id : String, item : Object) : void{
 			if(idMap == null){
 				idMap = new Dictionary();
 			}
 			if(!idMap.hasOwnProperty(id)){
-				idMap[id] = object;
+				idMap[id] = item;
 			}
 		}
 		/**

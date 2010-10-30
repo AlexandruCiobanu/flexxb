@@ -60,7 +60,7 @@ package com.googlecode.flexxb.persistence {
 		 *
 		 */
 		public function PersistableObject(listenMode : Boolean = true) {
-			addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, this.valueChanged, false, Number.MAX_VALUE, false);
+			addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, this.onValueChanged, false, Number.MAX_VALUE, false);
 			listen = listenMode;
 		}
 		
@@ -167,7 +167,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public override final function dispatchEvent(event : Event) : Boolean {
 			if (editMode && event is PropertyChangeEvent && event.type == PropertyChangeEvent.PROPERTY_CHANGE) {
-				valueChanged(PropertyChangeEvent(event));
+				onValueChanged(PropertyChangeEvent(event));
 				return true;
 			}
 			return super.dispatchEvent(event);
@@ -291,7 +291,7 @@ package com.googlecode.flexxb.persistence {
 			listen = true;
 		}
 
-		private function valueChanged(event : PropertyChangeEvent) : void {
+		private function onValueChanged(event : PropertyChangeEvent) : void {
 			if (listen) {
 				var name : String = event.property as String;
 				if(isExcluded(name)){
