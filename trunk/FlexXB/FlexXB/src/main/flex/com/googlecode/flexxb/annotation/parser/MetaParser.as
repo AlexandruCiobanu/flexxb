@@ -85,7 +85,7 @@ package com.googlecode.flexxb.annotation.parser
 					continue;
 				}
 				if(AnnotationFactory.instance.isMemberAnnotation(descriptor.metadataName)){
-					throw new DescriptorParsingError(type, "", "Member type metadata found on class level. You should only define class and global metadatas at class level");
+					throw new DescriptorParsingError(type, "", "Member type metadata found on class level. You should only define class and global metadatas at class level. Class metadata representant must implement IClassAnnotation; Global metadata representant must implement IGlobalAnnotation");
 				}
 				descriptor.fieldName = name;
 				descriptor.fieldType = type;
@@ -167,7 +167,7 @@ package com.googlecode.flexxb.annotation.parser
 				descriptor = parseMetadata(meta);
 				if(descriptor){
 					if(!AnnotationFactory.instance.isMemberAnnotation(descriptor.metadataName)){
-						throw new DescriptorParsingError(type, "", "Non-Member type metadata found on field level. You should only define class and global metadatas at class level");
+						throw new DescriptorParsingError(type, "", "Non-Member type metadata found on field level. You should only define class and global metadatas at class level. The member metadata must implement IMemberAnnotation.");
 					}
 					descriptor.fieldName = name;
 					descriptor.fieldType = type;
