@@ -87,7 +87,7 @@ package com.googlecode.flexxb.serializer {
 }  
 }}}
 
-You can also extend existing serializers and provide additional features to them. A good starting place is {{{com.googlecode.flexxb.serializer.MemberSerializer}}}, the base for AttributeSerializer, ElementSerializer, ArraySerializer. You may override the regular public methods defined by ISerializer or the two protected methods, inorder to still benefit from the features MemberSerializer brings (such as virtual paths): 
+You can also extend existing serializers and provide additional features to them. A good starting place is {{{com.googlecode.flexxb.serializer.MemberSerializer}}}, the base for `AttributeSerializer`, `ElementSerializer`, `ArraySerializer`. You may override the regular public methods defined by ISerializer or the two protected methods, inorder to still benefit from the features `MemberSerializer` brings (such as virtual paths): 
 {{{
 protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void
 protected function deserializeObject(xmlData : XML, xmlName : QName, annotation : XmlMember, serializer : SerializerCore) : Object;  
@@ -95,7 +95,135 @@ protected function deserializeObject(xmlData : XML, xmlName : QName, annotation 
 
 == Model object interfaces ==
 
-TODO
+There are four main interfaces objects can implement in order to impose a specific behavior of the engine: IXmlSerializable, ISerializeNotifiable, IDeserializeNotifiable and ICycleRecoverable. All these interfaces are located in the com.googlecode.flexxb.interfaces.
+
+=== 1. {{{com.googlecode.flexxb.interfaces.IXmlSerializable}}} ===
+
+You use this interface if your object requires teh serialization/deserialization process be handled in a customized manner. This way the object itself will handle its own parsing/rendering.
+
+{{{
+/**           
+* Interface for an object that requires custom serialization/deserialization into/from Xml
+* @author aciobanu
+*
+*
+*/          
+public interface IXmlSerializable extends IIdentifiable {
+{
+         /**          
+          * Serialize current object into Xml        
+          */     
+          function toXml() : XML;     
+         /**          
+          * Deserialize this object from one of it's possible XML representation.         
+          * @param xmlData xml data source       
+          */        
+          function fromXml(xmlData : XML) : Object;       
+         /**     
+          *        
+          * @param xmldata        
+          * @return          
+          *         
+          */        
+          function getIdValue(xmldata : XML) : String;
+}  
+}}}
+The {{{getIdValue}}} method is used in case your object is identifiable by an id, and allows the extraction of the id value that is used in case you have object caching enabled. With the obtained id, the engine can look into the cache for an instance associated to that id and get that instance instead of creating a new object.
+
+=== 2. {{{com.googlecode.flexxb.interfaces.ISerializeNotifiable}}} ===
+
+{{{
+/**
+ * Optional interface to be implemented by objects which need specific
+ * notification on the serialization process.<br> 
+ * If the current object to be serialized implements this interface, the
+ * engine will call the methods implemented on each process step (pre and 
+ * post serialize) instead of firing an XmlEvent on the engine instance for
+ * each step. <br>
+ * Implementing this interface overrides the normal event dispatching in the 
+ * engine.   
+ * @author Alexutz
+ * 
+ */	
+public interface ISerializeNotifiable
+{
+	/**
+	 * Called before the serialization process of the current object begins.
+	 * @param parent
+	 * @param xmlData
+	 * 
+	 */				
+	function onPreSerialize(parent : Object, xmlData : XML) : void;
+	/**
+	 * Called after the serialization process of the current object ends.
+	 * @param parent
+	 * @param xmlData
+	 *  
+	 */		
+	function onPostSerialize(parent : Object, xmlData : XML) : void;
+}
+}}}
+
+=== 3. {{{com.googlecode.flexxb.interfaces.IDeserializeNotifiable }}} ===
+
+{{{
+/**
+ * Optional interface to be implemented by objects which need specific
+ * notification on the deserialization process.<br> 
+ * If the current object to be serialized implements this interface, the
+ * engine will call the methods implemented on each process step (pre and 
+ * post deserialize) instead of firing an XmlEvent on the engine instance for
+ * each step. <br>
+ * Implementing this interface overrides the normal event dispatching in the 
+ * engine.   
+ * @author Alexutz
+ * 
+ */	
+public interface IDeserializeNotifiable
+{
+	/**
+	 * Called before the deserialization process of the current object begins.
+	 * @param parent
+	 * @param xmlData
+	 * 
+	 */		
+	function onPreDeserialize(parent : Object, xmlData : XML) : void;
+	/**
+	 * Called after the deserialization process of the current object ends.
+	 * @param parent
+	 * @param xmlData
+	 * 
+	 */	
+	function onPostDeserialize(parent : Object, xmlData : XML) : void;
+}
+}}}
+
+=== 4. {{{com.googlecode.flexxb.interfaces.ICycleRecoverable}}} ===
+
+{{{
+/**
+ * Optional interface that can be implemented by FlexXB bound objects to handle 
+ * cycles in the object graph.
+ * <p/>Normally a cycle in the object graph causes the engine to throw an error.
+ * This is not always a desired behavior.Implementing this interface allows the 
+ * user application to change this behavior.
+ * 
+ * @author Alexutz
+ * 
+ */	
+public interface ICycleRecoverable
+{
+	/**
+	 * Called when a cycle is detected by the engine to nominate a new
+	 * object to be serialized instead.
+	 * @param parentCaller reference to the parent object referencing the current ne 
+	 * @return the object to be serialized instead of <code>this</code> or null to 
+	 * instruct the engine to behave as if the object does not implement this interface. 
+	 * 
+	 */			
+	function onCycleDetected(parentCaller : Object) : Object;
+}
+}}}
 
 
 = Samples =
