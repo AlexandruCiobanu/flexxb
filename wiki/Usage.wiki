@@ -51,7 +51,47 @@ TODO
 
 == Creating custom serializers ==
 
-TODO
+To create a custom serializer one should implement the {{{com.googlecode.flexxb.serializer.ISerializer}}} interface. Thus one can provide the logic for serializing objects into xml and deserializing xml into actionScript objects. 
+After creating your serializer you must register it with the FlexXB engine.
+Below you can see the structure of the ISerializer interface, with its two methods, one for serialization, the other for deserialization.
+{{{
+package com.googlecode.flexxb.serializer {
+          import com.googlecode.flexxb.SerializerCore;
+          import com.googlecode.flexxb.annotation.contract.IAnnotation;
+          /**
+           * Interface for an annotation bound xml serializer.
+           * @author aCiobanu
+           *
+           */
+          public interface ISerializer {
+                  /**
+                   * Serialize an object into xml
+                   * @param object Object to be serialized
+                   * @param annotation Annotation containing the conversion parameters
+                   * @param parentXml Parent xml that will enclose the objects xml representation
+                   * @serializer
+                   * @return Generated xml
+                   *
+                   */
+                  function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializerCore) : XML;
+                  /**
+                   * Deserialize an xml into the appropiate AS3 object
+                   * @param xmlData Xml to be deserialized
+                   * @param annotation Annotation containing the conversion parameters
+                   * @serializer
+                   * @return Generated object
+                   *
+                   */
+                  function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializerCore) : Object;
+          }
+}  
+}}}
+
+You can also extend existing serializers and provide additional features to them. A good starting place is {{{com.googlecode.flexxb.serializer.MemberSerializer}}}, the base for AttributeSerializer, ElementSerializer, ArraySerializer. You may override the regular public methods defined by ISerializer or the two protected methods, inorder to still benefit from the features MemberSerializer brings (such as virtual paths): 
+{{{
+protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void
+protected function deserializeObject(xmlData : XML, xmlName : QName, annotation : XmlMember, serializer : SerializerCore) : Object;  
+}}}
 
 == Model object interfaces ==
 
