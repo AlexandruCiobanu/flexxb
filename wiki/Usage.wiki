@@ -132,6 +132,8 @@ The {{{getIdValue}}} method is used in case your object is identifiable by an id
 
 === 2. {{{com.googlecode.flexxb.interfaces.ISerializeNotifiable}}} ===
 
+Implementing this interfaces allows the object to get notified of the stages in which teh serialization process is: Pre-serialize and post-serialize. The FlexXB Engine's default behavior is to dispatch pre/post serialize events as they occur for each object processed. When it encounters an ISerializeNotifiable object, it will call its {{{onPreSerialize}}} and {{{onPostSerialize}}} methods, overriding the default behavior.
+
 {{{
 /**
  * Optional interface to be implemented by objects which need specific
@@ -166,6 +168,7 @@ public interface ISerializeNotifiable
 
 === 3. {{{com.googlecode.flexxb.interfaces.IDeserializeNotifiable }}} ===
 
+Implementing this interfaces allows the object to get notified of the stages in which teh deserialization process is: Pre-deserialize and post-deserialize. The FlexXB Engine's default behavior is to dispatch pre/post deserialize events as they occur for each object processed. When it encounters an IDeserializeNotifiable object, it will call its {{{onPreDeserialize}}} and {{{onPostDeserialize}}} methods, overriding the default behavior.
 {{{
 /**
  * Optional interface to be implemented by objects which need specific
@@ -200,6 +203,7 @@ public interface IDeserializeNotifiable
 
 === 4. {{{com.googlecode.flexxb.interfaces.ICycleRecoverable}}} ===
 
+FlexXB is able to detect and handle object cycles that would otherwise make it go into an infinite loop. One can implement this interface to instruct the engine to turn to the current object causing teh cycle and ask it to provide a replacement for itself, one that would break the cycle.
 {{{
 /**
  * Optional interface that can be implemented by FlexXB bound objects to handle 
