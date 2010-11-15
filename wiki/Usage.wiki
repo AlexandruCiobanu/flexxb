@@ -40,7 +40,23 @@ For XmlArray using the "{{{*}}}" alias will cause the members of the array value
 
 = Extending FlexXB =
 
+FlexXB offers several extension points:
+ * Create a custom serializer
+ * Create a custom annotation along with its own serializer
+ * Implement specialised interfaces in your model objects to modify the engine's behavior on serialization/deserialization.
+
+== Creating custom annotations ==
+
 TODO
+
+== Creating custom serializers ==
+
+TODO
+
+== Model object interfaces ==
+
+TODO
+
 
 = Samples =
 
