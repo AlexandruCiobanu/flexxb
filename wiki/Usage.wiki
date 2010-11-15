@@ -38,9 +38,11 @@ There are four annotations defined:
 field using an alias computed at runtime by the runtime type of the field's value, except for XmlArray.
 For XmlArray using the "{{{*}}}" alias will cause the members of the array value to be rendered as children of the owner object xml rather than children of an xml element specifying the array.
 
-== Extending FlexXB ==
+= Extending FlexXB =
 
 TODO
+
+= Samples =
 
 == Annotation samples ==
 
