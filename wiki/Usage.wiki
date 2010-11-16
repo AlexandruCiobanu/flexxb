@@ -14,6 +14,16 @@ To register a custom annotation, subclass of {{{com.googlecode.serializer.flexxb
 To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the xml representation and viceversa:<br/>
 {{{com.googlecode.serializer.flexxb.FlexXBEngine.registerSimpleTypeConverter(converterInstance, overrideExisting)}}}
 
+To enable/diable object caching:
+{{{
+//disable
+com.googlecode.serializer.flexxb.FlexXBEngine.configuration.cacheProvider = null;
+//enable
+com.googlecode.serializer.flexxb.FlexXBEngine.configuration.cacheProvider = new com.googlecode.flexxb.cache.ObjectCache();
+   //or
+com.googlecode.serializer.flexxb.FlexXBEngine.configuration.cacheProvider = new com.googlecode.flexxb.cache.ObjectPool();
+}}}
+
 In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to add annotations:
 {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)}}}
 
@@ -26,13 +36,13 @@ To provide an API descriptor file content in which the class descriptors are dep
 
 There are four annotations defined:
 
- XmlClass {{{[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false")] }}}
+ XmlClass {{{[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false", version="versionValue")] }}}
 
- XmlAttribute {{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="orderIndex")]}}}
+ XmlAttribute {{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="orderIndex", version="versionValue")]}}}
 
- XmlElement {{{[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="orderIndex")]}}} 
+ XmlElement {{{[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="orderIndex", version="versionValue")]}}} 
 
- XmlArray {{{[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="orderIndex")]}}}
+ XmlArray {{{[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="orderIndex", version="versionValue")]}}}
 
 *Note*: Using as alias "{{{*}}}" on a field will force the serializer to serialize that 
 field using an alias computed at runtime by the runtime type of the field's value, except for XmlArray.
@@ -47,7 +57,7 @@ FlexXB offers several extension points:
 
 == Creating custom annotations ==
 
-TODO
+
 
 == Creating custom serializers ==
 
