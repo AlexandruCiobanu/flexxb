@@ -15,7 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.annotation.xml.XmlClass;
+	import com.googlecode.flexxb.xml.annotation.XmlClass;
 
 	/**
 	 * This interface defines the api structure and access points

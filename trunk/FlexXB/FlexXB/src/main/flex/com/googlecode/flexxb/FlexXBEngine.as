@@ -16,67 +16,29 @@
  */
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
-	import com.googlecode.flexxb.annotation.contract.Constants;
-	import com.googlecode.flexxb.annotation.contract.ConstructorArgument;
-	import com.googlecode.flexxb.annotation.xml.XmlArray;
-	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
-	import com.googlecode.flexxb.annotation.xml.XmlClass;
-	import com.googlecode.flexxb.annotation.xml.XmlConstants;
-	import com.googlecode.flexxb.annotation.xml.XmlElement;
-	import com.googlecode.flexxb.annotation.xml.XmlNamespace;
 	import com.googlecode.flexxb.api.IFlexXBApi;
-	import com.googlecode.flexxb.converter.ClassTypeConverter;
 	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.converter.XmlConverter;
-	import com.googlecode.flexxb.serializer.XmlArraySerializer;
-	import com.googlecode.flexxb.serializer.XmlAttributeSerializer;
-	import com.googlecode.flexxb.serializer.XmlClassSerializer;
-	import com.googlecode.flexxb.serializer.XmlElementSerializer;
-	import com.googlecode.flexxb.util.log.ILogger;
-	import com.googlecode.flexxb.util.log.LogFactory;
+	import com.googlecode.flexxb.core.Configuration;
+	import com.googlecode.flexxb.core.IFlexXB;
+	import com.googlecode.flexxb.xml.XmlConfiguration;
 	
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 
 	/**
-	 * Triggers prior to the serialization of an object into XML
-	 */
-	[Event(name="preserialize", type="com.googlecode.flexxb.XmlEvent")]
-	/**
-	 * Triggers after the serialization of an AS3 object into XML
-	 */
-	[Event(name="postserialize", type="com.googlecode.flexxb.XmlEvent")]
-	/**
-	 * Triggers prior to the deserialization of a XML into an AS3 object
-	 */
-	[Event(name="predeserialize", type="com.googlecode.flexxb.XmlEvent")]
-	/**
-	 * Triggers after the deserialization of a XML into an AS3 object
-	 */
-	[Event(name="postdeserialize", type="com.googlecode.flexxb.XmlEvent")]
-	/**
 	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration.
-	 * The main access point consist of two methods: <code>serialize()</code> and <code>deserialize</code>, each corresponding to the specific stage in the conversion process.
-	 * By default it registeres the built-in annotations at startup.
-	 * <p>Built-in anotation usage:
-	 *  <ul>
-	 *  <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", 
-	 *                        uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></li>
-	 *  <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
-	 *  <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", 
-	 *                     serializePartialElement="true|false")]</code></li>
-	 *  <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", 
-	 *                   serializePartialElement="true|false")]</code></li>
-	 *  </ul></p>
-	 * <p>Make sure you add the following switches to your compiler settings:
-	 * <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code></p>
+	 * The main access point consist of two methods: <code>serialize()</code> and 
+	 * <code>deserialize</code>, each corresponding to the specific stage in the 
+	 * conversion process.
 	 * @author aCiobanu
-	 *
+	 * @deprecated This class now only points to the xml serialization mechanism, for
+	 * backwards compatibility reasons. You may keep using it if you only need the xml
+	 * processing.
 	 */
-	public final class FlexXBEngine implements IEventDispatcher {
+	public final class FlexXBEngine {
 		private static var _instance : FlexXBEngine;
 		
-		private static const LOG : ILogger = LogFactory.getLog(FlexXBEngine);
+		private static var staticAccess : Boolean;
 
 		/**
 		 * Not a singleton, but an easy access instance.
@@ -85,33 +47,26 @@ package com.googlecode.flexxb {
 		 */
 		public static function get instance() : FlexXBEngine {
 			if (!_instance) {
+				staticAccess = true;
 				_instance = new FlexXBEngine();
+				staticAccess = false;
+				_instance.v2Engine = com.googlecode.flexxb.core.FxBEngine.instance;
 			}
 			return _instance;
 		}
 		
-		private var mappingModel : MappingModel;
+		private var v2Engine : com.googlecode.flexxb.core.FxBEngine;
 		
-		private var core : SerializerCore;
-
-		private var _api : IFlexXBApi;
-
+		private var _xmlSerializer : IFlexXB;
+		
 		/**
 		 * Constructor
 		 *
 		 */
 		public function FlexXBEngine() {
-			mappingModel = new MappingModel();
-			core = new SerializerCore(mappingModel);
-			registerSimpleTypeConverter(new ClassTypeConverter());
-			registerSimpleTypeConverter(new XmlConverter());
-			
-			registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
-			registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
-			registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
-			registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
-			registerAnnotation(XmlConstants.ANNOTATION_NAMESPACE, XmlNamespace, null);
-			registerAnnotation(Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT, ConstructorArgument, null);
+			if(!staticAccess){
+				v2Engine = new com.googlecode.flexxb.core.FxBEngine();
+			}
 		}
 
 		/**
@@ -119,8 +74,8 @@ package com.googlecode.flexxb {
 		 * @return instance of type <code>com.googlecode.flexxb.Configuration</code>
 		 *
 		 */
-		public function get configuration() : Configuration {
-			return mappingModel.configuration;
+		public function get configuration() : XmlConfiguration {
+			return xmlSerializer.configuration as XmlConfiguration;
 		}
 
 		/**
@@ -129,10 +84,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function get api() : IFlexXBApi {
-			if (!_api) {
-				_api = new FlexXBApi(this, mappingModel.descriptorStore);
-			}
-			return _api;
+			return v2Engine.api;
 		}
 
 		/**
@@ -144,10 +96,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function serialize(object : Object, partial : Boolean = false, version : String = "") : XML {
-			mappingModel.collisionDetector.beginDocument();
-			var xml : XML = core.serialize(object, partial, version);
-			mappingModel.collisionDetector.endDocument();
-			return xml;
+			return xmlSerializer.serialize(object, partial, version) as XML;
 		}
 
 		/**
@@ -160,16 +109,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : * {
-			mappingModel.idResolver.beginDocument();
-			mappingModel.collisionDetector.beginDocument();
-			//determine the xml document version
-			if(!version && configuration.autoDetectVersion){
-				version = configuration.versionExtractor.getVersion(xmlData);
-			}
-			var object : Object = core.deserialize(xmlData, objectClass, getFromCache, version);
-			mappingModel.idResolver.endDocument();
-			mappingModel.collisionDetector.endDocument();
-			return object;
+			return xmlSerializer.deserialize(xmlData, objectClass, getFromCache, version);
 		}
 
 		/**
@@ -179,18 +119,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public final function processTypes(... args) : void {
-			if (args && args.length > 0) {
-				for each (var item : Object in args) {
-					if (item is Class) {
-						if(configuration.enableLogging){
-							LOG.info("Processing class {0}", item);
-						}
-						mappingModel.descriptorStore.getDescriptor(item);
-					}else if(configuration.enableLogging){
-						LOG.info("Excluded from processing because it is not a class: {0}", item);
-					}
-				}
-			}
+			xmlSerializer.processTypes.apply(_xmlSerializer, args);
 		}
 
 		/**
@@ -202,35 +131,26 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public function registerSimpleTypeConverter(converter : IConverter, overrideExisting : Boolean = false) : Boolean {
-			return mappingModel.converterStore.registerSimpleTypeConverter(converter, overrideExisting);
+			return xmlSerializer.context.registerSimpleTypeConverter(converter, overrideExisting);
 		}
-
-		/**
-		 * @see AnnotationFactory#registerAnnotation()
-		 *
-		 */
+		
 		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
-			AnnotationFactory.instance.registerAnnotation(name, annotationClazz, serializer, overrideExisting);
+			return xmlSerializer.context.registerAnnotation(name, annotationClazz, serializer, overrideExisting);
 		}
 		
 		public function addEventListener(type : String, listener : Function, useCapture : Boolean = false, priority : int = 0, useWeakReference : Boolean = false) : void {
-			core.addEventListener(type, listener, useCapture, priority, useWeakReference);
+			xmlSerializer.addEventListener(type, listener, priority, useWeakReference);
 		}
 		
 		public function removeEventListener(type : String, listener : Function, useCapture : Boolean = false) : void {
-			core.removeEventListener(type, listener, useCapture);
+			xmlSerializer.removeEventListener(type, listener);
 		}
 		
-		public function dispatchEvent(event : Event) : Boolean {
-			return false;
-		}
-		
-		public function hasEventListener(type : String) : Boolean {
-			return false;
-		}
-		
-		public function willTrigger(type : String) : Boolean {
-			return false;
+		private function get xmlSerializer() : IFlexXB{
+			if(!_xmlSerializer){
+				_xmlSerializer = v2Engine.getXmlSerializer();
+			}
+			return _xmlSerializer;
 		}
 	}
 }

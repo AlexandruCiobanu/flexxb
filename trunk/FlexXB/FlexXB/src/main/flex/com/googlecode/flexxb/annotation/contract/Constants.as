@@ -18,7 +18,7 @@ package com.googlecode.flexxb.annotation.contract
 {
 	/**
 	 * 
-	 * @author User
+	 * @author Alexutz
 	 * 
 	 */	
 	public class Constants

@@ -16,8 +16,9 @@
  */
 package com.googlecode.flexxb.annotation
 {
-	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.testData.DefaultValueTestObj;
+	
 	import org.flexunit.Assert;
 	
 	public class DefaultValueTest
@@ -29,7 +30,7 @@ package com.googlecode.flexxb.annotation
 				<DefaultValueTestObj>
 					<min>3</min>
 				</DefaultValueTestObj>;
-			v = FlexXBEngine.instance.deserialize(xml, DefaultValueTestObj);
+			v = FxBEngine.instance.getXmlSerializer().deserialize(xml, DefaultValueTestObj);
 			Assert.assertEquals("String field wrong", "MyValue", v.string);
 			Assert.assertEquals("min field wrong", 3, v.min);
 			Assert.assertEquals("max field wrong", 5, v.max);

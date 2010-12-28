@@ -15,7 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.converter {
-	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.core.FxBEngine;
 
 	/**
 	 * Date converter conforming to the W3C standard

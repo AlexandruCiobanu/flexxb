@@ -18,7 +18,7 @@ package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
-	import com.googlecode.flexxb.serializer.ISerializer;
+	import com.googlecode.flexxb.serializer.BaseSerializer;
 	
 	import flash.utils.Dictionary;
 
@@ -118,7 +118,7 @@ package com.googlecode.flexxb.annotation {
 		 */
 		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
 			if (overrideExisting || !annotationMap[name]) {
-				annotationMap[name] = new MetaStore(annotationClazz, serializer);
+				annotationMap[name] = new MetaStore(annotationClazz, serializer, null);
 			}
 		}
 
@@ -128,9 +128,9 @@ package com.googlecode.flexxb.annotation {
 		 * @return the serializer object or null if the annotation name is not registered
 		 *
 		 */
-		public function getSerializer(annotation : IAnnotation) : ISerializer {
+		public function getSerializer(annotation : IAnnotation) : BaseSerializer {
 			if (annotation && annotationMap[annotation.annotationName]) {
-				return  MetaStore(annotationMap[annotation.annotationName]).serializer as ISerializer;
+				return  MetaStore(annotationMap[annotation.annotationName]).serializer as BaseSerializer;
 			}
 			return null;
 		}
@@ -170,14 +170,16 @@ package com.googlecode.flexxb.annotation {
 		}
 	}
 }
-import com.googlecode.flexxb.serializer.ISerializer;
+import com.googlecode.flexxb.core.DescriptionContext;
+import com.googlecode.flexxb.serializer.BaseSerializer;
+
 import mx.utils.DescribeTypeCache;
 
 final class MetaStore{
 	
 	public var annotation : Class;
 	
-	public var serializer : ISerializer;
+	public var serializer : BaseSerializer;
 	
 	private var _isClass : Boolean;
 	
@@ -185,10 +187,10 @@ final class MetaStore{
 	
 	private var _isMember : Boolean;
 	
-	public function MetaStore(annotation : Class, serializerClass : Class){
+	public function MetaStore(annotation : Class, serializerClass : Class, context : DescriptionContext){
 		this.annotation = annotation;
 		if(serializerClass){
-			this.serializer = new serializerClass() as ISerializer;
+			this.serializer = new serializerClass(context) as BaseSerializer;
 		}
 		var xml : XML = DescribeTypeCache.describeType(annotation).typeDescription;
 		if(xml.factory.length() > 0){
