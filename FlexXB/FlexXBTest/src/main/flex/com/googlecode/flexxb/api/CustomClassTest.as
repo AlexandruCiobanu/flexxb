@@ -16,7 +16,7 @@
  */
 package com.googlecode.flexxb.api
 {
-	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.core.FxBEngine;
 	
 	import flash.net.registerClassAlias;
 	
@@ -39,7 +39,7 @@ package com.googlecode.flexxb.api
 			        </Class>
 				</Descriptors>
 				</FlexXBAPI>;
-			var engine : FlexXBEngine = new FlexXBEngine();
+			var engine : FxBEngine = new FxBEngine();
 			engine.api.processDescriptorsFromXml(xml);
 			var pipe : PipeLine = new PipeLine();
 			pipe.name = "test";
@@ -52,7 +52,7 @@ package com.googlecode.flexxb.api
 			panel.x = 2;
 			panel.y = 2;
 			pipe.panels.push(panel);
-			xml = engine.serialize(pipe);
+			xml = engine.getXmlSerializer().serialize(pipe) as XML;
 		}		
 	}
 }

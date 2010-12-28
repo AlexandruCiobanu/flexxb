@@ -15,10 +15,10 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
-	import com.googlecode.flexxb.annotation.xml.Annotation;
-	import com.googlecode.flexxb.annotation.xml.XmlArray;
+	import com.googlecode.flexxb.xml.annotation.Annotation;
+	import com.googlecode.flexxb.xml.annotation.XmlArray;
 	import com.googlecode.testData.List;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.VectoredElement;

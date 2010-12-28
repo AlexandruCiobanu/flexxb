@@ -78,7 +78,6 @@ package com.googlecode.flexxb.annotation.parser
 			var metas : XMLList = xml.metadata;
 			var descriptors : Array = [];
 			var descriptor : MetaDescriptor;
-			var classesFound : Boolean;
 			for each(var meta : XML in metas){
 				descriptor = parseMetadata(meta);
 				if(!descriptor){
@@ -99,18 +98,9 @@ package com.googlecode.flexxb.annotation.parser
 					throw new DescriptorParsingError(type, "", "Two class type metadatas found with the same version (" + descriptor.version + ")");
 				}
 				classMap[descriptor.version] = descriptor;
-				classesFound = true;
 			}
 			var owner : ClassMetaDescriptor;
-			//Let's specify the default class annotation if none is explicitly stated 
-			if(!classesFound){
-				owner = new ClassMetaDescriptor();
-				//TODO is this a hack???
-				owner.metadataName = "XmlClass";
-				owner.fieldName = name;
-				owner.fieldType = type;
-				classMap[owner.version] = owner;
-			}
+			
 			//we need to assign the global descriptors to their proper class annotations
 			for each(descriptor in descriptors){
 				owner = classMap[descriptor.version];

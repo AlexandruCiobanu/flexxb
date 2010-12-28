@@ -15,9 +15,9 @@
  *   limitations under the License.
  */
 package com.googlecode.testData {
-	import com.googlecode.flexxb.interfaces.IXmlSerializable;
+	import com.googlecode.flexxb.interfaces.ISerializable;
 
-	public class CustomSerializabeObject implements IXmlSerializable {
+	public class CustomSerializabeObject implements ISerializable {
 		public var test : String;
 
 		public function CustomSerializabeObject() {

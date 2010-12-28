@@ -18,13 +18,12 @@
 package com.googlecode.flexxb
 {
 	import com.googlecode.flexxb.api.FxClass;
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.testData.Company;
 	import com.googlecode.testData.Department;
 	import com.googlecode.testData.DepartmentEmployee;
 	
 	import flash.events.Event;
-	
-	import flashx.textLayout.debug.assert;
 	
 	import org.flexunit.assertThat;
 	import org.hamcrest.object.equalTo;
@@ -55,7 +54,7 @@ package com.googlecode.flexxb
 			employee.department = department;
 			department.employees.push(employee);
 			department.addEventListener(Department.CYCLE_DETECTED, onCycleDetected);
-			var xml : XML = new FlexXBEngine().serialize(department);
+			var xml : XML = new FxBEngine().getXmlSerializer().serialize(department) as XML;
 			assertThat(cycleDetectedCount, equalTo(2));
 		}
 		
@@ -92,13 +91,13 @@ package com.googlecode.flexxb
 			employee.department = department;
 			company.employees.push(employee);
 			
-			var engine : FlexXBEngine = new FlexXBEngine();
+			var engine : FxBEngine = new FxBEngine();
 			var clasz : FxClass = new FxClass(DepartmentEmployee);
 			clasz.addAttribute("name", String);
 			clasz.addElement("department", Department).idref = true;
 			engine.api.processTypeDescriptor(clasz);
-			var xml : XML = engine.serialize(company);
-			var clone : Company = engine.deserialize(xml);
+			var xml : XML = engine.getXmlSerializer().serialize(company) as XML;
+			var clone : Company = engine.getXmlSerializer().deserialize(xml);
 			
 			assertThat(clone.departments.length, equalTo(2));
 			assertThat(clone.employees.length, equalTo(3));

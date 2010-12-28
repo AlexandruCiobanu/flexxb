@@ -17,8 +17,8 @@
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.contract.Stage;
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
-	import com.googlecode.flexxb.annotation.xml.Annotation;
-	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
+	import com.googlecode.flexxb.xml.annotation.Annotation;
+	import com.googlecode.flexxb.xml.annotation.XmlAttribute;
 	
 	import org.flexunit.Assert;
 

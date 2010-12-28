@@ -17,6 +17,7 @@
  */
 package com.googlecode.flexxb
 {
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.testData.Node;
 	
 	import org.flexunit.assertThat;
@@ -31,7 +32,7 @@ package com.googlecode.flexxb
 		[Test]
 		public function doInternalNamespaceTest() : void{
 			var node : Node = new Node();
-			var xml : XML = FlexXBEngine.instance.serialize(node);
+			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(node) as XML;
 			namespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
 			assertThat(xml.@xsi::type, equalTo("xml"));
 		}

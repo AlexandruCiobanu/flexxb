@@ -15,9 +15,9 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.annotation.xml.Annotation;
-	import com.googlecode.flexxb.annotation.xml.XmlConstants;
-	import com.googlecode.flexxb.annotation.xml.XmlMember;
+	import com.googlecode.flexxb.xml.annotation.Annotation;
+	import com.googlecode.flexxb.xml.annotation.XmlConstants;
+	import com.googlecode.flexxb.xml.annotation.XmlMember;
 	import com.googlecode.flexxb.error.ApiError;
 	
 	import flash.errors.MemoryError;

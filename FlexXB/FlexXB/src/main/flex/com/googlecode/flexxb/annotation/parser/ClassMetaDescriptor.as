@@ -20,7 +20,7 @@ package com.googlecode.flexxb.annotation.parser
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
 	/**
 	 * @private 
-	 * @author User
+	 * @author Alexutz
 	 * 
 	 */	
 	public final class ClassMetaDescriptor extends MetaDescriptor

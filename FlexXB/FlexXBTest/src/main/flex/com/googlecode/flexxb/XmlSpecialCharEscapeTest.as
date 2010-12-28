@@ -15,8 +15,11 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb {
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.testData.NameOrdered;
+	
 	import org.flexunit.Assert;
+
 	/**
 	 *
 	 * @author Alexutz
@@ -31,7 +34,7 @@ package com.googlecode.flexxb {
 			target.test3 = "EscapeChar2 <b>OK</b>";
 			target.reference = "<test </meeee>";
 			target.list = ["Alt escape test <juice />", "nik", "test4<", "<test5>"];
-			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(target) as XML;
 			Assert.assertEquals("Escape Char element is wrong", "EscapeChar <b>OK</b>", (xml.test2[0] as XML).children()[0]);
 			Assert.assertEquals("Escape Char 2 element is wrong", "EscapeChar2 <b>OK</b>", xml.@test3);
 			Assert.assertEquals("Reference has wrong escape chars", "<test </meeee>", (xml.reference[0] as XML).children()[0]);

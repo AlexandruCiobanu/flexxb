@@ -15,8 +15,10 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb {
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock3;
+	
 	import org.flexunit.Assert;
 
 	/**
@@ -33,7 +35,7 @@ package com.googlecode.flexxb {
 			target.link = new Mock3();
 			target.link.id = 325;
 			target.link.version = 2;
-			var xml : XML = FlexXBEngine.instance.serialize(target);
+			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(target) as XML;
 			var mk3 : XML = xml.child(new QName(new Namespace("http://www.test.com/xmlns/pp/v1"), "mock3"))[0];
 			Assert.assertTrue(mk3.length() > 0);
 			Assert.assertEquals("Link id is wrong", "325", mk3.@id);

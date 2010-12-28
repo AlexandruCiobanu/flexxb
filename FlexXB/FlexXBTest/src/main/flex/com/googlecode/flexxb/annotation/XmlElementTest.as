@@ -16,8 +16,8 @@
  */
 package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
-	import com.googlecode.flexxb.annotation.xml.Annotation;
-	import com.googlecode.flexxb.annotation.xml.XmlElement;
+	import com.googlecode.flexxb.xml.annotation.Annotation;
+	import com.googlecode.flexxb.xml.annotation.XmlElement;
 	import com.googlecode.testData.Mock3;
 	
 	import org.flexunit.Assert;

@@ -15,7 +15,8 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.cache {
-	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.core.FxBEngine;
+	import com.googlecode.flexxb.core.IFlexXB;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock3;
 	import com.googlecode.testData.Mock4;
@@ -32,13 +33,13 @@ package com.googlecode.flexxb.cache {
 		
 		private static var objectCache : ObjectCache;
 		private static var objectPool : ObjectPool;
-		private static var engine : FlexXBEngine;
+		private static var engine : IFlexXB;
 		
 		[BeforeClass]
 		public static function initialize() : void{
 			objectCache = new ObjectCache();
 			objectPool = new ObjectPool();
-			engine = new FlexXBEngine();
+			engine = new FxBEngine().getXmlSerializer();
 		}
 		
 		[Test(order="1")]
@@ -55,7 +56,7 @@ package com.googlecode.flexxb.cache {
 			obj.id = 352;
 			obj.attribute = true;
 			engine.configuration.cacheProvider = objectCache;
-			var xml : XML = engine.serialize(obj);
+			var xml : XML = engine.serialize(obj) as XML;
 			var copy : Mock3 = engine.deserialize(xml, Mock3);
 			Assert.assertEquals(copy.id, obj.id);
 			Assert.assertTrue("Deserialized object not cached", objectCache.isInCache(String(copy.id), Mock3));

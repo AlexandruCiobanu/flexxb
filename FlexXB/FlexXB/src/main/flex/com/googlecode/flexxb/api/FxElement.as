@@ -15,8 +15,8 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.annotation.xml.XmlConstants;
-	import com.googlecode.flexxb.annotation.xml.XmlElement;
+	import com.googlecode.flexxb.xml.annotation.XmlConstants;
+	import com.googlecode.flexxb.xml.annotation.XmlElement;
 	
 	import flash.utils.Dictionary;
 	import com.googlecode.flexxb.annotation.contract.AccessorType;

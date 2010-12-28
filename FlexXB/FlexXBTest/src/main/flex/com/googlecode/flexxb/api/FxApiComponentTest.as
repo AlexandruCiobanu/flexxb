@@ -15,16 +15,16 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.FlexXBEngine;
 	import com.googlecode.flexxb.annotation.contract.AccessorType;
 	import com.googlecode.flexxb.annotation.contract.Stage;
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
-	import com.googlecode.flexxb.annotation.xml.XmlArray;
-	import com.googlecode.flexxb.annotation.xml.XmlAttribute;
-	import com.googlecode.flexxb.annotation.xml.XmlClass;
-	import com.googlecode.flexxb.annotation.xml.XmlElement;
-	import com.googlecode.flexxb.annotation.xml.XmlMember;
 	import com.googlecode.flexxb.converter.W3CDateConverter;
+	import com.googlecode.flexxb.core.FxBEngine;
+	import com.googlecode.flexxb.xml.annotation.XmlArray;
+	import com.googlecode.flexxb.xml.annotation.XmlAttribute;
+	import com.googlecode.flexxb.xml.annotation.XmlClass;
+	import com.googlecode.flexxb.xml.annotation.XmlElement;
+	import com.googlecode.flexxb.xml.annotation.XmlMember;
 	import com.googlecode.testData.APITestObject;
 	import com.googlecode.testData.Address;
 	import com.googlecode.testData.Mock;
@@ -48,7 +48,7 @@ package com.googlecode.flexxb.api {
 			new PhoneNumber();
 			new Person();
 			new Address();
-			FlexXBEngine.instance.api.processTypeDescriptor(null);
+			FxBEngine.instance.api.processTypeDescriptor(null);
 		}
 
 		[Test]
@@ -104,14 +104,14 @@ package com.googlecode.flexxb.api {
 		[Test]
 		public function testSerializationWithApiDescriptor() : void {
 			var cls : FxClass = buildDescriptor();
-			FlexXBEngine.instance.api.processTypeDescriptor(cls);
+			FxBEngine.instance.api.processTypeDescriptor(cls);
 			var person : Person = new Person();
 			person.firstName = "John";
 			person.lastName = "Doe";
 			person.birthDate = new Date();
 			person.age = 34;
-			var xml : XML = FlexXBEngine.instance.serialize(person);
-			var copy : Person = FlexXBEngine.instance.deserialize(xml, Person);
+			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(person) as XML;
+			var copy : Person = FxBEngine.instance.getXmlSerializer().deserialize(xml, Person);
 			Assert.assertEquals("Wrong firstName", person.firstName, copy.firstName);
 			Assert.assertEquals("Wrong lastName", person.lastName, copy.lastName);
 			Assert.assertEquals("Wrong birthDate", person.birthDate.toString(), copy.birthDate.toString());
@@ -121,7 +121,7 @@ package com.googlecode.flexxb.api {
 		[Test]
 		public function testFileDescriptorProcessing() : void {
 			var xml : XML = getXmlDescriptor();
-			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
+			var wrapper : FxApiWrapper = FxBEngine.instance.getXmlSerializer().deserialize(xml, FxApiWrapper);
 			Assert.assertEquals("Wrong number of classes parsed", 3, wrapper.descriptors.length);
 			Assert.assertEquals("Wrong version", 1, wrapper.version);
 			Assert.assertEquals("Wrong member count for first class", 4, FxClass(wrapper.descriptors[0]).flexxb_api_internal::members.length);
@@ -161,13 +161,13 @@ package com.googlecode.flexxb.api {
 			member.setNamespace(new Namespace("me", "www.me.com"));
 			Assert.assertEquals("Wrong number of registered namespaces upon programatic build", 2, count(cls.flexxb_api_internal::namespaces));
 			var xml : XML = getXmlDescriptor();
-			var wrapper : FxApiWrapper = FlexXBEngine.instance.deserialize(xml, FxApiWrapper);
+			var wrapper : FxApiWrapper = FxBEngine.instance.getXmlSerializer().deserialize(xml, FxApiWrapper);
 			Assert.assertEquals("Wrong number of registered namespaces upon deserialization", 2, count(FxClass(wrapper.descriptors[0]).flexxb_api_internal::namespaces));
 		}
 		
 		[Test]
 		public function testFullAPIProcessing() : void{
-			FlexXBEngine.instance.registerSimpleTypeConverter(new W3CDateConverter());
+			FxBEngine.instance.getXmlSerializer().context.registerSimpleTypeConverter(new W3CDateConverter());
 			var cls : FxClass = new FxClass(APITestObject, "ATO");
 			cls.prefix = "apitest";
 			cls.uri = "http://www.apitest.com/api/test";
@@ -184,7 +184,7 @@ package com.googlecode.flexxb.api {
 			var array : FxArray = cls.addArray("results", ArrayCollection, null, "Results");
 			array.memberName = "resultItem";
 			array.memberType = String;
-			FlexXBEngine.instance.api.processTypeDescriptor(cls);
+			FxBEngine.instance.api.processTypeDescriptor(cls);
 			var target : APITestObject = new APITestObject(1234);
 			target.currentDate = new Date();
 			target.name = "MyName";
@@ -192,8 +192,8 @@ package com.googlecode.flexxb.api {
 			target.version = 3;
 			target.xmlAtts = <atts><att index="0"/><att index="1"/><att index="2"/></atts>;
 			target.xmlData = <data id="34"><result value="one"/></data>;
-			var xml : XML = FlexXBEngine.instance.serialize(target);
-			var copy : APITestObject = FlexXBEngine.instance.deserialize(xml, APITestObject);
+			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(target) as XML;
+			var copy : APITestObject = FxBEngine.instance.getXmlSerializer().deserialize(xml, APITestObject);
 			
 			Assert.assertEquals("Id is wrong", target.id, copy.id);
 			Assert.assertEquals("Name is wrong", target.name, copy.name);

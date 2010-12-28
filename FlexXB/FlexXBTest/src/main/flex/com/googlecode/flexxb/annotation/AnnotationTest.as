@@ -15,13 +15,13 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.xml.annotation.Annotation;
 	import com.googlecode.testData.Mock;
 	
 	import flash.utils.describeType;
 	
 	import org.flexunit.Assert;
-	import com.googlecode.flexxb.annotation.xml.Annotation;
+	import com.googlecode.flexxb.xml.annotation.Annotation;
 
 	/**
 	 *

@@ -15,10 +15,10 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
-	import com.googlecode.flexxb.annotation.xml.Annotation;
-	import com.googlecode.flexxb.annotation.xml.XmlClass;
+	import com.googlecode.flexxb.xml.annotation.Annotation;
+	import com.googlecode.flexxb.xml.annotation.XmlClass;
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.Mock;
 	
@@ -32,7 +32,7 @@ package com.googlecode.flexxb.annotation {
 		[Test]
 		public function testConstructorParameters() : void {
 			var target : ConstructorRefObj = new ConstructorRefObj("test", 1, true);
-			FlexXBEngine.instance.serialize(null);
+			FxBEngine.instance.getXmlSerializer().serialize(null);
 			var parser : MetaParser = new MetaParser();
 			var cls : XmlClass = parser.parseDescriptor(describeType(ConstructorRefObj))[0];
 			Assert.assertFalse("Class constructor should not be default", cls.constructor.isDefault());
