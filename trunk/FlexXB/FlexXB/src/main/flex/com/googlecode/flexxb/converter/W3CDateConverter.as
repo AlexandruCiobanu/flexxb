@@ -40,13 +40,14 @@ package com.googlecode.flexxb.converter {
 		 *
 		 * @returns
 		 */
-		public function toString(d : Object) : String {
-			var date : Number = d.getDate();
-			var month : Number = d.getMonth();
-			var hours : Number = d.getHours();
-			var minutes : Number = d.getMinutes();
-			var seconds : Number = d.getSeconds();
-			var milliseconds : Number = d.getMilliseconds();
+		public function toString(obj : Object) : String {
+			var d : Date = obj as Date;
+			var date : Number = d.getUTCDate();
+			var month : Number = d.getUTCMonth();
+			var hours : Number = d.getUTCHours();
+			var minutes : Number = d.getUTCMinutes();
+			var seconds : Number = d.getUTCSeconds();
+			var milliseconds : Number = d.getUTCMilliseconds();
 			var timeOffset : Number = d.getTimezoneOffset();
 			var sb : String = new String();
 

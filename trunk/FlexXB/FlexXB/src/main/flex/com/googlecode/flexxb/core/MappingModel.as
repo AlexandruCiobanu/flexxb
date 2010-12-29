@@ -37,6 +37,8 @@ package com.googlecode.flexxb.core
 		
 		public var idResolver : IdResolver;
 		
+		public var context : DescriptionContext;
+		
 		private var _itemStack : Array;
 		/**
 		 * 
@@ -47,8 +49,6 @@ package com.googlecode.flexxb.core
 			_itemStack = [];
 			collisionDetector = new ElementStack(_itemStack);
 			idResolver = new IdResolver();
-			
-			converterStore = new ConverterStore();
 		}	
 		/**
 		 * 

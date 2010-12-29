@@ -90,7 +90,7 @@ package com.googlecode.flexxb.xml
 		 * @return 
 		 * 
 		 */		
-		public final function getXmlName(object : Object, version : String = "") : QName {
+		public function getXmlName(object : Object, version : String = "") : QName {
 			if (object != null) {
 				var classDescriptor : XmlClass = descriptorStore.getDescriptor(object, version) as XmlClass;
 				if (classDescriptor) {
@@ -118,14 +118,7 @@ package com.googlecode.flexxb.xml
 		 *
 		 */
 		public function getClassByAlias(name : String, version : String = "") : Class {
-			var descriptor : XmlClass;
-			/*for each (var store : ResultStore in descriptorCache) {
-				descriptor = store.getDescriptor(version) as XmlClass;
-				if (descriptor && descriptor.alias == name) {
-					return descriptor.type;
-				}
-			}*/
-			return null;
+			return descriptorStore.getClassReferenceByCriteria("alias", name, version);
 		}
 		
 		/**
@@ -134,7 +127,8 @@ package com.googlecode.flexxb.xml
 		 * @return class
 		 *
 		 */
-		public final function getIncomingType(incomingXML : XML) : Class {
+		public override function getIncomingType(source : Object) : Class {
+			var incomingXML : XML = source as XML;
 			if (incomingXML) {
 				if (XmlConfiguration(configuration).getResponseTypeByTagName) {
 					var tagName : QName = incomingXML.name() as QName;

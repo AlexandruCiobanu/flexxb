@@ -69,6 +69,18 @@ package com.googlecode.flexxb.core
 			}
 		}
 		/**
+		 * Get the object type associated with the incoming serialized form.</br>
+		 * Override this method in subclasses because each serialization format has 
+		 * different ways of determining the type of teh object to be used in 
+		 * deserialization.  
+		 * @param source serialized form
+		 * @return object type
+		 * 
+		 */		
+		public function getIncomingType(source : Object) : Class{
+			return null;
+		}
+		/**
 		 * 
 		 * @param descriptors
 		 * 
@@ -107,7 +119,7 @@ package com.googlecode.flexxb.core
 		 * 
 		 */		
 		public final function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
-			AnnotationFactory.instance.registerAnnotation(name, annotationClazz, serializer, overrideExisting);
+			AnnotationFactory.instance.registerAnnotation(name, annotationClazz, serializer, this, overrideExisting);
 		}
 	}
 }

@@ -32,6 +32,9 @@ package com.googlecode.flexxb.annotation.parser
 	 */	
 	public final class MetaParser
 	{
+		
+		private var name : QName;
+		private var type : Class;
 		/**
 		 * Constructor 
 		 * 
@@ -54,10 +57,10 @@ package com.googlecode.flexxb.annotation.parser
 			processClassDescriptors(xmlDescriptor, classes);
 			var field : XML;
 			for each (field in xmlDescriptor..variable) {
-				processMemberDescriptors(field, classes);
+				processMemberDescriptors(field, classes, name, type);
 			}
 			for each (field in xmlDescriptor..accessor) {
-				processMemberDescriptors(field, classes);
+				processMemberDescriptors(field, classes, name, type);
 			}
 			var result : Array = [];
 			var descriptor : ClassMetaDescriptor;
@@ -65,6 +68,8 @@ package com.googlecode.flexxb.annotation.parser
 				descriptor = classes[key];
 				result.push(AnnotationFactory.instance.getAnnotation(descriptor, null));
 			}
+			name = null;
+			type = null;
 			return result;
 		}
 		
@@ -73,8 +78,8 @@ package com.googlecode.flexxb.annotation.parser
 			if (!classType) {
 				classType = xml.@name;
 			}
-			var name : QName = new QName(null, classType.substring(classType.lastIndexOf(":") + 1));
-			var type : Class = getDefinitionByName(classType) as Class;
+			name = new QName(null, classType.substring(classType.lastIndexOf(":") + 1));
+			type = getDefinitionByName(classType) as Class;
 			var metas : XMLList = xml.metadata;
 			var descriptors : Array = [];
 			var descriptor : MetaDescriptor;
@@ -112,15 +117,23 @@ package com.googlecode.flexxb.annotation.parser
 			}			
 		}
 		
-		private function processMemberDescriptors(field : XML, classMap : Object) : void{
+		private function processMemberDescriptors(field : XML, classMap : Object, className : QName, classType : Class) : void{
 			var descriptors : Array = parseField(field);
 			var owner : ClassMetaDescriptor;
+			var ownerName : String;
 			for each(var meta : MetaDescriptor in descriptors){
 				owner = classMap[meta.version];
+				if(owner == null && (ownerName = getOwnerName(meta))){
+					owner = new ClassMetaDescriptor();
+					owner.metadataName = ownerName;
+					owner.fieldType = classType;
+					owner.fieldName = className;
+					classMap[meta.version] = owner;
+				}
 				if(owner){
 					owner.members.push(meta);
 				}else{
-					throw new DescriptorParsingError(owner.fieldType, meta.fieldName.localName, "Could not find a class annotation with the version" + meta.version);
+					throw new DescriptorParsingError(classType, meta.fieldName.localName, "Could not find a class annotation with the version" + meta.version);
 				}
 			}
 		}
@@ -166,6 +179,10 @@ package com.googlecode.flexxb.annotation.parser
 				}
 			}
 			return descriptors;
+		}
+		
+		private function getOwnerName(meta : MetaDescriptor) : String{
+			return AnnotationFactory.instance.getClassAnnotationName(meta.metadataName);
 		}
 	}
 }

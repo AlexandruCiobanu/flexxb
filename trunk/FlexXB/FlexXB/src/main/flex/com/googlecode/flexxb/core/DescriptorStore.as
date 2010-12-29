@@ -36,18 +36,21 @@ package com.googlecode.flexxb.core {
 		private var classNamespaceMap : Dictionary;
 		
 		private var parser : MetaParser = new MetaParser();
-
-		/**
-		 * Get the class descriptor associated with the object type. <b>If the required version is not found, 
-		 * it will fallback to the default version.</b>
-		 * @param object target object 
-		 * @param version xml version to be used
-		 * @return XmlClass descriptor 
-		 * 
-		 */		
+			
 		public function getDescriptor(object : Object, version : String = "") : IClassAnnotation {
 			var className : String = getQualifiedClassName(object);
 			return getDefinition(object, className).getDescriptor(version);
+		}
+			
+		public function getClassReferenceByCriteria(field : String, value : String, version : String = "") : Class{
+			var descriptor : Object;
+			for each (var store : ResultStore in descriptorCache) {
+				descriptor = store.getDescriptor(version);
+				if (descriptor && descriptor.hasOwnProperty(field) && descriptor[field] == value) {
+					return IClassAnnotation(descriptor).type;
+				}
+			}
+			return null;
 		}
 
 		/**
@@ -113,7 +116,7 @@ package com.googlecode.flexxb.core {
 			}
 			var customSerializable : Boolean;
 			for each (var interf : XML in interfaces) {
-				if (interf.@type.indexOf("IXmlSerializable") >= 0) {
+				if (interf.@type.toString() == "com.googlecode.flexxb.interfaces::ISerializable") {
 					customSerializable = true;
 					break;
 				}

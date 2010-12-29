@@ -15,15 +15,10 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb {
-	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.api.IFlexXBApi;
 	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.core.Configuration;
 	import com.googlecode.flexxb.core.IFlexXB;
 	import com.googlecode.flexxb.xml.XmlConfiguration;
-	
-	import flash.events.Event;
-	import flash.events.IEventDispatcher;
 
 	/**
 	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration.
@@ -83,7 +78,7 @@ package com.googlecode.flexxb {
 		 * @return instance of type <code>com.googlecode.flexxb.api.IFlexXBApi</code>
 		 *
 		 */
-		public final function get api() : IFlexXBApi {
+		public function get api() : IFlexXBApi {
 			return v2Engine.api;
 		}
 
@@ -95,7 +90,7 @@ package com.googlecode.flexxb {
 		 * @return xml representation of the given object
 		 *
 		 */
-		public final function serialize(object : Object, partial : Boolean = false, version : String = "") : XML {
+		public function serialize(object : Object, partial : Boolean = false, version : String = "") : XML {
 			return xmlSerializer.serialize(object, partial, version) as XML;
 		}
 
@@ -108,7 +103,7 @@ package com.googlecode.flexxb {
 		 * @return object of type objectClass
 		 *
 		 */
-		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : * {
+		public function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : * {
 			return xmlSerializer.deserialize(xmlData, objectClass, getFromCache, version);
 		}
 
@@ -118,7 +113,7 @@ package com.googlecode.flexxb {
 		 * @param args types to be processed
 		 *
 		 */
-		public final function processTypes(... args) : void {
+		public function processTypes(... args) : void {
 			xmlSerializer.processTypes.apply(_xmlSerializer, args);
 		}
 

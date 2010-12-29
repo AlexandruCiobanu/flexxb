@@ -28,7 +28,7 @@ package com.googlecode.flexxb.core {
 	import flash.events.IEventDispatcher;
 	
 	/**
-	 * Entry point for AS3-XML (de)serialization. Allows new annotation registration.
+	 * Entry point for AS3-? (de)serialization. Allows new annotation registration.
 	 * The main access point consist of two methods: <code>serialize()</code> and <code>deserialize</code>, each corresponding to the specific stage in the conversion process.
 	 * By default it registeres the built-in annotations at startup.
 	 * <p>Built-in anotation usage:
@@ -113,8 +113,8 @@ package com.googlecode.flexxb.core {
 		public function getSerializer(name : String) : IFlexXB{
 			var item : Object = contextMap[name];
 			if(item){
-				DescriptionContext(item.context).initializeContext(this, store);
 				if(!item.core){
+					DescriptionContext(item.context).initializeContext(this, store);
 					item.core = new FlexXBCore(item.context as DescriptionContext, store);
 				}
 				return item.core as IFlexXB;
