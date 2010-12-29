@@ -18,11 +18,14 @@ package com.googlecode.flexxb.annotation {
 	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
+	import com.googlecode.flexxb.core.DescriptionContext;
+	import com.googlecode.flexxb.error.DescriptorParsingError;
 	import com.googlecode.flexxb.serializer.BaseSerializer;
 	
 	import flash.utils.Dictionary;
 
 	/**
+	 * @private
 	 * This Factory will return an annotation instance based on the type required. Since each
 	 * annotation has a specific serializer, it will also provide the serializer instance to be
 	 * used when processing a field. Since they are stateless, serializers do not need to be
@@ -113,12 +116,13 @@ package com.googlecode.flexxb.annotation {
 		 * @param name the name of the annotation to be registered
 		 * @param annotationClazz annotation class type
 		 * @param serializerInstance instance of the serializer that will handle this annotation
+		 * @param context
 		 * @param overrideExisting
 		 *
 		 */
-		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
+		public function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, context : DescriptionContext, overrideExisting : Boolean = false) : void {
 			if (overrideExisting || !annotationMap[name]) {
-				annotationMap[name] = new MetaStore(annotationClazz, serializer, null);
+				annotationMap[name] = new MetaStore(annotationClazz, serializer, context);
 			}
 		}
 
@@ -168,18 +172,50 @@ package com.googlecode.flexxb.annotation {
 			}
 			return null;
 		}
+		/**
+		 * 
+		 * @param memberMetadataName
+		 * @return 
+		 * 
+		 */		
+		public function getClassAnnotationName(memberMetadataName : String) : String{
+			if(isMemberAnnotation(memberMetadataName)){
+				var context : DescriptionContext = getMetadataContext(memberMetadataName);
+				if(context){
+					for(var key : * in annotationMap){
+						if(MetaStore(annotationMap[key]).isClass && MetaStore(annotationMap[key]).descriptionContext == context){
+							return key;
+						}
+					}
+					throw new Error("No class annotation defined in the description context for metadata named " + memberMetadataName);
+				}
+				throw new Error("Could not find a description context for metadata named " + memberMetadataName + ". Please make sure it is defined within your description context.");
+			}
+			return "";
+		}
+		
+		private function getMetadataContext(metaName : String) : DescriptionContext{
+			if(annotationMap[metaName]){
+				return MetaStore(annotationMap[metaName]).descriptionContext;
+			}
+			return null;
+		}
 	}
 }
 import com.googlecode.flexxb.core.DescriptionContext;
 import com.googlecode.flexxb.serializer.BaseSerializer;
 
 import mx.utils.DescribeTypeCache;
-
+/**
+ * @private 
+ * @author User
+ * 
+ */
 final class MetaStore{
 	
 	public var annotation : Class;
 	
-	public var serializer : BaseSerializer;
+	private var _serializer : BaseSerializer;
 	
 	private var _isClass : Boolean;
 	
@@ -187,11 +223,14 @@ final class MetaStore{
 	
 	private var _isMember : Boolean;
 	
+	private var serializerClass : Class;
+	
+	private var context : DescriptionContext;
+	
 	public function MetaStore(annotation : Class, serializerClass : Class, context : DescriptionContext){
 		this.annotation = annotation;
-		if(serializerClass){
-			this.serializer = new serializerClass(context) as BaseSerializer;
-		}
+		this.serializerClass = serializerClass;
+		this.context = context;
 		var xml : XML = DescribeTypeCache.describeType(annotation).typeDescription;
 		if(xml.factory.length() > 0){
 			xml = xml.factory[0];
@@ -210,6 +249,17 @@ final class MetaStore{
 				break;
 			}
 		}
+	}
+	
+	public function get serializer() : BaseSerializer{
+		if(!_serializer){
+			_serializer = new serializerClass(context) as BaseSerializer;
+		}
+		return _serializer;
+	}
+	
+	public function get descriptionContext() : DescriptionContext{
+		return context;
 	}
 	
 	public function get isClass() : Boolean{

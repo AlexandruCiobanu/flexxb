@@ -25,12 +25,24 @@ package com.googlecode.flexxb.core {
 	public interface IDescriptorStore {
 		
 		/**
-		 * 
-		 * @param object
-		 * @param version
-		 * @return 
+		 * Get the class descriptor associated with the object type. <b>If the required version is not found, 
+		 * it will fallback to the default version.</b>
+		 * @param object target object 
+		 * @param version version to be used
+		 * @return IClassAnnotation descriptor 
 		 * 
 		 */		
 		function getDescriptor(object : Object, version : String = "") : IClassAnnotation;
+		
+		/**
+		 * This method allows searching through the registered annotations for a class annotation bearing 
+		 * specific criterion. Method will return null if no such item is found or if the field name is invalid. 
+		 * @param field criterion field name
+		 * @param value criterion field value
+		 * @param version version to be used
+		 * @return clas type reference
+		 * 
+		 */			
+		function getClassReferenceByCriteria(field : String, value : String, version : String = "") : Class
 	}
 }

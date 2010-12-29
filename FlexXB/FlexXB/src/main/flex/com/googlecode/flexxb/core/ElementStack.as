@@ -19,10 +19,10 @@ package com.googlecode.flexxb.core
 {
 	/**
 	 * @private
-	 * @author Alexutzutz
+	 * @author Alexutz
 	 * 
 	 */	
-	public class ElementStack
+	internal final class ElementStack
 	{
 		private var stack : Array;
 		/**

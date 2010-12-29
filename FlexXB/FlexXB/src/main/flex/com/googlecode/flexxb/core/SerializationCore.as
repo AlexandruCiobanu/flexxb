@@ -201,7 +201,7 @@ package com.googlecode.flexxb.core {
 			}
 			if (xmlData) {
 				if (!objectClass) {
-					objectClass = getIncomingType(xmlData);
+					objectClass = mappingModel.context.getIncomingType(xmlData);
 				}
 				if (objectClass) {
 					var result : Object;
@@ -287,10 +287,6 @@ package com.googlecode.flexxb.core {
 			if(configuration.enableLogging){
 				LOG.info("Ended xml deserialization");
 			}
-			return null;
-		}
-		
-		private function getIncomingType(source : Object) : Class{
 			return null;
 		} 
 		/**

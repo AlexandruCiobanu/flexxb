@@ -121,6 +121,7 @@ package com.googlecode.flexxb.api {
 		[Test]
 		public function testFileDescriptorProcessing() : void {
 			var xml : XML = getXmlDescriptor();
+			FxBEngine.instance.api;
 			var wrapper : FxApiWrapper = FxBEngine.instance.getXmlSerializer().deserialize(xml, FxApiWrapper);
 			Assert.assertEquals("Wrong number of classes parsed", 3, wrapper.descriptors.length);
 			Assert.assertEquals("Wrong version", 1, wrapper.version);
@@ -151,6 +152,7 @@ package com.googlecode.flexxb.api {
 		
 		[Test]
 		public function testMultipleNamespace() : void{
+			FxBEngine.instance.api;
 			var cls : FxClass = new FxClass(Mock);
 			var member : FxMember = cls.addAttribute("version", Number, null, "Version");
 			member.setNamespace(new Namespace("me", "www.me.com"));

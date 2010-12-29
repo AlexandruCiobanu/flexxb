@@ -54,6 +54,7 @@ package com.googlecode.flexxb.core
 		public function FlexXBCore(context : DescriptionContext, store : DescriptorStore){
 			this._context = context;
 			mappingModel = new MappingModel();
+			mappingModel.context = context;
 			mappingModel.descriptorStore = store;
 			mappingModel.configuration = context.configuration;
 			mappingModel.converterStore = context.converterStore;
@@ -68,8 +69,7 @@ package com.googlecode.flexxb.core
 			return mappingModel.configuration;
 		}
 		
-		public function processTypes(...args):void
-		{
+		public function processTypes(...args) : void {
 			if (args && args.length > 0) {
 				for each (var item : Object in args) {
 					if (item is Class) {
