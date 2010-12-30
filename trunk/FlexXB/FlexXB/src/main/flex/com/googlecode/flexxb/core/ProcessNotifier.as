@@ -43,13 +43,13 @@ package com.googlecode.flexxb.core
 		 * @param xmlData
 		 * 
 		 */		
-		public function notifyPreSerialize(dispatcher : IEventDispatcher, xmlData : XML) : void{
+		public function notifyPreSerialize(dispatcher : IEventDispatcher, serializedData : Object) : void{
 			var object : Object = mappingModel.collisionDetector.getCurrent();
 			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(object is ISerializeNotifiable){
-				ISerializeNotifiable(object).onPreSerialize(parent, xmlData);
+				ISerializeNotifiable(object).onPreSerialize(parent, serializedData);
 			}else{
-				dispatcher.dispatchEvent(SerializationEvent.createPreSerializeEvent(object, parent, xmlData));
+				dispatcher.dispatchEvent(SerializationEvent.createPreSerializeEvent(object, parent, serializedData));
 			}
 		}
 		/**
@@ -59,12 +59,12 @@ package com.googlecode.flexxb.core
 		 * @param xmlData
 		 * 
 		 */		
-		public function notifyPreDeserialize(dispatcher : IEventDispatcher, item : Object, xmlData : XML) : void{
+		public function notifyPreDeserialize(dispatcher : IEventDispatcher, item : Object, serializedData : Object) : void{
 			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(item is IDeserializeNotifiable){
-				IDeserializeNotifiable(item).onPreDeserialize(parent, xmlData);
+				IDeserializeNotifiable(item).onPreDeserialize(parent, serializedData);
 			}else{
-				dispatcher.dispatchEvent(SerializationEvent.createPreDeserializeEvent(item, parent, xmlData));
+				dispatcher.dispatchEvent(SerializationEvent.createPreDeserializeEvent(item, parent, serializedData));
 			}			
 		}
 		/**
@@ -73,13 +73,13 @@ package com.googlecode.flexxb.core
 		 * @param xmlData
 		 * 
 		 */		
-		public function notifyPostSerialize(dispatcher : IEventDispatcher, xmlData : XML) : void{
+		public function notifyPostSerialize(dispatcher : IEventDispatcher, serializedData : Object) : void{
 			var object : Object = mappingModel.collisionDetector.getCurrent();
 			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(object is ISerializeNotifiable){
-				ISerializeNotifiable(object).onPostSerialize(parent, xmlData);
+				ISerializeNotifiable(object).onPostSerialize(parent, serializedData);
 			}else{
-				dispatcher.dispatchEvent(SerializationEvent.createPostSerializeEvent(object, parent, xmlData));
+				dispatcher.dispatchEvent(SerializationEvent.createPostSerializeEvent(object, parent, serializedData));
 			}
 		}
 		/**
@@ -89,12 +89,12 @@ package com.googlecode.flexxb.core
 		 * @param xmlData
 		 * 
 		 */			
-		public function notifyPostDeserialize(dispatcher : IEventDispatcher, item : Object, xmlData : XML) : void{
+		public function notifyPostDeserialize(dispatcher : IEventDispatcher, item : Object, serializedData : Object) : void{
 			var parent : Object = mappingModel.collisionDetector.getParent();
 			if(item is IDeserializeNotifiable){
-				IDeserializeNotifiable(item).onPostDeserialize(parent, xmlData);
+				IDeserializeNotifiable(item).onPostDeserialize(parent, serializedData);
 			}else{
-				dispatcher.dispatchEvent(SerializationEvent.createPostDeserializeEvent(item, parent, xmlData));
+				dispatcher.dispatchEvent(SerializationEvent.createPostDeserializeEvent(item, parent, serializedData));
 			}
 		}
 	}

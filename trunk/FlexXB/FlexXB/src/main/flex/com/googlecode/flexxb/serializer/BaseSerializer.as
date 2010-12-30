@@ -32,15 +32,15 @@ package com.googlecode.flexxb.serializer
 			_context = context;
 		}
 		/**
-		 * Serialize an object into xml
+		 * Serialize an object into a serialization format
 		 * @param object Object to be serialized
 		 * @param annotation Annotation containing the conversion parameters
-		 * @param parentXml Parent xml that will enclose the objects xml representation
+		 * @param serializedData Serialized data written so far
 		 * @serializer
-		 * @return Generated xml
+		 * @return Generated serialized data
 		 *
 		 */
-		public function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializationCore) : XML {
+		public function serialize(object : Object, annotation : IAnnotation, serializedData : Object, serializer : SerializationCore) : Object {
 			return null;
 		}
 		/**
@@ -51,7 +51,7 @@ package com.googlecode.flexxb.serializer
 		 * @return Generated object
 		 *
 		 */
-		public function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializationCore) : Object{
+		public function deserialize(serializedData : Object, annotation : IAnnotation, serializer : SerializationCore) : Object{
 			return null;
 		}
 		/**

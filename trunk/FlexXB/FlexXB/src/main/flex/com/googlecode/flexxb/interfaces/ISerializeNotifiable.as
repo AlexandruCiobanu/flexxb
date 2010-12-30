@@ -21,8 +21,8 @@ package com.googlecode.flexxb.interfaces
 	 * notification on the serialization process.<br> 
 	 * If the current object to be serialized implements this interface, the
 	 * engine will call the methods implemented on each process step (pre and 
-	 * post serialize) instead of firing an XmlEvent on the engine instance for
-	 * each step. <br>
+	 * post serialize) instead of firing a SerializationEvent on the engine 
+	 * instance for each step. <br>
 	 * Implementing this interface overrides the normal event dispatching in the 
 	 * engine.   
 	 * @author Alexutz
@@ -33,16 +33,16 @@ package com.googlecode.flexxb.interfaces
 		/**
 		 * Called before the serialization process of the current object begins.
 		 * @param parent
-		 * @param xmlData
+		 * @param serializedData
 		 * 
 		 */				
-		function onPreSerialize(parent : Object, xmlData : XML) : void;
+		function onPreSerialize(parent : Object, serializedData : Object) : void;
 		/**
 		 * Called after the serialization process of the current object ends.
 		 * @param parent
-		 * @param xmlData
+		 * @param serializedData
 		 *  
 		 */		
-		function onPostSerialize(parent : Object, xmlData : XML) : void;
+		function onPostSerialize(parent : Object, serializedData : Object) : void;
 	}
 }

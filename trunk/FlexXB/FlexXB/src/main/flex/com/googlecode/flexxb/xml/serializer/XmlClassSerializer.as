@@ -38,12 +38,12 @@ package com.googlecode.flexxb.xml.serializer {
 			super(context);
 		}
 		
-		public override function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializationCore) : XML {
+		public override function serialize(object : Object, annotation : IAnnotation, serializedData : Object, serializer : SerializationCore) : Object {
 			var xmlClass : XmlClass = annotation as XmlClass;
 			if(serializer.configuration.enableLogging){
 				LOG.info("Serializing object of type {0}", xmlClass.name);
 			}
-			var xml : XML = <xml />
+			var xml : XML = <xml />;
 			xml.setNamespace(xmlClass.nameSpace);
 			xml.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
 			if (xmlClass.useOwnNamespace()) {
@@ -60,7 +60,7 @@ package com.googlecode.flexxb.xml.serializer {
 			return xml;
 		}
 		
-		public override function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializationCore) : Object {
+		public override function deserialize(serializedData : Object, annotation : IAnnotation, serializer : SerializationCore) : Object {
 			return null;
 		}
 	}

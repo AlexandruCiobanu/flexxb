@@ -92,7 +92,7 @@ package com.googlecode.flexxb.core {
 		 * @return xml representation of the given object
 		 *
 		 */
-		public final function serialize(object : Object, partial : Boolean = false, version : String = "") : XML {
+		public final function serialize(object : Object, partial : Boolean = false, version : String = "") : Object {
 			if(configuration.enableLogging){
 				LOG.info("Started object serialization. Partial flag is {0}", partial);
 			}
@@ -102,39 +102,39 @@ package com.googlecode.flexxb.core {
 				}
 				return null;
 			}
-			var xmlData : XML;
+			var serializedData : Object;
 			
 			object = pushObject(object, partial);
 			
-			mappingModel.processNotifier.notifyPreSerialize(this, xmlData);
+			mappingModel.processNotifier.notifyPreSerialize(this, serializedData);
 
 			if (mappingModel.descriptorStore.isCustomSerializable(object)) {
-				xmlData = ISerializable(object).toXml();
+				serializedData = ISerializable(object).serialize();
 			} else {
 				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(object, version);
-				xmlData = AnnotationFactory.instance.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
+				serializedData = AnnotationFactory.instance.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
 				var serializer : BaseSerializer;
 				var annotation : IMemberAnnotation;
 				if (partial && classDescriptor.idField) {
-					doSerialize(object, classDescriptor.idField, xmlData);
+					doSerialize(object, classDescriptor.idField, serializedData);
 				} else if (configuration.onlySerializeChangedValueFields && object is PersistableObject) {
 					for each (annotation in classDescriptor.members) {
 						if (annotation.writeOnly  || annotation.ignoreOn == Stage.SERIALIZE || !PersistableObject(object).isChanged(annotation.name.localName)) {
 							continue;
 						}
-						doSerialize(object, annotation, xmlData);
+						doSerialize(object, annotation, serializedData);
 					}
 				} else {
 					for each (annotation in classDescriptor.members) {
 						if (annotation.writeOnly || annotation.ignoreOn == Stage.SERIALIZE) {
 							continue;
 						}
-						doSerialize(object, annotation, xmlData);
+						doSerialize(object, annotation, serializedData);
 					}
 				}
 			}
 
-			mappingModel.processNotifier.notifyPostSerialize(this, xmlData);
+			mappingModel.processNotifier.notifyPostSerialize(this, serializedData);
 			
 			mappingModel.collisionDetector.pop();
 			
@@ -142,7 +142,7 @@ package com.googlecode.flexxb.core {
 				LOG.info("Ended object serialization");
 			}
 			
-			return xmlData;
+			return serializedData;
 		}
 		
 		public function getObjectId(object : Object) : String{
@@ -172,17 +172,17 @@ package com.googlecode.flexxb.core {
 		 *
 		 * @param object
 		 * @param annotation
-		 * @param xmlData
+		 * @param serializedData
 		 *
 		 */
-		private function doSerialize(object : Object, annotation : IFieldAnnotation, xmlData : XML) : void {
+		private function doSerialize(object : Object, annotation : IFieldAnnotation, serializedData : Object) : void {
 			if(configuration.enableLogging){
 				LOG.info("Serializing field {0} as {1}", annotation.name, annotation.annotationName);
 			}
 			var serializer : BaseSerializer = AnnotationFactory.instance.getSerializer(annotation);
 			var target : Object = object[annotation.name];
 			if (target != null) {
-				serializer.serialize(target, annotation, xmlData, this);
+				serializer.serialize(target, annotation, serializedData, this);
 			}
 		}
 
@@ -254,7 +254,7 @@ package com.googlecode.flexxb.core {
 					
 					//update object fields
 					if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
-						ISerializable(result).fromXml(xmlData);
+						ISerializable(result).deserialize(xmlData);
 					} else {
 						//iterate through anotations
 						for each (var annotation : IMemberAnnotation in classDescriptor.members) {

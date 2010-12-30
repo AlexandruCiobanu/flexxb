@@ -15,12 +15,12 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.xml.serializer {
-	import com.googlecode.flexxb.core.SerializationCore;
 	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 	import com.googlecode.flexxb.core.DescriptionContext;
+	import com.googlecode.flexxb.core.SerializationCore;
+	import com.googlecode.flexxb.serializer.BaseSerializer;
 	import com.googlecode.flexxb.xml.XmlDescriptionContext;
 	import com.googlecode.flexxb.xml.annotation.XmlMember;
-	import com.googlecode.flexxb.serializer.BaseSerializer;
 	
 	import flash.utils.getQualifiedClassName;
 
@@ -35,8 +35,9 @@ package com.googlecode.flexxb.xml.serializer {
 			super(context);
 		}
 		
-		public override function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializationCore) : XML {
+		public override function serialize(object : Object, annotation : IAnnotation, serializedData : Object, serializer : SerializationCore) : Object {
 			var element : XmlMember = annotation as XmlMember;
+			var parentXml : XML = serializedData as XML;
 			
 			if (element.isDefaultValue()) {
 				parentXml.appendChild(serializer.converterStore.objectToString(object, element.type));
@@ -68,9 +69,9 @@ package com.googlecode.flexxb.xml.serializer {
 		protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializationCore) : void {
 		}
 		
-		public override function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializationCore) : Object {
+		public override function deserialize(serializedData : Object, annotation : IAnnotation, serializer : SerializationCore) : Object {
 			var element : XmlMember = annotation as XmlMember;
-			
+			var xmlData : XML = serializedData as XML;
 			if (element.isDefaultValue()) {
 				for each (var child : XML in xmlData.children()) {
 					if (child.nodeKind() == "text") {

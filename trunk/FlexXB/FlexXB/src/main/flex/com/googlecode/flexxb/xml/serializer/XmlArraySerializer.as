@@ -23,6 +23,7 @@ package com.googlecode.flexxb.xml.serializer {
 	import com.googlecode.flexxb.xml.XmlDescriptionContext;
 	import com.googlecode.flexxb.xml.annotation.XmlArray;
 	import com.googlecode.flexxb.xml.annotation.XmlMember;
+	import com.googlecode.flexxb.util.isVector;
 	
 	import flash.utils.getQualifiedClassName;
 	
@@ -51,7 +52,7 @@ package com.googlecode.flexxb.xml.serializer {
 			var child : XML;
 			for each (var member : Object in object) {
 				if (isComplexType(member)) {
-					child = serializer.serialize(member, xmlArray.serializePartialElement);
+					child = serializer.serialize(member, xmlArray.serializePartialElement) as XML;
 					if (xmlArray.memberName) {
 						child.setName(xmlArray.memberName);
 					}
@@ -142,7 +143,7 @@ package com.googlecode.flexxb.xml.serializer {
 				for each (var member : Object in members) {
 					ListCollectionView(result).addItem(member);
 				}
-			}else if(getQualifiedClassName(result).indexOf(getQualifiedClassName(Vector)) == 0){
+			}else if(isVector(result)){
 				result.push.apply(null, members);
 			}
 		}

@@ -18,6 +18,7 @@ package com.googlecode.flexxb.xml.annotation {
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
+	import com.googlecode.flexxb.util.isVector;
 	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
@@ -88,7 +89,7 @@ package com.googlecode.flexxb.xml.annotation {
 			var type : Class;
 			//handle the vector type. We need to check for it first as it will override settings in the member type 
 			var classType : String = getQualifiedClassName(metadata.fieldType);
-			if(classType.indexOf(getQualifiedClassName(Vector)) == 0){
+			if(isVector(classType)){
 				if(classType.lastIndexOf("<") > -1){
 					classType = classType.substring(classType.lastIndexOf("<") + 1, classType.length - 1);
 				}

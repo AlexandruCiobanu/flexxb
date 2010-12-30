@@ -51,7 +51,7 @@ package com.googlecode.flexxb.xml.serializer {
 				if(annotation.isIDRef){
 					child.appendChild(serializer.getObjectId(object));
 				}else{
-					child = serializer.serialize(object, XmlElement(annotation).serializePartialElement);
+					child = serializer.serialize(object, XmlElement(annotation).serializePartialElement) as XML;
 				}
 			}else if(annotation.type == XML){
 				child.appendChild(new XML(object));
