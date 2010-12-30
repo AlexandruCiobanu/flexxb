@@ -86,10 +86,10 @@ package com.googlecode.flexxb.core {
 		}
 
 		/**
-		 * Convert an object to a xml representation.
+		 * Convert an object to a serialized representation.
 		 * @param object object to be converted.
 		 * @param version
-		 * @return xml representation of the given object
+		 * @return serialized data representation of the given object
 		 *
 		 */
 		public final function serialize(object : Object, partial : Boolean = false, version : String = "") : Object {
@@ -187,25 +187,25 @@ package com.googlecode.flexxb.core {
 		}
 
 		/**
-		 * Convert an xml to an AS3 object counterpart
-		 * @param xmlData xml to be deserialized
+		 * Convert a serialized data to an AS3 object counterpart
+		 * @param serializedData data to be deserialized
 		 * @param objectClass object class
 		 * @param getFromCache
 		 * @param version
 		 * @return object of type objectClass
 		 *
 		 */
-		public final function deserialize(xmlData : XML, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : Object {
+		public final function deserialize(serializedData : Object, objectClass : Class = null, getFromCache : Boolean = false, version : String = "") : Object {
 			if(configuration.enableLogging){
-				LOG.info("Started xml deserialization to type {0}. GetFromCache flag is {1}", objectClass, getFromCache);
+				LOG.info("Started deserialization to type {0}. GetFromCache flag is {1}", objectClass, getFromCache);
 			}
-			if (xmlData) {
+			if (serializedData) {
 				if (!objectClass) {
-					objectClass = mappingModel.context.getIncomingType(xmlData);
+					objectClass = mappingModel.context.getIncomingType(serializedData);
 				}
 				if (objectClass) {
 					var result : Object;
-					var itemId : String = getId(objectClass, xmlData);
+					var itemId : String = getId(objectClass, serializedData);
 					var foundInCache : Boolean;
 
 					//get object from cache
@@ -231,7 +231,7 @@ package com.googlecode.flexxb.core {
 							for each (var member : IMemberAnnotation in classDescriptor.constructor.parameterFields) {
 								//On deserialization, when using constructor arguments, we need to process them even though the ignoreOn 
 								//flag is set to deserialize stage.
-								var data : Object = AnnotationFactory.instance.getSerializer(member).deserialize(xmlData, member, this);
+								var data : Object = AnnotationFactory.instance.getSerializer(member).deserialize(serializedData, member, this);
 								_arguments.push(data);
 							}
 						}
@@ -250,11 +250,11 @@ package com.googlecode.flexxb.core {
 					mappingModel.collisionDetector.pushNoCheck(result);
 					
 					//dispatch preDeserializeEvent
-					mappingModel.processNotifier.notifyPreDeserialize(this, result, xmlData);
+					mappingModel.processNotifier.notifyPreDeserialize(this, result, serializedData);
 					
 					//update object fields
 					if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
-						ISerializable(result).deserialize(xmlData);
+						ISerializable(result).deserialize(serializedData);
 					} else {
 						//iterate through anotations
 						for each (var annotation : IMemberAnnotation in classDescriptor.members) {
@@ -268,43 +268,43 @@ package com.googlecode.flexxb.core {
 								result[annotation.name] = null;
 							}else{
 								var serializer : BaseSerializer = AnnotationFactory.instance.getSerializer(annotation);
-								result[annotation.name] = serializer.deserialize(xmlData, annotation, this);
+								result[annotation.name] = serializer.deserialize(serializedData, annotation, this);
 							}
 						}
 					}
 					//dispatch postDeserializeEvent
-					mappingModel.processNotifier.notifyPostDeserialize(this, result, xmlData);
+					mappingModel.processNotifier.notifyPostDeserialize(this, result, serializedData);
 					
 					mappingModel.collisionDetector.pop();
 					
 					if(configuration.enableLogging){
-						LOG.info("Ended xml deserialization");
+						LOG.info("Ended deserialization");
 					}
 					
 					return result;
 				}
 			}
 			if(configuration.enableLogging){
-				LOG.info("Ended xml deserialization");
+				LOG.info("Ended deserialization");
 			}
 			return null;
 		} 
 		/**
 		 *
 		 * @param result
-		 * @param xmlData
+		 * @param serializedData
 		 * @return
 		 *
 		 */
-		private function getId(objectClass : Class, xmlData : XML) : String {
+		private function getId(objectClass : Class, serializedData : Object) : String {
 			var itemId : String;
 			if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
-				itemId = mappingModel.descriptorStore.getCustomSerializableReference(objectClass).getIdValue(xmlData);
+				itemId = mappingModel.descriptorStore.getCustomSerializableReference(objectClass).getIdValue(serializedData);
 			} else {
 				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(objectClass);
 				var idSerializer : BaseSerializer = AnnotationFactory.instance.getSerializer(classDescriptor.idField);
 				if (idSerializer) {
-					itemId = String(idSerializer.deserialize(xmlData, classDescriptor.idField, this));
+					itemId = String(idSerializer.deserialize(serializedData, classDescriptor.idField, this));
 				}
 			}
 			return itemId;

@@ -13,26 +13,9 @@
 			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">com.googlecode.flexxb.core</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public final   class  FxBEngine</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FxBEngine  <img src="../../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><p></p><p></p>
 	 Entry point for AS3-? (de)serialization. Allows new annotation registration.
 	 The main access point consist of two methods: <code>serialize()</code> and <code>deserialize</code>, each corresponding to the specific stage in the conversion process.
-	 By default it registeres the built-in annotations at startup.
-	 <p>Built-in anotation usage:
-	  <ul>
-	                    <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", 
-	                        uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code>
-                     </li>
-	                    <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code>
-                     </li>
-	                    <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", 
-	                     serializePartialElement="true|false")]</code>
-                     </li>
-	                    <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", 
-	                   serializePartialElement="true|false")]</code>
-                     </li>
-	                 </ul>
-               </p>
-	              <p>Make sure you add the following switches to your compiler settings:
-	 <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code>
-               </p>
-	           <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#api" class="signatureLink">api</a> : <a href="../../../../com/googlecode/flexxb/api/IFlexXBApi.html">IFlexXBApi</a><div class="summaryTableDescription">[read-only] 
+	 By default it registeres the built-in xml handling annotations through the xml description context.
+	 
+	 <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#api" class="signatureLink">api</a> : <a href="../../../../com/googlecode/flexxb/api/IFlexXBApi.html">IFlexXBApi</a><div class="summaryTableDescription">[read-only] 
 		 Get a reference to the api object
 		 </div></td><td class="summaryTableOwnerCol">FxBEngine</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#instance" class="signatureLink">instance</a> : <a href="../../../../com/googlecode/flexxb/core/FxBEngine.html">FxBEngine</a><div class="summaryTableDescription">[static] [read-only] 
 		 Not a singleton, but an easy access instance.</div></td><td class="summaryTableOwnerCol">FxBEngine</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#FxBEngine()" class="signatureLink">FxBEngine</a>()</div><div class="summaryTableDescription">
@@ -63,4 +46,4 @@
 		 
 		 </td></tr></table></div><a name="registerDescriptionContext()"></a><a name="registerDescriptionContext(String,com.googlecode.flexxb.core.DescriptionContext)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">registerDescriptionContext</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function registerDescriptionContext(name:String, context:<a href="../../../../com/googlecode/flexxb/core/DescriptionContext.html">DescriptionContext</a>):void</code><p></p><p></p><p>
 		 
-		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">context</span>:<a href="../../../../com/googlecode/flexxb/core/DescriptionContext.html">DescriptionContext</a></code></td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Wed Dec 29 2010, 08:21 PM +02:00  </center></div></body></html><!--<br/>Wed Dec 29 2010, 08:21 PM +02:00  -->
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">context</span>:<a href="../../../../com/googlecode/flexxb/core/DescriptionContext.html">DescriptionContext</a></code></td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Fri Dec 31 2010, 12:28 AM +02:00  </center></div></body></html><!--<br/>Fri Dec 31 2010, 12:28 AM +02:00  -->

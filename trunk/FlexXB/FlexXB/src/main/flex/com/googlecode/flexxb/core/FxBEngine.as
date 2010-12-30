@@ -30,19 +30,8 @@ package com.googlecode.flexxb.core {
 	/**
 	 * Entry point for AS3-? (de)serialization. Allows new annotation registration.
 	 * The main access point consist of two methods: <code>serialize()</code> and <code>deserialize</code>, each corresponding to the specific stage in the conversion process.
-	 * By default it registeres the built-in annotations at startup.
-	 * <p>Built-in anotation usage:
-	 *  <ul>
-	 *  <li>XmlClass: <code>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", 
-	 *                        uri="http://www.your.site.com/schema/", defaultValueField="fieldName")]</code></li>
-	 *  <li>XmlAttribute: <code>[XmlAttribute(name="attribute", ignoreOn="serialize|deserialize")]</code></li>
-	 *  <li>XmlElement: <code>[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", 
-	 *                     serializePartialElement="true|false")]</code></li>
-	 *  <li>XmlArray: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", 
-	 *                   serializePartialElement="true|false")]</code></li>
-	 *  </ul></p>
-	 * <p>Make sure you add the following switches to your compiler settings:
-	 * <code>-keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray</code></p>
+	 * By default it registeres the built-in xml handling annotations through the xml description context.
+	 * 
 	 * @author aCiobanu
 	 *
 	 */

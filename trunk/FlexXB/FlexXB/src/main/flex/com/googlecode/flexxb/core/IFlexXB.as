@@ -19,23 +19,26 @@ package com.googlecode.flexxb.core
 	
 
 	/**
-	 * Triggers prior to the serialization of an object into XML
+	 * Triggers prior to the serialization of an object
 	 */
 	[Event(name="preserialize", type="com.googlecode.flexxb.core.SerializationEvent")]
 	/**
-	 * Triggers after the serialization of an AS3 object into XML
+	 * Triggers after the serialization of an AS3 object
 	 */
 	[Event(name="postserialize", type="com.googlecode.flexxb.core.SerializationEvent")]
 	/**
-	 * Triggers prior to the deserialization of a XML into an AS3 object
+	 * Triggers prior to the deserialization of a data source into an AS3 object
 	 */
 	[Event(name="predeserialize", type="com.googlecode.flexxb.core.SerializationEvent")]
 	/**
-	 * Triggers after the deserialization of a XML into an AS3 object
+	 * Triggers after the deserialization of a data source into an AS3 object
 	 */
 	[Event(name="postdeserialize", type="com.googlecode.flexxb.core.SerializationEvent")]
 	/**
-	 * 
+	 * This interface defines a core that handles a specific way of serializing/deserializing
+	 * and object. It makes use of a serialization context to inject all the particularities 
+	 * of a specific serialization format. Also, within the context serializers and converters 
+	 * are registered. 
 	 * @author Alexutz
 	 * 
 	 */	
@@ -43,7 +46,7 @@ package com.googlecode.flexxb.core
 	{
 		/**
 		 * Get a reference to the context initiating this serializer 
-		 * @return 
+		 * @return Description context instance
 		 * 
 		 */		
 		function get context() : DescriptionContext;
@@ -64,19 +67,21 @@ package com.googlecode.flexxb.core
 		function processTypes(... args) : void;
 		
 		/**
-		 * 
-		 * @param type
-		 * @param listener
-		 * @param priority
+		 * Add a listener to an event being raised by the serialization process to signal various stages.
+		 * <br/>There are four stages being signaled through events: preserialize, postserialize, predeserialize
+		 * and postdeserialize. 
+		 * @param type event type
+		 * @param listener listener function 
+		 * @param priority priority
 		 * @param useWeakReference
 		 * 
 		 */		
 		function addEventListener(type : String, listener : Function, priority : int = 0, useWeakReference : Boolean = false) : void;
 		
 		/**
-		 * 
-		 * @param type
-		 * @param listener
+		 * Remove a registered listener for a stage event
+		 * @param type event type
+		 * @param listener listener function
 		 * 
 		 */		
 		function removeEventListener(type : String, listener : Function) : void;
@@ -95,7 +100,7 @@ package com.googlecode.flexxb.core
 		 * Convert a serialized data (string or byte) to an AS3 object counterpart
 		 * @param source serialized content to be deserialized
 		 * @param objectClass object class
-		 * @param getFromCache get the object from the model object cache if it exists, without applying the xml
+		 * @param getFromCache get the object from the model object cache if it exists, without processing the serialized data
 		 * @param version
 		 * @return object of type objectClass
 		 *
