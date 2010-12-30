@@ -27,7 +27,7 @@ package com.googlecode.testData {
 			return null;
 		}
 
-		public function toXml() : XML {
+		public function serialize() : Object {
 			return <testObject><testField>{test}</testField></testObject>;
 		}
 
@@ -35,12 +35,13 @@ package com.googlecode.testData {
 			return CustomSerializabeObject;
 		}
 
-		public function fromXml(xmlData : XML) : Object {
+		public function deserialize(serializedData : Object) : Object {
+			var xmlData : XML = serializedData as XML;
 			test = xmlData.testField;
 			return this;
 		}
 
-		public function getIdValue(xmldata : XML) : String {
+		public function getIdValue(serializedData : Object) : String {
 			return null;
 		}
 	}

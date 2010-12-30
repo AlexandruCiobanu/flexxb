@@ -17,27 +17,30 @@
 package com.googlecode.flexxb.interfaces {
 	
 	/**
-	 * Interface for an object that requires custom serialization/deserialization into/from Xml
+	 * Interface for an object that requires custom serialization/deserialization into/from
+	 * a serialization format (XML, JSON, AMF etc.). Use this interface to instruct the engine 
+	 * to delegate the serialization/deserialization task to the object itself. 
 	 * @author aciobanu
 	 *
 	 *
 	 */
 	public interface ISerializable extends IIdentifiable {
 		/**
-		 * Serialize current object into Xml
+		 * Serialize current object into a serialization format
 		 */
-		function toXml() : XML;
+		function serialize() : Object;
 		/**
-		 * Deserialize this object from one of it's possible XML representation.
-		 * @param xmlData xml data source
+		 * Deserialize this object from its serialized representation.
+		 * @param source serialized data source
 		 */
-		function fromXml(xmlData : XML) : Object;
+		function deserialize(source : Object) : Object;
 		/**
-		 *
-		 * @param xmldata
-		 * @return
+		 * Extract the object's identifier from the serialized source if
+		 * such an identifier exists.
+		 * @param source serialized data source
+		 * @return string representing object's identifier
 		 *
 		 */
-		function getIdValue(xmldata : XML) : String;
+		function getIdValue(source : Object) : String;
 	}
 }

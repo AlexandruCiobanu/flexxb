@@ -30,7 +30,7 @@ package com.googlecode.flexxb.annotation.parser
 	{
 		public var metadataName : String;
 		
-		public var fieldName : QName;
+		private var _fieldName : QName;
 		
 		public var fieldType : Class;
 		
@@ -44,6 +44,19 @@ package com.googlecode.flexxb.annotation.parser
 			attributes = new Object();
 		}
 		
+		public function get fieldName():QName
+		{
+			return _fieldName;
+		}
+
+		public function set fieldName(value:QName):void
+		{
+			//if(value == null){
+			//	throw new Error("QName is null. Fuck!");
+			//}
+			_fieldName = value;
+		}
+
 		public function get version() : String{
 			return attributes[Constants.VERSION] ? attributes[Constants.VERSION] : Constants.DEFAULT;
 		}

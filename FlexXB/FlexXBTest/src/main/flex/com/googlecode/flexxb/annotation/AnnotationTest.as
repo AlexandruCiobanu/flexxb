@@ -50,6 +50,7 @@ package com.googlecode.flexxb.annotation {
 		protected final function validate(annotation : Annotation, ... args) : void {
 			Assert.assertNotNull("Null annotation", annotation);
 			Assert.assertNotNull("Validation arguments are missing", args);
+			Assert.assertNotNull("Null name", annotation.name);
 			Assert.assertEquals("Field Name is incorrect", args[0], annotation.name.localName);
 			Assert.assertEquals("Field Type is incorrect", args[1], annotation.type);
 			Assert.assertEquals("Alias is incorrect", args[2], annotation.alias);
