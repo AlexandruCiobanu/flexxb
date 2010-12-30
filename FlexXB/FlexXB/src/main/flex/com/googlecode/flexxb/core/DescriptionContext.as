@@ -7,7 +7,14 @@ package com.googlecode.flexxb.core
 	import com.googlecode.flexxb.error.DescriptorParsingError;
 
 	/**
-	 * 
+	 * Description context is the main access point for instructing the engine how to handle a specific serialization format.
+	 * The context registers annotations, serializers, converters and offers additional methods to assist the registered
+	 * serializers with the handling of that serialization format. A context also has an instance of a configuration object; 
+	 * as is the case with different formats, additional settings are needed for configuring the mechanism. One may extend the 
+	 * default configuration object to add settings as needed and reference them in the serializers.
+	 * <p>This class must be extended if one is to provide a new serialization format support. In subclasses the method 
+	 * <code>performInitialization</code> must be overriden in order to register serializers, annotations and converters.</p>
+	 *  
 	 * @author Alexutz
 	 * 
 	 */	
@@ -18,9 +25,7 @@ package com.googlecode.flexxb.core
 		protected var _configuration : Configuration;
 		private var _engine : FxBEngine;
 		/**
-		 * 
-		 * @param store
-		 * @param configuration
+		 * Constructor
 		 * 
 		 */		
 		public function DescriptionContext(){ }
@@ -43,15 +48,15 @@ package com.googlecode.flexxb.core
 		 * @private
 		 * @return 
 		 * 
-		 */		
+		 */
 		internal final function get converterStore() : ConverterStore{
 			return _converterStore;
 		}
 		/**
-		 * 
+		 * Get a configuration instance attached to the current description context
 		 * @return 
 		 * 
-		 */		
+		 */
 		public function get configuration() : Configuration{
 			if(!_configuration){
 				_configuration = new Configuration();
@@ -59,7 +64,7 @@ package com.googlecode.flexxb.core
 			return _configuration;
 		}
 		/**
-		 * 
+		 * Set a configuration instance attached to the current description context
 		 * @param value
 		 * 
 		 */		
@@ -81,7 +86,8 @@ package com.googlecode.flexxb.core
 			return null;
 		}
 		/**
-		 * 
+		 * Once a new type has been processed, the context has the chance to handle the descriptors in order to construct 
+		 * internal structures it may need (for example, in handling XML, determine the type by the namespace used).
 		 * @param descriptors
 		 * 
 		 */		
@@ -93,7 +99,7 @@ package com.googlecode.flexxb.core
 		 */		
 		protected function performInitialization() : void { }
 		/**
-		 * 
+		 * Get a reference to the descriptor store
 		 * @return 
 		 * 
 		 */		
@@ -101,9 +107,9 @@ package com.googlecode.flexxb.core
 			return _store;
 		}
 		/**
-		 * 
-		 * @param converter
-		 * @param overrideExisting
+		 * Register a converter instance for a specific type
+		 * @param converter converter instance
+		 * @param overrideExisting override existing registrations under the same class type
 		 * @return 
 		 * 
 		 */		
@@ -111,11 +117,12 @@ package com.googlecode.flexxb.core
 			return _converterStore.registerSimpleTypeConverter(converter, overrideExisting);
 		}
 		/**
-		 * 
-		 * @param name
-		 * @param annotationClazz
-		 * @param serializer
-		 * @param overrideExisting
+		 * Register a new annotation and its serializer. If it finds a registration with the
+		 * same name and <code>overrideExisting </code> is set to <code>false</code>, it will disregard the current attempt and keep the old value.
+		 * @param name the name of the annotation to be registered
+		 * @param annotationClazz annotation class type
+		 * @param serializerInstance instance of the serializer that will handle this annotation
+		 * @param overrideExisting override existing registrations under the same name
 		 * 
 		 */		
 		public final function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {

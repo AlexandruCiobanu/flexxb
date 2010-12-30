@@ -23,7 +23,7 @@ package com.googlecode.flexxb.core
 
 	/**
 	 * @private
-	 * @author Alexutzutz
+	 * @author Alexutz
 	 * 
 	 */	
 	internal final class ProcessNotifier
@@ -40,7 +40,7 @@ package com.googlecode.flexxb.core
 		/**
 		 * 
 		 * @param dispatcher
-		 * @param xmlData
+		 * @param serializedData
 		 * 
 		 */		
 		public function notifyPreSerialize(dispatcher : IEventDispatcher, serializedData : Object) : void{
@@ -56,7 +56,7 @@ package com.googlecode.flexxb.core
 		 * 
 		 * @param dispatcher
 		 * @param item
-		 * @param xmlData
+		 * @param serializedData
 		 * 
 		 */		
 		public function notifyPreDeserialize(dispatcher : IEventDispatcher, item : Object, serializedData : Object) : void{
@@ -70,7 +70,7 @@ package com.googlecode.flexxb.core
 		/**
 		 * 
 		 * @param dispatcher
-		 * @param xmlData
+		 * @param serializedData
 		 * 
 		 */		
 		public function notifyPostSerialize(dispatcher : IEventDispatcher, serializedData : Object) : void{
@@ -86,7 +86,7 @@ package com.googlecode.flexxb.core
 		 * 
 		 * @param dispatcher
 		 * @param item
-		 * @param xmlData
+		 * @param serializedData
 		 * 
 		 */			
 		public function notifyPostDeserialize(dispatcher : IEventDispatcher, item : Object, serializedData : Object) : void{

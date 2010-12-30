@@ -38,6 +38,7 @@ package com.googlecode.flexxb.core {
 		/**
 		 *
 		 * @param converter
+		 * @param overrideExisting
 		 * @return
 		 *
 		 */

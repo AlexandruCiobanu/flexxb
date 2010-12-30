@@ -17,7 +17,17 @@
 package com.googlecode.flexxb.core {
 	import flash.events.Event;
 	/**
-	 * 
+	 * Event being raised by the serialization mechanism in order
+	 * to signal various stages teh process is in. The event is
+	 * raised for each complex object/subobject being processed.<br/>
+	 * There are four types of events one should listen for to hook 
+	 * into the mechanism:<br/>
+	 * <ul>
+	 * <li>preserialize - raised before the serialization of an object begins</li>
+	 * <li>postserialize - raised after the objet's serialization ends</li>
+	 * <li>predeserialize - raised before the deserialization of data to an object begins</li>
+	 * <li>postdeserialize - raised after the deserialization ends</li>
+	 * </ul>
 	 * @author Alexutz
 	 * 
 	 */	
@@ -27,46 +37,46 @@ package com.googlecode.flexxb.core {
 		public static const PRE_DESERIALIZE : String = "predeserialize";
 		public static const POST_DESERIALIZE : String = "postdeserialize";
 		/**
-		 * 
-		 * @param item
-		 * @param parent
-		 * @param source
-		 * @return 
+		 * Create a preserialize event instance to be raised
+		 * @param item current object being serialized
+		 * @param parent current object's parent
+		 * @param source serialized document being generated up to this point
+		 * @return <code>SerializationEvent</code> instance
 		 * 
 		 */		
 		public static function createPreSerializeEvent(item : Object, parent : Object, source : Object) : SerializationEvent {
 			return new SerializationEvent(PRE_SERIALIZE, item, parent, source);
 		}
 		/**
-		 * 
-		 * @param item
-		 * @param parent
-		 * @param source
-		 * @return 
+		 * Create a postserialize event instance to be raised
+		 * @param item current object being serialized
+		 * @param parent current object's parent
+		 * @param source serialized document being generated up to this point
+		 * @return <code>SerializationEvent</code> instance
 		 * 
 		 */		
 		public static function createPostSerializeEvent(item : Object, parent : Object, source : Object) : SerializationEvent {
 			return new SerializationEvent(POST_SERIALIZE, item, parent, source);
 		}
 		/**
+		 * Create a predeserialize event instance to be raised
+		 * @param item current object being populated with deserialized data from the data source
+		 * @param parent current object's parent
+		 * @param source data source document being deserialized
+		 * @return <code>SerializationEvent</code> instance
 		 * 
-		 * @param item
-		 * @param parent
-		 * @param source
-		 * @return 
-		 * 
-		 */		
+		 */			
 		public static function createPreDeserializeEvent(item : Object, parent : Object, source : Object) : SerializationEvent {
 			return new SerializationEvent(PRE_DESERIALIZE, item, parent, source);
 		}
 		/**
+		 * Create a postdeserialize event instance to be raised
+		 * @param item current object being populated with deserialized data from the data source
+		 * @param parent current object's parent
+		 * @param source data source document being deserialized
+		 * @return <code>SerializationEvent</code> instance
 		 * 
-		 * @param item
-		 * @param parent
-		 * @param source
-		 * @return 
-		 * 
-		 */		
+		 */			
 		public static function createPostDeserializeEvent(item : Object, parent : Object, source : Object) : SerializationEvent {
 			return new SerializationEvent(POST_DESERIALIZE, item, parent, source);
 		}
@@ -75,7 +85,7 @@ package com.googlecode.flexxb.core {
 		private var _parent : Object;
 		private var _source : Object;
 		/**
-		 * 
+		 * Constructor
 		 * @param type event type
 		 * @param item current item undergoing the serialization process
 		 * @param parent parent of current item
@@ -89,7 +99,7 @@ package com.googlecode.flexxb.core {
 			_source = source;
 		}
 		/**
-		 * 
+		 * Get current object
 		 * @return 
 		 * 
 		 */		
@@ -97,7 +107,7 @@ package com.googlecode.flexxb.core {
 			return _object;
 		}
 		/**
-		 * 
+		 * Get current object's parent
 		 * @return 
 		 * 
 		 */		
@@ -105,18 +115,14 @@ package com.googlecode.flexxb.core {
 			return _parent;
 		}
 		/**
-		 * 
+		 * Get serialized document
 		 * @return 
 		 * 
 		 */		
 		public function get source() : Object {
 			return _source;
 		}
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
+				
 		public override function clone() : Event{
 			return new SerializationEvent(type, _object, parent, _source);
 		}

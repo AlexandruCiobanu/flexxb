@@ -18,7 +18,9 @@ package com.googlecode.flexxb.core {
 	import com.googlecode.flexxb.cache.ICacheProvider;
 
 	/**
-	 *
+	 * This class defines the settings the FlexXB Core and serialization contexts accept in 
+	 * order to control processing. You may override this class to add more settings that 
+	 * will be used in your serialization contexts and serializers.
 	 * @author Alexutz
 	 *
 	 */
@@ -42,7 +44,7 @@ package com.googlecode.flexxb.core {
 		public var cacheProvider : ICacheProvider;
 		/**
 		 * Reference to a version extractor instance used to determine automatically the version of
-		 * an xml document.
+		 * an serialized document.
 		 */		
 		public var versionExtractor : IVersionExtractor;
 		/**
@@ -61,26 +63,42 @@ package com.googlecode.flexxb.core {
 		}
 		/**
 		 * Flag signaling whether the engine should attempt to automatically
-		 * determine the version of the received xml document. This setting
+		 * determine the version of the received serialized document. This setting
 		 * is overridden by specifying a non empty version value when 
-		 * deserializing the xml document. 
+		 * deserializing the serialized document. 
 		 * @return true if detection is auto, false otherwise
 		 * 
 		 */		
 		public function get autoDetectVersion() : Boolean{
 			return versionExtractor != null;
 		} 
-		
+		/**
+		 * Clone the current configuration object 
+		 * @return exact copy of the current object 
+		 * 
+		 */		
 		public final function clone() : Configuration{
 			var copy : Configuration = getInstance();
 			copyFrom(this, copy);
 			return copy;
 		}
-		
+		/**
+		 * Get a new instance of the Configuration object. It is used by the clone method
+		 * to create and populate a copy of this.<br/>
+		 * Override this method to specify subclass instance.
+		 * @return Configuration instance
+		 * 
+		 */		
 		protected function getInstance() : Configuration{
 			return new Configuration();
 		}
-		
+		/**
+		 * Copy the settings from a configuration instance to another. Override
+		 * this method in subclasses to specify additional settings to be copied. 
+		 * @param source source configuration
+		 * @param target destination configuration
+		 * 
+		 */		
 		protected function copyFrom(source : Configuration, target : Configuration) : void{
 			if(source && target){
 				target.cacheProvider = source.cacheProvider;

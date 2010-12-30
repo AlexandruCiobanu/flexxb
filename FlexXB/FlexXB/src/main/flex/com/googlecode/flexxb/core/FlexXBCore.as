@@ -20,23 +20,22 @@ package com.googlecode.flexxb.core
 	import com.googlecode.flexxb.util.log.LogFactory;
 
 	/**
-	 * Triggers prior to the serialization of an object into XML
+	 * Triggers prior to the serialization of an object into a serialization format
 	 */
 	[Event(name="preserialize", type="com.googlecode.flexxb.core.SerializationEvent")]
 	/**
-	 * Triggers after the serialization of an AS3 object into XML
+	 * Triggers after the serialization of an AS3 object into a serialization format
 	 */
 	[Event(name="postserialize", type="com.googlecode.flexxb.core.SerializationEvent")]
 	/**
-	 * Triggers prior to the deserialization of a XML into an AS3 object
+	 * Triggers prior to the deserialization of a serialization format into an AS3 object
 	 */
 	[Event(name="predeserialize", type="com.googlecode.flexxb.core.SerializationEvent")]
 	/**
-	 * Triggers after the deserialization of a XML into an AS3 object
+	 * Triggers after the deserialization of a serialization format into an AS3 object
 	 */
 	[Event(name="postdeserialize", type="com.googlecode.flexxb.core.SerializationEvent")]	
 	/**
-	 * 
 	 * @private
 	 * @author Alexutz
 	 * 
@@ -106,7 +105,7 @@ package com.googlecode.flexxb.core
 			if(!version && configuration.autoDetectVersion){
 				version = configuration.versionExtractor.getVersion(source);
 			}
-			var object : Object = core.deserialize(source as XML, objectClass, getFromCache, version);
+			var object : Object = core.deserialize(source, objectClass, getFromCache, version);
 			mappingModel.idResolver.endDocument();
 			mappingModel.collisionDetector.endDocument();
 			return object;
