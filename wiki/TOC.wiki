@@ -1,10 +1,11 @@
 #summary Table of Contents
-#labels Phase-Support
 
  * [GeneralDescription Home]
  * [Features Features]
    * [RoadMap Road map]
- * [Usage Usage]
+ * Usage
+   * [Usage FlexXB 1.x]
+   * FlexXB 2.x
  * Architecture
    * [Architecture FlexXB architecture]
    * [CommunicationServicesAndObjectPersistence  Communication services and object persistence]
