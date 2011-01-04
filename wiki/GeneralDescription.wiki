@@ -1,4 +1,4 @@
-#summary XML-AS3 automated (de)serialization for Flex and Air applications
+#summary FlexXB - automated (de)serialization for Flex and Air applications
 #labels Featured
 
 = Introduction =
