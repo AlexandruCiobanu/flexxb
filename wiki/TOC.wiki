@@ -8,8 +8,9 @@
    * [Usage FlexXB 1.x]
    * [Usage2x FlexXB 2.x]
  * Architecture
-   * [Architecture FlexXB 1.x architecture]
-   * [Architecture2x FlexXB 2.x architecture]
+   * FlexXB architecture
+     * [Architecture FlexXB 1.x]
+     * [Architecture2x FlexXB 2.x]
    * [XmlAnnotations Built-in Xml annotations]
    * [CommunicationServicesAndObjectPersistence Communication services and object persistence]
  * [FAQ FAQ]
