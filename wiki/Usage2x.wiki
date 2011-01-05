@@ -4,8 +4,6 @@ FlexXB 2.x allows extensions to support different serialization formats. Due to 
 
 =Using built-in XML serialization=
 
-== The new way==
-
 To get the serializer to be used in xml handling:<br/>
 {{{com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer() : IFlexXB}}}
 
@@ -33,40 +31,6 @@ In order to register a class descriptor created via the FlexXB API for classes t
 To provide an API descriptor file content in which the class descriptors are depicted in an XML format:<br/>
 {{{com.googlecode.flexxb.core.FxBEngine.instance.api.processDescriptorsFromXml(xml)}}}
 
-
-
-==The deprecated way==
-
-Using FlexXBEngine is deprecated but still accepted and only applies to xml handling.
-
-To serialize an object to xml:<br/>
-{{{com.googlecode.serializer.flexxb.FlexXBEngine.serialize(object)}}}
-
-To deserialize a received xml to an object, given the object's class:<br/>
-{{{com.googlecode.serializer.flexxb.FlexXBEngine.deserialize(xml, class)}}}
-
-To register a custom annotationbr/>
-{{{com.googlecode.serializer.flexxb.FlexXBEngine.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)}}}
-
-To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the xml representation and viceversa:<br/>
-{{{com.googlecode.serializer.flexxb.FlexXBEngine.registerSimpleTypeConverter(converterInstance, overrideExisting)}}}
-
-To enable/diable object caching:
-{{{
-//disable
-com.googlecode.serializer.flexxb.FlexXBEngine.configuration.cacheProvider = null;
-//enable
-com.googlecode.serializer.flexxb.FlexXBEngine.configuration.cacheProvider = new com.googlecode.flexxb.cache.ObjectCache();
-   //or
-com.googlecode.serializer.flexxb.FlexXBEngine.configuration.cacheProvider = new com.googlecode.flexxb.cache.ObjectPool();
-}}}
-
-In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to add annotations:
-{{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)}}}
-
-To provide an API descriptor file content in which the class descriptors are depicted in an XML format:<br/>
-{{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processDescriptorsFromXml(xml)}}}
-
 =Customizing serialization format=
 
 To create a description context, the core of your custom serialization, extend 
@@ -77,3 +41,20 @@ To create a description context, the core of your custom serialization, extend
 
 To register the new serialization format context:
 {{{com.googlecode.flexxb.core.FxBEngine.instance.registerDescriptionContext(name : String, context : DescriptionContext) : void}}}
+
+To get the associated serializer:
+{{{com.googlecode.flexxb.core.FxBEngine.instance.getSerializer(name : String) : IFlexXB}}}
+
+To serialize an object to the custom format:<br/>
+{{{com.googlecode.flexxb.core.FxBEngine.instance.getSerializer(name : String).serialize(object)}}}
+
+To deserialize a received data ina custom format to an object, given the object's class:<br/>
+{{{com.googlecode.flexxb.core.FxBEngine.instance.getSerializer(name : String).deserialize(xml, class)}}}
+
+=Using the api=
+
+In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to add annotations:<br/>
+{{{com.googlecode.serializer.flexxb.core.FxBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)}}}
+
+To provide an API descriptor file content in which the class descriptors are depicted in an XML format:<br/>
+{{{com.googlecode.serializer.flexxb.core.FxBEngine.instance.api.processDescriptorsFromXml(xml)}}}
