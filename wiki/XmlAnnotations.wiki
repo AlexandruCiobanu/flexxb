@@ -1,0 +1,66 @@
+#summary Xml annotations details
+#labels Phase-Support
+
+FlexXB accomplishes marshalling/unmarshalling of objects by using annotations defined on the model classes it works with. 
+
+= Annotations =
+
+=== XmlClass ===
+Is used at class level. It defines the wrapper in which the class' fields are serialized or from which they are deserialized. I allows defining the alias the class will be found under in the xml aswell as the namespace specific for this class.
+ 
+ Syntax: {{{[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false")]}}}
+  * {{{alias}}}: The name of the element/attribute that represents this object in the xml request/response;
+  * {{{useNamespaceFrom}}}: Allows the class to use as class namespace a namespace defined by the type of one of the composing fields.
+  * {{{idField}}} The name of the object's field that will be used to identify that object;
+  * {{{prefix}}}: Namespace prefix that will be used to serialize objects of this class;
+  * {{{uri}}}: Namespace uri for object representations received from and transmitted to server;
+  * {{{defaultValueField}}}: name of the field whose value will be renderer as a free text element in the xml representation;
+  * {{{ordered}}}: boolean flag signaling whether a specific order has been specified for the fields or not. If true, on serialization, the fields values will be serialized in teh order specified by the field annotations.
+
+=== ConstructorArg ===
+Is defined at class level and multiple definitions are allowed for the same class. In classes that define parametered constructors the marshalling engine must be aware of the type and order of parameters with witch the constructor is being called. Usually, a constructor would configure its field values with values received as parameters. Since the received xml contains field rendering it is not possible to inject different values in the constructor parameter list. 
+
+Annotation order is higly important in this case and they must duplicate the order of the parameters used by the constructor. 
+Defining constructor arguments allow for preservation of business object structure and creation rules.
+ 
+ Syntax:{{{[ConstructorArg(reference="FieldName", optional="true|false")]}}}
+  * {{{reference}}}: Holds the name of one of the classes' fields. 
+  * {{{optional}}}: Whether the parameter is optional or not in the constructor definition. Defaults to {{{false}}}.
+
+=== Namespace ===
+Is defined at class level and multiple definitions are allowed for the same class. 
+
+ Syntax:{{{[Namespace(prefix="namespace_Prefix", uri="namespace_Uri”)]}}}
+ * {{{prefix}}}: The prefix used by this namespace; 
+ * {{{uri}}}: The uri used by this namespace;
+
+=== XmlAttribute ===
+Is used at field level and defines the details of the field being rendered as an attribute of the wrapping xml element.
+ Syntax:{{{[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="NameSpace_Prefix")]}}}
+  * {{{alias}}}: The name of the attribute that represents this object in the xml request/response;
+  * {{{ignoreOn}}}: Ignore this field from processing;
+  * {{{order}}}: Numeric value specifying the order ot the field on serialization. the order is used only if the ordered flag was set to true at class level. 
+  * {{{namespace}}}: References by prefix a namespace registered for the current class. Allows the current item to be rendered with a qualified name containing the referenced namespace.
+
+=== XmlElement ===
+Is used at field level and defines the details of the field being rendered as an element of the wrapping xml element.
+ Syntax:{{{[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="NameSpace_Prefix")]}}}
+  * {{{alias}}}: The name of the element that represents this object in the xml request/response;
+  * {{{getFromCache}}}: Get the value of this field from the object cache, based on its id 
+  * {{{ignoreOn}}}: Ignore this field from processing;
+  * {{{serializePartialElement}}}: Serialize only the id of this field's value (implies that the field represents a complex object that has an id);
+  * {{{order}}}: Numeric value specifying the order ot the field on serialization. the order is used only if the ordered flag was set to true at class level;
+  * {{{getRuntimeType}}}: Get the element type on deserialization based on the xml name at runtime.
+  * {{{namespace}}}: References by prefix a namespace registered for the current class. Allows the current item to be rendered with a qualified name containing the referenced namespace.
+
+=== XmlArray ===
+Is used at field level and defines the details of the field being rendered as an element of the wrapping xml element. The element will contain the rendering of the list elements. 
+ Syntax:{{{[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index", namespace="NameSpace_Prefix")]}}}
+  * {{{alias}}}: The name of the element/attribute that represents this object in the xml request/response;
+  * {{{memberName}}}: Optionaly specify the name that each of the items' xml rendering will have;
+  * {{{getFromCache}}}: Get the members of the array representing this field's value from the object cache, based on their ids;
+  * {{{type}}}: Specify the type of the array's members; 
+  * {{{ignoreOn}}}: Ignore this field from processing;
+  * {{{serializePartialElement}}}: Serialize only the ids of the array's member;
+  * {{{order}}}: Numeric value specifying the order ot the field on serialization. the order is used only if the ordered flag was set to true at class level.
+  * {{{namespace}}}: References by prefix a namespace registered for the current class. Allows the current item to be rendered with a qualified name containing the referenced namespace.
