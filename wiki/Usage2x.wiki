@@ -35,7 +35,9 @@ To provide an API descriptor file content in which the class descriptors are dep
 
 
 
-==The old way==
+==The deprecated way==
+
+Using FlexXBEngine is deprecated but still accepted and only applies to xml handling.
 
 To serialize an object to xml:<br/>
 {{{com.googlecode.serializer.flexxb.FlexXBEngine.serialize(object)}}}
