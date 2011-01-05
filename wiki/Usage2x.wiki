@@ -15,6 +15,25 @@ To serialize an object to xml:<br/>
 To deserialize a received xml to an object, given the object's class:<br/>
 {{{com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().deserialize(xml, class)}}}
 
+To get the configuration for the xml serializer. One may need to convert teh configuration instance to its true type, {{{com.googlecode.flexxb.xml.XmlConfiguration}}} in order to access all settings:<br/>
+{{{com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().configuration}}}
+
+To do an early processing of class types required for deserialization so as not to have problems when classes are not known:<br/>
+{{{com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().processTypes(...args) : void}}}
+
+To register a custom annotation:<br/>
+{{{com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().context.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)}}}
+
+To register a class type converter:<br/>
+{{{com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().context.registerSimpleTypeConverter(converterInstance, overrideExisting)}}}
+
+In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to add annotations:
+{{{com.googlecode.flexxb.core.FxBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)}}}
+
+To provide an API descriptor file content in which the class descriptors are depicted in an XML format:<br/>
+{{{com.googlecode.flexxb.core.FxBEngine.instance.api.processDescriptorsFromXml(xml)}}}
+
+
 
 ==The old way==
 
