@@ -1,0 +1,2 @@
+#summary FlexXB 2.x architecture
+#labels Phase-Design
