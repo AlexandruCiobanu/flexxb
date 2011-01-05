@@ -5,7 +5,7 @@
    * [RoadMap Road map]
  * Usage
    * [Usage FlexXB 1.x]
-   * FlexXB 2.x
+   * [Usage2x FlexXB 2.x]
  * Architecture
    * [Architecture FlexXB architecture]
    * [CommunicationServicesAndObjectPersistence  Communication services and object persistence]
