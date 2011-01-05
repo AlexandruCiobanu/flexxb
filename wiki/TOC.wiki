@@ -13,4 +13,6 @@
      * [Architecture2x FlexXB 2.x]
    * [XmlAnnotations Built-in Xml annotations]
    * [CommunicationServicesAndObjectPersistence Communication services and object persistence]
+ * Samples
+   * TODO
  * [FAQ FAQ]
