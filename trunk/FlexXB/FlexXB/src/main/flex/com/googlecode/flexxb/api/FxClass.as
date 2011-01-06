@@ -1,6 +1,6 @@
 /**
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
- *   Copyright (C) 2008-2010 Alex Ciobanu
+ *   Copyright (C) 2008-2011 Alex Ciobanu
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
+	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.error.ApiError;
 	
 	import flash.utils.Dictionary;
@@ -27,10 +28,11 @@ package com.googlecode.flexxb.api {
 	 */
 	public class FxClass implements IFxMetaProvider {
 		
+		[XmlAttribute]
 		/**
-		 *
-		 */
-		private var _members : Array = [];
+		 * 
+		 */		
+		public var version : String = "";
 		
 		[XmlArray(alias="ConstructorArguments", type="com.googlecode.flexxb.api.FxConstructorArgument")]
 		[ArrayElementType("com.googlecode.flexxb.api.FxConstructorArgument")]
@@ -41,7 +43,11 @@ package com.googlecode.flexxb.api {
 		/**
 		 *
 		 */
-		private var _type : Class;
+		private var _type : Class;		
+		/**
+		 *
+		 */
+		private var _members : Array = [];
 
 		/**
 		 * Constructor
@@ -100,6 +106,7 @@ package com.googlecode.flexxb.api {
 			
 		public function getMappingValues() : Dictionary{
 			var values : Dictionary = new Dictionary();
+			values[Constants.VERSION] = version;
 			return values;
 		}
 		

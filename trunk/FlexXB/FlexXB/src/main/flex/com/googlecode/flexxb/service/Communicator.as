@@ -1,6 +1,6 @@
 /**
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
- *   Copyright (C) 2008-2010 Alex Ciobanu
+ *   Copyright (C) 2008-2011 Alex Ciobanu
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -53,12 +53,12 @@ package com.googlecode.flexxb.service {
 		 */
 		public function applySettings(settings : ServiceSettings, detectSettingsChange : Boolean = false) : void {
 			if (_settings) {
-				_settings.removeEventListener(SettingsChangedEvent.SETTINGSCHANGE, settingsChangeHandler);
+				_settings.removeEventListener(SettingsChangedEvent.SETTINGSCHANGE, onSettingsChange);
 			}
 			_settings = settings;
 			if (settings) {
 				if (detectSettingsChange) {
-					_settings.addEventListener(SettingsChangedEvent.SETTINGSCHANGE, settingsChangeHandler);
+					_settings.addEventListener(SettingsChangedEvent.SETTINGSCHANGE, onSettingsChange);
 				}
 				configureService(service, _settings);
 			}
@@ -117,7 +117,7 @@ package com.googlecode.flexxb.service {
 		 * @param event
 		 *
 		 */
-		private function settingsChangeHandler(event : SettingsChangedEvent) : void {
+		private function onSettingsChange(event : SettingsChangedEvent) : void {
 			configureService(service, _settings);
 		}
 

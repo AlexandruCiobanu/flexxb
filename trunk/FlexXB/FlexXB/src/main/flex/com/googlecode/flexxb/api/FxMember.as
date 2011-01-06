@@ -1,6 +1,6 @@
 /**
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
- *   Copyright (C) 2008-2010 Alex Ciobanu
+ *   Copyright (C) 2008-2011 Alex Ciobanu
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -37,6 +37,12 @@ package com.googlecode.flexxb.api {
 		 * @default 
 		 */
 		public var ignoreOn : Stage = null;
+		
+		[XmlAttribute]
+		/**
+		 * 
+		 */		
+		public var version : String = "";
 		
 		/**
 		 *
@@ -114,6 +120,7 @@ package com.googlecode.flexxb.api {
 			if(ignoreOn){
 				values[Constants.IGNORE_ON] = ignoreOn;
 			}
+			values[Constants.VERSION] = version;
 			return values;
 		}
 		

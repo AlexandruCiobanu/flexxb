@@ -1,6 +1,6 @@
 /**
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
- *   Copyright (C) 2008-2010 Alex Ciobanu
+ *   Copyright (C) 2008-2011 Alex Ciobanu
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -31,15 +31,18 @@ package com.googlecode.flexxb.core {
 	 *
 	 */
 	internal final class DescriptorStore implements IDescriptorStore {
+		/**
+		 * @private 
+		 */		
 		private var descriptorCache : Dictionary = new Dictionary();
-
-		private var classNamespaceMap : Dictionary;
-		
+		/**
+		 * @private 
+		 */		
 		private var parser : MetaParser = new MetaParser();
-			
-		public function getDescriptor(object : Object, version : String = "") : IClassAnnotation {
-			var className : String = getQualifiedClassName(object);
-			return getDefinition(object, className).getDescriptor(version);
+		
+		public function getDescriptor(item : Object, version : String = "") : IClassAnnotation {
+			var className : String = getQualifiedClassName(item);
+			return getDefinition(item, className).getDescriptor(version);
 		}
 			
 		public function getClassReferenceByCriteria(field : String, value : String, version : String = "") : Class{
@@ -59,9 +62,9 @@ package com.googlecode.flexxb.core {
 		 * @return true if the object is custom serialisable, false otherwise
 		 *
 		 */
-		public function isCustomSerializable(object : Object) : Boolean {
-			var className : String = getQualifiedClassName(object);
-			return getDefinition(object, className).reference != null;
+		public function isCustomSerializable(item : Object) : Boolean {
+			var className : String = getQualifiedClassName(item);
+			return getDefinition(item, className).reference != null;
 		}
 
 		/**
