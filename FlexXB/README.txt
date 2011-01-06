@@ -78,24 +78,44 @@ FEATURES
 	
 USAGE
 
+To get the serializer to be used in xml handling:
+com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer() : IFlexXB
+ 
 To serialize an object to xml:
-com.googlecode.serializer.flexxb.FlexXBEngine.instance.serialize(object)
+com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().serialize(object) 
 
 To deserialize a received xml to an object, given the object's class:
-com.googlecode.serializer.flexxb.FlexXBEngine.instance.deserialize(xml, class)
+com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().deserialize(xml, class) 
 
-To register a custom annotation, subclass of com.googlecode.serializer.flexxb.Annotation:
-com.googlecode.serializer.flexxb.FlexXBEngine.instance.registerAnnotation(name, annotationClass, serializerClass, overrideExisting)
+To get the configuration for the xml serializer. One may need to convert the configuration instance to its true type, com.googlecode.flexxb.xml.XmlConfiguration in order to access all settings:
+com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().configuration 
 
-To register a converter that will handle how an object of a specific type is converted to a String value that will be attached to the
-xml representation and viceversa:
-com.googlecode.serializer.flexxb.FlexXBEngine.instance.registerSimpleTypeConverter(converterInstance, overrideExisting)
+To do an early processing of class types required for deserialization so as not to have problems when classes are not known:
+com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().processTypes(...args) : void 
 
-To register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to ad annotations:
-com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor)
+To register a custom annotation:
+com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().context.registerAnnotation(name, annotationClass, serializerClass, overrideExisting) 
+
+To register a class type converter:
+com.googlecode.flexxb.core.FxBEngine.instance.getXmlSerializer().context.registerSimpleTypeConverter(converterInstance, overrideExisting) 
+
+In order to register a class descriptor created via the FlexXB API for classes that cannot be accessed in order to add annotations: 
+com.googlecode.flexxb.core.FxBEngine.instance.api.processTypeDescriptor(apiTypeDescriptor) 
 
 To provide an API descriptor file content in which the class descriptors are depicted in an XML format:
-com.googlecode.serializer.flexxb.FlexXBEngine.instance.api.processDescriptorsFromXml(xml)
+com.googlecode.flexxb.core.FxBEngine.instance.api.processDescriptorsFromXml(xml) 
+
+To register the new serialization format context: 
+com.googlecode.flexxb.core.FxBEngine.instance.registerDescriptionContext(name : String, context : DescriptionContext) : void 
+
+To get the associated serializer: 
+com.googlecode.flexxb.core.FxBEngine.instance.getSerializer(name : String) : IFlexXB 
+
+To serialize an object to the custom format:
+com.googlecode.flexxb.core.FxBEngine.instance.getSerializer(name : String).serialize(object) 
+
+To deserialize a received data ina custom format to an object, given the object's class:
+com.googlecode.flexxb.core.FxBEngine.instance.getSerializer(name : String).deserialize(xml, class)
 
 !NOTE!: Make sure you add the following switches to your compiler settings:
 	 -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray -keep-as3-metadata ConstructorArg -keep-as3-metadata Namespace
@@ -130,9 +150,10 @@ KNOWN LIMITATIONS
 - If an object's field has values of subtypes of the field's type and the alias is set to "*" then the deserialization process will 
   return null for that field.
 
-- Circular references in the object graph will cause StackOverflow exceptions.
-
 RELEASE NOTES
+
+1.8 - 11-01-2011
+	- Feature: FXB-21 - Serialization format support
 
 1.7.1 - 01-11-2010
 	  - Enhancement: Issue 32 - Allow xml version to be picked up automatically  

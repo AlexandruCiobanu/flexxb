@@ -22,6 +22,54 @@
 			<pathelement location="${basedir}/libs/ant/svnjavahl.jar"/>
 		</classpath>
 	</taskdef>
+
+	    <!--****************************************************
+	                FlexPMD
+	        *****************************************************-->
+	 <taskdef name="flexPmd"
+		classname="com.adobe.ac.pmd.ant.FlexPmdAntTask"
+		classpath="${flexpmd.dir}/flex-pmd-ant-task-${flexpmd.version}.jar">
+	        <classpath>
+	            <pathelement location="${flexpmd.dir}/flex-pmd-ruleset-api-${flexpmd.version}.jar"/>
+	            <pathelement location="${flexpmd.dir}/flex-pmd-ruleset-${flexpmd.version}.jar"/>
+	            <pathelement location="${flexpmd.dir}/flex-pmd-core-${flexpmd.version}.jar"/>
+	            <pathelement location="${flexpmd.dir}/as3-plugin-utils-${flexpmd.version}.jar"/>
+	            <pathelement location="${flexpmd.dir}/as3-parser-${flexpmd.version}.jar"/>
+	            <pathelement location="${flexpmd.dir}/pmd-4.2.5.jar"/>
+	            <pathelement location="${flexpmd.dir}/commons-lang-2.4.jar"/>
+	            <pathelement location="${flexpmd.dir}/flex-pmd-files-${flexpmd.version}.jar"/>
+	            <pathelement location="${flexpmd.dir}/as3-parser-api-${flexpmd.version}.jar"/>
+	            <pathelement location="${flexpmd.dir}/plexus-utils-1.0.2.jar"/>
+	        </classpath>
+	 </taskdef>
+	
+	 <taskdef name="flexCpd" classname="com.adobe.ac.cpd.ant.FlexCpdAntTask"
+	         classpath="${flexpmd.dir}/flex-pmd-cpd-ant-task-${flexpmd.version}.jar">
+	      <classpath>
+	         <pathelement location="${flexpmd.dir}/flex-pmd-files-${flexpmd.version}.jar" />
+	         <pathelement location="${flexpmd.dir}/flex-pmd-cpd-${flexpmd.version}.jar" />
+	         <pathelement location="${flexpmd.dir}/as3-plugin-utils-${flexpmd.version}.jar" />
+	         <pathelement location="${flexpmd.dir}/as3-parser-${flexpmd.version}.jar" />
+	         <pathelement location="${flexpmd.dir}/as3-parser-api$-{flexpmd.version}.jar" />
+	         <pathelement location="${flexpmd.dir}/pmd-4.2.5.jar" />
+	      </classpath>
+	 </taskdef>
+
+	 <taskdef name="flexMetrics" classname="com.adobe.ac.pmd.metrics.ant.FlexMetricsAntTask"
+	       classpath="${flexpmd.dir}/flex-pmd-metrics-ant-task-${flexpmd.version}.jar">
+	      <classpath>
+	        <pathelement location="${flexpmd.dir}/flex-pmd-files-${flexpmd.version}.jar" />
+	        <pathelement location="${flexpmd.dir}/flex-pmd-metrics-${flexpmd.version}.jar" />
+	        <pathelement location="${flexpmd.dir}/as3-plugin-utils-${flexpmd.version}.jar" />
+	        <pathelement location="${flexpmd.dir}/as3-parser-${flexpmd.version}.jar" />
+	        <pathelement location="${flexpmd.dir}/as3-parser-api-${flexpmd.version}.jar" />
+			<pathelement location="${flexpmd.dir}/commons-lang-2.4.jar" />
+			<pathelement location="${flexpmd.dir}/flex-pmd-ruleset-api-${flexpmd.version}.jar" />
+	        <pathelement location="${flexpmd.dir}/pmd-4.2.5.jar" />
+	      	<pathelement location="${flexpmd.dir}/dom4j-1.6.1.jar"/>
+	      </classpath>
+	 </taskdef>
+
 	<!-- -->
 	<target name="init" description="Initializes the build">  
 		<tstamp/>  
@@ -89,6 +137,7 @@
 	<!-- -->
 	<target name="development" depends="build.project, build.project.test">
 		<antcall target="documentation" />
+		<antcall target="Metrics" />
 	</target>
 	<!-- -->
 	<target name="release" depends="development, junit.ui">
@@ -171,6 +220,20 @@
 		<fail
 				message="One or more flexunit tests failed. See test reports for details."
 				if="flexunit.failed"/>
+	</target>
+	
+	<target name="Metrics">
+		<condition property="pmdDirExists">
+			<available file="${flexpmd.dir}" property="pmdDirExists"></available>
+		</condition>
+		<flexPmd sourcedirectory="${project.src.dir}" outputdirectory="${bin.dir}/metrics/pmd" ruleset="${flexpmd.dir}/pmd.xml"/>
+		<flexCpd minimumtokencount="50" outputfile="${bin.dir}/metrics/cpd.xml">
+			<fileset dir="${project.src.dir}">
+				<include name="**/*.as"/>
+				<include name="**/*.mxml"/>
+			</fileset>
+		</flexCpd>
+		<flexMetrics sourcedirectory="${project.src.dir}" outputfile="${bin.dir}/metrics/javancss.xml"/>
 	</target>
 	
 	<macrodef name="make.readme">
