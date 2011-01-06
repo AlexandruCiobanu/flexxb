@@ -25,6 +25,11 @@ package com.googlecode.flexxb.xml
 	import com.googlecode.flexxb.xml.annotation.XmlConstants;
 	import com.googlecode.flexxb.xml.annotation.XmlElement;
 	import com.googlecode.flexxb.xml.annotation.XmlNamespace;
+	import com.googlecode.flexxb.xml.api.XmlApiArray;
+	import com.googlecode.flexxb.xml.api.XmlApiAttribute;
+	import com.googlecode.flexxb.xml.api.XmlApiClass;
+	import com.googlecode.flexxb.xml.api.XmlApiElement;
+	import com.googlecode.flexxb.xml.api.XmlApiNamespace;
 	import com.googlecode.flexxb.xml.serializer.XmlArraySerializer;
 	import com.googlecode.flexxb.xml.serializer.XmlAttributeSerializer;
 	import com.googlecode.flexxb.xml.serializer.XmlClassSerializer;
@@ -56,6 +61,8 @@ package com.googlecode.flexxb.xml
 			registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
 			registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
 			registerAnnotation(XmlConstants.ANNOTATION_NAMESPACE, XmlNamespace, null);
+			
+			setApiClasses(XmlApiClass, XmlApiArray, XmlApiAttribute, XmlApiElement, XmlApiNamespace);
 		}
 		
 		public override function handleDescriptors(descriptors : Array) : void {

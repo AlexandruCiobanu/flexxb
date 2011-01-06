@@ -15,15 +15,12 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.xml.annotation.Annotation;
-	import com.googlecode.flexxb.xml.annotation.XmlConstants;
-	import com.googlecode.flexxb.xml.annotation.XmlMember;
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.annotation.contract.Constants;
+	import com.googlecode.flexxb.annotation.contract.Stage;
 	import com.googlecode.flexxb.error.ApiError;
 	
-	import flash.errors.MemoryError;
 	import flash.utils.Dictionary;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
-	import com.googlecode.flexxb.annotation.contract.Stage;
 
 	use namespace flexxb_api_internal;
 
@@ -32,14 +29,7 @@ package com.googlecode.flexxb.api {
 	 * @author Alexutz
 	 *
 	 */
-	internal class FxMember {
-				
-		[XmlAttribute]
-		/**
-		 * 
-		 * @default 
-		 */
-		public var alias : String;
+	public class FxMember implements IFxMetaProvider {
 		
 		[XmlAttribute]
 		/**
@@ -48,28 +38,11 @@ package com.googlecode.flexxb.api {
 		 */
 		public var ignoreOn : Stage = null;
 		
-		[XmlAttribute]
-		/**
-		 * 
-		 *  @default
-		 */		
-		public var idref : Boolean;
-		
-		[XmlAttribute]
-		/**
-		 * 
-		 * @default 
-		 */
-		public var order : Number;
-		
 		/**
 		 *
 		 */
 		protected var _field : FxField;
-		/**
-		 * @private
-		 */		
-		protected var _nameSpace : FxNamespace;
+		
 		/**
 		 * @private
 		 */		
@@ -81,9 +54,8 @@ package com.googlecode.flexxb.api {
 		 * @param alias
 		 *
 		 */
-		public function FxMember(field : FxField, alias : String = null) {
+		public function FxMember(field : FxField) {
 			this.field = field;
-			this.alias = alias;
 		}
 
 		[XmlElement(alias="*")]
@@ -95,30 +67,6 @@ package com.googlecode.flexxb.api {
 			return _field;
 		}
 		
-		[XmlElement(alias="*")]
-		/**
-		 * 
-		 * @return 
-		 */
-		public final function get nameSpace() : FxNamespace{
-			return _nameSpace;
-		}
-		
-		/**
-		 * 
-		 * @param value
-		 */
-		public final function set nameSpace(value : FxNamespace) : void{
-			_nameSpace = value;
-			if(owner){
-				if(value){
-					_nameSpace = owner.addNamespace(value);
-				}else{
-					owner.removeNamespace(value);
-				}
-			}
-		}
-
 		/**
 		 *
 		 * @param value
@@ -157,62 +105,20 @@ package com.googlecode.flexxb.api {
 			return field.accessType;
 		}
 		
-		/**
-		 * 
-		 * @param ns
-		 */
-		public function setNamespace(ns : Namespace) : void{
-			nameSpace = FxNamespace.create(ns);
+		public function getMetadataName() : String{
+			return "";
 		}
-
-		/**
-		 *
-		 * @see com.googlecode.flexxb.IXmlSerializable#toXml()
-		 *
-		 */
-		public function toXml() : XML {
-			var xml : XML = field.toXml();
-			var metadata : XML = <metadata />;
-			xml.appendChild(metadata);
-
-			metadata.@name = getXmlAnnotationName();
-
-			var items : Dictionary = getContent();
-			
-			if(items && _nameSpace){
-				items[XmlConstants.NAMESPACE_REF] = _nameSpace.prefix;
+		
+		public function getMappingValues() : Dictionary{
+			var values : Dictionary = new Dictionary();
+			if(ignoreOn){
+				values[Constants.IGNORE_ON] = ignoreOn;
 			}
-
-			for (var key : * in items) {
-				if (items[key] != null) {
-					metadata.appendChild(<arg key={key} value={items[key]} />)
-				}
-			}
-			return xml;
+			return values;
 		}
-
-		/**
-		 *
-		 * @return
-		 *
-		 */
-		protected function getXmlAnnotationName() : String {
-			return null;
-		}
-
-		/**
-		 *
-		 * @return
-		 *
-		 */
-		protected function getContent() : Dictionary {
-			var items : Dictionary = new Dictionary();
-			items[XmlConstants.ALIAS] = alias;
-			items[XmlConstants.IGNORE_ON] = ignoreOn;
-			if (!isNaN(order))
-				items[XmlConstants.ORDER] = order;
-			items[XmlConstants.IDREF] = idref;
-			return items;
+		
+		protected final function getOwner() : FxClass{
+			return owner;
 		}
 	}
 }

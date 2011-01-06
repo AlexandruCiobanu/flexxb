@@ -16,6 +16,8 @@
  */
 package com.googlecode.flexxb.api {
 	import com.googlecode.flexxb.error.ApiError;
+	
+	import flash.utils.Dictionary;
 
 	[XmlClass(alias="Argument")]
 	[ConstructorArg(reference="reference")]
@@ -27,7 +29,7 @@ package com.googlecode.flexxb.api {
 	 * @author Alexutz
 	 *
 	 */
-	public class FxConstructorArgument {
+	public class FxConstructorArgument implements IFxMetaProvider {
 		protected var _reference : String;
 
 		protected var _optional : Boolean;
@@ -81,15 +83,16 @@ package com.googlecode.flexxb.api {
 		public function set optional(value : Boolean) : void {
 			_optional = value;
 		}
-		/**
-		 * Get the xml representation of the current instance
-		 * @return XML instance
-		 */
-		public function toXml() : XML {
-			return <metadata name="ConstructorArg">
-					<arg key="reference" value={reference} />
-					<arg key="optional" value={optional} />
-				</metadata>
+		
+		public function getMetadataName() : String{
+			return "ConstructorArg";
+		}
+		
+		public function getMappingValues() : Dictionary{
+			var values : Dictionary = new Dictionary();
+			values["reference"] = reference;
+			values["optional"] = optional;
+			return values;
 		}
 		/**
 		 * Get the string representation of the current instance

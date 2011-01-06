@@ -17,13 +17,13 @@
 package com.googlecode.flexxb.xml.serializer {
 	import com.googlecode.flexxb.core.DescriptionContext;
 	import com.googlecode.flexxb.core.SerializationCore;
+	import com.googlecode.flexxb.util.isVector;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 	import com.googlecode.flexxb.xml.XmlConfiguration;
 	import com.googlecode.flexxb.xml.XmlDescriptionContext;
 	import com.googlecode.flexxb.xml.annotation.XmlArray;
 	import com.googlecode.flexxb.xml.annotation.XmlMember;
-	import com.googlecode.flexxb.util.isVector;
 	
 	import flash.utils.getQualifiedClassName;
 	
@@ -121,8 +121,15 @@ package com.googlecode.flexxb.xml.serializer {
 						list.push(getValue(XML(value), array.memberType, array.getFromCache, serializer))
 					}
 				}else{
+					var type : Class = array.memberType;
 					for each (var xmlChild : XML in xmlArray) {
-						var member : Object = getValue(xmlChild, array.memberType, array.getFromCache, serializer);
+						if (array.getRuntimeType) {
+							type = XmlDescriptionContext(context).getIncomingType(xmlChild);
+							if (!type) {
+								type = array.memberType;
+							}
+						}
+						var member : Object = getValue(xmlChild, type, array.getFromCache, serializer);
 						if (member != null) {
 							list.push(member);
 						}

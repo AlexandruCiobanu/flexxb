@@ -23,7 +23,8 @@ package com.googlecode.flexxb.api {
 	 *
 	 */
 	public class FxApiWrapper {
-		[XmlArray(alias="Descriptors", type="com.googlecode.flexxb.api.FxClass")]
+		[XmlArray(alias="Descriptors", getRuntimeType="true")]
+		[ArrayElementType("com.googlecode.flexxb.api.FxClass")]
 		public var descriptors : Array;
 		[XmlAttribute]
 		public var version : Number;

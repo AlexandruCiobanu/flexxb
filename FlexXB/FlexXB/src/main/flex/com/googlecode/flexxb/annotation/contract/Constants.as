@@ -44,6 +44,10 @@ package com.googlecode.flexxb.annotation.contract
 		 */
 		public static const OPTIONAL : String = "optional";
 		/**
+		 * IgnoreOn attribute name
+		 */
+		public static const IGNORE_ON : String = "ignoreOn";
+		/**
 		 * @private 
 		 * 
 		 */		

@@ -14,24 +14,24 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api {
+package com.googlecode.flexxb.xml.api {
+	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.api.FxField;
 	import com.googlecode.flexxb.xml.annotation.XmlConstants;
-	import com.googlecode.flexxb.xml.annotation.XmlArray;
+	import com.googlecode.flexxb.xml.annotation.XmlElement;
 	
 	import flash.utils.Dictionary;
-	import flash.utils.getQualifiedClassName;
-	import com.googlecode.flexxb.annotation.contract.AccessorType;
 	
-	[XmlClass(alias="Array")]
+	[XmlClass(alias="XmlElement")]
 	[ConstructorArg(reference="field")]
 	[ConstructorArg(reference="alias")]
 	/**
-	 * 
-	 * @author Alexutzutz
-	 * 
-	 */	
-	public class FxArray extends FxElement {
-		public static const INCOMING_XML_NAME : String = "Array";
+	 *
+	 * @author Alexutz
+	 *
+	 */
+	public class XmlApiElement extends XmlApiMember {
+		public static const INCOMING_XML_NAME : String = "XmlElement";
 
 		/**
 		 *
@@ -42,21 +42,26 @@ package com.googlecode.flexxb.api {
 		 * @return
 		 *
 		 */
-		public static function create(name : String, type : Class, accessType : AccessorType = null, alias : String = null) : FxArray {
+		public static function create(name : String, type : Class, accessType : AccessorType = null, alias : String = null) : XmlApiElement {
 			var field : FxField = new FxField(name, type, accessType);
-			var array : FxArray = new FxArray(field, alias);
-			return array;
+			var element : XmlApiElement = new XmlApiElement(field, alias);
+			return element;
 		}
 		/**
 		 *
 		 */
 		[XmlAttribute]
-		public var memberName : String;
+		public var getFromCache : Boolean;
 		/**
 		 *
 		 */
 		[XmlAttribute]
-		public var memberType : Class;
+		public var serializePartialElement : Boolean;
+		/**
+		 *
+		 */
+		[XmlAttribute]
+		public var getRuntimeType : Boolean;
 
 		/**
 		 *
@@ -64,29 +69,28 @@ package com.googlecode.flexxb.api {
 		 * @param alias
 		 *
 		 */
-		public function FxArray(field : FxField, alias : String = null) {
+		public function XmlApiElement(field : FxField, alias : String = null) {
 			super(field, alias);
 		}
 
-		protected override function getXmlAnnotationName() : String {
-			return XmlArray.ANNOTATION_NAME;
+		public override function getMetadataName() : String {
+			return XmlElement.ANNOTATION_NAME;
 		}
 
-		protected override function getContent() : Dictionary {
-			var items : Dictionary = super.getContent();
-			items[XmlConstants.MEMBER_NAME] = memberName;
-			if(memberType is Class){
-				items[XmlConstants.TYPE] =  getQualifiedClassName(memberType);
-			}
-			return items;
+		public override function getMappingValues() : Dictionary{
+			var values : Dictionary = super.getMappingValues();
+			values[XmlConstants.GET_FROM_CACHE] = getFromCache;
+			values[XmlConstants.SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
+			values[XmlConstants.GET_RUNTIME_TYPE] = getRuntimeType;
+			return values;
 		}
 		
 		/**
 		 * Get string representation of the current instance
 		 * @return string representing the current instance
 		 */
-		public override function toString() : String {
-			return "Array[field: " + fieldName + ", type:" + fieldType + "]";
+		public function toString() : String {
+			return "XmlElement[field: " + fieldName + ", type:" + fieldType + "]";
 		}
 	}
 }

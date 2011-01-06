@@ -14,8 +14,13 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api
+package com.googlecode.flexxb.xml.api
 {
+	import com.googlecode.flexxb.annotation.contract.Constants;
+	import com.googlecode.flexxb.api.IFxMetaProvider;
+	import com.googlecode.flexxb.xml.annotation.XmlConstants;
+	
+	import flash.utils.Dictionary;
 		
 	[XmlClass(alias="Namespace")]
 	[ConstructorArg(reference="prefix")]
@@ -25,7 +30,7 @@ package com.googlecode.flexxb.api
 	 * @author Alexutz
 	 * 
 	 */
-	public final class FxNamespace
+	public final class XmlApiNamespace implements IFxMetaProvider
 	{
 		/**
 		 * 
@@ -33,9 +38,9 @@ package com.googlecode.flexxb.api
 		 * @return 
 		 * 
 		 */		
-		public static function create(ns : Namespace) : FxNamespace{
+		public static function create(ns : Namespace) : XmlApiNamespace{
 			if(ns){
-				return new FxNamespace(ns.prefix, ns.uri);
+				return new XmlApiNamespace(ns.prefix, ns.uri);
 			}
 			return null;
 		}
@@ -48,7 +53,7 @@ package com.googlecode.flexxb.api
 		 * @param prefix
 		 * @param uri
 		 */
-		public function FxNamespace(prefix : *, uri : *){
+		public function XmlApiNamespace(prefix : *, uri : *){
 			_prefix = prefix;
 			_uri = uri;
 		}
@@ -72,11 +77,15 @@ package com.googlecode.flexxb.api
 			return _uri;
 		}
 		
-		public function toXml() : XML{
-			return <metadata name="Namespace">
-								<arg key="prefix" value={prefix} />
-								<arg key="uri" value={uri} />
-							</metadata>
+		public function getMetadataName() : String{
+			return "Namespace";
+		}
+		
+		public function getMappingValues() : Dictionary{
+			var values : Dictionary = new Dictionary();
+			values[XmlConstants.NAMESPACE_PREFIX] = prefix;
+			values[XmlConstants.NAMESPACE_URI] = uri;
+			return values;
 		}
 		
 		/**

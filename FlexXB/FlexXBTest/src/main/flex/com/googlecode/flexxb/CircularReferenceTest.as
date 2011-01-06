@@ -17,8 +17,8 @@
  */
 package com.googlecode.flexxb
 {
-	import com.googlecode.flexxb.api.FxClass;
 	import com.googlecode.flexxb.core.FxBEngine;
+	import com.googlecode.flexxb.xml.api.XmlApiClass;
 	import com.googlecode.testData.Company;
 	import com.googlecode.testData.Department;
 	import com.googlecode.testData.DepartmentEmployee;
@@ -92,7 +92,7 @@ package com.googlecode.flexxb
 			company.employees.push(employee);
 			
 			var engine : FxBEngine = new FxBEngine();
-			var clasz : FxClass = new FxClass(DepartmentEmployee);
+			var clasz : XmlApiClass = new XmlApiClass(DepartmentEmployee);
 			clasz.addAttribute("name", String);
 			clasz.addElement("department", Department).idref = true;
 			engine.api.processTypeDescriptor(clasz);

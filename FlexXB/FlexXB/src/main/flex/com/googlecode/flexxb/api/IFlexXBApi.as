@@ -15,7 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.xml.annotation.XmlClass;
+	import com.googlecode.flexxb.api.FxClass;
 
 	/**
 	 * This interface defines the api structure and access points
@@ -37,5 +37,19 @@ package com.googlecode.flexxb.api {
 		 *
 		 */
 		function processDescriptorsFromXml(xml : XML) : void;
+		/**
+		 * 
+		 * @param apiClass
+		 * @return 
+		 * 
+		 */		
+		function buildTypeXmlDescriptor(apiClass : FxClass) : XML;
+		/**
+		 * 
+		 * @param member
+		 * @return 
+		 * 
+		 */		
+		function buildFieldXmlDescriptor(member : FxMember) : XML;
 	}
 }

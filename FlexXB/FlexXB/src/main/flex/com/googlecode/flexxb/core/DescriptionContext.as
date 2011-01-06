@@ -128,5 +128,18 @@ package com.googlecode.flexxb.core
 		public final function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
 			AnnotationFactory.instance.registerAnnotation(name, annotationClazz, serializer, this, overrideExisting);
 		}
+		/**
+		 * Specify api classes that reflect the defined annotations. 
+		 * @param args 
+		 * 
+		 */		
+		public final function setApiClasses(classType : Class, ...args) : void{
+			_store.getDescriptor(classType);
+			for each(var type : Class in args){
+				if(type is Class){
+					_store.getDescriptor(type);
+				}
+			}
+		}
 	}
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexLibProperties includeAllClasses="true" version="1">
+<flexLibProperties includeAllClasses="false" version="1">
   <includeClasses>
+    <classEntry path="com.googlecode.flexxb.FlexXBEngine"/>
     <classEntry path="com.googlecode.flexxb.VERSION"/>
     <classEntry path="com.googlecode.flexxb.annotation.AnnotationFactory"/>
     <classEntry path="com.googlecode.flexxb.annotation.contract.AccessorType"/>
@@ -19,15 +20,10 @@
     <classEntry path="com.googlecode.flexxb.annotation.parser.MetaParser"/>
     <classEntry path="com.googlecode.flexxb.api.AccessorTypeConverter"/>
     <classEntry path="com.googlecode.flexxb.api.FxApiWrapper"/>
-    <classEntry path="com.googlecode.flexxb.api.FxArray"/>
-    <classEntry path="com.googlecode.flexxb.api.FxAttribute"/>
-    <classEntry path="com.googlecode.flexxb.api.FxClass"/>
     <classEntry path="com.googlecode.flexxb.api.FxConstructorArgument"/>
-    <classEntry path="com.googlecode.flexxb.api.FxElement"/>
     <classEntry path="com.googlecode.flexxb.api.FxField"/>
-    <classEntry path="com.googlecode.flexxb.api.FxMember"/>
-    <classEntry path="com.googlecode.flexxb.api.FxNamespace"/>
     <classEntry path="com.googlecode.flexxb.api.IFlexXBApi"/>
+    <classEntry path="com.googlecode.flexxb.api.IFxMetaProvider"/>
     <classEntry path="com.googlecode.flexxb.api.StageXmlConverter"/>
     <classEntry path="com.googlecode.flexxb.api.flexxb_api_internal"/>
     <classEntry path="com.googlecode.flexxb.cache.ICacheProvider"/>
@@ -92,6 +88,12 @@
     <classEntry path="com.googlecode.flexxb.xml.annotation.XmlElement"/>
     <classEntry path="com.googlecode.flexxb.xml.annotation.XmlMember"/>
     <classEntry path="com.googlecode.flexxb.xml.annotation.XmlNamespace"/>
+    <classEntry path="com.googlecode.flexxb.xml.api.XmlApiArray"/>
+    <classEntry path="com.googlecode.flexxb.xml.api.XmlApiAttribute"/>
+    <classEntry path="com.googlecode.flexxb.xml.api.XmlApiClass"/>
+    <classEntry path="com.googlecode.flexxb.xml.api.XmlApiElement"/>
+    <classEntry path="com.googlecode.flexxb.xml.api.XmlApiMember"/>
+    <classEntry path="com.googlecode.flexxb.xml.api.XmlApiNamespace"/>
     <classEntry path="com.googlecode.flexxb.xml.serializer.XmlArraySerializer"/>
     <classEntry path="com.googlecode.flexxb.xml.serializer.XmlAttributeSerializer"/>
     <classEntry path="com.googlecode.flexxb.xml.serializer.XmlClassSerializer"/>
