@@ -11,7 +11,19 @@
                      Base package. Holds main entry point.  
                 ]]> 
             </description> 
-        </package> 
+        </package>
+        <package name="com.googlecode.flexxb.core"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Base package. Holds main entry point.  
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                     Base package. Holds main entry point.  
+                ]]> 
+            </description> 
+        </package>
         <package name="com.googlecode.flexxb.annotation"> 
             <shortDescription> 
                 <![CDATA[ 
@@ -24,6 +36,30 @@
                 ]]> 
             </description> 
         </package> 
+         <package name="com.googlecode.flexxb.annotation.contract"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds the annotations defined by FlexXB.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                    Holds the annotations defined by FlexXB.
+                ]]> 
+            </description> 
+        </package>
+         <package name="com.googlecode.flexxb.annotation.parser"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds the annotations defined by FlexXB.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                    Holds the annotations defined by FlexXB.
+                ]]> 
+            </description> 
+        </package>
         <package name="com.googlecode.flexxb.interfaces"> 
             <shortDescription> 
                 <![CDATA[ 
@@ -144,5 +180,53 @@
                 ]]> 
             </description> 
         </package> 
+        <package name="com.googlecode.flexxb.xml"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
+        <package name="com.googlecode.flexxb.xml.annotation"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
+        <package name="com.googlecode.flexxb.xml.serializer"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
+        <package name="com.googlecode.flexxb.xml.util"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
     </packages> 
 </overviews>
