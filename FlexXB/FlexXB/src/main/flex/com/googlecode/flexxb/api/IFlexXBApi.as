@@ -1,6 +1,6 @@
 /**
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
- *   Copyright (C) 2008-2010 Alex Ciobanu
+ *   Copyright (C) 2008-2011 Alex Ciobanu
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import com.googlecode.flexxb.api.FxClass;
-
+	
 	/**
 	 * This interface defines the api structure and access points
 	 * @author Alexutz

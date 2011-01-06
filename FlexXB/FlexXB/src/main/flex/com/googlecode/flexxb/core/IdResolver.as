@@ -1,6 +1,6 @@
 /**
  *   FlexXB
- *   Copyright (C) 2008-2010 Alex Ciobanu
+ *   Copyright (C) 2008-2011 Alex Ciobanu
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -54,11 +54,10 @@ package com.googlecode.flexxb.core
 		/**
 		 * 
 		 * @param id
-		 * @param clasz
 		 * @return 
 		 * 
 		 */		
-		private function resolve(id : String, clasz : Class = null) : Object{
+		private function resolve(id : String) : Object{
 			if(idMap==null){
 				return null;
 			}
