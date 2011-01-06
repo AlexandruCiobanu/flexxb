@@ -15,6 +15,8 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
+	import com.googlecode.flexxb.xml.api.FxApiComponentTest;
+
 	/**
 	 *
 	 * @author Alexutz

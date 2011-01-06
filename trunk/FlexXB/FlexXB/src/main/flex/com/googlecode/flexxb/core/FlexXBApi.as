@@ -17,15 +17,18 @@
 package com.googlecode.flexxb.core {
 	import com.googlecode.flexxb.api.AccessorTypeConverter;
 	import com.googlecode.flexxb.api.FxApiWrapper;
-	import com.googlecode.flexxb.api.FxArray;
-	import com.googlecode.flexxb.api.FxAttribute;
 	import com.googlecode.flexxb.api.FxClass;
 	import com.googlecode.flexxb.api.FxConstructorArgument;
-	import com.googlecode.flexxb.api.FxElement;
+	import com.googlecode.flexxb.api.FxMember;
 	import com.googlecode.flexxb.api.IFlexXBApi;
+	import com.googlecode.flexxb.api.IFxMetaProvider;
 	import com.googlecode.flexxb.api.StageXmlConverter;
+	import com.googlecode.flexxb.api.flexxb_api_internal;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
+	
+	import flash.utils.Dictionary;
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 *
@@ -37,7 +40,7 @@ package com.googlecode.flexxb.core {
 		private static const LOG : ILogger = LogFactory.getLog(FlexXBApi);
 		
 		private var core : FlexXBCore;
-		private var store : DescriptorStore
+		private var store : DescriptorStore;
 
 		/**
 		 * Constructor
@@ -50,13 +53,13 @@ package com.googlecode.flexxb.core {
 			this.store = store;
 			core.context.registerSimpleTypeConverter(new StageXmlConverter());
 			core.context.registerSimpleTypeConverter(new AccessorTypeConverter());
-			core.processTypes(FxAttribute, FxElement, FxArray, FxConstructorArgument);
+			core.processTypes(FxConstructorArgument);
 		}
 		
 		public function processTypeDescriptor(apiDescriptor : FxClass) : void {
 			if (apiDescriptor) {
 				var type : Class = apiDescriptor.type;
-				store.registerDescriptor(apiDescriptor.toXml(), type);
+				store.registerDescriptor(buildTypeXmlDescriptor(apiDescriptor), type);
 			}
 		}
 		
@@ -74,6 +77,46 @@ package com.googlecode.flexxb.core {
 					}
 				}
 			}
+		}
+		
+		public function buildTypeXmlDescriptor(apiClass : FxClass) : XML{
+			var xml : XML = <type />;
+			xml.@name = getQualifiedClassName(apiClass.type);
+			if (apiClass.constructorArguments) {
+				for (var i : int = apiClass.constructorArguments.length - 1; i >= 0; i--) {
+					xml.appendChild(buildMetadataDescriptor(apiClass.constructorArguments[i] as FxConstructorArgument));
+				}
+			}
+			var globals : Array = apiClass.getGlobalAnnotations();
+			for each(var global : IFxMetaProvider in globals){
+				xml.appendChild(buildMetadataDescriptor(global));
+			}
+			xml.appendChild(buildMetadataDescriptor(apiClass));
+			for each (var member : FxMember in apiClass.members) {
+				xml.appendChild(buildFieldXmlDescriptor(member));
+			}
+			return xml;
+		}
+		
+		public function buildFieldXmlDescriptor(member : FxMember) : XML{
+			var xml : XML = <accessor />;
+			xml.@name = member.field.name;
+			xml.@type = getQualifiedClassName(member.field.type);
+			xml.@access = member.field.accessType.toString();
+			xml.appendChild(buildMetadataDescriptor(member));
+			return xml;
+		}
+		
+		private function buildMetadataDescriptor(meta : IFxMetaProvider) : XML{
+			var xml : XML = <metadata />;
+			xml.@name = meta.getMetadataName();
+			var values : Dictionary = meta.getMappingValues();
+			for(var key : * in values){
+				if(values[key] != null){
+					xml.appendChild(<arg key={key} value={values[key]} />);
+				}
+			}
+			return xml;
 		}
 	}
 }

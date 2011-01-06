@@ -15,11 +15,11 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.api {
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-
-	import mx.utils.StringUtil;
 	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	
+	import flash.utils.getQualifiedClassName;
+	
+	import mx.utils.StringUtil;
 
 	[XmlClass(alias="Field")]
 	[ConstructorArg(reference="name")]
@@ -125,14 +125,6 @@ package com.googlecode.flexxb.api {
 				return;
 			}
 			_accessType = value;
-		}
-
-		public function toXml() : XML {
-			var xml : XML = <accessor />;
-			xml.@name = name;
-			xml.@type = getQualifiedClassName(type);
-			xml.@access = accessType.toString();
-			return xml;
 		}
 		
 		/**

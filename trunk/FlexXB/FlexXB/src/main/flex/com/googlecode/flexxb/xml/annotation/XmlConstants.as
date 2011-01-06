@@ -65,10 +65,6 @@ package com.googlecode.flexxb.xml.annotation
 		 */
 		public static const ORDERED : String = "ordered";
 		/**
-		 * IgnoreOn attribute name
-		 */
-		public static const IGNORE_ON : String = "ignoreOn";
-		/**
 		 * Order attribute name
 		 */
 		public static const ORDER : String = "order";

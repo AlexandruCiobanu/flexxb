@@ -28,15 +28,15 @@ package com.googlecode.flexxb.api
 			var xml : XML = 
 				<FlexXBAPI> 
 				<Descriptors>
-			        <Class type="com.googlecode.flexxb.api.FetchPanel"> 
-			                <Members><Attribute> 
+			        <XmlClass type="com.googlecode.flexxb.api.FetchPanel"> 
+			                <Members><XmlAttribute> 
 			                        <Field name="x" type="int"/> <!-- To serialize their positions. --> 
-			                </Attribute> 
-			                <Attribute> 
+			                </XmlAttribute> 
+			                <XmlAttribute> 
 			                        <Field name="y" type="int"/> 
-			                </Attribute>
+			                </XmlAttribute>
  							</Members>
-			        </Class>
+			        </XmlClass>
 				</Descriptors>
 				</FlexXBAPI>;
 			var engine : FxBEngine = new FxBEngine();

@@ -14,10 +14,11 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.googlecode.flexxb.api {
+package com.googlecode.flexxb.xml.api {
 	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.api.FxField;
 
-	[XmlClass(alias="Attribute")]
+	[XmlClass(alias="XmlAttribute")]
 	[ConstructorArg(reference="field")]
 	[ConstructorArg(reference="alias")]
 	/**
@@ -25,8 +26,8 @@ package com.googlecode.flexxb.api {
 	 * @author Alexutz
 	 *
 	 */
-	public class FxAttribute extends FxMember {
-		public static const INCOMING_XML_NAME : String = "Attribute";
+	public class XmlApiAttribute extends XmlApiMember {
+		public static const INCOMING_XML_NAME : String = "XmlAttribute";
 
 		/**
 		 *
@@ -37,9 +38,9 @@ package com.googlecode.flexxb.api {
 		 * @return
 		 *
 		 */
-		public static function create(name : String, type : Class, accessType : AccessorType = null, alias : String = null) : FxAttribute {
+		public static function create(name : String, type : Class, accessType : AccessorType = null, alias : String = null) : XmlApiAttribute {
 			var field : FxField = new FxField(name, type, accessType);
-			var attribute : FxAttribute = new FxAttribute(field, alias);
+			var attribute : XmlApiAttribute = new XmlApiAttribute(field, alias);
 			return attribute;
 		}
 
@@ -49,11 +50,11 @@ package com.googlecode.flexxb.api {
 		 * @param alias
 		 *
 		 */
-		public function FxAttribute(field : FxField, alias : String = null) {
+		public function XmlApiAttribute(field : FxField, alias : String = null) {
 			super(field, alias);
 		}
 
-		protected override function getXmlAnnotationName() : String {
+		public override function getMetadataName() : String {
 			return "XmlAttribute";
 		}
 		
@@ -62,7 +63,7 @@ package com.googlecode.flexxb.api {
 		 * @return string representing the current instance
 		 */
 		public function toString() : String {
-			return "Attribute[field: " + fieldName + ", type:" + fieldType + "]";
+			return "XmlAttribute[field: " + fieldName + ", type:" + fieldType + "]";
 		}
 	}
 }
