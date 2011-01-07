@@ -16,4 +16,7 @@
  * Samples
    * [Samples1x FlexXB 1.x]
    * [Samples2x FlexXB 2.x]
+ * Extending FlexXB
+   * [Extend1x 1.x]
+   * [Extend2x 2.x]
  * [FAQ FAQ]
