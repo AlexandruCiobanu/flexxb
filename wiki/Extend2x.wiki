@@ -146,9 +146,98 @@ public interface ICycleRecoverable
 	function onCycleDetected(parentCaller : Object) : Object;
 }
 }}}
+
 =Custom serialization contexts=
 
-TODO
+You use a custom serialization context (or a description context as it is refered to in the code) when you need to instruct FlexXB on how to handle a new format of serialized data (JSON, binary). By default, FlexXB has no idea how to write and read the serialized form, xml included. The xml serialization is done by making a custom serialization context. Serialization contexts allow you to:
+ * define your annotations and serializers, converters;
+ * get notified when a type has been described by FlexXB, and perform additional logic on the processed data;
+ * provide specific logic for determining at runtime the type of the object to be used in deserialization by inspecting the serialized data source - because there are differentways of doing this in different formats (for example, in XML, one can do this by inspecting the tag name of the current element or the namespace in which it is defined).
+
+_Note: The context is passed onto the annotation serializer instances so you can add here any specific method that will aid you in the de/serialization process._
+
+The base class is {{{com.googlecode.flexxb.core.DescriptionContext}}} and there are 3 methods of interest:
+ * {{{protected function performInitialization() : void}}} - do you registrations here
+ * {{{public function getIncomingType(source : Object) : Class}}} - if required, add your type detection code here
+ * {{{public function handleDescriptors(descriptors : Array) : void}}} - if required, perform additional actions on the descriptors(list of IClassAnnotation items) to aid in serialization.
+
+Once created, one may register the description context with a {{{com.googlecode.flexxb.core.FxBEngine}}} instance by using the method registerDescriptionContext<br/>{{{public function registerDescriptionContext(name : String, context : DescriptionContext) : void}}}
+
+As an example, let's take a look at some of the code for the Xml description context for FlexXB. We'll the the four elements being used: initializing the context by registering annotations and serializers, implementing the incomingType detector, handling newly processed descriptors and adding helper functions for teh annotations serializers:
+
+{{{
+public final class XmlDescriptionContext extends DescriptionContext
+{
+	private var classNamespaceMap : Dictionary;
+		
+	public function XmlDescriptionContext(){
+		super();
+		_configuration = new XmlConfiguration();
+	}
+	
+	protected override function performInitialization() : void{
+		registerSimpleTypeConverter(new ClassTypeConverter());
+		registerSimpleTypeConverter(new XmlConverter());
+		registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer);
+		registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer);
+		registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer);
+		registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer);
+		registerAnnotation(XmlConstants.ANNOTATION_NAMESPACE, XmlNamespace, null);
+		setApiClasses(XmlApiClass, XmlApiArray, XmlApiAttribute, XmlApiElement, XmlApiNamespace);
+	}
+		
+	public override function handleDescriptors(descriptors : Array) : void {
+		for each(var classDescriptor : XmlClass in descriptors){
+			//if the class descriptor defines a namespace, register it in the namespace map
+			if (classDescriptor.nameSpace) {
+				if (!classNamespaceMap) {
+					classNamespaceMap = new Dictionary();
+				}
+				classNamespaceMap[classDescriptor.nameSpace.uri] = classDescriptor.type;
+			}
+		}
+	}
+
+	public function getXmlName(object : Object, version : String = "") : QName {
+		if (object != null) {
+			var classDescriptor : XmlClass = descriptorStore.getDescriptor(object, version) as XmlClass;
+			if (classDescriptor) {
+				return classDescriptor.xmlName;
+			}
+		}
+		return null;
+	}
+
+	public function getClassByNamespace(ns : String) : Class {
+		if (classNamespaceMap) {
+			return classNamespaceMap[ns] as Class;
+		}
+		return null;
+	}		
+		
+	public override function getIncomingType(source : Object) : Class {
+		var incomingXML : XML = source as XML;
+		if (incomingXML) {
+			if (XmlConfiguration(configuration).getResponseTypeByTagName) {
+				var tagName : QName = incomingXML.name() as QName;
+				if (tagName) {
+					var clasz : Class = getClassByAlias(tagName.localName);
+					if (clasz) {
+						return clasz;
+					}
+				}
+			}
+			if (XmlConfiguration(configuration).getResponseTypeByNamespace) {
+				if (incomingXML.namespaceDeclarations().length > 0) {
+					var _namespace : String = incomingXML.namespaceDeclarations()[0] as Namespace).uri;
+					return getClassByNamespace(_namespace);
+				}
+			}
+		}
+		return null;
+	}
+}
+}}}
 
 = Custom annotations=
 
