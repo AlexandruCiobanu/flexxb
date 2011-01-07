@@ -1,0 +1,324 @@
+#summary Example usage for FlexXB 1.x
+#labels Phase-Support
+
+== Annotation samples ==
+
+=== 1. Basic sample using xml annotations ===
+
+_This is a simple example on using xml annotations. Only fields that have been decorated with an annotation will be taken into account in the (de)serialization process. Notice the idField attribute. It specifies that this object supports a compact method of defining it in xml, by only specifying the id. The id will be rendered as element or attribute in the owner xml. _
+
+{{{
+        [XmlClass(alias="MOck2Replacement", idField="id")]
+	public class Mock3
+	{
+		[XmlAttribute]
+		public var id : Number = 3;
+		[XmlAttribute]
+		public var attribute : Boolean;
+		[XmlElement(alias="objectVersion")]
+		public var version : Number;
+		
+		public function Mock3()
+		{
+			super();
+		}
+	}
+}}}
+
+_The object has been built as:_
+
+{{{
+        var target : Mock3 = new Mock3();
+	target.attribute = true;
+	target.id = 5;
+	target.version = 33;
+}}}
+
+_The resulting XML is:_
+
+{{{
+<MOck2Replacement attribute="true" id="5">
+  <objectVersion>
+    33
+  </objectVersion>
+</MOck2Replacement>
+}}}
+
+=== 2. Namespacing objects ===
+
+_The object defines its own namespace under which it is serialized. Notice the serializePartialElement attribute in the XmlElement annotations. It specifies that the value will be serialized in a compact manner, that is, by only specifying the id of an object. For this, the object must have defined an id field as seen in the first sample_
+
+{{{
+        [Bindable]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.yourcompany.com/xmlns/yourNs")]
+	public class Mock
+	{
+		[XmlAttribute(alias="stuff")]
+		public var aField : String = "a";
+		[XmlAttribute(ignoreOn="serialize")]
+		public var date : Date;
+		[XmlElement(alias="objVersion")]
+		public var version : Number = 4;
+		[XmlElement(alias="mock3", serializePartialElement="true")]
+		public var link : Mock3;
+		[XmlElement(serializePartialElement="true")]
+		public var reference : Object;
+		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]
+		public var result : Array;
+		[XmlElement]
+		public var xmlData : XML; 
+		
+		public var someExcludedField  : Boolean;
+		
+		public function Mock(){
+			//TODO: implement function
+		}
+	}
+}}}
+
+_The object to be serialized has been built as_
+
+{{{
+        var target : Mock = new Mock();
+	target.link = new Mock3();
+	target.aField = "test1";
+	target.date = new Date();
+	target.version = 6;
+	target.result = [];
+	var mk : Mock = new Mock();
+	mk.date = new Date();
+	mk.aField = "mocktestfield";
+	target.result.push(mk);
+	target.xmlData = <test id="1"><element>retw</element></test>
+}}}
+
+_The resulting XML is:_
+
+{{{
+<test:MyClass test:stuff="test1" xmlns:test="http://www.yourcompany.com/xmlns/yourNs">
+  <test:data>
+    <test:MyClass test:stuff="mocktestfield">
+      <test:objVersion>
+        4
+      </test:objVersion>
+    </test:MyClass>
+  </test:data>
+  <test:objVersion>
+    6
+  </test:objVersion>
+  <test:xmlData>
+    <test id="1">
+      <element>
+        retw
+      </element>
+    </test>
+  </test:xmlData>
+  <test:mock3 id="3"/>
+</test:MyClass>
+}}}
+
+=== 3. Using virtual paths ===
+
+_A member's alias can define "virtual paths". Virtual paths allow definition of complex xml structures for a field without complicating the model design. Thus, structures can be present in the xml just by adding virtual paths in the alias definition of a member.
+
+Let's assume the xml representation looks like:_
+
+{{{
+<myPathTester>
+  <anotherSub attTest="Thu Mar 19 15:49:32 GMT+0200 2009"/>
+  This is Default!!!
+  <subObject>
+    <id>
+      2
+    </id>
+    <subSubObj>
+      <ref>
+        ReferenceTo
+      </ref>
+    </subSubObj>
+  </subObject>
+</myPathTester>
+}}}
+
+_This would normally translate itself in about 4 model classes. Using virtual paths, one can describe it in just one model class:_
+
+{{{
+[XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
+public class XmlPathObject
+{
+	[XmlElement(alias="subObject/id")]
+	public var identity : Number = 2;
+	[XmlElement(alias="subObject/subSubObj/ref")]
+	public var reference : String = "ReferenceTo"; 
+	[XmlArray(alias="subObject/list")]
+	public var list : Array;
+	[XmlAttribute(alias="anotherSub/attTest")]
+	public var test : Date = new Date();
+	[XmlElement()]
+	public var defaultTest : String = "This is Default!!!"
+	
+	public function XmlPathObject()
+	{
+	}
+}
+}}}
+
+_Notice the {{{defaultValueField}}} attribute. It specifies that the target field will be rendered in xml as a simple text element. Still, the field maked as default will still have to be decorated by an annotation to be taken into account by the serializer._
+
+=== 4. Ordering the xml sequence ===
+
+_FlexXB supports ordering the fields of an object in the rendered xml either by order index or by field alias both defined in the annotation decorating the field. For ordering to be activated, the ordered attribute must be set to true._
+
+{{{
+	[XmlClass(name="OrderTest", ordered="true")]
+	public class Persist extends PersistableObject
+	{
+		[XmlElement(order="1")]
+		public var isOK : Boolean = false;
+		[XmlElement(order="3")]
+		public var test1 : int;
+		[XmlElement(order="2")]
+		public var test2 : String;		
+		
+		public function Persist(){
+			super();
+		}		
+	}
+}}}
+
+_The resulting xml looks like:_
+
+{{{
+<Persist>
+  <isOK>
+    false
+  </isOK>
+  <test2>
+    valoare
+  </test2>
+  <test1>
+    3
+  </test1>
+</Persist>
+}}}
+
+== API Samples ==
+
+The FlexXB API allows developers to specify the way classes should be processed without decorating them with annotations. This is particularly usefull is cases when using an external library whose sources are not available or when you can't modify existing sources for one reason or another. There are two ways of using the API:
+  
+ * Programatically: you can define in code the fields of a specific type that can be processed and how.
+ * Via xml config file: you can define an xml file containing all the information FlexXB engine needs to process the specified types. This file must oblige to the api schema file located in _*FLEXXB_BINARIES_DIR/api-schema/FlexXB-api.xsd*_.
+The main access point for the api is {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api}}}.
+
+=== 1. Programatically building descriptor ===
+
+Let's assume we have the following object(annotations are set just to demonstrate how the api should be configured):
+
+{{{
+package model
+{
+	import com.googlecode.flexxb.IIdentifiable;
+
+	[XmlClass(alias="Person")]
+	[ConstructorArg(reference="firstName")]
+	[ConstructorArg(reference="lastName")]
+	[Bindable]
+	public class Person implements IIdentifiable
+	{
+		[XmlElement(alias="ID")]
+		public var id : String = "1";
+		[XmlAttribute(alias="FirstName")]
+		public var firstName : String;
+		[XmlAttribute(alias="LastName")]
+		public var lastName : String;
+		[XmlAttribute(alias="Age")]
+		public var age : int;
+		[XmlElement(alias="Position")]
+		public var position : String;
+		
+		public function Person(firstName : String, lastName : String)
+		{
+			super();
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		
+		public function get thisType():Class
+		{
+			return Person;
+		}		
+	}
+}
+}}}
+
+Building the api descriptor should loomk like:
+
+{{{
+        var apiClass : FxClass = new FxClass(Person, "Person");				
+        //Add class members descriptors
+	apiClass.addElement("id", String, AccessorType.READ_WRITE, "ID");
+	apiClass.addAttribute("firstName", String, AccessorType.READ_WRITE, "FirstName");
+	apiClass.addAttribute("lastName", String, AccessorType.READ_WRITE, "LastName");
+	apiClass.addAttribute("age", String, AccessorType.READ_WRITE, "Age");
+	apiClass.addElement("position", String, AccessorType.READ_WRITE, "Position");
+	//Set the constructor arguments, if any
+	apiClass.addArgument("firstName");
+	apiClass.addArgument("lastName");
+	//Register the api descriptor class in the FlexXB engine
+	FlexXBEngine.instance.api.processTypeDescriptor(apiClass);
+}}}
+
+Another example: let's assume we now have a department class (annotations are set just to demonstrate how the api should be configured):
+
+{{{
+package model
+{
+	import com.googlecode.flexxb.IIdentifiable;
+	
+	[XmlClass(alias="CompanyDepartment", prefix="dept", uri="http://myCompanyUrl.com")]
+	[ConstructorArg(reference="id")]
+	[ConstructorArg(reference="name")]
+	[Bindable]
+	public class Department implements IIdentifiable
+	{
+		[XmlAttribute(alias="ID")]
+		public var id : String;
+		
+		[XmlElement(alias="DepartmentName")]
+		public var name : String;
+		
+		[XmlElement(alias="Leader")]
+		public var departmentHead : Person;
+		
+		public function Department(id : String, name : String)
+		{
+			super();
+			this.id = id;
+			this.name = name;
+		}
+		
+		public function get thisType():Class
+		{
+			return Department;
+		}
+		
+	}
+}
+}}}
+
+The api descriptor is built like:
+
+{{{
+        var apiClass : FxClass = new FxClass(Department);
+	apiClass.alias = "CompanyDepartment";
+	apiClass.nameSpace = new Namespace("dept", "http://myCompanyUrl.com");
+	//Add clas members descriptors
+	apiClass.addAttribute("id", String, AccessorType.READ_WRITE, "ID");
+	apiClass.addElement("name", String, AccessorType.READ_WRITE, "DepartmentName");
+	apiClass.addElement("departmentHead", Person, AccessorType.READ_WRITE, "Leader");
+	//Set the constructor arguments, if any
+	apiClass.addArgument("id");
+	apiClass.addArgument("name");
+	//Register the api descriptor class in the FlexXB engine
+	FlexXBEngine.instance.api.processTypeDescriptor(apiClass);
+}}}
