@@ -14,5 +14,6 @@
    * [XmlAnnotations Built-in Xml annotations]
    * [CommunicationServicesAndObjectPersistence Communication services and object persistence]
  * Samples
-   * TODO
+   * [Samples1x FlexXB 1.x]
+   * [Samples2x FlexXB 2.x]
  * [FAQ FAQ]
