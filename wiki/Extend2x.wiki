@@ -8,4 +8,22 @@ FlexXB offers several extension points:
  * Create a custom annotation along with its own serializer;
  * Create custom classes for your annotations to be used in the Annotation API to markup classes without having to manually specify metadatas in the source code.
 
+=Modifier interfaces=
+
+TODO
+
+=Custom serialization contexts=
+
+TODO
+
+= Custom annotations=
+
+TODO
+
+=Custom serializers=
+
+TODO
+
+=Custom annotation API=
+
 TODO
