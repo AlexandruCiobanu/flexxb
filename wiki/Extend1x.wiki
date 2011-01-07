@@ -1,0 +1,204 @@
+#summary Customizing and extending FlexXB 1.x
+#labels Phase-Implementation
+
+FlexXB offers several extension points:
+ * Create a custom serializer
+ * Create a custom annotation along with its own serializer
+ * Implement specialised interfaces in your model objects to modify the engine's behavior on serialization/deserialization.
+
+== Creating custom annotations ==
+
+Annotation structure has changed as of FlexXB 1.7.0 to reflect a global movement whose intent is to make the engine serialization format agnostic (being able to serialize/deserialize Xml, JSON, etc). It has been split into three parts: the contract, the annotation parser and the annotation implementations. 
+
+*The contract* specifies the accepted structure and relationships between annotation as well as a standardization of the types available. Thus we differentiate between three types of annotations:
+ * Class annotations ({{{com.googlecode.flexxb.annotation.contract.IClassAnnotation}}})
+ They are defined at class level and establish conventions for rendering/parsing the wrapper or shell without populating the fields. Class annotations hold references to the list of member annotations defined as well as information about the constructor structure (see Constructor and ConstructorArgument classes). Generally, class instances are identified by an id field and the class annotation can keep a reference to the member metadata annotating the field, in order to know how to render/parse it. Ids are generally used in combination with object caching.
+ * Global annotations ({{{com.googlecode.flexxb.annotation.contract.IGlobalAnnotation}}})
+ They are also defined at class level but do not have direct consequences in the rendering/parsing process. Global annotations are used for specifying configuration elements that the class or member annotation can use (for example, mapping the constructor arguments to class fields, specifying the namespaces used in the class etc.). The contract specifies the constructor argument metadata as a part of class metadata mapping.
+ * Member annotations ({{{com.googlecode.flexxb.annotation.contract.IMemberAnnotation}}})
+ They are defined at field level and establish the conventions for rendering/parsing the field they annotate (for example, whether the field is rendered as ann attribute or an element, its alias etc.). 
+All annotations should generally extend {{{com.googlecode.flexxb.annotation.contract.IBaseAnnotation}}} as it provides the basic implementation and establishes the way teh annotation obtains its data (subclasses will need to override the protected method {{{parse(descriptor : MetaDescriptor) : void}}}).
+
+*The annotation parser* takes the class xml descriptor, obtained via  the describeType() method, and processes the class descriptors, making sure everything is alligned according to version settings. The end result is a list of class annotations, fully configured that reflect the metadatas decorating the class definition. The data from the xml descriptor is passed to each annotation instance via its constructor under teh form of an instance of the class {{{com.googlecode.flexxb.annotation.parser.MetaDescriptor}}}. BaseAnnotation, which is intended to be the basis for all defined annotation classes, then offers a protected method {{{parse(descriptor : MetaDescriptor) : void}}} to be overridden in which sub classes can read values from the data provider and populate their fields.
+
+*The implementations* are basically the end product, the annotations that one use to define the serialization structure. They make use of the contract and parser packages. A very good example of usage iis provided by the default xml implementation located in {{{com.googlecode.flexxb.annotation.xml}}} package.
+
+== Creating custom serializers ==
+
+To create a custom serializer one should implement the {{{com.googlecode.flexxb.serializer.ISerializer}}} interface. Thus one can provide the logic for serializing objects into xml and deserializing xml into actionScript objects. 
+After creating your serializer you must register it with the FlexXB engine.
+Below you can see the structure of the ISerializer interface, with its two methods, one for serialization, the other for deserialization.
+{{{
+package com.googlecode.flexxb.serializer {
+          import com.googlecode.flexxb.SerializerCore;
+          import com.googlecode.flexxb.annotation.contract.IAnnotation;
+          /**
+           * Interface for an annotation bound xml serializer.
+           * @author aCiobanu
+           *
+           */
+          public interface ISerializer {
+                  /**
+                   * Serialize an object into xml
+                   * @param object Object to be serialized
+                   * @param annotation Annotation containing the conversion parameters
+                   * @param parentXml Parent xml that will enclose the objects xml representation
+                   * @serializer
+                   * @return Generated xml
+                   *
+                   */
+                  function serialize(object : Object, annotation : IAnnotation, parentXml : XML, serializer : SerializerCore) : XML;
+                  /**
+                   * Deserialize an xml into the appropiate AS3 object
+                   * @param xmlData Xml to be deserialized
+                   * @param annotation Annotation containing the conversion parameters
+                   * @serializer
+                   * @return Generated object
+                   *
+                   */
+                  function deserialize(xmlData : XML, annotation : IAnnotation, serializer : SerializerCore) : Object;
+          }
+}  
+}}}
+
+You can also extend existing serializers and provide additional features to them. A good starting place is {{{com.googlecode.flexxb.serializer.MemberSerializer}}}, the base for `AttributeSerializer`, `ElementSerializer`, `ArraySerializer`. You may override the regular public methods defined by ISerializer or the two protected methods, inorder to still benefit from the features `MemberSerializer` brings (such as virtual paths): 
+{{{
+protected function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializerCore) : void
+protected function deserializeObject(xmlData : XML, xmlName : QName, annotation : XmlMember, serializer : SerializerCore) : Object;  
+}}}
+
+== Model object interfaces ==
+
+There are four main interfaces objects can implement in order to impose a specific behavior of the engine: IXmlSerializable, ISerializeNotifiable, IDeserializeNotifiable and ICycleRecoverable. All these interfaces are located in the com.googlecode.flexxb.interfaces.
+
+=== 1. {{{com.googlecode.flexxb.interfaces.IXmlSerializable}}} ===
+
+You use this interface if your object requires teh serialization/deserialization process be handled in a customized manner. This way the object itself will handle its own parsing/rendering.
+
+{{{
+/**           
+* Interface for an object that requires custom serialization/deserialization into/from Xml
+* @author aciobanu
+*
+*
+*/          
+public interface IXmlSerializable extends IIdentifiable {
+{
+         /**          
+          * Serialize current object into Xml        
+          */     
+          function toXml() : XML;     
+         /**          
+          * Deserialize this object from one of it's possible XML representation.         
+          * @param xmlData xml data source       
+          */        
+          function fromXml(xmlData : XML) : Object;       
+         /**     
+          *        
+          * @param xmldata        
+          * @return          
+          *         
+          */        
+          function getIdValue(xmldata : XML) : String;
+}  
+}}}
+The {{{getIdValue}}} method is used in case your object is identifiable by an id, and allows the extraction of the id value that is used in case you have object caching enabled. With the obtained id, the engine can look into the cache for an instance associated to that id and get that instance instead of creating a new object.
+
+=== 2. {{{com.googlecode.flexxb.interfaces.ISerializeNotifiable}}} ===
+
+Implementing this interfaces allows the object to get notified of the stages in which teh serialization process is: Pre-serialize and post-serialize. The FlexXB Engine's default behavior is to dispatch pre/post serialize events as they occur for each object processed. When it encounters an ISerializeNotifiable object, it will call its {{{onPreSerialize}}} and {{{onPostSerialize}}} methods, overriding the default behavior.
+
+{{{
+/**
+ * Optional interface to be implemented by objects which need specific
+ * notification on the serialization process.<br> 
+ * If the current object to be serialized implements this interface, the
+ * engine will call the methods implemented on each process step (pre and 
+ * post serialize) instead of firing an XmlEvent on the engine instance for
+ * each step. <br>
+ * Implementing this interface overrides the normal event dispatching in the 
+ * engine.   
+ * @author Alexutz
+ * 
+ */	
+public interface ISerializeNotifiable
+{
+	/**
+	 * Called before the serialization process of the current object begins.
+	 * @param parent
+	 * @param xmlData
+	 * 
+	 */				
+	function onPreSerialize(parent : Object, xmlData : XML) : void;
+	/**
+	 * Called after the serialization process of the current object ends.
+	 * @param parent
+	 * @param xmlData
+	 *  
+	 */		
+	function onPostSerialize(parent : Object, xmlData : XML) : void;
+}
+}}}
+
+=== 3. {{{com.googlecode.flexxb.interfaces.IDeserializeNotifiable }}} ===
+
+Implementing this interfaces allows the object to get notified of the stages in which teh deserialization process is: Pre-deserialize and post-deserialize. The FlexXB Engine's default behavior is to dispatch pre/post deserialize events as they occur for each object processed. When it encounters an IDeserializeNotifiable object, it will call its {{{onPreDeserialize}}} and {{{onPostDeserialize}}} methods, overriding the default behavior.
+{{{
+/**
+ * Optional interface to be implemented by objects which need specific
+ * notification on the deserialization process.<br> 
+ * If the current object to be serialized implements this interface, the
+ * engine will call the methods implemented on each process step (pre and 
+ * post deserialize) instead of firing an XmlEvent on the engine instance for
+ * each step. <br>
+ * Implementing this interface overrides the normal event dispatching in the 
+ * engine.   
+ * @author Alexutz
+ * 
+ */	
+public interface IDeserializeNotifiable
+{
+	/**
+	 * Called before the deserialization process of the current object begins.
+	 * @param parent
+	 * @param xmlData
+	 * 
+	 */		
+	function onPreDeserialize(parent : Object, xmlData : XML) : void;
+	/**
+	 * Called after the deserialization process of the current object ends.
+	 * @param parent
+	 * @param xmlData
+	 * 
+	 */	
+	function onPostDeserialize(parent : Object, xmlData : XML) : void;
+}
+}}}
+
+=== 4. {{{com.googlecode.flexxb.interfaces.ICycleRecoverable}}} ===
+
+FlexXB is able to detect and handle object cycles that would otherwise make it go into an infinite loop. One can implement this interface to instruct the engine to turn to the current object causing teh cycle and ask it to provide a replacement for itself, one that would break the cycle.
+{{{
+/**
+ * Optional interface that can be implemented by FlexXB bound objects to handle 
+ * cycles in the object graph.
+ * <p/>Normally a cycle in the object graph causes the engine to throw an error.
+ * This is not always a desired behavior.Implementing this interface allows the 
+ * user application to change this behavior.
+ * 
+ * @author Alexutz
+ * 
+ */	
+public interface ICycleRecoverable
+{
+	/**
+	 * Called when a cycle is detected by the engine to nominate a new
+	 * object to be serialized instead.
+	 * @param parentCaller reference to the parent object referencing the current ne 
+	 * @return the object to be serialized instead of <code>this</code> or null to 
+	 * instruct the engine to behave as if the object does not implement this interface. 
+	 * 
+	 */			
+	function onCycleDetected(parentCaller : Object) : Object;
+}
+}}}
