@@ -18,7 +18,14 @@ package com.googlecode.flexxb.annotation.contract {
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 
 	/**
-	 *
+	 * This is the base class for all annotations. It implements the most 
+	 * basic contract, IAnnotation, and offers the means of retrieving the 
+	 * metadata attributes and their values from the type descriptor. This
+	 * information is passed inthe constructor via a MetaDescriptor object
+	 * and one must override the protected methd parse in order to apply 
+	 * the necesary attributes on their own annotations. This mechanism 
+	 * makes the annotations to not require direct access to the xml 
+	 * descriptor of the type being introspected.
 	 * @author Alexutz
 	 *
 	 */
@@ -41,15 +48,21 @@ package com.googlecode.flexxb.annotation.contract {
 		public final function get version() : String{
 			return _version;
 		}
-		
+		/**
+		 * Set the version of the current annotation 
+		 * @param value version value
+		 * 
+		 */		
 		protected final function setVersion(value : String) : void{
 			_version = value ? value : Constants.DEFAULT;
 		}
 
 		/**
-		 * @private
-		 * Analyze field/class descriptor to extract base informations like field's name and type
-		 * @param descriptor
+		 * Analyze field/class descriptor to extract base informations like field's name and type.
+		 * Override this method in subclasses to add custom parsing of values extracted from the
+		 * annotation via the MetaDescriptor instance. 
+		 * @param descriptor MetaDescriptor instance holding the key-value pairs of existing attributes 
+		 * and their values as present in the metadata instrospection
 		 *
 		 */
 		protected function parse(descriptor : MetaDescriptor) : void {

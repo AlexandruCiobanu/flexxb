@@ -29,7 +29,7 @@ package com.googlecode.flexxb.annotation.contract
 	public interface IGlobalAnnotation
 	{
 		/**
-		 * 
+		 * Get a reference to the parent class annotation
 		 * @return 
 		 * 
 		 */		

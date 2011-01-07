@@ -19,7 +19,11 @@ package com.googlecode.flexxb.annotation.contract
 	import mx.collections.ArrayCollection;
 
 	/**
-	 * 
+	 * This is the contract interface for a class annotation. A class annotation
+	 * holds all the annotation structure relevant for that type, being the 
+	 * FlexXB's representation of the type. This representation is used in the
+	 * (de)serialization process so the engine will know how to generate and 
+	 * parse xml. 
 	 * @author Alexutz
 	 * 
 	 */	
@@ -27,29 +31,34 @@ package com.googlecode.flexxb.annotation.contract
 	{
 		[ArrayElementType("com.googlecode.flexxb.annotation.contract.IMemberAnnotation")]
 		/**
-		 * 
+		 * Get the list of members associated with this class
 		 * @return 
 		 * 
 		 */		
 		function get members() : ArrayCollection;
 		
 		/**
-		 * 
-		 * @param fieldName
-		 * @return 
+		 * Get a member by field name
+		 * @param fieldName name of target field
+		 * @return Member annotation instance if the field has member metadata defined, null otherwise 
 		 * 
 		 */		
 		function getMember(fieldName : String) : IMemberAnnotation; 
 		
 		/**
-		 * 
-		 * @return 
+		 * Get a reference to a field which is considered the identifier for instances of the specified 
+		 * type. The ID field is used if one wishes to render objects of the current type in a short form,
+		 * consisting only in the type representation wrapper and the representation of this idField. By
+		 * this id field, upon deserialization, the engine can identify and extract the correct instance
+		 * from a model object cache.
+		 * @return Member annotation instance if idField has been defined, null otherwise
 		 * 
 		 */		
 		function get idField() : IMemberAnnotation;
 		
 		/**
-		 * 
+		 * Get a reference to the constructor object which defines the parameters the type constructor takes
+		 * (default or non-default constructor)
 		 * @return 
 		 * 
 		 */		

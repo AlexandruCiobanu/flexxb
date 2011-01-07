@@ -17,7 +17,10 @@
 package com.googlecode.flexxb.annotation.contract
 {
 	/**
-	 * 
+	 * This contract specifies the basic requirements for a FlexXB
+	 * recognized annotation. The basic annotation must provide a name 
+	 * and a version. Annotations of specific versions will be grouped
+	 * together. 
 	 * @author Alexutz
 	 * 
 	 */	

@@ -18,7 +18,7 @@ package com.googlecode.flexxb.annotation.contract
 {
 	/**
 	 * This interface defines a metadata decorating a class field or class. 
-	 * It exposes a name and a type. 
+	 * It exposes a name and a type as any class field has a name and a type. 
 	 * @author Alexutz
 	 * 
 	 */	
