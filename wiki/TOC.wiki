@@ -24,4 +24,4 @@
      * [Extend2x_Annotations Custom annotations]
      * [Extend2x_Serializers Custom serializers]
      * [Extend2x_API Custom annotation API]
- * [FAQ FAQ
+ * [FAQ FAQ]
