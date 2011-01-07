@@ -19,4 +19,9 @@
  * Extending FlexXB
    * [Extend1x 1.x]
    * [Extend2x 2.x]
- * [FAQ FAQ]
+     * [Extend2x_ModifierInterfaces Modifier interfaces]
+     * [Extend2x_SerializationContext Custom serialization contexts]
+     * [Extend2x_Annotations Custom annotations]
+     * [Extend2x_Serializers Custom serializers]
+     * [Extend2x_API Custom annotation API]
+ * [FAQ FAQ
