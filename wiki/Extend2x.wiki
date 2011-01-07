@@ -14,7 +14,7 @@ There are four main interfaces objects can implement in order to impose a specif
 
 === 1. {{{com.googlecode.flexxb.interfaces.ISerializable}}} ===
 
-You use this interface if your object requires teh serialization/deserialization process be handled in a customized manner. This way the object itself will handle its own parsing/rendering.
+You use this interface if your object requires the serialization/deserialization process be handled in a customized manner. This way the object itself will handle its own parsing/rendering.
 
 {{{
 /**           
@@ -50,7 +50,7 @@ The {{{getIdValue}}} method is used in case your object is identifiable by an id
 
 === 2. {{{com.googlecode.flexxb.interfaces.ISerializeNotifiable}}} ===
 
-Implementing this interfaces allows the object to get notified of the stages in which teh serialization process is: Pre-serialize and post-serialize. The FlexXB Engine's default behavior is to dispatch pre/post serialize events as they occur for each object processed. When it encounters an ISerializeNotifiable object, it will call its {{{onPreSerialize}}} and {{{onPostSerialize}}} methods, overriding the default behavior.
+Implementing this interfaces allows the object to get notified of the stages in which the serialization process is: Pre-serialize and post-serialize. The FlexXB Engine's default behavior is to dispatch pre/post serialize events as they occur for each object processed. When it encounters an ISerializeNotifiable object, it will call its {{{onPreSerialize}}} and {{{onPostSerialize}}} methods, overriding the default behavior.
 
 {{{
 /**
@@ -70,23 +70,23 @@ public interface ISerializeNotifiable
 	/**
 	 * Called before the serialization process of the current object begins.
 	 * @param parent
-	 * @param xmlData
+	 * @param serializedData
 	 * 
 	 */				
-	function onPreSerialize(parent : Object, xmlData : XML) : void;
+	function onPreSerialize(parent : Object, serializedData : Object) : void;
 	/**
 	 * Called after the serialization process of the current object ends.
 	 * @param parent
-	 * @param xmlData
+	 * @param serializedData
 	 *  
 	 */		
-	function onPostSerialize(parent : Object, xmlData : XML) : void;
+	function onPostSerialize(parent : Object, serializedData : Object) : void;
 }
 }}}
 
 === 3. {{{com.googlecode.flexxb.interfaces.IDeserializeNotifiable }}} ===
 
-Implementing this interfaces allows the object to get notified of the stages in which teh deserialization process is: Pre-deserialize and post-deserialize. The FlexXB Engine's default behavior is to dispatch pre/post deserialize events as they occur for each object processed. When it encounters an IDeserializeNotifiable object, it will call its {{{onPreDeserialize}}} and {{{onPostDeserialize}}} methods, overriding the default behavior.
+Implementing this interfaces allows the object to get notified of the stages in which the deserialization process is: Pre-deserialize and post-deserialize. The FlexXB Engine's default behavior is to dispatch pre/post deserialize events as they occur for each object processed. When it encounters an IDeserializeNotifiable object, it will call its {{{onPreDeserialize}}} and {{{onPostDeserialize}}} methods, overriding the default behavior.
 {{{
 /**
  * Optional interface to be implemented by objects which need specific
@@ -105,23 +105,23 @@ public interface IDeserializeNotifiable
 	/**
 	 * Called before the deserialization process of the current object begins.
 	 * @param parent
-	 * @param xmlData
+	 * @param serializedData
 	 * 
 	 */		
-	function onPreDeserialize(parent : Object, xmlData : XML) : void;
+	function onPreDeserialize(parent : Object, serializedData : Object) : void;
 	/**
 	 * Called after the deserialization process of the current object ends.
 	 * @param parent
-	 * @param xmlData
+	 * @param serializedData
 	 * 
 	 */	
-	function onPostDeserialize(parent : Object, xmlData : XML) : void;
+	function onPostDeserialize(parent : Object, serializedData : Object) : void;
 }
 }}}
 
 === 4. {{{com.googlecode.flexxb.interfaces.ICycleRecoverable}}} ===
 
-FlexXB is able to detect and handle object cycles that would otherwise make it go into an infinite loop. One can implement this interface to instruct the engine to turn to the current object causing teh cycle and ask it to provide a replacement for itself, one that would break the cycle.
+FlexXB is able to detect and handle object cycles that would otherwise make it go into an infinite loop. One can implement this interface to instruct the engine to turn to the current object causing the cycle and ask it to provide a replacement for itself, one that would break the cycle.
 {{{
 /**
  * Optional interface that can be implemented by FlexXB bound objects to handle 
