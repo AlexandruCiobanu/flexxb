@@ -18,14 +18,19 @@ package com.googlecode.flexxb.annotation.contract
 {
 
 	/**
-	 * 
+	 * This contact interface defines the structure of a member annotation,
+	 * that is, an annotation that is used only on class fields. A basic
+	 * member annotation has a reference to its parent class annotation,
+	 * has an access type (read, write, read/write) and can be ignored in 
+	 * one of the two stages of the engine's processing: serialization or 
+	 * deserialization.  
 	 * @author Alexutz
 	 * 
 	 */	
 	public interface IMemberAnnotation extends IFieldAnnotation
 	{
 		/**
-		 * 
+		 * Get a reference to the parent class annotation
 		 * @return 
 		 * 
 		 */		
@@ -54,7 +59,9 @@ package com.googlecode.flexxb.annotation.contract
 		function get accessor() : AccessorType;
 		
 		/**
-		 * 
+		 * Flag signaling whether the member annotation must be ignored in a
+		 * specific processing stage or not. 
+		 * @see Stage
 		 * @return 
 		 * 
 		 */		

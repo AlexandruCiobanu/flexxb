@@ -26,7 +26,6 @@ package com.googlecode.flexxb.persistence {
 		public var bindedVar : String;
 
 		public function PersistableObjectTest(methodName : String = null) {
-			//TODO: implement function
 			super(methodName);
 		}
 

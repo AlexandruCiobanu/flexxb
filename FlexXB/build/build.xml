@@ -7,6 +7,9 @@
 	</tstamp>
 	<property file="./build/build.properties" />   
 	<property file="../svn.properties"/>
+	<condition property="pmdDir.Exists">
+		<available file="${flexpmd.dir}" property="pmdDir.Exists"/>
+	</condition>
 	<!-- SDK description markers -->
 	<xmlproperty file="${flexsdk.dir}/flex-sdk-description.xml"/>
 	<property name="flexSDKVersion" value="${flex-sdk-description.version}"/>
@@ -50,7 +53,7 @@
 	         <pathelement location="${flexpmd.dir}/flex-pmd-cpd-${flexpmd.version}.jar" />
 	         <pathelement location="${flexpmd.dir}/as3-plugin-utils-${flexpmd.version}.jar" />
 	         <pathelement location="${flexpmd.dir}/as3-parser-${flexpmd.version}.jar" />
-	         <pathelement location="${flexpmd.dir}/as3-parser-api$-{flexpmd.version}.jar" />
+	         <pathelement location="${flexpmd.dir}/as3-parser-api-${flexpmd.version}.jar" />
 	         <pathelement location="${flexpmd.dir}/pmd-4.2.5.jar" />
 	      </classpath>
 	 </taskdef>
@@ -64,6 +67,8 @@
 	        <pathelement location="${flexpmd.dir}/as3-parser-${flexpmd.version}.jar" />
 	        <pathelement location="${flexpmd.dir}/as3-parser-api-${flexpmd.version}.jar" />
 			<pathelement location="${flexpmd.dir}/commons-lang-2.4.jar" />
+	      	<pathelement location="${flexpmd.dir}/flex-pmd-core-${flexpmd.version}.jar" />
+	      	<pathelement location="${flexpmd.dir}/flex-pmd-ruleset-${flexpmd.version}.jar" />
 			<pathelement location="${flexpmd.dir}/flex-pmd-ruleset-api-${flexpmd.version}.jar" />
 	        <pathelement location="${flexpmd.dir}/pmd-4.2.5.jar" />
 	      	<pathelement location="${flexpmd.dir}/dom4j-1.6.1.jar"/>
@@ -135,9 +140,8 @@
     	 </exec>
 	</target>
 	<!-- -->
-	<target name="development" depends="build.project, build.project.test">
+	<target name="development" depends="build.project, build.project.test, Metrics">
 		<antcall target="documentation" />
-		<antcall target="Metrics" />
 	</target>
 	<!-- -->
 	<target name="release" depends="development, junit.ui">
@@ -222,11 +226,9 @@
 				if="flexunit.failed"/>
 	</target>
 	
-	<target name="Metrics">
-		<condition property="pmdDirExists">
-			<available file="${flexpmd.dir}" property="pmdDirExists"></available>
-		</condition>
-		<flexPmd sourcedirectory="${project.src.dir}" outputdirectory="${bin.dir}/metrics/pmd" ruleset="${flexpmd.dir}/pmd.xml"/>
+	<target name="Metrics" if="pmdDir.Exists">
+		<flexPmd sourcedirectory="${project.src.dir}" outputdirectory="${bin.dir}/metrics/pmd" 
+			ruleset="${flexpmd.dir}/../pmd.xml"/>
 		<flexCpd minimumtokencount="50" outputfile="${bin.dir}/metrics/cpd.xml">
 			<fileset dir="${project.src.dir}">
 				<include name="**/*.as"/>

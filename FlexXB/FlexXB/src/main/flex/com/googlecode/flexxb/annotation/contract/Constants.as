@@ -17,7 +17,7 @@
 package com.googlecode.flexxb.annotation.contract
 {
 	/**
-	 * 
+	 * Commonly used constants.
 	 * @author Alexutz
 	 * 
 	 */	
