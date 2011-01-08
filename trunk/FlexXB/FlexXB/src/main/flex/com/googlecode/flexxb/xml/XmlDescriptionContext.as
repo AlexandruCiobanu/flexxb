@@ -128,12 +128,6 @@ package com.googlecode.flexxb.xml
 			return descriptorStore.getClassReferenceByCriteria("alias", name, version);
 		}
 		
-		/**
-		 * Get the type class corresponding to the namespace defined in the incoming xml
-		 * @param incomingXML
-		 * @return class
-		 *
-		 */
 		public override function getIncomingType(source : Object) : Class {
 			var incomingXML : XML = source as XML;
 			if (incomingXML) {
