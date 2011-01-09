@@ -5,6 +5,8 @@ The annotation API allows you to programatically construct the descriptors for c
 
 Extending the API involves working with three base elements: {{{IFxMetaProvider}}}, {{{FxClass}}}, {{{FxMember}}}.
 
+The package {{{com.googlecode.flexxb.xml.api}}} offers an excellent example of extending the base API.
+
 ==={{{IFxMetaProvider}}}===
 
 Location: {{{com.googlecode.flexxb.api}}}
