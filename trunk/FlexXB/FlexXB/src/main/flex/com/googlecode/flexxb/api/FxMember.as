@@ -25,7 +25,13 @@ package com.googlecode.flexxb.api {
 	use namespace flexxb_api_internal;
 
 	/**
-	 *
+	 * API member annotation wrapper. This is the base for member annotation 
+	 * API description. It references the field from the parent type and base
+	 * attributes that all members will share: version and ignore flags.<br/> 
+	 * All member annotations have a version in order to handle different 
+	 * representations of the same object that may appear as appplication 
+	 * develoment evolves. Also, some fields may be ignored in different stages
+	 * of the processing: serialize or deserialize.
 	 * @author Alexutz
 	 *
 	 */

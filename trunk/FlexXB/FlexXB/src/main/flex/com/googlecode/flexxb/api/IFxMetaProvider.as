@@ -26,14 +26,17 @@ package com.googlecode.flexxb.api
 	public interface IFxMetaProvider
 	{
 		/**
-		 * 
-		 * @return 
+		 * Get the name of the metadata this class describes 
+		 * @return metadata name
 		 * 
 		 */		
 		function getMetadataName() : String;
 		/**
-		 * 
-		 * @return 
+		 * Get a dictionary with key-value pairs representing the 
+		 * annotation attribute names and their values. This map
+		 * is used by the API to construct the actual descriptors 
+		 * used by FlexXB to process the objects and serialized data 
+		 * @return Dictionary instance
 		 * 
 		 */		
 		function getMappingValues() : Dictionary;
