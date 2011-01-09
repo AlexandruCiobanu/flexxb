@@ -146,6 +146,7 @@
 	<!-- -->
 	<target name="release" depends="development, junit.ui">
 		<make.readme />
+		<antcall target="copySchemas"/>
 		<zip destfile="${bin.dir}/${release.name.bin}">
 			<fileset dir="${basedir}">
 				<exclude name="**/build/**"/>
@@ -179,6 +180,20 @@
 				<include name="**/**"/>
 			</fileset>
 		</delete>
+	</target>
+	
+	<target name="copySchemas">
+		<mkdir dir="${bin.dir}/schema"/>
+		<copy file="${project.src.dir}/com/googlecode/flexxb/api/schema/FlexXB.xsd"
+			  tofile="${bin.dir}/schema/FlexXB.xsd" 
+			  overwrite="true"/>
+		<copy file="${project.src.dir}/com/googlecode/flexxb/xml/api/schema/FlexXB-XML.xsd"
+			  tofile="${bin.dir}/schema/FlexXB-XML.xsd" 
+			  overwrite="true"/>
+		<replaceregexp file="${bin.dir}/schema/FlexXB-XML.xsd"
+						flags="gs"
+						match="../../../api/schema/FlexXB.xsd"
+						replace="FlexXB.xsd"/>
 	</target>
 	
 	<!-- -->
