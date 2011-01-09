@@ -1,2 +1,124 @@
 #labels Phase-Implementation
 = Custom annotation API=
+
+The annotation API allows you to programatically construct the descriptors for class types which cannot, from various reasons, be decorated with the usual metadata annotations - no access to the source code, for example. 
+
+Extending the API involves working with three base elements: {{{IFxMetaProvider}}}, {{{FxClass}}}, {{{FxMember}}}.
+
+==={{{IFxMetaProvider}}}===
+
+Location: {{{com.googlecode.flexxb.api}}}
+
+This is the base interface for the API. An API implementor of this interface defines a regular annotation and allows specifying its attributes. There are two requirements for an annotation: its name and its attributes with their values.
+
+{{{
+public interface IFxMetaProvider
+{
+	/**
+	 * Get the name of the metadata this class describes 
+	 * @return metadata name
+	 * 
+	 */		
+	function getMetadataName() : String;
+	/**
+	 * Get a dictionary with key-value pairs representing the 
+	 * annotation attribute names and their values. This map
+	 * is used by the API to construct the actual descriptors 
+	 * used by FlexXB to process the objects and serialized data 
+	 * @return Dictionary instance
+	 * 
+	 */		
+	function getMappingValues() : Dictionary;
+}
+}}}
+
+We can take a look at an example usage of this interface in {{{com.googlecode.flexxb.xml.api.XmlAPINamespace}}} that defines the xml namespace global annotation. Since the API structure allows persisting the information in xml you'll see the xml metadata decorating the class in order to be able to specify class types annotations in xml, located in a file on a server somewhere.
+
+{{{
+[XmlClass(alias="Namespace")]
+[ConstructorArg(reference="prefix")]
+[ConstructorArg(reference="uri")]
+
+public final class XmlApiNamespace implements IFxMetaProvider
+{
+	/**
+	 * 
+	 * @param ns
+	 * @return 
+	 * 
+	 */		
+	public static function create(ns : Namespace) : XmlApiNamespace{
+		if(ns){
+			return new XmlApiNamespace(ns.prefix, ns.uri);
+		}
+		return null;
+	}
+		
+	private var _prefix : String;
+	private var _uri : String
+		
+	/**
+	 * 
+	 * @param prefix
+	 * @param uri
+	 */
+	public function XmlApiNamespace(prefix : *, uri : *){
+		_prefix = prefix;
+		_uri = uri;
+	}
+	
+	[XmlAttribute]
+	/**
+	 * 
+	 * @return 
+	 */
+	public function get prefix() : String{
+		return _prefix;
+	}
+	
+	[XmlAttribute]
+	/**
+	 * 
+	 * @return 
+	 * 
+	 */		
+	public function get uri() : String{
+		return _uri;
+	}
+	
+	public function getMetadataName() : String{
+		return "Namespace";
+	}
+	
+	public function getMappingValues() : Dictionary{
+		var values : Dictionary = new Dictionary();
+		values[XmlConstants.NAMESPACE_PREFIX] = prefix;
+		values[XmlConstants.NAMESPACE_URI] = uri;
+		return values;
+	}
+	
+	/**
+	 * Get string representation of the current instance
+	 * @return string representing the current instance
+	 */
+	public function toString() : String{
+		return "Namespace[ prefix: " + _prefix + ", uri: " + _uri + "]";
+	}
+}
+}}}
+
+==={{{FxClass}}}===
+
+Location: {{{com.googlecode.flexxb.api}}}
+
+{{{FxClass}}} defines a class annotation; it has the decorated class type, a list of member annotations, a list of global annotations defined under it as well as the arguments needed by the constructor for creating a new instance. Since it is the base for defining class annotations in the API, it implements IFxMetaProvider.
+
+When extending this class to define a custom API class annotation one may use a couple helper methods:
+
+ * {{{addMember(member : FxMember) : void}}} - add a member to this class annotation; if you require addition processing after adding a member to the list you should override the protected method {{{onMemberAdded(member : FxMember) : void}}};
+ * {{{addArgument(fieldName : String, optional : Boolean = false) : void}}} - allows specifying a constructor argument; take care on the order and number of the arguments to match the actual order and number in the class constructor definition to not have instanciation errors.
+ * {{{getGlobalAnnotations() : Array}}} - get a list of global annotations defined for the class annotation. You should override this method if you require global annotations. For example, in the Xml class annotation you need to define namespaces used by the members as global annotations.
+
+==={{{FxMember}}}===
+
+Defines a member annotation, meaning a recognized annotation decorating a class field (variable or getter/setter). An API member wrapper keeps a reference to the owner FxClass, and knowledge about the field name and type.
