@@ -54,4 +54,4 @@ Once your serializer and annotation classes defined, you need to register them w
 
 The registerAnnotation method registers a new annotation and its serializer with the engine. If it finds a registration with the same name and overrideExisting is set to false, it will disregard the current attempt and keep the old value.
 
-The serializer classes present in {{{com.googlecode.flexxb.xml.serializer}}} provide excellent examples of extending the BaseSerializer class.
+The serializer classes present in {{{com.googlecode.flexxb.xml.serializer}}} provide excellent examples of extending the {{{BaseSerializer}}} class.
