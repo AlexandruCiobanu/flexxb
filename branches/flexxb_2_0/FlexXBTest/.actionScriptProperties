@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<actionScriptProperties analytics="false" mainApplicationPath="FlexXBTest.mxml" projectUUID="c4de6a3e-61f2-4816-9b32-08cc9993797b" version="6">
+  <compiler additionalCompilerArguments="-locale en_US -keep-as3-metadata XmlClass -keep-as3-metadata XmlAttribute -keep-as3-metadata XmlElement -keep-as3-metadata XmlArray -keep-as3-metadata ConstructorArg -keep-as3-metadata Namespace" autoRSLOrdering="false" copyDependentFiles="true" flex3CompatMode="false" flexSDK="Flex 4.1" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src/main/flex" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+    <compilerSourcePath/>
+    <libraryPath defaultLinkType="3">
+      <libraryPathEntry kind="4" path="">
+        <modifiedEntries>
+          <libraryPathEntry index="1" kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/framework.swc" useDefaultLinkType="true">
+            <crossDomainRsls>
+              <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.5.0.12683.swz"/>
+              <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.5.0.12683.swf"/>
+            </crossDomainRsls>
+          </libraryPathEntry>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/rpc.swc" useDefaultLinkType="false"/>
+        </modifiedEntries>
+        <excludedEntries>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" useDefaultLinkType="false"/>
+        </excludedEntries>
+      </libraryPathEntry>
+      <libraryPathEntry kind="1" linkType="1" path="libs"/>
+      <libraryPathEntry autoExtract="true" kind="3" linkType="3" path="/FlexXB/bin/FlexXB.swc" rslUrl="FlexXB.swf" useDefaultLinkType="false"/>
+    </libraryPath>
+    <sourceAttachmentPath/>
+  </compiler>
+  <applications>
+    <application path="AntTestRunner.mxml"/>
+    <application path="FlexXBTest.mxml"/>
+    <application path="FlexUnitCompilerApplication.mxml"/>
+  </applications>
+  <modules/>
+  <buildCSSFiles/>
+</actionScriptProperties>
