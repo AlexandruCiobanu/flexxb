@@ -3,7 +3,7 @@
 
 The annotation API allows you to programatically construct the descriptors for class types which cannot, from various reasons, be decorated with the usual metadata annotations - no access to the source code, for example. 
 
-Extending the API involves working with three base elements: {{{IFxMetaProvider}}}, {{{FxClass}}}, {{{FxMember}}}.
+Extending the API involves working with three base elements: {{{IFxMetaProvider}}}, {{{FxClass}}}, {{{FxMember}}}. After defining your extensions you should take into acount the fact that the api supports data being injected via xml description file, following specific standards described by the schema, and should decorate your API wrapper classes with XML annotations that would allow extraction from/persistence to such a serialization medium.
 
 The package {{{com.googlecode.flexxb.xml.api}}} offers an excellent example of extending the base API.
 
