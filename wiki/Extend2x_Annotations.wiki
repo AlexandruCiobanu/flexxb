@@ -15,3 +15,45 @@ All annotations should generally extend {{{com.googlecode.flexxb.annotation.cont
 *The annotation parser* takes the class xml descriptor, obtained via  the describeType() method, and processes the class descriptors, making sure everything is alligned according to version settings. The end result is a list of class annotations, fully configured that reflect the metadatas decorating the class definition. The data from the xml descriptor is passed to each annotation instance via its constructor under the form of an instance of the class {{{com.googlecode.flexxb.annotation.parser.MetaDescriptor}}}. BaseAnnotation, which is intended to be the basis for all defined annotation classes, then offers a protected method {{{parse(descriptor : MetaDescriptor) : void}}} to be overridden in which sub classes can read values from the data provider and populate their fields.
 
 *The implementations* are basically the end product, the annotations that one use to define the serialization structure. They make use of the contract and parser packages. A very good example of usage is provided by the default xml implementation located in {{{com.googlecode.flexxb.annotation.xml}}} package.
+
+Let's take a look at an example annotation class, taken from the xml serializing package built in FlexXB, the XmlElement:
+
+{{{
+public class XmlElement extends XmlMember {
+	
+	public static const ANNOTATION_NAME : String = "XmlElement";
+	
+	protected var _serializePartialElement : Boolean;
+	
+	protected var _getFromCache : Boolean;
+	
+	protected var _getRuntimeType : Boolean;
+	
+	public function XmlElement(descriptor : MetaDescriptor, owner : ClassAnnotation) {
+		super(descriptor, owner);
+	}
+	
+	public function get serializePartialElement() : Boolean {
+		return _serializePartialElement;
+	}
+	
+	public function get getRuntimeType() : Boolean {
+		return _getRuntimeType;
+	}
+	
+	public function get getFromCache() : Boolean {
+		return _getFromCache;
+	}
+		
+	protected override function parse(metadata : MetaDescriptor) : void {
+		super.parse(metadata);
+		_serializePartialElement = metadata.getBooleanAttribute(XmlConstants.SERIALIZE_PARTIAL_ELEMENT);
+		_getFromCache = metadata.getBooleanAttribute(XmlConstants.GET_FROM_CACHE);
+		_getRuntimeType = metadata.getBooleanAttribute(XmlConstants.GET_RUNTIME_TYPE);
+	}
+		
+	public override function get annotationName() : String {
+		return ANNOTATION_NAME;
+	}
+}
+}}}
