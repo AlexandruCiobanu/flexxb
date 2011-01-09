@@ -142,7 +142,7 @@ com.googlecode.serializer.flexxb.core.FxBEngine.instance.api.processDescriptorsF
 Annotation syntax:
 
 XmlClass
-[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false")] 
+[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", defaultValueField="fieldName", ordered="true|false", version="version_Name")] 
 
 ConstructorArg
 [ConstructorArg(reference="element", optional="true|false")]
@@ -151,18 +151,20 @@ Namespace
 [Namespace(prefix="NS_Prefix", uri="NS_Uri")]
 
 XmlAttribute
-[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", idref="true|false", namespace="ns_prefix", default="defaultStringValue")]
+[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="NameSpace_Prefix", idref="true|false", version="version_Name")]
 
 XmlElement
-[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", idref="true|false", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="ns_prefix", default="defaultStringValue")] 
+[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="NameSpace_Prefix", idref="true|false", version="version_Name")]  
 
 XmlArray
-[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", idref="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="index", namespace="ns_prefix")]
+[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", getRuntimeType="true|false", order="index", namespace="NameSpace_Prefix", version="version_Name")] 
 
 
 Note: Using as alias "*" on a field will force the serializer to serialize that field using an alias computed at runtime by the 
 runtime type of the field's value, except for XmlArray. For XmlArray using the "*" alias will cause the members of the array value 
-to be rendered as children of the owner object xml rather than children of an xml element specifying the array.
+to be rendered as children of the owner object xml rather than children of an xml element specifying the array. For XmlArray, setting 
+getRuntimeType flag to true will cause the engine to analyse each item in the xml representation of the array and determine the type
+of it from the name tag or namespace. 
 
 KNOWN LIMITATIONS
 
