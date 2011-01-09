@@ -123,4 +123,66 @@ When extending this class to define a custom API class annotation one may use a 
 
 ==={{{FxMember}}}===
 
-Defines a member annotation, meaning a recognized annotation decorating a class field (variable or getter/setter). An API member wrapper keeps a reference to the owner FxClass, and knowledge about the field name and type.
+Defines a member annotation, meaning a recognized annotation decorating a class field (variable or getter/setter). An API member wrapper keeps a reference to the owner FxClass, and knowledge about the field name and type. Extending {{{FxMember}}} allows you to define member annotations. As previously stated you must override the two methods that come from {{{IFxMetaProvider}}} in order to specify the annotation's name and its characteristics.
+
+Below is the code listing for the {{{FxMember}}} class:
+
+{{{
+public class FxMember implements IFxMetaProvider {
+	
+	[XmlAttribute]
+	public var ignoreOn : Stage = null;
+	
+	[XmlAttribute]		
+	public var version : String = "";
+	
+	protected var _field : FxField;
+			
+	internal var owner : FxClass;
+	
+	public function FxMember(field : FxField) {
+		this.field = field;
+	}
+
+	[XmlElement(alias="*")]
+	public function get field() : FxField {
+		return _field;
+	}
+	
+	public function set field(value : FxField) : void {
+		if (!value) {
+			throw new ApiError("Field cannot be null");
+		}
+		_field = value;
+	}
+		
+	public function get fieldName() : String {
+		return field.name;
+	}
+		
+	public function get fieldType() : Class {
+		return field.type;
+	}
+	
+	public function get fieldAccessType() : AccessorType {
+		return field.accessType;
+	}
+	
+	public function getMetadataName() : String{
+		return "";
+	}
+	
+	public function getMappingValues() : Dictionary{
+		var values : Dictionary = new Dictionary();
+		if(ignoreOn){
+			values[Constants.IGNORE_ON] = ignoreOn;
+		}
+		values[Constants.VERSION] = version;
+		return values;
+	}
+	
+	protected final function getOwner() : FxClass{
+		return owner;
+	}
+}
+}}}
