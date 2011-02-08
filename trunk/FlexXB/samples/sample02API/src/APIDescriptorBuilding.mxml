@@ -20,12 +20,15 @@
 	layout="vertical" creationComplete="{init();}" >
 	<mx:Script>
 		<![CDATA[
-			import com.googlecode.flexxb.api.AccessorType;
-			import com.googlecode.flexxb.api.FxClass;
 			import com.googlecode.flexxb.FlexXBEngine;
-			import mx.controls.Alert;
-			import model.Person;
+			import com.googlecode.flexxb.annotation.contract.AccessorType;
+			import com.googlecode.flexxb.api.FxClass;
+			import com.googlecode.flexxb.xml.api.XmlApiClass;
+			
 			import model.Department;
+			import model.Person;
+			
+			import mx.controls.Alert;
 			[Bindable]
 			private var department : Department;
 			[Bindable]
@@ -38,7 +41,7 @@
 			}
 			
 			private function buildAPI() : void{
-				var apiClass : FxClass = new FxClass(Person, "Person");				
+				var apiClass : XmlApiClass = new XmlApiClass(Person, "Person");				
 				//Add class members descriptors
 				apiClass.addElement("id", String, AccessorType.READ_WRITE, "ID");
 				apiClass.addAttribute("firstName", String, AccessorType.READ_WRITE, "FirstName");
@@ -51,9 +54,9 @@
 				//Register the api descriptor class in the FlexXB engine
 				FlexXBEngine.instance.api.processTypeDescriptor(apiClass);
 				
-				apiClass = new FxClass(Department);
+				apiClass = new XmlApiClass(Department);
 				apiClass.alias = "CompanyDepartment";
-				apiClass.nameSpace = new Namespace("dept", "http://myCompanyUrl.com");
+				apiClass.defaultNamespace = new Namespace("dept", "http://myCompanyUrl.com");
 				//Add clas members descriptors
 				apiClass.addAttribute("id", String, AccessorType.READ_WRITE, "ID");
 				apiClass.addElement("name", String, AccessorType.READ_WRITE, "DepartmentName");
