@@ -28,7 +28,7 @@ package com.googlecode.flexxb {
 		 *
 		 */
 		public static function get Version() : String {
-			return "2.0";
+			return "2.0.1";
 		}
 
 		/**
