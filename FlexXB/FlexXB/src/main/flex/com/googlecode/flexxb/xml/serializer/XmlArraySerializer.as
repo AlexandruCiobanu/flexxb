@@ -28,6 +28,7 @@ package com.googlecode.flexxb.xml.serializer {
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.collections.ArrayCollection;
+	import mx.collections.ArrayList;
 	import mx.collections.ListCollectionView;
 
 	/**
@@ -51,7 +52,15 @@ package com.googlecode.flexxb.xml.serializer {
 			var xmlArray : XmlArray = annotation as XmlArray;
 			var child : XML;
 			for each (var member : Object in object) {
-				if (isComplexType(member)) {
+				if(xmlArray.isIDRef){
+					child = XML(serializer.getObjectId(member));
+					if(xmlArray.memberName){
+						var temp : XML = <xml/>;
+						temp.setName(xmlArray.memberName);
+						temp.appendChild(child);
+						child = temp;
+					}
+				}else if (isComplexType(member)) {
 					child = serializer.serialize(member, xmlArray.serializePartialElement) as XML;
 					if (xmlArray.memberName) {
 						child.setName(xmlArray.memberName);
@@ -129,9 +138,13 @@ package com.googlecode.flexxb.xml.serializer {
 								type = array.memberType;
 							}
 						}
-						var member : Object = getValue(xmlChild, type, array.getFromCache, serializer);
-						if (member != null) {
-							list.push(member);
+						if(array.isIDRef){
+							serializer.idResolver.addResolutionTask(list, null, xmlChild.toString());
+						}else{
+							var member : Object = getValue(xmlChild, type, array.getFromCache, serializer);
+							if (member != null) {
+								list.push(member);
+							}
 						}
 					}
 				}
@@ -145,11 +158,8 @@ package com.googlecode.flexxb.xml.serializer {
 				(result as Array).push.apply(null, members);
 			} else if (result is ArrayCollection) {
 				ArrayCollection(result).source = members;
-				ArrayCollection(result).refresh();
 			} else if (result is ListCollectionView) {
-				for each (var member : Object in members) {
-					ListCollectionView(result).addItem(member);
-				}
+				ListCollectionView(result).list = new ArrayList(members);
 			}else if(isVector(result)){
 				result.push.apply(null, members);
 			}
