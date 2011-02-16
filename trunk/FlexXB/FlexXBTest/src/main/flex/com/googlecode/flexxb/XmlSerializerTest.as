@@ -23,13 +23,22 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
+	import com.googlecode.testData.Node;
 	import com.googlecode.testData.VectoredElement;
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
+	import com.googlecode.testData.idref.Data;
+	import com.googlecode.testData.idref.Node;
+	
+	import mx.collections.ArrayCollection;
 	
 	import org.flexunit.Assert;
 	import org.flexunit.assertThat;
+	import org.flexunit.asserts.assertEquals;
+	import org.flexunit.asserts.assertFalse;
 	import org.flexunit.asserts.assertNotNull;
+	import org.flexunit.asserts.assertNull;
+	import org.flexunit.asserts.assertTrue;
 	import org.hamcrest.object.equalTo;
 	
 	public class XmlSerializerTest {
@@ -38,6 +47,7 @@ package com.googlecode.flexxb {
 			var target : Mock = new Mock();
 			target.link = new Mock3();
 			target.aField = "test1";
+			target.type = Mock2;
 			target.date = new Date();
 			target.version = 6;
 			target.result = [];
@@ -49,12 +59,13 @@ package com.googlecode.flexxb {
 		}
 
 		protected function compare(source : Mock, copy : Mock) : void {
-			Assert.assertEquals("Wrong version", source.version, copy.version);
-			Assert.assertEquals("Wrong aField", source.aField, copy.aField);
-			Assert.assertEquals("Wrong link id", source.link.id, copy.link.id);
-			Assert.assertNull("Date not null", copy.date);
-			Assert.assertEquals("Wrong result list", source.result.length, copy.result.length);
-			Assert.assertFalse("Wrong excluded field", copy.someExcludedField);			
+			assertEquals("Wrong version", source.version, copy.version);
+			assertEquals("Wrong aField", source.aField, copy.aField);
+			assertEquals("Wrong link id", source.link.id, copy.link.id);
+			assertNull("Date not null", copy.date);
+			assertEquals("Wrong result list", source.result.length, copy.result.length);
+			assertFalse("Wrong excluded field", copy.someExcludedField);
+			assertEquals("Wrong type specified", source.type, copy.type);
 		}
 		
 		[Test]
@@ -191,6 +202,26 @@ package com.googlecode.flexxb {
 			for(var i : int = 0; i < item.list.length; i++){
 				assertThat(clone.list[i], equalTo(item.list[i]));
 			}
+		}
+		
+		[Test]
+		public function idRefTest() : void{
+			var xml : XML = <data><node id="1" name="bar" /><referenceAtt id="1" /><referenceElement>1</referenceElement><referenceArray><node>1</node></referenceArray></data>;
+			var initial : Data = new Data();
+			initial.node = new com.googlecode.testData.idref.Node();
+			initial.node.id = "1";
+			initial.referenceAtt = initial.node;
+			initial.referenceElement = initial.node;
+			initial.referenceArray = new ArrayCollection([initial.node]);
+			var xmlInitial : XML = FxBEngine.instance.getXmlSerializer().serialize(initial) as XML;
+			assertEquals("Node id missing", "1", String(xmlInitial.node.@id));
+			assertEquals("Reference att id missing", "1", String(xmlInitial.referenceAtt.@id));
+			assertEquals("Reference element id missing", "1", String(xmlInitial.referenceElement));
+			assertEquals("Reference Array missing", "1", String(xmlInitial.referenceArray[0].node));
+			var data : Data = FxBEngine.instance.getXmlSerializer().deserialize(xml, Data)
+			assertEquals("Node differs from attribute value", data.node,  data.referenceAtt);
+			assertEquals("Node differs from element value", data.node,  data.referenceElement);
+			assertEquals("Node differs from array's first item value", data.node,  data.referenceArray.getItemAt(0));
 		}
 	}
 }

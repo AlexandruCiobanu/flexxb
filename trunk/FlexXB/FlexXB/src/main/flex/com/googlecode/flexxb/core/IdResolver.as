@@ -18,6 +18,9 @@
 package com.googlecode.flexxb.core
 {
 	import flash.utils.Dictionary;
+	
+	import mx.collections.IList;
+
 	/**
 	 * @private 
 	 * @author Alexutzutz
@@ -71,7 +74,7 @@ package com.googlecode.flexxb.core
 		 * 
 		 */		
 		public function addResolutionTask(item : Object, field : QName, id : String) : void{
-			if(item && item.hasOwnProperty(field)){
+			if(item &&(item is Array || item is IList || item.hasOwnProperty(field))){
 				if(taskList == null){
 					taskList = [];
 				}
@@ -89,8 +92,16 @@ package com.googlecode.flexxb.core
 		
 		private function resolveTasks() : void{
 			if(taskList){
+				var resolved : Object;
 				for each(var task : ResolverTask in taskList){
-					task.object[task.field] = resolve(task.id);
+					resolved = resolve(task.id);
+					if(task.object is Array){
+						(task.object as Array).push(resolved);
+					}else if(task.object is IList){
+						(task.object as IList).addItem(resolved);
+					}else{
+						task.object[task.field] = resolved;
+					}
 				}
 			}
 		}
