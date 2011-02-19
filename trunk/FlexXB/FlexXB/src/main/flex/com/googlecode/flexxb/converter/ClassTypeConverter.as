@@ -29,12 +29,11 @@ package com.googlecode.flexxb.converter {
 		}
 
 		public function toString(object : Object) : String {
-			return getQualifiedClassName(object);
+			return object ? getQualifiedClassName(object) : "";
 		}
 
 		public function fromString(value : String) : Object {
-			var result : Object = getDefinitionByName(value);
-			return result;
+			return value ? getDefinitionByName(value) : null;
 		}
 	}
 }

@@ -163,7 +163,12 @@ package com.googlecode.flexxb.annotation.parser
 			var descriptors : Array = [];
 			var name : QName = new QName(xml.@uri, xml.@name);
 			var accessType : AccessorType = AccessorType.fromString(xml.@access);
-			var type : Class = getDefinitionByName(xml.@type) as Class;
+			var type : Class;
+			try{
+				type = getDefinitionByName(xml.@type) as Class;
+			}catch(e : Error){
+				throw e;
+			}
 			var metas : XMLList = xml.metadata;
 			var descriptor : MetaDescriptor;
 			for each(var meta : XML in metas){

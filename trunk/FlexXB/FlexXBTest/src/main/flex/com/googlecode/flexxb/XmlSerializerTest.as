@@ -47,7 +47,7 @@ package com.googlecode.flexxb {
 			var target : Mock = new Mock();
 			target.link = new Mock3();
 			target.aField = "test1";
-			target.type = Mock2;
+			target.classType = Mock2;
 			target.date = new Date();
 			target.version = 6;
 			target.result = [];
@@ -65,7 +65,7 @@ package com.googlecode.flexxb {
 			assertNull("Date not null", copy.date);
 			assertEquals("Wrong result list", source.result.length, copy.result.length);
 			assertFalse("Wrong excluded field", copy.someExcludedField);
-			assertEquals("Wrong type specified", source.type, copy.type);
+			assertEquals("Wrong type specified", source.classType, copy.classType);
 		}
 		
 		[Test]

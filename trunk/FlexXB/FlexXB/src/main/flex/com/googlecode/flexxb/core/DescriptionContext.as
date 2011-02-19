@@ -21,6 +21,9 @@ package com.googlecode.flexxb.core
 	import com.googlecode.flexxb.annotation.contract.ConstructorArgument;
 	import com.googlecode.flexxb.converter.IConverter;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
+	
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * Description context is the main access point for instructing the engine how to handle a specific serialization format.
@@ -131,6 +134,15 @@ package com.googlecode.flexxb.core
 		 */		
 		public final function registerSimpleTypeConverter(converter : IConverter, overrideExisting : Boolean = false) : Boolean {
 			return _converterStore.registerSimpleTypeConverter(converter, overrideExisting);
+		}
+		/**
+		 * 
+		 * @param object
+		 * @return 
+		 * 
+		 */		
+		public final function hasSimpleTypeConverter(object : Object) : Boolean {
+			return object && _converterStore.hasConverter(getDefinitionByName(getQualifiedClassName(object)) as Class);
 		}
 		/**
 		 * Register a new annotation and its serializer. If it finds a registration with the

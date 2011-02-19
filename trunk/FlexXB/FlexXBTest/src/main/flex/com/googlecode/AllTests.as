@@ -15,10 +15,10 @@
  *   limitations under the License.
  */
 package com.googlecode {
-	import com.googlecode.flexxb.cache.CacheTest;
 	import com.googlecode.flexxb.PartialSerializationTest;
 	import com.googlecode.flexxb.XmlTests;
 	import com.googlecode.flexxb.api.ApiTests;
+	import com.googlecode.flexxb.cache.CacheTest;
 	import com.googlecode.flexxb.persistence.PersistenceTests;
 	
 	[Suite]

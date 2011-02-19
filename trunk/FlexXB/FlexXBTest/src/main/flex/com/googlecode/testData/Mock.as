@@ -33,6 +33,8 @@ package com.googlecode.testData {
 		public var link : Mock3;
 		[XmlElement(serializePartialElement="true")]
 		public var reference : Object;
+		[XmlElement()]
+		public var classType : Class;
 		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]
 		public var result : Array;
 		

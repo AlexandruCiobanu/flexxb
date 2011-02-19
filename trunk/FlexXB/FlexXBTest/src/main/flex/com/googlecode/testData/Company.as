@@ -18,10 +18,10 @@ package com.googlecode.testData
 {
 	public class Company
 	{	
-		[XmlArray]
+		[XmlArray(getRuntimeType="true")]
 		public var employees : Array;
 		
-		[XmlArray]
+		[XmlArray(getRuntimeType="true")]
 		public var departments : Array;
 		
 		public function Company()
