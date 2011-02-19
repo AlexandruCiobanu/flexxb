@@ -47,7 +47,7 @@ package com.googlecode.flexxb.xml.serializer {
 		
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializationCore) : void {
 			var child : XML = <xml />;
-			if (isComplexType(object)) {
+			if (isComplexType(object) && !(object is Class)) {
 				if(annotation.isIDRef){
 					child.appendChild(serializer.getObjectId(object));
 				}else{

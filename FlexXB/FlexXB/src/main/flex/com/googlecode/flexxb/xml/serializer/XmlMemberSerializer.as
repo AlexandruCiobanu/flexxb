@@ -195,9 +195,10 @@ package com.googlecode.flexxb.xml.serializer {
 				case "Boolean":
 				case "Date":
 				case "XML":
+				case "Class":
 					return false;break;
 				default:
-					return true;
+					return !context.hasSimpleTypeConverter(value);
 			}
 		}
 	}
