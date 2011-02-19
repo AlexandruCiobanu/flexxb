@@ -48,6 +48,8 @@ This page will contain a list of features and requirements I have planned for my
  This feature is the same as offered by JAXB: https://jaxb.dev.java.net/guide/Mapping_cyclic_references_to_XML.html. When encountering objects cycles, the application needs to recover from it without ending up in a stack overflow exception. To do this you will be able to specify objects once in the xml document and reference them by id wherever is needed; also one may implement a custom interface allowing the replacement of the current object with a new one that will break the cycle.
  * FXB-021 *Serialization format support*: 
  Make FlexXB serialization format agnostic. Allows users to extend the engine and add support for different serialization formats (JSON, etc) while still sharing the base features such as object caching, circular reference handling, constructor annotations, id fields, version extraction. The advantage is that the base features are integrated by default with the new serialization context that defines the new format and one should only care about the actual AS3 object - ? conversions.
+ * FXB-022 *JSON serialization support*: 
+ Provide (de)serialization mechanisms for JSON encoding, while taking full advantage of FlexXB stock features such as circular reference handling, object cache, etc.
 
 || *Feature ID* || *Description* || *Delivery version* ||
 ||FXB-001||Support for object namespacing||1.0 _alpha_||
@@ -68,5 +70,6 @@ This page will contain a list of features and requirements I have planned for my
 ||FXB-019||Annotation versioning||1.7.0||
 ||FXB-020||Circular reference handling||1.7.0||
 ||FXB-021||Serialization format support||2.0||
+||FXB-022||JSON serialization support||2.1.0||
 ||FXB-013||Add method references to annotation's attribute values||?||
 ||FXB-011||XSD validation against incoming XML||?||
