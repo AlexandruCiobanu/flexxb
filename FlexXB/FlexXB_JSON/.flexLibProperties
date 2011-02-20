@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" version="3">
+  <includeClasses>
+    <classEntry path="com.googlecode.flexxb.json.util.StringBuilder"/>
+    <classEntry path="com.googlecode.flexxb.json.annotation.JSONClass"/>
+    <classEntry path="com.googlecode.flexxb.json.annotation.JSONMember"/>
+    <classEntry path="com.googlecode.flexxb.json.annotation.JSONObject"/>
+    <classEntry path="com.googlecode.flexxb.json.annotation.JSONField"/>
+    <classEntry path="com.googlecode.flexxb.json.annotation.JSONArray"/>
+    <classEntry path="com.googlecode.flexxb.json.serializer.JSONClassSerializer"/>
+    <classEntry path="com.googlecode.flexxb.json.serializer.JSONFieldSerializer"/>
+    <classEntry path="com.googlecode.flexxb.json.serializer.JSONObjectSerializer"/>
+    <classEntry path="com.googlecode.flexxb.json.serializer.JSONArraySerializer"/>
+    <classEntry path="com.googlecode.flexxb.json.api.JSONApiClass"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
