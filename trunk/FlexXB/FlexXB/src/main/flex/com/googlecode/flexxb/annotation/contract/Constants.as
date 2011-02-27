@@ -48,6 +48,22 @@ package com.googlecode.flexxb.annotation.contract
 		 */
 		public static const IGNORE_ON : String = "ignoreOn";
 		/**
+		 *
+		 */
+		public static const ORDERED : String = "ordered";
+		/**
+		 * Order attribute name
+		 */
+		public static const ORDER : String = "order";		
+		/**
+		 *
+		 */
+		public static const ID : String = "idField";
+		/**
+		 * Id reference 
+		 */		
+		public static const IDREF : String = "idref";
+		/**
 		 * @private 
 		 * 
 		 */		

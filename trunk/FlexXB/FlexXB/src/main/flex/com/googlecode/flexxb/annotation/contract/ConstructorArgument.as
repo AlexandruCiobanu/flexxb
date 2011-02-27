@@ -81,7 +81,7 @@ package com.googlecode.flexxb.annotation.contract {
 		protected override function parse(descriptor:MetaDescriptor):void{
 			super.parse(descriptor);
 			_referenceField = descriptor.attributes[Constants.REF];
-			_optional = descriptor.getBooleanAttribute(Constants.OPTIONAL);
+			_optional = descriptor.getBoolean(Constants.OPTIONAL);
 		} 
 	}
 }

@@ -276,9 +276,9 @@ package com.googlecode.flexxb.xml.annotation {
 			_accessorType = descriptor.fieldAccess;
 			_nsRef = descriptor.attributes[XmlConstants.NAMESPACE];
 			ignoreOn = Stage.fromString(descriptor.attributes[Constants.IGNORE_ON]);
-			setOrder(descriptor.attributes[XmlConstants.ORDER]);
+			setOrder(descriptor.attributes[Constants.ORDER]);
 			_default = descriptor.attributes[Constants.DEFAULT];
-			_isIDRef = descriptor.getBooleanAttribute(XmlConstants.IDREF);
+			_isIDRef = descriptor.getBoolean(Constants.IDREF);
 		}
 		/**
 		 *

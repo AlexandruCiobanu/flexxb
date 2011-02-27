@@ -83,9 +83,9 @@ package com.googlecode.flexxb.xml.annotation {
 		
 		protected override function parse(metadata : MetaDescriptor) : void {
 			super.parse(metadata);
-			_serializePartialElement = metadata.getBooleanAttribute(XmlConstants.SERIALIZE_PARTIAL_ELEMENT);
-			_getFromCache = metadata.getBooleanAttribute(XmlConstants.GET_FROM_CACHE);
-			_getRuntimeType = metadata.getBooleanAttribute(XmlConstants.GET_RUNTIME_TYPE);
+			_serializePartialElement = metadata.getBoolean(XmlConstants.SERIALIZE_PARTIAL_ELEMENT);
+			_getFromCache = metadata.getBoolean(XmlConstants.GET_FROM_CACHE);
+			_getRuntimeType = metadata.getBoolean(XmlConstants.GET_RUNTIME_TYPE);
 		}
 		
 		public override function get annotationName() : String {

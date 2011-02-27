@@ -16,6 +16,7 @@
  */
 package com.googlecode.flexxb.xml.api {
 	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.api.FxClass;
 	import com.googlecode.flexxb.api.FxMember;
 	import com.googlecode.flexxb.api.flexxb_api_internal;
@@ -236,9 +237,9 @@ package com.googlecode.flexxb.xml.api {
 			values[XmlConstants.ALIAS] = alias;
 			values[XmlConstants.NAMESPACE_PREFIX] = prefix;
 			values[XmlConstants.NAMESPACE_URI] = uri;
-			values[XmlConstants.ORDERED] = ordered;
+			values[Constants.ORDERED] = ordered;
 			values[XmlConstants.USE_CHILD_NAMESPACE] = useNamespaceFrom;
-			values[XmlConstants.ID] = idField;
+			values[Constants.ID] = idField;
 			values[XmlConstants.VALUE] = defaultValueField;
 			return values;
 		}

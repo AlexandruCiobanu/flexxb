@@ -24,6 +24,9 @@ package com.googlecode.flexxb.annotation.parser
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
+	
+	import mx.collections.Sort;
+	import mx.collections.SortField;
 
 	/**
 	 * @private
@@ -64,9 +67,17 @@ package com.googlecode.flexxb.annotation.parser
 			}
 			var result : Array = [];
 			var descriptor : ClassMetaDescriptor;
+			var classAnnotation : IClassAnnotation;
 			for(var key : * in classes){
 				descriptor = classes[key];
-				result.push(AnnotationFactory.instance.getAnnotation(descriptor, null));
+				classAnnotation = AnnotationFactory.instance.getAnnotation(descriptor, null) as IClassAnnotation;
+				if(classAnnotation.ordered){
+					var sort : Sort = new Sort();
+					sort.fields = [new SortField("order", false, false, true)].concat(classAnnotation.getAdditionalSortFields());
+					classAnnotation.members.sort = sort;
+					classAnnotation.members.refresh();
+				}
+				result.push(classAnnotation);
 			}
 			name = null;
 			type = null;

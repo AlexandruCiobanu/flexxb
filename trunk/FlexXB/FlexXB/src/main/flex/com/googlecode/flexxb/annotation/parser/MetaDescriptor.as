@@ -39,16 +39,27 @@ package com.googlecode.flexxb.annotation.parser
 		public var attributes : Object;
 		
 		public var owner : IClassAnnotation;
-		
+		/**
+		 * 
+		 * 
+		 */		
 		public function MetaDescriptor(){
 			attributes = new Object();
 		}
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get fieldName():QName
 		{
 			return _fieldName;
 		}
-
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */
 		public function set fieldName(value:QName):void
 		{
 			//if(value == null){
@@ -56,17 +67,40 @@ package com.googlecode.flexxb.annotation.parser
 			//}
 			_fieldName = value;
 		}
-
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */
 		public function get version() : String{
 			return attributes[Constants.VERSION] ? attributes[Constants.VERSION] : Constants.DEFAULT;
 		}
-		
-		public function getBooleanAttribute(name : String) : Boolean{
+		/**
+		 * 
+		 * @param name
+		 * @return 
+		 * 
+		 */		
+		public function getBoolean(name : String) : Boolean{
 			return attributes[name] == "true";
 		} 
-		
-		public function getIntAttribute(name : String) : Number{
+		/**
+		 * 
+		 * @param name
+		 * @return 
+		 * 
+		 */		
+		public function getInt(name : String) : Number{
 			return Number(attributes[name]);
+		}
+		/**
+		 * 
+		 * @param name
+		 * @return 
+		 * 
+		 */		
+		public function getString(name : String) : String{
+			return attributes[name] as String;
 		}
 	}
 }
