@@ -12,6 +12,7 @@
     <classEntry path="com.googlecode.flexxb.json.serializer.JSONObjectSerializer"/>
     <classEntry path="com.googlecode.flexxb.json.serializer.JSONArraySerializer"/>
     <classEntry path="com.googlecode.flexxb.json.api.JSONApiClass"/>
+    <classEntry path="com.googlecode.flexxb.json.annotation.JSONConstants"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

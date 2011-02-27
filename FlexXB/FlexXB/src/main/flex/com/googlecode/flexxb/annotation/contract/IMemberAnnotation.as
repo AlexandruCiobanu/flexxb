@@ -66,5 +66,21 @@ package com.googlecode.flexxb.annotation.contract
 		 * 
 		 */		
 		function get ignoreOn() : Stage;
+		
+		/**
+		 * Get the order value of the current annotation. This value is used of the
+		 * owner class annotation has its ordered flag set to true.
+		 * @return order value
+		 *
+		 */
+		function get order() : Number;
+		
+		/**
+		 * Flag used to signal if the current field's values are id references to objects 
+		 * in the same document.
+		 * @return true if id referencing is on, false otherwise
+		 * 
+		 */		
+		function get isIDRef() : Boolean;
 	}
 }

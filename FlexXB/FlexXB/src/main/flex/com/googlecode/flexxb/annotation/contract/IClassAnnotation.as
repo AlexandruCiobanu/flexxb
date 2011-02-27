@@ -63,5 +63,18 @@ package com.googlecode.flexxb.annotation.contract
 		 * 
 		 */		
 		function get constructor() : Constructor;
+		
+		/**
+		 * Get a flag signaling whether the members must be ordered by an integer value or not
+		 * @return true if the content is ordered, false otherwise
+		 * 
+		 */		
+		function get ordered() : Boolean;
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		function getAdditionalSortFields() : Array;
 	}
 }

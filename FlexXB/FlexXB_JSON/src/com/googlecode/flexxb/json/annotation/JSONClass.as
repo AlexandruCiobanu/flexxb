@@ -17,90 +17,43 @@
  */
 package com.googlecode.flexxb.json.annotation
 {
-	import com.googlecode.flexxb.annotation.contract.BaseAnnotation;
-	import com.googlecode.flexxb.annotation.contract.Constructor;
+	import com.googlecode.flexxb.annotation.contract.BaseClass;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
-	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
 	
-	import mx.collections.ArrayCollection;
+	import mx.collections.SortField;
+
 	/**
 	 * 
 	 * @author aciobanu
 	 * 
 	 */	
-	public class JSONClass extends BaseAnnotation implements IClassAnnotation
+	public class JSONClass extends BaseClass implements IClassAnnotation
 	{
 		public static const NAME : String = "JSONClass";
 		
-		private var id : String;
-		/**
-		 * @private
-		 */
-		private var _idField : JSONMember;
-		/**
-		 * @private
-		 */
-		private var _ordered : Boolean;
-		/**
-		 * @private
-		 */
-		private var _constructor : Constructor;
+		private var _alias : String;
 		
-		public function JSONClass(descriptor:MetaDescriptor)
-		{
-			//TODO: implement function
+		public function JSONClass(descriptor : MetaDescriptor){
 			super(descriptor);
+		}	
+		/**
+		 * Get the alias
+		 * @return annotation alias
+		 *
+		 */
+		public function get alias() : String {
+			return _alias;
 		}
 		
-		public function get members():ArrayCollection
-		{
-			//TODO: implement function
-			return null;
-		}
-		
-		public function getMember(fieldName:String):IMemberAnnotation
-		{
-			//TODO: implement function
-			return null;
-		}
-		
-		public function get idField() : IMemberAnnotation{
-			return _idField;
-		}
-		
-		public function get constructor():Constructor
-		{
-			return _constructor;
-		}
-		
-		public function get name():QName
-		{
-			//TODO: implement function
-			return null;
-		}
-		
-		public function get type():Class
-		{
-			//TODO: implement function
-			return null;
+		public override function getAdditionalSortFields() : Array{
+			return [new SortField("alias", true, false, false)];
 		}
 		
 		protected override function parse(descriptor : MetaDescriptor) : void {
 			super.parse(descriptor);
 			
-			var desc : ClassMetaDescriptor = descriptor as ClassMetaDescriptor;
-			id = desc.attributes[XmlConstants.ID];
-			_ordered = desc.getBooleanAttribute(XmlConstants.ORDERED);
-			_name = descriptor.fieldName;
-			_type = descriptor.fieldType;
-			setAlias(descriptor.attributes[XmlConstants.ALIAS]);
-			
-			for each(var meta : MetaDescriptor in desc.members){
-				addMember(AnnotationFactory.instance.getAnnotation(meta, this) as XmlMember);
-			}
-			
-			constructor.parse(desc);
+			_alias = descriptor.getString(JSONConstants.ALIAS);
 		}
 	}
 }

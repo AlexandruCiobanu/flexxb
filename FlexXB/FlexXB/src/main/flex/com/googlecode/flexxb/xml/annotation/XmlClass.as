@@ -16,6 +16,7 @@
  */
 package com.googlecode.flexxb.xml.annotation {
 	import com.googlecode.flexxb.annotation.AnnotationFactory;
+	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.annotation.contract.Constructor;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
@@ -133,6 +134,10 @@ package com.googlecode.flexxb.xml.annotation {
 		public function get valueField() : Annotation {
 			return _defaultValueField;
 		}
+		
+		public function getAdditionalSortFields() : Array{
+			return [new SortField("alias", true, false, false)];
+		}
 
 		/**
 		 *
@@ -180,9 +185,9 @@ package com.googlecode.flexxb.xml.annotation {
 			super.parse(descriptor);
 			
 			var desc : ClassMetaDescriptor = descriptor as ClassMetaDescriptor;
-			id = desc.attributes[XmlConstants.ID];
+			id = desc.attributes[Constants.ID];
 			_useChildNamespace = desc.attributes[XmlConstants.USE_CHILD_NAMESPACE];
-			_ordered = desc.getBooleanAttribute(XmlConstants.ORDERED);
+			_ordered = desc.getBoolean(Constants.ORDERED);
 			defaultValue = desc.attributes[XmlConstants.VALUE];
 			
 			processNamespaces(desc);
@@ -228,15 +233,6 @@ package com.googlecode.flexxb.xml.annotation {
 					members.addItemAt(members.removeItemAt(i), 0);
 					break;
 				}
-			}
-			if (ordered) {
-				var sort : Sort = new Sort();
-				var fields : Array = [];
-				fields.push(new SortField("order", false, false, true));
-				fields.push(new SortField("alias", true, false, false));
-				sort.fields = fields;
-				members.sort = sort;
-				members.refresh();
 			}
 		}
 		

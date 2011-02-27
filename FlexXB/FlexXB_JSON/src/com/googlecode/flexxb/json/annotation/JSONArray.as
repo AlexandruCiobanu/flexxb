@@ -29,7 +29,6 @@ package com.googlecode.flexxb.json.annotation
 		
 		public function JSONArray(descriptor:MetaDescriptor)
 		{
-			//TODO: implement function
 			super(descriptor);
 		}
 	}

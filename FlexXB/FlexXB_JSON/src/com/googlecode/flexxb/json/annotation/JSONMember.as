@@ -19,63 +19,43 @@ package com.googlecode.flexxb.json.annotation
 {
 	import com.googlecode.flexxb.annotation.contract.AccessorType;
 	import com.googlecode.flexxb.annotation.contract.BaseAnnotation;
+	import com.googlecode.flexxb.annotation.contract.BaseMember;
+	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
 	import com.googlecode.flexxb.annotation.contract.Stage;
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
+	import com.googlecode.flexxb.error.DescriptorParsingError;
+
 	/**
 	 * 
 	 * @author aciobanu
 	 * 
 	 */	
-	public class JSONMember extends BaseAnnotation implements IMemberAnnotation
-	{
-		public function JSONMember(descriptor:MetaDescriptor)
-		{
-			//TODO: implement function
+	public class JSONMember extends BaseMember implements IMemberAnnotation
+	{		
+		private var _alias : String;
+						
+		public function JSONMember(descriptor : MetaDescriptor){
 			super(descriptor);
 		}
 		
-		public function get classAnnotation():IClassAnnotation
-		{
-			//TODO: implement function
-			return null;
+		public final function get alias() : String{
+			return _alias;
 		}
 		
-		public function get readOnly():Boolean
-		{
-			//TODO: implement function
-			return false;
+		/**
+		 * Get a flag to signal wether to use the owner's alias or not
+		 * @return true if it must use the owner's alias, false otherwise
+		 *
+		 */
+		public final function useOwnerAlias() : Boolean {
+			return _alias == JSONConstants.ALIAS_ANY;
 		}
 		
-		public function get writeOnly():Boolean
-		{
-			//TODO: implement function
-			return false;
-		}
-		
-		public function get accessor():AccessorType
-		{
-			//TODO: implement function
-			return null;
-		}
-		
-		public function get ignoreOn():Stage
-		{
-			//TODO: implement function
-			return null;
-		}
-		
-		public function get name():QName
-		{
-			//TODO: implement function
-			return null;
-		}
-		
-		public function get type():Class
-		{
-			//TODO: implement function
-			return null;
+		protected override function parse(descriptor : MetaDescriptor) : void{
+			super.parse(descriptor);
+			_alias = descriptor.getString(JSONConstants.ALIAS);
 		}
 	}
 }

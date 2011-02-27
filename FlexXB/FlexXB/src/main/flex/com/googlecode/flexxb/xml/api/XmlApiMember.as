@@ -15,6 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.xml.api {
+	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.api.FxField;
 	import com.googlecode.flexxb.api.FxMember;
 	import com.googlecode.flexxb.api.flexxb_api_internal;
@@ -104,8 +105,8 @@ package com.googlecode.flexxb.xml.api {
 			var values : Dictionary = super.getMappingValues();
 			values[XmlConstants.ALIAS] = alias;
 			if (!isNaN(order))
-				values[XmlConstants.ORDER] = order;
-			values[XmlConstants.IDREF] = idref;
+				values[Constants.ORDER] = order;
+			values[Constants.IDREF] = idref;
 			return values;
 		}
 	}
