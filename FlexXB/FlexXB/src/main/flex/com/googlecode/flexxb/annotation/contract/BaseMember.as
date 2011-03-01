@@ -43,6 +43,7 @@ package com.googlecode.flexxb.annotation.contract
 				
 		public function BaseMember(descriptor : MetaDescriptor){
 			super(descriptor);
+			_classAnnotation = descriptor.owner;
 		}
 		
 		public function get classAnnotation() : IClassAnnotation {

@@ -163,11 +163,7 @@ package com.googlecode.flexxb.annotation {
 			if (descriptor) {
 				var annotationClass : Class = getAnnotationClass(descriptor.metadataName);
 				if (annotationClass) {
-					if(isClassAnnotation(descriptor.metadataName)){
-						return new annotationClass(descriptor) as IAnnotation;
-					}else{
-						return new annotationClass(descriptor, owner) as IAnnotation;
-					}
+					return new annotationClass(descriptor) as IAnnotation;
 				}
 			}
 			return null;
