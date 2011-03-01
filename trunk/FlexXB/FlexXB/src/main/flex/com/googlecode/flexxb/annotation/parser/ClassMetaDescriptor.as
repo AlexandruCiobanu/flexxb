@@ -17,7 +17,9 @@
  */
 package com.googlecode.flexxb.annotation.parser
 {
+	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
+
 	/**
 	 * @private 
 	 * @author Alexutz
@@ -35,6 +37,13 @@ package com.googlecode.flexxb.annotation.parser
 			super();
 			members = new Array();
 			config = new Array();
+		}
+		
+		public override function set owner(value:IClassAnnotation):void{
+			super.owner = value;
+			for each(var member : MetaDescriptor in members){
+				member.owner = value;
+			}
 		}
 		
 		public function getConfigItemsByName(annotationName : String) : Array{

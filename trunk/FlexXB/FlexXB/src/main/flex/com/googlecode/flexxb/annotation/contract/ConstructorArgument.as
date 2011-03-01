@@ -48,9 +48,9 @@ package com.googlecode.flexxb.annotation.contract {
 		 * Constructor
 		 *
 		 */
-		public function ConstructorArgument(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+		public function ConstructorArgument(descriptor : MetaDescriptor) {
 			super(descriptor);
-			_owner = owner;
+			_owner = descriptor.owner;
 		}
 		
 		public function get classAnnotation() : IClassAnnotation{

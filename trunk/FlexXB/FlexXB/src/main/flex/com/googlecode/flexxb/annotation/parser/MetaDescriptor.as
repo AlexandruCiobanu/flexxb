@@ -38,7 +38,7 @@ package com.googlecode.flexxb.annotation.parser
 		
 		public var attributes : Object;
 		
-		public var owner : IClassAnnotation;
+		private var _owner : IClassAnnotation;
 		/**
 		 * 
 		 * 
@@ -46,6 +46,15 @@ package com.googlecode.flexxb.annotation.parser
 		public function MetaDescriptor(){
 			attributes = new Object();
 		}
+
+		public function get owner() : IClassAnnotation{
+			return _owner;
+		}
+
+		public function set owner(value : IClassAnnotation) : void{
+			_owner = value;
+		}
+
 		/**
 		 * 
 		 * @return 
