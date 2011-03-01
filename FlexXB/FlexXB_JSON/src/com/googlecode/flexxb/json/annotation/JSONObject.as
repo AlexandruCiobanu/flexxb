@@ -27,10 +27,57 @@ package com.googlecode.flexxb.json.annotation
 	{
 		public static const NAME : String = "JSONObject";
 		
+		protected var _serializePartialElement : Boolean;
+		/**
+		 * @private
+		 */
+		protected var _getFromCache : Boolean;
+		/**
+		 *@private
+		 */
+		protected var _getRuntimeType : Boolean;
+		
 		public function JSONObject(descriptor:MetaDescriptor)
 		{
-			//TODO: implement function
 			super(descriptor);
+		}
+		
+		/**
+		 * Get serializePartialElement flag
+		 * @return
+		 *
+		 */
+		public function get serializePartialElement() : Boolean {
+			return _serializePartialElement;
+		}
+		
+		/**
+		 *
+		 * @return
+		 *
+		 */
+		public function get getRuntimeType() : Boolean {
+			return _getRuntimeType;
+		}
+		
+		/**
+		 * Get getFromCache flag
+		 * @return
+		 *
+		 */
+		public function get getFromCache() : Boolean {
+			return _getFromCache;
+		}
+		
+		protected override function parse(metadata : MetaDescriptor) : void {
+			super.parse(metadata);
+			_serializePartialElement = metadata.getBoolean(JSONConstants.SERIALIZE_PARTIAL_ELEMENT);
+			_getFromCache = metadata.getBoolean(JSONConstants.GET_FROM_CACHE);
+			_getRuntimeType = metadata.getBoolean(JSONConstants.GET_RUNTIME_TYPE);
+		}
+		
+		public override function get annotationName() : String {
+			return NAME;
 		}
 	}
 }

@@ -27,6 +27,26 @@ package com.googlecode.flexxb.json.annotation
 		 * 
 		 */		
 		public static const ALIAS_ANY : String = "*";
+		/**
+		 * SerializePartialElement attribute name
+		 */
+		public static const SERIALIZE_PARTIAL_ELEMENT : String = "serializePartialElement";
+		/**
+		 * GetFromCache attribute name
+		 */
+		public static const GET_FROM_CACHE : String = "getFromCache";
+		/**
+		 * 
+		 */		
+		public static const GET_RUNTIME_TYPE : String = "getRuntimeType";
+		/**
+		 * 
+		 */		
+		public static const TYPE : String = "type";
+		/**
+		 * 
+		 */		
+		public static const MEMBER_NAME : String = "memberName";
 		
 		public function JSONConstants(){
 			throw new Error("Do not instantiate this class. Use static variables instead");

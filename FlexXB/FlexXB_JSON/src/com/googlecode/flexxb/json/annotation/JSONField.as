@@ -27,10 +27,12 @@ package com.googlecode.flexxb.json.annotation
 	{
 		public static const NAME : String = "JSONField";
 		
-		public function JSONField(descriptor:MetaDescriptor)
-		{
-			//TODO: implement function
+		public function JSONField(descriptor:MetaDescriptor){
 			super(descriptor);
+		}
+		
+		public override function get annotationName() : String {
+			return NAME;
 		}
 	}
 }
