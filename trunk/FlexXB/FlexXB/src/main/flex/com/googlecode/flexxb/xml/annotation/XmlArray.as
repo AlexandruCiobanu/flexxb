@@ -50,8 +50,8 @@ package com.googlecode.flexxb.xml.annotation {
 		 * @param xmlClass
 		 *
 		 */
-		public function XmlArray(descriptor : MetaDescriptor, owner : IClassAnnotation) {
-			super(descriptor, owner);
+		public function XmlArray(descriptor : MetaDescriptor) {
+			super(descriptor);
 		}
 
 		/**

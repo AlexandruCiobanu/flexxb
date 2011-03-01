@@ -33,9 +33,8 @@ package com.googlecode.flexxb.xml.annotation
 		
 		private var _owner : IClassAnnotation;
 		
-		public function XmlNamespace(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+		public function XmlNamespace(descriptor : MetaDescriptor) {
 			super(descriptor);
-			_owner = owner;
 		}
 		
 		public function get classAnnotation():IClassAnnotation{

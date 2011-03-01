@@ -36,8 +36,8 @@ package com.googlecode.flexxb.xml.annotation {
 		 * @param classDescriptor owner XmlClass object
 		 *
 		 */
-		public function XmlAttribute(descriptor : MetaDescriptor, owner : IClassAnnotation) {
-			super(descriptor, owner);
+		public function XmlAttribute(descriptor : MetaDescriptor) {
+			super(descriptor);
 		}
 
 		/**

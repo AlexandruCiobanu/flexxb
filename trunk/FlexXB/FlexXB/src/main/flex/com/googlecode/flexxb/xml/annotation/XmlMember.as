@@ -114,9 +114,9 @@ package com.googlecode.flexxb.xml.annotation {
 		 * @param _class owner XmlClass entity
 		 *
 		 */
-		public function XmlMember(descriptor : MetaDescriptor, owner : IClassAnnotation) {
+		public function XmlMember(descriptor : MetaDescriptor) {
 			super(descriptor);
-			_class = owner as XmlClass;
+			_class = descriptor.owner as XmlClass;
 		}
 		
 		public function get classAnnotation() : IClassAnnotation{
