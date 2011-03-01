@@ -88,6 +88,7 @@ package com.googlecode.flexxb.xml.annotation {
 		 */
 		public function XmlClass(descriptor : ClassMetaDescriptor) {
 			_constructor = new Constructor(this);
+			descriptor.owner = this;
 			super(descriptor);
 		}
 
