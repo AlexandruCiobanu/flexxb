@@ -18,6 +18,12 @@
 package com.googlecode.flexxb.json.annotation
 {
 	import com.googlecode.flexxb.annotation.parser.MetaDescriptor;
+	import com.googlecode.flexxb.error.DescriptorParsingError;
+	import com.googlecode.flexxb.util.isVector;
+	
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+
 	/**
 	 * 
 	 * @author aciobanu
@@ -27,9 +33,51 @@ package com.googlecode.flexxb.json.annotation
 	{
 		public static const NAME : String = "JSONArray";
 		
-		public function JSONArray(descriptor:MetaDescriptor)
-		{
+		private var _memberType : Class;
+		
+		private var _memberName : String;
+		
+		public function JSONArray(descriptor : MetaDescriptor){
 			super(descriptor);
+		}
+		
+		public function get memberType() : Class {
+			return _memberType;
+		}
+		
+		public function get memberName() : String {
+			return _memberName;
+		}
+		
+		protected override function parse(metadata : MetaDescriptor) : void {
+			super.parse(metadata);
+			_memberType = determineElementType(metadata);
+			_memberName = metadata.getString(JSONConstants.MEMBER_NAME);
+		}
+		
+		public override function get annotationName() : String {
+			return NAME;
+		}
+		
+		private function determineElementType(metadata : MetaDescriptor) : Class{
+			var type : Class;
+			//handle the vector type. We need to check for it first as it will override settings in the member type 
+			var classType : String = getQualifiedClassName(metadata.fieldType);
+			if(isVector(classType)){
+				if(classType.lastIndexOf("<") > -1){
+					classType = classType.substring(classType.lastIndexOf("<") + 1, classType.length - 1);
+				}
+			}else{
+				classType = metadata.getString(JSONConstants.TYPE);
+			}
+			if (classType) {
+				try {
+					type = getDefinitionByName(classType) as Class;
+				} catch (e : Error) {
+					throw new DescriptorParsingError(classAnnotation.type, memberName, "Member type <<" + classType + ">> can't be found as specified in the metadata. Make sure you spelled it correctly"); 
+				}
+			}
+			return type;
 		}
 	}
 }

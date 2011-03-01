@@ -33,6 +33,11 @@ package com.googlecode.flexxb.json
 		 */		
 		public var strict : Boolean;
 		/**
+		 * Determine the type of the object the response will be deserialised into
+		 * by the name associated with the value in the parent.
+		 */
+		public var getResponseTypeByName : Boolean = true;
+		/**
 		 * 
 		 * @param parent
 		 * 

@@ -55,5 +55,9 @@ package com.googlecode.flexxb.json.annotation
 			
 			_alias = descriptor.getString(JSONConstants.ALIAS);
 		}
+		
+		public override function get annotationName() : String {
+			return NAME;
+		}
 	}
 }
