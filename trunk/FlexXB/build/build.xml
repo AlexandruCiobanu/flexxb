@@ -142,6 +142,7 @@
 	<!-- -->
 	<target name="development" depends="build.project, build.project.test, Metrics">
 		<antcall target="documentation" />
+		<antcall target="embedAsDoc"/>
 	</target>
 	<!-- -->
 	<target name="release" depends="development, junit.ui">
@@ -211,7 +212,19 @@
 			<arg line="-window-title ${doc.title}"/>
 			<arg line="-package-description-file ${doc.dir}/packageDescriptor.xml"/>
 			<arg line="-lenient"/>
+			<arg line="-keep-xml"/>
 		</exec>
+	</target>
+	
+	<target name="embedAsDoc">
+		<zip destfile="${project.swc.output}" update="true">
+		    <zipfileset dir="${doc.dir}/asdoc/tempdita" prefix="docs">
+			    <include name="*.*"/>
+				<exclude name="ASDoc_Config.xml"/>
+				<exclude name="overviews.xml"/>
+		    </zipfileset>
+		</zip>
+		<delete dir="${doc.dir}/asdoc/tempdita"/>
 	</target>
 	
 	<target name="junit.ui" depends="build.project.test">
