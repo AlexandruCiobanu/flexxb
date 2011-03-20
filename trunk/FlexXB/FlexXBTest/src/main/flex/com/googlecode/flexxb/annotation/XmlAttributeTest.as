@@ -26,10 +26,10 @@ package com.googlecode.flexxb.annotation {
 		
 		protected override function runTest(descriptor : XML) : void {
 			var parser : MetaParser = new MetaParser();
-			var att1 : XmlAttribute = new XmlAttribute(parser.parseField(getFieldDescriptor("aField", descriptor))[0], null);
+			var att1 : XmlAttribute = new XmlAttribute(parser.parseField(getFieldDescriptor("aField", descriptor))[0]);
 			validate(att1, "aField", String, "stuff", null);
 
-			var att2 : XmlAttribute = new XmlAttribute(parser.parseField(getFieldDescriptor("date", descriptor))[0], null);
+			var att2 : XmlAttribute = new XmlAttribute(parser.parseField(getFieldDescriptor("date", descriptor))[0]);
 			validate(att2, "date", Date, "date", Stage.SERIALIZE);
 		}
 

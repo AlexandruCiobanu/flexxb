@@ -33,7 +33,7 @@ package com.googlecode.flexxb.annotation {
 		
 		protected override function runTest(descriptor : XML) : void {
 			var parser : MetaParser = new MetaParser();
-			var att1 : XmlArray = new XmlArray(parser.parseField(getFieldDescriptor("result", descriptor))[0], null);
+			var att1 : XmlArray = new XmlArray(parser.parseField(getFieldDescriptor("result", descriptor))[0]);
 			validate(att1, "result", Array, "data", null, false, Mock);
 		}
 
@@ -47,7 +47,7 @@ package com.googlecode.flexxb.annotation {
 		public function validateVectorSupport() : void{
 			var parser : MetaParser = new MetaParser();
 			var xml : XML = describeType(VectoredElement);
-			var att1 : XmlArray = new XmlArray(parser.parseField(xml.factory.variable.(@name=="list")[0])[0], null);
+			var att1 : XmlArray = new XmlArray(parser.parseField(xml.factory.variable.(@name=="list")[0])[0]);
 			assertThat(att1.type, equalTo(Vector.<String>));
 			assertThat(att1.memberType, equalTo(String));
 		}

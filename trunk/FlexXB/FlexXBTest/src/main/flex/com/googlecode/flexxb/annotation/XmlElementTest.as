@@ -26,13 +26,13 @@ package com.googlecode.flexxb.annotation {
 		
 		protected override function runTest(descriptor : XML) : void {
 			var parser : MetaParser = new MetaParser();
-			var att1 : XmlElement = new XmlElement(parser.parseField(getFieldDescriptor("version", descriptor))[0], null);
+			var att1 : XmlElement = new XmlElement(parser.parseField(getFieldDescriptor("version", descriptor))[0]);
 			validate(att1, "version", int, "objVersion", null, false);
 
-			var att2 : XmlElement = new XmlElement(parser.parseField(getFieldDescriptor("reference", descriptor))[0], null);
+			var att2 : XmlElement = new XmlElement(parser.parseField(getFieldDescriptor("reference", descriptor))[0]);
 			validate(att2, "reference", Object, "reference", null, true);
 
-			var att3 : XmlElement = new XmlElement(parser.parseField(getFieldDescriptor("link", descriptor))[0], null);
+			var att3 : XmlElement = new XmlElement(parser.parseField(getFieldDescriptor("link", descriptor))[0]);
 			validate(att3, "link", Mock3, "mock3", null, true);
 		}
 

@@ -58,7 +58,7 @@ package com.googlecode.flexxb.xml.api {
 		public function testFxAttribute() : void {
 			var api : XmlApiAttribute = XmlApiAttribute.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = FlexXBEngine.instance.api.buildFieldXmlDescriptor(api);
-			var att : XmlAttribute = new XmlAttribute(new MetaParser().parseField(descriptor)[0], null);
+			var att : XmlAttribute = new XmlAttribute(new MetaParser().parseField(descriptor)[0]);
 			doMemberAssertion(api, att);
 		}
 
@@ -66,7 +66,7 @@ package com.googlecode.flexxb.xml.api {
 		public function testFxElement() : void {
 			var api : XmlApiElement = XmlApiElement.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = FlexXBEngine.instance.api.buildFieldXmlDescriptor(api);
-			var att : XmlElement = new XmlElement(new MetaParser().parseField(descriptor)[0], null);
+			var att : XmlElement = new XmlElement(new MetaParser().parseField(descriptor)[0]);
 			doElementAssertion(api, att);
 		}
 
@@ -74,7 +74,7 @@ package com.googlecode.flexxb.xml.api {
 		public function testFxArray() : void {
 			var api : XmlApiArray = XmlApiArray.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = FlexXBEngine.instance.api.buildFieldXmlDescriptor(api);
-			var att : XmlArray = new XmlArray(new MetaParser().parseField(descriptor)[0], null);
+			var att : XmlArray = new XmlArray(new MetaParser().parseField(descriptor)[0]);
 			doArrayAssertion(api, att);
 		}
 
