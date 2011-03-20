@@ -172,11 +172,11 @@ package com.googlecode.flexxb.annotation.parser
 		
 		public function parseField(xml : XML) : Array{
 			var descriptors : Array = [];
-			var name : QName = new QName(xml.@uri, xml.@name);
-			var accessType : AccessorType = AccessorType.fromString(xml.@access);
+			var name : QName = new QName(String(xml.@uri), String(xml.@name));
+			var accessType : AccessorType = AccessorType.fromString(String(xml.@access));
 			var type : Class;
 			try{
-				type = getDefinitionByName(xml.@type) as Class;
+				type = getDefinitionByName(String(xml.@type)) as Class;
 			}catch(e : Error){
 				throw e;
 			}
