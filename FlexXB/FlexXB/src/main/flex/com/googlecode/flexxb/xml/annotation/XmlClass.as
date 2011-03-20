@@ -180,9 +180,7 @@ package com.googlecode.flexxb.xml.annotation {
 			return ANNOTATION_NAME;
 		}
 		
-		protected override function parse(descriptor : MetaDescriptor) : void {
-			nameSpace = getNamespace(descriptor);
-			
+		protected override function parse(descriptor : MetaDescriptor) : void {			
 			super.parse(descriptor);
 			
 			var desc : ClassMetaDescriptor = descriptor as ClassMetaDescriptor;
@@ -192,6 +190,8 @@ package com.googlecode.flexxb.xml.annotation {
 			defaultValue = desc.attributes[XmlConstants.VALUE];
 			
 			processNamespaces(desc);
+			
+			nameSpace = getNamespace(descriptor);
 			
 			for each(var meta : MetaDescriptor in desc.members){
 				addMember(AnnotationFactory.instance.getAnnotation(meta, this) as XmlMember);
@@ -260,6 +260,13 @@ package com.googlecode.flexxb.xml.annotation {
 			var prefix : String = descriptor.attributes[XmlConstants.NAMESPACE_PREFIX];
 			var uri : String =  descriptor.attributes[XmlConstants.NAMESPACE_URI];
 			if (uri == null || uri.length == 0) {
+				try{
+					if(prefix){
+						return getRegisteredNamespace(prefix);
+					}
+				}catch(e : Error){
+					trace(e.getStackTrace());
+				}
 				return null;
 			}
 			if (prefix != null && prefix.length > 0) {
