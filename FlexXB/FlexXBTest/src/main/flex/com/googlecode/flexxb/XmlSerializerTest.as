@@ -27,6 +27,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.VectoredElement;
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
+	import com.googlecode.testData.arrayIssue.IData;
 	import com.googlecode.testData.idref.Data;
 	import com.googlecode.testData.idref.Node;
 	
@@ -168,6 +169,13 @@ package com.googlecode.flexxb {
 			Assert.assertEquals("DefaultTest is wrong", target.defaultTest, copy.defaultTest);
 		}
 		
+		[Test]
+		public function testNamespaceNestedArray() : void{
+			var xml : XML = <xs:data xmlns:xs="http://www.example.com" itemFormDefault="qualified"><xs:item value="1" /><xs:item value="2" /><xs:nested><xs:item value="3" /><xs:item value="4" /></xs:nested></xs:data>;
+			var data:IData = FxBEngine.instance.getXmlSerializer().deserialize(xml, IData);
+			assertThat(data.localItems.length, equalTo(2));
+			assertThat(data.nestedItems.length, equalTo(2));
+		} 		
 		[Test]
 		public function testClassTypeByNamespace() : void {
 			var target : Mock2 = new Mock2();
