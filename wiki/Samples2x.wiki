@@ -199,3 +199,124 @@ _The resulting xml looks like:_
   </test1>
 </Persist>
 }}}
+
+== API Samples ==
+
+The FlexXB API allows developers to specify the way classes should be processed without decorating them with annotations. This is particularly usefull is cases when using an external library whose sources are not available or when you can't modify existing sources for one reason or another. There are two ways of using the API:
+  
+ * Programatically: you can define in code the fields of a specific type that can be processed and how.
+ * Via xml config file: you can define an xml file containing all the information FlexXB engine needs to process the specified types. This file must oblige to the api schema file located in _*FLEXXB_BINARIES_DIR/api-schema/FlexXB-api.xsd*_.
+The main access point for the api is {{{com.googlecode.serializer.flexxb.FlexXBEngine.instance.api}}}.
+
+=== 1. Programatically building descriptor ===
+
+Let's assume we have the following object(annotations are set just to demonstrate how the api should be configured):
+
+{{{
+package model
+{
+	import com.googlecode.flexxb.IIdentifiable;
+
+	[XmlClass(alias="Person")]
+	[ConstructorArg(reference="firstName")]
+	[ConstructorArg(reference="lastName")]
+	[Bindable]
+	public class Person implements IIdentifiable
+	{
+		[XmlElement(alias="ID")]
+		public var id : String = "1";
+		[XmlAttribute(alias="FirstName")]
+		public var firstName : String;
+		[XmlAttribute(alias="LastName")]
+		public var lastName : String;
+		[XmlAttribute(alias="Age")]
+		public var age : int;
+		[XmlElement(alias="Position")]
+		public var position : String;
+		
+		public function Person(firstName : String, lastName : String)
+		{
+			super();
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		
+		public function get thisType():Class
+		{
+			return Person;
+		}		
+	}
+}
+}}}
+
+Building the api descriptor should loomk like:
+
+{{{
+        var apiClass : XmlApiClass = new XmlApiClass(Person, "Person");				
+        //Add class members descriptors
+	apiClass.addElement("id", String, AccessorType.READ_WRITE, "ID");
+	apiClass.addAttribute("firstName", String, AccessorType.READ_WRITE, "FirstName");
+	apiClass.addAttribute("lastName", String, AccessorType.READ_WRITE, "LastName");
+	apiClass.addAttribute("age", String, AccessorType.READ_WRITE, "Age");
+	apiClass.addElement("position", String, AccessorType.READ_WRITE, "Position");
+	//Set the constructor arguments, if any
+	apiClass.addArgument("firstName");
+	apiClass.addArgument("lastName");
+	//Register the api descriptor class in the FlexXB engine
+	FlexXBEngine.instance.api.processTypeDescriptor(apiClass);
+}}}
+
+Another example: let's assume we now have a department class (annotations are set just to demonstrate how the api should be configured):
+
+{{{
+package model
+{
+	import com.googlecode.flexxb.IIdentifiable;
+	
+	[XmlClass(alias="CompanyDepartment", prefix="dept", uri="http://myCompanyUrl.com")]
+	[ConstructorArg(reference="id")]
+	[ConstructorArg(reference="name")]
+	[Bindable]
+	public class Department implements IIdentifiable
+	{
+		[XmlAttribute(alias="ID")]
+		public var id : String;
+		
+		[XmlElement(alias="DepartmentName")]
+		public var name : String;
+		
+		[XmlElement(alias="Leader")]
+		public var departmentHead : Person;
+		
+		public function Department(id : String, name : String)
+		{
+			super();
+			this.id = id;
+			this.name = name;
+		}
+		
+		public function get thisType():Class
+		{
+			return Department;
+		}
+		
+	}
+}
+}}}
+
+The api descriptor is built like:
+
+{{{
+        var apiClass : XmlApiClass = new XmlApiClass(Department);
+	apiClass.alias = "CompanyDepartment";
+	apiClass.defaultNameSpace = new Namespace("dept", "http://myCompanyUrl.com");
+	//Add clas members descriptors
+	apiClass.addAttribute("id", String, AccessorType.READ_WRITE, "ID");
+	apiClass.addElement("name", String, AccessorType.READ_WRITE, "DepartmentName");
+	apiClass.addElement("departmentHead", Person, AccessorType.READ_WRITE, "Leader");
+	//Set the constructor arguments, if any
+	apiClass.addArgument("id");
+	apiClass.addArgument("name");
+	//Register the api descriptor class in the FlexXB engine
+	FlexXBEngine.instance.api.processTypeDescriptor(apiClass);
+}}}
