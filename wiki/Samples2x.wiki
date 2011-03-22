@@ -249,7 +249,7 @@ package model
 }
 }}}
 
-Building the api descriptor should loomk like:
+Building the api descriptor should look like:
 
 {{{
         var apiClass : XmlApiClass = new XmlApiClass(Person, "Person");				
