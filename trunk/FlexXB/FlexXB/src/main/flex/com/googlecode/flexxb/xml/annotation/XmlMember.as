@@ -95,10 +95,6 @@ package com.googlecode.flexxb.xml.annotation {
 		/**
 		 * @private
 		 */
-		private var pathElements : Array;
-		/**
-		 * @private
-		 */
 		private var _accessorType : AccessorType;
 		/**
 		 * @private 
@@ -116,23 +112,12 @@ package com.googlecode.flexxb.xml.annotation {
 		 */
 		public function XmlMember(descriptor : MetaDescriptor) {
 			super(descriptor);
-			_class = descriptor.owner as XmlClass;
 		}
 		
 		public function get classAnnotation() : IClassAnnotation{
 			return _class;
 		}
-				
-		public override function set nameSpace(value : Namespace) : void{
-			super.nameSpace = value;
-			if(isPath()){
-				var path : QName;
-				for(var i : int = 0; i < pathElements.length; i++){
-					path = pathElements[i] as QName;
-					pathElements[i] = new QName(value, path.localName);
-				}
-			}
-		}
+		
 		/**
 		 * Check if this member is marked as default in the (de)serialization process
 		 * @return true if the member is default, false otherwise
@@ -189,24 +174,6 @@ package com.googlecode.flexxb.xml.annotation {
 		 */		
 		public function hasNamespaceRef() : Boolean{
 			return _nsRef && StringUtil.trim(_nsRef).length > 0;
-		}
-
-		/**
-		 * Check if the alias defines virtual paths
-		 * @return true if virtual paths are defined, false otherwise
-		 *
-		 */
-		public function isPath() : Boolean {
-			return pathElements && pathElements.length > 0;
-		}
-
-		/**
-		 * Get the list of virtual path consituents
-		 * @return Array containing pathe elements
-		 *
-		 */
-		public function get qualifiedPathElements() : Array {
-			return pathElements;
 		}
 
 		/**
@@ -272,6 +239,7 @@ package com.googlecode.flexxb.xml.annotation {
 		 *
 		 */
 		protected override function parse(descriptor : MetaDescriptor) : void {
+			_class = descriptor.owner as XmlClass;
 			super.parse(descriptor);
 			_accessorType = descriptor.fieldAccess;
 			_nsRef = descriptor.attributes[XmlConstants.NAMESPACE];
@@ -279,6 +247,23 @@ package com.googlecode.flexxb.xml.annotation {
 			setOrder(descriptor.attributes[Constants.ORDER]);
 			_default = descriptor.attributes[Constants.DEFAULT];
 			_isIDRef = descriptor.getBoolean(Constants.IDREF);
+		}
+		/**
+		 * @private
+		 * 
+		 */		
+		protected override function setAlias(value : String) : void {
+			super.setAlias(value);
+			if(_class && _class.isPath()){
+				var path : Array = _class.qualifiedPathElements;
+				if(!pathElements){
+					pathElements = [];
+				}
+				pathElements.unshift(_class.xmlName);
+				for(var i : int = path.length - 1; i > 0; i--){
+					pathElements.unshift(path[i]);
+				}
+			}
 		}
 		/**
 		 *
@@ -294,26 +279,6 @@ package com.googlecode.flexxb.xml.annotation {
 					throw new DescriptorParsingError(ownerClass.type, name.localName, "The order attribute of the annotation is invalid as number");
 				}
 				_order = nr;
-			}
-		}
-		
-		protected override function setAlias(value : String) : void {
-			if (value && value.indexOf(XmlConstants.ALIAS_PATH_SEPARATOR) > 0) {
-				var elems : Array = value.split(XmlConstants.ALIAS_PATH_SEPARATOR);
-				pathElements = [];
-				var localName : String;
-				for (var i : int = 0; i < elems.length; i++) {
-					localName = elems[i] as String;
-					if (localName && localName.length > 0) {
-						if (i == elems.length - 1) {
-							super.setAlias(localName);
-							break;
-						}
-						pathElements.push(new QName(nameSpace, localName));
-					}
-				}
-			} else {
-				super.setAlias(value);
 			}
 		}
 	}

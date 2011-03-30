@@ -21,6 +21,7 @@ package com.googlecode.flexxb.xml.serializer {
 	import com.googlecode.flexxb.serializer.BaseSerializer;
 	import com.googlecode.flexxb.xml.XmlDescriptionContext;
 	import com.googlecode.flexxb.xml.annotation.XmlMember;
+	import com.googlecode.flexxb.xml.util.XmlUtils;
 	
 	import flash.utils.getQualifiedClassName;
 
@@ -39,17 +40,19 @@ package com.googlecode.flexxb.xml.serializer {
 			var element : XmlMember = annotation as XmlMember;
 			var parentXml : XML = serializedData as XML;
 			
-			if (element.isDefaultValue()) {
-				parentXml.appendChild(serializer.converterStore.objectToString(object, element.type));
-				return null;
-			}
+			
 			var location : XML = parentXml;
 
 			if (element.isPath()) {
-				location = setPathElement(element, parentXml);
+				location = XmlUtils.setPathElement(element, parentXml);
 			}
 			
-			if(element.hasNamespaceRef() && element.nameSpace != element.ownerClass.nameSpace && mustAddNamespace(element.nameSpace, parentXml)){
+			if (element.isDefaultValue()) {
+				location.appendChild(serializer.converterStore.objectToString(object, element.type));
+				return null;
+			}
+			
+			if(element.hasNamespaceRef() && element.nameSpace != element.ownerClass.nameSpace && XmlUtils.mustAddNamespace(element.nameSpace, parentXml)){
 				parentXml.addNamespace(element.nameSpace);
 			}
 
@@ -72,24 +75,25 @@ package com.googlecode.flexxb.xml.serializer {
 		public override function deserialize(serializedData : Object, annotation : IAnnotation, serializer : SerializationCore) : Object {
 			var element : XmlMember = annotation as XmlMember;
 			var xmlData : XML = serializedData as XML;
-			if (element.isDefaultValue()) {
-				for each (var child : XML in xmlData.children()) {
-					if (child.nodeKind() == "text") {
-						return serializer.converterStore.stringToObject(child.toXMLString(), element.type);
-					}
-				}
-			}
-
+			
 			var xmlElement : XML;
 
 			if (element.isPath()) {
-				xmlElement = getPathElement(element, xmlData);
+				xmlElement = XmlUtils.getPathElement(element, xmlData);
 			} else {
 				xmlElement = xmlData;
 			}
 
 			if (xmlElement == null) {
 				return null;
+			}
+			
+			if (element.isDefaultValue()) {
+				for each (var child : XML in xmlElement.children()) {
+					if (child.nodeKind() == "text") {
+						return serializer.converterStore.stringToObject(child.toXMLString(), element.type);
+					}
+				}
 			}
 
 			var xmlName : QName;
@@ -113,70 +117,6 @@ package com.googlecode.flexxb.xml.serializer {
 		 */
 		protected function deserializeObject(xmlData : XML, xmlName : QName, annotation : XmlMember, serializer : SerializationCore) : Object {
 			return null;
-		}
-
-		/**
-		 *
-		 * @param element
-		 * @param xmlData
-		 * @return
-		 *
-		 */
-		private function getPathElement(element : XmlMember, xmlData : XML) : XML {
-			var xmlElement : XML;
-			var list : XMLList;
-			var pathElement : QName;
-			for (var i : int = 0; i < element.qualifiedPathElements.length; i++) {
-				pathElement = element.qualifiedPathElements[i];
-				if (!xmlElement) {
-					list = xmlData.child(pathElement);
-				} else {
-					list = xmlElement.child(pathElement);
-				}
-				if (list.length() > 0) {
-					xmlElement = list[0];
-				} else {
-					xmlElement = null;
-					break;
-				}
-			}
-			return xmlElement;
-		}
-
-		/**
-		 *
-		 * @param element
-		 * @param xmlParent
-		 * @param serializedChild
-		 * @return
-		 *
-		 */
-		private function setPathElement(element : XmlMember, xmlParent : XML) : XML {
-			var cursor : XML = xmlParent;
-			var count : int = 0;
-			for each (var pathElement : QName in element.qualifiedPathElements) {
-				var path : XMLList = cursor.child(pathElement);
-				if (path.length() > 0) {
-					cursor = path[0];
-				} else {
-					var pathItem : XML = <xml />;
-					pathItem.setName(pathElement);
-					cursor.appendChild(pathItem);
-					cursor = pathItem;
-				}
-				count++;
-			}
-			return cursor;
-		}
-		
-		private function mustAddNamespace(ns : Namespace, xml : XML) : Boolean{
-			var inScopeNs : Array = xml.inScopeNamespaces();
-			for each(var inNs : Namespace in inScopeNs){
-				if(inNs.uri == ns.uri){
-					return false;
-				}
-			}
-			return true;
 		}
 
 		/**
