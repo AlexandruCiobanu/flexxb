@@ -45,6 +45,10 @@ package com.googlecode.flexxb.xml.annotation {
 		private var _xmlName : QName;
 		
 		private var _nameSpace : Namespace;
+		/**
+		 * @private
+		 */
+		protected var pathElements : Array;
 
 		/**
 		 * Constructor
@@ -78,6 +82,13 @@ package com.googlecode.flexxb.xml.annotation {
 		 */
 		public function set nameSpace(value : Namespace) : void {
 			_nameSpace = value;
+			if(isPath()){
+				var path : QName;
+				for(var i : int = 0; i < pathElements.length; i++){
+					path = pathElements[i] as QName;
+					pathElements[i] = new QName(value, path.localName);
+				}
+			}
 		}
 
 		/**
@@ -100,6 +111,23 @@ package com.googlecode.flexxb.xml.annotation {
 		public function get alias() : String {
 			return _alias;
 		}
+		/**
+		 * Check if the alias defines virtual paths
+		 * @return true if virtual paths are defined, false otherwise
+		 *
+		 */
+		public function isPath() : Boolean {
+			return pathElements && pathElements.length > 0;
+		}
+		
+		/**
+		 * Get the list of virtual path consituents
+		 * @return Array containing pathe elements
+		 *
+		 */
+		public function get qualifiedPathElements() : Array {
+			return pathElements;
+		}
 
 		/**
 		 * @private
@@ -107,6 +135,26 @@ package com.googlecode.flexxb.xml.annotation {
 		 *
 		 */
 		protected function setAlias(value : String) : void {
+			if (value && value.indexOf(XmlConstants.ALIAS_PATH_SEPARATOR) > 0) {
+				var elems : Array = value.split(XmlConstants.ALIAS_PATH_SEPARATOR);
+				pathElements = [];
+				var localName : String;
+				for (var i : int = 0; i < elems.length; i++) {
+					localName = elems[i] as String;
+					if (localName && localName.length > 0) {
+						if (i == elems.length - 1) {
+							internalSetAlias(localName);
+							break;
+						}
+						pathElements.push(new QName(nameSpace, localName));
+					}
+				}
+			} else {
+				internalSetAlias(value);
+			}
+		}
+		
+		private function internalSetAlias(value : String) : void{
 			_alias = value;
 			if (!_alias || _alias.length == 0) {
 				_alias = _name.localName;

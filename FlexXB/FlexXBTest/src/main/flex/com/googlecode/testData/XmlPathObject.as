@@ -16,7 +16,7 @@
  */
 package com.googlecode.testData {
 
-	[XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
+	[XmlClass(alias="test1/t3/myPathTester", defaultValueField="defaultTest")]
 	public class XmlPathObject {
 		[XmlElement(alias="subObject/id")]
 		public var identity : Number = 2;

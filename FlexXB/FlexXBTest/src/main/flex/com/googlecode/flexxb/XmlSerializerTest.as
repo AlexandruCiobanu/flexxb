@@ -17,6 +17,7 @@
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.flexxb.core.IFlexXB;
+	import com.googlecode.testData.AnotherVP;
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.CustomSerializabeObject;
 	import com.googlecode.testData.List;
@@ -153,7 +154,6 @@ package com.googlecode.flexxb {
 			copy = FxBEngine.instance.getXmlSerializer().deserialize(xml, List);
 			Assert.assertEquals("Item count is incorrect", 3, copy.items.length);
 			Assert.assertEquals("Numbers count is incorrect", 3, copy.numbers.length);
-			
 		}
 		
 		[Test]
@@ -167,6 +167,21 @@ package com.googlecode.flexxb {
 			Assert.assertEquals("Identity is wrong", target.identity, copy.identity);
 			Assert.assertEquals("Reference is wrong", target.reference, copy.reference);
 			Assert.assertEquals("DefaultTest is wrong", target.defaultTest, copy.defaultTest);
+		}
+		
+		[Test]
+		public function testNestedVirtualPathWithClassAlias() : void{
+			var newTarget : AnotherVP = new AnotherVP();
+			newTarget.path = new XmlPathObject();
+			newTarget.path.defaultTest = "My custom default";
+			newTarget.path.identity = 345;
+			newTarget.path.reference = "SOmeRef";
+			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(newTarget) as XML;
+			var copy : AnotherVP = FxBEngine.instance.getXmlSerializer().deserialize(xml, AnotherVP);
+			Assert.assertEquals("Id is wrong", newTarget.id, copy.id);
+			Assert.assertEquals("Identity is wrong", newTarget.path.identity, copy.path.identity);
+			Assert.assertEquals("Reference is wrong", newTarget.path.reference, copy.path.reference);
+			Assert.assertEquals("DefaultTest is wrong", newTarget.path.defaultTest, copy.path.defaultTest);
 		}
 		
 		[Test]

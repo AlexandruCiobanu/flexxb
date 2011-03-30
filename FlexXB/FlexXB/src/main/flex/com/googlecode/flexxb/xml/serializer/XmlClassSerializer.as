@@ -15,15 +15,16 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.xml.serializer {
-	import com.googlecode.flexxb.core.SerializationCore;
 	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
 	import com.googlecode.flexxb.core.DescriptionContext;
-	import com.googlecode.flexxb.xml.annotation.XmlClass;
-	import com.googlecode.flexxb.xml.XmlDescriptionContext;
+	import com.googlecode.flexxb.core.SerializationCore;
 	import com.googlecode.flexxb.serializer.BaseSerializer;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
+	import com.googlecode.flexxb.xml.XmlDescriptionContext;
+	import com.googlecode.flexxb.xml.annotation.XmlClass;
+	import com.googlecode.flexxb.xml.util.XmlUtils;
 
 	/**
 	 *
@@ -44,8 +45,16 @@ package com.googlecode.flexxb.xml.serializer {
 				LOG.info("Serializing object of type {0}", xmlClass.name);
 			}
 			var xml : XML = <xml />;
-			xml.setNamespace(xmlClass.nameSpace);
-			xml.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
+			var cursor : XML = xml;
+			if(xmlClass.isPath()){
+				cursor = XmlUtils.setPathElement(xmlClass, xml);
+				xml = xml.children()[0];
+				cursor.appendChild(<xml />);
+				cursor = cursor.children()[0];	
+			}
+			cursor.setNamespace(xmlClass.nameSpace);
+			cursor.setName(new QName(xmlClass.nameSpace, xmlClass.alias));
+			
 			if (xmlClass.useOwnNamespace()) {
 				xml.addNamespace(xmlClass.nameSpace);
 			} else {
