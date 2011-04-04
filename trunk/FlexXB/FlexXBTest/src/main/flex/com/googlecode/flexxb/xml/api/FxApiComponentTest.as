@@ -16,7 +16,10 @@
  */
 package com.googlecode.flexxb.xml.api {
 	import com.googlecode.flexxb.FlexXBEngine;
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.contract.AccessorType;
+	import com.googlecode.flexxb.annotation.contract.Constants;
+	import com.googlecode.flexxb.annotation.contract.ConstructorArgument;
 	import com.googlecode.flexxb.annotation.contract.Stage;
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
 	import com.googlecode.flexxb.api.FxApiWrapper;
@@ -26,8 +29,14 @@ package com.googlecode.flexxb.xml.api {
 	import com.googlecode.flexxb.xml.annotation.XmlArray;
 	import com.googlecode.flexxb.xml.annotation.XmlAttribute;
 	import com.googlecode.flexxb.xml.annotation.XmlClass;
+	import com.googlecode.flexxb.xml.annotation.XmlConstants;
 	import com.googlecode.flexxb.xml.annotation.XmlElement;
 	import com.googlecode.flexxb.xml.annotation.XmlMember;
+	import com.googlecode.flexxb.xml.annotation.XmlNamespace;
+	import com.googlecode.flexxb.xml.serializer.XmlArraySerializer;
+	import com.googlecode.flexxb.xml.serializer.XmlAttributeSerializer;
+	import com.googlecode.flexxb.xml.serializer.XmlClassSerializer;
+	import com.googlecode.flexxb.xml.serializer.XmlElementSerializer;
 	import com.googlecode.testData.APITestObject;
 	import com.googlecode.testData.Address;
 	import com.googlecode.testData.Mock;
@@ -47,18 +56,27 @@ package com.googlecode.flexxb.xml.api {
 	 */
 	public class FxApiComponentTest {
 		
+		private var factory : AnnotationFactory;
+		
 		public function FxApiComponentTest() {
 			new PhoneNumber();
 			new Person();
 			new Address();
 			FxBEngine.instance.api.processTypeDescriptor(null);
+			factory = new AnnotationFactory();
+			factory.registerAnnotation(Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT, ConstructorArgument, null, null);
+			factory.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer, null);
+			factory.registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer, null);
+			factory.registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer, null);
+			factory.registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer, null);
+			factory.registerAnnotation(XmlConstants.ANNOTATION_NAMESPACE, XmlNamespace, null, null);
 		}
 
 		[Test]
 		public function testFxAttribute() : void {
 			var api : XmlApiAttribute = XmlApiAttribute.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = FlexXBEngine.instance.api.buildFieldXmlDescriptor(api);
-			var att : XmlAttribute = new XmlAttribute(new MetaParser().parseField(descriptor)[0]);
+			var att : XmlAttribute = new XmlAttribute(new MetaParser(factory).parseField(descriptor)[0]);
 			doMemberAssertion(api, att);
 		}
 
@@ -66,7 +84,7 @@ package com.googlecode.flexxb.xml.api {
 		public function testFxElement() : void {
 			var api : XmlApiElement = XmlApiElement.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = FlexXBEngine.instance.api.buildFieldXmlDescriptor(api);
-			var att : XmlElement = new XmlElement(new MetaParser().parseField(descriptor)[0]);
+			var att : XmlElement = new XmlElement(new MetaParser(factory).parseField(descriptor)[0]);
 			doElementAssertion(api, att);
 		}
 
@@ -74,13 +92,13 @@ package com.googlecode.flexxb.xml.api {
 		public function testFxArray() : void {
 			var api : XmlApiArray = XmlApiArray.create("testAtt", String, null, 'aliasAttTest');
 			var descriptor : XML = FlexXBEngine.instance.api.buildFieldXmlDescriptor(api);
-			var att : XmlArray = new XmlArray(new MetaParser().parseField(descriptor)[0]);
+			var att : XmlArray = new XmlArray(new MetaParser(factory).parseField(descriptor)[0]);
 			doArrayAssertion(api, att);
 		}
 
 		[Test]
 		public function testFxClass() : void {
-			var parser : MetaParser = new MetaParser();
+			var parser : MetaParser = new MetaParser(factory);
 			var cls : XmlApiClass = buildDescriptor();
 			var xmlCls : XmlClass = parser.parseDescriptor(FlexXBEngine.instance.api.buildTypeXmlDescriptor(cls))[0];
 			Assert.assertEquals("wrong type", cls.type, xmlCls.type);

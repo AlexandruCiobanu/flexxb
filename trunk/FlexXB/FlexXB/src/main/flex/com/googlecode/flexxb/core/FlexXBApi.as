@@ -48,9 +48,9 @@ package com.googlecode.flexxb.core {
 		 * @param store
 		 *
 		 */
-		public function FlexXBApi(core : FlexXBCore, store : DescriptorStore) {
+		public function FlexXBApi(core : FlexXBCore) {
 			this.core = core;
-			this.store = store;
+			this.store = core.store as DescriptorStore;
 			core.context.registerSimpleTypeConverter(new StageXmlConverter());
 			core.context.registerSimpleTypeConverter(new AccessorTypeConverter());
 			core.processTypes(FxConstructorArgument);

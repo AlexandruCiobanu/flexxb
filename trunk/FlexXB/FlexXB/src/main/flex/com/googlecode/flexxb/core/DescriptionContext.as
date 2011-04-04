@@ -16,11 +16,9 @@
  */
 package com.googlecode.flexxb.core
 {
-	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.annotation.contract.ConstructorArgument;
 	import com.googlecode.flexxb.converter.IConverter;
-	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
@@ -39,10 +37,9 @@ package com.googlecode.flexxb.core
 	 */	
 	public class DescriptionContext
 	{
-		private var _store : IDescriptorStore;
+		private var _store : DescriptorStore;
 		private var _converterStore : ConverterStore;
 		protected var _configuration : Configuration;
-		private var _engine : FxBEngine;
 		/**
 		 * Constructor
 		 * 
@@ -55,10 +52,9 @@ package com.googlecode.flexxb.core
 		 * @param configuration
 		 * 
 		 */		
-		internal final function initializeContext(engine : FxBEngine, descriptorStore : IDescriptorStore) : void{
-			_store = descriptorStore;
+		internal final function initializeContext(descriptorStore : IDescriptorStore) : void{
+			_store = descriptorStore as DescriptorStore;
 			_converterStore = new ConverterStore();
-			_engine = engine;
 			//register the annotations we know must always exist
 			registerAnnotation(Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT, ConstructorArgument, null);
 			performInitialization();
@@ -154,7 +150,7 @@ package com.googlecode.flexxb.core
 		 * 
 		 */		
 		public final function registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void {
-			AnnotationFactory.instance.registerAnnotation(name, annotationClazz, serializer, this, overrideExisting);
+			_store.factory.registerAnnotation(name, annotationClazz, serializer, this, overrideExisting);
 		}
 		/**
 		 * Specify api classes that reflect the defined annotations. 

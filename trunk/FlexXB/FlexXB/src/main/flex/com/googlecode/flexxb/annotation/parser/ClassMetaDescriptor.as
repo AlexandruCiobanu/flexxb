@@ -17,6 +17,7 @@
  */
 package com.googlecode.flexxb.annotation.parser
 {
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
 
@@ -33,8 +34,8 @@ package com.googlecode.flexxb.annotation.parser
 		[ArrayElementType("com.googlecode.flexxb.annotation.contract.IMemberAnnotation")]
 		public var members : Array;
 		
-		public function ClassMetaDescriptor(){
-			super();
+		public function ClassMetaDescriptor(factory : AnnotationFactory){
+			super(factory);
 			members = new Array();
 			config = new Array();
 		}
