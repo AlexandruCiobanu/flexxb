@@ -22,7 +22,8 @@ package com.googlecode.flexxb.xml.annotation {
 	 * Usage: <code>[XmlElement(alias="element", getFromCache="true|false", 
 	 * ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
 	 * order="order_index", getRuntimeType="true|false", namespace="Namespace_Prefix", 
-	 * default="DEFAULT_VALUE", idref="true|false", version="versionName")]</code>
+	 * default="DEFAULT_VALUE", idref="true|false", setXsiType="true|false", 
+	 * version="versionName")]</code>
 	 * @author aCiobanu
 	 *
 	 */
@@ -43,6 +44,10 @@ package com.googlecode.flexxb.xml.annotation {
 		 *@private
 		 */
 		protected var _getRuntimeType : Boolean;
+		/**
+		 * @private 
+		 */		
+		protected var _setXsiType : Boolean;
 
 		/**
 		 * Constructor
@@ -62,7 +67,6 @@ package com.googlecode.flexxb.xml.annotation {
 		public function get serializePartialElement() : Boolean {
 			return _serializePartialElement;
 		}
-
 		/**
 		 *
 		 * @return
@@ -70,6 +74,14 @@ package com.googlecode.flexxb.xml.annotation {
 		 */
 		public function get getRuntimeType() : Boolean {
 			return _getRuntimeType;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get setXsiType() : Boolean{
+			return _setXsiType;
 		}
 
 		/**
@@ -86,6 +98,7 @@ package com.googlecode.flexxb.xml.annotation {
 			_serializePartialElement = metadata.getBoolean(XmlConstants.SERIALIZE_PARTIAL_ELEMENT);
 			_getFromCache = metadata.getBoolean(XmlConstants.GET_FROM_CACHE);
 			_getRuntimeType = metadata.getBoolean(XmlConstants.GET_RUNTIME_TYPE);
+			_setXsiType = metadata.getBoolean(XmlConstants.SET_XSI_TYPE);
 		}
 		
 		public override function get annotationName() : String {

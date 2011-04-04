@@ -93,7 +93,7 @@ package com.googlecode.flexxb.annotation.contract
 			_type = descriptor.fieldType;
 			
 			for each(var meta : MetaDescriptor in desc.members){
-				addMember(AnnotationFactory.instance.getAnnotation(meta, this) as IMemberAnnotation);
+				addMember(descriptor.factory.getAnnotation(meta, this) as IMemberAnnotation);
 			}
 			
 			constructor.parse(desc);

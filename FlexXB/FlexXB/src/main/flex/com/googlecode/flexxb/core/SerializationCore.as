@@ -15,7 +15,6 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.core {
-	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IFieldAnnotation;
 	import com.googlecode.flexxb.annotation.contract.IMemberAnnotation;
@@ -112,7 +111,7 @@ package com.googlecode.flexxb.core {
 				serializedData = ISerializable(object).serialize();
 			} else {
 				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(object, version);
-				serializedData = AnnotationFactory.instance.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
+				serializedData = mappingModel.factory.getSerializer(classDescriptor).serialize(object, classDescriptor, null, this);
 				var serializer : BaseSerializer;
 				var annotation : IMemberAnnotation;
 				if (partial && classDescriptor.idField) {
@@ -179,7 +178,7 @@ package com.googlecode.flexxb.core {
 			if(configuration.enableLogging){
 				LOG.info("Serializing field {0} as {1}", annotation.name, annotation.annotationName);
 			}
-			var serializer : BaseSerializer = AnnotationFactory.instance.getSerializer(annotation);
+			var serializer : BaseSerializer = mappingModel.factory.getSerializer(annotation);
 			var target : Object = object[annotation.name];
 			if (target != null) {
 				serializer.serialize(target, annotation, serializedData, this);
@@ -231,7 +230,7 @@ package com.googlecode.flexxb.core {
 							for each (var member : IMemberAnnotation in classDescriptor.constructor.parameterFields) {
 								//On deserialization, when using constructor arguments, we need to process them even though the ignoreOn 
 								//flag is set to deserialize stage.
-								var data : Object = AnnotationFactory.instance.getSerializer(member).deserialize(serializedData, member, this);
+								var data : Object = mappingModel.factory.getSerializer(member).deserialize(serializedData, member, this);
 								_arguments.push(data);
 							}
 						}
@@ -267,7 +266,7 @@ package com.googlecode.flexxb.core {
 								// TODO: check if this can be removed
 								result[annotation.name] = null;
 							}else{
-								var serializer : BaseSerializer = AnnotationFactory.instance.getSerializer(annotation);
+								var serializer : BaseSerializer =mappingModel.factory .getSerializer(annotation);
 								result[annotation.name] = serializer.deserialize(serializedData, annotation, this);
 							}
 						}
@@ -302,7 +301,7 @@ package com.googlecode.flexxb.core {
 				itemId = mappingModel.descriptorStore.getCustomSerializableReference(objectClass).getIdValue(serializedData);
 			} else {
 				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(objectClass);
-				var idSerializer : BaseSerializer = AnnotationFactory.instance.getSerializer(classDescriptor.idField);
+				var idSerializer : BaseSerializer = mappingModel.factory.getSerializer(classDescriptor.idField);
 				if (idSerializer) {
 					itemId = String(idSerializer.deserialize(serializedData, classDescriptor.idField, this));
 				}

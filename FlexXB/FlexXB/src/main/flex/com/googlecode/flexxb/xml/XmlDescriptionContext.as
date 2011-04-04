@@ -34,6 +34,7 @@ package com.googlecode.flexxb.xml
 	import com.googlecode.flexxb.xml.serializer.XmlAttributeSerializer;
 	import com.googlecode.flexxb.xml.serializer.XmlClassSerializer;
 	import com.googlecode.flexxb.xml.serializer.XmlElementSerializer;
+	import com.googlecode.flexxb.xml.util.XmlUtils;
 	
 	import flash.utils.Dictionary;
 
@@ -131,6 +132,15 @@ package com.googlecode.flexxb.xml
 		public override function getIncomingType(source : Object) : Class {
 			var incomingXML : XML = source as XML;
 			if (incomingXML) {
+				if(XmlConfiguration(configuration).getResponseTypeByXsiType){
+					var xsiType : String = incomingXML.attribute(XmlUtils.xsiType).toString();
+					if (xsiType) { 
+						clasz = getClassByAlias(xsiType); 
+						if (clasz) { 
+							return clasz; 
+						} 
+					}
+				}		
 				if (XmlConfiguration(configuration).getResponseTypeByTagName) {
 					var tagName : QName = incomingXML.name() as QName;
 					if (tagName) {
@@ -145,8 +155,7 @@ package com.googlecode.flexxb.xml
 						var _namespace : String = (incomingXML.namespaceDeclarations()[0] as Namespace).uri;
 						return getClassByNamespace(_namespace);
 					}
-				}
-				
+				}		
 			}
 			return null;
 		}

@@ -27,13 +27,21 @@ package com.googlecode.flexxb.xml
 		/**
 		 * Determine the type of the object the response will be deserialised into
 		 * by the namespace defined in the received xml.
+		 * @default true
 		 */
 		public var getResponseTypeByNamespace : Boolean = true;
 		/**
 		 * Determine the type of the object the response will be deserialised into
 		 * by the root element name of the received xml.
+		 * @default true
 		 */
 		public var getResponseTypeByTagName : Boolean = true;
+		/**
+		 * Determine the type of the object the response will be deserialised into
+		 * by the xsi:type attribute present in the xml element representing the object.
+		 * @default false
+		 */
+		public var getResponseTypeByXsiType : Boolean = false;
 		/**
 		 * Set this flag to true if you want special chars to be escaped in the xml. 
 		 * If set to false, text containing special characters will be enveloped in a CDATA tag.
@@ -62,6 +70,7 @@ package com.googlecode.flexxb.xml
 			if(source is XmlConfiguration && target is XmlConfiguration){
 				XmlConfiguration(target).getResponseTypeByNamespace = XmlConfiguration(source).getResponseTypeByNamespace;
 				XmlConfiguration(target).getResponseTypeByTagName = XmlConfiguration(source).getResponseTypeByTagName;
+				XmlConfiguration(target).getResponseTypeByXsiType = XmlConfiguration(source).getResponseTypeByXsiType;
 				XmlConfiguration(target).escapeSpecialChars = XmlConfiguration(source).escapeSpecialChars;
 			}
 		}

@@ -15,6 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.core {
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
 	import com.googlecode.flexxb.interfaces.ISerializable;
@@ -38,7 +39,18 @@ package com.googlecode.flexxb.core {
 		/**
 		 * @private 
 		 */		
-		private var parser : MetaParser = new MetaParser();
+		private var parser : MetaParser;
+		
+		private var _factory : AnnotationFactory;
+		
+		public function DescriptorStore(theFactory : AnnotationFactory){
+			parser = new MetaParser(theFactory);
+			_factory = theFactory;
+		}
+		
+		internal function get factory() : AnnotationFactory{
+			return _factory;
+		}
 		
 		public function getDescriptor(item : Object, version : String = "") : IClassAnnotation {
 			var className : String = getQualifiedClassName(item);

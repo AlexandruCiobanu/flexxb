@@ -4,6 +4,11 @@ package com.googlecode.flexxb.xml.util
 
 	public final class XmlUtils
 	{
+		public static const xsiNamespace : Namespace = new Namespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		/**
+		 * Qualified name of the xml schema type attribute 
+		 */		
+		public static const xsiType : QName = new QName(xsiNamespace, "type");  
 		/**
 		 * 
 		 * @param ns

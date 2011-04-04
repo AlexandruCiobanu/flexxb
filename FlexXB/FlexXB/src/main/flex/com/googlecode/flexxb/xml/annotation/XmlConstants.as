@@ -77,6 +77,10 @@ package com.googlecode.flexxb.xml.annotation
 		 */		
 		public static const GET_RUNTIME_TYPE : String = "getRuntimeType";
 		/**
+		 * 
+		 */		
+		public static const SET_XSI_TYPE : String = "setXsiType";
+		/**
 		 *
 		 */
 		public static const TYPE : String = "type";

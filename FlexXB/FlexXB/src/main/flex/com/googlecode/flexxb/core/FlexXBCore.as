@@ -16,6 +16,7 @@
  */
 package com.googlecode.flexxb.core
 {
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
 
@@ -50,14 +51,16 @@ package com.googlecode.flexxb.core
 		
 		private var _context : DescriptionContext;
 		
-		public function FlexXBCore(context : DescriptionContext, store : DescriptorStore){
+		public function FlexXBCore(context : DescriptionContext){
 			this._context = context;
 			mappingModel = new MappingModel();
+			mappingModel.factory = new AnnotationFactory();
 			mappingModel.context = context;
-			mappingModel.descriptorStore = store;
-			mappingModel.configuration = context.configuration;
-			mappingModel.converterStore = context.converterStore;
+			mappingModel.descriptorStore = new DescriptorStore(mappingModel.factory);
 			core = new SerializationCore(mappingModel);
+			_context.initializeContext(mappingModel.descriptorStore);
+			mappingModel.converterStore = context.converterStore;
+			mappingModel.configuration = context.configuration;
 		}
 		
 		public function get context() : DescriptionContext{
@@ -109,6 +112,10 @@ package com.googlecode.flexxb.core
 			mappingModel.idResolver.endDocument();
 			mappingModel.collisionDetector.endDocument();
 			return object;
+		}
+		
+		internal function get store() : IDescriptorStore{
+			return mappingModel.descriptorStore;
 		}
 	}
 }

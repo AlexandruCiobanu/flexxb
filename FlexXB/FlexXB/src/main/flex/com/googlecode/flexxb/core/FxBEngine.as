@@ -43,8 +43,6 @@ package com.googlecode.flexxb.core {
 		private var _api : IFlexXBApi;
 		
 		private var contextMap : Object;
-		
-		private var store : DescriptorStore;
 
 		/**
 		 * Not a singleton, but an easy access instance.
@@ -64,7 +62,6 @@ package com.googlecode.flexxb.core {
 		 */
 		public function FxBEngine() {
 			contextMap = new Object();
-			store = new DescriptorStore();
 			registerDescriptionContext("XML", new XmlDescriptionContext());
 		}
 		/**
@@ -74,7 +71,7 @@ package com.googlecode.flexxb.core {
 		 */		
 		public function get api() : IFlexXBApi {
 			if (!_api) {
-				_api = new FlexXBApi(getXmlSerializer() as FlexXBCore, store);
+				_api = new FlexXBApi(getXmlSerializer() as FlexXBCore);
 			}
 			return _api;
 		}
@@ -103,8 +100,7 @@ package com.googlecode.flexxb.core {
 			var item : Object = contextMap[name];
 			if(item){
 				if(!item.core){
-					DescriptionContext(item.context).initializeContext(this, store);
-					item.core = new FlexXBCore(item.context as DescriptionContext, store);
+					item.core = new FlexXBCore(item.context as DescriptionContext);
 				}
 				return item.core as IFlexXB;
 			}

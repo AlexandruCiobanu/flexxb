@@ -21,6 +21,7 @@
 	<mx:Script>
 		<![CDATA[
 			import com.googlecode.AllTests;
+			import com.googlecode.flexxb.CircularReferenceTest;
 			
 			import org.flexunit.listeners.UIListener;
 			import org.flexunit.runner.FlexUnitCore;
@@ -28,6 +29,7 @@
 			private var core : FlexUnitCore;
 			
 			private function init() : void {
+				new CircularReferenceTest().circularReferenceTest();
 				core = new FlexUnitCore();
 				core.addListener(new UIListener(testRunner));
 				core.run(AllTests);

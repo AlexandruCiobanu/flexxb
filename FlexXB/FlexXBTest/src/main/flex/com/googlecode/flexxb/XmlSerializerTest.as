@@ -17,6 +17,7 @@
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.flexxb.core.IFlexXB;
+	import com.googlecode.flexxb.xml.XmlConfiguration;
 	import com.googlecode.testData.AnotherVP;
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.CustomSerializabeObject;
@@ -31,6 +32,9 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.arrayIssue.IData;
 	import com.googlecode.testData.idref.Data;
 	import com.googlecode.testData.idref.Node;
+	import com.googlecode.testData.xsi.ItemA;
+	import com.googlecode.testData.xsi.ItemB;
+	import com.googlecode.testData.xsi.Main;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -42,6 +46,7 @@ package com.googlecode.flexxb {
 	import org.flexunit.asserts.assertNull;
 	import org.flexunit.asserts.assertTrue;
 	import org.hamcrest.object.equalTo;
+	import org.hamcrest.object.instanceOf;
 	
 	public class XmlSerializerTest {
 		
@@ -245,6 +250,24 @@ package com.googlecode.flexxb {
 			assertEquals("Node differs from attribute value", data.node,  data.referenceAtt);
 			assertEquals("Node differs from element value", data.node,  data.referenceElement);
 			assertEquals("Node differs from array's first item value", data.node,  data.referenceArray.getItemAt(0));
+		}
+		
+		[Test]
+		public function xsiTypeTest() : void{
+			var item : Main = new Main();
+			item.property = new ItemA();
+			item.id = 3;
+			item.property.element = "test";
+			ItemA(item.property).fieldA = "valueA";
+			var engine : IFlexXB = new FxBEngine().getXmlSerializer();
+			engine.processTypes(ItemA, ItemB);
+			XmlConfiguration(engine.configuration).getResponseTypeByXsiType = true;
+			var xml : XML = engine.serialize(item) as XML;
+			var copy : Main = engine.deserialize(xml, Main);
+			assertThat(copy.id, equalTo(item.id));
+			assertThat(copy.property, instanceOf(ItemA));
+			assertThat(copy.property.element, equalTo(item.property.element));
+			assertThat(ItemA(copy.property).fieldA, equalTo(ItemA(item.property).fieldA));
 		}
 	}
 }

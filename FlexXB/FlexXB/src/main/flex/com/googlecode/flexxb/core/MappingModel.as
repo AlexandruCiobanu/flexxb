@@ -16,6 +16,7 @@
  */
 package com.googlecode.flexxb.core
 {
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 
 	/**
 	 * @private
@@ -38,6 +39,8 @@ package com.googlecode.flexxb.core
 		public var idResolver : IdResolver;
 		
 		public var context : DescriptionContext;
+		
+		public var factory : AnnotationFactory;
 		
 		private var _itemStack : Array;
 		/**

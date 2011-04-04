@@ -22,8 +22,10 @@ package com.googlecode.flexxb.xml.serializer {
 	import com.googlecode.flexxb.util.log.LogFactory;
 	import com.googlecode.flexxb.xml.XmlConfiguration;
 	import com.googlecode.flexxb.xml.XmlDescriptionContext;
+	import com.googlecode.flexxb.xml.annotation.XmlClass;
 	import com.googlecode.flexxb.xml.annotation.XmlElement;
 	import com.googlecode.flexxb.xml.annotation.XmlMember;
+	import com.googlecode.flexxb.xml.util.XmlUtils;
 	import com.googlecode.flexxb.xml.util.cdata;
 	
 	import flash.xml.XMLNode;
@@ -71,6 +73,12 @@ package com.googlecode.flexxb.xml.serializer {
 				}
 			} else if (annotation.xmlName) {
 				child.setName(annotation.xmlName);
+			}
+			//If the setXsiType flag is set then we should add an xsi:type attribuute to 
+			//the child being created now. Means we expect a derived class object. 
+			if(XmlElement(annotation).setXsiType){
+				child.addNamespace(XmlUtils.xsiNamespace);
+				child.@[XmlUtils.xsiType] = (serializer.descriptorStore.getDescriptor(object) as XmlClass).alias;
 			}
 			parentXml.appendChild(child);
 		}

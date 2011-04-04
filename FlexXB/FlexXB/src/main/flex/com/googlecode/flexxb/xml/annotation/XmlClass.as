@@ -194,7 +194,7 @@ package com.googlecode.flexxb.xml.annotation {
 			nameSpace = getNamespace(descriptor);
 			
 			for each(var meta : MetaDescriptor in desc.members){
-				addMember(AnnotationFactory.instance.getAnnotation(meta, this) as XmlMember);
+				addMember(desc.factory.getAnnotation(meta, this) as XmlMember);
 			}
 			
 			constructor.parse(desc);

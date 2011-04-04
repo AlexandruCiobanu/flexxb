@@ -17,6 +17,7 @@
  */
 package com.googlecode.flexxb.annotation.parser
 {	
+	import com.googlecode.flexxb.annotation.AnnotationFactory;
 	import com.googlecode.flexxb.annotation.contract.AccessorType;
 	import com.googlecode.flexxb.annotation.contract.Constants;
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
@@ -39,12 +40,19 @@ package com.googlecode.flexxb.annotation.parser
 		public var attributes : Object;
 		
 		private var _owner : IClassAnnotation;
+		
+		private var _factory : AnnotationFactory;
 		/**
 		 * 
 		 * 
 		 */		
-		public function MetaDescriptor(){
+		public function MetaDescriptor(factory : AnnotationFactory){
 			attributes = new Object();
+			_factory = factory;
+		}
+		
+		public final function get factory() : AnnotationFactory{
+			return _factory;
 		}
 
 		public function get owner() : IClassAnnotation{

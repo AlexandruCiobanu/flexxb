@@ -22,7 +22,6 @@ package com.googlecode.flexxb.annotation.parser
 	import com.googlecode.flexxb.annotation.contract.IClassAnnotation;
 	import com.googlecode.flexxb.error.DescriptorParsingError;
 	
-	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
 	import mx.collections.Sort;
@@ -35,14 +34,16 @@ package com.googlecode.flexxb.annotation.parser
 	 */	
 	public final class MetaParser
 	{
-		
+		private var factory : AnnotationFactory;
 		private var name : QName;
 		private var type : Class;
 		/**
 		 * Constructor 
 		 * 
 		 */		
-		public function MetaParser(){ }
+		public function MetaParser(factory : AnnotationFactory = null){ 
+			this.factory = (factory ? factory : AnnotationFactory.instance);
+		}
 		
 		/**
 		 * 
@@ -70,7 +71,7 @@ package com.googlecode.flexxb.annotation.parser
 			var classAnnotation : IClassAnnotation;
 			for(var key : * in classes){
 				descriptor = classes[key];
-				classAnnotation = AnnotationFactory.instance.getAnnotation(descriptor, null) as IClassAnnotation;
+				classAnnotation = factory.getAnnotation(descriptor, null) as IClassAnnotation;
 				if(classAnnotation.ordered){
 					var sort : Sort = new Sort();
 					sort.fields = [new SortField("order", false, false, true)].concat(classAnnotation.getAdditionalSortFields());
@@ -99,13 +100,13 @@ package com.googlecode.flexxb.annotation.parser
 				if(!descriptor){
 					continue;
 				}
-				if(AnnotationFactory.instance.isMemberAnnotation(descriptor.metadataName)){
+				if(factory.isMemberAnnotation(descriptor.metadataName)){
 					throw new DescriptorParsingError(type, "", "Member type metadata found on class level. You should only define class and global metadatas at class level. Class metadata representant must implement IClassAnnotation; Global metadata representant must implement IGlobalAnnotation");
 				}
 				descriptor.fieldName = name;
 				descriptor.fieldType = type;
 				//we have global anotations 
-				if(AnnotationFactory.instance.isGlobalAnnotation(descriptor.metadataName)){
+				if(factory.isGlobalAnnotation(descriptor.metadataName)){
 					descriptors.push(descriptor);
 					continue;
 				}
@@ -135,7 +136,7 @@ package com.googlecode.flexxb.annotation.parser
 			for each(var meta : MetaDescriptor in descriptors){
 				owner = classMap[meta.version];
 				if(owner == null && (ownerName = getOwnerName(meta))){
-					owner = new ClassMetaDescriptor();
+					owner = new ClassMetaDescriptor(factory);
 					owner.metadataName = ownerName;
 					owner.fieldType = classType;
 					owner.fieldName = className;
@@ -153,7 +154,7 @@ package com.googlecode.flexxb.annotation.parser
 			var metadataName : String = xml.@name;
 			var descriptor : MetaDescriptor;
 			//Need to make sure we're not parsing any bogus annotation
-			if(AnnotationFactory.instance.isRegistered(metadataName)){
+			if(factory.isRegistered(metadataName)){
 				descriptor = getDescriptorInstance(metadataName);
 				descriptor.metadataName = xml.@name;
 				for each(var argument : XML in xml.arg){
@@ -164,10 +165,10 @@ package com.googlecode.flexxb.annotation.parser
 		}
 		
 		private function getDescriptorInstance(metadataName : String) : MetaDescriptor{
-			if(AnnotationFactory.instance.isClassAnnotation(metadataName)){
-				return new ClassMetaDescriptor();
+			if(factory.isClassAnnotation(metadataName)){
+				return new ClassMetaDescriptor(factory);
 			}
-			return new MetaDescriptor();
+			return new MetaDescriptor(factory);
 		}
 		
 		public function parseField(xml : XML) : Array{
@@ -185,7 +186,7 @@ package com.googlecode.flexxb.annotation.parser
 			for each(var meta : XML in metas){
 				descriptor = parseMetadata(meta);
 				if(descriptor){
-					if(!AnnotationFactory.instance.isMemberAnnotation(descriptor.metadataName)){
+					if(!factory.isMemberAnnotation(descriptor.metadataName)){
 						throw new DescriptorParsingError(type, "", "Non-Member type metadata found on field level. You should only define class and global metadatas at class level. The member metadata must implement IMemberAnnotation.");
 					}
 					descriptor.fieldName = name;
@@ -198,7 +199,7 @@ package com.googlecode.flexxb.annotation.parser
 		}
 		
 		private function getOwnerName(meta : MetaDescriptor) : String{
-			return AnnotationFactory.instance.getClassAnnotationName(meta.metadataName);
+			return factory.getClassAnnotationName(meta.metadataName);
 		}
 	}
 }

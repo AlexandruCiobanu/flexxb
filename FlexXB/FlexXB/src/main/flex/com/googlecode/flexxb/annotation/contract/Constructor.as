@@ -82,7 +82,7 @@ package com.googlecode.flexxb.annotation.contract {
 			var arguments : Array = descriptor.getConfigItemsByName(Constants.ANNOTATION_CONSTRUCTOR_ARGUMENT);
 			// multiple annotations on the same field are returned in reverse order with describeType
 			for (var i : int = arguments.length - 1; i >= 0; i--) {
-				addArgument(AnnotationFactory.instance.getAnnotation(arguments[i] as MetaDescriptor, owner) as ConstructorArgument);
+				addArgument(descriptor.factory.getAnnotation(arguments[i] as MetaDescriptor, owner) as ConstructorArgument);
 			}
 		}
 

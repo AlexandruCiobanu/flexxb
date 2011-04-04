@@ -55,11 +55,7 @@ package com.googlecode.flexxb.annotation {
 		 * Constructor
 		 *
 		 */
-		public function AnnotationFactory() {
-			if (_instance) {
-				throw new Error("Use AnnotationFactory.instance instead!");
-			}
-		}
+		public function AnnotationFactory() {}
 		
 		/**
 		 * Check if there is an annotation with the given name registered in the factory.

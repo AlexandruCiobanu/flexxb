@@ -105,6 +105,7 @@
     <classEntry path="com.googlecode.flexxb.xml.serializer.XmlMemberSerializer"/>
     <classEntry path="com.googlecode.flexxb.xml.util.cdata"/>
     <classEntry path="com.googlecode.flexxb.annotation.contract.BaseClass"/>
+    <classEntry path="com.googlecode.flexxb.xml.util.XmlUtils"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

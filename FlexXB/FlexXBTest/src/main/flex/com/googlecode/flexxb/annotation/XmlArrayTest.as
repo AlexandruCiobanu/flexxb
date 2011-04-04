@@ -15,10 +15,19 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.annotation {
-	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.flexxb.annotation.parser.MetaParser;
+	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.flexxb.xml.annotation.Annotation;
 	import com.googlecode.flexxb.xml.annotation.XmlArray;
+	import com.googlecode.flexxb.xml.annotation.XmlAttribute;
+	import com.googlecode.flexxb.xml.annotation.XmlClass;
+	import com.googlecode.flexxb.xml.annotation.XmlConstants;
+	import com.googlecode.flexxb.xml.annotation.XmlElement;
+	import com.googlecode.flexxb.xml.annotation.XmlNamespace;
+	import com.googlecode.flexxb.xml.serializer.XmlArraySerializer;
+	import com.googlecode.flexxb.xml.serializer.XmlAttributeSerializer;
+	import com.googlecode.flexxb.xml.serializer.XmlClassSerializer;
+	import com.googlecode.flexxb.xml.serializer.XmlElementSerializer;
 	import com.googlecode.testData.List;
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.VectoredElement;
@@ -32,7 +41,7 @@ package com.googlecode.flexxb.annotation {
 	public class XmlArrayTest extends AnnotationTest {
 		
 		protected override function runTest(descriptor : XML) : void {
-			var parser : MetaParser = new MetaParser();
+			var parser : MetaParser = new MetaParser(factory);
 			var att1 : XmlArray = new XmlArray(parser.parseField(getFieldDescriptor("result", descriptor))[0]);
 			validate(att1, "result", Array, "data", null, false, Mock);
 		}
@@ -43,9 +52,22 @@ package com.googlecode.flexxb.annotation {
 			Assert.assertEquals("Type is incorrect", args[5], XmlArray(annotation).memberType);
 		}
 		
+		private var factory : AnnotationFactory;
+		
+		[Before]
+		public function before() : void{
+			factory = new AnnotationFactory();
+			
+			factory.registerAnnotation(XmlAttribute.ANNOTATION_NAME, XmlAttribute, XmlAttributeSerializer, null);
+			factory.registerAnnotation(XmlElement.ANNOTATION_NAME, XmlElement, XmlElementSerializer, null);
+			factory.registerAnnotation(XmlArray.ANNOTATION_NAME, XmlArray, XmlArraySerializer, null);
+			factory.registerAnnotation(XmlClass.ANNOTATION_NAME, XmlClass, XmlClassSerializer, null);
+			factory.registerAnnotation(XmlConstants.ANNOTATION_NAMESPACE, XmlNamespace, null, null);
+		}
+		
 		[Test]
 		public function validateVectorSupport() : void{
-			var parser : MetaParser = new MetaParser();
+			var parser : MetaParser = new MetaParser(factory);
 			var xml : XML = describeType(VectoredElement);
 			var att1 : XmlArray = new XmlArray(parser.parseField(xml.factory.variable.(@name=="list")[0])[0]);
 			assertThat(att1.type, equalTo(Vector.<String>));
