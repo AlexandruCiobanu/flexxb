@@ -103,8 +103,18 @@
 			<arg line="${compile.metadata}"/>
 		</exec>
 	</target>
+	<target name="build.project.json" depends="build.project">
+			<exec executable="${compc.exe}" dir="${basedir}">
+				<arg line="-o '${project.swc.json.output}'"/>
+				<arg line="-sp '${project.src.json.dir}'"/>
+				<arg line="-is '${project.src.json.dir}'"/>
+				<arg line="-debug=false"/>
+				<arg line="-external-library-path='${flexsdk.lib.dir}','${flexsdk.playerlib.dir}','${project.swc.output}'"/>
+				<arg line="${compile.metadata}"/>
+			</exec>
+		</target>
 	<!-- -->
-	<target name="build.project.test" depends="build.project">
+	<target name="build.project.test" depends="build.project.json">
 		 <exec executable="${mxmlc.exe}" failonerror="true">
     	 	<arg value="-source-path=${project.tests.src.dir}"/>
     	 	<arg value="-file-specs=${project.tests.src.dir}/${project.name}Test.mxml"/>
@@ -119,6 +129,7 @@
     	 	<arg line="${compile.metadata}"/>
 			<arg line="-include-libraries ${flexunit.libs}"/>
 		 	<arg line="-include-libraries ${project.swc.output}"/>
+		 	<arg line="-include-libraries ${project.swc.json.output}"/>
     	 </exec>
 		<make.wrapper application="${project.test.name}" output.dir="${bin.dir}/test" wrapper.dir="${project.test.dir}/html-template"
 			output.html="${bin.dir}/test/${project.test.name}.html" swf="${project.test.name}"
@@ -143,6 +154,8 @@
 	<target name="development" depends="build.project, build.project.test, Metrics">
 		<antcall target="documentation" />
 		<antcall target="embedAsDoc"/>
+		<antcall target="documentationJSON" />
+		<antcall target="embedAsDocJSON"/>
 	</target>
 	<!-- -->
 	<target name="release" depends="development, junit.ui">
@@ -225,6 +238,39 @@
 		    </zipfileset>
 		</zip>
 		<delete dir="${doc.dir}/asdoc/tempdita"/>
+	</target>
+	
+	<!-- -->
+	<target name="documentationJSON">
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${doc.dir}/asdoc_JSON">
+				<include name="**/**"/>
+			</fileset>
+		</delete>
+		<exec executable="${asdoc.exe}">
+			<arg line="-source-path ${project.src.json.dir}"/>
+			<arg line="-doc-sources ${project.src.json.dir}"/>
+			<arg line="-library-path '${flexsdk.lib.dir}'"/>
+			<arg line="-library-path '${flexsdk.playerlib.dir}'"/>
+			<arg line="-library-path '${project.swc.output}'"/>
+			<arg line="-output ${doc.dir}/asdoc_JSON"/>
+			<arg line="-main-title &quot;FlexXB: JSON Serialization extension&quot;"/>
+			<arg line="-window-title &quot;FlexXB: JSON Serialization extension&quot;"/>
+			<arg line="-package-description-file ${doc.dir}/packageDescriptorJSON.xml"/>
+			<arg line="-lenient"/>
+			<arg line="-keep-xml"/>
+		</exec>
+	</target>
+	
+	<target name="embedAsDocJSON">
+		<zip destfile="${project.swc.json.output}" update="true">
+		    <zipfileset dir="${doc.dir}/asdoc_JSON/tempdita" prefix="docs">
+			    <include name="*.*"/>
+				<exclude name="ASDoc_Config.xml"/>
+				<exclude name="overviews.xml"/>
+		    </zipfileset>
+		</zip>
+		<delete dir="${doc.dir}/asdoc_JSON/tempdita"/>
 	</target>
 	
 	<target name="junit.ui" depends="build.project.test">
