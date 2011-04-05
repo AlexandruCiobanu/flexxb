@@ -18,6 +18,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.flexxb.core.IFlexXB;
 	import com.googlecode.flexxb.xml.XmlConfiguration;
+	import com.googlecode.flexxb.xml.util.XmlUtils;
 	import com.googlecode.testData.AnotherVP;
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.CustomSerializabeObject;
@@ -266,6 +267,9 @@ package com.googlecode.flexxb {
 			engine.processTypes(ItemA, ItemB);
 			XmlConfiguration(engine.configuration).getResponseTypeByXsiType = true;
 			var xml : XML = engine.serialize(item) as XML;
+			assertThat(xml.property[0].@[XmlUtils.xsiType], equalTo("ItemA"));
+			assertThat(xml.members.listItem[0].@[XmlUtils.xsiType], equalTo("ItemA"));
+			assertThat(xml.members.listItem[1].@[XmlUtils.xsiType], equalTo("ItemB"));
 			var copy : Main = engine.deserialize(xml, Main);
 			assertThat(copy.id, equalTo(item.id));
 			assertThat(copy.property, instanceOf(ItemA));
