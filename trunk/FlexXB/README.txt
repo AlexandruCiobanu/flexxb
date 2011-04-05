@@ -3,7 +3,7 @@
 /**								by Alex Ciobanu 		      **/
 /*******************************************************************************************************/
 
-Copyright 2008 - 2010 Alex Ciobanu (http://code.google.com/p/flexxb)
+Copyright 2008 - 2011 Alex Ciobanu (http://code.google.com/p/flexxb)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -75,6 +75,8 @@ FEATURES
 	* FXB-018 Multiple namespace support
 	* FXB-019 Annotation versioning
 	* FXB-020 Circular reference handling
+	* FXB-021 Serialization format support
+	* FXB-022 JSON serialization support
 	
 USAGE
 
@@ -154,10 +156,10 @@ XmlAttribute
 [XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", namespace="NameSpace_Prefix", idref="true|false", version="version_Name")]
 
 XmlElement
-[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="NameSpace_Prefix", idref="true|false", version="version_Name")]  
+[XmlElement(alias="element", getFromCache="true|false", ignoreOn="serialize|deserialize", serializePartialElement="true|false", order="order_index", getRuntimeType="true|false", namespace="NameSpace_Prefix", idref="true|false", setXsiType="true|false", version="version_Name")]  
 
 XmlArray
-[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", getRuntimeType="true|false", order="index", namespace="NameSpace_Prefix", version="version_Name", idref="true|false")] 
+[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", getRuntimeType="true|false", order="index", namespace="NameSpace_Prefix", setXsiType="true|false", version="version_Name", idref="true|false")] 
 
 
 Note: Using as alias "*" on a field will force the serializer to serialize that field using an alias computed at runtime by the 
@@ -172,6 +174,14 @@ KNOWN LIMITATIONS
   return null for that field.
 
 RELEASE NOTES
+
+2.1.0 - 08-04-2011
+	  - Fix: Issue 41: Release build of the SWC loses all argument names/description
+	  - NoChangeRequired: Issue 40: Issue While Adding Namespace to ArrayElement 
+	  - Enhancement: Issue 43: Add virtual path support for XmlClass alias
+	  - Fix: Issue 44: Configuration instance mismatch between the context and serializers 
+	  - Enhancement: Issue 45: Configuration instance mismatch between the context and serializers
+	  - Fix: Issue 46: Namespace issue
 
 2.0.1 - 20-02-2011
 	  - Fix: Issue 38 - XmlArray getFromCache idref deserialisation bug when a cacheProvider isn't set via configuration 
