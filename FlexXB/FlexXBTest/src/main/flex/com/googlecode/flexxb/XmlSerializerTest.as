@@ -259,6 +259,9 @@ package com.googlecode.flexxb {
 			item.id = 3;
 			item.property.element = "test";
 			ItemA(item.property).fieldA = "valueA";
+			item.list = [new ItemA(), new ItemB()];
+			ItemA(item.list[0]).fieldA = "ouj";
+			ItemB(item.list[1]).fieldB = "klm";			
 			var engine : IFlexXB = new FxBEngine().getXmlSerializer();
 			engine.processTypes(ItemA, ItemB);
 			XmlConfiguration(engine.configuration).getResponseTypeByXsiType = true;
@@ -268,6 +271,8 @@ package com.googlecode.flexxb {
 			assertThat(copy.property, instanceOf(ItemA));
 			assertThat(copy.property.element, equalTo(item.property.element));
 			assertThat(ItemA(copy.property).fieldA, equalTo(ItemA(item.property).fieldA));
+			assertThat(copy.list[0], instanceOf(ItemA));
+			assertThat(copy.list[1], instanceOf(ItemB));
 		}
 	}
 }
