@@ -25,6 +25,9 @@ package com.googlecode.testData.xsi
 		[XmlElement(setXsiType="true", getRuntimeType="true")]
 		public var property : BaseItem;
 		
+		[XmlArray(alias="members", memberName="listItem", setXsiType="true", getRuntimeType="true")]
+		public var list : Array;
+		
 		public function Main()
 		{
 		}
