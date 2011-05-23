@@ -5,72 +5,72 @@ TODO
 
 ==Support for object namespacing==
 
-   _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
+     _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
 
 ==Xml alias==
 
-   _Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias)._
+     _Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias)._
 
 ==Ignore a field on serialization, deserialization or both==
  
-   _An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization._
+     _An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization._
 
 == Serialize partial object== 
 
-   _An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id)._
+     _An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id)._
 
 ==Integrate model object cache to insure object uniqueness==
  
-   _All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application._
+     _All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application._
 
 == Class type identification by response's namespace on deserialization==
 
-   _Object types that should be used in deserialization should be determined from the namespaces present in the xml response._
+     _Object types that should be used in deserialization should be determined from the namespaces present in the xml response._
 
 == Custom to and from string conversion for simple types==  
 
-   _Some simple types (such as Date) may require custom conversion methods to and from String values._
+     _Some simple types (such as Date) may require custom conversion methods to and from String values._
 
 == Use paths in xml aliases== 
 
-   _Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of the server object's hierarchy)._
+     _Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of the server object's hierarchy)._
 
 == Allow custom object (de)serialization==  
 
-   _There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent._
+     _There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent._
 
 == Add getFromCache option for deserializing complex fields== 
 
-   _Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized._
+     _Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized._
 
 == Add events to signal processing start and finish==
 
-   _The serializer should allow custom treatments at different stages in the xml processing. These stages are: _Pre-Serialize_, _Post-Serialize_, _Pre-Deserialize_ and _Post-Deserialize_._
+     _The serializer should allow custom treatments at different stages in the xml processing. These stages are: _Pre-Serialize_, _Post-Serialize_, _Pre-Deserialize_ and _Post-Deserialize_._
 
 == Xml Service ==
 
-   _FlexXB should provide a data service that is able to send xml requests and receive xml responses._
+     _FlexXB should provide a data service that is able to send xml requests and receive xml responses._
 
 == Annotation API ==
 
-   _FlexXB should provide an API to allow developers to programatically describe object types to be registered in the FlexXB engine._
+     _FlexXB should provide an API to allow developers to programatically describe object types to be registered in the FlexXB engine._
 
 == Constructor Annotation==
 
-   _There are cases in which the business objects have parametered constructors which should not default to null in order to inforce some business constraints. FlexXB should provide a way to annotate the constructors along with the parameers they take. Due to the fact that those parameters will more than likely have values found in the xml (like serialized object fields) the parameters will reference a field that will be the end-receiver of the value._ 
+     _There are cases in which the business objects have parametered constructors which should not default to null in order to inforce some business constraints. FlexXB should provide a way to annotate the constructors along with the parameers they take. Due to the fact that those parameters will more than likely have values found in the xml (like serialized object fields) the parameters will reference a field that will be the end-receiver of the value._ 
 
 == Multiple namespace support==
 
-   _Allow multiple namespaces to be defined for a class. Various members of the class can use different namespaces._
+     _Allow multiple namespaces to be defined for a class. Various members of the class can use different namespaces._
 
 == Annotation versioning ==
 
-   _Allow multiple annotations per field differentiated by a version. This is extremely useful when the same object can be rendered to xml in different ways accorduing to the end server it is talking to._
+     _Allow multiple annotations per field differentiated by a version. This is extremely useful when the same object can be rendered to xml in different ways accorduing to the end server it is talking to._
 
 == Circular reference handling ==
 
-   _This feature is the same as offered by JAXB: https://jaxb.dev.java.net/guide/Mapping_cyclic_references_to_XML.html. When encountering objects cycles, the application needs to recover from it without ending up in a stack overflow exception. To do this you will be able to specify objects once in the xml document and reference them by id wherever is needed; also one may implement a custom interface allowing the replacement of the current object with a new one that will break the cycle._
+     _This feature is the same as offered by JAXB: https://jaxb.dev.java.net/guide/Mapping_cyclic_references_to_XML.html. When encountering objects cycles, the application needs to recover from it without ending up in a stack overflow exception. To do this you will be able to specify objects once in the xml document and reference them by id wherever is needed; also one may implement a custom interface allowing the replacement of the current object with a new one that will break the cycle._
 
 == Serialization format support==
  
-   _Make FlexXB serialization format agnostic. Allows users to extend the engine and add support for different serialization formats (JSON, etc) while still sharing the base features such as object caching, circular reference handling, constructor annotations, id fields, version extraction. The advantage is that the base features are integrated by default with the new serialization context that defines the new format and one should only care about the actual AS3 object - ? conversions._
+     _Make FlexXB serialization format agnostic. Allows users to extend the engine and add support for different serialization formats (JSON, etc) while still sharing the base features such as object caching, circular reference handling, constructor annotations, id fields, version extraction. The advantage is that the base features are integrated by default with the new serialization context that defines the new format and one should only care about the actual AS3 object - ? conversions._
