@@ -3,6 +3,7 @@
 
  * [GeneralDescription Home]
  * [Features Features]
+   * [FeaturesExplained Features in detailed explanation]
    * [RoadMap Road map]
  * Usage
    * [Usage FlexXB 1.x]
