@@ -10,9 +10,9 @@ This page will contain a list of features and requirements I have planned for my
 
  * FXB-001 *[FeaturesExplained#Support_for_object_namespacing Support for object namespacing]*: 
  Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace.
- * FXB-002 *Xml alias*: 
+ * FXB-002 *[FeaturesExplained#Xml_alias Xml alias]*: 
  Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias).
- * FXB-003 *Ignore a field on serialization, deserialization or both*: 
+ * FXB-003 *[FeaturesExplained#Ignore_a_field_on_serialization_deserialization_or_both Ignore a field on serialization, deserialization or both]*: 
  An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization.
  * FXB-004 *Serialize partial object (only serialize the object's identification field(s))*: 
  An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id). 
