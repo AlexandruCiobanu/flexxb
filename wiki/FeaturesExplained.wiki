@@ -1,6 +1,8 @@
 #summary List of explained features
 #labels Phase-Support,Phase-Implementation
 
+TODO
+
 ==Support for object namespacing==
 
    _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
