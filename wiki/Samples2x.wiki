@@ -166,7 +166,7 @@ public class XmlPathObject
 
 _Notice the {{{defaultValueField}}} attribute. It specifies that the target field will be rendered in xml as a simple text element. Still, the field marked as default will still have to be decorated by an annotation to be taken into account by the serializer._
 
-_As seen, the notation for virtual paths uses the slash character as a separator "/". The name after the last slash is the actual name of the element/attribute. If one does not want to hardcode that name one can use the star character "`*`" to tell the engine to take the name from the object localted there.For example, instead of "anotherSub/attTest" one can put "anotherSub/*" which in our case has the same effect. This is expecially useful when you have values of different types but which extend a base type. Usually these values have different names and using star permits the engine to determine the attribute's name at runtime based on the value type it finds there._
+_As seen, the notation for virtual paths uses the slash character as a separator "/". The name after the last slash is the actual name of the element/attribute. If one does not want to hardcode that name one can use the star character "`*`" to tell the engine to take the name from the object localted there.For example, instead of "anotherSub/attTest" one can put "anotherSub/`*`" which in our case has the same effect. This is expecially useful when you have values of different types but which extend a base type. Usually these values have different names and using star permits the engine to determine the attribute's name at runtime based on the value type it finds there._
 
 === 4. Ordering the xml sequence ===
 
