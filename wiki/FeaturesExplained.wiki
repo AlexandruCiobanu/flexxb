@@ -7,6 +7,13 @@ TODO
 
      _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
 
+<table width="100%">
+   <tr>
+     <td align="left">[FeaturesExplained Top]</td>
+     <td align="right">[Features Back to Features]</td>
+   </tr>
+</table>
+
 ==Xml alias==
 
      _Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias)._
