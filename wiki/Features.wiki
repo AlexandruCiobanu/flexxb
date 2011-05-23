@@ -8,7 +8,7 @@ This page will contain a list of features and requirements I have planned for my
 
 = Features =
 
- * FXB-001 *Support for object namespacing*: 
+ * [http://code.google.com/p/flexxb/wiki/FeaturesExplained#Support_for_object_namespacing FXB-001 *Support for object namespacing*:] 
  Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace.
  * FXB-002 *Xml alias*: 
  Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias).
