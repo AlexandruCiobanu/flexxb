@@ -18,7 +18,7 @@ This page will contain a list of features and requirements I have planned for my
  An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id). 
  * FXB-005 *[FeaturesExplained#Integrate_model_object_cache_to_insure_object_uniqueness Integrate model object cache to insure object uniqueness]*: 
  All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application.
- * FXB-006 *[FeaturesExplained#Class_type_identification_by_response's_namespace_on_deserialization Class type identification by response's namespace on deserialization]*: 
+ * FXB-006 *[FeaturesExplained#Class_type_identification_by_response's_namespace_on_deseri Class type identification by response's namespace on deserialization]*: 
  Object types that should be used in deserialization should be determined from the namespaces present in the xml response.
  * FXB-008 *[FeaturesExplained#Custom_to_and_from_string_conversion_for_simple_types Custom to and from string conversion for simple types]*: 
  Some simple types (such as Date) may require custom conversion methods to and from String values.
