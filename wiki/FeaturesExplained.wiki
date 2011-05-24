@@ -2,6 +2,42 @@
 #labels Phase-Support,Phase-Implementation
 
 TODO
+==Xml alias==
+
+     _Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias)._
+
+Alias attribute is available for all field annotations and allows the engine to render the value as an attribute/element with a different name that the field's name. If the alias attributes is missing the engine will use the field's name as a name for the xml sequence to be inserted/parsed.
+
+Eg:
+{{{
+        [Bindable]
+	public class Mock
+	{
+		[XmlAttribute()]
+		public var date : Date;
+
+                [XmlAttribute(alias="stuff")]
+		public var aField : String = "a";
+
+		[XmlElement(alias="objVersion")]
+		public var version : Number = 4;
+
+		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]
+		public var result : Array;
+		[XmlElement]
+		public var xmlData : XML; 
+		
+		public var someExcludedField  : Boolean;
+	}
+}}}
+
+
+<table width="100%">
+   <tr>
+     <td align="left">[Features Back to Features]</td>
+     <td align="right">[FeaturesExplained Top]</td>
+   </tr>
+</table>
 
 ==Support for object namespacing==
 
@@ -37,17 +73,6 @@ Eg:
 	}
 }}}
  
-<table width="100%">
-   <tr>
-     <td align="left">[Features Back to Features]</td>
-     <td align="right">[FeaturesExplained Top]</td>
-   </tr>
-</table>
-
-==Xml alias==
-
-     _Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias)._
-
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
