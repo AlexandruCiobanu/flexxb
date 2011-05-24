@@ -7,6 +7,36 @@ TODO
 
      _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
 
+There are two ways namespaces can be defined on the metadata used to decorate a class:
+ * Class namespace - defined in the XmlClass annotation and it is the default namespace used for all fields in the class. Spcifying it is done by setting the {{{prefix}}} and {{{uri}}} attributes of the XmlClass annotation.
+ * Field namespace - is used by specific fields within the class; multiple fields can reference the same namespace. Field namespaces are defined by first declaring them at class level with XmlNamespace annotation then referencing its prefix where needed. Field namespaces' prefixes should be unique for that class. 
+
+Eg:
+{{{
+        [Bindable]
+        [Namespace(prefix="ns1", uri="http://www.ns1.com")]
+        [Namespace(prefix="ns2", uri="http://www.ns2.com")]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.yourcompany.com/xmlns/yourNs")]
+	public class Mock
+	{
+		[XmlAttribute(namespace="ns1")]
+		public var date : Date;
+
+                [XmlAttribute(alias="stuff")]
+		public var aField : String = "a";
+
+		[XmlElement(alias="objVersion")]
+		public var version : Number = 4;
+
+		[XmlArray(alias="data", type="com.googlecode.testData.Mock", namespace="ns2")]
+		public var result : Array;
+		[XmlElement]
+		public var xmlData : XML; 
+		
+		public var someExcludedField  : Boolean;
+	}
+}}}
+ 
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
