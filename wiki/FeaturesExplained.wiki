@@ -85,6 +85,37 @@ Eg:
  
      _An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization._
 
+Fields can be excluded from the (de)serialization process by setting the {{{ignoreOn}}} in all field annotations. There are two possible values:
+ * serialize: ignore the value of the current field when serializing the object;
+ * deserialize: ignore the value of the current field when deserializing the data (xml);
+
+In order to have the field completely ignored remove the field annotation on it. FlexXB will only process fields that have a recognized annotation decorating them.
+
+Eg:
+{{{
+        [Bindable]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.yourcompany.com/xmlns/yourNs")]
+	public class Mock
+	{
+		[XmlAttribute(alias="stuff")]
+		public var aField : String = "a";
+		
+                [XmlAttribute(ignoreOn="serialize")]
+		public var date : Date;
+		
+                [XmlElement(alias="objVersion")]
+		public var version : Number = 4;
+		
+		[XmlElement(ingnoreOn="deserialize")]
+		public var reference : Object;
+				
+                [XmlElement]
+		public var xmlData : XML; 
+		
+		public var someExcludedField  : Boolean;
+	}
+}}}
+
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
