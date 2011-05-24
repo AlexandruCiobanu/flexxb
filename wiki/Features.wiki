@@ -3,7 +3,9 @@
 
 = Introduction =
 
-This page will contain a list of features and requirements I have planned for my project, along with some delivery dates :D. Click the name links to see a more detailed explanation for each feature that is already implemented.
+This page will contain a list of features and requirements I have planned for my project, along with some delivery dates :D. 
+
+Click the name links to see a more detailed explanation for each feature that is already implemented.
 
 
 = Features =
