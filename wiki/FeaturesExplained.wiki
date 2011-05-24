@@ -176,6 +176,8 @@ Eg:
 
      _Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of the server object's hierarchy)._
 
+Also known as *virtual paths*, this feature allows classes to have fields rendered in subelements withour requiring existence of special classes for those subelements. Virtual paths are defined within the alias attribute on each annotation: {{{XmlClass}}}, {{{XmlAttribute}}}
+
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
