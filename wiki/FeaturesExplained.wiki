@@ -44,8 +44,8 @@ Eg:
      _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
 
 There are two ways namespaces can be defined on the metadata used to decorate a class:
- * Class namespace - defined in the XmlClass annotation and it is the default namespace used for all fields in the class. Spcifying it is done by setting the {{{prefix}}} and {{{uri}}} attributes of the XmlClass annotation.
- * Field namespace - is used by specific fields within the class; multiple fields can reference the same namespace. Field namespaces are defined by first declaring them at class level with XmlNamespace annotation then referencing its prefix where needed. Field namespaces' prefixes should be unique for that class. 
+ * Class namespace - defined in the [XmlAnnotations#XmlClass XmlClass] annotation and it is the default namespace used for all fields in the class. Spcifying it is done by setting the {{{prefix}}} and {{{uri}}} attributes of the [XmlAnnotations#XmlClass XmlClass] annotation.
+ * Field namespace - is used by specific fields within the class; multiple fields can reference the same namespace. Field namespaces are defined by first declaring them at class level with [XmlAnnotations#Namespace Namespace] annotation then referencing its prefix where needed. Field namespaces' prefixes should be unique for that class. 
 
 Eg:
 {{{
