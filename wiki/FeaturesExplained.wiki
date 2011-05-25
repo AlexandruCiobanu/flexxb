@@ -33,6 +33,12 @@ Eg:
 
 The alias allows use of wildcards. One can use the star character `*` to tell the engine to determine the name of the element/attribute at runtime, by inspecting the field's value. If the value is an instance of a FlexXb annotated class, the name defined by the class alias is used.
 
+{{{
+  [XmlElement(alias="*")]
+   public var field3 : MyCustomItem = new MyCustomItem();
+}}}
+
+
 Not setting any alias in the metadata will instruct the engine to use the field's name as a name for the attribute/element being written/read.
 
 
