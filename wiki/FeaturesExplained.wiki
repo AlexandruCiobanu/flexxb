@@ -31,6 +31,10 @@ Eg:
 	}
 }}}
 
+The alias allows use of wildcards. One can use the star character `*` to tell the engine to determine the name of the element/attribute at runtime, by inspecting the field's value. If the value is an instance of a FlexXb annotated class, the name defined by the class alias is used.
+
+Not setting any alias in the metadata will instruct the engine to use the field's name as a name for the attribute/element being written/read.
+
 
 <table width="100%">
    <tr>
@@ -188,7 +192,7 @@ Assume we have the following fields:
    public var field1 : Number = 3;
 
    [XmlElement(alias="sub1/sub2/testValue")]
-   public var fields2 : String = "test"
+   public var field2 : String = "test"
 }}}
 
 For them, the xml will look like:
@@ -199,6 +203,13 @@ For them, the xml will look like:
         <testValue>test</testValue>
     </sub2>
 </sub1>
+}}}
+
+One can use the wildcard as would in a simple alias to make the engine set the name based on the field's value at runtime.
+
+{{{
+  [XmlElement(alias="sub1/sub2/*")]
+   public var field3 : MyCustomItem = new MyCustomItem();
 }}}
 
 
