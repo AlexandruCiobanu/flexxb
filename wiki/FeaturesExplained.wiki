@@ -138,6 +138,43 @@ Eg:
 
      _An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id)._
 
+An object can be serialized normally, in which case all annotated fields are serialized, or in a partial mode in which only the idfield is serialized, provided the class annotation specifies an id field.
+
+For partial serialization to work there are two conditions needed:
+ * The target class must have an {{{XmlClass}}} annotation defining an {{{idField}}} attribute. The attribute's value is the id field's name.
+ * The field in the owner class must set the {{{serializePartialElement}}} attriute to true.
+
+The {{{serializePartialElement}}} is only available for {{{XmlElement}}} and {{{XmlArray}}} metadatas.
+
+Eg:
+{{{
+[XmlClass(idField="idRef")]
+public class TestClass{
+     [XmlAttribute(alias="id")]
+     public var idRef : Number = 1;
+
+     [XmlElement()]
+     public var name : String = "";
+}
+
+[XmlClass]
+public class Owner{
+    [XmlAttribute()]
+    public var value : String = "test";
+
+    [XmlElement(alias="Ref", serializePartialElement="true")]
+    public var testClassRef : TestClass = new TestClass();
+}
+}}}
+
+The xml output would be:
+
+{{{
+<Owner value="test">
+    <Ref id="1"/>
+</Owner>
+}}}
+
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
