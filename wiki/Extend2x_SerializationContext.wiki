@@ -15,7 +15,7 @@ The base class is {{{com.googlecode.flexxb.core.DescriptionContext}}} and there 
 
 Once created, one may register the description context with a {{{com.googlecode.flexxb.core.FxBEngine}}} instance by using the method registerDescriptionContext<br/>{{{public function registerDescriptionContext(name : String, context : DescriptionContext) : void}}}
 
-As an example, let's take a look at some of the code for the Xml description context for FlexXB. We'll the the four elements being used: initializing the context by registering annotations and serializers, implementing the incomingType detector, handling newly processed descriptors and adding helper functions for teh annotations serializers:
+As an example, let's take a look at some of the code for the Xml description context for FlexXB. We'll the the four elements being used: initializing the context by registering annotations and serializers, implementing the incomingType detector, handling newly processed descriptors and adding helper functions for the annotations serializers:
 
 {{{
 public final class XmlDescriptionContext extends DescriptionContext
