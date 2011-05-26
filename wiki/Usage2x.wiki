@@ -2,6 +2,8 @@
 
 FlexXB 2.x allows extensions to support different serialization formats. Due to the architectural changes to support this feature, the main access point from the 1.x version, com.googlecode.serializer.flexxb.FlexXBEngine is deprecated in FlexXB 2.x. However, for compatibility reasons this class is still available; it will only work for xml serialization and provide the same methods as in previous versions. Do not use FlexXBEngine class if you need to support a new serialization format.
 
+*To get an idea about the features FlexXB provides please take a look on the [FeaturesExplained Features in detailed explanation] page. You'll find detailed explanations for all capabilities FlexXB offers.*
+
 =Using built-in XML serialization=
 
 To get the serializer to be used in xml handling:<br/>
