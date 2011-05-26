@@ -49,6 +49,7 @@ Not setting any alias in the metadata will instruct the engine to use the field'
    </tr>
 </table>
 
+
 ==Support for object namespacing==
 
      _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
@@ -91,6 +92,7 @@ Eg:
 </table>
 
 
+ 
 ==Ignore a field on serialization, deserialization or both==
  
      _An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization._
@@ -134,6 +136,7 @@ Eg:
 </table>
 
 
+ 
 == Serialize partial object== 
 
      _An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id)._
@@ -187,6 +190,54 @@ The xml output would be:
  
      _All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application._
 
+During an application's operation all the responses received from the server are translated into AS3 objects and often different instances represent the same item. In order to ensure object uniqueness scross the entire application a model object cache is used. Through the configuration object, FlexXB is instructed to use an object cache instance in which to store all objects based on type and identifier. Upon deserialization the engine will inspect the cache to retrieve existing instances for items it receives and update them accordingly.
+
+There is a cache provider interface which must be implemented by objects that are to be used by the engine as cache storage called {{{ com.googlecode.flexxb.cache.ICacheProvider}}}:
+{{{
+        public interface ICacheProvider
+	{
+		/**
+		 * Determines whether an object with the given id is aleady cached.
+		 * @param id the id under which the object should have been cached
+		 * @param clasz the class of the object
+		 * @return true if there is an object cached under the given id and class.
+		 *
+		 */	
+		function isInCache(id : String, clasz : Class) : Boolean;
+		/**
+		 * Get an instance of the specified type and with the specified id
+		 * from the cache
+		 * @param id object identifier
+		 * @param clasz object class
+		 * @return instance defined by id and type if it exists, null otherwise
+		 * 
+		 */		
+		function getFromCache(id : String, clasz : Class) : *;
+		/**
+		 * Gets a new instance of the specified object class. The constructor may
+		 * require arguments which are supplied with the parameters list.<br/>
+		 * After the instance is created it will be placed into the cache.
+		 * @param clasz object class 
+		 * @param id object identifier
+		 * @param parameters parameter list to be used when calling the constructor
+		 * @return newly created instance 
+		 * 
+		 */		
+		function getNewInstance(clasz : Class, id : String, parameters : Array = null) : *;
+		/**
+		 * Clears the cache for all the objects with given class.
+		 * If no class is specified, then all cache is cleared.
+		 * @param typeList List of types for which the cache will be flushed. ALL instances will be flushed if null or empty
+		 */
+		function clearCache(...typeList) : void;
+	}
+}}}
+
+Out of the box FlexXB offers two kinds of cache providers:
+ * {{{com.googlecode.flexxb.cache.ObjectCache}}} - regular caching system, indexed by object type and identifier. All items within it are uniquely identified and stored until a clean is requested or the application shuts down. For large quatities of data, this cache may grow quite a lot since it will keep references to all unique objects.
+ * {{{com.googlecode.flexxb.cache.ObjectPool}}} - an alternate caching system which uses pools of objects. Each object pool holds items of a certain type. When the application needs an instance, it will look into the pool and if there is an object available it will mark it as used and give it to the caller. When the caller is done with that instance it will return it to the pool to be marked as free and cleared. When there are no free objects available in the pool, a new one will be created and added to the pool. This is usefull when one needs to keep the amount of created objects in check and does not require enforcement of uniqueness constraints. 
+
+Assigning a cache provider is done via the{{{com.googlecode.flexxb.core.Configuration.cacheProvider}}}. Setting this field in the current configuration to null will cause the engine to stop using caching systems and create the required object tree on each request. Setting it with one instance of a cacche provider will make it use that system on the next request. Setting and resetting the cacheProvider field done live and changes are picked up on the next request processing
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
