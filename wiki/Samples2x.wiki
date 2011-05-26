@@ -44,7 +44,7 @@ _The resulting XML is:_
 </MOck2Replacement>
 }}}
 
-_The alias field is versatile in which it can accept the wildcard character, star (`*`). This instructs the engine to determine at runtime the name of the element/attribute based on the values that is provided, regardless of the field name. It is useful when using a base type for the field and providing values of types extended from that type which may have different names. Also, not setting an alias will tell the engine to use as name the field's name (id your field names match the necessary names in teh xml, then there is no need to specify the alias)._
+_The alias field is versatile in which it can accept the wildcard character, star (`*`). This instructs the engine to determine at runtime the name of the element/attribute based on the values that is provided, regardless of the field name. It is useful when using a base type for the field and providing values of types extended from that type which may have different names. Also, not setting an alias will tell the engine to use as name the field's name (id your field names match the necessary names in the xml, then there is no need to specify the alias)._
 
 
 === 2. Namespacing objects ===
