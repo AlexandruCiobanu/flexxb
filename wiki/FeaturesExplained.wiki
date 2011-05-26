@@ -250,6 +250,19 @@ Assigning a cache provider is done via the{{{com.googlecode.flexxb.core.Configur
 
      _Object types that should be used in deserialization should be determined from the namespaces present in the xml response._
 
+In deserialization mode there are cases in which the type of the object represented by the xml element cannot be determined (the value provided can be a subclass of the field's type and the alias on the field is explicitly defined). In such cases the usual flow would be for the elements to have different namespaces and the engine would be able to determine the type of the object to be instanciated by inspecting the element's namespace. 
+
+The user must make sure to specify the namespace on the class metadata. Also since some classes may not be used at the request receive time, they must be registred with the engine at the start:
+{{{
+//for legacy Xml serializer access
+com.googlecode.flexxb.FlexXBEngine.instance.processTypes(Type1, Type2, Type3) // and so on
+}}}
+or
+{{{
+//for 2.x access
+com.googlecode.flexxb.core.FxBEngine.instance.getSerializer("type").processTypes(Type1, Type2, Type3) // and so on
+}}}
+
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
