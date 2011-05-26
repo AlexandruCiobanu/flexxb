@@ -255,6 +255,8 @@ One can use the wildcard as would in a simple alias to make the engine set the n
    public var field3 : MyCustomItem = new MyCustomItem();
 }}}
 
+This is expecially useful when you have values of different types but which extend a base type. Usually these values have different names and using star permits the engine to determine the attribute's name at runtime based on the value type it finds there.
+
 
 <table width="100%">
    <tr>
