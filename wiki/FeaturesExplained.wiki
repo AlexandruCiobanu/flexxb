@@ -211,6 +211,46 @@ The xml output would be:
 
      _Some simple types (such as Date) may require custom conversion methods to and from String values._
 
+There are cases in which you must have a string representing an object instance or infer an object from a string value. In XML this is particularly used, for example in Date representation. Thus need arises for a types converter that would take care of transforming object instances to strings and viceversa. This is usually applicaed for simple objects, such as Date, but works equally well with user objects which can be represented in a string manner. There is a specific interface to be implemented by a converter:
+{{{
+package com.googlecode.flexxb.converter {
+
+	/**
+	 * Interface defining how strings can be converted to
+	 * specific objects and viceversa.
+	 * @author aCiobanu
+	 *
+	 */
+	public interface IConverter {
+		/**
+		 *
+		 * @return Object type
+		 *
+		 */
+		function get type() : Class;
+		/**
+		 * Get the string representation of the specified object
+		 * @param item Target object
+		 * @return String representation of the specified object
+		 *
+		 */
+		function toString(item : Object) : String;
+		/**
+		 * Get the object whose representation is the specified value
+		 * @param value String parameter from which the object is created
+		 * @return Object whose representation is the specified value
+		 *
+		 */
+		function fromString(value : String) : Object;
+	}
+}
+}}}
+
+Each converter object is built for a type. FlexXB already offers three converters: 
+ * {{{ClassTypeConverter}}} - represents Class values and insures proper conversion to and from String;
+ * {{{W3CDateConverter}}} - parses a W3C styled date string to a Date object and viceversa;
+ * {{{XmlConverter}}} - handles XML conversion to String and back.
+
 <table width="100%">
    <tr>
      <td align="left">[Features Back to Features]</td>
