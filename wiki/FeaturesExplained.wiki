@@ -211,7 +211,7 @@ The xml output would be:
 
      _Some simple types (such as Date) may require custom conversion methods to and from String values._
 
-There are cases in which you must have a string representing an object instance or infer an object from a string value. In XML this is particularly used, for example in Date representation. Thus need arises for a types converter that would take care of transforming object instances to strings and viceversa. This is usually applicaed for simple objects, such as Date, but works equally well with user objects which can be represented in a string manner. There is a specific interface to be implemented by a converter:
+There are cases in which you must have a string representing an object instance or infer an object from a string value. In XML this is particularly used, for example in Date representation. Thus need arises for a types converter that would take care of transforming object instances to strings and viceversa. This is usually applied for simple objects, such as Date, but works equally well with user objects which can be represented in a string manner. There is a specific interface to be implemented by a converter:
 {{{
 package com.googlecode.flexxb.converter {
 
