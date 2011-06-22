@@ -253,7 +253,11 @@ package com.googlecode.flexxb.core {
 					
 					//update object fields
 					if (mappingModel.descriptorStore.isCustomSerializable(objectClass)) {
-						ISerializable(result).deserialize(serializedData);
+						var tmp : Object = ISerializable(result).deserialize(serializedData);
+						//if they return null then it suks. Keep the original reference See Issue 47: http://code.google.com/p/flexxb/issues/detail?id=47
+						if(tmp != null){
+							result = tmp as ISerializable;
+						}
 					} else {
 						//iterate through anotations
 						for each (var annotation : IMemberAnnotation in classDescriptor.members) {
