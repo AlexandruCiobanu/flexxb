@@ -37,7 +37,10 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.xsi.ItemB;
 	import com.googlecode.testData.xsi.Main;
 	
+	import flash.net.registerClassAlias;
+	
 	import mx.collections.ArrayCollection;
+	import mx.utils.ObjectUtil;
 	
 	import org.flexunit.Assert;
 	import org.flexunit.assertThat;
@@ -173,6 +176,8 @@ package com.googlecode.flexxb {
 			Assert.assertEquals("Identity is wrong", target.identity, copy.identity);
 			Assert.assertEquals("Reference is wrong", target.reference, copy.reference);
 			Assert.assertEquals("DefaultTest is wrong", target.defaultTest, copy.defaultTest);
+			registerClassAlias("com.googlecode.testData.XmlPathObject", XmlPathObject);
+			xml = FxBEngine.instance.getXmlSerializer().serialize(ObjectUtil.copy(target)) as XML;
 		}
 		
 		[Test]

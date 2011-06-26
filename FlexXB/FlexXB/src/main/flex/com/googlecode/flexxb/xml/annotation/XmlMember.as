@@ -158,6 +158,13 @@ package com.googlecode.flexxb.xml.annotation {
 			return _nsRef;
 		}
 		
+		public override function get nameSpace():Namespace{
+			if(_nsRef == ""){
+				return null;
+			}
+			return super.nameSpace;
+		}
+		
 		/**
 		 * 
 		 * @return 
