@@ -18,7 +18,10 @@
 package com.googlecode.flexxb
 {
 	import com.googlecode.flexxb.core.FxBEngine;
+	import com.googlecode.testData.MGM;
 	import com.googlecode.testData.Node;
+	
+	import mx.collections.ArrayCollection;
 	
 	import org.flexunit.assertThat;
 	import org.hamcrest.object.equalTo;
@@ -35,6 +38,15 @@ package com.googlecode.flexxb
 			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(node) as XML;
 			namespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
 			assertThat(xml.@xsi::type, equalTo("xml"));
+		}
+		[Test]
+		public function deEmptyNSTest() : void{
+			var obj : MGM = new MGM();
+			obj.fields = new ArrayCollection(["one", "two", "three"]);
+			obj.id = "prodhost";
+			var xml : XML = FxBEngine.instance.getXmlSerializer().serialize(obj) as XML;
+			assertThat(xml.fields.length(), equalTo(1));
+			assertThat(xml.id.length(), equalTo(0));
 		}
 	}
 }
