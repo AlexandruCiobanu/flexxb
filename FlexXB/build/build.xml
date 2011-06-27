@@ -101,6 +101,7 @@
 			<arg line="-debug=false"/>
 			<arg line="-external-library-path='${flexsdk.lib.dir}','${flexsdk.playerlib.dir}'"/>
 			<arg line="${compile.metadata}"/>
+			<arg line="-include-file metadata.xml '${project.src.dir}'/metadata.xml" />
 		</exec>
 	</target>
 	<target name="build.project.json" depends="build.project">

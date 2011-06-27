@@ -175,6 +175,11 @@ KNOWN LIMITATIONS
 
 RELEASE NOTES
 
+2.2.0 - 27-06-2011
+	  - Usability: added metadata.xml annotation descriptor file in the swc to use FlashBuilder's support for annotation code hints
+	  - Fix: Issue 47: Serializable#deserialize return object is not used
+	  - Fix: Issue 48: The local namespace (xmlns="") is not considered
+
 2.1.0 - 08-04-2011
 	  - Fix: Issue 41: Release build of the SWC loses all argument names/description
 	  - NoChangeRequired: Issue 40: Issue While Adding Namespace to ArrayElement 

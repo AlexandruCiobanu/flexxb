@@ -1,0 +1,1542 @@
+<asdoc>
+
+<classRec name='JSONTokenType' fullname='com.adobe.serialization.json:JSONTokenType' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\adobe\serialization\json\JSONTokenType.as' namespace='com.adobe.serialization.json' access='public' baseclass='Object' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+	 Class containing constant values for the different types
+	 of tokens in a JSON encoded string.
+	 ]]></description>
+</classRec>
+<field name='COLON' fullname='com.adobe.serialization.json:JSONTokenType/COLON' type='int' isStatic='true' isConst='true' defaultValue='6' >
+</field>
+<field name='COMMA' fullname='com.adobe.serialization.json:JSONTokenType/COMMA' type='int' isStatic='true' isConst='true' defaultValue='0' >
+</field>
+<field name='FALSE' fullname='com.adobe.serialization.json:JSONTokenType/FALSE' type='int' isStatic='true' isConst='true' defaultValue='8' >
+</field>
+<field name='LEFT_BRACE' fullname='com.adobe.serialization.json:JSONTokenType/LEFT_BRACE' type='int' isStatic='true' isConst='true' defaultValue='1' >
+</field>
+<field name='LEFT_BRACKET' fullname='com.adobe.serialization.json:JSONTokenType/LEFT_BRACKET' type='int' isStatic='true' isConst='true' defaultValue='3' >
+</field>
+<field name='NAN' fullname='com.adobe.serialization.json:JSONTokenType/NAN' type='int' isStatic='true' isConst='true' defaultValue='12' >
+</field>
+<field name='NULL' fullname='com.adobe.serialization.json:JSONTokenType/NULL' type='int' isStatic='true' isConst='true' defaultValue='9' >
+</field>
+<field name='NUMBER' fullname='com.adobe.serialization.json:JSONTokenType/NUMBER' type='int' isStatic='true' isConst='true' defaultValue='11' >
+</field>
+<field name='RIGHT_BRACE' fullname='com.adobe.serialization.json:JSONTokenType/RIGHT_BRACE' type='int' isStatic='true' isConst='true' defaultValue='2' >
+</field>
+<field name='RIGHT_BRACKET' fullname='com.adobe.serialization.json:JSONTokenType/RIGHT_BRACKET' type='int' isStatic='true' isConst='true' defaultValue='4' >
+</field>
+<field name='STRING' fullname='com.adobe.serialization.json:JSONTokenType/STRING' type='int' isStatic='true' isConst='true' defaultValue='10' >
+</field>
+<field name='TRUE' fullname='com.adobe.serialization.json:JSONTokenType/TRUE' type='int' isStatic='true' isConst='true' defaultValue='7' >
+</field>
+<field name='UNKNOWN' fullname='com.adobe.serialization.json:JSONTokenType/UNKNOWN' type='int' isStatic='true' isConst='true' defaultValue='-1' >
+</field>
+<classRec name='JSONDecoder' fullname='com.adobe.serialization.json:JSONDecoder' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\adobe\serialization\json\JSONDecoder.as' namespace='com.adobe.serialization.json' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='JSONDecoder' fullname='com.adobe.serialization.json:JSONDecoder/JSONDecoder' isStatic='false' isFinal='false' isOverride='false'  param_names='s;strict' param_types='String;Boolean' param_defaults='undefined;undefined' result_type='*'>
+<description><![CDATA[
+
+		 Constructs a new JSONDecoder to parse a JSON string
+
+		 into a native object.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<param><![CDATA[s The JSON string to be converted
+
+		 	into a native object
+
+		 ]]></param>
+<param><![CDATA[strict Flag indicating if the JSON string needs to
+
+		 		strictly match the JSON standard or not.
+
+		 ]]></param>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<method name='checkValidToken' fullname='com.adobe.serialization.json:JSONDecoder/private:checkValidToken' isStatic='false' isFinal='true' isOverride='false'  result_type='void'>
+<description><![CDATA[
+
+		 Verifies that the token is valid.
+
+		 ]]></description>
+</method>
+<method name='getValue' fullname='com.adobe.serialization.json:JSONDecoder/getValue' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		 Gets the internal object that was created by parsing
+
+		 the JSON string passed to the constructor.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<return><![CDATA[The internal object representation of the JSON
+
+		 		string that was passed to the constructor
+
+		 ]]></return>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<method name='nextToken' fullname='com.adobe.serialization.json:JSONDecoder/private:nextToken' isStatic='false' isFinal='true' isOverride='false'  result_type='com.adobe.serialization.json:JSONToken'>
+<description><![CDATA[
+
+		 Returns the next token from the tokenzier reading
+
+		 the JSON string
+
+		 ]]></description>
+</method>
+<method name='nextValidToken' fullname='com.adobe.serialization.json:JSONDecoder/private:nextValidToken' isStatic='false' isFinal='true' isOverride='false'  result_type='com.adobe.serialization.json:JSONToken'>
+<description><![CDATA[
+
+		 Returns the next token from the tokenizer reading
+
+		 the JSON string and verifies that the token is valid.
+
+		 ]]></description>
+</method>
+<method name='parseArray' fullname='com.adobe.serialization.json:JSONDecoder/private:parseArray' isStatic='false' isFinal='true' isOverride='false'  result_type='Array'>
+<description><![CDATA[
+
+		 Attempt to parse an array.
+
+		 ]]></description>
+</method>
+<method name='parseObject' fullname='com.adobe.serialization.json:JSONDecoder/private:parseObject' isStatic='false' isFinal='true' isOverride='false'  result_type='Object'>
+<description><![CDATA[
+
+		 Attempt to parse an object.
+
+		 ]]></description>
+</method>
+<method name='parseValue' fullname='com.adobe.serialization.json:JSONDecoder/private:parseValue' isStatic='false' isFinal='true' isOverride='false'  result_type='Object'>
+<description><![CDATA[
+
+		 Attempt to parse a value
+
+		 ]]></description>
+</method>
+<field name='strict' fullname='com.adobe.serialization.json:JSONDecoder/private:strict' type='Boolean' isStatic='false' isConst='false' >
+<description><![CDATA[
+
+		 Flag indicating if the parser should be strict about the format
+
+		 of the JSON string it is attempting to decode.
+
+		 ]]></description>
+</field>
+<field name='token' fullname='com.adobe.serialization.json:JSONDecoder/private:token' type='com.adobe.serialization.json:JSONToken' isStatic='false' isConst='false' >
+<description><![CDATA[ The current token from the tokenizer ]]></description>
+</field>
+<field name='tokenizer' fullname='com.adobe.serialization.json:JSONDecoder/private:tokenizer' type='com.adobe.serialization.json:JSONTokenizer' isStatic='false' isConst='false' >
+<description><![CDATA[ The tokenizer designated to read the JSON string ]]></description>
+</field>
+<field name='value' fullname='com.adobe.serialization.json:JSONDecoder/private:value' type='' isStatic='false' isConst='false' >
+<description><![CDATA[ The value that will get parsed from the JSON string ]]></description>
+</field>
+<classRec name='JSONToken' fullname='com.adobe.serialization.json:JSONToken' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\adobe\serialization\json\JSONToken.as' namespace='com.adobe.serialization.json' access='public' baseclass='Object' isFinal='true' isDynamic='false' >
+</classRec>
+<method name='JSONToken' fullname='com.adobe.serialization.json:JSONToken/JSONToken' isStatic='false' isFinal='false' isOverride='false'  param_names='type;value' param_types='int;Object' param_defaults='-1;null' result_type='*'>
+<description><![CDATA[
+
+		 Creates a new JSONToken with a specific token type and value.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<param><![CDATA[type The JSONTokenType of the token
+
+		 ]]></param>
+<param><![CDATA[value The value of the token
+
+		 ]]></param>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<method name='create' fullname='com.adobe.serialization.json:JSONToken/com.adobe.serialization.json:create' isStatic='true' isFinal='false' isOverride='false'  param_names='type;value' param_types='int;Object' param_defaults='-1;null' result_type='com.adobe.serialization.json:JSONToken'>
+<description><![CDATA[
+
+		 Factory method to create instances.  Because we don't need more than one instance
+
+		 of a token at a time, we can always use the same instance to improve performance
+
+		 and reduce memory consumption during decoding.
+
+		 ]]></description>
+</method>
+<field name='token' fullname='com.adobe.serialization.json:JSONToken/com.adobe.serialization.json:token' type='com.adobe.serialization.json:JSONToken' isStatic='true' isConst='true' defaultValue='unknown' >
+<description><![CDATA[
+
+		 Reusable token instance.
+
+		 
+
+		 ]]></description>
+<see><![CDATA[#create()
+
+		 ]]></see>
+</field>
+<field name='type' fullname='com.adobe.serialization.json:JSONToken/type' type='int' isStatic='false' isConst='false' >
+<description><![CDATA[
+
+		 The type of the token.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</field>
+<field name='value' fullname='com.adobe.serialization.json:JSONToken/value' type='Object' isStatic='false' isConst='false' >
+<description><![CDATA[
+
+		 The value of the token
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</field>
+<classRec name='JSONTokenizer' fullname='com.adobe.serialization.json:JSONTokenizer' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\adobe\serialization\json\JSONTokenizer.as' namespace='com.adobe.serialization.json' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='JSONTokenizer' fullname='com.adobe.serialization.json:JSONTokenizer/JSONTokenizer' isStatic='false' isFinal='false' isOverride='false'  param_names='s;strict' param_types='String;Boolean' param_defaults='undefined;undefined' result_type='*'>
+<description><![CDATA[
+		 Constructs a new JSONDecoder to parse a JSON string
+		 into a native object.
+		 		 ]]></description>
+<param><![CDATA[s The JSON string to be converted
+		 	into a native object
+		 ]]></param>
+</method>
+<method name='getNextToken' fullname='com.adobe.serialization.json:JSONTokenizer/getNextToken' isStatic='false' isFinal='false' isOverride='false'  result_type='com.adobe.serialization.json:JSONToken'>
+<description><![CDATA[
+		 Gets the next token in the input sting and advances
+		 the character to the next character after the token
+		 ]]></description>
+</method>
+<method name='isDigit' fullname='com.adobe.serialization.json:JSONTokenizer/private:isDigit' isStatic='false' isFinal='true' isOverride='false'  param_names='ch' param_types='String' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[
+		 Determines if a character is a digit [0-9].
+		 		 ]]></description>
+<return><![CDATA[True if the character passed in is a digit
+		 ]]></return>
+</method>
+<method name='isHexDigit' fullname='com.adobe.serialization.json:JSONTokenizer/private:isHexDigit' isStatic='false' isFinal='true' isOverride='false'  param_names='ch' param_types='String' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[
+		 Determines if a character is a hex digit [0-9A-Fa-f].
+		 		 ]]></description>
+<return><![CDATA[True if the character passed in is a hex digit
+		 ]]></return>
+</method>
+<method name='isWhiteSpace' fullname='com.adobe.serialization.json:JSONTokenizer/private:isWhiteSpace' isStatic='false' isFinal='true' isOverride='false'  param_names='ch' param_types='String' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[
+		 Determines if a character is whitespace or not.
+		 		 ]]></description>
+<return><![CDATA[True if the character passed in is a whitespace
+		 character
+		 ]]></return>
+</method>
+<method name='nextChar' fullname='com.adobe.serialization.json:JSONTokenizer/private:nextChar' isStatic='false' isFinal='true' isOverride='false'  result_type='String'>
+<description><![CDATA[
+		 Reads the next character in the input
+		 string and advances the character location.
+		 		 ]]></description>
+<return><![CDATA[The next character in the input string, or
+		 	null if we've read past the end.
+		 ]]></return>
+</method>
+<method name='parseError' fullname='com.adobe.serialization.json:JSONTokenizer/parseError' isStatic='false' isFinal='true' isOverride='false'  param_names='message' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+		 Raises a parsing error with a specified message, tacking
+		 on the error location and the original string.
+		 		 ]]></description>
+<param><![CDATA[message The message indicating why the error occurred
+		 ]]></param>
+</method>
+<method name='readNumber' fullname='com.adobe.serialization.json:JSONTokenizer/private:readNumber' isStatic='false' isFinal='true' isOverride='false'  result_type='com.adobe.serialization.json:JSONToken'>
+<description><![CDATA[
+		 Attempts to read a number from the input string.  Places
+		 the character location at the first character after the
+		 number.
+		 		 ]]></description>
+<return><![CDATA[The JSONToken with the number value if a number could
+		 		be read.  Throws an error otherwise.
+		 ]]></return>
+</method>
+<method name='readString' fullname='com.adobe.serialization.json:JSONTokenizer/private:readString' isStatic='false' isFinal='true' isOverride='false'  result_type='com.adobe.serialization.json:JSONToken'>
+<description><![CDATA[
+		 Attempts to read a string from the input string.  Places
+		 the character location at the first character after the
+		 string.  It is assumed that ch is " before this method is called.
+		 		 ]]></description>
+<return><![CDATA[the JSONToken with the string value if a string could
+		 	be read.  Throws an error otherwise.
+		 ]]></return>
+</method>
+<method name='skipComments' fullname='com.adobe.serialization.json:JSONTokenizer/private:skipComments' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[
+		 Skips comments in the input string, either
+		 single-line or multi-line.  Advances the character
+		 to the first position after the end of the comment.
+		 ]]></description>
+</method>
+<method name='skipIgnored' fullname='com.adobe.serialization.json:JSONTokenizer/private:skipIgnored' isStatic='false' isFinal='true' isOverride='false'  result_type='void'>
+<description><![CDATA[
+		 Advances the character location past any
+		 sort of white space and comments
+		 ]]></description>
+</method>
+<method name='skipWhite' fullname='com.adobe.serialization.json:JSONTokenizer/private:skipWhite' isStatic='false' isFinal='true' isOverride='false'  result_type='void'>
+<description><![CDATA[
+		 Skip any whitespace in the input string and advances
+		 the character to the first character after any possible
+		 whitespace.
+		 ]]></description>
+</method>
+<method name='unescapeString' fullname='com.adobe.serialization.json:JSONTokenizer/unescapeString' isStatic='false' isFinal='false' isOverride='false'  param_names='input' param_types='String' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+		 Convert all JavaScript escape characters into normal characters
+		 		 ]]></description>
+<param><![CDATA[input The input string to convert
+		 ]]></param>
+<return><![CDATA[Original string with escape characters replaced by real characters
+		 ]]></return>
+</method>
+<field name='ch' fullname='com.adobe.serialization.json:JSONTokenizer/private:ch' type='String' isStatic='false' isConst='false' >
+<description><![CDATA[ The current character in the JSON string during parsing ]]></description>
+</field>
+<field name='controlCharsRegExp' fullname='com.adobe.serialization.json:JSONTokenizer/private:controlCharsRegExp' type='RegExp' isStatic='false' isConst='true' defaultValue='unknown' >
+<description><![CDATA[
+		 The regular expression used to make sure the string does not
+		 contain invalid control characters.
+		 ]]></description>
+</field>
+<field name='jsonString' fullname='com.adobe.serialization.json:JSONTokenizer/private:jsonString' type='String' isStatic='false' isConst='false' >
+<description><![CDATA[ The JSON string to be parsed ]]></description>
+</field>
+<field name='loc' fullname='com.adobe.serialization.json:JSONTokenizer/private:loc' type='int' isStatic='false' isConst='false' >
+<description><![CDATA[ The current parsing location in the JSON string ]]></description>
+</field>
+<field name='obj' fullname='com.adobe.serialization.json:JSONTokenizer/private:obj' type='Object' isStatic='false' isConst='false' >
+<description><![CDATA[ The object that will get parsed from the JSON string ]]></description>
+</field>
+<field name='strict' fullname='com.adobe.serialization.json:JSONTokenizer/private:strict' type='Boolean' isStatic='false' isConst='false' >
+<description><![CDATA[
+		 Flag indicating if the tokenizer should only recognize
+		 standard JSON tokens.  Setting to <code>false</code> allows
+		 tokens such as NaN and allows numbers to be formatted as
+		 hex, etc.
+		 ]]></description>
+</field>
+<classRec name='JSONParseError' fullname='com.adobe.serialization.json:JSONParseError' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\adobe\serialization\json\JSONParseError.as' namespace='com.adobe.serialization.json' access='public' baseclass='Error' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+	 
+	 ]]></description>
+</classRec>
+<method name='JSONParseError' fullname='com.adobe.serialization.json:JSONParseError/JSONParseError' isStatic='false' isFinal='false' isOverride='false'  param_names='message;location;text' param_types='String;int;String' param_defaults=';0;' result_type='*'>
+<description><![CDATA[
+
+		 Constructs a new JSONParseError.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<param><![CDATA[message The error message that occured during parsing
+
+		 ]]></param>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<method name='location' fullname='com.adobe.serialization.json:JSONParseError/location/get' isStatic='false' isFinal='false' isOverride='false'  result_type='int'>
+<description><![CDATA[
+
+		 Provides read-only access to the location variable.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<return><![CDATA[The location in the string where the error occurred
+
+		 ]]></return>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<method name='text' fullname='com.adobe.serialization.json:JSONParseError/text/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		 Provides read-only access to the text variable.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<return><![CDATA[The string in which the error occurred
+
+		 ]]></return>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<field name='_location' fullname='com.adobe.serialization.json:JSONParseError/private:_location' type='int' isStatic='false' isConst='false' >
+<description><![CDATA[ The location in the string where the error occurred ]]></description>
+</field>
+<field name='_text' fullname='com.adobe.serialization.json:JSONParseError/private:_text' type='String' isStatic='false' isConst='false' >
+<description><![CDATA[ The string in which the parse error occurred ]]></description>
+</field>
+<classRec name='JSONEncoder' fullname='com.adobe.serialization.json:JSONEncoder' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\adobe\serialization\json\JSONEncoder.as' namespace='com.adobe.serialization.json' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='JSONEncoder' fullname='com.adobe.serialization.json:JSONEncoder/JSONEncoder' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='*' param_defaults='undefined' result_type='*'>
+<description><![CDATA[
+
+		 Creates a new JSONEncoder.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<param><![CDATA[o The object to encode as a JSON string
+
+		 ]]></param>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<method name='arrayToString' fullname='com.adobe.serialization.json:JSONEncoder/private:arrayToString' isStatic='false' isFinal='false' isOverride='false'  param_names='a' param_types='Array' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+
+		 Converts an array to it's JSON string equivalent
+
+		 
+		 ]]></description>
+<param><![CDATA[a The array to convert
+
+		 ]]></param>
+<return><![CDATA[The JSON string representation of <code>a</code>
+
+		 ]]></return>
+</method>
+<method name='convertToString' fullname='com.adobe.serialization.json:JSONEncoder/private:convertToString' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='*' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+
+		 Converts a value to it's JSON string equivalent.
+
+		 
+		 ]]></description>
+<param><![CDATA[value The value to convert.  Could be any
+
+		 	type (object, number, array, etc)
+
+		 ]]></param>
+</method>
+<method name='escapeString' fullname='com.adobe.serialization.json:JSONEncoder/private:escapeString' isStatic='false' isFinal='false' isOverride='false'  param_names='str' param_types='String' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+
+		 Escapes a string accoding to the JSON specification.
+
+		 
+		 ]]></description>
+<param><![CDATA[str The string to be escaped
+
+		 ]]></param>
+<return><![CDATA[The string with escaped special characters
+
+		 		according to the JSON specification
+
+		 ]]></return>
+</method>
+<method name='getString' fullname='com.adobe.serialization.json:JSONEncoder/getString' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		 Gets the JSON string from the encoder.
+
+		 
+		 ]]></description>
+<langversion><![CDATA[ActionScript 3.0
+
+		 ]]></langversion>
+<playerversion><![CDATA[Flash 9.0
+
+		 ]]></playerversion>
+<return><![CDATA[The JSON string representation of the object
+
+		 		that was passed to the constructor
+
+		 ]]></return>
+<tiptext><![CDATA[
+		 ]]></tiptext>
+</method>
+<method name='objectToString' fullname='com.adobe.serialization.json:JSONEncoder/private:objectToString' isStatic='false' isFinal='false' isOverride='false'  param_names='o' param_types='Object' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+
+		 Converts an object to it's JSON string equivalent
+
+		 
+		 ]]></description>
+<param><![CDATA[o The object to convert
+
+		 ]]></param>
+<return><![CDATA[The JSON string representation of <code>o</code>
+
+		 ]]></return>
+</method>
+<field name='jsonString' fullname='com.adobe.serialization.json:JSONEncoder/private:jsonString' type='String' isStatic='false' isConst='false' >
+<description><![CDATA[ The string that is going to represent the object we're encoding ]]></description>
+</field>
+<packageRec name='com.googlecode.flexxb.json.annotation.null' fullname='com.googlecode.flexxb.json.annotation.null'>
+<description><![CDATA[
+
+   FlexXB
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   This program is free software: you can redistribute it and/or modify
+
+   it under the terms of the GNU General Public License as published by
+
+   the Free Software Foundation, either version 3 of the License, or
+
+   (at your option) any later version.
+
+ 
+
+   This program is distributed in the hope that it will be useful,
+
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+
+   GNU General Public License for more details.
+
+ 
+   You should have received a copy of the GNU General Public License
+
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONConstants' fullname='com.googlecode.flexxb.json.annotation:JSONConstants' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\annotation\JSONConstants.as' namespace='com.googlecode.flexxb.json.annotation' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='JSONConstants' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/JSONConstants' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+</method>
+<field name='ALIAS_ANY' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/ALIAS_ANY' type='String' isStatic='true' isConst='true' defaultValue='*' >
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+</field>
+<field name='ALIAS' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/ALIAS' type='String' isStatic='true' isConst='true' defaultValue='alias' >
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+</field>
+<field name='GET_FROM_CACHE' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/GET_FROM_CACHE' type='String' isStatic='true' isConst='true' defaultValue='getFromCache' >
+<description><![CDATA[
+
+		 GetFromCache attribute name
+
+		 ]]></description>
+</field>
+<field name='GET_RUNTIME_TYPE' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/GET_RUNTIME_TYPE' type='String' isStatic='true' isConst='true' defaultValue='getRuntimeType' >
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+</field>
+<field name='MEMBER_NAME' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/MEMBER_NAME' type='String' isStatic='true' isConst='true' defaultValue='memberName' >
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+</field>
+<field name='SERIALIZE_PARTIAL_ELEMENT' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/SERIALIZE_PARTIAL_ELEMENT' type='String' isStatic='true' isConst='true' defaultValue='serializePartialElement' >
+<description><![CDATA[
+
+		 SerializePartialElement attribute name
+
+		 ]]></description>
+</field>
+<field name='TYPE' fullname='com.googlecode.flexxb.json.annotation:JSONConstants/TYPE' type='String' isStatic='true' isConst='true' defaultValue='type' >
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+</field>
+<packageRec name='com.googlecode.flexxb.json.annotation.null' fullname='com.googlecode.flexxb.json.annotation.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONMember' fullname='com.googlecode.flexxb.json.annotation:JSONMember' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\annotation\JSONMember.as' namespace='com.googlecode.flexxb.json.annotation' access='public' baseclass='com.googlecode.flexxb.annotation.contract:BaseMember' interfaces='com.googlecode.flexxb.annotation.contract:IMemberAnnotation' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONMember' fullname='com.googlecode.flexxb.json.annotation:JSONMember/JSONMember' isStatic='false' isFinal='false' isOverride='false'  param_names='descriptor' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='*'>
+</method>
+<method name='parse' fullname='com.googlecode.flexxb.json.annotation:JSONMember/protected:parse' isStatic='false' isFinal='false' isOverride='true'  param_names='descriptor' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='void'>
+</method>
+<method name='useOwnerAlias' fullname='com.googlecode.flexxb.json.annotation:JSONMember/useOwnerAlias' isStatic='false' isFinal='true' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[
+
+		 Get a flag to signal wether to use the owner's alias or not
+
+		 ]]></description>
+<return><![CDATA[true if it must use the owner's alias, false otherwise
+
+		 
+		 ]]></return>
+</method>
+<method name='alias' fullname='com.googlecode.flexxb.json.annotation:JSONMember/alias/get' isStatic='false' isFinal='true' isOverride='false'  result_type='String'>
+</method>
+<field name='_alias' fullname='com.googlecode.flexxb.json.annotation:JSONMember/private:_alias' type='String' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.annotation.null' fullname='com.googlecode.flexxb.json.annotation.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONObject' fullname='com.googlecode.flexxb.json.annotation:JSONObject' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\annotation\JSONObject.as' namespace='com.googlecode.flexxb.json.annotation' access='public' baseclass='com.googlecode.flexxb.json.annotation:JSONMember' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONObject' fullname='com.googlecode.flexxb.json.annotation:JSONObject/JSONObject' isStatic='false' isFinal='false' isOverride='false'  param_names='descriptor' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='*'>
+</method>
+<method name='getFromCache' fullname='com.googlecode.flexxb.json.annotation:JSONObject/getFromCache/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[
+
+		 Get getFromCache flag
+
+		 ]]></description>
+<return><![CDATA[
+		 
+		 ]]></return>
+</method>
+<method name='getRuntimeType' fullname='com.googlecode.flexxb.json.annotation:JSONObject/getRuntimeType/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[
+
+		 
+		 ]]></description>
+<return><![CDATA[
+		 
+		 ]]></return>
+</method>
+<method name='parse' fullname='com.googlecode.flexxb.json.annotation:JSONObject/protected:parse' isStatic='false' isFinal='false' isOverride='true'  param_names='metadata' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='void'>
+</method>
+<method name='annotationName' fullname='com.googlecode.flexxb.json.annotation:JSONObject/annotationName/get' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<method name='serializePartialElement' fullname='com.googlecode.flexxb.json.annotation:JSONObject/serializePartialElement/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[
+
+		 Get serializePartialElement flag
+
+		 ]]></description>
+<return><![CDATA[
+		 
+		 ]]></return>
+</method>
+<field name='NAME' fullname='com.googlecode.flexxb.json.annotation:JSONObject/NAME' type='String' isStatic='true' isConst='true' defaultValue='JSONObject' >
+</field>
+<field name='_getFromCache' fullname='com.googlecode.flexxb.json.annotation:JSONObject/protected:_getFromCache' type='Boolean' isStatic='false' isConst='false' >
+<description><![CDATA[
+
+		 ]]></description>
+<private><![CDATA[]]></private>
+</field>
+<field name='_getRuntimeType' fullname='com.googlecode.flexxb.json.annotation:JSONObject/protected:_getRuntimeType' type='Boolean' isStatic='false' isConst='false' >
+<description><![CDATA[
+
+		 private
+
+		 ]]></description>
+</field>
+<field name='_serializePartialElement' fullname='com.googlecode.flexxb.json.annotation:JSONObject/protected:_serializePartialElement' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.annotation.null' fullname='com.googlecode.flexxb.json.annotation.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONField' fullname='com.googlecode.flexxb.json.annotation:JSONField' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\annotation\JSONField.as' namespace='com.googlecode.flexxb.json.annotation' access='public' baseclass='com.googlecode.flexxb.json.annotation:JSONMember' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONField' fullname='com.googlecode.flexxb.json.annotation:JSONField/JSONField' isStatic='false' isFinal='false' isOverride='false'  param_names='descriptor' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='*'>
+</method>
+<method name='annotationName' fullname='com.googlecode.flexxb.json.annotation:JSONField/annotationName/get' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<field name='NAME' fullname='com.googlecode.flexxb.json.annotation:JSONField/NAME' type='String' isStatic='true' isConst='true' defaultValue='JSONField' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.annotation.null' fullname='com.googlecode.flexxb.json.annotation.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONArray' fullname='com.googlecode.flexxb.json.annotation:JSONArray' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\annotation\JSONArray.as' namespace='com.googlecode.flexxb.json.annotation' access='public' baseclass='com.googlecode.flexxb.json.annotation:JSONMember' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONArray' fullname='com.googlecode.flexxb.json.annotation:JSONArray/JSONArray' isStatic='false' isFinal='false' isOverride='false'  param_names='descriptor' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='*'>
+</method>
+<method name='determineElementType' fullname='com.googlecode.flexxb.json.annotation:JSONArray/private:determineElementType' isStatic='false' isFinal='false' isOverride='false'  param_names='metadata' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='Class'>
+</method>
+<method name='parse' fullname='com.googlecode.flexxb.json.annotation:JSONArray/protected:parse' isStatic='false' isFinal='false' isOverride='true'  param_names='metadata' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='void'>
+</method>
+<method name='annotationName' fullname='com.googlecode.flexxb.json.annotation:JSONArray/annotationName/get' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<method name='memberName' fullname='com.googlecode.flexxb.json.annotation:JSONArray/memberName/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+</method>
+<method name='memberType' fullname='com.googlecode.flexxb.json.annotation:JSONArray/memberType/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Class'>
+</method>
+<field name='NAME' fullname='com.googlecode.flexxb.json.annotation:JSONArray/NAME' type='String' isStatic='true' isConst='true' defaultValue='JSONArray' >
+</field>
+<field name='_memberName' fullname='com.googlecode.flexxb.json.annotation:JSONArray/private:_memberName' type='String' isStatic='false' isConst='false' >
+</field>
+<field name='_memberType' fullname='com.googlecode.flexxb.json.annotation:JSONArray/private:_memberType' type='Class' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.annotation.null' fullname='com.googlecode.flexxb.json.annotation.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONClass' fullname='com.googlecode.flexxb.json.annotation:JSONClass' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\annotation\JSONClass.as' namespace='com.googlecode.flexxb.json.annotation' access='public' baseclass='com.googlecode.flexxb.annotation.contract:BaseClass' interfaces='com.googlecode.flexxb.annotation.contract:IClassAnnotation' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONClass' fullname='com.googlecode.flexxb.json.annotation:JSONClass/JSONClass' isStatic='false' isFinal='false' isOverride='false'  param_names='descriptor' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='*'>
+</method>
+<method name='getAdditionalSortFields' fullname='com.googlecode.flexxb.json.annotation:JSONClass/getAdditionalSortFields' isStatic='false' isFinal='false' isOverride='true'  result_type='Array'>
+</method>
+<method name='parse' fullname='com.googlecode.flexxb.json.annotation:JSONClass/protected:parse' isStatic='false' isFinal='false' isOverride='true'  param_names='descriptor' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='void'>
+</method>
+<method name='alias' fullname='com.googlecode.flexxb.json.annotation:JSONClass/alias/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		 Get the alias
+
+		 ]]></description>
+<return><![CDATA[annotation alias
+
+		 
+		 ]]></return>
+</method>
+<method name='annotationName' fullname='com.googlecode.flexxb.json.annotation:JSONClass/annotationName/get' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<field name='NAME' fullname='com.googlecode.flexxb.json.annotation:JSONClass/NAME' type='String' isStatic='true' isConst='true' defaultValue='JSONClass' >
+</field>
+<field name='_alias' fullname='com.googlecode.flexxb.json.annotation:JSONClass/private:_alias' type='String' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.util.null' fullname='com.googlecode.flexxb.json.util.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='StringBuilder' fullname='com.googlecode.flexxb.json.util:StringBuilder' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\util\StringBuilder.as' namespace='com.googlecode.flexxb.json.util' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='StringBuilder' fullname='com.googlecode.flexxb.json.util:StringBuilder/StringBuilder' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+</method>
+<method name='append' fullname='com.googlecode.flexxb.json.util:StringBuilder/append' isStatic='false' isFinal='false' isOverride='false'  param_names='data' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[data
+
+		 
+
+		 ]]></param>
+</method>
+<method name='toString' fullname='com.googlecode.flexxb.json.util:StringBuilder/toString' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<field name='content' fullname='com.googlecode.flexxb.json.util:StringBuilder/private:content' type='String' isStatic='false' isConst='false' defaultValue='' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.null' fullname='com.googlecode.flexxb.json.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONVersionExtractor' fullname='com.googlecode.flexxb.json:JSONVersionExtractor' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\JSONVersionExtractor.as' namespace='com.googlecode.flexxb.json' access='public' baseclass='Object' interfaces='com.googlecode.flexxb.core:IVersionExtractor' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 This class is used to determine the version of an incoming document. The version
+
+	 is considerent consistent throughout the entire document and as such the engine 
+
+	 will extract it once per received document. By default, the version extractor 
+
+	 searches for an attribute named "version".<br/>
+
+	 If you require another kind of processing for versions you should extend this 
+
+	 class and override the <code>getVersion</code> method which returns a String and 
+
+	 accepts the xml document as source
+
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONVersionExtractor' fullname='com.googlecode.flexxb.json:JSONVersionExtractor/JSONVersionExtractor' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		 Constructor
+
+		 
+
+		 ]]></description>
+</method>
+<method name='getVersion' fullname='com.googlecode.flexxb.json:JSONVersionExtractor/getVersion' isStatic='false' isFinal='false' isOverride='false'  param_names='source' param_types='Object' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+
+		 Method that returns the version string located in the source document. Override this
+
+		 method to implement different extraction algorithms.
+
+		 ]]></description>
+<param><![CDATA[source xml document
+
+		 ]]></param>
+<return><![CDATA[string value representing the document's version
+
+		 
+
+		 ]]></return>
+</method>
+<classRec name='JSONEntity' fullname='com.googlecode.flexxb.json:JSONEntity' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\JSONEntity.as' namespace='com.googlecode.flexxb.json' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[User
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONEntity' fullname='com.googlecode.flexxb.json:JSONEntity/JSONEntity' isStatic='false' isFinal='false' isOverride='false'  param_names='conf' param_types='com.googlecode.flexxb.json:JSONConfiguration' param_defaults='undefined' result_type='*'>
+<description><![CDATA[
+
+		 
+
+		 
+
+		 ]]></description>
+</method>
+<method name='fromString' fullname='com.googlecode.flexxb.json:JSONEntity/fromString' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='String' param_defaults='undefined' result_type='Object'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[value
+
+		 ]]></param>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='toString' fullname='com.googlecode.flexxb.json:JSONEntity/toString' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='strict' fullname='com.googlecode.flexxb.json:JSONEntity/private:strict/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='target' fullname='com.googlecode.flexxb.json:JSONEntity/target/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Object'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='target' fullname='com.googlecode.flexxb.json:JSONEntity/target/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='Object' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[value
+
+		 
+
+		 ]]></param>
+</method>
+<field name='_target' fullname='com.googlecode.flexxb.json:JSONEntity/private:_target' type='Object' isStatic='false' isConst='false' >
+</field>
+<field name='config' fullname='com.googlecode.flexxb.json:JSONEntity/private:config' type='com.googlecode.flexxb.json:JSONConfiguration' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.null' fullname='com.googlecode.flexxb.json.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONConfiguration' fullname='com.googlecode.flexxb.json:JSONConfiguration' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\JSONConfiguration.as' namespace='com.googlecode.flexxb.json' access='public' baseclass='com.googlecode.flexxb.core:Configuration' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONConfiguration' fullname='com.googlecode.flexxb.json:JSONConfiguration/JSONConfiguration' isStatic='false' isFinal='false' isOverride='false'  param_names='parent' param_types='com.googlecode.flexxb.core:Configuration' param_defaults='null' result_type='*'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[parent
+
+		 
+
+		 ]]></param>
+</method>
+<method name='copyFrom' fullname='com.googlecode.flexxb.json:JSONConfiguration/protected:copyFrom' isStatic='false' isFinal='false' isOverride='true'  param_names='source;target' param_types='com.googlecode.flexxb.core:Configuration;com.googlecode.flexxb.core:Configuration' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='getInstance' fullname='com.googlecode.flexxb.json:JSONConfiguration/protected:getInstance' isStatic='false' isFinal='false' isOverride='true'  result_type='com.googlecode.flexxb.core:Configuration'>
+</method>
+<field name='getResponseTypeByName' fullname='com.googlecode.flexxb.json:JSONConfiguration/getResponseTypeByName' type='Boolean' isStatic='false' isConst='false' defaultValue='true' >
+<description><![CDATA[
+
+		 Determine the type of the object the response will be deserialised into
+
+		 by the name associated with the value in the parent.
+
+		 ]]></description>
+</field>
+<field name='strict' fullname='com.googlecode.flexxb.json:JSONConfiguration/strict' type='Boolean' isStatic='false' isConst='false' >
+<description><![CDATA[
+
+		 Flag indicating if the decoder should strictly adhere to the JSON standard or not. 
+
+		 The default of <code>true</code> throws errors if the format does not match the JSON 
+
+		 syntax exactly. Pass <code>false</code> to allow for non-properly-formatted JSON 
+
+		 strings to be decoded with more leniancy.
+
+		 ]]></description>
+</field>
+<packageRec name='com.googlecode.flexxb.json.null' fullname='com.googlecode.flexxb.json.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONDescriptionContext' fullname='com.googlecode.flexxb.json:JSONDescriptionContext' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\JSONDescriptionContext.as' namespace='com.googlecode.flexxb.json' access='public' baseclass='com.googlecode.flexxb.core:DescriptionContext' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONDescriptionContext' fullname='com.googlecode.flexxb.json:JSONDescriptionContext/JSONDescriptionContext' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+</method>
+<method name='handleDescriptors' fullname='com.googlecode.flexxb.json:JSONDescriptionContext/handleDescriptors' isStatic='false' isFinal='false' isOverride='true'  param_names='descriptors' param_types='Array' param_defaults='undefined' result_type='void'>
+</method>
+<method name='performInitialization' fullname='com.googlecode.flexxb.json:JSONDescriptionContext/protected:performInitialization' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<classRec name='JSONApiClass' fullname='com.googlecode.flexxb.json.api:JSONApiClass' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\api\JSONApiClass.as' namespace='com.googlecode.flexxb.json.api' access='public' baseclass='com.googlecode.flexxb.api:FxClass' isFinal='true' isDynamic='false' >
+</classRec>
+<method name='JSONApiClass' fullname='com.googlecode.flexxb.json.api:JSONApiClass/JSONApiClass' isStatic='false' isFinal='false' isOverride='false'  param_names='type' param_types='Class' param_defaults='undefined' result_type='*'>
+</method>
+<classRec name='JSONApiField' fullname='com.googlecode.flexxb.json.api:JSONApiField' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\api\JSONApiField.as' namespace='com.googlecode.flexxb.json.api' access='public' baseclass='com.googlecode.flexxb.api:FxMember' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='JSONApiField' fullname='com.googlecode.flexxb.json.api:JSONApiField/JSONApiField' isStatic='false' isFinal='false' isOverride='false'  param_names='field' param_types='com.googlecode.flexxb.api:FxField' param_defaults='undefined' result_type='*'>
+</method>
+<classRec name='JSONApiObject' fullname='com.googlecode.flexxb.json.api:JSONApiObject' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\api\JSONApiObject.as' namespace='com.googlecode.flexxb.json.api' access='public' baseclass='com.googlecode.flexxb.api:FxMember' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='JSONApiObject' fullname='com.googlecode.flexxb.json.api:JSONApiObject/JSONApiObject' isStatic='false' isFinal='false' isOverride='false'  param_names='field' param_types='com.googlecode.flexxb.api:FxField' param_defaults='undefined' result_type='*'>
+</method>
+<packageRec name='com.googlecode.flexxb.json.serializer.null' fullname='com.googlecode.flexxb.json.serializer.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONArraySerializer' fullname='com.googlecode.flexxb.json.serializer:JSONArraySerializer' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\serializer\JSONArraySerializer.as' namespace='com.googlecode.flexxb.json.serializer' access='public' baseclass='com.googlecode.flexxb.serializer:BaseSerializer' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONArraySerializer' fullname='com.googlecode.flexxb.json.serializer:JSONArraySerializer/JSONArraySerializer' isStatic='false' isFinal='false' isOverride='false'  param_names='context' param_types='com.googlecode.flexxb.core:DescriptionContext' param_defaults='undefined' result_type='*'>
+</method>
+<method name='deserialize' fullname='com.googlecode.flexxb.json.serializer:JSONArraySerializer/deserialize' isStatic='false' isFinal='false' isOverride='true'  param_names='serializedData;annotation;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined' result_type='Object'>
+</method>
+<method name='serialize' fullname='com.googlecode.flexxb.json.serializer:JSONArraySerializer/serialize' isStatic='false' isFinal='false' isOverride='true'  param_names='object;annotation;serializedData;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;Object;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined;undefined' result_type='Object'>
+</method>
+<field name='LOG' fullname='com.googlecode.flexxb.json.serializer:JSONArraySerializer/private:LOG' type='com.googlecode.flexxb.util.log:ILogger' isStatic='true' isConst='true' defaultValue='unknown' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.serializer.null' fullname='com.googlecode.flexxb.json.serializer.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONObjectSerializer' fullname='com.googlecode.flexxb.json.serializer:JSONObjectSerializer' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\serializer\JSONObjectSerializer.as' namespace='com.googlecode.flexxb.json.serializer' access='public' baseclass='com.googlecode.flexxb.serializer:BaseSerializer' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONObjectSerializer' fullname='com.googlecode.flexxb.json.serializer:JSONObjectSerializer/JSONObjectSerializer' isStatic='false' isFinal='false' isOverride='false'  param_names='context' param_types='com.googlecode.flexxb.core:DescriptionContext' param_defaults='undefined' result_type='*'>
+</method>
+<method name='deserialize' fullname='com.googlecode.flexxb.json.serializer:JSONObjectSerializer/deserialize' isStatic='false' isFinal='false' isOverride='true'  param_names='serializedData;annotation;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined' result_type='Object'>
+</method>
+<method name='serialize' fullname='com.googlecode.flexxb.json.serializer:JSONObjectSerializer/serialize' isStatic='false' isFinal='false' isOverride='true'  param_names='object;annotation;serializedData;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;Object;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined;undefined' result_type='Object'>
+</method>
+<field name='LOG' fullname='com.googlecode.flexxb.json.serializer:JSONObjectSerializer/private:LOG' type='com.googlecode.flexxb.util.log:ILogger' isStatic='true' isConst='true' defaultValue='unknown' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.serializer.null' fullname='com.googlecode.flexxb.json.serializer.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONFieldSerializer' fullname='com.googlecode.flexxb.json.serializer:JSONFieldSerializer' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\serializer\JSONFieldSerializer.as' namespace='com.googlecode.flexxb.json.serializer' access='public' baseclass='com.googlecode.flexxb.serializer:BaseSerializer' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[aciobanu
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='JSONFieldSerializer' fullname='com.googlecode.flexxb.json.serializer:JSONFieldSerializer/JSONFieldSerializer' isStatic='false' isFinal='false' isOverride='false'  param_names='context' param_types='com.googlecode.flexxb.core:DescriptionContext' param_defaults='undefined' result_type='*'>
+</method>
+<method name='deserialize' fullname='com.googlecode.flexxb.json.serializer:JSONFieldSerializer/deserialize' isStatic='false' isFinal='false' isOverride='true'  param_names='serializedData;annotation;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined' result_type='Object'>
+</method>
+<method name='serialize' fullname='com.googlecode.flexxb.json.serializer:JSONFieldSerializer/serialize' isStatic='false' isFinal='false' isOverride='true'  param_names='object;annotation;serializedData;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;Object;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined;undefined' result_type='Object'>
+</method>
+<field name='LOG' fullname='com.googlecode.flexxb.json.serializer:JSONFieldSerializer/private:LOG' type='com.googlecode.flexxb.util.log:ILogger' isStatic='true' isConst='true' defaultValue='unknown' >
+</field>
+<packageRec name='com.googlecode.flexxb.json.serializer.null' fullname='com.googlecode.flexxb.json.serializer.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+ 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='JSONClassSerializer' fullname='com.googlecode.flexxb.json.serializer:JSONClassSerializer' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB_JSON\src\main\flex\com\googlecode\flexxb\json\serializer\JSONClassSerializer.as' namespace='com.googlecode.flexxb.json.serializer' access='public' baseclass='com.googlecode.flexxb.serializer:BaseSerializer' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='JSONClassSerializer' fullname='com.googlecode.flexxb.json.serializer:JSONClassSerializer/JSONClassSerializer' isStatic='false' isFinal='false' isOverride='false'  param_names='context' param_types='com.googlecode.flexxb.core:DescriptionContext' param_defaults='undefined' result_type='*'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[context
+
+		 
+
+		 ]]></param>
+</method>
+<method name='deserialize' fullname='com.googlecode.flexxb.json.serializer:JSONClassSerializer/deserialize' isStatic='false' isFinal='false' isOverride='true'  param_names='serializedData;annotation;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined' result_type='Object'>
+</method>
+<method name='serialize' fullname='com.googlecode.flexxb.json.serializer:JSONClassSerializer/serialize' isStatic='false' isFinal='false' isOverride='true'  param_names='object;annotation;serializedData;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;Object;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined;undefined' result_type='Object'>
+</method>
+<field name='LOG' fullname='com.googlecode.flexxb.json.serializer:JSONClassSerializer/private:LOG' type='com.googlecode.flexxb.util.log:ILogger' isStatic='true' isConst='true' defaultValue='unknown' >
+</field>
+</asdoc>
