@@ -1,0 +1,52 @@
+<overviews> 
+    <packages>
+        <package name="com.googlecode.flexxb.json"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
+        <package name="com.googlecode.flexxb.json.annotation"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
+        <package name="com.googlecode.flexxb.json.serializer"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
+        <package name="com.googlecode.flexxb.json.util"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Holds FlexXB logging system.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   Holds FlexXB logging system. The logging system allows sending debug messages to the trace window.  
+                ]]> 
+            </description> 
+        </package>
+    </packages> 
+</overviews>

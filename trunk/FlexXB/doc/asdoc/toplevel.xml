@@ -9118,6 +9118,8 @@
 
 		 ]]></return>
 </method>
+<method name='nameSpace' fullname='com.googlecode.flexxb.xml.annotation:XmlMember/nameSpace/get' isStatic='false' isFinal='false' isOverride='true'  result_type='Namespace'>
+</method>
 <method name='namespaceRef' fullname='com.googlecode.flexxb.xml.annotation:XmlMember/namespaceRef/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
 <description><![CDATA[
 
@@ -9991,105 +9993,6 @@
 
 	 ]]></return>
 </method>
-<packageRec name='com.googlecode.flexxb.serializer.null' fullname='com.googlecode.flexxb.serializer.null'>
-<description><![CDATA[
-
-   FlexXB - an annotation based xml serializer for Flex and Air applications
-
-   Copyright (C) 2008-2011 Alex Ciobanu
-
- 
-   Licensed under the Apache License, Version 2.0 (the "License");
-
-   you may not use this file except in compliance with the License.
-
-   You may obtain a copy of the License at
-
- 
-       http://www.apache.org/licenses/LICENSE-2.0
-
- 
-   Unless required by applicable law or agreed to in writing, software
-
-   distributed under the License is distributed on an "AS IS" BASIS,
-
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
-   See the License for the specific language governing permissions and
-
-   limitations under the License.
-
- ]]></description>
-</packageRec>
-<classRec name='BaseSerializer' fullname='com.googlecode.flexxb.serializer:BaseSerializer' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\serializer\BaseSerializer.as' namespace='com.googlecode.flexxb.serializer' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
-<description><![CDATA[
-
-	 
-
-	 ]]></description>
-<author><![CDATA[Alexutz
-
-	 
-
-	 ]]></author>
-</classRec>
-<method name='BaseSerializer' fullname='com.googlecode.flexxb.serializer:BaseSerializer/BaseSerializer' isStatic='false' isFinal='false' isOverride='false'  param_names='context' param_types='com.googlecode.flexxb.core:DescriptionContext' param_defaults='undefined' result_type='*'>
-</method>
-<method name='deserialize' fullname='com.googlecode.flexxb.serializer:BaseSerializer/deserialize' isStatic='false' isFinal='false' isOverride='false'  param_names='serializedData;annotation;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined' result_type='Object'>
-<description><![CDATA[
-
-		 Deserialize an xml into the appropiate AS3 object
-
-		 ]]></description>
-<param><![CDATA[xmlData Xml to be deserialized
-
-		 ]]></param>
-<param><![CDATA[annotation Annotation containing the conversion parameters
-
-		 ]]></param>
-<return><![CDATA[Generated object
-
-		 
-		 ]]></return>
-<serializer><![CDATA[
-		 ]]></serializer>
-</method>
-<method name='serialize' fullname='com.googlecode.flexxb.serializer:BaseSerializer/serialize' isStatic='false' isFinal='false' isOverride='false'  param_names='object;annotation;serializedData;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;Object;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined;undefined' result_type='Object'>
-<description><![CDATA[
-
-		 Serialize an object into a serialization format
-
-		 ]]></description>
-<param><![CDATA[object Object to be serialized
-
-		 ]]></param>
-<param><![CDATA[annotation Annotation containing the conversion parameters
-
-		 ]]></param>
-<param><![CDATA[serializedData Serialized data written so far
-
-		 ]]></param>
-<return><![CDATA[Generated serialized data
-
-		 
-		 ]]></return>
-<serializer><![CDATA[
-		 ]]></serializer>
-</method>
-<method name='context' fullname='com.googlecode.flexxb.serializer:BaseSerializer/protected:context/get' isStatic='false' isFinal='true' isOverride='false'  result_type='com.googlecode.flexxb.core:DescriptionContext'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<return><![CDATA[
-
-		 
-
-		 ]]></return>
-</method>
-<field name='_context' fullname='com.googlecode.flexxb.serializer:BaseSerializer/private:_context' type='com.googlecode.flexxb.core:DescriptionContext' isStatic='false' isConst='false' >
-</field>
 <packageRec name='com.googlecode.flexxb.xml.api.null' fullname='com.googlecode.flexxb.xml.api.null'>
 <description><![CDATA[
 
@@ -10891,6 +10794,105 @@
 <default><![CDATA[
 
 		 ]]></default>
+</field>
+<packageRec name='com.googlecode.flexxb.serializer.null' fullname='com.googlecode.flexxb.serializer.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='BaseSerializer' fullname='com.googlecode.flexxb.serializer:BaseSerializer' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\serializer\BaseSerializer.as' namespace='com.googlecode.flexxb.serializer' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+
+	 ]]></author>
+</classRec>
+<method name='BaseSerializer' fullname='com.googlecode.flexxb.serializer:BaseSerializer/BaseSerializer' isStatic='false' isFinal='false' isOverride='false'  param_names='context' param_types='com.googlecode.flexxb.core:DescriptionContext' param_defaults='undefined' result_type='*'>
+</method>
+<method name='deserialize' fullname='com.googlecode.flexxb.serializer:BaseSerializer/deserialize' isStatic='false' isFinal='false' isOverride='false'  param_names='serializedData;annotation;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined' result_type='Object'>
+<description><![CDATA[
+
+		 Deserialize an xml into the appropiate AS3 object
+
+		 ]]></description>
+<param><![CDATA[xmlData Xml to be deserialized
+
+		 ]]></param>
+<param><![CDATA[annotation Annotation containing the conversion parameters
+
+		 ]]></param>
+<return><![CDATA[Generated object
+
+		 
+		 ]]></return>
+<serializer><![CDATA[
+		 ]]></serializer>
+</method>
+<method name='serialize' fullname='com.googlecode.flexxb.serializer:BaseSerializer/serialize' isStatic='false' isFinal='false' isOverride='false'  param_names='object;annotation;serializedData;serializer' param_types='Object;com.googlecode.flexxb.annotation.contract:IAnnotation;Object;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined;undefined' result_type='Object'>
+<description><![CDATA[
+
+		 Serialize an object into a serialization format
+
+		 ]]></description>
+<param><![CDATA[object Object to be serialized
+
+		 ]]></param>
+<param><![CDATA[annotation Annotation containing the conversion parameters
+
+		 ]]></param>
+<param><![CDATA[serializedData Serialized data written so far
+
+		 ]]></param>
+<return><![CDATA[Generated serialized data
+
+		 
+		 ]]></return>
+<serializer><![CDATA[
+		 ]]></serializer>
+</method>
+<method name='context' fullname='com.googlecode.flexxb.serializer:BaseSerializer/protected:context/get' isStatic='false' isFinal='true' isOverride='false'  result_type='com.googlecode.flexxb.core:DescriptionContext'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<field name='_context' fullname='com.googlecode.flexxb.serializer:BaseSerializer/private:_context' type='com.googlecode.flexxb.core:DescriptionContext' isStatic='false' isConst='false' >
 </field>
 <packageRec name='com.googlecode.flexxb.xml.serializer.null' fullname='com.googlecode.flexxb.xml.serializer.null'>
 <description><![CDATA[
