@@ -58,6 +58,8 @@ There are two ways namespaces can be defined on the metadata used to decorate a 
  * Class namespace - defined in the [XmlAnnotations#XmlClass XmlClass] annotation and it is the default namespace used for all fields in the class. Spcifying it is done by setting the {{{prefix}}} and {{{uri}}} attributes of the [XmlAnnotations#XmlClass XmlClass] annotation.
  * Field namespace - is used by specific fields within the class; multiple fields can reference the same namespace. Field namespaces are defined by first declaring them at class level with [XmlAnnotations#Namespace Namespace] annotation then referencing its prefix where needed. Field namespaces' prefixes should be unique for that class. 
 
+*Update*: On xml member annotations you can set the namespace attribute to "" (empty string) to use the local (default) namespace. This is useful when your class defines a global namespace in the XmlClass but you need one or more of its fields to be rendered under the local one.
+
 Eg:
 {{{
         [Bindable]
