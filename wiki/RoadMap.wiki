@@ -26,5 +26,5 @@ Here is a roadmap for FlexXB deliveries. _For the moment it's a very rough estim
 ||   2.0 || 09-Jan-2011|| [Features FXB-021]  || Delivered||
 ||   2.0.1 || 20-Feb-2011|| Issue 38, Issue 39  || Delivered||
 ||   2.1.0 || 08-Apr-2011|| Issue 40, Issue 41, Issue 42, Issue 43, Issue 44, Issue 45, Issue 46 || Delivered ||
-||   2.2.0 || 27-Jul-2011||Issue 47, Issue 48 || _To be delivered_||
+||   2.2.0 || 27-Jul-2011||Issue 47, Issue 48 || Delivered||
 ||   2.3.0 || _To be decided_|| [Features FXB-22] || _To be delivered_||
