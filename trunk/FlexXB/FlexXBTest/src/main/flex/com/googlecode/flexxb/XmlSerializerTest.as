@@ -31,6 +31,9 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
 	import com.googlecode.testData.arrayIssue.IData;
+	import com.googlecode.testData.errorTest.TestVO;
+	import com.googlecode.testData.errorTest.testVO6;
+	import com.googlecode.testData.errorTest.testVO7;
 	import com.googlecode.testData.idref.Data;
 	import com.googlecode.testData.idref.Node;
 	import com.googlecode.testData.xsi.ItemA;
@@ -282,6 +285,20 @@ package com.googlecode.flexxb {
 			assertThat(ItemA(copy.property).fieldA, equalTo(ItemA(item.property).fieldA));
 			assertThat(copy.list[0], instanceOf(ItemA));
 			assertThat(copy.list[1], instanceOf(ItemB));
+		}
+		[Test]
+		public function checkError() : void{
+			var vo : TestVO = new TestVO();
+			vo.intTest = new testVO6();
+			testVO6(vo.intTest).test6Inst = "6test6";
+			vo.intTest1 = new testVO7();
+			testVO7(vo.intTest1).test7Inst = "7test7";
+			var xml : XML = FlexXBEngine.instance.serialize(vo);
+			var copy : TestVO = FlexXBEngine.instance.deserialize(xml, TestVO);
+			assertThat(copy.intTest, instanceOf(testVO6));
+			assertThat(testVO6(vo.intTest).test6Inst, equalTo("6test6"));
+			assertThat(copy.intTest1, instanceOf(testVO7));
+			assertThat(testVO7(vo.intTest1).test7Inst, equalTo("7test7"));
 		}
 	}
 }

@@ -92,6 +92,19 @@ package com.googlecode.flexxb.xml.serializer {
 		}
 		
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializationCore) : Object {
+			// AFAIK we can have a null xmlName only when getRuntimeType is true and the element 
+			//has a virtual path so the engine can detect the wrapper
+			if(xmlName == null && XmlElement(element).getRuntimeType){
+				if(element.isPath()){
+					if(xmlData.children().length() > 0){
+						xmlName = XmlDescriptionContext(context).getXmlName(XmlDescriptionContext(context).getIncomingType(xmlData.children()[0]));
+					}else{
+						return null;
+					}
+				}else{
+					//??? Don't know yet what should happen in this case
+				}
+			}
 			if(serializer.configuration.enableLogging){
 				LOG.info("Deserializing element <<{0}>> to field {1}", xmlName, element.name);
 			}
