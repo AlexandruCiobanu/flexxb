@@ -20,6 +20,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.xml.XmlConfiguration;
 	import com.googlecode.flexxb.xml.util.XmlUtils;
 	import com.googlecode.testData.AnotherVP;
+	import com.googlecode.testData.ArrayListItem;
 	import com.googlecode.testData.ConstructorRefObj;
 	import com.googlecode.testData.CustomSerializabeObject;
 	import com.googlecode.testData.List;
@@ -43,6 +44,7 @@ package com.googlecode.flexxb {
 	import flash.net.registerClassAlias;
 	
 	import mx.collections.ArrayCollection;
+	import mx.collections.ArrayList;
 	import mx.utils.ObjectUtil;
 	
 	import org.flexunit.Assert;
@@ -54,6 +56,7 @@ package com.googlecode.flexxb {
 	import org.flexunit.asserts.assertTrue;
 	import org.hamcrest.object.equalTo;
 	import org.hamcrest.object.instanceOf;
+	import org.hamcrest.object.notNullValue;
 	
 	public class XmlSerializerTest {
 		
@@ -299,6 +302,20 @@ package com.googlecode.flexxb {
 			assertThat(testVO6(vo.intTest).test6Inst, equalTo("6test6"));
 			assertThat(copy.intTest1, instanceOf(testVO7));
 			assertThat(testVO7(vo.intTest1).test7Inst, equalTo("7test7"));
+		}
+		
+		[Test]
+		public function testArrayListSerialization() : void{
+			var obj : ArrayListItem = new ArrayListItem();
+			obj.id = "4";
+			obj.list = new ArrayList(["one", "three", "two"]);
+			var xml : XML = FlexXBEngine.instance.serialize(obj);
+			var copy : ArrayListItem = FlexXBEngine.instance.deserialize(xml, ArrayListItem);
+			assertThat(copy.list, notNullValue());
+			assertThat(copy.list.length, equalTo(3));
+			assertThat(copy.list.getItemAt(0), equalTo(obj.list.getItemAt(0)));
+			assertThat(copy.list.getItemAt(1), equalTo(obj.list.getItemAt(1)));
+			assertThat(copy.list.getItemAt(2), equalTo(obj.list.getItemAt(2)));
 		}
 	}
 }
