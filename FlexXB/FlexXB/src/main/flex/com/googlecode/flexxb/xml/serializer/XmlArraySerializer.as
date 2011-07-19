@@ -17,6 +17,7 @@
 package com.googlecode.flexxb.xml.serializer {
 	import com.googlecode.flexxb.core.DescriptionContext;
 	import com.googlecode.flexxb.core.SerializationCore;
+	import com.googlecode.flexxb.util.isArrayList;
 	import com.googlecode.flexxb.util.isVector;
 	import com.googlecode.flexxb.util.log.ILogger;
 	import com.googlecode.flexxb.util.log.LogFactory;
@@ -31,6 +32,7 @@ package com.googlecode.flexxb.xml.serializer {
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
+	import mx.collections.IList;
 	import mx.collections.ListCollectionView;
 
 	/**
@@ -53,6 +55,9 @@ package com.googlecode.flexxb.xml.serializer {
 			var result : XML = <xml />;
 			var xmlArray : XmlArray = annotation as XmlArray;
 			var child : XML;
+			if(isArrayList(object)){
+				object = object.source;
+			}
 			for each (var member : Object in object) {
 				if(xmlArray.isIDRef){
 					child = XML(serializer.getObjectId(member));
@@ -164,9 +169,9 @@ package com.googlecode.flexxb.xml.serializer {
 		private function addMembersToResult(members : Array, result : Object) : void {
 			if (result is Array) {
 				(result as Array).push.apply(null, members);
-			} else if (result is ArrayCollection) {
-				ArrayCollection(result).source = members;
-			} else if (result is ListCollectionView) {
+			} else if (result is ArrayCollection || isArrayList(result)) {
+				result.source = members;
+			} else if (result is ListCollectionView) {	
 				ListCollectionView(result).list = new ArrayList(members);
 			}else if(isVector(result)){
 				result.push.apply(null, members);

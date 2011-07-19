@@ -24,6 +24,8 @@
 			import com.googlecode.flexxb.CircularReferenceTest;
 			import com.googlecode.flexxb.XmlSerializerTest;
 			
+			import mx.collections.ArrayList;
+			
 			import org.flexunit.listeners.UIListener;
 			import org.flexunit.runner.FlexUnitCore;
 		
