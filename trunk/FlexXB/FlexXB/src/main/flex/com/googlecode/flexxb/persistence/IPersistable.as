@@ -30,12 +30,16 @@ package com.googlecode.flexxb.persistence {
 	 *
 	 */
 	public interface IPersistable {
+		
+		[Bindable("modifiedChange")]
 		/**
 		 * Get the object's status: has it been modified since the previous commit?
 		 * @return  true/false
 		 *
 		 */
 		function get modified() : Boolean;
+		
+		[Bindable("editModeChange")]
 		/**
 		 * The editMode flag will cause the object not to issue PropertyChangeEvents whenever 
 		 * one of its fields is changed. This means that components bound to that object will 

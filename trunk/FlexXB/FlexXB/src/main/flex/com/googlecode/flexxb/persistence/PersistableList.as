@@ -60,11 +60,8 @@ package com.googlecode.flexxb.persistence {
 			_watchItems = watchChildChanges;
 		}
 
-		/**
-		 *
-		 * @see IPersistable#editMode()
-		 *
-		 */
+		[Bindable("editModeChange")]
+		
 		public final function get editMode() : Boolean {
 			return _editMode;
 		}
@@ -76,6 +73,7 @@ package com.googlecode.flexxb.persistence {
 		 */
 		public final function setEditMode(mode : Boolean) : void {
 			_editMode = mode;
+			dispatchEvent(new Event("editModeChange"));
 		}
 
 		/**
@@ -175,18 +173,12 @@ package com.googlecode.flexxb.persistence {
 			super.source = s;
 		}
 
-		/**
-		 * @see IPersistable#modified()
-		 *
-		 */
+		[Bindable("modifiedChange")]
+		
 		public final function get modified() : Boolean {
 			return _modified || (_watchItems && areItemsModified());
 		}
 
-		/**
-		 * @see IPersistable#commit()
-		 *
-		 */
 		public final function commit() : void {
 			if (modified) {
 
@@ -358,6 +350,7 @@ package com.googlecode.flexxb.persistence {
 				}
 			}
 			listen = true;
+			dispatchEvent(new Event("modifiedChange"));
 		}
 
 		/**

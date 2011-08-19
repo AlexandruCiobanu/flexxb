@@ -64,12 +64,14 @@ package com.googlecode.flexxb.persistence {
 			listen = listenMode;
 		}
 		
+		[Bindable("editModeChange")]
 		public final function get editMode() : Boolean {
 			return _editMode;
 		}
 
 		public final function setEditMode(mode : Boolean) : void {
 			_editMode = mode;
+			dispatchEvent(new Event("editModeChange"));
 			//try and set the edit mode for the connected objects also
 			if (hasWatchedFields()) {
 				var value : Object;
@@ -82,6 +84,7 @@ package com.googlecode.flexxb.persistence {
 			}
 		}
 		
+		[Bindable("modifiedChange")]
 		public final function get modified() : Boolean {
 			return _modified || areWatchedFieldsModified();
 		}
@@ -289,6 +292,7 @@ package com.googlecode.flexxb.persistence {
 				}
 			}
 			listen = true;
+			dispatchEvent(new Event("modifiedChange"));
 		}
 
 		private function onValueChanged(event : PropertyChangeEvent) : void {
