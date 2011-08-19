@@ -80,7 +80,7 @@ package com.googlecode.flexxb.core {
 			if (hasConverter(clasz)) {
 				return getConverter(clasz).fromString(value);
 			}
-			if (value == null || value == "")
+			if (value == null)
 				return null;
 			if (clasz == Boolean) {
 				return (value && value.toLowerCase() == "true");
