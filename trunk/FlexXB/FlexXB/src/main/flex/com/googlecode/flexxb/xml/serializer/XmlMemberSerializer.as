@@ -85,6 +85,7 @@ package com.googlecode.flexxb.xml.serializer {
 			}
 
 			if (xmlElement == null) {
+				signalMissingField();
 				return null;
 			}
 			

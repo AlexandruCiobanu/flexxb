@@ -16,9 +16,11 @@
  */
 package com.googlecode.flexxb.serializer
 {
-	import com.googlecode.flexxb.core.SerializationCore;
 	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 	import com.googlecode.flexxb.core.DescriptionContext;
+	import com.googlecode.flexxb.core.MissingFieldDataException;
+	import com.googlecode.flexxb.core.SerializationCore;
+
 	/**
 	 * 
 	 * @author Alexutz
@@ -53,6 +55,12 @@ package com.googlecode.flexxb.serializer
 		 */
 		public function deserialize(serializedData : Object, annotation : IAnnotation, serializer : SerializationCore) : Object{
 			return null;
+		}		
+				
+		protected final function signalMissingField() : void{
+			if(context.configuration.ignoreMissingContent){
+				throw new MissingFieldDataException();
+			}				
 		}
 		/**
 		 * 

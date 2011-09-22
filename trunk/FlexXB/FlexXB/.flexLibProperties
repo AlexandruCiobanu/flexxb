@@ -106,6 +106,7 @@
     <classEntry path="com.googlecode.flexxb.xml.util.cdata"/>
     <classEntry path="com.googlecode.flexxb.annotation.contract.BaseClass"/>
     <classEntry path="com.googlecode.flexxb.xml.util.XmlUtils"/>
+    <classEntry path="com.googlecode.flexxb.core.MissingFieldDataException"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="metadata.xml" sourcePath="metadata.xml"/>
