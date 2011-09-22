@@ -46,7 +46,16 @@ package com.googlecode.flexxb.core {
 		 * Reference to a version extractor instance used to determine automatically the version of
 		 * an serialized document.
 		 */		
-		public var versionExtractor : IVersionExtractor;
+		public var versionExtractor : IVersionExtractor;		
+		/**
+		 * Set this flag to true if you want the engine to ignore missing content. By default this field is set on false.
+		 * By default FlexXB considers a missing serialized content representing a field value as being null and sets null as a value
+		 * for the appropriate field in the  ActionScript object. This is particularly usefull when you need to perform subsequent 
+		 * calls in order to get pieces of data that will in the end construct the final object. By default, after each call, the 
+		 * missing fields in the serialized data will be set to null and such the object will only have the values specified in the last call. 
+		 * Set this flag to true in order to ignore missing values and not set null into the appropiate fields.     
+		 */		
+		public var ignoreMissingContent : Boolean = false;
 		/**
 		 * Constructor
 		 *

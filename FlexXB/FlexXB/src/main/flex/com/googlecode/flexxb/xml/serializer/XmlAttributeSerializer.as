@@ -56,6 +56,7 @@ package com.googlecode.flexxb.xml.serializer {
 			if(valueXML.length() > 0){
 				value = valueXML[0];
 			}else{
+				signalMissingField();
 				value = attribute.defaultSetValue;
 			}
 			var result : Object;

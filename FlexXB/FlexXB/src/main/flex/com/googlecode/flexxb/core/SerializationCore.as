@@ -270,8 +270,13 @@ package com.googlecode.flexxb.core {
 								// TODO: check if this can be removed
 								result[annotation.name] = null;
 							}else{
-								var serializer : BaseSerializer =mappingModel.factory .getSerializer(annotation);
-								result[annotation.name] = serializer.deserialize(serializedData, annotation, this);
+								var serializer : BaseSerializer = mappingModel.factory.getSerializer(annotation);
+								try{
+									result[annotation.name] = serializer.deserialize(serializedData, annotation, this);
+								}catch(e : MissingFieldDataException){
+									//catch this and continue silently because it is thrown only when a field's data is 
+									//missing from the serialized source and ignoreMissingField flag is set to true.
+								}
 							}
 						}
 					}
@@ -307,7 +312,9 @@ package com.googlecode.flexxb.core {
 				var classDescriptor : IClassAnnotation = mappingModel.descriptorStore.getDescriptor(objectClass);
 				var idSerializer : BaseSerializer = mappingModel.factory.getSerializer(classDescriptor.idField);
 				if (idSerializer) {
-					itemId = String(idSerializer.deserialize(serializedData, classDescriptor.idField, this));
+					try{
+						itemId = String(idSerializer.deserialize(serializedData, classDescriptor.idField, this));
+					}catch(e : MissingFieldDataException){ }
 				}
 			}
 			return itemId;

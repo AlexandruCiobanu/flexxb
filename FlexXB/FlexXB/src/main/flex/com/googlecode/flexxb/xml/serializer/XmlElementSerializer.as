@@ -15,6 +15,7 @@
  *   limitations under the License.
  */
 package com.googlecode.flexxb.xml.serializer {
+	import com.googlecode.flexxb.annotation.contract.IAnnotation;
 	import com.googlecode.flexxb.core.Configuration;
 	import com.googlecode.flexxb.core.DescriptionContext;
 	import com.googlecode.flexxb.core.SerializationCore;
@@ -99,6 +100,7 @@ package com.googlecode.flexxb.xml.serializer {
 					if(xmlData.children().length() > 0){
 						xmlName = XmlDescriptionContext(context).getXmlName(XmlDescriptionContext(context).getIncomingType(xmlData.children()[0]));
 					}else{
+						signalMissingField();
 						return null;
 					}
 				}else{
@@ -116,6 +118,7 @@ package com.googlecode.flexxb.xml.serializer {
 				if(element.defaultSetValue){
 					xml = XML(element.defaultSetValue);
 				}else{
+					signalMissingField();
 					return null;
 				}
 			}

@@ -317,5 +317,17 @@ package com.googlecode.flexxb {
 			assertThat(copy.list.getItemAt(1), equalTo(obj.list.getItemAt(1)));
 			assertThat(copy.list.getItemAt(2), equalTo(obj.list.getItemAt(2)));
 		}
+		
+		[Test]
+		public function testIgnoreMissingFields() : void{
+			var engine : IFlexXB = FxBEngine.instance.getXmlSerializer();
+			engine.configuration.ignoreMissingContent = true;
+			var xml : XML = <MOck2Replacement attribute="true"><objectVersion>33</objectVersion></MOck2Replacement>;
+			var copy : Mock3 = engine.deserialize(xml, Mock3);
+			assertThat(copy.id, equalTo(new Mock3().id));
+			engine.configuration.ignoreMissingContent = false;
+			copy = engine.deserialize(xml, Mock3);
+			assertThat(copy.id, equalTo(0));
+		}
 	}
 }
