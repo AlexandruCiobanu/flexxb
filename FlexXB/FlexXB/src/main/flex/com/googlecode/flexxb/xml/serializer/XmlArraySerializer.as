@@ -68,9 +68,16 @@ package com.googlecode.flexxb.xml.serializer {
 						child = temp;
 					}
 				}else if (isComplexType(member)) {
-					child = serializer.serialize(member, xmlArray.serializePartialElement) as XML;
+					child = serializer.serialize(member, xmlArray.serializePartialElement, annotation.version) as XML;
 					if (xmlArray.memberName) {
-						child.setName(xmlArray.memberName);
+						if(annotation.hasNamespaceDeclaration()){
+							//need to set a qualified name for the member element
+							var xmlMemberName:QName = new QName(annotation.nameSpace.uri, xmlArray.memberName.localName)
+							child.setName(xmlMemberName);
+						}
+						else{
+							child.setName(xmlArray.memberName);
+						}
 					}
 				} else {
 					var stringValue : String = serializer.converterStore.objectToString(member, xmlArray.type);
@@ -93,11 +100,17 @@ package com.googlecode.flexxb.xml.serializer {
 				//the child being created now. Means we expect a derived class object. 
 				if(XmlArray(annotation).setXsiType){
 					child.addNamespace(XmlUtils.xsiNamespace);
-					child.@[XmlUtils.xsiType] = (serializer.descriptorStore.getDescriptor(member) as XmlClass).alias;
-				}
+					var childAnnotation:XmlClass = serializer.descriptorStore.getDescriptor(member, annotation.version) as XmlClass;
+					if(childAnnotation.hasNamespaceDeclaration()){
+						//if child has namespace, then xsi type needs to include it
+						child.addNamespace(childAnnotation.nameSpace);
+						child.@[XmlUtils.xsiType] = childAnnotation.nameSpace.prefix + ":" + childAnnotation.alias;
+					}
+					else{
+						child.@[XmlUtils.xsiType] = childAnnotation.alias;
+					}				}
 				result.appendChild(child);
 			}
-
 			if (xmlArray.useOwnerAlias()) {
 				for each (var subChild : XML in result.children()) {
 					parentXml.appendChild(subChild);
@@ -140,7 +153,7 @@ package com.googlecode.flexxb.xml.serializer {
 					// and have no item name defined
 					var values : Array = xmlArray[0].toString().split("\n");
 					for each(var value : String in values){
-						list.push(getValue(XML(value), array.memberType, array.getFromCache, serializer))
+						list.push(getValue(XML(value), array.memberType, array.getFromCache, serializer, array.version))
 					}
 				}else{
 					var type : Class = array.memberType;
@@ -154,7 +167,7 @@ package com.googlecode.flexxb.xml.serializer {
 						if(array.isIDRef){
 							serializer.idResolver.addResolutionTask(list, null, xmlChild.toString());
 						}else{
-							var member : Object = getValue(xmlChild, type, array.getFromCache, serializer);
+							var member : Object = getValue(xmlChild, type, array.getFromCache, serializer,array.version);
 							if (member != null) {
 								list.push(member);
 							}

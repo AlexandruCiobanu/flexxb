@@ -17,15 +17,21 @@
 package com.googlecode.testData.xsi
 {
 	[XmlClass]
+	[XmlClass(version="xsiNS")]
+	[Namespace(prefix="a", uri="http://test.com/xsiNS", version="xsiNS")]
+	[Namespace(prefix="xsi", uri="http://www.w3.org/2001/XMLSchema-instance", version="xsiNS")]
 	public class Main
 	{
 		[XmlAttribute]
+		[XmlAttribute(version="xsiNS")]
 		public var id : Number = 0;
 		
 		[XmlElement(setXsiType="true", getRuntimeType="true")]
+		[XmlElement(setXsiType="true", getRuntimeType="true", namespace="a", version="xsiNS")]
 		public var property : BaseItem;
 		
 		[XmlArray(alias="members", memberName="listItem", setXsiType="true", getRuntimeType="true")]
+		[XmlArray(alias="members", memberName="listItem", setXsiType="true", getRuntimeType="true", namespace="a", version="xsiNS")]
 		public var list : Array;
 		
 		public function Main()

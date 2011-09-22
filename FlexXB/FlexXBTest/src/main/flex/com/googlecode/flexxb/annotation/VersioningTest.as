@@ -59,7 +59,7 @@ package com.googlecode.flexxb.annotation
 		
 		[Test]
 		public function autoVersionDetectionTest() : void{
-			var v2Xml : XML = <VersionedItem itemName="MyName" version="v2"><id>MyId</id><mock test:stuff="field1" xmlns:test="http://www.test.com/xmlns/pp/v1" xmlns:me="www.me.com"><test:readOnly>YES</test:readOnly><me:objVersion>6</me:objVersion></mock></VersionedItem>;
+			var v2Xml : XML = <VersionedItem itemName="MyName" version="v2"><id>MyId</id><mock test:stuff="field1" xmlns:test="http://www.test.com/xmlns/pp/v1" xmlns:me="www.me.com" version="6"><test:readOnly>YES</test:readOnly></mock></VersionedItem>;
 			var engine : IFlexXB = new FxBEngine().getXmlSerializer();
 			engine.configuration.versionExtractor = new XmlVersionExtractor();
 			var item : VersionedItem = engine.deserialize(v2Xml, VersionedItem);

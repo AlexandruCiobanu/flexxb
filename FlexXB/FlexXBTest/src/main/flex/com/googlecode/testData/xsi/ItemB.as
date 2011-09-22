@@ -17,9 +17,12 @@
 package com.googlecode.testData.xsi
 {
 	[XmlClass]
+	[XmlClass(prefix="a", uri="http://test.com/xsiNS", version="xsiNS")]
+	[Namespace(prefix="a", uri="http://test.com/xsiNS", version="xsiNS")]
 	public class ItemB extends BaseItem
 	{
 		[XmlAttribute]
+		[XmlAttribute(version="xsiNS")]
 		public var fieldB : String;
 		
 		public function ItemB(){

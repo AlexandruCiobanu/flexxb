@@ -54,7 +54,7 @@ package com.googlecode.flexxb.xml.serializer {
 				if(annotation.isIDRef){
 					child.appendChild(serializer.getObjectId(object));
 				}else{
-					child = serializer.serialize(object, XmlElement(annotation).serializePartialElement) as XML;
+					child = serializer.serialize(object, XmlElement(annotation).serializePartialElement, annotation.version) as XML;
 				}
 			}else if(annotation.type == XML){
 				child.appendChild(new XML(object));
@@ -66,9 +66,9 @@ package com.googlecode.flexxb.xml.serializer {
 					child.appendChild(escapeValue(stringValue, serializer.configuration as XmlConfiguration));
 				}
 			}
-
+			
 			if (annotation.useOwnerAlias()) {
-				var name : QName = XmlDescriptionContext(context).getXmlName(object);
+				var name : QName = XmlDescriptionContext(context).getXmlName(object, annotation.version);
 				if (name) {
 					child.setName(name);
 				}
@@ -79,7 +79,15 @@ package com.googlecode.flexxb.xml.serializer {
 			//the child being created now. Means we expect a derived class object. 
 			if(XmlElement(annotation).setXsiType){
 				child.addNamespace(XmlUtils.xsiNamespace);
-				child.@[XmlUtils.xsiType] = (serializer.descriptorStore.getDescriptor(object) as XmlClass).alias;
+				var childAnnotation:XmlClass = (serializer.descriptorStore.getDescriptor(object, annotation.version) as XmlClass)	
+				if(childAnnotation.hasNamespaceDeclaration()){
+					//if child has namespace, then xsi type needs to include it
+					child.addNamespace(childAnnotation.xmlName);
+					child.@[XmlUtils.xsiType] = childAnnotation.nameSpace.prefix + ":" + childAnnotation.alias;
+				}
+				else{
+					child.@[XmlUtils.xsiType] = childAnnotation.alias;
+				}
 			}
 			parentXml.appendChild(child);
 		}
@@ -134,12 +142,12 @@ package com.googlecode.flexxb.xml.serializer {
 					type = element.type;
 				}
 			}
-			return getValue(xml, type, XmlElement(element).getFromCache, serializer);
+			return getValue(xml, type, XmlElement(element).getFromCache, serializer, element.version);
 		}
 		
-		protected final function getValue(xml : XML, type : Class, getFromCache : Boolean, serializer : SerializationCore) : Object{
+		protected final function getValue(xml : XML, type : Class, getFromCache : Boolean, serializer : SerializationCore, version:String="") : Object{
 			if (isComplexType(type)) {
-				return serializer.deserialize(xml, type, getFromCache);
+				return serializer.deserialize(xml, type, getFromCache, version);
 			}
 			var stringValue : String = xml.toString();
 			//FIX: if the type is XML then we have a bit of processing to do

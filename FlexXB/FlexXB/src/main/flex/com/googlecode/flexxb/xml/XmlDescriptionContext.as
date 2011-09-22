@@ -135,6 +135,13 @@ package com.googlecode.flexxb.xml
 				if(XmlConfiguration(configuration).getResponseTypeByXsiType){
 					var xsiType : String = incomingXML.attribute(XmlUtils.xsiType).toString();
 					if (xsiType) { 
+						//check if xsiType contains a qualified reference (e.g. xsi:type="a:Item")
+						if(xsiType.indexOf(":") != -1){
+							//this will return the first XMLCLass alias match irrespective of namespace.
+							//In order to check more accurately (e.g. match by xmlName) descriptorStore.getClassReferenceByCriteria
+							//would need to support values other than strings 
+							xsiType = xsiType.split(":")[1]; 
+						}
 						clasz = getClassByAlias(xsiType); 
 						if (clasz) { 
 							return clasz; 
