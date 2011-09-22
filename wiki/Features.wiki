@@ -72,6 +72,6 @@ Click the name links to see a more detailed explanation for each feature that is
 ||FXB-019||Annotation versioning||1.7.0||
 ||FXB-020||Circular reference handling||1.7.0||
 ||FXB-021||Serialization format support||2.0||
-||FXB-022||JSON serialization support||2.3.0||
+||FXB-022||JSON serialization support||2.4.0||
 ||FXB-013||Add method references to annotation's attribute values||?||
 ||FXB-011||XSD validation against incoming XML||?||
