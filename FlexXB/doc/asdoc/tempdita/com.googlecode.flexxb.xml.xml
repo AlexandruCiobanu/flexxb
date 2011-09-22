@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="com.googlecode.flexxb.xml"><apiName>com.googlecode.flexxb.xml</apiName><apiDetail/><apiClassifier id="com.googlecode.flexxb.xml:XmlVersionExtractor"><apiName>XmlVersionExtractor</apiName><shortdesc>
+	 This class is used to determine the version of an incoming document.</shortdesc><prolog><author>Alexutz
+	 
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>com.googlecode.flexxb.core:IVersionExtractor</apiBaseInterface><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class is used to determine the version of an incoming document. The version
+	 is considerent consistent throughout the entire document and as such the engine 
+	 will extract it once per received document. By default, the version extractor 
+	 searches for an attribute named "version".
+	 If you require another kind of processing for versions you should extend this 
+	 class and override the <codeph>getVersion</codeph> method which returns a String and 
+	 accepts the xml document as source
+	 </apiDesc></apiClassifierDetail><apiConstructor id="com.googlecode.flexxb.xml:XmlVersionExtractor:XmlVersionExtractor"><apiName>XmlVersionExtractor</apiName><shortdesc>
+		 Constructor
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>versionTagName</apiItemName><apiType value="String"/><apiData>version</apiData><apiDesc>name of the version tag
+		 </apiDesc></apiParam><apiParam><apiItemName>isElement</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>boolean flag signaling whether the version is represented as an element or an attribute
+		 
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="com.googlecode.flexxb.xml:XmlVersionExtractor:getVersion"><apiName>getVersion</apiName><shortdesc>
+		 Method that returns the version string al located in the source xml document.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>string value representing the document's version
+		 
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>source</apiItemName><apiType value="Object"/><apiDesc>xml document
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Method that returns the version string al located in the source xml document. Override this
+		 method to implement different extraction algorithms.
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="com.googlecode.flexxb.xml:XmlDescriptionContext"><apiName>XmlDescriptionContext</apiName><shortdesc>
+	 
+	 </shortdesc><prolog><author>Alexutz
+	 
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiFinal/><apiBaseClassifier>com.googlecode.flexxb.core:DescriptionContext</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="com.googlecode.flexxb.xml:XmlDescriptionContext:XmlDescriptionContext"><apiName>XmlDescriptionContext</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef></apiConstructorDetail></apiConstructor><apiOperation id="com.googlecode.flexxb.xml:XmlDescriptionContext:getClassByAlias"><apiName>getClassByAlias</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="Class"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>version</apiItemName><apiType value="String"/><apiData/></apiParam></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml:XmlDescriptionContext:getClassByNamespace"><apiName>getClassByNamespace</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="Class"/></apiReturn><apiParam><apiItemName>ns</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml:XmlDescriptionContext:getIncomingType"><apiName>getIncomingType</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="Class"/></apiReturn><apiParam><apiItemName>source</apiItemName><apiType value="Object"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml:XmlDescriptionContext:getNamespace"><apiName>getNamespace</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="Namespace"/></apiReturn><apiParam><apiItemName>object</apiItemName><apiType value="Object"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>version</apiItemName><apiType value="String"/><apiData/></apiParam></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml:XmlDescriptionContext:getXmlName"><apiName>getXmlName</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="QName"/></apiReturn><apiParam><apiItemName>object</apiItemName><apiType value="Object"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>version</apiItemName><apiType value="String"/><apiData/></apiParam></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml:XmlDescriptionContext:handleDescriptors"><apiName>handleDescriptors</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>descriptors</apiItemName><apiType value="Array"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml:XmlDescriptionContext:protected:performInitialization"><apiName>performInitialization</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="com.googlecode.flexxb.xml:XmlConfiguration"><apiName>XmlConfiguration</apiName><shortdesc>
+	 
+	 </shortdesc><prolog><author>Alexutz
+	 
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiFinal/><apiBaseClassifier>com.googlecode.flexxb.core:Configuration</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 
+	 </apiDesc></apiClassifierDetail><apiConstructor id="com.googlecode.flexxb.xml:XmlConfiguration:XmlConfiguration"><apiName>XmlConfiguration</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiOperationClassifier>com.googlecode.flexxb.core:Configuration</apiOperationClassifier><apiData>null</apiData><apiDesc>	 
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="com.googlecode.flexxb.xml:XmlConfiguration:protected:copyFrom"><apiName>copyFrom</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>source</apiItemName><apiOperationClassifier>com.googlecode.flexxb.core:Configuration</apiOperationClassifier></apiParam><apiParam><apiItemName>target</apiItemName><apiOperationClassifier>com.googlecode.flexxb.core:Configuration</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml:XmlConfiguration:protected:getInstance"><apiName>getInstance</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiOperationClassifier>com.googlecode.flexxb.core:Configuration</apiOperationClassifier></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="com.googlecode.flexxb.xml:XmlConfiguration:escapeSpecialChars"><apiName>escapeSpecialChars</apiName><shortdesc>
+		 Set this flag to true if you want special chars to be escaped in the xml.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiData>false</apiData><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Set this flag to true if you want special chars to be escaped in the xml. 
+		 If set to false, text containing special characters will be enveloped in a CDATA tag.
+		 This option applies to xml elements. For xml attributes special chars are automatically 
+		 escaped.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.xml:XmlConfiguration:getResponseTypeByNamespace"><apiName>getResponseTypeByNamespace</apiName><shortdesc>
+		 Determine the type of the object the response will be deserialised into
+		 by the namespace defined in the received xml.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiData>true</apiData><apiType value="Boolean"/><apiDefaultValue>true
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Determine the type of the object the response will be deserialised into
+		 by the namespace defined in the received xml.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.xml:XmlConfiguration:getResponseTypeByTagName"><apiName>getResponseTypeByTagName</apiName><shortdesc>
+		 Determine the type of the object the response will be deserialised into
+		 by the root element name of the received xml.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiData>true</apiData><apiType value="Boolean"/><apiDefaultValue>true
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Determine the type of the object the response will be deserialised into
+		 by the root element name of the received xml.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.xml:XmlConfiguration:getResponseTypeByXsiType"><apiName>getResponseTypeByXsiType</apiName><shortdesc>
+		 Determine the type of the object the response will be deserialised into
+		 by the xsi:type attribute present in the xml element representing the object.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiData>false</apiData><apiType value="Boolean"/><apiDefaultValue>false
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Determine the type of the object the response will be deserialised into
+		 by the xsi:type attribute present in the xml element representing the object.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

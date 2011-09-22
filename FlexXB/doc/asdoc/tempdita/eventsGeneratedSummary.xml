@@ -1,0 +1,1654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<allClasses>
+   <apiPackage id="com.googlecode.flexxb.annotation.contract">
+      <apiName>com.googlecode.flexxb.annotation.contract</apiName>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:AccessorType">
+         <apiName>AccessorType</apiName>
+         <shortdesc>
+	 Enumeration defining field acces types.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Enumeration defining field acces types. A class field can be accessed
+	 in readonly, writeonly or readwrite modes.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:ConstructorArgument">
+         <apiName>ConstructorArgument</apiName>
+         <shortdesc>
+	 Defines a constructor argument.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IGlobalAnnotation</apiBaseInterface>
+               <apiBaseClassifier>com.googlecode.flexxb.annotation.contract:BaseAnnotation</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Defines a constructor argument. This annotaton is used when a class has a
+	 non default constructor. In order to maintain the business restrictions, FlexXB
+	 will determine the values of the arguments based on the received xml and call
+	 the constructor with those values.
+	 <p/>An argument has a reference; the reference is the name of the class field
+	 whose value it represents. A non default constructor will most often configure
+	 some of the object's fields when called. Since the only available data is the
+	 incoming xml, arguments must specify the field the the constructor will modify
+	 with the received value.
+	 <p/>
+            <b>The class field referenced in the argument must have an annotation defined
+	  for it</b>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:IFieldAnnotation">
+         <apiName>IFieldAnnotation</apiName>
+         <shortdesc>
+	 This interface defines a metadata decorating a class field or class.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IAnnotation</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This interface defines a metadata decorating a class field or class. 
+	 It exposes a name and a type as any class field has a name and a type. 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:BaseClass">
+         <apiName>BaseClass</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IClassAnnotation</apiBaseInterface>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier>com.googlecode.flexxb.annotation.contract:BaseAnnotation</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:IClassAnnotation">
+         <apiName>IClassAnnotation</apiName>
+         <shortdesc>
+	 This is the contract interface for a class annotation.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IFieldAnnotation</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is the contract interface for a class annotation. A class annotation
+	 holds all the annotation structure relevant for that type, being the 
+	 FlexXB's representation of the type. This representation is used in the
+	 (de)serialization process so the engine will know how to generate and 
+	 parse xml. 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:IAnnotation">
+         <apiName>IAnnotation</apiName>
+         <shortdesc>
+	 This contract specifies the basic requirements for a FlexXB
+	 recognized annotation.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This contract specifies the basic requirements for a FlexXB
+	 recognized annotation. The basic annotation must provide a name 
+	 and a version. Annotations of specific versions will be grouped
+	 together. 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:BaseMember">
+         <apiName>BaseMember</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IMemberAnnotation</apiBaseInterface>
+               <apiBaseClassifier>com.googlecode.flexxb.annotation.contract:BaseAnnotation</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:Constants">
+         <apiName>Constants</apiName>
+         <shortdesc>
+	 Commonly used constants.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Commonly used constants.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:BaseAnnotation">
+         <apiName>BaseAnnotation</apiName>
+         <shortdesc>
+	 This is the base class for all annotations.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IAnnotation</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is the base class for all annotations. It implements the most 
+	 basic contract, IAnnotation, and offers the means of retrieving the 
+	 metadata attributes and their values from the type descriptor. This
+	 information is passed inthe constructor via a MetaDescriptor object
+	 and one must override the protected methd parse in order to apply 
+	 the necesary attributes on their own annotations. This mechanism 
+	 makes the annotations to not require direct access to the xml 
+	 descriptor of the type being introspected.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:IMemberAnnotation">
+         <apiName>IMemberAnnotation</apiName>
+         <shortdesc>
+	 This contact interface defines the structure of a member annotation,
+	 that is, an annotation that is used only on class fields.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IFieldAnnotation</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This contact interface defines the structure of a member annotation,
+	 that is, an annotation that is used only on class fields. A basic
+	 member annotation has a reference to its parent class annotation,
+	 has an access type (read, write, read/write) and can be ignored in 
+	 one of the two stages of the engine's processing: serialization or 
+	 deserialization.  
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:Constructor">
+         <apiName>Constructor</apiName>
+         <shortdesc>
+	 Defines the class constructor.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Defines the class constructor. Notifies the owner XmlClass whether the
+	 described type has a default constructor or not.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:Stage">
+         <apiName>Stage</apiName>
+         <shortdesc>
+	 This enumeration defines the preocessing directions supported by the
+	 FlexXBEngine: serialize and deserialize
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This enumeration defines the preocessing directions supported by the
+	 FlexXBEngine: serialize and deserialize
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.annotation.contract:IGlobalAnnotation">
+         <apiName>IGlobalAnnotation</apiName>
+         <shortdesc>
+	 This interface describes a metadata defined at class level, that is bound 
+	 to the class owner metadata but defines particularities specific to the
+	 class itself.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This interface describes a metadata defined at class level, that is bound 
+	 to the class owner metadata but defines particularities specific to the
+	 class itself. Good examples to this end are constructor arguments metadata
+	 or namespaces used by the class fields. They are not bound to a field name 
+	 and type but they afect the class representation.
+	 This kind of annotations does not usually need a serializer.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.api">
+      <apiName>com.googlecode.flexxb.api</apiName>
+      <apiClassifier id="com.googlecode.flexxb.api:IFlexXBApi">
+         <apiName>IFlexXBApi</apiName>
+         <shortdesc>
+	 This interface defines the api structure and access points
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This interface defines the api structure and access points
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.api:IFxMetaProvider">
+         <apiName>IFxMetaProvider</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.api:FxMember">
+         <apiName>FxMember</apiName>
+         <shortdesc>
+	 API member annotation wrapper.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.api:IFxMetaProvider</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 API member annotation wrapper. This is the base for member annotation 
+	 API description. It references the field from the parent type and base
+	 attributes that all members will share: version and ignore flags. 
+	 All member annotations have a version in order to handle different 
+	 representations of the same object that may appear as appplication 
+	 develoment evolves. Also, some fields may be ignored in different stages
+	 of the processing: serialize or deserialize.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.api:FxApiWrapper">
+         <apiName>FxApiWrapper</apiName>
+         <shortdesc>
+	 Wrapper holding the class descriptors specified in the xml api descriptor file
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Wrapper holding the class descriptors specified in the xml api descriptor file
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.api:FxConstructorArgument">
+         <apiName>FxConstructorArgument</apiName>
+         <shortdesc>
+	 A constructor argument is a way to say to the FlexXB engine that objects of a certain type
+	 need a special way to be instantiated in the deserialization stage.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.api:IFxMetaProvider</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A constructor argument is a way to say to the FlexXB engine that objects of a certain type
+	 need a special way to be instantiated in the deserialization stage. A constructor argument 
+	 is linked to a class field. Usually, when having parameterized arguments, in the constructor
+	 these values are mapped to specific fields within the object.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.api:FxField">
+         <apiName>FxField</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.api:FxClass">
+         <apiName>FxClass</apiName>
+         <shortdesc>
+	 API wrapper for a class type.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.api:IFxMetaProvider</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 API wrapper for a class type. Allows programatically defining all the
+	 elements that would normally be specified via annotations.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.cache">
+      <apiName>com.googlecode.flexxb.cache</apiName>
+      <apiClassifier id="com.googlecode.flexxb.cache:ICacheProvider">
+         <apiName>ICacheProvider</apiName>
+         <shortdesc>
+	 This interface defines a cache provider recognised by FlexXB engine.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This interface defines a cache provider recognised by FlexXB engine.  
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.cache:IPooledObject">
+         <apiName>IPooledObject</apiName>
+         <shortdesc>
+	 This is the interface for objects used by the object cache.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is the interface for objects used by the object cache. Using this interface will give 
+	 the implementor objects the ability to get their cleanup method called when they are returned 
+	 to the cache. The object Cache can store any type of objects, regardless whether they implement 
+	 IPooledObject or not. 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.cache:ObjectCache">
+         <apiName>ObjectCache</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.cache:ICacheProvider</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.cache:ObjectPool">
+         <apiName>ObjectPool</apiName>
+         <shortdesc>
+	 This is the cache for object instances.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseInterface>com.googlecode.flexxb.cache:ICacheProvider</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is the cache for object instances. It maintains a pool for each 
+	 object type. It works a bit differently... objects in pool are used 
+	 then released to be used by others. While an object is in use it cannot
+	 be reasigned to other. Once the user is done with the instance, it must 
+	 call releaseInstance method. 
+	 <p/> ObjectPool does not use an id. Objects are assigned baed on the used 
+	 state. If all available objects are in use then a new instance will be 
+	 created. If there is an object released, it will be passed on for use.
+	 That's why sometimes it is required to clean the objects after use. This 
+	 is where the IPooledObject interface comes to use by exposing the clear 
+	 method which should be implemented by the objects that require some 
+	 cleanup before being reused.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.converter">
+      <apiName>com.googlecode.flexxb.converter</apiName>
+      <apiClassifier id="com.googlecode.flexxb.converter:W3CDateConverter">
+         <apiName>W3CDateConverter</apiName>
+         <shortdesc>
+	 Date converter conforming to the W3C standard
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseInterface>com.googlecode.flexxb.converter:IConverter</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Date converter conforming to the W3C standard
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.converter:XmlConverter">
+         <apiName>XmlConverter</apiName>
+         <shortdesc>
+	 Converter for XML objects
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseInterface>com.googlecode.flexxb.converter:IConverter</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Converter for XML objects
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.converter:IConverter">
+         <apiName>IConverter</apiName>
+         <shortdesc>
+	 Interface defining how strings can be converted to
+	 specific objects and viceversa.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface defining how strings can be converted to
+	 specific objects and viceversa.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.converter:ClassTypeConverter">
+         <apiName>ClassTypeConverter</apiName>
+         <shortdesc>
+	 Converter for Class objects
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseInterface>com.googlecode.flexxb.converter:IConverter</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Converter for Class objects
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.core">
+      <apiName>com.googlecode.flexxb.core</apiName>
+      <apiClassifier id="com.googlecode.flexxb.core:IVersionExtractor">
+         <apiName>IVersionExtractor</apiName>
+         <shortdesc>
+	 This interface is used to determine the version of an incoming document.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This interface is used to determine the version of an incoming document. The version
+	 is considerent consistent throughout the entire document and as such the engine 
+	 will extract it once per received document.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.core:DescriptionContext">
+         <apiName>DescriptionContext</apiName>
+         <shortdesc>
+	 Description context is the main access point for instructing the engine how to handle a specific serialization format.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Description context is the main access point for instructing the engine how to handle a specific serialization format.
+	 The context registers annotations, serializers, converters and offers additional methods to assist the registered
+	 serializers with the handling of that serialization format. A context also has an instance of a configuration object; 
+	 as is the case with different formats, additional settings are needed for configuring the mechanism. One may extend the 
+	 default configuration object to add settings as needed and reference them in the serializers.
+	 <p>This class must be extended if one is to provide a new serialization format support. In subclasses the method 
+	 <codeph>performInitialization</codeph> must be overriden in order to register serializers, annotations and converters.</p>
+	  
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.core:FxBEngine">
+         <apiName>FxBEngine</apiName>
+         <shortdesc>
+	 Entry point for AS3-? (de)serialization.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Entry point for AS3-? (de)serialization. Allows new annotation registration.
+	 The main access point consist of two methods: <codeph>serialize()</codeph> and <codeph>deserialize</codeph>, each corresponding to the specific stage in the conversion process.
+	 By default it registeres the built-in xml handling annotations through the xml description context.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.core:Configuration">
+         <apiName>Configuration</apiName>
+         <shortdesc>
+	 This class defines the settings the FlexXB Core and serialization contexts accept in 
+	 order to control processing.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class defines the settings the FlexXB Core and serialization contexts accept in 
+	 order to control processing. You may override this class to add more settings that 
+	 will be used in your serialization contexts and serializers.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.core:IFlexXB">
+         <apiName>IFlexXB</apiName>
+         <shortdesc>
+	 This interface defines a core that handles a specific way of serializing/deserializing
+	 and object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This interface defines a core that handles a specific way of serializing/deserializing
+	 and object. It makes use of a serialization context to inject all the particularities 
+	 of a specific serialization format. Also, within the context serializers and converters 
+	 are registered. 
+	 </apiDesc>
+         <adobeApiEvent id="com.googlecode.flexxb.core:IFlexXB_com.googlecode.flexxb.core.SerializationEvent_postdeserialize">
+            <apiName>postdeserialize</apiName>
+            <shortdesc>
+	 Triggers after the deserialization of a data source into an AS3 object
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <adobeApiEventClassifier>com.googlecode.flexxb.core.SerializationEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Triggers after the deserialization of a data source into an AS3 object
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="com.googlecode.flexxb.core:IFlexXB_com.googlecode.flexxb.core.SerializationEvent_predeserialize">
+            <apiName>predeserialize</apiName>
+            <shortdesc>
+	 Triggers prior to the deserialization of a data source into an AS3 object
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <adobeApiEventClassifier>com.googlecode.flexxb.core.SerializationEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Triggers prior to the deserialization of a data source into an AS3 object
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="com.googlecode.flexxb.core:IFlexXB_com.googlecode.flexxb.core.SerializationEvent_postserialize">
+            <apiName>postserialize</apiName>
+            <shortdesc>
+	 Triggers after the serialization of an AS3 object
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <adobeApiEventClassifier>com.googlecode.flexxb.core.SerializationEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Triggers after the serialization of an AS3 object
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="com.googlecode.flexxb.core:IFlexXB_com.googlecode.flexxb.core.SerializationEvent_preserialize">
+            <apiName>preserialize</apiName>
+            <shortdesc>
+	 Triggers prior to the serialization of an object
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <adobeApiEventClassifier>com.googlecode.flexxb.core.SerializationEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Triggers prior to the serialization of an object
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.core:SerializationEvent">
+         <apiName>SerializationEvent</apiName>
+         <shortdesc>
+	 Event being raised by the serialization mechanism in order
+	 to signal various stages teh process is in.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Event being raised by the serialization mechanism in order
+	 to signal various stages teh process is in. The event is
+	 raised for each complex object/subobject being processed.
+	 There are four types of events one should listen for to hook 
+	 into the mechanism:
+	 <ul>
+	              <li>preserialize - raised before the serialization of an object begins</li>
+	              <li>postserialize - raised after the objet's serialization ends</li>
+	              <li>predeserialize - raised before the deserialization of data to an object begins</li>
+	              <li>postdeserialize - raised after the deserialization ends</li>
+	           </ul>
+	        </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.error">
+      <apiName>com.googlecode.flexxb.error</apiName>
+      <apiClassifier id="com.googlecode.flexxb.error:DescriptorParsingError">
+         <apiName>DescriptorParsingError</apiName>
+         <shortdesc>
+	 Error thrown when the FlexXB engine encounters problems parsing the type descriptor xml  
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Error thrown when the FlexXB engine encounters problems parsing the type descriptor xml  
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.error:ProcessingError">
+         <apiName>ProcessingError</apiName>
+         <shortdesc>
+	 Error thrown when the FlexXB engine encounters problems processing the xml, 
+	 be it in the serialize or the deserialize stages.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Error thrown when the FlexXB engine encounters problems processing the xml, 
+	 be it in the serialize or the deserialize stages.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.error:ApiError">
+         <apiName>ApiError</apiName>
+         <shortdesc>
+	 This error is thrown when the FlexXB API engine encounters execution problems.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This error is thrown when the FlexXB API engine encounters execution problems.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.interfaces">
+      <apiName>com.googlecode.flexxb.interfaces</apiName>
+      <apiClassifier id="com.googlecode.flexxb.interfaces:IIdentifiable">
+         <apiName>IIdentifiable</apiName>
+         <shortdesc>
+	 Provides a method to uniquely identify objects of a certain type.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Provides a method to uniquely identify objects of a certain type.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.interfaces:IDeserializeNotifiable">
+         <apiName>IDeserializeNotifiable</apiName>
+         <shortdesc>
+	 Optional interface to be implemented by objects which need specific
+	 notification on the deserialization process. 
+	 If the current object to be serialized implements this interface, the
+	 engine will call the methods implemented on each process step (pre and 
+	 post deserialize) instead of firing a SerializationEvent on the engine 
+	 instance for each step.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Optional interface to be implemented by objects which need specific
+	 notification on the deserialization process. 
+	 If the current object to be serialized implements this interface, the
+	 engine will call the methods implemented on each process step (pre and 
+	 post deserialize) instead of firing a SerializationEvent on the engine 
+	 instance for each step. 
+	 Implementing this interface overrides the normal event dispatching in the 
+	 engine.   
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.interfaces:ICycleRecoverable">
+         <apiName>ICycleRecoverable</apiName>
+         <shortdesc>
+	 Optional interface that can be implemented by FlexXB bound objects to handle 
+	 cycles in the object graph.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Optional interface that can be implemented by FlexXB bound objects to handle 
+	 cycles in the object graph.
+	 <p/>Normally a cycle in the object graph causes the engine to throw an error.
+	 This is not always a desired behavior.Implementing this interface allows the 
+	 user application to change this behavior.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.interfaces:ISerializeNotifiable">
+         <apiName>ISerializeNotifiable</apiName>
+         <shortdesc>
+	 Optional interface to be implemented by objects which need specific
+	 notification on the serialization process. 
+	 If the current object to be serialized implements this interface, the
+	 engine will call the methods implemented on each process step (pre and 
+	 post serialize) instead of firing a SerializationEvent on the engine 
+	 instance for each step.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Optional interface to be implemented by objects which need specific
+	 notification on the serialization process. 
+	 If the current object to be serialized implements this interface, the
+	 engine will call the methods implemented on each process step (pre and 
+	 post serialize) instead of firing a SerializationEvent on the engine 
+	 instance for each step. 
+	 Implementing this interface overrides the normal event dispatching in the 
+	 engine.   
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.interfaces:ISerializable">
+         <apiName>ISerializable</apiName>
+         <shortdesc>
+	 Interface for an object that requires custom serialization/deserialization into/from
+	 a serialization format (XML, JSON, AMF etc.).</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.interfaces:IIdentifiable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface for an object that requires custom serialization/deserialization into/from
+	 a serialization format (XML, JSON, AMF etc.). Use this interface to instruct the engine 
+	 to delegate the serialization/deserialization task to the object itself. 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.persistence">
+      <apiName>com.googlecode.flexxb.persistence</apiName>
+      <apiClassifier id="com.googlecode.flexxb.persistence:PersistableObject">
+         <apiName>PersistableObject</apiName>
+         <shortdesc>
+	 Main implementation of IPersistable.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.persistence:IPersistable</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Main implementation of IPersistable. A persistable object is capable of
+	 tracking changes done to it and reverting to initial values if required.
+	 It should be base for all model objects that need initial state memory
+	 capabilities such as IPersistable allows. It uses the methods <codeph>commit()</codeph> and <codeph>rollback()</codeph> to save the
+	 current state or to revert to the previously saved state.
+	 <p>Basically, this object listens for changes to all its public properties and
+	 variables and saves the initial value set for that field. Upon commit, the list of
+	 initial values is discarded, the new values thus becoming initial values. On rollback,
+	 the initial values are reinstated the object returning to the state before eny change
+	 had been made.</p>
+	           <p>
+               <b>Note</b>: Subclasses should be decorated with the <codeph>[Bindable]</codeph> annotation so all
+	 changes to the public fields would be registered.</p>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.persistence:IPersistable">
+         <apiName>IPersistable</apiName>
+         <shortdesc>
+	 Interface defining an object that can be persisted.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface defining an object that can be persisted. A persistable object
+	 is capable of tracking changes done to it and reverting to initial values
+	 if required.
+	 <codeph>IPersistable</codeph> exposes three methods:
+	 <ul>
+	 	            <li>
+                  <codeph>modified</codeph> - check if object has been changed since its last save</li>
+	 	            <li>
+                  <codeph>commit</codeph> - make changes done from the last save persistent</li>
+	 	            <li>
+                  <codeph>rollback</codeph> - revert to the initial state of the object</li>
+	           </ul>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.persistence:PersistableList">
+         <apiName>PersistableList</apiName>
+         <shortdesc>
+	 Adds to ArrayCollection the functionalities specified by IPersistable.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.persistence:IPersistable</apiBaseInterface>
+               <apiBaseClassifier>mx.collections:ArrayCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Adds to ArrayCollection the functionalities specified by IPersistable.
+	 Should be used in model objects the require having lists of referenced objects.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.persistence:ChangeTracker">
+         <apiName>ChangeTracker</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.serializer">
+      <apiName>com.googlecode.flexxb.serializer</apiName>
+      <apiClassifier id="com.googlecode.flexxb.serializer:BaseSerializer">
+         <apiName>BaseSerializer</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.service">
+      <apiName>com.googlecode.flexxb.service</apiName>
+      <apiClassifier id="com.googlecode.flexxb.service:ITranslator">
+         <apiName>ITranslator</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.service:ServiceSettings">
+         <apiName>ServiceSettings</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+         <adobeApiEvent id="com.googlecode.flexxb.service:ServiceSettings_com.googlecode.flexxb.service.SettingsChangedEvent_settingsChange">
+            <apiName>settingsChange</apiName>
+            <shortdesc/>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <adobeApiEventClassifier>com.googlecode.flexxb.service.SettingsChangedEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc/>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.service:Communicator">
+         <apiName>Communicator</apiName>
+         <shortdesc>
+	 Communicates with the server by sending xml requests and receiving xml responses
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.service:ICommunicator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Communicates with the server by sending xml requests and receiving xml responses
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.service:AbstractService">
+         <apiName>AbstractService</apiName>
+         <shortdesc>
+	 Base Service for communicating with the server.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Base Service for communicating with the server. All data service classes should extend this class
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.service:ICommunicator">
+         <apiName>ICommunicator</apiName>
+         <shortdesc>
+	 Communication interface
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Communication interface
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.service:SettingsChangedEvent">
+         <apiName>SettingsChangedEvent</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.util.log">
+      <apiName>com.googlecode.flexxb.util.log</apiName>
+      <apiClassifier id="com.googlecode.flexxb.util.log:LogFactory">
+         <apiName>LogFactory</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.util.log:ILogger">
+         <apiName>ILogger</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.util">
+      <apiName>com.googlecode.flexxb.util</apiName>
+      <apiClassifier id="com.googlecode.flexxb.util:Instanciator">
+         <apiName>Instanciator</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb">
+      <apiName>com.googlecode.flexxb</apiName>
+      <apiClassifier id="com.googlecode.flexxb:VERSION">
+         <apiName>VERSION</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb:FlexXBEngine">
+         <apiName>FlexXBEngine</apiName>
+         <shortdesc>
+	 Entry point for AS3-XML (de)serialization.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Entry point for AS3-XML (de)serialization. Allows new annotation registration.
+	 The main access point consist of two methods: <codeph>serialize()</codeph> and 
+	 <codeph>deserialize</codeph>, each corresponding to the specific stage in the 
+	 conversion process.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.xml.annotation">
+      <apiName>com.googlecode.flexxb.xml.annotation</apiName>
+      <apiClassifier id="com.googlecode.flexxb.xml.annotation:XmlMember">
+         <apiName>XmlMember</apiName>
+         <shortdesc>
+	 Defines a member of an XmlClass, that is, a field of the class definition.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IMemberAnnotation</apiBaseInterface>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.annotation:Annotation</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Defines a member of an XmlClass, that is, a field of the class definition.
+	 The XmlMember is base for XmlAttribute and XmlElement since field values can
+	 be rendered as XML in the form of attributes or elements.
+	 <p/>A member's alias can define "virtual paths". Virtual paths allow definition
+	 of complex xml structures for a field without complicating the model design. Thus,
+	 structures can be present in the xml just by adding vistual paths in the alias
+	 definition of a member.
+	 <p/>Example: Lets assume the xml representation looks like:
+	 <p/>
+            <codeph>
+               <pre>
+	 &lt;myPathTester&gt;
+	   &lt;anotherSub attTest="Thu Mar 19 15:49:32 GMT+0200 2009"/&gt;
+	   This is Default!!!
+	   &lt;subObject&gt;
+	     &lt;id&gt;
+	       2
+	     &lt;/id&gt;
+	     &lt;subSubObj&gt;
+	       &lt;ref&gt;
+	         ReferenceTo
+	       &lt;/ref&gt;
+	     &lt;/subSubObj&gt;
+	   &lt;/subObject&gt;
+	 &lt;/myPathTester&gt;
+	 </pre>
+            </codeph>
+	           <p/>This would normally translate itself in about 4 model classes. Using virtual paths, one can describe it in just one model class:
+	 <p/>
+            <codeph>
+               <pre>
+	 [XmlClass(alias="myPathTester", defaultValueField="defaultTest")]
+	 public class XmlPathObject
+	 {
+	 	[XmlElement(alias="subObject/id")]
+	 	public var identity : Number = 2;
+	 	[XmlElement(alias="subObject/subSubObj/ref")]
+	 	public var reference : String = "ReferenceTo";
+	 	[XmlArray(alias="subObject/list")]
+	 	public var list : Array;
+	 	[XmlAttribute(alias="anotherSub/attTest")]
+	 	public var test : Date = new Date();
+	 	[XmlElement()]
+	 	public var defaultTest : String = "This is Default!!!"
+	 
+	 	public function XmlPathObject()
+	 	{
+	 	}
+	 }
+	 </pre>
+            </codeph>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.annotation:Annotation">
+         <apiName>Annotation</apiName>
+         <shortdesc>
+	 This is the base class for a field xml annotation.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IFieldAnnotation</apiBaseInterface>
+               <apiBaseClassifier>com.googlecode.flexxb.annotation.contract:BaseAnnotation</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is the base class for a field xml annotation.
+	 <p> It obtains basic informations about the field:
+	 <ul>
+                  <li>Field name</li>
+	                 <li>Field type</li>
+	                 <li>Alias (the name under which the field will be used in the xml reprezentation)</li>
+	              </ul>
+	           </p>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.annotation:XmlNamespace">
+         <apiName>XmlNamespace</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IGlobalAnnotation</apiBaseInterface>
+               <apiBaseClassifier>com.googlecode.flexxb.annotation.contract:BaseAnnotation</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.annotation:XmlClass">
+         <apiName>XmlClass</apiName>
+         <shortdesc>
+	 
+	 Usage: [XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", 
+	 idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", 
+	 defaultValueField="fieldName", ordered="true|false", version="versionName")]
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseInterface>com.googlecode.flexxb.annotation.contract:IClassAnnotation</apiBaseInterface>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.annotation:Annotation</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	           <p>Usage: <codeph>[XmlClass(alias="MyClass", useNamespaceFrom="elementFieldName", 
+	 idField="idFieldName", prefix="my", uri="http://www.your.site.com/schema/", 
+	 defaultValueField="fieldName", ordered="true|false", version="versionName")]</codeph>
+            </p>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.annotation:XmlArray">
+         <apiName>XmlArray</apiName>
+         <shortdesc>
+	 Usage: [XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", 
+	 type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
+	 order="order_index", namespace="Namespace_Prefix", idref="true|false", 
+	 setXsiType="true|false", version="versionName")]
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.annotation:XmlElement</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <p>Usage: <codeph>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", 
+	 type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
+	 order="order_index", namespace="Namespace_Prefix", idref="true|false", 
+	 setXsiType="true|false", version="versionName")]</codeph>
+            </p>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.annotation:XmlElement">
+         <apiName>XmlElement</apiName>
+         <shortdesc>
+	 Usage: [XmlElement(alias="element", getFromCache="true|false", 
+	 ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
+	 order="order_index", getRuntimeType="true|false", namespace="Namespace_Prefix", 
+	 default="DEFAULT_VALUE", idref="true|false", setXsiType="true|false", 
+	 version="versionName")]
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.annotation:XmlMember</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Usage: <codeph>[XmlElement(alias="element", getFromCache="true|false", 
+	 ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
+	 order="order_index", getRuntimeType="true|false", namespace="Namespace_Prefix", 
+	 default="DEFAULT_VALUE", idref="true|false", setXsiType="true|false", 
+	 version="versionName")]</codeph>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.annotation:XmlAttribute">
+         <apiName>XmlAttribute</apiName>
+         <shortdesc>
+	 Usage: [XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", 
+	 namespace="NameSpace_Prefix", default="DEFAULT_VALUE", idref="true|false", version="versionName")]
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.annotation:XmlMember</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	           <p>Usage: <codeph>[XmlAttribute(alias="attribute", ignoreOn="serialize|deserialize", order="order_index", 
+	 namespace="NameSpace_Prefix", default="DEFAULT_VALUE", idref="true|false", version="versionName")]</codeph>
+            </p>
+	        </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.xml.api">
+      <apiName>com.googlecode.flexxb.xml.api</apiName>
+      <apiClassifier id="com.googlecode.flexxb.xml.api:XmlApiNamespace">
+         <apiName>XmlApiNamespace</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseInterface>com.googlecode.flexxb.api:IFxMetaProvider</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.api:XmlApiAttribute">
+         <apiName>XmlApiAttribute</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.api:XmlApiMember</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.api:XmlApiArray">
+         <apiName>XmlApiArray</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.api:XmlApiElement</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.api:XmlApiElement">
+         <apiName>XmlApiElement</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.api:XmlApiMember</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.api:XmlApiClass">
+         <apiName>XmlApiClass</apiName>
+         <shortdesc>
+	 API wrapper for a class type.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>com.googlecode.flexxb.api:FxClass</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 API wrapper for a class type. Allows programatically defining all the
+	 elements that would normally be specified via annotations.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.xml.serializer">
+      <apiName>com.googlecode.flexxb.xml.serializer</apiName>
+      <apiClassifier id="com.googlecode.flexxb.xml.serializer:XmlClassSerializer">
+         <apiName>XmlClassSerializer</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>com.googlecode.flexxb.serializer:BaseSerializer</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.serializer:XmlArraySerializer">
+         <apiName>XmlArraySerializer</apiName>
+         <shortdesc>
+	 Insures serialization/deserialization for object field decorated with the XmlArray annotation.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.serializer:XmlElementSerializer</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Insures serialization/deserialization for object field decorated with the XmlArray annotation.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.serializer:XmlAttributeSerializer">
+         <apiName>XmlAttributeSerializer</apiName>
+         <shortdesc>
+	 Insures serialization/deserialization for object field decorated with the XmlAttribute annotation
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.serializer:XmlMemberSerializer</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Insures serialization/deserialization for object field decorated with the XmlAttribute annotation
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml.serializer:XmlElementSerializer">
+         <apiName>XmlElementSerializer</apiName>
+         <shortdesc>
+	 Insures serialization/deserialization for object field decorated with the XmlElement annotation
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>com.googlecode.flexxb.xml.serializer:XmlMemberSerializer</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Insures serialization/deserialization for object field decorated with the XmlElement annotation
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.xml.util">
+      <apiName>com.googlecode.flexxb.xml.util</apiName>
+      <apiClassifier id="com.googlecode.flexxb.xml.util:XmlUtils">
+         <apiName>XmlUtils</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="com.googlecode.flexxb.xml">
+      <apiName>com.googlecode.flexxb.xml</apiName>
+      <apiClassifier id="com.googlecode.flexxb.xml:XmlVersionExtractor">
+         <apiName>XmlVersionExtractor</apiName>
+         <shortdesc>
+	 This class is used to determine the version of an incoming document.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>com.googlecode.flexxb.core:IVersionExtractor</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class is used to determine the version of an incoming document. The version
+	 is considerent consistent throughout the entire document and as such the engine 
+	 will extract it once per received document. By default, the version extractor 
+	 searches for an attribute named "version".
+	 If you require another kind of processing for versions you should extend this 
+	 class and override the <codeph>getVersion</codeph> method which returns a String and 
+	 accepts the xml document as source
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml:XmlDescriptionContext">
+         <apiName>XmlDescriptionContext</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>com.googlecode.flexxb.core:DescriptionContext</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="com.googlecode.flexxb.xml:XmlConfiguration">
+         <apiName>XmlConfiguration</apiName>
+         <shortdesc>
+	 
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>com.googlecode.flexxb.core:Configuration</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+</allClasses>

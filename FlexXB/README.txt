@@ -76,7 +76,6 @@ FEATURES
 	* FXB-019 Annotation versioning
 	* FXB-020 Circular reference handling
 	* FXB-021 Serialization format support
-	* FXB-022 JSON serialization support
 	
 USAGE
 
@@ -175,6 +174,15 @@ KNOWN LIMITATIONS
 
 RELEASE NOTES
 
+2.3.0 - 27-09-2011
+	  - Fix: Issue 49 - Arraylist not being serialized or deserialized;    
+  	  - Fix: Issue 50 - NPE when using virtual path and getRuntimeType;   
+  	  - Fix: Issue 51 - Issue in deserialization from XML to AS3 object;
+  	  - Fix: Issue 52 - escapeSpecialchars
+  	  - Enhancement: Issue 53 - XMLSerializer doesn't support xsi:type with namespace xsi:type="a:ItemA"
+  	  - Enhancement: Issue 54 - Ignore missing elements/attributes and control whether to set the fields to null or leave them out  
+	  - Enhancement: Changed PersistableObject/List and made modified and editMode bindable
+	  
 2.2.0 - 27-06-2011
 	  - Usability: added metadata.xml annotation descriptor file in the swc to use FlashBuilder's support for annotation code hints
 	  - Fix: Issue 47: Serializable#deserialize return object is not used

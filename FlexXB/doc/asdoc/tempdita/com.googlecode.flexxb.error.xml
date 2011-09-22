@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="com.googlecode.flexxb.error"><apiName>com.googlecode.flexxb.error</apiName><apiDetail/><apiClassifier id="com.googlecode.flexxb.error:DescriptorParsingError"><apiName>DescriptorParsingError</apiName><shortdesc>
+	 Error thrown when the FlexXB engine encounters problems parsing the type descriptor xml  
+	 </shortdesc><prolog><author>Alexutz
+	 
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Error</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Error thrown when the FlexXB engine encounters problems parsing the type descriptor xml  
+	 </apiDesc></apiClassifierDetail><apiConstructor id="com.googlecode.flexxb.error:DescriptorParsingError:DescriptorParsingError"><apiName>DescriptorParsingError</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>type</apiItemName><apiType value="Class"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>field</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>message</apiItemName><apiType value="String"/><apiData/><apiDesc>	 
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="com.googlecode.flexxb.error:DescriptorParsingError:toString"><apiName>toString</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="com.googlecode.flexxb.error:DescriptorParsingError:DESCRIPTOR_PARSING_ERROR_ID"><apiName>DESCRIPTOR_PARSING_ERROR_ID</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>0</apiData><apiType value="int"/></apiValueDef><apiDesc>
+		 
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.error:DescriptorParsingError:field:get"><apiName>field</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.error:DescriptorParsingError:type:get"><apiName>type</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Class"/></apiValueDef><apiDesc>
+		 
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="com.googlecode.flexxb.error:ProcessingError"><apiName>ProcessingError</apiName><shortdesc>
+	 Error thrown when the FlexXB engine encounters problems processing the xml, 
+	 be it in the serialize or the deserialize stages.</shortdesc><prolog><author>Alexutz
+	 
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Error</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Error thrown when the FlexXB engine encounters problems processing the xml, 
+	 be it in the serialize or the deserialize stages.
+	 </apiDesc></apiClassifierDetail><apiConstructor id="com.googlecode.flexxb.error:ProcessingError:ProcessingError"><apiName>ProcessingError</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>type</apiItemName><apiType value="Class"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>field</apiItemName><apiType value="String"/><apiDesc>	 
+		 </apiDesc></apiParam><apiParam><apiItemName>inSerializeStage</apiItemName><apiType value="Boolean"/></apiParam><apiParam><apiItemName>message</apiItemName><apiType value="String"/></apiParam></apiConstructorDef><apiDesc>
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="com.googlecode.flexxb.error:ProcessingError:isInDeserializeStage"><apiName>isInDeserializeStage</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="Boolean"/></apiReturn></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.error:ProcessingError:isInSerializeStage"><apiName>isInSerializeStage</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="Boolean"/></apiReturn></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="com.googlecode.flexxb.error:ProcessingError:STAGE_DESERIALIZE"><apiName>STAGE_DESERIALIZE</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>1</apiData><apiType value="int"/></apiValueDef><apiDesc>
+		 
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.error:ProcessingError:STAGE_SERIALIZE"><apiName>STAGE_SERIALIZE</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>0</apiData><apiType value="int"/></apiValueDef><apiDesc>
+		 
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.error:ProcessingError:field:get"><apiName>field</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.error:ProcessingError:type:get"><apiName>type</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Class"/></apiValueDef><apiDesc>
+		 
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="com.googlecode.flexxb.error:ApiError"><apiName>ApiError</apiName><shortdesc>
+	 This error is thrown when the FlexXB API engine encounters execution problems.</shortdesc><prolog><author>Alexutz
+	 
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Error</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This error is thrown when the FlexXB API engine encounters execution problems.
+	 </apiDesc></apiClassifierDetail><apiConstructor id="com.googlecode.flexxb.error:ApiError:ApiError"><apiName>ApiError</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>message</apiItemName><apiType value="String"/><apiData/></apiParam><apiParam><apiItemName>id</apiItemName><apiType value="int"/><apiData>0</apiData></apiParam></apiConstructorDef></apiConstructorDetail></apiConstructor><apiValue id="com.googlecode.flexxb.error:ApiError:API_COMPONENT_TREE_BUILD_ERROR"><apiName>API_COMPONENT_TREE_BUILD_ERROR</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>0</apiData><apiType value="int"/></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>
