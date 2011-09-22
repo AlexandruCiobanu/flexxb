@@ -37,6 +37,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.errorTest.testVO7;
 	import com.googlecode.testData.idref.Data;
 	import com.googlecode.testData.idref.Node;
+	import com.googlecode.testData.xsi.BaseItem;
 	import com.googlecode.testData.xsi.ItemA;
 	import com.googlecode.testData.xsi.ItemB;
 	import com.googlecode.testData.xsi.Main;
@@ -289,6 +290,74 @@ package com.googlecode.flexxb {
 			assertThat(copy.list[0], instanceOf(ItemA));
 			assertThat(copy.list[1], instanceOf(ItemB));
 		}
+		
+		[Test]
+		public function testSerializeXSITypeWithNS() : void{
+			var item:Main = new Main();
+			item.id = 1;
+			item.property = new ItemA();
+			item.property.element = "test";
+			ItemA(item.property).fieldA = "valueA";
+			var itemA:ItemA = new ItemA();
+			itemA.element = "test a";
+			ItemA(itemA).fieldA= "field a";
+			var itemB:ItemB = new ItemB();
+			itemB.element = "test b";
+			ItemB(itemB).fieldB = "field b";
+			item.list = [itemA, itemB];
+			
+			var engine : IFlexXB = new FxBEngine().getXmlSerializer();
+			engine.processTypes(BaseItem, ItemA, ItemB);
+			XmlConfiguration(engine.configuration).getResponseTypeByXsiType = true;
+			
+			var xml : XML = engine.serialize(item, false, "xsiNS") as XML;
+			assertNotNull(xml);
+			
+			var a:Namespace = new Namespace("a", "http://test.com/xsiNS");
+			assertThat(xml.a::property[0].@[XmlUtils.xsiType], equalTo("a:ItemA"));
+			assertThat(xml.a::members.a::listItem[0].@[XmlUtils.xsiType], equalTo("a:ItemA"));
+			assertThat(xml.a::members.a::listItem[1].@[XmlUtils.xsiType], equalTo("a:ItemB"));
+			
+			var copy : Main = engine.deserialize(xml, Main, false, "xsiNS");
+			assertThat(copy.id, equalTo(item.id));
+			assertThat(copy.property, instanceOf(ItemA));
+			assertThat(copy.property.element, equalTo(item.property.element));
+			assertThat(ItemA(copy.property).fieldA, equalTo(ItemA(item.property).fieldA));
+			assertThat(copy.list[0], instanceOf(ItemA));
+			assertThat(copy.list[1], instanceOf(ItemB));
+		}
+		
+		[Test]
+		public function testDeserializeXSITypeWithNS() : void{
+			var xml:XML =   <data id="1" xmlns:a="http://test.com/xsiNS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+				<a:property xsi:type="a:ItemA">
+					<a:element>test</a:element>
+				</a:property>
+				<a:members>
+					<a:listItem xsi:type="a:ItemA">
+						<a:element>test a</a:element>
+					</a:listItem>
+					<a:listItem xsi:type="a:ItemB">
+						<a:element>test b</a:element>
+					</a:listItem>
+				</a:members>
+			</data>;
+			
+			var engine : IFlexXB = new FxBEngine().getXmlSerializer();
+			engine.processTypes(BaseItem, ItemA, ItemB);
+			XmlConfiguration(engine.configuration).getResponseTypeByXsiType = true;
+			
+			var data:Main = engine.deserialize(xml, Main, false, "xsiNS");
+			
+			assertEquals(1, data.id);
+			assertNotNull(data.property);
+			assertTrue(data.property is ItemA);
+			assertEquals("test", data.property.element);
+			assertEquals(2, data.list.length);
+			assertTrue(data.list[0] is ItemA);
+			assertEquals("test a", data.list[0].element);
+		}
+		
 		[Test]
 		public function checkError() : void{
 			var vo : TestVO = new TestVO();
