@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="com.googlecode.flexxb.xml.util"><apiName>com.googlecode.flexxb.xml.util</apiName><apiDetail/><apiClassifier id="com.googlecode.flexxb.xml.util:XmlUtils"><apiName>XmlUtils</apiName><shortdesc/><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiFinal/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef></apiClassifierDetail><apiConstructor id="com.googlecode.flexxb.xml.util:XmlUtils:XmlUtils"><apiName>XmlUtils</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef></apiConstructorDetail></apiConstructor><apiOperation id="com.googlecode.flexxb.xml.util:XmlUtils:getPathElement"><apiName>getPathElement</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiOperationClassifier>com.googlecode.flexxb.xml.annotation:Annotation</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>xmlData</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml.util:XmlUtils:mustAddNamespace"><apiName>mustAddNamespace</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>ns</apiItemName><apiType value="Namespace"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>xml</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="com.googlecode.flexxb.xml.util:XmlUtils:setPathElement"><apiName>setPathElement</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>
+		 
+		 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>element</apiItemName><apiOperationClassifier>com.googlecode.flexxb.xml.annotation:Annotation</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>xmlParent</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="com.googlecode.flexxb.xml.util:XmlUtils:xsiNamespace"><apiName>xsiNamespace</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unknown</apiData><apiType value="Namespace"/></apiValueDef></apiValueDetail></apiValue><apiValue id="com.googlecode.flexxb.xml.util:XmlUtils:xsiType"><apiName>xsiType</apiName><shortdesc>
+		 Qualified name of the xml schema type attribute 
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unknown</apiData><apiType value="QName"/></apiValueDef><apiDesc>
+		 Qualified name of the xml schema type attribute 
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiOperation id="globalOperation:com.googlecode.flexxb.xml.util:cdata"><apiName>cdata</apiName><shortdesc>
+	 Function that wraps the provided value in an xml with a CDATA tag 
+	 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>XML representing the value
+	  
+	 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>value</apiItemName><apiType value="any"/><apiDesc>value to which the cdata tag will be added
+	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+	 Function that wraps the provided value in an xml with a CDATA tag 
+	 </apiDesc></apiOperationDetail></apiOperation></apiPackage>
