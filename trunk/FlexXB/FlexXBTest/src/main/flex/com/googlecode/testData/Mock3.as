@@ -22,6 +22,8 @@ package com.googlecode.testData {
 		public var attribute : Boolean;
 		[XmlElement(alias="objectVersion")]
 		public var version : Number;
+		[XmlArray]
+		public var list : Array = [1, 2, 3];
 
 		public function Mock3() {
 			super();

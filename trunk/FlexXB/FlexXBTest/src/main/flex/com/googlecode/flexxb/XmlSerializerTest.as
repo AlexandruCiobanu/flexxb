@@ -27,7 +27,6 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
-	import com.googlecode.testData.Node;
 	import com.googlecode.testData.VectoredElement;
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
@@ -394,9 +393,13 @@ package com.googlecode.flexxb {
 			var xml : XML = <MOck2Replacement attribute="true"><objectVersion>33</objectVersion></MOck2Replacement>;
 			var copy : Mock3 = engine.deserialize(xml, Mock3);
 			assertThat(copy.id, equalTo(new Mock3().id));
+			assertNotNull(copy.list);
+			assertThat(copy.list.length, equalTo(3));
 			engine.configuration.ignoreMissingContent = false;
 			copy = engine.deserialize(xml, Mock3);
 			assertThat(copy.id, equalTo(0));
+			assertNotNull(copy.list);
+			assertThat(copy.list.length, equalTo(0));
 		}
 	}
 }
