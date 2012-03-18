@@ -88,5 +88,9 @@ package com.googlecode.flexxb.xml.annotation
 		 *
 		 */
 		public static const MEMBER_NAME : String = "memberName";
+		/**
+		 *
+		 */
+		public static const MEMBER_NAMESPACE : String = "memberNamespace";
 	}
 }

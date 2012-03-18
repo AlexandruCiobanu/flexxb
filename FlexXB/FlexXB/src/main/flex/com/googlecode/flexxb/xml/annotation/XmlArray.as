@@ -22,9 +22,11 @@ package com.googlecode.flexxb.xml.annotation {
 	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
+	
+	import mx.utils.StringUtil;
 
 	/**
-	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", 
+	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", memberType="type", getFromCache="true|false", 
 	 * type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
 	 * order="order_index", namespace="Namespace_Prefix", idref="true|false", 
 	 * setXsiType="true|false", version="versionName")]</code></p>
@@ -44,7 +46,14 @@ package com.googlecode.flexxb.xml.annotation {
 		 * @private
 		 */
 		private var _memberName : QName;
-
+		/**
+		 * @private
+		 */
+		private var _memberNamespaceRef: String;
+		/**
+		 * @private
+		 */
+		private var _memberNamespace: Namespace;
 		/**
 		 * Constructor
 		 * @param descriptor
@@ -72,13 +81,49 @@ package com.googlecode.flexxb.xml.annotation {
 		public function get memberName() : QName {
 			return _memberName;
 		}
+		/**
+		 * Get the optional namespace for member
+		 * @return
+		 *
+		 */
+		public function get memberNamespaceRef() : String
+		{
+			return _memberNamespaceRef;
+		}
+		/**
+		 * Get the optional namespace for member
+		 * @return
+		 *
+		 */
+		public function set memberNamespace(value:Namespace):void
+		{
+			_memberNamespace = value;
+			if(_memberName)
+			{
+				_memberName = new QName(value, _memberName.localName);
+			}
+		}
+		public function get memberNamespace():Namespace
+		{
+			return _memberNamespace;
+		}
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function hasMemberNamespaceRef() : Boolean{
+			return _memberNamespaceRef && StringUtil.trim(_memberNamespaceRef).length > 0;
+		}
 		
 		protected override function parse(metadata : MetaDescriptor) : void {
 			super.parse(metadata);
 			_memberType = determineElementType(metadata);
+			_memberNamespaceRef = metadata.attributes[XmlConstants.MEMBER_NAMESPACE];
 			var arrayMemberName : String = metadata.attributes[XmlConstants.MEMBER_NAME];
 			if (arrayMemberName) {
-				_memberName = new QName(nameSpace, arrayMemberName);
+				var ns:Namespace = memberNamespace?memberNamespace:nameSpace;
+				_memberName = new QName(ns, arrayMemberName);
 			}
 		}
 		

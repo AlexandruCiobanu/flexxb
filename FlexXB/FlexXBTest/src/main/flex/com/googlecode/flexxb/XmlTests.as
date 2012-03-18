@@ -21,6 +21,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.flexxb.annotation.XmlAttributeTest;
 	import com.googlecode.flexxb.annotation.XmlClassTest;
 	import com.googlecode.flexxb.annotation.XmlElementTest;
+	import com.googlecode.flexxb.converter.ConverterTest;
 	
 	[Suite(description="Run the xml tests")]
     [RunWith("org.flexunit.runners.Suite")]
@@ -47,5 +48,7 @@ package com.googlecode.flexxb {
 		public var namespaceTest : NamespaceTest;
 		
 		public var collisionDetectionTest : CircularReferenceTest;
+		
+		public var converter : ConverterTest;
 	}
 }
