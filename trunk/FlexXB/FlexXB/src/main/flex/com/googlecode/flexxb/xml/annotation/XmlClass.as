@@ -214,6 +214,14 @@ package com.googlecode.flexxb.xml.annotation {
 				}else{
 					annotation.nameSpace = nameSpace;
 				}
+				if(annotation is XmlArray)
+				{
+					var xmlArray:XmlArray = XmlArray(annotation);
+					if(xmlArray.hasMemberNamespaceRef())
+					{
+						xmlArray.memberNamespace =  getRegisteredNamespace(xmlArray.memberNamespaceRef);
+					}
+				}
 				members.addItem(annotation);
 				if (annotation.name.localName == id) {
 					_idField = annotation;

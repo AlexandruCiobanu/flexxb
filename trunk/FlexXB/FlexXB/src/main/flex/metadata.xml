@@ -172,6 +172,7 @@
 		
 		<attribute name="alias" type="String" required="false"/>
 		<attribute name="memberName" type="String" required="false"/>
+		<attribute name="memberNamespace" type="String" required="false"/>
 		<attribute name="getFromCache" type="Boolean" required="false" defaultValue="false" hint="boolean"/>
 		<attribute name="type" type="Class" required="false"/>
 		<attribute name="ignoreOn" type="String" required="false" values="serialize, deserialize"/>

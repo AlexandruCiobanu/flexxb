@@ -27,6 +27,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.Mock;
 	import com.googlecode.testData.Mock2;
 	import com.googlecode.testData.Mock3;
+	import com.googlecode.testData.NamespacedArrayMember;
 	import com.googlecode.testData.VectoredElement;
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
@@ -400,6 +401,30 @@ package com.googlecode.flexxb {
 			assertThat(copy.id, equalTo(0));
 			assertNotNull(copy.list);
 			assertThat(copy.list.length, equalTo(0));
+		}
+		
+		[Test]
+		public function testArrayMemberNamespace() : void
+		{
+			var item : NamespacedArrayMember = new NamespacedArrayMember();
+			item.listA = ["one", "two", "three"];
+			item.listB = [1,2];
+			
+			var engine : IFlexXB = new FxBEngine().getXmlSerializer();
+			var xml : XML = FlexXBEngine.instance.serialize(item);
+			
+			var aliasNS:Namespace = new Namespace("ns", "www.example.com/ns");
+			var memberNS:Namespace = new Namespace("member", "www.example.com/member");
+			assertNotNull(xml.listA[0].memberNS::string[0]);
+			assertNotNull(xml.aliasNS::listB[0]);
+			assertNotNull(xml.aliasNS::listB[0].memberNS::int[0]);
+			
+			var copy:NamespacedArrayMember = FlexXBEngine.instance.deserialize(xml, NamespacedArrayMember);
+			
+			assertThat(copy.listA.length, equalTo(3));
+			assertThat(copy.listA[0], equalTo("one"));
+			assertThat(copy.listB.length, equalTo(2));
+			assertThat(copy.listB[0], equalTo(1));
 		}
 	}
 }

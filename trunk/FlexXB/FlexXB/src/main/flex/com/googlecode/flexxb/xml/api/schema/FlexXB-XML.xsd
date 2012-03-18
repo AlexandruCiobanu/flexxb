@@ -58,6 +58,9 @@
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="XmlMember">
+				<xs:sequence>
+					<xs:element name="memberNameSpace" type="XmlNamespace" minOccurs="0" maxOccurs="1" />
+				</xs:sequence>
 				<xs:attribute name="memberName" type="xs:string" use="optional" />
 				<xs:attribute name="memberType" type="xs:string" use="optional" />
 				<xs:attribute name="getFromCache" type="xs:boolean" use="optional" default="false" />

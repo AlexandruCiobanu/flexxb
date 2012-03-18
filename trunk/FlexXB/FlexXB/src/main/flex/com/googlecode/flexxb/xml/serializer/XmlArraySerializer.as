@@ -96,7 +96,7 @@ package com.googlecode.flexxb.xml.serializer
 				}
 				else
 				{
-					var stringValue:String=serializer.converterStore.objectToString(member, xmlArray.type);
+					var stringValue:String=serializer.converterStore.objectToString(member, xmlArray.memberType);
 					var xmlValue:XML;
 					try
 					{

@@ -58,7 +58,12 @@ package com.googlecode.flexxb.xml.api {
 		 */
 		[XmlAttribute]
 		public var memberType : Class;
-
+		/**
+		 * @private
+		 */		
+		protected var _memberNameSpace : XmlApiNamespace;
+		
+		
 		/**
 		 *
 		 * @param field
@@ -67,6 +72,38 @@ package com.googlecode.flexxb.xml.api {
 		 */
 		public function XmlApiArray(field : FxField, alias : String = null) {
 			super(field, alias);
+		}
+		
+		[XmlElement]
+		/**
+		 * 
+		 * @return 
+		 */
+		public final function get memberNameSpace() : XmlApiNamespace{
+			return _memberNameSpace;
+		}
+		
+		/**
+		 * 
+		 * @param value
+		 */
+		public final function set memberNameSpace(value : XmlApiNamespace) : void{
+			_memberNameSpace = value;
+			if(getOwner()){
+				if(value){
+					_memberNameSpace = XmlApiClass(getOwner()).addNamespace(value);
+				}else{
+					XmlApiClass(getOwner()).removeNamespace(value);
+				}
+			}
+		}
+		
+		/**
+		 * 
+		 * @param ns
+		 */
+		public function setMemberNamespace(ns : Namespace) : void{
+			memberNameSpace = XmlApiNamespace.create(ns);
 		}
 
 		public override function getMetadataName() : String {
