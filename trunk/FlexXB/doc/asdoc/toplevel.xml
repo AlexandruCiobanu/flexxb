@@ -8786,6 +8786,13 @@
 		 
 		 ]]></description>
 </field>
+<field name='WRAP_CDATA' fullname='com.googlecode.flexxb.xml.annotation:XmlConstants/WRAP_CDATA' type='String' isStatic='true' isConst='true' defaultValue='wrapCDATA' >
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+</field>
 <packageRec name='com.googlecode.flexxb.xml.annotation.null' fullname='com.googlecode.flexxb.xml.annotation.null'>
 <description><![CDATA[
 
@@ -9586,6 +9593,18 @@
 
 		 ]]></return>
 </method>
+<method name='wrapCDATA' fullname='com.googlecode.flexxb.xml.annotation:XmlElement/wrapCDATA/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
 <field name='ANNOTATION_NAME' fullname='com.googlecode.flexxb.xml.annotation:XmlElement/ANNOTATION_NAME' type='String' isStatic='true' isConst='true' defaultValue='XmlElement' >
 <description><![CDATA[
 
@@ -9619,6 +9638,12 @@
 <private><![CDATA[]]></private>
 </field>
 <field name='_setXsiType' fullname='com.googlecode.flexxb.xml.annotation:XmlElement/protected:_setXsiType' type='Boolean' isStatic='false' isConst='false' >
+<description><![CDATA[
+
+		 ]]></description>
+<private><![CDATA[]]></private>
+</field>
+<field name='_wrapCdata' fullname='com.googlecode.flexxb.xml.annotation:XmlElement/protected:_wrapCdata' type='Boolean' isStatic='false' isConst='false' >
 <description><![CDATA[
 
 		 ]]></description>
@@ -10459,94 +10484,6 @@
 
  ]]></description>
 </packageRec>
-<classRec name='XmlApiAttribute' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\xml\api\XmlApiAttribute.as' namespace='com.googlecode.flexxb.xml.api' access='public' baseclass='com.googlecode.flexxb.xml.api:XmlApiMember' isFinal='false' isDynamic='false' >
-<description><![CDATA[
-
-	 
-	 ]]></description>
-<author><![CDATA[Alexutz
-
-	 
-	 ]]></author>
-</classRec>
-<method name='XmlApiAttribute' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/XmlApiAttribute' isStatic='false' isFinal='false' isOverride='false'  param_names='field;alias' param_types='com.googlecode.flexxb.api:FxField;String' param_defaults='undefined;null' result_type='*'>
-<description><![CDATA[
-
-		 
-		 ]]></description>
-<param><![CDATA[field
-
-		 ]]></param>
-<param><![CDATA[alias
-
-		 
-		 ]]></param>
-</method>
-<method name='create' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/create' isStatic='true' isFinal='false' isOverride='false'  param_names='name;type;accessType;alias' param_types='String;Class;com.googlecode.flexxb.annotation.contract:AccessorType;String' param_defaults='undefined;undefined;null;null' result_type='com.googlecode.flexxb.xml.api:XmlApiAttribute'>
-<description><![CDATA[
-
-		 
-		 ]]></description>
-<param><![CDATA[name
-
-		 ]]></param>
-<param><![CDATA[type
-
-		 ]]></param>
-<param><![CDATA[accessType
-
-		 ]]></param>
-<param><![CDATA[alias
-
-		 ]]></param>
-<return><![CDATA[
-		 
-		 ]]></return>
-</method>
-<method name='getMetadataName' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/getMetadataName' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
-</method>
-<method name='toString' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/toString' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
-<description><![CDATA[
-
-		 Get string representation of the current instance
-
-		 ]]></description>
-<return><![CDATA[string representing the current instance
-
-		 ]]></return>
-</method>
-<field name='INCOMING_XML_NAME' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/INCOMING_XML_NAME' type='String' isStatic='true' isConst='true' defaultValue='XmlAttribute' >
-</field>
-<packageRec name='com.googlecode.flexxb.xml.api.null' fullname='com.googlecode.flexxb.xml.api.null'>
-<description><![CDATA[
-
-   FlexXB - an annotation based xml serializer for Flex and Air applications
-
-   Copyright (C) 2008-2011 Alex Ciobanu
-
- 
-   Licensed under the Apache License, Version 2.0 (the "License");
-
-   you may not use this file except in compliance with the License.
-
-   You may obtain a copy of the License at
-
- 
-       http://www.apache.org/licenses/LICENSE-2.0
-
- 
-   Unless required by applicable law or agreed to in writing, software
-
-   distributed under the License is distributed on an "AS IS" BASIS,
-
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
-   See the License for the specific language governing permissions and
-
-   limitations under the License.
-
- ]]></description>
-</packageRec>
 <classRec name='XmlApiElement' fullname='com.googlecode.flexxb.xml.api:XmlApiElement' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\xml\api\XmlApiElement.as' namespace='com.googlecode.flexxb.xml.api' access='public' baseclass='com.googlecode.flexxb.xml.api:XmlApiMember' isFinal='false' isDynamic='false' >
 <description><![CDATA[
 
@@ -10626,6 +10563,96 @@
 
 		 
 		 ]]></description>
+</field>
+<field name='wrapCDATA' fullname='com.googlecode.flexxb.xml.api:XmlApiElement/wrapCDATA' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.xml.api.null' fullname='com.googlecode.flexxb.xml.api.null'>
+<description><![CDATA[
+
+   FlexXB - an annotation based xml serializer for Flex and Air applications
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   Licensed under the Apache License, Version 2.0 (the "License");
+
+   you may not use this file except in compliance with the License.
+
+   You may obtain a copy of the License at
+
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+   Unless required by applicable law or agreed to in writing, software
+
+   distributed under the License is distributed on an "AS IS" BASIS,
+
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+   See the License for the specific language governing permissions and
+
+   limitations under the License.
+
+ ]]></description>
+</packageRec>
+<classRec name='XmlApiAttribute' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\xml\api\XmlApiAttribute.as' namespace='com.googlecode.flexxb.xml.api' access='public' baseclass='com.googlecode.flexxb.xml.api:XmlApiMember' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+	 ]]></author>
+</classRec>
+<method name='XmlApiAttribute' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/XmlApiAttribute' isStatic='false' isFinal='false' isOverride='false'  param_names='field;alias' param_types='com.googlecode.flexxb.api:FxField;String' param_defaults='undefined;null' result_type='*'>
+<description><![CDATA[
+
+		 
+		 ]]></description>
+<param><![CDATA[field
+
+		 ]]></param>
+<param><![CDATA[alias
+
+		 
+		 ]]></param>
+</method>
+<method name='create' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/create' isStatic='true' isFinal='false' isOverride='false'  param_names='name;type;accessType;alias' param_types='String;Class;com.googlecode.flexxb.annotation.contract:AccessorType;String' param_defaults='undefined;undefined;null;null' result_type='com.googlecode.flexxb.xml.api:XmlApiAttribute'>
+<description><![CDATA[
+
+		 
+		 ]]></description>
+<param><![CDATA[name
+
+		 ]]></param>
+<param><![CDATA[type
+
+		 ]]></param>
+<param><![CDATA[accessType
+
+		 ]]></param>
+<param><![CDATA[alias
+
+		 ]]></param>
+<return><![CDATA[
+		 
+		 ]]></return>
+</method>
+<method name='getMetadataName' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/getMetadataName' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<method name='toString' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/toString' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		 Get string representation of the current instance
+
+		 ]]></description>
+<return><![CDATA[string representing the current instance
+
+		 ]]></return>
+</method>
+<field name='INCOMING_XML_NAME' fullname='com.googlecode.flexxb.xml.api:XmlApiAttribute/INCOMING_XML_NAME' type='String' isStatic='true' isConst='true' defaultValue='XmlAttribute' >
 </field>
 <packageRec name='com.googlecode.flexxb.xml.api.null' fullname='com.googlecode.flexxb.xml.api.null'>
 <description><![CDATA[
@@ -11140,306 +11167,6 @@
 </method>
 <field name='_context' fullname='com.googlecode.flexxb.serializer:BaseSerializer/private:_context' type='com.googlecode.flexxb.core:DescriptionContext' isStatic='false' isConst='false' >
 </field>
-<packageRec name='com.googlecode.flexxb.annotation.parser.null' fullname='com.googlecode.flexxb.annotation.parser.null'>
-<description><![CDATA[
-
-   FlexXB
-
-   Copyright (C) 2008-2011 Alex Ciobanu
-
- 
-   This program is free software: you can redistribute it and/or modify
-
-   it under the terms of the GNU General Public License as published by
-
-   the Free Software Foundation, either version 3 of the License, or
-
-   (at your option) any later version.
-
- 
-
-   This program is distributed in the hope that it will be useful,
-
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
-   GNU General Public License for more details.
-
- 
-   You should have received a copy of the GNU General Public License
-
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
- ]]></description>
-</packageRec>
-<classRec name='MetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\annotation\parser\MetaDescriptor.as' namespace='com.googlecode.flexxb.annotation.parser' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
-<description><![CDATA[
-
-	 ]]></description>
-<author><![CDATA[Alexutz
-
-	 
-
-	 ]]></author>
-<private><![CDATA[]]></private>
-</classRec>
-<method name='MetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/MetaDescriptor' isStatic='false' isFinal='false' isOverride='false'  param_names='factory' param_types='com.googlecode.flexxb.annotation:AnnotationFactory' param_defaults='undefined' result_type='*'>
-<description><![CDATA[
-
-		 
-
-		 
-
-		 ]]></description>
-</method>
-<method name='getBoolean' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/getBoolean' isStatic='false' isFinal='false' isOverride='false'  param_names='name' param_types='String' param_defaults='undefined' result_type='Boolean'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<param><![CDATA[name
-
-		 ]]></param>
-<return><![CDATA[
-
-		 
-
-		 ]]></return>
-</method>
-<method name='getInt' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/getInt' isStatic='false' isFinal='false' isOverride='false'  param_names='name' param_types='String' param_defaults='undefined' result_type='Number'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<param><![CDATA[name
-
-		 ]]></param>
-<return><![CDATA[
-
-		 
-
-		 ]]></return>
-</method>
-<method name='getString' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/getString' isStatic='false' isFinal='false' isOverride='false'  param_names='name' param_types='String' param_defaults='undefined' result_type='String'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<param><![CDATA[name
-
-		 ]]></param>
-<return><![CDATA[
-
-		 
-
-		 ]]></return>
-</method>
-<method name='factory' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/factory/get' isStatic='false' isFinal='true' isOverride='false'  result_type='com.googlecode.flexxb.annotation:AnnotationFactory'>
-</method>
-<method name='fieldName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldName/get' isStatic='false' isFinal='false' isOverride='false'  result_type='QName'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<return><![CDATA[
-
-		 
-
-		 ]]></return>
-</method>
-<method name='owner' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/owner/get' isStatic='false' isFinal='false' isOverride='false'  result_type='com.googlecode.flexxb.annotation.contract:IClassAnnotation'>
-</method>
-<method name='version' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/version/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<return><![CDATA[
-
-		 
-
-		 ]]></return>
-</method>
-<method name='fieldName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldName/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='QName' param_defaults='undefined' result_type='void'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<param><![CDATA[value
-
-		 
-
-		 ]]></param>
-</method>
-<method name='owner' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/owner/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='com.googlecode.flexxb.annotation.contract:IClassAnnotation' param_defaults='undefined' result_type='void'>
-</method>
-<field name='_factory' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/private:_factory' type='com.googlecode.flexxb.annotation:AnnotationFactory' isStatic='false' isConst='false' >
-</field>
-<field name='_fieldName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/private:_fieldName' type='QName' isStatic='false' isConst='false' >
-</field>
-<field name='_owner' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/private:_owner' type='com.googlecode.flexxb.annotation.contract:IClassAnnotation' isStatic='false' isConst='false' >
-</field>
-<field name='attributes' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/attributes' type='Object' isStatic='false' isConst='false' >
-</field>
-<field name='fieldAccess' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldAccess' type='com.googlecode.flexxb.annotation.contract:AccessorType' isStatic='false' isConst='false' >
-</field>
-<field name='fieldType' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldType' type='Class' isStatic='false' isConst='false' >
-</field>
-<field name='metadataName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/metadataName' type='String' isStatic='false' isConst='false' >
-</field>
-<packageRec name='com.googlecode.flexxb.annotation.parser.null' fullname='com.googlecode.flexxb.annotation.parser.null'>
-<description><![CDATA[
-
-   FlexXB
-
-   Copyright (C) 2008-2011 Alex Ciobanu
-
- 
-   This program is free software: you can redistribute it and/or modify
-
-   it under the terms of the GNU General Public License as published by
-
-   the Free Software Foundation, either version 3 of the License, or
-
-   (at your option) any later version.
-
- 
-
-   This program is distributed in the hope that it will be useful,
-
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
-   GNU General Public License for more details.
-
- 
-   You should have received a copy of the GNU General Public License
-
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
- ]]></description>
-</packageRec>
-<classRec name='ClassMetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\annotation\parser\ClassMetaDescriptor.as' namespace='com.googlecode.flexxb.annotation.parser' access='public' baseclass='com.googlecode.flexxb.annotation.parser:MetaDescriptor' isFinal='true' isDynamic='false' >
-<description><![CDATA[
-
-	 ]]></description>
-<author><![CDATA[Alexutz
-
-	 
-
-	 ]]></author>
-<private><![CDATA[]]></private>
-</classRec>
-<method name='ClassMetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/ClassMetaDescriptor' isStatic='false' isFinal='false' isOverride='false'  param_names='factory' param_types='com.googlecode.flexxb.annotation:AnnotationFactory' param_defaults='undefined' result_type='*'>
-</method>
-<method name='getConfigItemsByName' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/getConfigItemsByName' isStatic='false' isFinal='false' isOverride='false'  param_names='annotationName' param_types='String' param_defaults='undefined' result_type='Array'>
-</method>
-<method name='owner' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/owner/set' isStatic='false' isFinal='false' isOverride='true'  param_names='value' param_types='com.googlecode.flexxb.annotation.contract:IClassAnnotation' param_defaults='undefined' result_type='void'>
-</method>
-<field name='config' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/config' type='Array' isStatic='false' isConst='false' >
-</field>
-<field name='members' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/members' type='Array' isStatic='false' isConst='false' >
-</field>
-<packageRec name='com.googlecode.flexxb.annotation.parser.null' fullname='com.googlecode.flexxb.annotation.parser.null'>
-<description><![CDATA[
-
-   FlexXB
-
-   Copyright (C) 2008-2011 Alex Ciobanu
-
- 
-   This program is free software: you can redistribute it and/or modify
-
-   it under the terms of the GNU General Public License as published by
-
-   the Free Software Foundation, either version 3 of the License, or
-
-   (at your option) any later version.
-
- 
-
-   This program is distributed in the hope that it will be useful,
-
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
-   GNU General Public License for more details.
-
- 
-   You should have received a copy of the GNU General Public License
-
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
- ]]></description>
-</packageRec>
-<classRec name='MetaParser' fullname='com.googlecode.flexxb.annotation.parser:MetaParser' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\annotation\parser\MetaParser.as' namespace='com.googlecode.flexxb.annotation.parser' access='public' baseclass='Object' isFinal='true' isDynamic='false' >
-<description><![CDATA[
-
-	 ]]></description>
-<author><![CDATA[Alexutz
-
-	 
-
-	 ]]></author>
-<private><![CDATA[]]></private>
-</classRec>
-<method name='MetaParser' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/MetaParser' isStatic='false' isFinal='false' isOverride='false'  param_names='factory' param_types='com.googlecode.flexxb.annotation:AnnotationFactory' param_defaults='null' result_type='*'>
-<description><![CDATA[
-
-		 Constructor 
-
-		 
-
-		 ]]></description>
-</method>
-<method name='getDescriptorInstance' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:getDescriptorInstance' isStatic='false' isFinal='false' isOverride='false'  param_names='metadataName' param_types='String' param_defaults='undefined' result_type='com.googlecode.flexxb.annotation.parser:MetaDescriptor'>
-</method>
-<method name='getOwnerName' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:getOwnerName' isStatic='false' isFinal='false' isOverride='false'  param_names='meta' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='String'>
-</method>
-<method name='parseDescriptor' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/parseDescriptor' isStatic='false' isFinal='false' isOverride='false'  param_names='xmlDescriptor' param_types='XML' param_defaults='undefined' result_type='Array'>
-<description><![CDATA[
-
-		 
-
-		 ]]></description>
-<param><![CDATA[xmlDescriptor
-
-		 ]]></param>
-<return><![CDATA[array of IClassAnnotation implementor instances, one for each version dicovered in the descriptor
-
-		 ]]></return>
-<see><![CDATA[com.googlecode.flexxb.annotation.IClassAnnotation
-
-		 ]]></see>
-<throws><![CDATA[com.googlecode.flexxb.error.DescriptorParsingError
-
-		 
-
-		 ]]></throws>
-</method>
-<method name='parseField' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/parseField' isStatic='false' isFinal='false' isOverride='false'  param_names='xml' param_types='XML' param_defaults='undefined' result_type='Array'>
-</method>
-<method name='parseMetadata' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/parseMetadata' isStatic='false' isFinal='false' isOverride='false'  param_names='xml' param_types='XML' param_defaults='undefined' result_type='com.googlecode.flexxb.annotation.parser:MetaDescriptor'>
-</method>
-<method name='processClassDescriptors' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:processClassDescriptors' isStatic='false' isFinal='false' isOverride='false'  param_names='xml;classMap' param_types='XML;Object' param_defaults='undefined;undefined' result_type='void'>
-</method>
-<method name='processMemberDescriptors' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:processMemberDescriptors' isStatic='false' isFinal='false' isOverride='false'  param_names='field;classMap;className;classType' param_types='XML;Object;QName;Class' param_defaults='undefined;undefined;undefined;undefined' result_type='void'>
-</method>
-<field name='factory' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:factory' type='com.googlecode.flexxb.annotation:AnnotationFactory' isStatic='false' isConst='false' >
-</field>
-<field name='name' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:name' type='QName' isStatic='false' isConst='false' >
-</field>
-<field name='type' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:type' type='Class' isStatic='false' isConst='false' >
-</field>
 <packageRec name='com.googlecode.flexxb.xml.serializer.null' fullname='com.googlecode.flexxb.xml.serializer.null'>
 <description><![CDATA[
 
@@ -11752,6 +11479,306 @@
 <method name='serializeObject' fullname='com.googlecode.flexxb.xml.serializer:XmlArraySerializer/protected:serializeObject' isStatic='false' isFinal='false' isOverride='true'  param_names='object;annotation;parentXml;serializer' param_types='Object;com.googlecode.flexxb.xml.annotation:XmlMember;XML;com.googlecode.flexxb.core:SerializationCore' param_defaults='undefined;undefined;undefined;undefined' result_type='void'>
 </method>
 <field name='LOG' fullname='com.googlecode.flexxb.xml.serializer:XmlArraySerializer/private:LOG' type='com.googlecode.flexxb.util.log:ILogger' isStatic='true' isConst='true' defaultValue='unknown' >
+</field>
+<packageRec name='com.googlecode.flexxb.annotation.parser.null' fullname='com.googlecode.flexxb.annotation.parser.null'>
+<description><![CDATA[
+
+   FlexXB
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   This program is free software: you can redistribute it and/or modify
+
+   it under the terms of the GNU General Public License as published by
+
+   the Free Software Foundation, either version 3 of the License, or
+
+   (at your option) any later version.
+
+ 
+
+   This program is distributed in the hope that it will be useful,
+
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+
+   GNU General Public License for more details.
+
+ 
+   You should have received a copy of the GNU General Public License
+
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ ]]></description>
+</packageRec>
+<classRec name='MetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\annotation\parser\MetaDescriptor.as' namespace='com.googlecode.flexxb.annotation.parser' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+
+	 ]]></author>
+<private><![CDATA[]]></private>
+</classRec>
+<method name='MetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/MetaDescriptor' isStatic='false' isFinal='false' isOverride='false'  param_names='factory' param_types='com.googlecode.flexxb.annotation:AnnotationFactory' param_defaults='undefined' result_type='*'>
+<description><![CDATA[
+
+		 
+
+		 
+
+		 ]]></description>
+</method>
+<method name='getBoolean' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/getBoolean' isStatic='false' isFinal='false' isOverride='false'  param_names='name' param_types='String' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[name
+
+		 ]]></param>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='getInt' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/getInt' isStatic='false' isFinal='false' isOverride='false'  param_names='name' param_types='String' param_defaults='undefined' result_type='Number'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[name
+
+		 ]]></param>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='getString' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/getString' isStatic='false' isFinal='false' isOverride='false'  param_names='name' param_types='String' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[name
+
+		 ]]></param>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='factory' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/factory/get' isStatic='false' isFinal='true' isOverride='false'  result_type='com.googlecode.flexxb.annotation:AnnotationFactory'>
+</method>
+<method name='fieldName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldName/get' isStatic='false' isFinal='false' isOverride='false'  result_type='QName'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='owner' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/owner/get' isStatic='false' isFinal='false' isOverride='false'  result_type='com.googlecode.flexxb.annotation.contract:IClassAnnotation'>
+</method>
+<method name='version' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/version/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<return><![CDATA[
+
+		 
+
+		 ]]></return>
+</method>
+<method name='fieldName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldName/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='QName' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[value
+
+		 
+
+		 ]]></param>
+</method>
+<method name='owner' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/owner/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='com.googlecode.flexxb.annotation.contract:IClassAnnotation' param_defaults='undefined' result_type='void'>
+</method>
+<field name='_factory' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/private:_factory' type='com.googlecode.flexxb.annotation:AnnotationFactory' isStatic='false' isConst='false' >
+</field>
+<field name='_fieldName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/private:_fieldName' type='QName' isStatic='false' isConst='false' >
+</field>
+<field name='_owner' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/private:_owner' type='com.googlecode.flexxb.annotation.contract:IClassAnnotation' isStatic='false' isConst='false' >
+</field>
+<field name='attributes' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/attributes' type='Object' isStatic='false' isConst='false' >
+</field>
+<field name='fieldAccess' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldAccess' type='com.googlecode.flexxb.annotation.contract:AccessorType' isStatic='false' isConst='false' >
+</field>
+<field name='fieldType' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/fieldType' type='Class' isStatic='false' isConst='false' >
+</field>
+<field name='metadataName' fullname='com.googlecode.flexxb.annotation.parser:MetaDescriptor/metadataName' type='String' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.annotation.parser.null' fullname='com.googlecode.flexxb.annotation.parser.null'>
+<description><![CDATA[
+
+   FlexXB
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   This program is free software: you can redistribute it and/or modify
+
+   it under the terms of the GNU General Public License as published by
+
+   the Free Software Foundation, either version 3 of the License, or
+
+   (at your option) any later version.
+
+ 
+
+   This program is distributed in the hope that it will be useful,
+
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+
+   GNU General Public License for more details.
+
+ 
+   You should have received a copy of the GNU General Public License
+
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ ]]></description>
+</packageRec>
+<classRec name='ClassMetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\annotation\parser\ClassMetaDescriptor.as' namespace='com.googlecode.flexxb.annotation.parser' access='public' baseclass='com.googlecode.flexxb.annotation.parser:MetaDescriptor' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+
+	 ]]></author>
+<private><![CDATA[]]></private>
+</classRec>
+<method name='ClassMetaDescriptor' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/ClassMetaDescriptor' isStatic='false' isFinal='false' isOverride='false'  param_names='factory' param_types='com.googlecode.flexxb.annotation:AnnotationFactory' param_defaults='undefined' result_type='*'>
+</method>
+<method name='getConfigItemsByName' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/getConfigItemsByName' isStatic='false' isFinal='false' isOverride='false'  param_names='annotationName' param_types='String' param_defaults='undefined' result_type='Array'>
+</method>
+<method name='owner' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/owner/set' isStatic='false' isFinal='false' isOverride='true'  param_names='value' param_types='com.googlecode.flexxb.annotation.contract:IClassAnnotation' param_defaults='undefined' result_type='void'>
+</method>
+<field name='config' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/config' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='members' fullname='com.googlecode.flexxb.annotation.parser:ClassMetaDescriptor/members' type='Array' isStatic='false' isConst='false' >
+</field>
+<packageRec name='com.googlecode.flexxb.annotation.parser.null' fullname='com.googlecode.flexxb.annotation.parser.null'>
+<description><![CDATA[
+
+   FlexXB
+
+   Copyright (C) 2008-2011 Alex Ciobanu
+
+ 
+   This program is free software: you can redistribute it and/or modify
+
+   it under the terms of the GNU General Public License as published by
+
+   the Free Software Foundation, either version 3 of the License, or
+
+   (at your option) any later version.
+
+ 
+
+   This program is distributed in the hope that it will be useful,
+
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+
+   GNU General Public License for more details.
+
+ 
+   You should have received a copy of the GNU General Public License
+
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ ]]></description>
+</packageRec>
+<classRec name='MetaParser' fullname='com.googlecode.flexxb.annotation.parser:MetaParser' sourcefile='D:\Development\Projects\Flex\FlexXBProject\FlexXBProject\FlexXB\src\main\flex\com\googlecode\flexxb\annotation\parser\MetaParser.as' namespace='com.googlecode.flexxb.annotation.parser' access='public' baseclass='Object' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+
+	 ]]></description>
+<author><![CDATA[Alexutz
+
+	 
+
+	 ]]></author>
+<private><![CDATA[]]></private>
+</classRec>
+<method name='MetaParser' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/MetaParser' isStatic='false' isFinal='false' isOverride='false'  param_names='factory' param_types='com.googlecode.flexxb.annotation:AnnotationFactory' param_defaults='null' result_type='*'>
+<description><![CDATA[
+
+		 Constructor 
+
+		 
+
+		 ]]></description>
+</method>
+<method name='getDescriptorInstance' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:getDescriptorInstance' isStatic='false' isFinal='false' isOverride='false'  param_names='metadataName' param_types='String' param_defaults='undefined' result_type='com.googlecode.flexxb.annotation.parser:MetaDescriptor'>
+</method>
+<method name='getOwnerName' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:getOwnerName' isStatic='false' isFinal='false' isOverride='false'  param_names='meta' param_types='com.googlecode.flexxb.annotation.parser:MetaDescriptor' param_defaults='undefined' result_type='String'>
+</method>
+<method name='parseDescriptor' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/parseDescriptor' isStatic='false' isFinal='false' isOverride='false'  param_names='xmlDescriptor' param_types='XML' param_defaults='undefined' result_type='Array'>
+<description><![CDATA[
+
+		 
+
+		 ]]></description>
+<param><![CDATA[xmlDescriptor
+
+		 ]]></param>
+<return><![CDATA[array of IClassAnnotation implementor instances, one for each version dicovered in the descriptor
+
+		 ]]></return>
+<see><![CDATA[com.googlecode.flexxb.annotation.IClassAnnotation
+
+		 ]]></see>
+<throws><![CDATA[com.googlecode.flexxb.error.DescriptorParsingError
+
+		 
+
+		 ]]></throws>
+</method>
+<method name='parseField' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/parseField' isStatic='false' isFinal='false' isOverride='false'  param_names='xml' param_types='XML' param_defaults='undefined' result_type='Array'>
+</method>
+<method name='parseMetadata' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/parseMetadata' isStatic='false' isFinal='false' isOverride='false'  param_names='xml' param_types='XML' param_defaults='undefined' result_type='com.googlecode.flexxb.annotation.parser:MetaDescriptor'>
+</method>
+<method name='processClassDescriptors' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:processClassDescriptors' isStatic='false' isFinal='false' isOverride='false'  param_names='xml;classMap' param_types='XML;Object' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='processMemberDescriptors' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:processMemberDescriptors' isStatic='false' isFinal='false' isOverride='false'  param_names='field;classMap;className;classType' param_types='XML;Object;QName;Class' param_defaults='undefined;undefined;undefined;undefined' result_type='void'>
+</method>
+<field name='factory' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:factory' type='com.googlecode.flexxb.annotation:AnnotationFactory' isStatic='false' isConst='false' >
+</field>
+<field name='name' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:name' type='QName' isStatic='false' isConst='false' >
+</field>
+<field name='type' fullname='com.googlecode.flexxb.annotation.parser:MetaParser/private:type' type='Class' isStatic='false' isConst='false' >
 </field>
 <packageRec name='com.googlecode.flexxb.annotation.null' fullname='com.googlecode.flexxb.annotation.null'>
 <description><![CDATA[
