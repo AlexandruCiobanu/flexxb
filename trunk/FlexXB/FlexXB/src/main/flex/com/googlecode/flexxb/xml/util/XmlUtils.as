@@ -10,6 +10,10 @@ package com.googlecode.flexxb.xml.util
 		 */		
 		public static const xsiType : QName = new QName(xsiNamespace, "type");  
 		/**
+		 * Qualified name of the xml schema nil attribute
+		 */	
+		public static const xsiNil : QName = new QName(xsiNamespace, "nil");  
+		/**
 		 * 
 		 * @param ns
 		 * @param xml

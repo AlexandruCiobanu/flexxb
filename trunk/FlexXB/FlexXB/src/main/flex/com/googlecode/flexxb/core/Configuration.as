@@ -56,6 +56,7 @@ package com.googlecode.flexxb.core {
 		 * Set this flag to true in order to ignore missing values and not set null into the appropiate fields.     
 		 */		
 		public var ignoreMissingContent : Boolean = false;
+		
 		/**
 		 * Constructor
 		 *

@@ -48,7 +48,11 @@ package com.googlecode.flexxb.xml.annotation {
 		 * @private 
 		 */		
 		protected var _setXsiType : Boolean;
-
+		/**
+		 * @private 
+		 */		
+		protected var _nillable : Boolean;
+		
 		/**
 		 * Constructor
 		 * @param descriptor
@@ -83,6 +87,25 @@ package com.googlecode.flexxb.xml.annotation {
 		public function get setXsiType() : Boolean{
 			return _setXsiType;
 		}
+		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get nillable() : Boolean{
+			return _nillable;
+		}
+		
+		
+		/**
+		 * Returns required if nillable is true
+		 * @return 
+		 * 
+		 */	
+		override public function get isRequired() : Boolean{
+			return super.isRequired || nillable;
+		}
 
 		/**
 		 * Get getFromCache flag
@@ -99,6 +122,7 @@ package com.googlecode.flexxb.xml.annotation {
 			_getFromCache = metadata.getBoolean(XmlConstants.GET_FROM_CACHE);
 			_getRuntimeType = metadata.getBoolean(XmlConstants.GET_RUNTIME_TYPE);
 			_setXsiType = metadata.getBoolean(XmlConstants.SET_XSI_TYPE);
+			_nillable = metadata.getBoolean(XmlConstants.NILLABLE);
 		}
 		
 		public override function get annotationName() : String {

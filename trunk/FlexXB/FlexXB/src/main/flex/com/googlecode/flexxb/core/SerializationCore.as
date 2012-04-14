@@ -180,7 +180,8 @@ package com.googlecode.flexxb.core {
 			}
 			var serializer : BaseSerializer = mappingModel.factory.getSerializer(annotation);
 			var target : Object = object[annotation.name];
-			if (target != null) {
+
+			if (target != null || (annotation is IMemberAnnotation && IMemberAnnotation(annotation).isRequired)) {
 				serializer.serialize(target, annotation, serializedData, this);
 			}
 		}

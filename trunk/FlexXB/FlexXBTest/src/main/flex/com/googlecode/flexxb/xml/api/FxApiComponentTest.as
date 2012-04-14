@@ -160,6 +160,7 @@ package com.googlecode.flexxb.xml.api {
 			doMemberAssertion(apiMember, xmlElement);
 			Assert.assertEquals("Wrong getFromCache", apiMember.getFromCache, xmlElement.getFromCache);
 			Assert.assertEquals("Wrong serializePartialElement", apiMember.serializePartialElement, xmlElement.serializePartialElement);
+			Assert.assertEquals("Wrong nillable", apiMember.nillable, xmlElement.nillable);
 		}
 
 		private function doMemberAssertion(apiMember : XmlApiMember, xmlMember : XmlMember) : void {
@@ -169,6 +170,7 @@ package com.googlecode.flexxb.xml.api {
 			Assert.assertEquals("Field access type is wrong for readOnly", apiMember.fieldAccessType == AccessorType.READ_ONLY, xmlMember.readOnly);
 			Assert.assertEquals("Wrong ignoreOn", apiMember.ignoreOn, xmlMember.ignoreOn);
 			Assert.assertEquals("Wrong alias", apiMember.alias, xmlMember.alias);
+			Assert.assertEquals("Wrong required", apiMember.isRequired, xmlMember.isRequired);
 		}
 		
 		[Test]

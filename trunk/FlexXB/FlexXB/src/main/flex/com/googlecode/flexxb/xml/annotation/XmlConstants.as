@@ -81,6 +81,10 @@ package com.googlecode.flexxb.xml.annotation
 		 */		
 		public static const SET_XSI_TYPE : String = "setXsiType";
 		/**
+		 * 
+		 */		
+		public static const NILLABLE : String = "nillable";
+		/**
 		 *
 		 */
 		public static const TYPE : String = "type";

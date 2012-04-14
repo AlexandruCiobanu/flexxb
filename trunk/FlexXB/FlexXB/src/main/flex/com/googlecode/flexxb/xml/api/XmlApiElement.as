@@ -62,6 +62,9 @@ package com.googlecode.flexxb.xml.api {
 		 */
 		[XmlAttribute]
 		public var getRuntimeType : Boolean;
+		
+		[XmlAttribute]
+		public var nillable : Boolean;
 
 		/**
 		 *
@@ -82,6 +85,7 @@ package com.googlecode.flexxb.xml.api {
 			values[XmlConstants.GET_FROM_CACHE] = getFromCache;
 			values[XmlConstants.SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
 			values[XmlConstants.GET_RUNTIME_TYPE] = getRuntimeType;
+			values[XmlConstants.NILLABLE] = nillable;
 			return values;
 		}
 		

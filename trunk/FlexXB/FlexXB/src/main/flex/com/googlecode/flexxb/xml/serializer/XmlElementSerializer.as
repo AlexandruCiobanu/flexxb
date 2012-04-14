@@ -50,7 +50,16 @@ package com.googlecode.flexxb.xml.serializer {
 		
 		protected override function serializeObject(object : Object, annotation : XmlMember, parentXml : XML, serializer : SerializationCore) : void {
 			var child : XML = <xml />;
-			if (isComplexType(object) && !(object is Class)) {
+			
+			if(object == null)
+			{
+				if(XmlElement(annotation).nillable)
+				{
+					child.addNamespace(XmlUtils.xsiNamespace);
+					child.@[XmlUtils.xsiNil] = "true";
+				}
+			}
+			else if (isComplexType(object) && !(object is Class)) {
 				if(annotation.isIDRef){
 					child.appendChild(serializer.getObjectId(object));
 				}else{
@@ -103,7 +112,9 @@ package com.googlecode.flexxb.xml.serializer {
 		protected override function deserializeObject(xmlData : XML, xmlName : QName, element : XmlMember, serializer : SerializationCore) : Object {
 			// AFAIK we can have a null xmlName only when getRuntimeType is true and the element 
 			//has a virtual path so the engine can detect the wrapper
-			if(xmlName == null && XmlElement(element).getRuntimeType){
+			var type : Class = element.type;
+			
+			if(XmlElement(element).getRuntimeType){
 				if(element.isPath()){
 					if(xmlData.children().length() > 0){
 						xmlName = XmlDescriptionContext(context).getXmlName(XmlDescriptionContext(context).getIncomingType(xmlData.children()[0]));
@@ -135,7 +146,10 @@ package com.googlecode.flexxb.xml.serializer {
 				return null;
 			}
 			
-			var type : Class = element.type;
+			if(XmlElement(element).nillable && xml.@[XmlUtils.xsiNil] == "true"){
+				return null;
+			}
+			
 			if (XmlElement(element).getRuntimeType) {
 				type = XmlDescriptionContext(context).getIncomingType(list[0]);
 				if (!type) {
