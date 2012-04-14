@@ -32,6 +32,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.XmlPathObject;
 	import com.googlecode.testData.XmlTypedObj;
 	import com.googlecode.testData.arrayIssue.IData;
+	import com.googlecode.testData.derivedType.*;
 	import com.googlecode.testData.errorTest.TestVO;
 	import com.googlecode.testData.errorTest.testVO6;
 	import com.googlecode.testData.errorTest.testVO7;
@@ -41,6 +42,7 @@ package com.googlecode.flexxb {
 	import com.googlecode.testData.xsi.ItemA;
 	import com.googlecode.testData.xsi.ItemB;
 	import com.googlecode.testData.xsi.Main;
+	import com.googlecode.testData.xsi.nil.NillableData;
 	
 	import flash.net.registerClassAlias;
 	
@@ -55,6 +57,7 @@ package com.googlecode.flexxb {
 	import org.flexunit.asserts.assertNotNull;
 	import org.flexunit.asserts.assertNull;
 	import org.flexunit.asserts.assertTrue;
+	import org.hamcrest.core.not;
 	import org.hamcrest.object.equalTo;
 	import org.hamcrest.object.instanceOf;
 	import org.hamcrest.object.notNullValue;
@@ -425,6 +428,29 @@ package com.googlecode.flexxb {
 			assertThat(copy.listA[0], equalTo("one"));
 			assertThat(copy.listB.length, equalTo(2));
 			assertThat(copy.listB[0], equalTo(1));
+		}
+		
+		[Test]
+		public function testXsiNill() : void{
+			var item : NillableData = new NillableData();
+			var xml : XML = FlexXBEngine.instance.serialize(item);
+			assertThat(xml.nested.elementNillable.length(), equalTo(1));
+			assertThat(xml.nested.elementNillable[0].children().length(), equalTo(0));
+			assertThat(xml.nested.elementNillable[0].attribute(new QName("http://www.w3.org/2001/XMLSchema-instance", "nil")).toString(), equalTo('true'));
+			var copy:NillableData =  FlexXBEngine.instance.deserialize(xml, NillableData);
+			assertNull(copy.elementNillable);
+		}
+		
+		[Test]
+		public function testDerivedType() : void{
+			var x:X = new X();
+			x.a = new B();
+			var engine : IFlexXB = new FxBEngine().getXmlSerializer();
+			var xml : XML = engine.serialize(x) as XML;
+			var newX : X = engine.deserialize(xml, X) as X;
+			assertThat(newX.a, notNullValue());
+			assertThat(newX.a, instanceOf(B))
+
 		}
 	}
 }

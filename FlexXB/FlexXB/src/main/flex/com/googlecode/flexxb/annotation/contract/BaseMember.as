@@ -37,6 +37,8 @@ package com.googlecode.flexxb.annotation.contract
 		
 		private var _isIDRef : Boolean;
 		
+		private var _isRequired : Boolean;
+		
 		private var _accessorType : AccessorType;
 		
 		private var _classAnnotation : IClassAnnotation;
@@ -81,7 +83,11 @@ package com.googlecode.flexxb.annotation.contract
 		public function get isIDRef() : Boolean{
 			return _isIDRef;
 		}
-		
+
+		public function get isRequired() : Boolean{
+			return _isRequired;
+		}
+
 		protected override function parse(descriptor : MetaDescriptor) : void{
 			super.parse(descriptor);
 			_classAnnotation = descriptor.owner;
@@ -91,6 +97,7 @@ package com.googlecode.flexxb.annotation.contract
 			_ignoreOn = Stage.fromString(descriptor.attributes[Constants.IGNORE_ON]);
 			setOrder(descriptor.attributes[Constants.ORDER]);
 			_isIDRef = descriptor.getBoolean(Constants.IDREF);
+			_isRequired = descriptor.getBoolean(Constants.REQUIRED);
 		}
 		
 		private function setOrder(value : String) : void {

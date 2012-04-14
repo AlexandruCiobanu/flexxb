@@ -20,15 +20,20 @@
 		<xs:complexContent>
 			<xs:extension base="FxBMember">
 				<xs:sequence>
-					<xs:element name="XmlNamespace" type="XmlNamespace" minOccurs="0" maxOccurs="1" />
+					<xs:element name="XmlNamespace" type="XmlNamespace"
+						minOccurs="0" maxOccurs="1" />
 				</xs:sequence>
-				<xs:attribute name="alias" type="xs:string" use="optional" />
-				<xs:attribute name="order" type="xs:unsignedInt" use="optional" />
-				<xs:attribute name="idref" type="xs:boolean" use="optional" default="false" />
+				<xs:attribute name="alias" type="xs:string"
+					use="optional" />
+				<xs:attribute name="order" type="xs:unsignedInt"
+					use="optional" />
+				<xs:attribute name="idref" type="xs:boolean"
+					use="optional" default="false" />
+				<xs:attribute name="isRequired" type="xs:boolean"></xs:attribute>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="XmlAttribute">
 		<xs:annotation>
 			<xs:documentation>Defines the field as being rendered as an
@@ -48,6 +53,7 @@
 				<xs:attribute name="getFromCache" type="xs:boolean" use="optional" default="false" />
 				<xs:attribute name="serializePartialElement" type="xs:boolean" use="optional" default="false" />
 				<xs:attribute name="getRuntimeType" type="xs:boolean" use="optional" default="false" />
+				<xs:attribute name="nillable" type="xs:boolean" use="optional" default="false" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

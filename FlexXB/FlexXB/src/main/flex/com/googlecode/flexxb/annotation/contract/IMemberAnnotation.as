@@ -82,5 +82,11 @@ package com.googlecode.flexxb.annotation.contract
 		 * 
 		 */		
 		function get isIDRef() : Boolean;
+		
+		/**
+		 * Flag used to signal if current field is manditory for serialization
+		 * @return true if required, false otherwise
+		 */		
+		function get isRequired() : Boolean;
 	}
 }

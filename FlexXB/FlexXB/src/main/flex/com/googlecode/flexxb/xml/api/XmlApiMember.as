@@ -53,6 +53,12 @@ package com.googlecode.flexxb.xml.api {
 		 */
 		public var order : Number;
 		
+		[XmlAttribute]
+		/**
+		 * 
+		 */		
+		public var isRequired : Boolean;
+		
 		/**
 		 * @private
 		 */		
@@ -107,6 +113,7 @@ package com.googlecode.flexxb.xml.api {
 			if (!isNaN(order))
 				values[Constants.ORDER] = order;
 			values[Constants.IDREF] = idref;
+			values[Constants.REQUIRED] = isRequired;
 			return values;
 		}
 	}

@@ -63,6 +63,12 @@ package com.googlecode.flexxb.annotation.contract
 		 * Id reference 
 		 */		
 		public static const IDREF : String = "idref";
+		
+		/**
+		 * Required reference 
+		 */		
+		public static const REQUIRED : String = "required";
+	
 		/**
 		 * @private 
 		 * 

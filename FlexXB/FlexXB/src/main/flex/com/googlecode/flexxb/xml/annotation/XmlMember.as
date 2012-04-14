@@ -105,6 +105,11 @@ package com.googlecode.flexxb.xml.annotation {
 		 */		
 		private var _isIDRef : Boolean;
 		/**
+		 * @private 
+		 */		
+		private var _isRequired : Boolean;
+
+		/**
 		 * Constructor
 		 * @param descriptor xml descriptor of the class field
 		 * @param _class owner XmlClass entity
@@ -208,6 +213,15 @@ package com.googlecode.flexxb.xml.annotation {
 		public function get isIDRef() : Boolean{
 			return _isIDRef;
 		}
+		
+		/**
+		 * Get the required flag 
+		 * @return 
+		 * 
+		 */		
+		public function get isRequired() : Boolean{
+			return _isRequired;
+		}
 
 		/**
 		 * Get the owner XmlClass entity
@@ -254,6 +268,7 @@ package com.googlecode.flexxb.xml.annotation {
 			setOrder(descriptor.attributes[Constants.ORDER]);
 			_default = descriptor.attributes[Constants.DEFAULT];
 			_isIDRef = descriptor.getBoolean(Constants.IDREF);
+			_isRequired = descriptor.getBoolean(Constants.REQUIRED);
 		}
 		/**
 		 * @private
