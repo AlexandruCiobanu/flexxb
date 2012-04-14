@@ -26,7 +26,7 @@ package com.googlecode.flexxb.xml.annotation {
 	import mx.utils.StringUtil;
 
 	/**
-	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", memberType="type", getFromCache="true|false", 
+	 * <p>Usage: <code>[XmlArray(alias="element", memberName="NameOfArrayElement", getFromCache="true|false", 
 	 * type="my.full.type" ignoreOn="serialize|deserialize", serializePartialElement="true|false", 
 	 * order="order_index", namespace="Namespace_Prefix", idref="true|false", 
 	 * setXsiType="true|false", version="versionName")]</code></p>
