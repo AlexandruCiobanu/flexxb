@@ -54,6 +54,11 @@ package com.googlecode.flexxb.xml.annotation {
 		protected var _nillable : Boolean;
 		
 		/**
+		 * @private 
+		 */		
+		protected var _wrapCdata : Boolean;
+		
+		/**
 		 * Constructor
 		 * @param descriptor
 		 * @param xmlClass
@@ -97,6 +102,15 @@ package com.googlecode.flexxb.xml.annotation {
 			return _nillable;
 		}
 		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get wrapCDATA() : Boolean{
+			return _wrapCdata;
+		}
+		
 		
 		/**
 		 * Returns required if nillable is true
@@ -123,6 +137,7 @@ package com.googlecode.flexxb.xml.annotation {
 			_getRuntimeType = metadata.getBoolean(XmlConstants.GET_RUNTIME_TYPE);
 			_setXsiType = metadata.getBoolean(XmlConstants.SET_XSI_TYPE);
 			_nillable = metadata.getBoolean(XmlConstants.NILLABLE);
+			_wrapCdata = metadata.getBoolean(XmlConstants.WRAP_CDATA);
 		}
 		
 		public override function get annotationName() : String {

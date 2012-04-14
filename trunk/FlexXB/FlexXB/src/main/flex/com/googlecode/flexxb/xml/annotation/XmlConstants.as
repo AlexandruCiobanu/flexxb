@@ -84,6 +84,12 @@ package com.googlecode.flexxb.xml.annotation
 		 * 
 		 */		
 		public static const NILLABLE : String = "nillable";
+		
+		/**
+		 * 
+		 */		
+		public static const WRAP_CDATA : String = "wrapCDATA";
+		
 		/**
 		 *
 		 */

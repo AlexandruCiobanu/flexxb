@@ -54,6 +54,7 @@
 				<xs:attribute name="serializePartialElement" type="xs:boolean" use="optional" default="false" />
 				<xs:attribute name="getRuntimeType" type="xs:boolean" use="optional" default="false" />
 				<xs:attribute name="nillable" type="xs:boolean" use="optional" default="false" />
+				<xs:attribute name="wrapCDATA" type="xs:boolean" use="optional" default="false" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
