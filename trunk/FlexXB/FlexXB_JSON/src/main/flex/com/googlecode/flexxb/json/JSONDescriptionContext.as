@@ -1,7 +1,7 @@
 /**
  *   FlexXB - an annotation based xml serializer for Flex and Air applications
  * 	 FlexXB_JSON -  FlexXB extension for JSON serialization support
- *   Copyright (C) 2008-2011 Alex Ciobanu
+ *   Copyright (C) 2008-2012 Alex Ciobanu
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
