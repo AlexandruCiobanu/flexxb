@@ -70,7 +70,11 @@ package com.googlecode.flexxb.xml.serializer {
 			}else{
 				var stringValue : String = serializer.converterStore.objectToString(object, annotation.type);
 				try {
-					child.appendChild(stringValue);
+					if(XmlElement(annotation).wrapCDATA){
+						child.appendChild(cdata(stringValue));
+					}else{
+						child.appendChild(stringValue);
+					}
 				} catch (error : Error) {
 					child.appendChild(escapeValue(stringValue, serializer.configuration as XmlConfiguration));
 				}

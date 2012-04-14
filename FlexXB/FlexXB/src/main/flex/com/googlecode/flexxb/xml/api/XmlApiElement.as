@@ -65,6 +65,9 @@ package com.googlecode.flexxb.xml.api {
 		
 		[XmlAttribute]
 		public var nillable : Boolean;
+		
+		[XmlAttribute]
+		public var wrapCDATA : Boolean;
 
 		/**
 		 *
@@ -86,6 +89,7 @@ package com.googlecode.flexxb.xml.api {
 			values[XmlConstants.SERIALIZE_PARTIAL_ELEMENT] = serializePartialElement;
 			values[XmlConstants.GET_RUNTIME_TYPE] = getRuntimeType;
 			values[XmlConstants.NILLABLE] = nillable;
+			values[XmlConstants.WRAP_CDATA]= wrapCDATA;
 			return values;
 		}
 		
