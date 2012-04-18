@@ -17,8 +17,11 @@
 package com.googlecode.flexxb {
 	import com.googlecode.flexxb.core.FxBEngine;
 	import com.googlecode.testData.NameOrdered;
+	import com.googlecode.testData.cdata.RootModel;
 	
 	import org.flexunit.Assert;
+	import org.flexunit.assertThat;
+	import org.hamcrest.object.equalTo;
 
 	/**
 	 *
@@ -42,6 +45,21 @@ package com.googlecode.flexxb {
 			Assert.assertEquals("Array member has wrong escape chars", "nik", xml.list[0].testerElem[1].children()[0]);
 			Assert.assertEquals("Array member has wrong escape chars", "test4<", xml.list[0].testerElem[2].children()[0]);
 			Assert.assertEquals("Array member has wrong escape chars", "<test5>", xml.list[0].testerElem[3].children()[0]);
+		}
+		
+		[Test]
+		public function testCDATAIssue61() : void{
+			var cdata:XML = new XML('<![CDATA[Lorem <b>ipsum</b> dolor <i>sit</i> amet]]>');
+			
+			var document:XML =
+				<root>
+					<child>{cdata}</child>
+					<anotherChild>{cdata}</anotherChild>
+				</root>;
+			
+			var root:RootModel = FxBEngine.instance.getXmlSerializer().deserialize(document, RootModel) as RootModel;
+			assertThat(root.child.value, equalTo("Lorem <b>ipsum</b> dolor <i>sit</i> amet"));
+			assertThat(root.anotherChild, equalTo("Lorem <b>ipsum</b> dolor <i>sit</i> amet"));
 		}
 	}
 }
