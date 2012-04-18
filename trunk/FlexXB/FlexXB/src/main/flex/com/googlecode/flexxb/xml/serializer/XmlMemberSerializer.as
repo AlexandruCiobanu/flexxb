@@ -92,7 +92,7 @@ package com.googlecode.flexxb.xml.serializer {
 			if (element.isDefaultValue()) {
 				for each (var child : XML in xmlElement.children()) {
 					if (child.nodeKind() == "text") {
-						return serializer.converterStore.stringToObject(child.toXMLString(), element.type);
+						return serializer.converterStore.stringToObject(child.toString(), element.type);
 					}
 				}
 			}
