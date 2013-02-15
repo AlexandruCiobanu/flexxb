@@ -1,0 +1,39 @@
+Text for description in com.googlecode.flexxb.core.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.core.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.cache.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.cache.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.cache.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.cache.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.cache.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.interfaces.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.xml.annotation.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.annotation.parser.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.annotation.parser.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.annotation.parser.null is not valid.
+org.xml.sax.SAXParseException: Element or attribute do not match QName production: QName::=(NCName':')?NCName. 
+
+Text for description in com.googlecode.flexxb.util:isArrayList is not valid.
+org.xml.sax.SAXParseException: The element type "p" must be terminated by the matching end-tag "</p>".
+

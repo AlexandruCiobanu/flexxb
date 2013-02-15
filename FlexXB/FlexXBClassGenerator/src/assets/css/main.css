@@ -1,0 +1,23 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@font-face { 
+	src: url("assets/font/segoe/SegoeWP.ttf"); 
+	fontFamily: "segoe";  
+	fontWeight: normal; 
+	embedAsCFF: true; 
+	advancedAntiAliasing: true; 
+}
+
+@font-face { 
+	src: url("assets/font/segoe/SegoeWP-Bold.ttf"); 
+	fontFamily: "segoe";  
+	fontWeight: bold; 
+	embedAsCFF: true; 
+	advancedAntiAliasing: true; 
+}
+
+s|Application{
+	fontFamily: "segoe";
+}

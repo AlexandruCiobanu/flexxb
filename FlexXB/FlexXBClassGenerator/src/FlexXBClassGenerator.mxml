@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   creationComplete="windowedapplication1_creationCompleteHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.fxmarker.FxMarker;
+			import com.fxmarker.dataModel.DataModel;
+			import com.fxmarker.template.Template;
+			import com.fxmarker.writer.Writer;
+			
+			import mx.events.FlexEvent;
+			
+			[Embed(source="assets/templates/class.template", mimeType="application/octet-stream")]
+			private var classTemplate : Class;
+			
+			private var templateData : String;
+			
+			private var template : Template;
+			
+			private var schema : File;
+			
+			private var destinationDirectory : File;
+			
+			private function browseXSDBtn_clickHandler(event:MouseEvent):void{
+				schema.browseForOpen("Choose XSD schema", [new FileFilter("XSD schema files", "*.xsd")]);
+			}
+			
+			private function browseDestinationBtn_clickHandler(event:MouseEvent):void{
+				destinationDirectory.browseForDirectory("Choose source files destination directory");
+			}
+			
+			private function generateBtn_clickHandler(event:MouseEvent):void{
+				var models : Array = processXSD();
+				var content : String;
+				for each(var model : DataModel in models){
+					content = generateContent(model);
+					saveSourceFile(content, model);
+				}
+			}
+			
+			private function windowedapplication1_creationCompleteHandler(event:FlexEvent):void{
+				schema = new File();
+				schema.addEventListener(Event.SELECT, onSchemaSelected);
+				destinationDirectory = new File();
+				destinationDirectory.addEventListener(Event.SELECT, onDestinationSelected);
+				templateData = new classTemplate();
+				template = FxMarker.instance.getTemplate(templateData);
+			}
+			
+			private function onSchemaSelected(event : Event) : void{
+				sourceXSDInput.text = schema.nativePath;
+				sourceXSDCheck.visible = destinationInput.visible = destinationLabel.visible = browseDestinationBtn.visible = schema.exists;
+				try{
+					destinationCheck.visible = schema.exists && destinationDirectory.exists;
+				}catch(e : Error){
+					destinationCheck.visible = false;
+				}
+			}
+			
+			private function onDestinationSelected(event : Event) : void{
+				destinationInput.text = destinationDirectory.nativePath;
+				destinationCheck.visible = generateBtn.visible = destinationDirectory.exists;
+			}
+			
+			private function processXSD() : Array{
+				var result : Array = [];
+				
+				return result;
+			}
+			
+			private function generateContent(model : DataModel) : String{				
+				var writer : Writer = new Writer();
+				template.process(model, writer);
+				return writer.writtenData;
+			}
+			
+			private function saveSourceFile(data : String, model : DataModel) : void{
+				var packageRef : String = model.getValue("package").getAsString(template.configuration);
+				var className : String = model.getValue("name").getAsString(template.configuration);
+				var folders : Array = packageRef.split(".");
+				var location : String = destinationDirectory.nativePath;
+				var file : File;
+				var stream : FileStream;
+				for each(var folder : String in folders){
+					location += File.separator + folder;
+				}
+				file = new File(location);
+				file.createDirectory();
+				location += className + ".as";
+				file = new File(location);
+				stream = new FileStream();
+				stream.open(file, FileMode.WRITE);
+				stream.writeUTFBytes(data);
+				stream.close();
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Style source="assets/css/main.css"/>
+	<s:Label id="sourceXSDLabel" x="62" y="9" fontSize="20" fontWeight="bold" text="Select XML Schema containing class definitions"/>
+	<s:TextInput id="sourceXSDInput" x="58" y="44" width="594" height="31" editable="false" color="#808080"/>
+	<s:Button id="browseXSDBtn" x="664" y="44" width="86" height="30" label="Browse"
+			  click="browseXSDBtn_clickHandler(event)" cornerRadius="5" fontSize="14"
+			  fontWeight="bold"/>
+	<s:Label id="destinationLabel" x="58" y="100" fontSize="20" fontWeight="bold" text="Choose destination directory for generated source files " visible="false"/>
+	<s:TextInput id="destinationInput" x="59" y="133" width="593" height="31" editable="false" visible="false"  color="#808080"/>
+	<s:Button id="browseDestinationBtn" visible="false" x="663" y="133" width="86" height="30"
+			  label="Browse" click="browseDestinationBtn_clickHandler(event)" cornerRadius="5"
+			  fontSize="14" fontWeight="bold"/>
+	<s:Image id="destinationCheck" x="10" y="130" source="assets/image/check_mark_green.png" visible="false"/>
+	<s:Image id="sourceXSDCheck" x="9" y="41" source="assets/image/check_mark_green.png" visible="false"/>
+	<s:Button id="generateBtn" visible="false" x="325" y="226" width="128" height="59"
+			  label="Generate" click="generateBtn_clickHandler(event)" color="#005D02"
+			  cornerRadius="5" fontSize="20" fontWeight="bold"/>
+</s:WindowedApplication>
