@@ -20,7 +20,7 @@ FlexXB offers built-in support for handling xml and there are six built-in annot
  - *[XmlElement|Xml-Annotations#xmlelement]*: Marks the field to be rendered as a child element of the xml representation of the parent object;
  - *[XmlArray|Xml-Annotations#xmlarray]*: Is a particular type of element since it marks a field to be rendered as an Array of elements of a certain type.
 
-*Please refer to the [[General Description|General description]] page for more details about the purpose and structure of this project.*
+*Please refer to the [General Description|General-Description] page for more details about the purpose and structure of this project.*
 
 
 
