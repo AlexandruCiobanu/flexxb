@@ -1,0 +1,488 @@
+TODO
+## Xml alias ##
+
+> _Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias)._
+
+Alias attribute is available for all field annotations and allows the engine to render the value as an attribute/element with a different name that the field's name. If the alias attributes is missing the engine will use the field's name as a name for the xml sequence to be inserted/parsed.
+
+Eg:
+```
+        [Bindable]
+	public class Mock
+	{
+		[XmlAttribute()]
+		public var date : Date;
+
+                [XmlAttribute(alias="stuff")]
+		public var aField : String = "a";
+
+		[XmlElement(alias="objVersion")]
+		public var version : Number = 4;
+
+		[XmlArray(alias="data", type="com.googlecode.testData.Mock")]
+		public var result : Array;
+		[XmlElement]
+		public var xmlData : XML; 
+		
+		public var someExcludedField  : Boolean;
+	}
+```
+
+The alias allows use of wildcards. One can use the star character `*` to tell the engine to determine the name of the element/attribute at runtime, by inspecting the field's value. If the value is an instance of a FlexXb annotated class, the name defined by the class alias is used.
+
+```
+  [XmlElement(alias="*")]
+   public var field3 : MyCustomItem = new MyCustomItem();
+```
+
+
+Not setting any alias in the metadata will instruct the engine to use the field's name as a name for the attribute/element being written/read.
+
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Support for object namespacing ##
+
+> _Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace._
+
+There are two ways namespaces can be defined on the metadata used to decorate a class:
+  * Class namespace - defined in the [XmlClass](XmlAnnotations#XmlClass.md) annotation and it is the default namespace used for all fields in the class. Spcifying it is done by setting the `prefix` and `uri` attributes of the [XmlClass](XmlAnnotations#XmlClass.md) annotation.
+  * Field namespace - is used by specific fields within the class; multiple fields can reference the same namespace. Field namespaces are defined by first declaring them at class level with [Namespace](XmlAnnotations#Namespace.md) annotation then referencing its prefix where needed. Field namespaces' prefixes should be unique for that class.
+
+**Update**: On xml member annotations you can set the namespace attribute to "" (empty string) to use the local (default) namespace. This is useful when your class defines a global namespace in the XmlClass but you need one or more of its fields to be rendered under the local one.
+
+Eg:
+```
+        [Bindable]
+        [Namespace(prefix="ns1", uri="http://www.ns1.com")]
+        [Namespace(prefix="ns2", uri="http://www.ns2.com")]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.yourcompany.com/xmlns/yourNs")]
+	public class Mock
+	{
+		[XmlAttribute(namespace="ns1")]
+		public var date : Date;
+
+                [XmlAttribute(alias="stuff")]
+		public var aField : String = "a";
+
+		[XmlElement(alias="objVersion")]
+		public var version : Number = 4;
+
+		[XmlArray(alias="data", type="com.googlecode.testData.Mock", namespace="ns2")]
+		public var result : Array;
+		[XmlElement]
+		public var xmlData : XML; 
+		
+		public var someExcludedField  : Boolean;
+	}
+```
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+
+## Ignore a field on serialization, deserialization or both ##
+
+> _An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization._
+
+Fields can be excluded from the (de)serialization process by setting the `ignoreOn` in all field annotations. There are two possible values:
+  * serialize: ignore the value of the current field when serializing the object;
+  * deserialize: ignore the value of the current field when deserializing the data (xml);
+
+In order to have the field completely ignored remove the field annotation on it. FlexXB will only process fields that have a recognized annotation decorating them.
+
+Eg:
+```
+        [Bindable]
+	[XmlClass(alias="MyClass", prefix="test", uri="http://www.yourcompany.com/xmlns/yourNs")]
+	public class Mock
+	{
+		[XmlAttribute(alias="stuff")]
+		public var aField : String = "a";
+		
+                [XmlAttribute(ignoreOn="serialize")]
+		public var date : Date;
+		
+                [XmlElement(alias="objVersion")]
+		public var version : Number = 4;
+		
+		[XmlElement(ingnoreOn="deserialize")]
+		public var reference : Object;
+				
+                [XmlElement]
+		public var xmlData : XML; 
+		
+		public var someExcludedField  : Boolean;
+	}
+```
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+
+## Serialize partial object ##
+
+> _An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id)._
+
+An object can be serialized normally, in which case all annotated fields are serialized, or in a partial mode in which only the idfield is serialized, provided the class annotation specifies an id field.
+
+For partial serialization to work there are two conditions needed:
+  * The target class must have an `XmlClass` annotation defining an `idField` attribute. The attribute's value is the id field's name.
+  * The field in the owner class must set the `serializePartialElement` attriute to true.
+
+The `serializePartialElement` is only available for `XmlElement` and `XmlArray` metadatas.
+
+Eg:
+```
+[XmlClass(idField="idRef")]
+public class TestClass{
+     [XmlAttribute(alias="id")]
+     public var idRef : Number = 1;
+
+     [XmlElement()]
+     public var name : String = "";
+}
+
+[XmlClass]
+public class Owner{
+    [XmlAttribute()]
+    public var value : String = "test";
+
+    [XmlElement(alias="Ref", serializePartialElement="true")]
+    public var testClassRef : TestClass = new TestClass();
+}
+```
+
+The xml output would be:
+
+```
+<Owner value="test">
+    <Ref id="1"/>
+</Owner>
+```
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Integrate model object cache to insure object uniqueness ##
+
+> _All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application._
+
+During an application's operation all the responses received from the server are translated into AS3 objects and often different instances represent the same item. In order to ensure object uniqueness scross the entire application a model object cache is used. Through the configuration object, FlexXB is instructed to use an object cache instance in which to store all objects based on type and identifier. Upon deserialization the engine will inspect the cache to retrieve existing instances for items it receives and update them accordingly.
+
+There is a cache provider interface which must be implemented by objects that are to be used by the engine as cache storage called ` com.googlecode.flexxb.cache.ICacheProvider`:
+```
+        public interface ICacheProvider
+	{
+		/**
+		 * Determines whether an object with the given id is aleady cached.
+		 * @param id the id under which the object should have been cached
+		 * @param clasz the class of the object
+		 * @return true if there is an object cached under the given id and class.
+		 *
+		 */	
+		function isInCache(id : String, clasz : Class) : Boolean;
+		/**
+		 * Get an instance of the specified type and with the specified id
+		 * from the cache
+		 * @param id object identifier
+		 * @param clasz object class
+		 * @return instance defined by id and type if it exists, null otherwise
+		 * 
+		 */		
+		function getFromCache(id : String, clasz : Class) : *;
+		/**
+		 * Gets a new instance of the specified object class. The constructor may
+		 * require arguments which are supplied with the parameters list.<br/>
+		 * After the instance is created it will be placed into the cache.
+		 * @param clasz object class 
+		 * @param id object identifier
+		 * @param parameters parameter list to be used when calling the constructor
+		 * @return newly created instance 
+		 * 
+		 */		
+		function getNewInstance(clasz : Class, id : String, parameters : Array = null) : *;
+		/**
+		 * Clears the cache for all the objects with given class.
+		 * If no class is specified, then all cache is cleared.
+		 * @param typeList List of types for which the cache will be flushed. ALL instances will be flushed if null or empty
+		 */
+		function clearCache(...typeList) : void;
+	}
+```
+
+Out of the box FlexXB offers two kinds of cache providers:
+  * `com.googlecode.flexxb.cache.ObjectCache` - regular caching system, indexed by object type and identifier. All items within it are uniquely identified and stored until a clean is requested or the application shuts down. For large quatities of data, this cache may grow quite a lot since it will keep references to all unique objects.
+  * `com.googlecode.flexxb.cache.ObjectPool` - an alternate caching system which uses pools of objects. Each object pool holds items of a certain type. When the application needs an instance, it will look into the pool and if there is an object available it will mark it as used and give it to the caller. When the caller is done with that instance it will return it to the pool to be marked as free and cleared. When there are no free objects available in the pool, a new one will be created and added to the pool. This is usefull when one needs to keep the amount of created objects in check and does not require enforcement of uniqueness constraints.
+
+Assigning a cache provider is done via the`com.googlecode.flexxb.core.Configuration.cacheProvider`. Setting this field in the current configuration to null will cause the engine to stop using caching systems and create the required object tree on each request. Setting it with one instance of a cacche provider will make it use that system on the next request. Setting and resetting the cacheProvider field done live and changes are picked up on the next request processing
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Class type identification by response's namespace on deserialization ##
+
+> _Object types that should be used in deserialization should be determined from the namespaces present in the xml response._
+
+In deserialization mode there are cases in which the type of the object represented by the xml element cannot be determined (the value provided can be a subclass of the field's type and the alias on the field is explicitly defined). In such cases the usual flow would be for the elements to have different namespaces and the engine would be able to determine the type of the object to be instanciated by inspecting the element's namespace.
+
+The user must make sure to specify the namespace on the class metadata. Also since some classes may not be used at the request receive time, they must be registred with the engine at the start:
+```
+//for legacy Xml serializer access
+com.googlecode.flexxb.FlexXBEngine.instance.processTypes(Type1, Type2, Type3) // and so on
+```
+or
+```
+//for 2.x access
+com.googlecode.flexxb.core.FxBEngine.instance.getSerializer("type").processTypes(Type1, Type2, Type3) // and so on
+```
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Custom to and from string conversion for simple types ##
+
+> _Some simple types (such as Date) may require custom conversion methods to and from String values._
+
+There are cases in which you must have a string representing an object instance or infer an object from a string value. In XML this is particularly used, for example in Date representation. Thus need arises for a types converter that would take care of transforming object instances to strings and viceversa. This is usually applied for simple objects, such as Date, but works equally well with user objects which can be represented in a string manner. There is a specific interface to be implemented by a converter:
+```
+package com.googlecode.flexxb.converter {
+
+	/**
+	 * Interface defining how strings can be converted to
+	 * specific objects and viceversa.
+	 * @author aCiobanu
+	 *
+	 */
+	public interface IConverter {
+		/**
+		 *
+		 * @return Object type
+		 *
+		 */
+		function get type() : Class;
+		/**
+		 * Get the string representation of the specified object
+		 * @param item Target object
+		 * @return String representation of the specified object
+		 *
+		 */
+		function toString(item : Object) : String;
+		/**
+		 * Get the object whose representation is the specified value
+		 * @param value String parameter from which the object is created
+		 * @return Object whose representation is the specified value
+		 *
+		 */
+		function fromString(value : String) : Object;
+	}
+}
+```
+
+Each converter object is built for a type. FlexXB already offers three converters:
+  * `ClassTypeConverter` - represents Class values and insures proper conversion to and from String;
+  * `W3CDateConverter` - parses a W3C styled date string to a Date object and viceversa;
+  * `XmlConverter` - handles XML conversion to String and back.
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Use paths in xml aliases ##
+
+> _Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of the server object's hierarchy)._
+
+Also known as **virtual paths**, this feature allows classes to have fields rendered in subelements withour requiring existence of special classes for those subelements. Virtual paths are defined within the alias attribute on each of the following annotations: `XmlClass`, `XmlAttribute`, `XmlElement`, `XmlArray`.
+
+Virtual paths are defined with the slash character "/".
+
+For example, `subelement1/subelement2/name` defines a virtual path. The first two slash separated names define the element tree and the last one the tag name of the xml item to be set.
+
+Assume we have the following fields:
+```
+   [XmlAttribute(alias="sub1/sub2/numberValue")]
+   public var field1 : Number = 3;
+
+   [XmlElement(alias="sub1/sub2/testValue")]
+   public var field2 : String = "test"
+```
+
+For them, the xml will look like:
+
+```
+<sub1>
+    <sub2 numberValue="3">
+        <testValue>test</testValue>
+    </sub2>
+</sub1>
+```
+
+One can use the wildcard as would in a simple alias to make the engine set the name based on the field's value at runtime.
+
+```
+  [XmlElement(alias="sub1/sub2/*")]
+   public var field3 : MyCustomItem = new MyCustomItem();
+```
+
+This is expecially useful when you have values of different types but which extend a base type. Usually these values have different names and using star permits the engine to determine the attribute's name at runtime based on the value type it finds there.
+
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Allow custom object (de)serialization ##
+
+> _There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Add getFromCache option for deserializing complex fields ##
+
+> _Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Add events to signal processing start and finish ##
+
+> _The serializer should allow custom treatments at different stages in the xml processing. These stages are:_Pre-Serialize_,_Post-Serialize_,_Pre-Deserialize_and_Post-Deserialize_._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Xml Service ##
+
+> _FlexXB should provide a data service that is able to send xml requests and receive xml responses._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Annotation API ##
+
+> _FlexXB should provide an API to allow developers to programatically describe object types to be registered in the FlexXB engine._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Constructor Annotation ##
+
+> _There are cases in which the business objects have parametered constructors which should not default to null in order to inforce some business constraints. FlexXB should provide a way to annotate the constructors along with the parameers they take. Due to the fact that those parameters will more than likely have values found in the xml (like serialized object fields) the parameters will reference a field that will be the end-receiver of the value._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Multiple namespace support ##
+
+> _Allow multiple namespaces to be defined for a class. Various members of the class can use different namespaces._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Annotation versioning ##
+
+> _Allow multiple annotations per field differentiated by a version. This is extremely useful when the same object can be rendered to xml in different ways accorduing to the end server it is talking to._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+## Circular reference handling ##
+
+> _This feature is the same as offered by JAXB: https://jaxb.dev.java.net/guide/Mapping_cyclic_references_to_XML.html. When encountering objects cycles, the application needs to recover from it without ending up in a stack overflow exception. To do this you will be able to specify objects once in the xml document and reference them by id wherever is needed; also one may implement a custom interface allowing the replacement of the current object with a new one that will break the cycle._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table></blockquote>
+
+
+## Serialization format support ##
+
+> _Make FlexXB serialization format agnostic. Allows users to extend the engine and add support for different serialization formats (JSON, etc) while still sharing the base features such as object caching, circular reference handling, constructor annotations, id fields, version extraction. The advantage is that the base features are integrated by default with the new serialization context that defines the new format and one should only care about the actual AS3 object - ? conversions._
+
+<table width='100%'>
+<blockquote><tr>
+<blockquote><td align='left'><a href='Features.md'>Back to Features</a></td>
+<td align='right'><a href='FeaturesExplained.md'>Top</a></td>
+</blockquote></tr>
+</table>

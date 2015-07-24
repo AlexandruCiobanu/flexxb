@@ -1,0 +1,6 @@
+FlexXB offers several extension points:
+  * Implement specialised interfaces in your model objects to modify the engine's behavior on serialization/deserialization;
+  * Create a custom serialization context in order to define a new format for serializing (JSON, binary, etc.)
+  * Create a custom serializer;
+  * Create a custom annotation along with its own serializer;
+  * Create custom classes for your annotations to be used in the Annotation API to markup classes without having to manually specify metadatas in the source code.

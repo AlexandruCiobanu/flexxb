@@ -1,0 +1,56 @@
+# Custom serializers #
+
+A serializer is used to handle the xml processing for a field decorated by a specific recognized annotation. A serializer is mapped against an annotation.
+Creating a custom serializer is simple and involves extending a base class called `com.googlecode.flexxb.serializer.BaseSerializer`. There are two methods that need to be overridden by our custom serializer, serialize and deserialize. These two method are the entry points for handling the objects and serialized data source and performing the conversions.
+
+Let's take a look at this class:
+
+```
+public class BaseSerializer
+{
+	private var _context : DescriptionContext;
+		
+	public function BaseSerializer(context : DescriptionContext){
+		_context = context;
+	}
+	/**
+	 * Serialize an object into a serialization format
+	 * @param object Object to be serialized
+	 * @param annotation Annotation containing the conversion parameters
+	 * @param serializedData Serialized data written so far
+	 * @serializer
+	 * @return Generated serialized data
+	 *
+	 */
+	public function serialize(object : Object, annotation : IAnnotation, serializedData : Object, serializer : SerializationCore) : Object {
+		return null;
+	}
+	/**
+	 * Deserialize an xml into the appropiate AS3 object
+	 * @param xmlData Xml to be deserialized
+	 * @param annotation Annotation containing the conversion parameters
+	 * @serializer
+	 * @return Generated object
+	 *
+	 */
+	public function deserialize(serializedData : Object, annotation : IAnnotation, serializer : SerializationCore) : Object{
+		return null;
+	}
+	/**
+	 * 
+	 * @return 
+	 * 
+	 */		
+	protected final function get context() : DescriptionContext{
+		return _context;
+	}
+}
+```
+
+Once your serializer and annotation classes defined, you need to register them with the engine and this is done via the description context that governs your serialization format, by using the method:
+
+`com.googlecode.flexxb.core.DescriptionContext.registerAnnotation(name : String, annotationClazz : Class, serializer : Class, overrideExisting : Boolean = false) : void`
+
+The registerAnnotation method registers a new annotation and its serializer with the engine. If it finds a registration with the same name and overrideExisting is set to false, it will disregard the current attempt and keep the old value.
+
+The serializer classes present in `com.googlecode.flexxb.xml.serializer` provide excellent examples of extending the `BaseSerializer` class.

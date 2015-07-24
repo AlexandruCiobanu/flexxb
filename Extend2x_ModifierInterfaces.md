@@ -1,0 +1,138 @@
+# Modifier interfaces #
+
+There are four main interfaces objects can implement in order to impose a specific behavior of the engine: ISerializable, ISerializeNotifiable, IDeserializeNotifiable and ICycleRecoverable. All these interfaces are located in the com.googlecode.flexxb.interfaces.
+
+### 1. `com.googlecode.flexxb.interfaces.ISerializable` ###
+
+You use this interface if your object requires the serialization/deserialization process be handled in a customized manner. This way the object itself will handle its own parsing/rendering.
+
+```
+/**           
+* Interface for an object that requires custom serialization/deserialization into/from           
+* a serialization format (XML, JSON, AMF etc.). Use this interface to instruct the engine            
+* to delegate the serialization/deserialization task to the object itself.            
+* @author aciobanu           
+*           
+*           
+*/          
+public interface ISerializable extends IIdentifiable {
+{
+       /**        
+        * Serialize current object into a serialization format 
+        */
+        function serialize() : Object; 
+       /**          
+        * Deserialize this object from its serialized representation.            
+        * @param source serialized data source          
+        */      
+        function deserialize(source : Object) : Object;
+       /**         
+        * Extract the object's identifier from the serialized source if                   
+        * such an identifier exists.     
+        * @param source serialized data source         
+        * @return string representing object's identifier         
+        *         
+        */           
+        function getIdValue(source : Object) : String;          
+}   
+```
+The `getIdValue` method is used in case your object is identifiable by an id, and allows the extraction of the id value that is used in case you have object caching enabled. With the obtained id, the engine can look into the cache for an instance associated to that id and get that instance instead of creating a new object.
+
+### 2. `com.googlecode.flexxb.interfaces.ISerializeNotifiable` ###
+
+Implementing this interfaces allows the object to get notified of the stages in which the serialization process is: Pre-serialize and post-serialize. The FlexXB Engine's default behavior is to dispatch pre/post serialize events as they occur for each object processed. When it encounters an ISerializeNotifiable object, it will call its `onPreSerialize` and `onPostSerialize` methods, overriding the default behavior.
+
+```
+/**
+ * Optional interface to be implemented by objects which need specific
+ * notification on the serialization process.<br> 
+ * If the current object to be serialized implements this interface, the
+ * engine will call the methods implemented on each process step (pre and 
+ * post serialize) instead of firing an XmlEvent on the engine instance for
+ * each step. <br>
+ * Implementing this interface overrides the normal event dispatching in the 
+ * engine.   
+ * @author Alexutz
+ * 
+ */	
+public interface ISerializeNotifiable
+{
+	/**
+	 * Called before the serialization process of the current object begins.
+	 * @param parent
+	 * @param serializedData
+	 * 
+	 */				
+	function onPreSerialize(parent : Object, serializedData : Object) : void;
+	/**
+	 * Called after the serialization process of the current object ends.
+	 * @param parent
+	 * @param serializedData
+	 *  
+	 */		
+	function onPostSerialize(parent : Object, serializedData : Object) : void;
+}
+```
+
+### 3. `com.googlecode.flexxb.interfaces.IDeserializeNotifiable ` ###
+
+Implementing this interfaces allows the object to get notified of the stages in which the deserialization process is: Pre-deserialize and post-deserialize. The FlexXB Engine's default behavior is to dispatch pre/post deserialize events as they occur for each object processed. When it encounters an IDeserializeNotifiable object, it will call its `onPreDeserialize` and `onPostDeserialize` methods, overriding the default behavior.
+```
+/**
+ * Optional interface to be implemented by objects which need specific
+ * notification on the deserialization process.<br> 
+ * If the current object to be serialized implements this interface, the
+ * engine will call the methods implemented on each process step (pre and 
+ * post deserialize) instead of firing an XmlEvent on the engine instance for
+ * each step. <br>
+ * Implementing this interface overrides the normal event dispatching in the 
+ * engine.   
+ * @author Alexutz
+ * 
+ */	
+public interface IDeserializeNotifiable
+{
+	/**
+	 * Called before the deserialization process of the current object begins.
+	 * @param parent
+	 * @param serializedData
+	 * 
+	 */		
+	function onPreDeserialize(parent : Object, serializedData : Object) : void;
+	/**
+	 * Called after the deserialization process of the current object ends.
+	 * @param parent
+	 * @param serializedData
+	 * 
+	 */	
+	function onPostDeserialize(parent : Object, serializedData : Object) : void;
+}
+```
+
+### 4. `com.googlecode.flexxb.interfaces.ICycleRecoverable` ###
+
+FlexXB is able to detect and handle object cycles that would otherwise make it go into an infinite loop. One can implement this interface to instruct the engine to turn to the current object causing the cycle and ask it to provide a replacement for itself, one that would break the cycle.
+```
+/**
+ * Optional interface that can be implemented by FlexXB bound objects to handle 
+ * cycles in the object graph.
+ * <p/>Normally a cycle in the object graph causes the engine to throw an error.
+ * This is not always a desired behavior.Implementing this interface allows the 
+ * user application to change this behavior.
+ * 
+ * @author Alexutz
+ * 
+ */	
+public interface ICycleRecoverable
+{
+	/**
+	 * Called when a cycle is detected by the engine to nominate a new
+	 * object to be serialized instead.
+	 * @param parentCaller reference to the parent object referencing the current ne 
+	 * @return the object to be serialized instead of <code>this</code> or null to 
+	 * instruct the engine to behave as if the object does not implement this interface. 
+	 * 
+	 */			
+	function onCycleDetected(parentCaller : Object) : Object;
+}
+```

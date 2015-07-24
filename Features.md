@@ -1,0 +1,75 @@
+# Introduction #
+
+This page will contain a list of features and requirements I have planned for my project, along with some delivery dates :D.
+
+Click the name links to see a more detailed explanation for each feature that is already implemented.
+
+
+# Features #
+
+  * FXB-001 **[Support for object namespacing](FeaturesExplained#Support_for_object_namespacing.md)**:
+> Xml requests and responses can have namespaces for each composing element, thus each model object must be liked to its corresponding namespace.
+  * FXB-002 **[Xml alias](FeaturesExplained#Xml_alias.md)**:
+> Each object or object field can be rendered as xml under a name which can be different from it's regular name (alias).
+  * FXB-003 **[Ignore a field on serialization, deserialization or both](FeaturesExplained#Ignore_a_field_on_serialization,_deserialization_or_both.md)**:
+> An object's field can be disregarded completly from the (de)serialization process or skipped on serialization or deserialization.
+  * FXB-004 **[Serialize partial object (only serialize the object's identification field(s))](FeaturesExplained#Serialize_partial_object.md)**:
+> An object's field can be serialized as a partial rendering (an element having as name the field's alias and subelement or attribute its id).
+  * FXB-005 **[Integrate model object cache to insure object uniqueness](FeaturesExplained#Integrate_model_object_cache_to_insure_object_uniqueness.md)**:
+> All deserialized objects received as responses should be cached according to their type and unique id in order to preserve object uniqueness across the application.
+  * FXB-006 **[Class type identification by response's namespace on deserialization](FeaturesExplained#Class_type_identification_by_response's_namespace_on_deseri.md)**:
+> Object types that should be used in deserialization should be determined from the namespaces present in the xml response.
+  * FXB-008 **[Custom to and from string conversion for simple types](FeaturesExplained#Custom_to_and_from_string_conversion_for_simple_types.md)**:
+> Some simple types (such as Date) may require custom conversion methods to and from String values.
+  * FXB-009 **[Use paths in xml aliases](FeaturesExplained#Use_paths_in_xml_aliases.md)**:
+> Some fields in an object can be renderer as being eveloped in an hierarchy of elements that do not have actionScript correspondents (basically, the model objects will shortcircuit a part of the server object's hierarchy).
+  * FXB-010 **[Allow custom object (de)serialization](FeaturesExplained#Allow_custom_object_(de)serialization.md)**:
+> There are specific cases in which a user defined serialization/deserialization process and objects needing such a process should notify FlexXB of that intent.
+  * FXB-011 **XSD validation against incoming XML**:
+> Xml responses should be validated by using XSD schemas.
+  * FXB-012 **[Add getFromCache option for deserializing complex fields](FeaturesExplained#Add_getFromCache_option_for_deserializing_complex_fields.md)**:
+> Fields marked with getFromCache option will be extracted from cache or, if the object is absent from cache, will be deserialized.
+  * FXB-013 **Add method references to annotation's attribute values**:
+> When specifying the annotations, the user should be able to provide, as a value for each of the annotation's attributes, a reference to a method within the object that will get called each time the serialization process accesses that annotation.
+  * FXB-014 **[Add events to signal processing start and finish](FeaturesExplained#Add_events_to_signal_processing_start_and_finish.md)**:
+> The serializer should allow custom treatments at different stages in the xml processing. These stages are: _Pre-Serialize_, _Post-Serialize_, _Pre-Deserialize_ and _Post-Deserialize_.
+  * FXB-015 **[Xml Service](FeaturesExplained#Xml_Service.md)**:
+> FlexXB should provide a data service that is able to send xml requests and receive xml responses.
+  * FXB-016 **[Annotation API](FeaturesExplained#Annotation_API.md)**:
+> FlexXB should provide an API to allow developers to programatically describe object types to be registered in the FlexXB engine.
+  * FXB-017 **[Constructor Annotation](FeaturesExplained#Constructor_Annotation.md)**:
+> There are cases in which the business objects have parametered constructors which should not default to null in order to inforce some business constraints. FlexXB should provide a way to annotate the constructors along with the parameers they take. Due to the fact that those parameters will more than likely have values found in the xml (like serialized object fields) the parameters will reference a field that will be the end-receiver of the value.
+  * FXB-018 **[Multiple namespace support](FeaturesExplained#Multiple_namespace_support.md)**:
+> Allow multiple namespaces to be defined for a class. Various members of the class can use different namespaces.
+  * FXB-019 **[Annotation versioning](FeaturesExplained#Annotation_versioning.md)**:
+> Allow multiple annotations per field differentiated by a version. This is extremely useful when the same object can be rendered to xml in different ways accorduing to the end server it is talking to.
+  * FXB-020 **[Circular reference handling](FeaturesExplained#Circular_reference_handling.md)**:
+> This feature is the same as offered by JAXB: https://jaxb.dev.java.net/guide/Mapping_cyclic_references_to_XML.html. When encountering objects cycles, the application needs to recover from it without ending up in a stack overflow exception. To do this you will be able to specify objects once in the xml document and reference them by id wherever is needed; also one may implement a custom interface allowing the replacement of the current object with a new one that will break the cycle.
+  * FXB-021 **[Serialization format support](FeaturesExplained#Serialization_format_support.md)**:
+> Make FlexXB serialization format agnostic. Allows users to extend the engine and add support for different serialization formats (JSON, etc) while still sharing the base features such as object caching, circular reference handling, constructor annotations, id fields, version extraction. The advantage is that the base features are integrated by default with the new serialization context that defines the new format and one should only care about the actual AS3 object - ? conversions.
+  * FXB-022 **JSON serialization support**:
+> Provide (de)serialization mechanisms for JSON encoding, while taking full advantage of FlexXB stock features such as circular reference handling, object cache, etc.
+
+| **Feature ID** | **Description** | **Delivery version** |
+|:---------------|:----------------|:---------------------|
+|FXB-001         |Support for object namespacing|1.0 _alpha_           |
+|FXB-002         |Xml alias        |1.0 _alpha_           |
+|FXB-003         |Ignore a field on serialization, deserialization or both|1.0 _alpha_           |
+|FXB-010         |Allow custom object (de)serialization|1.0 _alpha_           |
+|FXB-005         |Integrate model object cache to insure object uniqueness|1.0 _beta_            |
+|FXB-004         |Serialize partial object |1.0 _beta_            |
+|FXB-008         |Custom to and from string conversion for simple types|1.0 _beta_            |
+|FXB-012         |Add getFromCache option for deserializing complex fields|1.0 _beta_            |
+|FXB-014         |Add events to signal processing start and finish|1.0 _beta_            |
+|FXB-015         |Xml Service      |1.0 _beta_            |
+|FXB-006         |Class type identification by response's namespace on deserialization|1.0                   |
+|FXB-009         |Use paths in xml aliases|1.0                   |
+|FXB-016         |Annotation API   |1.1                   |
+|FXB-017         |Constructor Annotation|1.2                   |
+|FXB-018         |Multiple namespace support|1.4.1                 |
+|FXB-019         |Annotation versioning|1.7.0                 |
+|FXB-020         |Circular reference handling|1.7.0                 |
+|FXB-021         |Serialization format support|2.0                   |
+|FXB-022         |JSON serialization support|2.4.0                 |
+|FXB-013         |Add method references to annotation's attribute values|?                     |
+|FXB-011         |XSD validation against incoming XML|?                     |

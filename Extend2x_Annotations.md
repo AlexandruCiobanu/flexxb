@@ -1,0 +1,58 @@
+# Custom Annotations #
+
+Annotation structure has changed as of FlexXB 1.7.0 to reflect a global movement whose intent is to make the engine serialization format agnostic (being able to serialize/deserialize Xml, JSON, etc). It has been split into three parts: the contract, the annotation parser and the annotation implementations.
+
+**The contract** specifies the accepted structure and relationships between annotation as well as a standardization of the types available. Thus we differentiate between three types of annotations:
+  * Class annotations (`com.googlecode.flexxb.annotation.contract.IClassAnnotation`)
+> They are defined at class level and establish conventions for rendering/parsing the wrapper or shell without populating the fields. Class annotations hold references to the list of member annotations defined as well as information about the constructor structure (see Constructor and ConstructorArgument classes). Generally, class instances are identified by an id field and the class annotation can keep a reference to the member metadata annotating the field, in order to know how to render/parse it. Ids are generally used in combination with object caching.
+  * Global annotations (`com.googlecode.flexxb.annotation.contract.IGlobalAnnotation`)
+> They are also defined at class level but do not have direct consequences in the rendering/parsing process. Global annotations are used for specifying configuration elements that the class or member annotation can use (for example, mapping the constructor arguments to class fields, specifying the namespaces used in the class etc.). The contract specifies the constructor argument metadata as a part of class metadata mapping.
+  * Member annotations (`com.googlecode.flexxb.annotation.contract.IMemberAnnotation`)
+> They are defined at field level and establish the conventions for rendering/parsing the field they annotate (for example, whether the field is rendered as an attribute or an element, its alias etc.).
+All annotations should generally extend `com.googlecode.flexxb.annotation.contract.IBaseAnnotation` as it provides the basic implementation and establishes the way the annotation obtains its data (subclasses will need to override the protected method `parse(descriptor : MetaDescriptor) : void`).
+
+**The annotation parser** takes the class xml descriptor, obtained via  the describeType() method, and processes the class descriptors, making sure everything is alligned according to version settings. The end result is a list of class annotations, fully configured that reflect the metadatas decorating the class definition. The data from the xml descriptor is passed to each annotation instance via its constructor under the form of an instance of the class `com.googlecode.flexxb.annotation.parser.MetaDescriptor`. BaseAnnotation, which is intended to be the basis for all defined annotation classes, then offers a protected method `parse(descriptor : MetaDescriptor) : void` to be overridden in which sub classes can read values from the data provider and populate their fields.
+
+**The implementations** are basically the end product, the annotations that one use to define the serialization structure. They make use of the contract and parser packages. A very good example of usage is provided by the default xml implementation located in `com.googlecode.flexxb.annotation.xml` package.
+
+Let's take a look at an example annotation class, taken from the xml serializing package built in FlexXB, the XmlElement:
+
+```
+public class XmlElement extends XmlMember {
+	
+	public static const ANNOTATION_NAME : String = "XmlElement";
+	
+	protected var _serializePartialElement : Boolean;
+	
+	protected var _getFromCache : Boolean;
+	
+	protected var _getRuntimeType : Boolean;
+	
+	public function XmlElement(descriptor : MetaDescriptor, owner : ClassAnnotation) {
+		super(descriptor, owner);
+	}
+	
+	public function get serializePartialElement() : Boolean {
+		return _serializePartialElement;
+	}
+	
+	public function get getRuntimeType() : Boolean {
+		return _getRuntimeType;
+	}
+	
+	public function get getFromCache() : Boolean {
+		return _getFromCache;
+	}
+		
+	protected override function parse(metadata : MetaDescriptor) : void {
+		super.parse(metadata);
+		_serializePartialElement = metadata.getBooleanAttribute(XmlConstants.SERIALIZE_PARTIAL_ELEMENT);
+		_getFromCache = metadata.getBooleanAttribute(XmlConstants.GET_FROM_CACHE);
+		_getRuntimeType = metadata.getBooleanAttribute(XmlConstants.GET_RUNTIME_TYPE);
+	}
+		
+	public override function get annotationName() : String {
+		return ANNOTATION_NAME;
+	}
+}
+```

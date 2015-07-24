@@ -1,0 +1,44 @@
+## 1. Specifying member type xxx for array annotations results in a _Error #1065: xxx variable is not defined_ ##
+
+**Cause:**
+
+This problem might appear on all list-like fields in class definitions if the type of the list members is not used anywhere else in the application. The Flex compiler will ignore class definitions that are not explicitly used in the application, thus the #1065 will appear if FlexXB attempts to deserialize the specific object.
+
+**Resolution:**
+
+To solve this problem do one of the following:
+
+  * Use objects of type xxx somewhere in the application;
+  * Add [ArrayElementType("xxx")] annotation on the array field;
+  * Explicitly include the xxx type at compile time by adding include-classes attribute in the compiler arguments.
+
+**Example:**
+
+```
+public class Section implements IIdentifiable
+{
+	[XmlAttribute]
+	public var id : String;
+
+	[XmlArray(alias="units",type="model.Unit")]
+        [ArrayElementType("model.Unit")]
+	public var units : Array;
+}
+```
+
+_Thanks to [willsp](http://code.google.com/u/willsp/) for bringing this to my attention_
+
+## 2. The annotations defined on classes and class fields or the custom annotations are ignored by FlexXB ##
+
+**Cause:**
+
+This problem might appear because the compiler does not retain by default user defined metadata (including FlexXB metadata).
+
+**Resolution:**
+
+To solve this problem make sure the compiler arguments are updated with the addition of the necessary metadata inclusions. For each annotation in question add:
+-keep-as3-metadata Annotation-Name.
+
+_Note:_ If you created a custom annotation you will need to make sure you overrode the _annotationName_ getter in your custom annotation class
+
+For the regular FlexXB annotations there probably would not be a need to manually include them in the keep metadata list since those arguments were supplied when the FlexXB swc was built. If you built the FlexXB swc yourself or if you created custom annotations to handle specific serialization/ deserialization cases, make sure all the annotations are set in the compiler argument list.

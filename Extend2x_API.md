@@ -1,0 +1,187 @@
+# Custom annotation API #
+
+The annotation API allows you to programatically construct the descriptors for class types which cannot, from various reasons, be decorated with the usual metadata annotations - no access to the source code, for example.
+
+Extending the API involves working with three base elements: `IFxMetaProvider`, `FxClass`, `FxMember`. After defining your extensions you should take into acount the fact that the api supports data being injected via xml description file, following specific standards described by the schema, and should decorate your API wrapper classes with XML annotations that would allow extraction from/persistence to such a serialization medium.
+
+The package `com.googlecode.flexxb.xml.api` offers an excellent example of extending the base API.
+
+### `IFxMetaProvider` ###
+
+Location: `com.googlecode.flexxb.api`
+
+This is the base interface for the API. An API implementor of this interface defines a regular annotation and allows specifying its attributes. There are two requirements for an annotation: its name and its attributes with their values.
+
+```
+public interface IFxMetaProvider
+{
+	/**
+	 * Get the name of the metadata this class describes 
+	 * @return metadata name
+	 * 
+	 */		
+	function getMetadataName() : String;
+	/**
+	 * Get a dictionary with key-value pairs representing the 
+	 * annotation attribute names and their values. This map
+	 * is used by the API to construct the actual descriptors 
+	 * used by FlexXB to process the objects and serialized data 
+	 * @return Dictionary instance
+	 * 
+	 */		
+	function getMappingValues() : Dictionary;
+}
+```
+
+We can take a look at an example usage of this interface in `com.googlecode.flexxb.xml.api.XmlAPINamespace` that defines the xml namespace global annotation. Since the API structure allows persisting the information in xml you'll see the xml metadata decorating the class in order to be able to specify class types annotations in xml, located in a file on a server somewhere.
+
+```
+[XmlClass(alias="Namespace")]
+[ConstructorArg(reference="prefix")]
+[ConstructorArg(reference="uri")]
+
+public final class XmlApiNamespace implements IFxMetaProvider
+{
+	/**
+	 * 
+	 * @param ns
+	 * @return 
+	 * 
+	 */		
+	public static function create(ns : Namespace) : XmlApiNamespace{
+		if(ns){
+			return new XmlApiNamespace(ns.prefix, ns.uri);
+		}
+		return null;
+	}
+		
+	private var _prefix : String;
+	private var _uri : String
+		
+	/**
+	 * 
+	 * @param prefix
+	 * @param uri
+	 */
+	public function XmlApiNamespace(prefix : *, uri : *){
+		_prefix = prefix;
+		_uri = uri;
+	}
+	
+	[XmlAttribute]
+	/**
+	 * 
+	 * @return 
+	 */
+	public function get prefix() : String{
+		return _prefix;
+	}
+	
+	[XmlAttribute]
+	/**
+	 * 
+	 * @return 
+	 * 
+	 */		
+	public function get uri() : String{
+		return _uri;
+	}
+	
+	public function getMetadataName() : String{
+		return "Namespace";
+	}
+	
+	public function getMappingValues() : Dictionary{
+		var values : Dictionary = new Dictionary();
+		values[XmlConstants.NAMESPACE_PREFIX] = prefix;
+		values[XmlConstants.NAMESPACE_URI] = uri;
+		return values;
+	}
+	
+	/**
+	 * Get string representation of the current instance
+	 * @return string representing the current instance
+	 */
+	public function toString() : String{
+		return "Namespace[ prefix: " + _prefix + ", uri: " + _uri + "]";
+	}
+}
+```
+
+### `FxClass` ###
+
+Location: `com.googlecode.flexxb.api`
+
+`FxClass` defines a class annotation; it has the decorated class type, a list of member annotations, a list of global annotations defined under it as well as the arguments needed by the constructor for creating a new instance. Since it is the base for defining class annotations in the API, it implements IFxMetaProvider.
+
+When extending this class to define a custom API class annotation one may use a couple helper methods:
+
+  * `addMember(member : FxMember) : void` - add a member to this class annotation; if you require addition processing after adding a member to the list you should override the protected method `onMemberAdded(member : FxMember) : void`;
+  * `addArgument(fieldName : String, optional : Boolean = false) : void` - allows specifying a constructor argument; take care on the order and number of the arguments to match the actual order and number in the class constructor definition to not have instanciation errors.
+  * `getGlobalAnnotations() : Array` - get a list of global annotations defined for the class annotation. You should override this method if you require global annotations. For example, in the Xml class annotation you need to define namespaces used by the members as global annotations.
+
+### `FxMember` ###
+
+Defines a member annotation, meaning a recognized annotation decorating a class field (variable or getter/setter). An API member wrapper keeps a reference to the owner FxClass, and knowledge about the field name and type. Extending `FxMember` allows you to define member annotations. As previously stated you must override the two methods that come from `IFxMetaProvider` in order to specify the annotation's name and its characteristics.
+
+Below is the code listing for the `FxMember` class:
+
+```
+public class FxMember implements IFxMetaProvider {
+	
+	[XmlAttribute]
+	public var ignoreOn : Stage = null;
+	
+	[XmlAttribute]		
+	public var version : String = "";
+	
+	protected var _field : FxField;
+			
+	internal var owner : FxClass;
+	
+	public function FxMember(field : FxField) {
+		this.field = field;
+	}
+
+	[XmlElement(alias="*")]
+	public function get field() : FxField {
+		return _field;
+	}
+	
+	public function set field(value : FxField) : void {
+		if (!value) {
+			throw new ApiError("Field cannot be null");
+		}
+		_field = value;
+	}
+		
+	public function get fieldName() : String {
+		return field.name;
+	}
+		
+	public function get fieldType() : Class {
+		return field.type;
+	}
+	
+	public function get fieldAccessType() : AccessorType {
+		return field.accessType;
+	}
+	
+	public function getMetadataName() : String{
+		return "";
+	}
+	
+	public function getMappingValues() : Dictionary{
+		var values : Dictionary = new Dictionary();
+		if(ignoreOn){
+			values[Constants.IGNORE_ON] = ignoreOn;
+		}
+		values[Constants.VERSION] = version;
+		return values;
+	}
+	
+	protected final function getOwner() : FxClass{
+		return owner;
+	}
+}
+```
